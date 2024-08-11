@@ -1,0 +1,71 @@
+/* Circle */
+.shine-three {
+	position: relative;
+}
+.shine-three-one {
+	position: relative;
+}
+.shine-three::before {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 100%;
+	height: 0;
+	background: rgba(255,255,255,.2);
+	/* border-radius: 100%; */
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+.shine-three-one::after {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 0;
+	height: 100%;
+	background: rgba(255,255,255,.2);
+	/* border-radius: 100%; */
+	-webkit-transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%);
+	opacity: 0;
+}
+.shine-three:hover::before {
+	-webkit-animation: square .75s;
+	animation: square 3s;
+}
+.shine-three-one:hover::after {
+	-webkit-animation: square .75s;
+	animation: square 3s;
+}
+@-webkit-keyframes square {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}
+@keyframes square {
+	0% {
+		opacity: 1;
+	}
+	40% {
+		opacity: 1;
+	}
+	100% {
+		width: 200%;
+		height: 200%;
+		opacity: 0;
+	}
+}

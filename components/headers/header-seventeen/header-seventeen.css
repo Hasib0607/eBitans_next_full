@@ -1,0 +1,48 @@
+.seventeenHeaderBackground {
+  background-image: url("./bg-img/iconbgtopimg.webp");
+  /* The image used */
+  background-repeat: repeat-x;
+  /* Do not repeat the image */
+  height: 100%;
+  width: 100%;
+}
+
+.seventeen-menu {
+  background-image: url("./bg-img/center.png");
+  /* The image used */
+  background-repeat: repeat-x;
+  /* Do not repeat the image */
+  width: 100%;
+  height: 100%;
+}
+.seventeen-menu-left::before {
+  content: url("./bg-img/left.png");
+  width: 100%;
+  height: 100%;
+}
+.seventeen-menu-right::after {
+  content: url("./bg-img/right.png");
+  width: 100%;
+  height: 100%;
+}
+
+.triangle {
+  margin: 0 0px;
+  vertical-align: middle;
+}
+
+.triangle-2 {
+  width: 20px;
+  height: 20px;
+  border-right: solid 30px rgb(255, 255, 255);
+  border-bottom: solid 20px transparent;
+  border-top: solid 18px transparent;
+}
+
+.triangle-3 {
+  width: 20px;
+  height: 20px;
+  border-left: solid 30px rgb(255, 255, 255);
+  border-bottom: solid 20px transparent;
+  border-top: solid 18px transparent;
+}

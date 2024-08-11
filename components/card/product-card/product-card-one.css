@@ -1,0 +1,23 @@
+.child_icon {
+  clip-path: polygon(
+    0% 0%,
+    100% 0%,
+    100% 75%,
+    58% 76%,
+    49% 100%,
+    38% 75%,
+    0% 75%
+  );
+  min-width: 100px;
+}
+
+.icon:hover .child_icon {
+  /*display: block !important;
+    */
+  visibility: visible;
+  transition: all 3s ease-out;
+  -webkit-transition: all 3s ease-out;
+  -moz-transition: all 3s ease-out;
+  -ms-transition: all 3s ease-out;
+  -o-transition: all 3s ease-out;
+}

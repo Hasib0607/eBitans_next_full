@@ -1,0 +1,39 @@
+.changeNavbar.openMenu {
+  display: block;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 9;
+  opacity: 0.8;
+  animation: fadeIn 0.6s ease-in both;
+}
+
+.changeNavbar.openMenu:hover {
+  opacity: 1;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate3d(0, -20%, 0);
+  }
+
+  to {
+    opacity: 0.8;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* MEDIA QUERY FOR SMALL DEVICE  */
+@media only screen and (max-width: 600px) {
+  .navbar.openMenu {
+    display: none;
+  }
+}
+
+/* MEDIA QUERY FOR MEDIUM DEVICE  */
+@media only screen and (max-width: 768px) {
+  .navbar.openMenu {
+    display: none;
+  }
+}

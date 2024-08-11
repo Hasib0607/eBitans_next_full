@@ -1,0 +1,17 @@
+.bestsellerSeventeenBackgroundImage {
+  background-image: url("./bg-img/17/offer_bg.webp"); /* The image used */
+  width: 100%;
+  /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 100% 100%; /* Resize the background image to cover the entire container */
+}
+@media only screen and (min-width: 360px) and (max-width: 991px) {
+  .bestsellerSeventeenBackgroundImage {
+    background-image: none; /* The image used */
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}

@@ -1,0 +1,169 @@
+.card4Height {
+  height: 420px;
+  width: 100%;
+  border: 1px solid #ededed;
+  border-radius: 5px;
+  position: relative;
+}
+
+.card4addToCart {
+  font-size: 12px;
+  padding-left: 0px !important;
+  margin-left: 10px !important;
+}
+
+.card4ImgStyle {
+  height: 190px;
+}
+
+.card5Height {
+  height: 150px;
+  width: 100%;
+}
+.card5ImgDiv {
+  width: 390%;
+}
+.card5ImgDiv img {
+  height: 150px;
+}
+.newDiv {
+  position: absolute;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  left: 16px;
+  margin-top: 5px;
+  border-radius: 10px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.testDiv {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  top: 20%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+}
+
+.card5addToCart {
+  font-size: 12px;
+}
+.card5InnerContentHeight {
+  height: 140px;
+}
+
+.card5ImgDiv {
+  width: 100%;
+}
+.card5ImgDiv img {
+  height: 120px;
+}
+
+.swiper-button-next {
+  margin-top: 0px;
+  position: absolute;
+  top: 50%;
+  right: -40px;
+  width: 45px;
+  height: 45px;
+  transform: translateY(-50%);
+}
+.swiper-button-prev {
+  position: absolute;
+  top: 50%;
+  left: -40px;
+  width: 45px;
+  height: 45px;
+  transform: translateY(-50%);
+  margin-top: 0px;
+}
+.quick3 {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: visibility 0s, opacity 0.5s linear, transform 0.5s ease-in-out;
+  background-color: #ededed;
+  height: 40px;
+}
+
+.card7Hover:hover .quick3 {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-10px);
+}
+
+.quick7 {
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: visibility 0s, opacity 0.5s linear, transform 0.5s ease-in-out;
+  background-color: #4b4a4a;
+  height: 60px;
+}
+
+.card7Hover:hover .quick7 {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(-10px);
+}
+.card7Hover:hover .imgHover {
+  transform: scale(1.1);
+  transition: transform 0.5s linear;
+  border-radius: 5rem;
+}
+
+@media only screen and (min-width: 360px) and (max-width: 767px) {
+  .card4Height {
+    height: 380px;
+    width: 100%;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+  }
+  .card4addToCart {
+    font-size: 12px;
+    padding-top: 30px !important;
+    padding-left: 20px !important;
+    margin-left: 20px !important;
+  }
+  .card5 {
+    border: 1px solid #ededed;
+    height: 310px;
+  }
+
+  .card5itemCategory {
+    margin-top: 5px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .card4Height {
+    height: 380px;
+    width: 100%;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+  }
+  .card4addToCart {
+    font-size: 12px;
+    padding-top: 15px !important;
+    padding-left: 20px !important;
+    margin-left: 20px !important;
+  }
+}
+@media only screen and (min-width: 1025px) and (max-width: 1280px) {
+  .card4Height {
+    height: 390px !important;
+    width: 100%;
+    border: 1px solid #ededed;
+    border-radius: 5px;
+  }
+  .card4addToCart {
+    font-size: 12px;
+    padding-top: 30px !important;
+    padding-left: 20px !important;
+    margin-left: 20px !important;
+  }
+}

@@ -1,0 +1,146 @@
+/* 
+.mySwiper-18 {
+  height: 600px;
+  width: 500px;
+
+}
+
+.mySwiper18 {
+  height: 600px;
+  width: 120px;
+  box-sizing: border-box;
+}
+
+.mySwiper18 .swiper-slide {
+  width: 100%;
+  height: 70%;
+  opacity: 0.4;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+
+
+.mySwiper18 img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+}
+.mySwiper-18 img {
+  display: block;
+  width: 100%;
+  height: 100%;
+
+}
+
+@media only screen and (max-width: 2000px) {
+  .mySwiper-18 {
+    height: 600px;
+    width: 500px;
+  
+  }
+  }
+
+
+@media only screen and (max-width: 1800px) {
+  .mySwiper-18 {
+    height: 450px;
+    width: 530px;
+  
+  }
+  }
+@media only screen and (max-width: 1600px) {
+  .mySwiper-18 {
+    height: 450px;
+    width: 450px;
+  
+  }
+  }
+
+@media only screen and (max-width: 1400px) {
+  .mySwiper-18 {
+    height: 450px;
+    width: 450px;
+  
+  }
+  }
+@media only screen and (max-width: 1200px) {
+  .mySwiper-18 {
+    height: 350px;
+    width: 350px;
+  
+  }
+  }
+@media only screen and (max-width: 1024px) {
+  .mySwiper-18 {
+    height: 300px;
+    width: 250px;
+  
+  }
+  }
+@media only screen and (max-width: 900px) {
+  .mySwiper-18 {
+    height: 300px;
+    width: 250px;
+  
+  }
+  }
+@media only screen and (max-width: 767px) {
+  .mySwiper-18 {
+    height: 400px;
+    width: 400px;
+  
+  }
+  .mySwiper18 {
+    height: 400px;
+    width: 80px;
+  
+  }
+  }
+@media only screen and (max-width: 600px) {
+  .mySwiper-18 {
+    height: 350px;
+    width: 230px;
+  
+  }
+  }
+@media only screen and (max-width: 300px) {
+  .mySwiper-18 {
+    height: 350px;
+    width: 150px;
+  
+  }
+  } */
+
+  .mySwiper18 .swiper-slide {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 3px solid transparent;
+  }
+
+  .mySwiper18 {
+    height: 600px;
+    width: 120px;
+    box-sizing: border-box;
+  }
+  
+  .mySwiper188 .swiper-slide {
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+    border: 3px solid transparent;
+  }
+
+  @media only screen and (max-width: 768px) {
+    .mySwiper-18 {
+      height: 350px;
+      width: 150px;
+    }
+    }
+  /* .mySwiper188 {
+    height: 100px;
+    width: 384px;
+    box-sizing: border-box;
+  }
+   */

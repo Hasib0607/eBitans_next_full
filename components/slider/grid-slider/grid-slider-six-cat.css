@@ -1,0 +1,22 @@
+
+.swiperjs {
+  width: 100%;
+  height: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.swiperjs-slider-six {
+  height: calc((100% - 54px) / 2) !important;
+  width: 100%;
+
+  /* Center slide text vertically */
+}
+@media (max-width: 480px) {
+  .swiperjs {
+    width: 100%;
+    height: 680px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

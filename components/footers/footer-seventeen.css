@@ -1,0 +1,8 @@
+.footerSeventeenBackGroundImage{
+    background-image: url('./bg-img/17/footer_bg_img.webp'); /* The image used */
+    width: 100%;
+    /* You must set a specified height */
+    background-position: center; /* Center the image */
+    background-repeat: no-repeat; /* Do not repeat the image */
+    background-size: 100% 100%; /* Resize the background image to cover the entire container */
+}

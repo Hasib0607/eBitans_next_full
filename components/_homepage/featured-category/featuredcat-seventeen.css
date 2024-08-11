@@ -1,0 +1,27 @@
+.styleSeventeenbackgroundImage {
+  background-image: url("./seventeen-bg-img/parallax-bg_269165d9-7117-4edb-b7b6-2cc5ab42d1aa.webp"); /* The image used */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed;
+}
+
+.catSeventeenBottomBackGroundImage {
+  background-image: url("./seventeen-bg-img//iconbgtopimg.webp");
+  /* The image used */
+  background-repeat: repeat-x;
+  /* Do not repeat the image */
+  height: 50px;
+  width: 100%;
+  transform: rotate(180deg);
+}
+@media only screen and (min-width: 360px) and (max-width: 991px) {
+  .styleSeventeenbackgroundImage {
+    background-image: none; /* The image used */
+    width: 100%;
+
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+  }
+}

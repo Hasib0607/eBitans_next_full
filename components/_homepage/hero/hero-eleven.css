@@ -1,0 +1,18 @@
+.heroElevenBgImage {
+  background-image: url("/assets/img/heroElevenBg.webp");
+  width: 100%;
+  /* You must set a specified height */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Do not repeat the image */
+  background-size: 100% 100%; /* Resize the background image to cover the entire container */
+  background-size: cover;
+}
+.heroElevenBgImage::before {
+  content: "";
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  background-color: rgba(255, 255, 255, 0.582);
+}

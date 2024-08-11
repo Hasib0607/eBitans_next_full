@@ -1,0 +1,23 @@
+.feature_product_prev{
+    opacity: 0;
+    visibility: hidden;
+    transition: 1s;
+    }
+    .feature_product_next{
+        opacity: 0;
+        visibility: hidden;
+        transition: 1s;
+    }
+    
+    .featureCustomHoverSix:hover .feature_product_next {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(30px);
+    }
+    
+    .featureCustomHoverSix:hover .feature_product_prev {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(30px);
+      
+    }
