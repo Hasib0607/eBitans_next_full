@@ -1,28 +1,26 @@
 "use client";
-import React from "react";
-import { MdDelete } from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
-import { useState } from "react";
-import { AiOutlineUpload } from "react-icons/ai";
-import { useRouter } from "next/navigation";
-import { getPrice } from "@/utils/get-price";
-import { toast } from "react-toastify";
-import axios from "axios";
+import MyModal from "@/components/modal";
+import useTheme from "@/hooks/use-theme";
+import { login } from "@/redux/features/auth.slice";
 import {
   clearCartList,
   removeToCartList,
 } from "@/redux/features/product.slice";
-import { login } from "@/redux/features/auth.slice";
-import httpReq from "@/utils/http/axios/http.service";
-import useTheme from "@/hooks/use-theme";
 import { productImg } from "@/site-settings/siteUrl";
-import Link from "next/link";
-import { FaEdit } from "react-icons/fa";
-import MyModal from "@/components/modal";
 import { btnhover } from "@/site-settings/style";
+import httpReq from "@/utils/http/axios/http.service";
 import Taka from "@/utils/taka";
+import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { AiOutlineUpload } from "react-icons/ai";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
+import { getPrice } from "@/utils/get-price";
 import "./checkout-five-order.css";
 
 const CheckOutFortyOrder = ({
@@ -183,9 +181,9 @@ const CheckOutFortyOrder = ({
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
-      // discount:
-      //   item.regular_price -
-      //   getPrice(item.regular_price, item.discount_price, item.discount_type),
+      discount:
+        item.regular_price -
+        getPrice(item.regular_price, item.discount_price, item.discount_type)!,
       price: item?.price - item.additional_price,
       size: item.size,
       color: item.color,
@@ -235,29 +233,29 @@ const CheckOutFortyOrder = ({
       address: selectAddress?.address,
       subtotal: total,
       shipping: parseInt(shipping_area),
-      total: total + tax + parseInt(shipping_area) - couponDis,
+      total:
+        parseInt(total) + parseInt(tax) + parseInt(shipping_area) - couponDis,
       discount: couponDis,
       product: cart,
       tax: tax,
       coupon: coupon ? coupon : null,
     };
-
     formData.append("store_id", store_id);
     formData.append(
       "name",
       bookingData?.status === 200
         ? formBookData?.name
         : store?.auth_type === "EasyOrder" && !user
-        ? userName
-        : selectAddress?.name
+          ? userName
+          : selectAddress?.name
     );
     formData.append(
       "phone",
       bookingData?.status === 200
         ? formBookData?.phone
         : store?.auth_type === "EasyOrder" && !user
-        ? userPhone
-        : selectAddress?.phone
+          ? userPhone
+          : selectAddress?.phone
     );
     formData.append("payment_type", selectPayment);
     formData.append(
@@ -265,12 +263,20 @@ const CheckOutFortyOrder = ({
       bookingData?.status === 200
         ? ""
         : store?.auth_type === "EasyOrder" && !user
-        ? userAddress
-        : selectAddress?.address
+          ? userAddress
+          : selectAddress?.address
     );
     formData.append("subtotal", total);
     formData.append("shipping", shipping_area);
-    // formData.append("total", total + tax + parseInt(shipping_area) - couponDis);
+    formData.append(
+      "total",
+      (
+        parseInt(total) +
+        parseInt(tax) +
+        parseInt(shipping_area) -
+        couponDis
+      ).toString()
+    );
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
@@ -379,7 +385,11 @@ const CheckOutFortyOrder = ({
                   }
                 );
                 dispatch(clearCartList());
-                dispatch(login({ tokenData: responseInfo?.data?.token }) as any)
+                dispatch(
+                  login({
+                    tokenData: responseInfo?.data?.token,
+                  }) as any
+                )
                   .unwrap()
                   .then(({ verify, error }: any) => {
                     if (error) {
@@ -395,7 +405,9 @@ const CheckOutFortyOrder = ({
                     }
                   })
                   .catch((er: any) => {
-                    toast("Credential Doesn't Match", { type: "error" });
+                    toast("Credential Doesn't Match", {
+                      type: "error",
+                    });
                   });
                 // navigate("/profile/order")
               }

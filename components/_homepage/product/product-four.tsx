@@ -15,14 +15,16 @@ const ProductFour = ({ product, design, store_id }: any) => {
           <div className="">
             <div className="flex justify-center py-5 sm:py-10  ">
               <div className="flex flex-wrap gap-8 justify-center">
-                {product?.slice(0, 10).map((item: any) => (
-                  <ProductCardTwo
-                    item={item}
-                    key={item.id}
-                    design={design}
-                    store_id={store_id}
-                  />
-                ))}
+                {product
+                  ?.slice(0, 10)
+                  .map((item: any) => (
+                    <ProductCardTwo
+                      item={item}
+                      key={item.id}
+                      design={design}
+                      store_id={store_id}
+                    />
+                  ))}
               </div>
             </div>
           </div>

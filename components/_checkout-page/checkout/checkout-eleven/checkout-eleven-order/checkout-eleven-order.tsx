@@ -1,19 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import MyModal from "@/components/modal";
+import useTheme from "@/hooks/use-theme";
+import { login } from "@/redux/features/auth.slice";
+import { clearCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import { btnhover } from "@/site-settings/style";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import Taka from "@/utils/taka";
+import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import axios from "axios";
-import useTheme from "@/hooks/use-theme";
-import { useRouter } from "next/navigation";
-import { getPrice } from "@/utils/get-price";
-import { clearCartList } from "@/redux/features/product.slice";
-import { login } from "@/redux/features/auth.slice";
-import httpReq from "@/utils/http/axios/http.service";
-import { productImg } from "@/site-settings/siteUrl";
-import Link from "next/link";
-import Taka from "@/utils/taka";
-import MyModal from "@/components/modal";
-import { btnhover } from "@/site-settings/style";
 
 const CheckOutElevenOrder = ({
   couponDis,
@@ -121,9 +121,9 @@ const CheckOutElevenOrder = ({
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
-      // discount:
-      //   item.regular_price -
-      //   getPrice(item.regular_price, item.discount_price, item.discount_type),
+      discount:
+        item.regular_price -
+        getPrice(item.regular_price, item.discount_price, item.discount_type)!,
       price: item?.price - item.additional_price,
       size: item.size,
       color: item.color,
@@ -164,7 +164,6 @@ const CheckOutElevenOrder = ({
         }
       }
     }
-
     const data = {
       store_id: store_id,
       name: selectAddress?.name,
@@ -173,7 +172,8 @@ const CheckOutElevenOrder = ({
       address: selectAddress?.address,
       subtotal: total,
       shipping: parseInt(shipping_area),
-      total: total + tax + parseInt(shipping_area) - couponDis,
+      total:
+        parseInt(total) + parseInt(tax) + parseInt(shipping_area) - couponDis,
       discount: couponDis,
       product: cart,
       tax: tax,
@@ -200,7 +200,15 @@ const CheckOutElevenOrder = ({
     );
     formData.append("subtotal", total);
     formData.append("shipping", shipping_area);
-    // formData.append("total", total + tax + parseInt(shipping_area) - couponDis);
+    formData.append(
+      "total",
+      (
+        parseInt(total) +
+        parseInt(tax) +
+        parseInt(shipping_area) -
+        couponDis
+      ).toString()
+    );
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");

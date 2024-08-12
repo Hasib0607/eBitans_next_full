@@ -49,9 +49,11 @@ const Search = ({ search, setSearch }: any) => {
         <span className="font-bold text-red-400">{search}</span>
       </h3>
       <div className="w-full flex flex-col gap-2 my-4 overflow-y-auto max-h-[500px]">
-        {result?.slice(0, 5).map((res, idx) => (
-          <Single key={idx} item={res} setSearch={setSearch} />
-        ))}
+        {result
+          ?.slice(0, 5)
+          .map((res, idx) => (
+            <Single key={idx} item={res} setSearch={setSearch} />
+          ))}
       </div>
     </motion.div>
   );

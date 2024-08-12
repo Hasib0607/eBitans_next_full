@@ -307,9 +307,9 @@ const RelatedProduct = ({ product }: any) => {
         <h1 className="xl:text-xl text-sm mb-5">Recommended For You</h1>
       </div>
       <div className="flex lg:flex-col items-center gap-1 lg:gap-5">
-        {product?.slice(0, 3).map((item: any) => (
-          <Card item={item} key={item.id} />
-        ))}
+        {product
+          ?.slice(0, 3)
+          .map((item: any) => <Card item={item} key={item.id} />)}
       </div>
     </div>
   );

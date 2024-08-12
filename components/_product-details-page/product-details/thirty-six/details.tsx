@@ -533,8 +533,8 @@ const AddCart = ({
               already?.qty && variant.length === 0
                 ? already?.qty
                 : variant.length === 0
-                ? 0
-                : qty
+                  ? 0
+                  : qty
             }
             onChange={handleChange}
             disabled

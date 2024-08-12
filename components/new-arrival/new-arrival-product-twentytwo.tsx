@@ -16,9 +16,11 @@ const NewArrivalProductTwentyTwo = ({ product, store_id }: any) => {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 container mt-10 gap-6">
-        {product?.slice(0, 10).map((item: any) => (
-          <Card46 item={item} key={item?.id} store_id={store_id} />
-        ))}
+        {product
+          ?.slice(0, 10)
+          .map((item: any) => (
+            <Card46 item={item} key={item?.id} store_id={store_id} />
+          ))}
       </div>
     </div>
   );

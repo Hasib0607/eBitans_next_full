@@ -133,8 +133,8 @@ const Profile = () => {
                                   selectedImage
                                     ? URL.createObjectURL(selectedImage)
                                     : userDetails?.image
-                                    ? profileImg + userDetails?.image
-                                    : "https://ebitans.com/Image/theme/default-user-image.png"
+                                      ? profileImg + userDetails?.image
+                                      : "https://ebitans.com/Image/theme/default-user-image.png"
                                 }
                                 alt=""
                                 className="object-fit"

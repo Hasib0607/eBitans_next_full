@@ -41,7 +41,7 @@ const GridSliderSixCat = ({ nextEl, prevEl, children, ...rest }: any) => {
         prevEl: `.${prevEl}`,
         nextEl: `.${nextEl}`,
       }}
-      className='h-[380px]'
+      className="h-[380px]"
       breakpoints={{
         375: {
           slidesPerView: 2,

@@ -57,7 +57,6 @@ const RenderSection = memo(({ component, data }: RenderSectionProps) => {
     design,
     store_id,
     brand,
-    
   } = data;
 
   switch (component) {
@@ -116,7 +115,6 @@ const RenderSection = memo(({ component, data }: RenderSectionProps) => {
         />
       );
     case "best_seller_product":
-      
       return (
         <BestSellerProduct
           theme={design?.best_sell_product}
@@ -125,7 +123,6 @@ const RenderSection = memo(({ component, data }: RenderSectionProps) => {
           store_id={store_id}
           product={product}
           banner={banner}
-        
         />
       );
     case "feature_product":

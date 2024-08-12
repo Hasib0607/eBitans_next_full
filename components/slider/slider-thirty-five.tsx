@@ -38,7 +38,7 @@ const SliderThirtyFive = ({ nextEl, prevEl, children, breakpoints }: any) => {
         prevEl: `.${prevEl}`,
         nextEl: `.${nextEl}`,
       }}
-      className='mySwiper swiper-thirty-five'
+      className="mySwiper swiper-thirty-five"
     >
       <style>{styleCss}</style>
       {children}

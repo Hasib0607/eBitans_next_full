@@ -12,6 +12,6 @@ const DataLoader = () => {
       />
     </div>
   );
-}; 
+};
 
 export default DataLoader;

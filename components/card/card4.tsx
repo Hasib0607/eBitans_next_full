@@ -201,8 +201,8 @@ const Card4 = ({ item, design, store_id }: any) => {
               {store_id === 2669
                 ? "Buy Now"
                 : store_id === 2680
-                ? "Order Now"
-                : "ADD TO CART"}
+                  ? "Order Now"
+                  : "ADD TO CART"}
             </div>
           </div>
         </div>

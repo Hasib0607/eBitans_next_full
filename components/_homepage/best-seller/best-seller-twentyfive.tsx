@@ -7,14 +7,16 @@ const BestSellerTwentyFive = ({ best_sell_product, store_id, design }: any) => {
       <SectionHeadingTwentyFive title={"Trading"} />
 
       <div className="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-6 md:grid-cols-3 gap-4">
-        {best_sell_product?.slice(0, 10)?.map((item: any) => (
-          <Card50
-            item={item}
-            key={item?.id}
-            store_id={store_id}
-            design={design}
-          />
-        ))}
+        {best_sell_product
+          ?.slice(0, 10)
+          ?.map((item: any) => (
+            <Card50
+              item={item}
+              key={item?.id}
+              store_id={store_id}
+              design={design}
+            />
+          ))}
       </div>
     </div>
   );

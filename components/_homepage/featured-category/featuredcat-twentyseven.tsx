@@ -91,16 +91,16 @@ const FeaturedTwentySeven = ({ category, design, product }: any) => {
                           id === 0
                             ? bgImg
                             : id === 1
-                            ? bgImg1
-                            : id === 2
-                            ? bgImg2
-                            : id === 3
-                            ? bgImg3
-                            : id === 4
-                            ? bgImg4
-                            : id === 5
-                            ? bgImg5
-                            : null
+                              ? bgImg1
+                              : id === 2
+                                ? bgImg2
+                                : id === 3
+                                  ? bgImg3
+                                  : id === 4
+                                    ? bgImg4
+                                    : id === 5
+                                      ? bgImg5
+                                      : null
                         }
                         alt=""
                         className="h-48"

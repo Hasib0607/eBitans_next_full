@@ -160,8 +160,8 @@ const Card50 = ({ item }: any) => {
             {camp?.status === "active"
               ? campPrice
               : store_id === 2109
-              ? productGetPrice
-              : price}{" "}
+                ? productGetPrice
+                : price}{" "}
           </p>
           {camp?.status !== "active" &&
           (item.discount_type === "no_discount" ||

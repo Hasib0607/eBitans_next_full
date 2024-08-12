@@ -65,14 +65,16 @@ const ProductFourteen = ({ category, design, store_id }: any) => {
 
         {products?.length > 0 ? (
           <div className="grid grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 sm:gap-5 gap-1 ">
-            {products?.slice(0, 8).map((productData: any) => (
-              <Card29
-                item={productData}
-                key={productData.id}
-                design={design}
-                store_id={store_id}
-              />
-            ))}
+            {products
+              ?.slice(0, 8)
+              .map((productData: any) => (
+                <Card29
+                  item={productData}
+                  key={productData.id}
+                  design={design}
+                  store_id={store_id}
+                />
+              ))}
           </div>
         ) : (
           <div className="text-red-500 text-center py-10 text-xl">

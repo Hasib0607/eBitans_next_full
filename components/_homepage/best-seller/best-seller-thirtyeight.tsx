@@ -17,14 +17,16 @@ const BestSellerThirtyEight = ({
         </div>
         <div className="flex justify-center">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-3 justify-center">
-            {best_sell_product?.slice(0, 12).map((item: any, id: any) => (
-              <Card65
-                item={item}
-                key={id}
-                design={design}
-                store_id={store_id}
-              />
-            ))}
+            {best_sell_product
+              ?.slice(0, 12)
+              .map((item: any, id: any) => (
+                <Card65
+                  item={item}
+                  key={id}
+                  design={design}
+                  store_id={store_id}
+                />
+              ))}
           </div>
         </div>
       </div>

@@ -53,7 +53,7 @@ const BestSellerFive = ({ best_sell_product, design, store_id }: any) => {
         >
           {best_sell_product?.slice(0, 10).map((item: any) => (
             <SwiperSlide key={item?.id}>
-              <Card4 item={item} design={design} store_id={store_id}  />
+              <Card4 item={item} design={design} store_id={store_id} />
             </SwiperSlide>
           ))}
         </DefaultSlider>

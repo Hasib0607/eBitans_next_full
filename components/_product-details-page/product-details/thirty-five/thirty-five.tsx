@@ -147,9 +147,11 @@ const Related = ({ product }: any) => {
         <SectionHeadingThirtyFive title={"✦ YOU MIGHT LIKE THESE ✦"} />
       </div>
       <div className="grid sm:grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-6 ">
-        {product?.slice(0, 10).map((productData: any) => (
-          <Card61 item={productData} key={productData.id} />
-        ))}
+        {product
+          ?.slice(0, 10)
+          .map((productData: any) => (
+            <Card61 item={productData} key={productData.id} />
+          ))}
       </div>
     </div>
   );

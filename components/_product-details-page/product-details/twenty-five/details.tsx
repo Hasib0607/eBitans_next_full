@@ -328,9 +328,11 @@ const Details = ({ data }: any) => {
   return (
     <div className="grid md:grid-cols-8 grid-cols-1 md:gap-4 ">
       <div className="md:col-span-4 h-full sm:cursor-zoom-in overflow-hidden ">
-        {product?.image?.slice(0, 1).map((item: any, id: any) => (
-          <ImageZoom key={id} img={productImg + item} />
-        ))}
+        {product?.image
+          ?.slice(0, 1)
+          .map((item: any, id: any) => (
+            <ImageZoom key={id} img={productImg + item} />
+          ))}
       </div>
 
       {/* additional price */}

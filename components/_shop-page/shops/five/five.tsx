@@ -24,7 +24,7 @@ const Five = ({ data }: any) => {
   const { category, design, module } = useTheme();
 
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
-  
+
   const [grid, setGrid] = useState("H");
   const [paginate, setPaginate] = useState({});
   const [products, setProducts] = useState([]);

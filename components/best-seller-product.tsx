@@ -37,7 +37,6 @@ const BestSellerProduct = ({
   headerSetting,
   banner,
 }: any) => {
-
   return (
     <>
       {theme === "four" && (

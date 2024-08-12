@@ -84,7 +84,7 @@ const Product = ({
   setPage,
   shop_load,
   setHasMore,
-  hasMore
+  hasMore,
 }: any) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);

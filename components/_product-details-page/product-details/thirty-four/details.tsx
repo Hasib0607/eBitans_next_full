@@ -592,8 +592,8 @@ const AddCart = ({
                 {store_id === 1187
                   ? "অর্ডার করুন"
                   : store_id === 6006 || store_id === 6747
-                  ? "Order Now"
-                  : "Buy Now"}
+                    ? "Order Now"
+                    : "Buy Now"}
               </button>
               <button
                 onClick={onClick}

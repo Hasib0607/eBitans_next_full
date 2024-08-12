@@ -10,7 +10,7 @@ import {
   FacebookIcon,
   FacebookShareButton,
   WhatsappIcon,
-  WhatsappShareButton
+  WhatsappShareButton,
 } from "react-share";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
@@ -119,7 +119,7 @@ const Details = ({ data }: any) => {
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
-      store_id
+      store_id,
     };
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
@@ -137,13 +137,13 @@ const Details = ({ data }: any) => {
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
                 ...unit,
-                ...product
+                ...product,
               })
             );
 
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
 
@@ -157,13 +157,13 @@ const Details = ({ data }: any) => {
                 variant_quantity: size?.quantity,
                 variantId: size.id,
                 ...size,
-                ...product
+                ...product,
               })
             );
 
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
 
@@ -177,12 +177,12 @@ const Details = ({ data }: any) => {
                 variant_quantity: color?.quantity,
                 variantId: color.id,
                 ...color,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
 
@@ -190,12 +190,12 @@ const Details = ({ data }: any) => {
           else if (filterV.length === 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           } else if (filterV.length > 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
         } else {
@@ -209,12 +209,12 @@ const Details = ({ data }: any) => {
               additional_price: null,
               volume: null,
               unit: null,
-              ...product
+              ...product,
             })
           );
           toast("Successfully you added to cart", {
             type: "success",
-            autoClose: 1000
+            autoClose: 1000,
           });
         }
       } else {
@@ -229,12 +229,12 @@ const Details = ({ data }: any) => {
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
                 ...unit,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
           // size with regular price
@@ -247,12 +247,12 @@ const Details = ({ data }: any) => {
                 variant_quantity: size?.quantity,
                 variantId: size.id,
                 ...size,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
           // color with regular price
@@ -265,12 +265,12 @@ const Details = ({ data }: any) => {
                 variant_quantity: color?.quantity,
                 variantId: color.id,
                 ...color,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
 
@@ -278,12 +278,12 @@ const Details = ({ data }: any) => {
           else if (filterV.length === 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           } else if (filterV.length > 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
         } else {
@@ -297,12 +297,12 @@ const Details = ({ data }: any) => {
               additional_price: null,
               volume: null,
               unit: null,
-              ...product
+              ...product,
             })
           );
           toast("Successfully you added to cart", {
             type: "success",
-            autoClose: 1000
+            autoClose: 1000,
           });
         }
       }

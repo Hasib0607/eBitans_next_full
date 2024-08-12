@@ -1,18 +1,19 @@
-"use client"
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import { FaCopy } from "react-icons/fa";
-import { useParams } from "next/navigation";
-import httpReq from "@/utils/http/axios/http.service";
-import Taka from "@/utils/taka";
+"use client";
 import DataLoader from "@/components/loader/data-loader";
-import BookingInformation from "../booking-information";
-import PaymentAgain from "../payment-again";
-import OrderStatus from "../order-status";
 import useTheme from "@/hooks/use-theme";
 import { productImg } from "@/site-settings/siteUrl";
+import httpReq from "@/utils/http/axios/http.service";
+import Taka from "@/utils/taka";
+import { motion } from "framer-motion";
 import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FaCopy } from "react-icons/fa";
+import BookingInformation from "../booking-information";
 import GiveReview from "../dashboard-four/order/review";
+import OrderStatus from "../order-status";
+import PaymentAgain from "../payment-again";
+import "./order-details-seven.css";
 
 const OrderDetails = () => {
   const [loaded, setLoaded] = useState(false);
@@ -54,6 +55,8 @@ const OrderDetails = () => {
     fetchData().catch((error) => console.log(error));
     // make sure to catch any error
   }, [order_id, call]);
+
+  console.log(order, "order");
 
   return (
     <div className="md:w-full mt-4 md:mt-0">
