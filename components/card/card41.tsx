@@ -18,8 +18,7 @@ import { useDispatch } from "react-redux";
 import BDT from "@/utils/bdt";
 
 const Card41 = ({ item }: any) => {
-
-  console.log(item, "FAHF")
+  console.log(item, "FAHF");
   const [open, setOpen] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
   const dispatch = useDispatch();
@@ -32,7 +31,9 @@ const Card41 = ({ item }: any) => {
   );
   const campPrice = getPrice(
     productGetPrice,
-    isNaN(parseInt(camp?.discount_amount)) ? 0 : parseInt(camp?.discount_amount),
+    isNaN(parseInt(camp?.discount_amount))
+      ? 0
+      : parseInt(camp?.discount_amount),
     camp?.discount_type
   );
 
@@ -115,14 +116,13 @@ const Card41 = ({ item }: any) => {
   };
 
   const add_cart_item = () => {
-    console.log(item, "hello items")
+    console.log(item, "hello items");
     if (item?.variant.length !== 0) {
       setOpen(!open);
     } else {
       filterOfferProduct(item);
     }
   };
-
 
   return (
     <div>

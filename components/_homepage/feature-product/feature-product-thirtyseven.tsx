@@ -19,14 +19,16 @@ const FeatureProductThirtySeven = ({
         </div>
         <div className="flex justify-center mt-10">
           <div className="grid grid-cols-2 md:grid-cols-3 gap-1 sm:gap-3 lg:grid-cols-5 xl:grid-cols-6 justify-center">
-            {feature_product?.slice(0, 12).map((item: any, id: any) => (
-              <Card64
-                item={item}
-                key={id}
-                design={design}
-                store_id={store_id}
-              />
-            ))}
+            {feature_product
+              ?.slice(0, 12)
+              .map((item: any, id: any) => (
+                <Card64
+                  item={item}
+                  key={id}
+                  design={design}
+                  store_id={store_id}
+                />
+              ))}
           </div>
         </div>
       </div>

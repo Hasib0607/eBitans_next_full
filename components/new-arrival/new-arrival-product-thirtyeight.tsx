@@ -14,14 +14,16 @@ const NewArrivalProductThirtyEight = ({ product, design, store_id }: any) => {
         </div>
         <div className="flex justify-center">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-3 justify-center">
-            {product?.slice(0, 12).map((item: any, id: any) => (
-              <Card65
-                item={item}
-                design={design}
-                store_id={store_id}
-                key={id}
-              />
-            ))}
+            {product
+              ?.slice(0, 12)
+              .map((item: any, id: any) => (
+                <Card65
+                  item={item}
+                  design={design}
+                  store_id={store_id}
+                  key={id}
+                />
+              ))}
           </div>
         </div>
       </div>

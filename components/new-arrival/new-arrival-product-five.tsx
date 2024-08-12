@@ -56,7 +56,6 @@ const NewArrivalProductFive = ({ product }: any) => {
           {product?.slice(0, 10).map((item: any) => {
             return (
               <SwiperSlide key={item?.id}>
-        
                 <Card41 item={item} />
               </SwiperSlide>
             );

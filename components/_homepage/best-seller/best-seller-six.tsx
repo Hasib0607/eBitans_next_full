@@ -17,7 +17,7 @@ import { addToCartList } from "@/redux/features/product.slice";
 import { useDispatch } from "react-redux";
 import useTheme from "@/hooks/use-theme";
 const BestSellerSix = ({ product, design, store_id }: any) => {
-  const {makeid}=useTheme()
+  const { makeid } = useTheme();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
 
@@ -41,51 +41,34 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
       autoClose: 1000,
     });
 
-    httpReq
-      .post(
-        "get/offer/product",
-        productDetails
-      )
-      .then((res: any) => {
-        if (!res?.error) {
-          let itemRegularPrice = getPrice(
-            item?.regular_price,
-            item?.discount_price,
-            item?.discount_type
-          );
-          let campaignPrice = getPrice(
-            itemRegularPrice,
-            parseInt(res?.discount_amount),
-            res?.discount_type
-          );
+    httpReq.post("get/offer/product", productDetails).then((res: any) => {
+      if (!res?.error) {
+        let itemRegularPrice = getPrice(
+          item?.regular_price,
+          item?.discount_price,
+          item?.discount_type
+        );
+        let campaignPrice = getPrice(
+          itemRegularPrice,
+          parseInt(res?.discount_amount),
+          res?.discount_type
+        );
 
-          if (res?.discount_amount === null) {
-            cartItem = {
-              cartId: uuidv4(),
-              price: itemRegularPrice,
-              color: null,
-              size: null,
-              additional_price: null,
-              volume: null,
-              unit: null,
-              ...item,
-            };
-          } else {
-            cartItem = {
-              cartId: uuidv4(),
-              price: campaignPrice,
-              color: null,
-              size: null,
-              additional_price: null,
-              volume: null,
-              unit: null,
-              ...item,
-            };
-          }
+        if (res?.discount_amount === null) {
+          cartItem = {
+            cartId: uuidv4(),
+            price: itemRegularPrice,
+            color: null,
+            size: null,
+            additional_price: null,
+            volume: null,
+            unit: null,
+            ...item,
+          };
         } else {
           cartItem = {
             cartId: uuidv4(),
-            price: productGetPrice,
+            price: campaignPrice,
             color: null,
             size: null,
             additional_price: null,
@@ -94,8 +77,20 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
             ...item,
           };
         }
-        dispatch(addToCartList({ ...cartItem }));
-      });
+      } else {
+        cartItem = {
+          cartId: uuidv4(),
+          price: productGetPrice,
+          color: null,
+          size: null,
+          additional_price: null,
+          volume: null,
+          unit: null,
+          ...item,
+        };
+      }
+      dispatch(addToCartList({ ...cartItem }));
+    });
   };
 
   let add_cart_item = (item: any) => {

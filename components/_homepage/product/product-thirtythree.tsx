@@ -61,9 +61,9 @@ const ProductThirtyThree = ({
           </div>
           <div className="pt-5">
             <div className="grid grid-cols-1 gap-5">
-              {feature_product?.slice(0, 4).map((item: any, id: any) => (
-                <Card item={item} key={id} />
-              ))}
+              {feature_product
+                ?.slice(0, 4)
+                .map((item: any, id: any) => <Card item={item} key={id} />)}
             </div>
           </div>
         </div>

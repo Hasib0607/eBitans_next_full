@@ -41,9 +41,8 @@ const LoginSeven = () => {
           toast(verify, { type: "success" });
           window.location.href = "/profile";
           // window.location.reload();
-        }
-        else {
-            router.push('/verify-otp')
+        } else {
+          router.push("/verify-otp");
         }
       })
       .catch((er: any) => {

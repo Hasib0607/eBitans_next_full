@@ -31,7 +31,7 @@ const GridSliderThirteen = ({
   ...rest
 }: any) => {
   return (
-    <div className=''>
+    <div className="">
       <Swiper
         loop={true}
         breakpoints={breakpoints}

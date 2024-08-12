@@ -63,9 +63,7 @@ const CategoryThirtySeven = () => {
       <style>{styleCss}</style>
       <div className="pt-3 sm:container px-5 lg:block hidden">
         <div className="flex flex-wrap items-center gap-3">
-          {subCat?.map((item: any) => (
-            <SubCat key={item?.id} item={item} />
-          ))}
+          {subCat?.map((item: any) => <SubCat key={item?.id} item={item} />)}
         </div>
       </div>
       <div className="pt-3 sm:container px-5">

@@ -142,13 +142,15 @@ const Order = () => {
                   </thead>
 
                   <tbody>
-                    {filter?.reverse().map((order: any) => (
-                      <OrderItem
-                        key={order?.reference_no}
-                        cancel_request={cancel_request}
-                        item={order}
-                      />
-                    ))}
+                    {filter
+                      ?.reverse()
+                      .map((order: any) => (
+                        <OrderItem
+                          key={order?.reference_no}
+                          cancel_request={cancel_request}
+                          item={order}
+                        />
+                      ))}
                   </tbody>
                 </table>
               )}
@@ -174,24 +176,24 @@ const OrderItem = ({ item, cancel_request }: any) => {
                   item?.status === "Pending"
                     ? "bg-purple-100 border-purple-200"
                     : item?.status === "Shipping"
-                    ? "bg-blue-100 border-blue-200"
-                    : item?.status === "Paid"
-                    ? "bg-orange-100 border-orange-200"
-                    : item?.status === "Payment Cancel"
-                    ? "bg-orange-300 border-orange-400"
-                    : item?.status === "Processing"
-                    ? "bg-indigo-100 border-indigo-200"
-                    : item?.status === "Delivered"
-                    ? "bg-green-100 border-green-200"
-                    : item?.status === "Returned"
-                    ? "bg-yellow-100 border-yellow-200"
-                    : item?.status === "Cancelled"
-                    ? "bg-red-200 border-red-200"
-                    : item?.status === "Payment Failed"
-                    ? "bg-pink-300 border-pink-300"
-                    : item?.status === "On Hold"
-                    ? "bg-gray-100 border-gray-200"
-                    : null
+                      ? "bg-blue-100 border-blue-200"
+                      : item?.status === "Paid"
+                        ? "bg-orange-100 border-orange-200"
+                        : item?.status === "Payment Cancel"
+                          ? "bg-orange-300 border-orange-400"
+                          : item?.status === "Processing"
+                            ? "bg-indigo-100 border-indigo-200"
+                            : item?.status === "Delivered"
+                              ? "bg-green-100 border-green-200"
+                              : item?.status === "Returned"
+                                ? "bg-yellow-100 border-yellow-200"
+                                : item?.status === "Cancelled"
+                                  ? "bg-red-200 border-red-200"
+                                  : item?.status === "Payment Failed"
+                                    ? "bg-pink-300 border-pink-300"
+                                    : item?.status === "On Hold"
+                                      ? "bg-gray-100 border-gray-200"
+                                      : null
                 } border-b`}
     >
       {/* order reference no  */}

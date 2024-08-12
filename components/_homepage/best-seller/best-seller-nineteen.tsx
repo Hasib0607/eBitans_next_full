@@ -23,9 +23,11 @@ const BestSellerNineteen = ({ best_sell_product, store_id }: any) => {
         </div>
         <div className="md:col-span-2">
           <div className="grid sm:grid-cols-2 gap-5">
-            {best_sell_product?.slice(0, 2).map((data: any) => (
-              <Card39 item={data} key={data?.id} store_id={store_id} />
-            ))}
+            {best_sell_product
+              ?.slice(0, 2)
+              .map((data: any) => (
+                <Card39 item={data} key={data?.id} store_id={store_id} />
+              ))}
           </div>
         </div>
       </div>

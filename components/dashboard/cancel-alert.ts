@@ -11,7 +11,7 @@ export const cancelAlert = (id: any, user: any, setCall: any) => {
     confirmButtonColor: "#3085d6",
     cancelButtonColor: "#d33",
     confirmButtonText: "Yes, delete it!",
-  }).then((result:any) => {
+  }).then((result: any) => {
     if (result.isConfirmed) {
       httpReq
         .post("order/cancel", { id, user_id: user?.details?.id })

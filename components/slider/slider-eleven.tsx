@@ -50,7 +50,7 @@ const SliderEleven = ({ nextEl, prevEl, children, ...rest }: any) => {
         prevEl: `.${prevEl}`,
         nextEl: `.${nextEl}`,
       }}
-      className='mySwiper'
+      className="mySwiper"
     >
       {children}
     </Swiper>

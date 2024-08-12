@@ -11,7 +11,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import {
   ChevronDownIcon,
   TableCellsIcon,
-  XMarkIcon
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { IoSearchCircleOutline } from "react-icons/io5";
 
@@ -316,7 +316,7 @@ const Sticky = ({ setSearchInput, searchInput, headerSetting }: any) => {
         transition={{ duration: 0.6, ease: "linear" }}
         className=" bg-gray-800 fixed top-0 left-0 right-0"
         style={{
-          zIndex: 11
+          zIndex: 11,
         }}
       >
         <div className="sm:container px-5">

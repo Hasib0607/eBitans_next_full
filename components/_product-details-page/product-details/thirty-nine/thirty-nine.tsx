@@ -135,9 +135,9 @@ const Related = ({ product }: any) => {
         <h1 className="text-2xl pb-3">RELATED PRODUCTS</h1>
       </div>
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 sm:gap-3 lg:grid-cols-5 xl:grid-cols-6 justify-center">
-        {product?.slice(0, 10).map((item: any, id: any) => (
-          <Card67 item={item} key={id} />
-        ))}
+        {product
+          ?.slice(0, 10)
+          .map((item: any, id: any) => <Card67 item={item} key={id} />)}
       </div>
     </div>
   );

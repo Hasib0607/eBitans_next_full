@@ -246,16 +246,16 @@ const CheckOutFortyOrder = ({
       bookingData?.status === 200
         ? formBookData?.name
         : store?.auth_type === "EasyOrder" && !user
-        ? userName
-        : selectAddress?.name
+          ? userName
+          : selectAddress?.name
     );
     formData.append(
       "phone",
       bookingData?.status === 200
         ? formBookData?.phone
         : store?.auth_type === "EasyOrder" && !user
-        ? userPhone
-        : selectAddress?.phone
+          ? userPhone
+          : selectAddress?.phone
     );
     formData.append("payment_type", selectPayment);
     formData.append(
@@ -263,8 +263,8 @@ const CheckOutFortyOrder = ({
       bookingData?.status === 200
         ? ""
         : store?.auth_type === "EasyOrder" && !user
-        ? userAddress
-        : selectAddress?.address
+          ? userAddress
+          : selectAddress?.address
     );
     formData.append("subtotal", total);
     formData.append("shipping", shipping_area);
@@ -385,7 +385,11 @@ const CheckOutFortyOrder = ({
                   }
                 );
                 dispatch(clearCartList());
-                dispatch(login({ tokenData: responseInfo?.data?.token }) as any)
+                dispatch(
+                  login({
+                    tokenData: responseInfo?.data?.token,
+                  }) as any
+                )
                   .unwrap()
                   .then(({ verify, error }: any) => {
                     if (error) {
@@ -401,7 +405,9 @@ const CheckOutFortyOrder = ({
                     }
                   })
                   .catch((er: any) => {
-                    toast("Credential Doesn't Match", { type: "error" });
+                    toast("Credential Doesn't Match", {
+                      type: "error",
+                    });
                   });
                 // navigate("/profile/order")
               }

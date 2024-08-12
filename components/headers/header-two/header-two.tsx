@@ -81,7 +81,7 @@ const HeaderTwo = () => {
           {menu?.map((item: any) => (
             <div key={item.id} className="header-menu">
               <Link
-                href={item.url || '/'}
+                href={item.url || "/"}
                 className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium"
               >
                 {item.name}
@@ -146,8 +146,8 @@ const HeaderTwo = () => {
                       userData?.image
                         ? profileImg + userData?.image
                         : userData?.social_img
-                        ? profileImg + userData?.social_img
-                        : "https://ebitans.com/Image/theme/default-user-image.png"
+                          ? profileImg + userData?.social_img
+                          : "https://ebitans.com/Image/theme/default-user-image.png"
                     }
                     alt=""
                     className="object-fit h-8 w-8 rounded-full overflow-hidden"

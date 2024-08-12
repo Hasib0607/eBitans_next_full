@@ -112,33 +112,33 @@
   }
   } */
 
-  .mySwiper18 .swiper-slide {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    border: 3px solid transparent;
-  }
+.mySwiper18 .swiper-slide {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
 
-  .mySwiper18 {
-    height: 600px;
-    width: 120px;
-    box-sizing: border-box;
-  }
-  
-  .mySwiper188 .swiper-slide {
-    width: 100%;
-    height: 100%;
-    cursor: pointer;
-    border: 3px solid transparent;
-  }
+.mySwiper18 {
+  height: 600px;
+  width: 120px;
+  box-sizing: border-box;
+}
 
-  @media only screen and (max-width: 768px) {
-    .mySwiper-18 {
-      height: 350px;
-      width: 150px;
-    }
-    }
-  /* .mySwiper188 {
+.mySwiper188 .swiper-slide {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  border: 3px solid transparent;
+}
+
+@media only screen and (max-width: 768px) {
+  .mySwiper-18 {
+    height: 350px;
+    width: 150px;
+  }
+}
+/* .mySwiper188 {
     height: 100px;
     width: 384px;
     box-sizing: border-box;

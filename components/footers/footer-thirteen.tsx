@@ -41,15 +41,23 @@ const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
           </div>
           <div className="">
             <Fheader bg={"#40AF64"} name={"Categories"} />
-            {category?.slice(0, 5).map((i: any) => (
-              <Single key={i?.id} id={i?.id} text={i?.name} />
-            ))}
+            {category
+              ?.slice(0, 5)
+              .map((i: any) => (
+                <Single key={i?.id} id={i?.id} text={i?.name} />
+              ))}
           </div>
           <div className="">
             <Fheader bg={"#F7BE24"} name={"Menu"} />
-            {menu?.slice(0, 5)?.map((i: any) => (
-              <Single url={i?.url ? i?.url : "/"} text={i?.name} key={i?.id} />
-            ))}
+            {menu
+              ?.slice(0, 5)
+              ?.map((i: any) => (
+                <Single
+                  url={i?.url ? i?.url : "/"}
+                  text={i?.name}
+                  key={i?.id}
+                />
+              ))}
           </div>
           <div className="">
             <Fheader bg={"#de5648"} name={"Your account"} />

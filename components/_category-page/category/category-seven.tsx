@@ -58,7 +58,6 @@ const CategorySeven = ({ data }: any) => {
           {category.map((item: any) => (
             <div key={item.id} className="">
               <SingleCat key={item?.id} item={item} />
-             
             </div>
           ))}
         </div>
@@ -209,7 +208,6 @@ const Product = ({
     val,
   ]);
 
-  
   const fetchData = async () => {
     // get the data from the api
     const { colors, data, error } = await httpReq.post(

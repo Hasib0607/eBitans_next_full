@@ -85,7 +85,10 @@
   visibility: hidden;
   opacity: 0;
   transform: translateY(30px);
-  transition: visibility 0s, opacity 0.5s linear, transform 0.5s ease-in-out;
+  transition:
+    visibility 0s,
+    opacity 0.5s linear,
+    transform 0.5s ease-in-out;
   background-color: #ededed;
   height: 40px;
 }
@@ -100,7 +103,10 @@
   visibility: hidden;
   opacity: 0;
   transform: translateY(30px);
-  transition: visibility 0s, opacity 0.5s linear, transform 0.5s ease-in-out;
+  transition:
+    visibility 0s,
+    opacity 0.5s linear,
+    transform 0.5s ease-in-out;
   background-color: #4b4a4a;
   height: 60px;
 }

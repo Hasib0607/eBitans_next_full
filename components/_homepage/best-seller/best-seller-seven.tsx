@@ -10,8 +10,6 @@ const BestSellerSeven = ({ best_sell_product }: any) => {
   const prev = "best_seller_Prev";
   const next = "best_seller_Next";
 
-
-
   return (
     <div className="container px-5 bg-white relative py-5">
       <SectionHeadingSeven title={"Flash Sale"} subtitle={""} />

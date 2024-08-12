@@ -64,13 +64,15 @@ const FooterOne = ({
               Categories
             </h2>
             <nav className="list-none mb-10 space-y-2">
-              {category?.slice(0, 7).map((item: any) => (
-                <Link1
-                  key={item.id}
-                  text={item.name}
-                  href={"/category/" + item.id}
-                />
-              ))}
+              {category
+                ?.slice(0, 7)
+                .map((item: any) => (
+                  <Link1
+                    key={item.id}
+                    text={item.name}
+                    href={"/category/" + item.id}
+                  />
+                ))}
             </nav>
           </div>
 
