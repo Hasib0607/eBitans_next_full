@@ -22,13 +22,13 @@ const TwentySeven = ({ data, updatedData }: any) => {
   });
 
   const { data: relatedProducts } = useQuery({
-    queryKey: ["rp-16"],
+    queryKey: ["rp-27"],
     queryFn: () => getRelatedProducts(updatedData?.product_id),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { data: reviews } = useQuery({
-    queryKey: ["rv-16"],
+    queryKey: ["rv-27"],
     queryFn: () => getReviews(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });

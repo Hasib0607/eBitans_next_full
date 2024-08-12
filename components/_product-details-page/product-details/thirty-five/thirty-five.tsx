@@ -13,19 +13,19 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
 const ThirtyFive = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
-    queryKey: ["pd-21"],
+    queryKey: ["pd-35"],
     queryFn: () => getProductDetails(updatedData),
     enabled: !!updatedData?.slug && !!updatedData?.store_id,
   });
 
   const { data: relatedProducts } = useQuery({
-    queryKey: ["rp-16"],
+    queryKey: ["rp-35"],
     queryFn: () => getRelatedProducts(updatedData?.product_id),
     enabled: !!updatedData?.slug && !!updatedData?.store_id,
   });
 
   const { data: reviews } = useQuery({
-    queryKey: ["rv-16"],
+    queryKey: ["rv-35"],
     queryFn: () => getReviews(updatedData),
     enabled: !!updatedData?.slug && !!updatedData?.store_id,
   });

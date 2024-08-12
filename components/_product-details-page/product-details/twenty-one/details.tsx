@@ -110,7 +110,7 @@ const Details = ({fetchStatus, product,variant,vrcolor , data, children  }: any)
     product?.quantity ||
     "Out of Stock";
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
@@ -358,7 +358,7 @@ const Details = ({fetchStatus, product,variant,vrcolor , data, children  }: any)
         border: 1px solid ${design?.header_color};
     }
   `;
-  
+
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">

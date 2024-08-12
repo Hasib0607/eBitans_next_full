@@ -90,7 +90,7 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any)
       .catch(console.error);
   }, [data, store_id]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
