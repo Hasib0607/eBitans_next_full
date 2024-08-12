@@ -22,7 +22,14 @@ import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 
-const Details = ({fetchStatus, product,variant,vrcolor , data, children  }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
