@@ -24,15 +24,12 @@ import {
   PlusIcon,
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
+import OvalLoader from "@/components/loader/oval-loader";
 
-const Details = ({ data }: any) => {
+const Details = ({ fetchStatus, product,variant,vrcolor , data, children   }: any) => {
   const { makeid, store_id } = useTheme();
   const dispatch = useDispatch();
-
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
 
   // select variant state
@@ -73,9 +70,7 @@ const Details = ({ data }: any) => {
       const sizeVariant = variant?.find((item: any) => item?.size !== null);
 
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+      
       setUnit(!sizeVariant && !vrcolor ? variant[0] : null);
       setSize(sizeVariant ? sizeVariant : null);
       setColor(
@@ -90,10 +85,10 @@ const Details = ({ data }: any) => {
       .catch(console.error);
   }, [data, store_id]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
-      <div className="w-full h-[450px] flex justify-center items-center">
-        Loading...
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
       </div>
     );
   }
@@ -325,6 +320,9 @@ const Details = ({ data }: any) => {
     }
   };
 
+ 
+
+
   return (
     <div className="grid md:grid-cols-8 grid-cols-1 md:gap-4 ">
       <div className="md:col-span-4 h-full sm:cursor-zoom-in overflow-hidden ">
@@ -351,8 +349,8 @@ const Details = ({ data }: any) => {
             <BDT />
             {camp?.status === "active" ? campPrice : price}{" "}
             {camp?.status !== "active" &&
-            (product.discount_type === "no_discount" ||
-              product.discount_price === "0.00") ? (
+            (product?.discount_type === "no_discount" ||
+              product?.discount_price === "0.00") ? (
               " "
             ) : (
               <span className="text-gray-500 font-thin line-through text-xl font-seven">
@@ -377,7 +375,7 @@ const Details = ({ data }: any) => {
 
         <div className="mt-5">
           {/* unit  */}
-          {!vrcolor && variant?.length !== 0 && variant[0]?.unit && (
+          {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
             <Units unit={unit} setUnit={setUnit} variant={variant} />
           )}
           {/* color and size  */}

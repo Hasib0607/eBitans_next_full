@@ -16,19 +16,19 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
 const Twenty = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
-    queryKey: ["pd-16"],
+    queryKey: ["pd-20"],
     queryFn: () => getProductDetails(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { data: relatedProducts } = useQuery({
-    queryKey: ["rp-16"],
+    queryKey: ["rp-20"],
     queryFn: () => getRelatedProducts(updatedData?.product_id),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { data: reviews } = useQuery({
-    queryKey: ["rv-16"],
+    queryKey: ["rv-20"],
     queryFn: () => getReviews(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });

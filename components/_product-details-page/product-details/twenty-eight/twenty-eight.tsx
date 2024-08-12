@@ -13,38 +13,31 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card58 from "@/components/card/card58";
 import useTheme from "@/hooks/use-theme";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const TwentyEight = ({ data }: any) => {
+const TwentyEight = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-28"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-28"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res: any) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-28"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("get/review", data).then((res: any) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq
-      .post("related-product", { id: data?.product_id })
-      .then((res: any) => {
-        if (!res?.error) {
-          setRelatedProduct(res);
-        }
-      });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   const styleCss = `
     .active-des-review {
@@ -62,12 +55,18 @@ const TwentyEight = ({ data }: any) => {
           <p>Home</p>
         </Link>
         <RiArrowRightSLine />
-        <p>{productDetails?.category}</p>
+        <p>{productDetailsData?.product?.category}</p>
         <RiArrowRightSLine />
-        <p>{productDetails?.name}</p>
+        <p>{productDetailsData?.product?.name}</p>
       </div>
       <style>{styleCss}</style>
-      <Details data={data} />
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      />
 
       <div className="mt-14 border rounded-md">
         <Tab.Group>
@@ -94,11 +93,11 @@ const TwentyEight = ({ data }: any) => {
           <Tab.Panels className="">
             <Tab.Panel>
               <div className="p-5 ">
-                {productDetails?.video_link && (
+                {productDetailsData?.product?.video_link && (
                   <div className="mb-5">
                     <iframe
                       className="xl:h-[700px] h-[350px] md:h-[450px] lg:h-[600px] w-full video-border"
-                      src={productDetails?.video_link}
+                      src={productDetailsData?.product?.video_link}
                       frameBorder="0"
                       allow="autoplay; encrypted-media"
                       allowFullScreen
@@ -108,30 +107,32 @@ const TwentyEight = ({ data }: any) => {
                 )}
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: productDetails?.description,
+                    __html: productDetailsData?.product?.description,
                   }}
                   className="apiHtml"
                 ></div>
               </div>
             </Tab.Panel>
             <Tab.Panel>
-              {reviews.length === 0 ? (
+              {reviews?.length === 0 ? (
                 <div className="flex flex-1 justify-center items-center p-5">
                   <h3 className="text-xl font-sans font-bold">
                     No Found Review
                   </h3>
                 </div>
               ) : (
-                reviews?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
+                reviews?.error
+                ? reviews?.error
+                : reviews?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))
               )}
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };

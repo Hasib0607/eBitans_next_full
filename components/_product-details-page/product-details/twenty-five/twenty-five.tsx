@@ -11,41 +11,41 @@ import moment from "moment";
 import Arrow from "@/utils/arrow";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card50 from "@/components/card/card50";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const TwentyFive = ({ data }: any) => {
+const TwentyFive = ({ data,updatedData }: any) => {
   const { store_id } = useTheme();
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-25"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-16"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-16"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res: any) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res: any) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div>
       <div className="sm:px-10 px-5 pt-10">
-        <Details data={data} />
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      />
       </div>
 
       {/* ************************ tab component start ***************************** */}
@@ -76,30 +76,32 @@ const TwentyFive = ({ data }: any) => {
               <div className="p-5 ">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: productDetails?.description,
+                    __html: productDetailsData?.product?.description,
                   }}
                   className="apiHtml"
                 ></div>
               </div>
             </Tab.Panel>
             <Tab.Panel>
-              {reviews.length === 0 ? (
+              {reviews?.length === 0 ? (
                 <div className="flex flex-1 my-2 items-center">
                   <h3 className="text-xl font-sans font-bold py-3 text-center w-full">
                     No Found Review
                   </h3>
                 </div>
               ) : (
-                reviews?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
+                reviews?.error
+                    ? reviews?.error
+                    : reviews?.map((item: any) => (
+                        <UserReview key={item?.id} review={item} />
+                      ))
               )}
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };

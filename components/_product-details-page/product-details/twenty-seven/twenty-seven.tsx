@@ -10,34 +10,41 @@ import Rate from "@/utils/rate";
 import Arrow from "@/utils/arrow";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card51 from "@/components/card/card51";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const TwentySeven = ({ data }: any) => {
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
+const TwentySeven = ({ data, updatedData }: any) => {
 
-  useEffect(() => {
-    httpReq.post("get/review", data).then((res: any) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq
-      .post("related-product", { id: data?.product_id })
-      .then((res: any) => {
-        if (!res?.error) {
-          setRelatedProduct(res);
-        }
-      });
-  }, [data]);
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-27"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
+
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-27"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
+
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-27"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
+
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div className="pt-10 md:container xl:px-20 px-5">
-      <Details data={data}>
-        <According text={"Customer Reviews"} reviews={reviews} />
-      </Details>
-      <Related product={relatedProduct} />
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      />
+      <Related product={relatedProducts} />
     </div>
   );
 };
@@ -63,14 +70,16 @@ const According = ({ text, reviews }: any) => {
           transition={{ duration: 0.5 }}
           className="font-seven"
         >
-          {reviews.length === 0 ? (
+          {reviews?.length === 0 ? (
             <div className="flex flex-1 justify-center items-center">
               <h3 className="text-xl font-sans font-bold">No Found Review</h3>
             </div>
           ) : (
-            reviews?.map((item: any) => (
-              <UserReview key={item?.id} review={item} />
-            ))
+            reviews?.error
+            ? reviews?.error
+            : reviews?.map((item: any) => (
+                <UserReview key={item?.id} review={item} />
+              ))
           )}
         </motion.div>
       )}

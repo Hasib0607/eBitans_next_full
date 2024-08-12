@@ -66,7 +66,7 @@ const Card58 = ({ item }: any) => {
         border: 2px solid ${design?.header_color};
     }
     .text-hover:hover {
-        color: ${design.header_color};
+        color: ${design?.header_color};
       }
     .bg-color {
         color:  ${textColor};

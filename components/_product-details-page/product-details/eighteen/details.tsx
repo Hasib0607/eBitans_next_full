@@ -315,6 +315,7 @@ const Details = ({
   `;
 
   const buttonEighteen =
+  
     "bg-black btn-hover text-white font-thin sm:py-[16px] py-2 px-5 sm:px-16 w-max";
 
   if (fetchStatus === "fetching") {

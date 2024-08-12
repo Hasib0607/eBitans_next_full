@@ -14,15 +14,14 @@ import Link from "next/link";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import useTheme from "@/hooks/use-theme";
 
-const Details = ({ data, children, open, setOpen }: any) => {
+const Details = ({fetchStatus, product,variant,vrcolor , data, children, open, setOpen }: any) => {
   const { makeid, store_id, headerSetting, design } = useTheme();
 
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
+
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
+
   const [load, setLoad] = useState<any>(false);
 
   // select variant state
@@ -61,9 +60,7 @@ const Details = ({ data, children, open, setOpen }: any) => {
       const sizeVariant = variant?.find((item: any) => item?.size !== null);
 
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+
       setLoad(false);
       setUnit(!sizeVariant && !vrcolor ? variant[0] : null);
       setSize(sizeVariant ? sizeVariant : null);
@@ -78,7 +75,7 @@ const Details = ({ data, children, open, setOpen }: any) => {
       .catch(console.error);
   }, [data, store_id]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
@@ -370,8 +367,8 @@ const Details = ({ data, children, open, setOpen }: any) => {
               <BDT />
               {camp?.status === "active" ? campPrice : price}{" "}
               {camp?.status !== "active" &&
-              (product.discount_type === "no_discount" ||
-                product.discount_price === "0.00") ? (
+              (product?.discount_type === "no_discount" ||
+                product?.discount_price === "0.00") ? (
                 " "
               ) : (
                 <span className="text-gray-500 font-thin line-through text-xl">
