@@ -22,14 +22,10 @@ import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 
-const Details = ({ data, children }: any) => {
+const Details = ({fetchStatus, product,variant,vrcolor , data, children  }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -78,9 +74,6 @@ const Details = ({ data, children }: any) => {
       }
 
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setLoad(false);
       setColor(null);
       setSize(null);
@@ -365,6 +358,14 @@ const Details = ({ data, children }: any) => {
         border: 1px solid ${design?.header_color};
     }
   `;
+  
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
 
   return (
     <div className=" bg-white h-full ">

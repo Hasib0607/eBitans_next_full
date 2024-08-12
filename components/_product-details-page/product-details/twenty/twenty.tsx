@@ -11,35 +11,40 @@ import SectionHeadingEighteen from "@/components/section-heading/section-heading
 import Arrow from "@/utils/arrow";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card44 from "@/components/card/card44";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const Twenty = ({ data }: any) => {
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
+const Twenty = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-16"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq
-      .post("related-product", { id: data?.product_id })
-      .then((res: any) => {
-        if (!res?.error) {
-          setRelatedProduct(res);
-        }
-      });
-  }, [data]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-16"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
+
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-16"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
+
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
-      <Details data={data}>
-        <div className="h-[1px] bg-gray-300 w-full "></div>
-        <According text={"Customer Reviews"} reviews={reviews} />
-      </Details>
-      <Related product={relatedProduct} />
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      />
+      <Related product={relatedProducts} />
     </div>
   );
 };
@@ -70,9 +75,11 @@ const According = ({ text, reviews }: any) => {
               <h3 className="text-xl font-sans font-bold">No Found Review</h3>
             </div>
           ) : (
-            reviews?.map((item: any) => (
-              <UserReview key={item?.id} review={item} />
-            ))
+            reviews?.error
+              ? reviews?.error
+              : reviews?.map((item: any) => (
+                  <UserReview key={item?.id} review={item} />
+                ))
           )}
         </motion.div>
       )}

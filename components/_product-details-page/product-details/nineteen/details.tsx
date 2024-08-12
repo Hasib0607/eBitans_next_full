@@ -31,15 +31,11 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-const Details = ({ data, children }: any) => {
+const Details = ({  fetchStatus, product,variant,vrcolor , data, children }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
-
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
 
   // select variant state
@@ -75,9 +71,7 @@ const Details = ({ data, children }: any) => {
       }
 
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+ 
       setLoad(false);
       setColor(null);
       setUnit(null);
@@ -337,6 +331,14 @@ const Details = ({ data, children }: any) => {
 
   const prev = "single_Prev";
   const next = "single_Next";
+
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="h-full">
