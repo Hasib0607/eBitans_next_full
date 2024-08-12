@@ -1,24 +1,24 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { MdDelete } from "react-icons/md";
-import axios from "axios";
-import { useRouter } from "next/navigation";
-import { getPrice } from "@/utils/get-price";
+import MyModal from "@/components/modal";
 import useTheme from "@/hooks/use-theme";
+import { login } from "@/redux/features/auth.slice";
 import {
   clearCartList,
   removeToCartList,
 } from "@/redux/features/product.slice";
-import { login } from "@/redux/features/auth.slice";
-import httpReq from "@/utils/http/axios/http.service";
 import { productImg } from "@/site-settings/siteUrl";
-import Link from "next/link";
-import BDT from "@/utils/bdt";
-import MyModal from "@/components/modal";
-import PaymentGateway from "../payment-gateway/payment-gateway";
 import { btnhover } from "@/site-settings/style";
+import BDT from "@/utils/bdt";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import axios from "axios";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import PaymentGateway from "../payment-gateway/payment-gateway";
 
 const YourOrders = ({
   couponDis,
@@ -124,9 +124,9 @@ const YourOrders = ({
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
-      // discount:
-      //   item.regular_price -
-      //   getPrice(item.regular_price, item.discount_price, item.discount_type),
+      discount:
+        item.regular_price -
+        getPrice(item.regular_price, item.discount_price, item.discount_type)!,
       price: item?.price - item.additional_price,
       size: item.size,
       color: item.color,
@@ -176,7 +176,8 @@ const YourOrders = ({
       address: selectAddress?.address,
       subtotal: total,
       shipping: parseInt(shipping_area),
-      total: total + tax + parseInt(shipping_area) - couponDis,
+      total:
+        parseInt(total) + parseInt(tax) + parseInt(shipping_area) - couponDis,
       discount: couponDis,
       product: cart,
       tax: tax,
@@ -203,7 +204,10 @@ const YourOrders = ({
     );
     formData.append("subtotal", total);
     formData.append("shipping", shipping_area);
-    // formData.append("total", total + tax + parseInt(shipping_area) - couponDis);
+    formData.append(
+      "total",
+      (total + tax + parseInt(shipping_area) - couponDis).toString()
+    );
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");

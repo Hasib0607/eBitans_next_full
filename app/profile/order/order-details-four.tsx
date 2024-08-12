@@ -1,4 +1,8 @@
 "use client";
+import BookingInformation from "@/components/dashboard/booking-information";
+import GiveReview from "@/components/dashboard/dashboard-four/order/review";
+import OrderStatus from "@/components/dashboard/order-status";
+import PaymentAgain from "@/components/dashboard/payment-again";
 import DataLoader from "@/components/loader/data-loader";
 import useTheme from "@/hooks/use-theme";
 import { productImg, profileImg } from "@/site-settings/siteUrl";
@@ -10,14 +14,8 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FaCopy } from "react-icons/fa";
 import { useSelector } from "react-redux";
-import BookingInformation from "../../booking-information";
-import "../../dashboard-seven/order-details-seven.css";
-import OrderStatus from "../../order-status";
-import PaymentAgain from "../../payment-again";
-import GiveReview from "./review";
-// import Countdown from 'react-countdown';
 
-const OrderDetails = () => {
+const OrderDetailsFour = () => {
   const [call, setCall] = useState(false);
   const [order, setOrder] = useState<any>({});
   const [transaction, setTransaction] = useState({});
@@ -65,7 +63,6 @@ const OrderDetails = () => {
         <p className={`text-base font-medium leading-6 text-gray-600 `}>
           {new Date(order?.created_at).toLocaleString()}
         </p>
-        {/* <p className={`text-base font-medium leading-6 text-gray-600 `}>{new Date(order?.updated_at).toLocaleString()}</p> */}
       </div>
 
       <div className="mt-10 flex flex-col xl:flex-row jusitfy-center items-stretch  w-full xl:space-x-8 space-y-4 md:space-y-6 xl:space-y-0">
@@ -266,7 +263,7 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default OrderDetailsFour;
 
 const SingleItem = ({
   item,
@@ -275,29 +272,21 @@ const SingleItem = ({
   order,
   orderItem,
   productLink,
-  copied,
-  setCopied,
 }: any) => {
   const [open, setOpen] = useState(false);
   const { store_id } = useTheme();
   const [product, setProduct] = useState<any>({});
 
   useEffect(() => {
-    // declare the async data fetching function
     const fetchData = async () => {
-      // get the data from the api
       const { product } = await httpReq.post("product-details", {
         store_id,
         product_id: item?.product_id,
       });
       setProduct(product);
     };
-    // call the function
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);
+    fetchData().catch(console.error);
   }, [store_id, item?.product_id]);
-  // console.log(order, 'order');
 
   useEffect(() => {
     let copyText = document.querySelector(".copy-text");
@@ -306,20 +295,13 @@ const SingleItem = ({
     if (copyText !== null) {
       copyText.querySelector("button")?.addEventListener("click", function () {
         let input: any = copyText.querySelector("input.text");
-
         let value = input.value;
-
         let tempTextarea = document.createElement("textarea");
         tempTextarea.value = value;
-
         document.body.appendChild(tempTextarea);
-
         tempTextarea.select();
-
         document.execCommand("copy");
-
         document.body.removeChild(tempTextarea);
-
         copyText.classList.add("active");
         setTimeout(function () {
           copyText.classList.remove("active");
@@ -376,9 +358,6 @@ const SingleItem = ({
               </div>
             </div>
             <div className="flex flex-col  space-x-8 items-end w-full">
-              {/* <p className="text-base xl:text-lg leading-6">
-                            $36.00 <span className="text-red-300 line-through"> $45.00</span>
-                        </p> */}
               <p className="text-base xl:text-lg leading-6 ">
                 QTY: {item?.quantity}
               </p>
@@ -415,7 +394,6 @@ const SingleItem = ({
                   type="text"
                   className="text"
                   value={productLink ? productLink : ""}
-                  // readOnly
                   disabled
                 />
                 <button>

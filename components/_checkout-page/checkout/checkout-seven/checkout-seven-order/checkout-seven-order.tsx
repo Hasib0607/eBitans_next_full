@@ -1,27 +1,25 @@
 "use client";
-import React from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { useState } from "react";
-import axios from "axios";
-import { MdDelete } from "react-icons/md";
-import { FaEdit } from "react-icons/fa";
-import { AiOutlineUpload } from "react-icons/ai";
+import MyModal from "@/components/modal";
 import useTheme from "@/hooks/use-theme";
-import { getPrice } from "@/utils/get-price";
+import { login } from "@/redux/features/auth.slice";
 import {
   clearCartList,
   removeToCartList,
 } from "@/redux/features/product.slice";
-import { login } from "@/redux/features/auth.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import { btnhover } from "@/site-settings/style";
+import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import Taka from "@/utils/taka";
-import { btnhover } from "@/site-settings/style";
-import MyModal from "@/components/modal";
-import { productImg } from "@/site-settings/siteUrl";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { AiOutlineUpload } from "react-icons/ai";
+import { FaEdit } from "react-icons/fa";
+import { MdDelete } from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const CheckOutSevenOrder = ({
   couponDis,
@@ -182,7 +180,6 @@ const CheckOutSevenOrder = ({
 
   const handleCheckout = async () => {
     setLoading(true);
-  
 
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
@@ -198,8 +195,6 @@ const CheckOutSevenOrder = ({
       volume: item.volume,
       items: item?.items,
     }));
-
-    
 
     const formData = new FormData();
 
@@ -241,15 +236,13 @@ const CheckOutSevenOrder = ({
       address: selectAddress?.address,
       subtotal: total,
       shipping: parseInt(shipping_area),
-      total: parseInt(total) + parseInt(tax) + parseInt(shipping_area) - couponDis,
+      total:
+        parseInt(total) + parseInt(tax) + parseInt(shipping_area) - couponDis,
       discount: couponDis,
       product: cart,
       tax: tax,
       coupon: coupon ? coupon : null,
     };
-
-
-
 
     formData.append("store_id", store_id);
     formData.append(
@@ -278,13 +271,18 @@ const CheckOutSevenOrder = ({
         : selectAddress?.address
     );
     formData.append("subtotal", total);
-    formData.append("shipping",shipping_area);
+    formData.append("shipping", shipping_area);
     formData.append(
       "total",
-      (parseInt(total) + parseInt(tax) + parseInt(shipping_area) - couponDis).toString()
+      (
+        parseInt(total) +
+        parseInt(tax) +
+        parseInt(shipping_area) -
+        couponDis
+      ).toString()
     );
     formData.append("discount", couponDis);
-    formData.append("tax",tax);
+    formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
     formData.append("email", formBookData?.email);
     formData.append("date", formBookData?.specificDate);

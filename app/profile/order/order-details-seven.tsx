@@ -1,44 +1,35 @@
 "use client";
+import { motion } from "framer-motion";
+import { useEffect, useState } from "react";
+
+import BookingInformation from "@/components/dashboard/booking-information";
+import GiveReview from "@/components/dashboard/dashboard-four/order/review";
+import OrderStatus from "@/components/dashboard/order-status";
+import PaymentAgain from "@/components/dashboard/payment-again";
 import DataLoader from "@/components/loader/data-loader";
 import useTheme from "@/hooks/use-theme";
 import { productImg } from "@/site-settings/siteUrl";
 import httpReq from "@/utils/http/axios/http.service";
 import Taka from "@/utils/taka";
-import { motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
 import { FaCopy } from "react-icons/fa";
-import BookingInformation from "../booking-information";
-import GiveReview from "../dashboard-four/order/review";
-import OrderStatus from "../order-status";
-import PaymentAgain from "../payment-again";
 import "./order-details-seven.css";
 
-const OrderDetails = () => {
+const OrderDetailsSeven = () => {
   const [loaded, setLoaded] = useState(false);
-  const [call, setCall] = useState<any>(false);
+  const [call, setCall] = useState(false);
   const [order, setOrder] = useState<any>({});
-  const [booking, setBooking] = useState<any>({});
-  const [transaction, setTransaction] = useState<any>({});
-  const [orderItem, setOrderItem] = useState<any>([]);
-  const [productLink, setProductLink] = useState<any>(null);
-  const [copied, setCopied] = useState<any>(false);
+  const [booking, setBooking] = useState({});
+  const [transaction, setTransaction] = useState({});
+  const [orderItem, setOrderItem] = useState([]);
+  const [productLink, setProductLink] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const { order_id } = useParams();
 
-  console.log(order, "order data");
-
   useEffect(() => {
-    // const fetchData = async () => {
-    //   // get the data from the api
-    //   const response = await httpReq.post("getorder/details", { id: order_id });
-    //   return response;
-    // };
-
-    // declare the async data fetching function
     const fetchData = async () => {
-      // get the data from the api
       const { order, orderitem, transaction, booking } = await httpReq.post(
         "getorder/details",
         { id: order_id }
@@ -50,12 +41,8 @@ const OrderDetails = () => {
       setProductLink(orderitem[0]?.product_link);
     };
 
-    // call the function
     fetchData().catch((error) => console.log(error));
-    // make sure to catch any error
   }, [order_id, call]);
-
-  console.log(order, "order");
 
   return (
     <div className="md:w-full mt-4 md:mt-0">
@@ -108,7 +95,7 @@ const OrderDetails = () => {
             </tr>
             <tr className="font-medium text-base border-b border-gray-300 last:border-b-0">
               <td className="px-4 py-5  italic">
-                Discount{" "}
+                Discount
                 {order?.coupon && (
                   <span className="bg-gray-200 p-1 rounded-md capitalize text-xs font-medium leading-3 ">
                     {order?.coupon}
@@ -124,7 +111,6 @@ const OrderDetails = () => {
               <td className="px-4 py-5  italic">Shipping</td>
               <td></td>
               <td className="flex justify-center w-full py-5 ">
-                {" "}
                 <Taka tk={order?.shipping} />
               </td>
             </tr>
@@ -132,7 +118,6 @@ const OrderDetails = () => {
               <td className="px-4 py-5  italic">Tax</td>
               <td></td>
               <td className="flex justify-center w-full py-5 ">
-                {" "}
                 <Taka tk={order?.tax} />
               </td>
             </tr>
@@ -140,7 +125,6 @@ const OrderDetails = () => {
               <td className="px-4 py-5  italic">Paid Amount</td>
               <td></td>
               <td className="flex justify-center w-full py-5 ">
-                {" "}
                 <Taka tk={order?.paid} />
               </td>
             </tr>
@@ -148,7 +132,6 @@ const OrderDetails = () => {
               <td className="px-4 py-5  italic">Total</td>
               <td></td>
               <td className="flex justify-center w-full py-5 ">
-                {" "}
                 <Taka tk={order?.due} />
               </td>
             </tr>
@@ -194,7 +177,7 @@ const OrderDetails = () => {
   );
 };
 
-export default OrderDetails;
+export default OrderDetailsSeven;
 
 const Single = ({
   item,
@@ -203,49 +186,25 @@ const Single = ({
   order,
   orderItem,
   productLink,
-  setCopied,
-  copied,
 }: any) => {
   const { store_id } = useTheme();
   const [open, setOpen] = useState(false);
   const [product, setProduct] = useState<any>({});
 
-  // useEffect(() => {
-  //   let copyText = document.querySelector(".copy-text");
-  //   copyText.querySelector("button").addEventListener("click", function () {
-  //     let input = copyText.querySelector("input.text");
-  //     input.select();
-  //     document.execCommand("copy");
-  //     copyText.classList.add("active");
-  //     window.getSelection().removeAllRanges();
-  //     setTimeout(function () {
-  //       copyText.classList.remove("active");
-  //     }, 2500);
-  //   });
-  // }, []);
-
   useEffect(() => {
-    // declare the async data fetching function
     const fetchData = async () => {
-      // get the data from the api
       const { product } = await httpReq.post("product-details", {
         store_id,
         product_id: item?.product_id,
       });
       setProduct(product);
     };
-    // call the function
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);
+    fetchData().catch(console.error);
   }, [store_id, item?.product_id]);
-
-  // console.log(item, "item");
 
   useEffect(() => {
     let copyText = document.querySelector(".copy-text");
     console.log(copyText);
-
     if (copyText !== null) {
       copyText.querySelector("button")?.addEventListener("click", function () {
         let input: any = copyText.querySelector("input.text");
@@ -279,8 +238,7 @@ const Single = ({
       <td className="px-4 py-5 w-full">
         <div className="flex items-center gap-x-3">
           <Link href={"/product/" + product?.id + "/" + product?.slug}>
-            {" "}
-            <p className="text-xs sm:text-base">{product?.name}</p>{" "}
+            <p className="text-xs sm:text-base">{product?.name}</p>
           </Link>
         </div>
         <p className="text-xs sm:text-sm mt-1">Quantity: {item?.quantity}</p>
@@ -311,68 +269,6 @@ const Single = ({
         {(order?.status === "Payment Success" ||
           order?.status === "Delivered") &&
         orderItem[0]?.product_link ? (
-          //   <div className="w-full max-w-sm">
-          //     <div className="flex items-center">
-          //       <span className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg dark:bg-gray-600 dark:text-white dark:border-gray-600">
-          //         URL
-          //       </span>
-          //       <div className="relative w-full">
-          //         <input
-          //           id="website-url"
-          //           type="text"
-          //           aria-describedby="helper-text-explanation"
-          //           className="bg-gray-50 border border-e-0 border-gray-300 text-gray-500 dark:text-gray-400 text-sm border-s-0 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          //           value={productLink}
-          //           readonly
-          //           disabled
-          //         />
-          //       </div>
-          //       <CopyToClipboard
-          //         text={productLink}
-          //         onCopy={() => setCopied(true)}
-          //       >
-          //         <button
-          //           data-tooltip-id="my-tooltip"
-          //           data-tooltip-content={copied ? "Copied" : "Copy Url"}
-          //           className="flex-shrink-0 z-10 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-e-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border border-blue-700 dark:border-blue-600 hover:border-blue-800 dark:hover:border-blue-700"
-          //           type="button"
-          //         >
-          //           <span id="default-icon">
-          //             <svg
-          //               className="w-4 h-4"
-          //               aria-hidden="true"
-          //               xmlns="http://www.w3.org/2000/svg"
-          //               fill="currentColor"
-          //               viewBox="0 0 18 20"
-          //             >
-          //               <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
-          //             </svg>
-          //           </span>
-          //           <span
-          //             id="success-icon"
-          //             className="hidden inline-flex items-center"
-          //           >
-          //             <svg
-          //               className="w-4 h-4"
-          //               aria-hidden="true"
-          //               xmlns="http://www.w3.org/2000/svg"
-          //               fill="none"
-          //               viewBox="0 0 16 12"
-          //             >
-          //               <path
-          //                 stroke="currentColor"
-          //                 stroke-linecap="round"
-          //                 stroke-linejoin="round"
-          //                 stroke-width="2"
-          //                 d="M1 5.917 5.724 10.5 15 1.5"
-          //               />
-          //             </svg>
-          //           </span>
-          //         </button>
-          //       </CopyToClipboard>
-          //       <ReactTooltip id="my-tooltip" />
-          //     </div>
-          //   </div>
           <div className="copy-text w-full">
             <input
               type="text"
