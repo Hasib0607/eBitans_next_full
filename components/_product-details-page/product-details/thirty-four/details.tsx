@@ -26,15 +26,13 @@ import Rate from "@/utils/rate";
 import BDT from "@/utils/bdt";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({ data, children }: any) => {
+const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
+
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
 
   // select variant state
@@ -43,21 +41,6 @@ const Details = ({ data, children }: any) => {
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
-  // const [imageSrc, setImageSrc] = useState(null);
-
-  // useEffect(() => {
-  //     // Create a temporary div element to parse the HTML content
-  //     const tempDiv = document.createElement('div');
-  //     tempDiv.innerHTML = product?.description;
-
-  //     // Find the img tag inside the p tag
-  //     const imgElement = tempDiv.querySelector('p img');
-
-  //     // Check if img tag is found and has a base64 src attribute
-  //     if (imgElement && imgElement.src.startsWith('data:image')) {
-  //         setImageSrc(imgElement.src);
-  //     }
-  // }, [product?.description]);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -85,10 +68,7 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+    
       setColor(null);
       setUnit(null);
       setSize(null);

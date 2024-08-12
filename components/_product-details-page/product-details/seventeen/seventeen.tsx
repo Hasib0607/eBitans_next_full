@@ -17,7 +17,7 @@ import { useQuery } from "@tanstack/react-query";
 
 const Seventeen = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
-    queryKey: ["pd-16"],
+    queryKey: ["pd-17"],
     queryFn: () => getProductDetails(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });

@@ -22,15 +22,12 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import ImageModal from "@/utils/image-modal";
 
-const Details = ({ data, children }: any) => {
+const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [open, setOpen] = useState<any>(false);
 
   // select variant state
@@ -81,10 +78,7 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+
       setLoad(false);
       setColor(null);
       setSize(null);

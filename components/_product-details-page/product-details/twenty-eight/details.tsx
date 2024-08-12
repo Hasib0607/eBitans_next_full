@@ -27,15 +27,14 @@ import { buyNow } from "@/utils/buy-now";
 import { getPrice } from "@/utils/get-price";
 import { ProductSlider } from "./product-slider";
 
-const Details = ({ data, children }: any) => {
+const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
+
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
+ 
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -70,9 +69,7 @@ const Details = ({ data, children }: any) => {
       }
 
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+      
       setLoad(false);
       setColor(null);
       setSize(null);

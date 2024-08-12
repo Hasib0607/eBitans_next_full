@@ -16,7 +16,7 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
 const Nineteen = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
-    queryKey: ["pd-16"],
+    queryKey: ["pd-19"],
     queryFn: () => getProductDetails(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });

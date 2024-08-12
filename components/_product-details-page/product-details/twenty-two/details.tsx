@@ -21,14 +21,11 @@ import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({ data, children }: any) => {
+const Details = ({ fetchStatus, product,variant,vrcolor , data, children  }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
+
 
   const [color, setColor] = useState<any>(null);
   const [size, setSize] = useState<any>(null);
@@ -37,7 +34,7 @@ const Details = ({ data, children }: any) => {
   const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
 
-  const sizeV = variant.find((item: any) => item.size !== null);
+  const sizeV = variant?.find((item: any) => item.size !== null);
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -60,10 +57,6 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setLoad(false);
       setColor(null);
       setSize(null);
@@ -334,6 +327,15 @@ const Details = ({ data, children }: any) => {
   const buttonTwentyTwo =
     " cart-btn  font-bold py-[11px] px-10 w-max rounded-full ";
 
+
+    if (fetchStatus === "fetching") {
+      return (
+        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+          <OvalLoader />
+        </div>
+      );
+    }
+
   return (
     <div className="bg-white h-full ">
       <style>{styleCss}</style>
@@ -351,8 +353,8 @@ const Details = ({ data, children }: any) => {
               <BDT />
               {camp?.status === "active" ? campPrice : price}{" "}
               {camp?.status !== "active" &&
-              (product.discount_type === "no_discount" ||
-                product.discount_price === "0.00") ? (
+              (product?.discount_type === "no_discount" ||
+                product?.discount_price === "0.00") ? (
                 " "
               ) : (
                 <span className="text-gray-500 font-thin line-through text-xl font-seven">
@@ -378,7 +380,7 @@ const Details = ({ data, children }: any) => {
           </p>
 
           {/* unit  */}
-          {!vrcolor && variant?.length !== 0 && variant[0]?.unit && (
+          {!vrcolor && variant?.length !== 0 && variant?.unit && (
             <Units unit={unit} setUnit={setUnit} variant={variant} />
           )}
           {/* color and size  */}
@@ -393,7 +395,7 @@ const Details = ({ data, children }: any) => {
               />
             </>
           )}
-          {filterV[0]?.size && vrcolor && (
+          {filterV?.size && vrcolor && (
             <Sizes size={size} setSize={setSize} variant={filterV} />
           )}
           {/* color only  */}

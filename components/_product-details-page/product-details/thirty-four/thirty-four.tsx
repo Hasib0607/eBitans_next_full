@@ -14,38 +14,30 @@ import SectionHeadingFive from "@/components/section-heading/section-heading-fiv
 import Arrow from "@/utils/arrow";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card60 from "@/components/card/card60";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const ThirtyFour = ({ data }: any) => {
-  const { store_id } = useTheme();
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+const ThirtyFour = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-34"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
-    httpReq.post("product-details", data).then((res: any) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-16"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("get/review", data).then((res: any) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq
-      .post("related-product", { id: data?.product_id })
-      .then((res: any) => {
-        if (!res?.error) {
-          setRelatedProduct(res);
-        }
-      });
-  }, [data, store_id]);
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-16"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  console.log(productDetails, "productDetails from ;;");
+  const { product, vrcolor, variant } = productDetailsData || {};
+ 
 
   return (
     <div className="bg-[#F9F8FF]">
@@ -56,16 +48,22 @@ const ThirtyFour = ({ data }: any) => {
               <AiOutlineHome className="" />
             </Link>
             <p>
-              <Link href={"/category/" + productDetails?.category_id}>
-                {productDetails?.category}
+              <Link href={"/category/" + productDetailsData?.product?.category_id}>
+                {productDetailsData?.product?.category}
               </Link>
-              {productDetails?.name}
+              {productDetailsData?.product?.name}
             </p>
           </div>
         </div>
       </div>
       <div className="sm:container px-5 py-5">
-        <Details data={data} />
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      />
 
         {/* ************************ tab component start ***************************** */}
         <div className="mt-14">
@@ -79,7 +77,7 @@ const ThirtyFour = ({ data }: any) => {
             <div className="py-5">
               <div
                 dangerouslySetInnerHTML={{
-                  __html: productDetails?.description,
+                  __html: productDetailsData?.product?.description,
                 }}
                 className="apiHtml"
               ></div>
@@ -92,21 +90,23 @@ const ThirtyFour = ({ data }: any) => {
               </h2>
               <p className="absolute h-[4px] w-28 -bottom-2 left-0 bg-orange-600"></p>
             </div>
-            {reviews.length === 0 ? (
+            {reviews?.length === 0 ? (
               <div className="flex flex-1 justify-center items-center">
                 <h3 className="text-xl font-sans font-bold py-3">
                   No Found Review
                 </h3>
               </div>
             ) : (
-              reviews?.map((item: any) => (
-                <UserReview key={item?.id} review={item} />
-              ))
+              reviews?.error
+                    ? reviews?.error
+                    : reviews?.map((item: any) => (
+                        <UserReview key={item?.id} review={item} />
+                      ))
             )}
           </div>
         </div>
         {/* ************************ tab component end ***************************** */}
-        <Related product={relatedProduct} />
+        <Related product={relatedProducts} />
       </div>
     </div>
   );
