@@ -7,5 +7,3 @@ const loading = () => {
 };
 
 export default loading;
-
-// hello world
