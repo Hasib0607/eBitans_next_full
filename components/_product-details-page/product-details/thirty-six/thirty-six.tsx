@@ -1,45 +1,64 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Details from "./details";
-import { motion, AnimatePresence } from "framer-motion";
-import { SwiperSlide } from "swiper/react";
-import httpReq from "@/utils/http/axios/http.service";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingEighteen from "@/components/section-heading/section-heading-eighteen";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card63 from "@/components/card/card63";
+import SectionHeadingEighteen from "@/components/section-heading/section-heading-eighteen";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { SwiperSlide } from "swiper/react";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
-const ThirtySix = ({ data }: any) => {
-  const [relatedProduct, setRelatedProduct] = useState<any>([]);
-  const [reviews, setReview] = useState([]);
+const ThirtySix = ({ data, updatedData }: any) => {
+  // const [relatedProduct, setRelatedProduct] = useState<any>([]);
+  // const [reviews, setReview] = useState([]);
 
-  useEffect(() => {
-    httpReq.post("get/review", data).then((res: any) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq
-      .post("related-product", { id: data?.product_id })
-      .then((res: any) => {
-        if (!res?.error) {
-          setRelatedProduct(res);
-        }
-      });
-  }, [data]);
+  // useEffect(() => {
+  //   httpReq.post("get/review", data).then((res: any) => {
+  //     if (!res?.error) {
+  //       setReview(res);
+  //     } else {
+  //       setReview([]);
+  //     }
+  //   });
+  //   httpReq
+  //     .post("related-product", { id: data?.product_id })
+  //     .then((res: any) => {
+  //       if (!res?.error) {
+  //         setRelatedProduct(res);
+  //       }
+  //     });
+  // }, [data]);
+
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-7"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
+
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-7"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
+
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-7"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
-      <Details data={data}>
+      <Details fetchStatus={fetchStatus} data={data}>
         <div className="h-[1px] bg-gray-300 w-full "></div>
         <According text={"Customer Reviews"} reviews={reviews} />
       </Details>
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };

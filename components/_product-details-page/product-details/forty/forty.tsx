@@ -1,50 +1,39 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import Card69 from "@/components/card/card69";
+import SectionHeadingSixteen from "@/components/section-heading/section-heading-sixteen";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { Tab } from "@headlessui/react";
+import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
 import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
-import Details from "./details";
-import { Tab } from "@headlessui/react";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingSixteen from "@/components/section-heading/section-heading-sixteen";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
 import { SwiperSlide } from "swiper/react";
-import Card69 from "@/components/card/card69";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
-const Forty = ({ data }: any) => {
-  const { store_id } = useTheme();
+const Forty = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-40"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState<any>([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-40"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-40"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
-
+  const { product, vrcolor, variant } = productDetailsData || {};
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <div className="flex gap-2 items-center">
@@ -52,20 +41,28 @@ const Forty = ({ data }: any) => {
           <p>Home</p>
         </Link>
         <IoIosArrowForward className="text-xs mt-1" />
-        <Link href={"/category/" + productDetails.category_id}>
-          <p className="w-max">{productDetails?.category}</p>
+        <Link href={"/category/" + productDetailsData?.product?.category_id}>
+          <p className="w-max">{productDetailsData?.product?.category}</p>
         </Link>
         <IoIosArrowForward className="text-xs mt-1" />
         <p className="text-gray-500 font-medium truncate">
-          {productDetails?.name}
+          {productDetailsData?.product?.name}
         </p>
       </div>
-      <Details data={data}>
+      <Details
+        fetchStatus={fetchStatus}
+        data={data}
+        product={product}
+        vrcolor={vrcolor}
+        variant={variant}
+      >
         <div className="flex flex-col space-y-3">
           <p className="text-base text-[#5a5a5a]">
             <span className="font-semibold text-[#212121]">Category:</span>{" "}
-            <Link href={"/category/" + productDetails.category_id}>
-              {productDetails?.category}
+            <Link
+              href={"/category/" + productDetailsData?.product?.category_id}
+            >
+              {productDetailsData?.product?.category}
             </Link>
           </p>
         </div>
@@ -99,30 +96,24 @@ const Forty = ({ data }: any) => {
               <div className="p-5 ">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: productDetails?.description,
+                    __html: productDetailsData?.product?.description,
                   }}
                   className="apiHtml"
                 ></div>
               </div>
             </Tab.Panel>
             <Tab.Panel>
-              {reviews.length === 0 ? (
-                <div className="flex flex-1 justify-center items-center">
-                  <h3 className="text-xl font-sans font-bold pt-3">
-                    No Found Review
-                  </h3>
-                </div>
-              ) : (
-                reviews?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
-              )}
+              {reviews?.error
+                ? reviews?.error
+                : reviews?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))}
             </Tab.Panel>
           </Tab.Panels>
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };

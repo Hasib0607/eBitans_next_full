@@ -179,25 +179,25 @@ const componentsMap: any = {
         "@/components/_product-details-page/product-details/thirty-five/thirty-five"
       )
   ),
-  thirty_six: lazy(
+  thirtysix: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-six/thirty-six"
       )
   ),
-  thirty_seven: lazy(
+  thirtyseven: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-seven/thirty-seven"
       )
   ),
-  thirty_eight: lazy(
+  thirtyeight: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-eight/thirty-eight"
       )
   ),
-  thirty_nine: lazy(
+  thirtynine: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-nine/thirty-nine"
@@ -223,7 +223,7 @@ const ProductDetails = () => {
     setUpdatedData({ product_id, store_id, slug });
   }, [product_id, store_id, slug]);
 
-  const RenderComponent = componentsMap["twenty_one"] || null;
+  const RenderComponent = componentsMap["thirtysix"] || null;
 
   // const RenderComponent = componentsMap[design?.single_product_page] || null;
 
