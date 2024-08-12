@@ -13,52 +13,44 @@ import SectionHeadingTwentyOne from "@/components/section-heading/section-headin
 import DefaultSlider from "@/components/slider/default-slider";
 import Card45 from "@/components/card/card45";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const TwentyOne = ({ data }: any) => {
-  const { store_id, design } = useTheme();
+const TwentyOne = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-16"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>({});
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-16"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-16"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
-
-  const styleCss = `
-    .active-des-review {
-      color:  ${design.header_color};
-      text-decoration-color: ${design.header_color};
-    }
-    `;
-
-  console.log(productDetails, "prod details");
+  const { product, vrcolor, variant } = productDetailsData || {};
   return (
     <div className="bg-white mx-auto">
-      <style>{styleCss}</style>
+      {/* <style>{styleCss }</style> */}
+
+      
       <div className="">
         <div className="sm:container px-5 sm:py-10 py-5">
           {/* start here */}
-          <Details data={data} />
+          <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      />
         </div>
         {/* ************************ tab component start ***************************** */}
         <div className="my-10 bg-gray-100 sm:py-10 py-5">
@@ -88,7 +80,7 @@ const TwentyOne = ({ data }: any) => {
                 <div className="bg-slate-50 rounded-lg p-5">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: productDetails?.description,
+                      __html: productDetailsData?.product?.description,
                     }}
                     className="apiHtml"
                   ></div>
@@ -102,9 +94,11 @@ const TwentyOne = ({ data }: any) => {
                     </h3>
                   </div>
                 ) : (
-                  reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))
+                  reviews?.error
+                    ? reviews?.error
+                    : reviews?.map((item: any) => (
+                        <UserReview key={item?.id} review={item} />
+                      ))
                 )}
               </Tab.Panel>
             </Tab.Panels>
@@ -112,7 +106,7 @@ const TwentyOne = ({ data }: any) => {
         </div>
         {/* ************************ tab component end ***************************** */}
         <div className="sm:container px-5 sm:py-10 py-5">
-          <Related product={relatedProduct} />
+          <Related product={relatedProducts} />
         </div>
       </div>
     </div>

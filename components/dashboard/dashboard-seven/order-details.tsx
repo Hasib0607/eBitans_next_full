@@ -1,10 +1,9 @@
-"use client";
+"use client"
 import React, { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { FaCopy } from "react-icons/fa";
-import "./order-details-seven.css";
 import { useParams } from "next/navigation";
 import httpReq from "@/utils/http/axios/http.service";
-import { motion } from "framer-motion";
 import Taka from "@/utils/taka";
 import DataLoader from "@/components/loader/data-loader";
 import BookingInformation from "../booking-information";
@@ -17,17 +16,18 @@ import GiveReview from "../dashboard-four/order/review";
 
 const OrderDetails = () => {
   const [loaded, setLoaded] = useState(false);
-  const [call, setCall] = useState<any>(false);
-  const [order, setOrder] = useState<any>({});
-  const [booking, setBooking] = useState<any>({});
-  const [transaction, setTransaction] = useState<any>({});
-  const [orderItem, setOrderItem] = useState<any>([]);
-  const [productLink, setProductLink] = useState<any>(null);
-  const [copied, setCopied] = useState<any>(false);
+  const [call, setCall] = useState(false);
+  const [order, setOrder] = useState<any>();
+  const [booking, setBooking] = useState({});
+  const [transaction, setTransaction] = useState({});
+  const [orderItem, setOrderItem] = useState([]);
+  const [productLink, setProductLink] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const { order_id } = useParams();
+  console.log(order_id, "order id")
 
-  console.log(order, "order data");
+  console.log(order, order?.due, "total ammount")
 
   useEffect(() => {
     // const fetchData = async () => {
@@ -35,7 +35,6 @@ const OrderDetails = () => {
     //   const response = await httpReq.post("getorder/details", { id: order_id });
     //   return response;
     // };
-    
 
     // declare the async data fetching function
     const fetchData = async () => {
@@ -55,8 +54,6 @@ const OrderDetails = () => {
     fetchData().catch((error) => console.log(error));
     // make sure to catch any error
   }, [order_id, call]);
-
-  console.log( order ,"order" );
 
   return (
     <div className="md:w-full mt-4 md:mt-0">
@@ -86,10 +83,10 @@ const OrderDetails = () => {
             </tr>
           </thead>
           <tbody className="text-sm lg:text-base">
-            {orderItem?.map((item: any) => (
+            {orderItem?.map((item) => (
               <Single
                 item={item}
-                key={item?.id}
+                key={item}
                 call={call}
                 setCall={setCall}
                 order={order}
@@ -206,10 +203,10 @@ const Single = ({
   productLink,
   setCopied,
   copied,
-}: any) => {
+}:any) => {
   const { store_id } = useTheme();
   const [open, setOpen] = useState(false);
-  const [product, setProduct] = useState<any>({});
+  const [product, setProduct] = useState<any>();
 
   // useEffect(() => {
   //   let copyText = document.querySelector(".copy-text");
@@ -245,11 +242,11 @@ const Single = ({
 
   useEffect(() => {
     let copyText = document.querySelector(".copy-text");
-    console.log(copyText);
+   
 
     if (copyText !== null) {
       copyText.querySelector("button")?.addEventListener("click", function () {
-        let input: any = copyText.querySelector("input.text");
+        let input:any = copyText.querySelector("input.text");
 
         let value = input.value;
 
@@ -312,68 +309,68 @@ const Single = ({
         {(order?.status === "Payment Success" ||
           order?.status === "Delivered") &&
         orderItem[0]?.product_link ? (
-          //   <div className="w-full max-w-sm">
-          //     <div className="flex items-center">
-          //       <span className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg dark:bg-gray-600 dark:text-white dark:border-gray-600">
-          //         URL
-          //       </span>
-          //       <div className="relative w-full">
-          //         <input
-          //           id="website-url"
-          //           type="text"
-          //           aria-describedby="helper-text-explanation"
-          //           className="bg-gray-50 border border-e-0 border-gray-300 text-gray-500 dark:text-gray-400 text-sm border-s-0 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
-          //           value={productLink}
-          //           readonly
-          //           disabled
-          //         />
-          //       </div>
-          //       <CopyToClipboard
-          //         text={productLink}
-          //         onCopy={() => setCopied(true)}
-          //       >
-          //         <button
-          //           data-tooltip-id="my-tooltip"
-          //           data-tooltip-content={copied ? "Copied" : "Copy Url"}
-          //           className="flex-shrink-0 z-10 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-e-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border border-blue-700 dark:border-blue-600 hover:border-blue-800 dark:hover:border-blue-700"
-          //           type="button"
-          //         >
-          //           <span id="default-icon">
-          //             <svg
-          //               className="w-4 h-4"
-          //               aria-hidden="true"
-          //               xmlns="http://www.w3.org/2000/svg"
-          //               fill="currentColor"
-          //               viewBox="0 0 18 20"
-          //             >
-          //               <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
-          //             </svg>
-          //           </span>
-          //           <span
-          //             id="success-icon"
-          //             className="hidden inline-flex items-center"
-          //           >
-          //             <svg
-          //               className="w-4 h-4"
-          //               aria-hidden="true"
-          //               xmlns="http://www.w3.org/2000/svg"
-          //               fill="none"
-          //               viewBox="0 0 16 12"
-          //             >
-          //               <path
-          //                 stroke="currentColor"
-          //                 stroke-linecap="round"
-          //                 stroke-linejoin="round"
-          //                 stroke-width="2"
-          //                 d="M1 5.917 5.724 10.5 15 1.5"
-          //               />
-          //             </svg>
-          //           </span>
-          //         </button>
-          //       </CopyToClipboard>
-          //       <ReactTooltip id="my-tooltip" />
-          //     </div>
-          //   </div>
+            // <div className="w-full max-w-sm">
+            //   <div className="flex items-center">
+            //     <span className="flex-shrink-0 z-10 inline-flex items-center py-2.5 px-4 text-sm font-medium text-center text-gray-900 bg-gray-100 border border-gray-300 rounded-s-lg dark:bg-gray-600 dark:text-white dark:border-gray-600">
+            //       URL
+            //     </span>
+            //     <div className="relative w-full">
+            //       <input
+            //         id="website-url"
+            //         type="text"
+            //         aria-describedby="helper-text-explanation"
+            //         className="bg-gray-50 border border-e-0 border-gray-300 text-gray-500 dark:text-gray-400 text-sm border-s-0 focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            //         value={productLink}
+            //         readonly
+            //         disabled
+            //       />
+            //     </div>
+            //     <CopyToClipboard
+            //       text={productLink}
+            //       onCopy={() => setCopied(true)}
+            //     >
+            //       <button
+            //         data-tooltip-id="my-tooltip"
+            //         data-tooltip-content={copied ? "Copied" : "Copy Url"}
+            //         className="flex-shrink-0 z-10 inline-flex items-center py-3 px-4 text-sm font-medium text-center text-white bg-blue-700 rounded-e-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 border border-blue-700 dark:border-blue-600 hover:border-blue-800 dark:hover:border-blue-700"
+            //         type="button"
+            //       >
+            //         <span id="default-icon">
+            //           <svg
+            //             className="w-4 h-4"
+            //             aria-hidden="true"
+            //             xmlns="http://www.w3.org/2000/svg"
+            //             fill="currentColor"
+            //             viewBox="0 0 18 20"
+            //           >
+            //             <path d="M16 1h-3.278A1.992 1.992 0 0 0 11 0H7a1.993 1.993 0 0 0-1.722 1H2a2 2 0 0 0-2 2v15a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2Zm-3 14H5a1 1 0 0 1 0-2h8a1 1 0 0 1 0 2Zm0-4H5a1 1 0 0 1 0-2h8a1 1 0 1 1 0 2Zm0-5H5a1 1 0 0 1 0-2h2V2h4v2h2a1 1 0 1 1 0 2Z" />
+            //           </svg>
+            //         </span>
+            //         <span
+            //           id="success-icon"
+            //           className="hidden inline-flex items-center"
+            //         >
+            //           <svg
+            //             className="w-4 h-4"
+            //             aria-hidden="true"
+            //             xmlns="http://www.w3.org/2000/svg"
+            //             fill="none"
+            //             viewBox="0 0 16 12"
+            //           >
+            //             <path
+            //               stroke="currentColor"
+            //               stroke-linecap="round"
+            //               stroke-linejoin="round"
+            //               stroke-width="2"
+            //               d="M1 5.917 5.724 10.5 15 1.5"
+            //             />
+            //           </svg>
+            //         </span>
+            //       </button>
+            //     </CopyToClipboard>
+            //     <ReactTooltip id="my-tooltip" />
+            //   </div>
+            // </div>
           <div className="copy-text w-full">
             <input
               type="text"

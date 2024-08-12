@@ -1,23 +1,27 @@
-"use client";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import { confirmAlert } from "react-confirm-alert";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Swal from "sweetalert2";
-import { cancelAlert } from "../../cancel-alert";
+
 
 const Order = () => {
   const [call, setCall] = useState(false);
-  const [orders, setOrder] = useState([]);
+  const [orders, setOrder] = useState<any>([]);
   const [filter, setFilter] = useState([]);
   const [btn, setBtn] = useState("All");
   const { store_id, design } = useTheme();
-  const { user } = useSelector((state: any) => state.auth);
+  const { user } = useSelector((state:any) => state.auth);
 
-  const fetchData = async () => {
-    try {
+  // console.log(user,"user");
+  // console.log(orders, "orders");
+
+  useEffect(() => {
+    // declare the async data fetching function
+    const fetchData = async () => {
+      // get the data from the api
       const data = await httpReq.post("getorder", {
         user_id: user?.details?.id,
         store_id,
@@ -25,39 +29,69 @@ const Order = () => {
 
       setOrder(data);
       setFilter(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  useEffect(() => {
-    fetchData();
+    };
+
+    // call the function
+    fetchData()
+      // make sure to catch any error
+      .catch((err) => {
+        // console.log(err);
+      });
   }, [user?.details?.id, store_id, call]);
 
-  const cancel_request = (id: any) => {
-    cancelAlert(id, user, setCall);
+  const cancel_request = (id:any) => {
+    confirmAlert({
+      title: "Confirm to Done",
+      message: "Are you sure to cancel this order.",
+      buttons: [
+        {
+          label: "Yes",
+          onClick: () => {
+            httpReq
+              .post("order/cancel", { id, user_id: user?.details?.id })
+              .then((res) => {
+                // console.log(res);
+                if (res?.success) {
+                  setCall(!call);
+                  toast(res?.success, {
+                    type: "success",
+                  });
+                }
+              });
+          },
+        },
+        {
+          label: "No",
+          onClick: () =>
+            toast("rejected", {
+              type: "warning",
+            }),
+        },
+      ],
+    });
   };
-  const get_filter = (key: any) => {
+  const get_filter = (key:any) => {
     setBtn(key);
     if (key === "All") {
       setFilter(orders);
     }
     if (key === "Pending") {
-      setFilter(orders.filter((i: any) => i.status === "Pending"));
+      setFilter(orders.filter((i:any) => i.status === "Pending"));
     }
     if (key === "Shipping") {
-      setFilter(orders.filter((i: any) => i.status === "Shipping"));
+      setFilter(orders.filter((i:any) => i.status === "Shipping"));
     }
     if (key === "Processing") {
-      setFilter(orders.filter((i: any) => i.status === "Processing"));
+      setFilter(orders.filter((i:any) => i.status === "Processing"));
     }
     if (key === "Delivered") {
-      setFilter(orders.filter((i: any) => i.status === "Delivered"));
+      setFilter(orders.filter((i:any) => i.status === "Delivered"));
     }
     if (key === "Returned") {
-      setFilter(orders.filter((i: any) => i.status === "Returned"));
+      setFilter(orders.filter((i:any) => i.status === "Returned"));
     }
     if (key === "Cancelled") {
-      setFilter(orders.filter((i: any) => i.status === "Cancelled"));
+      setFilter(orders.filter((i:any) => i.status === "Cancelled"));
     }
   };
 
@@ -142,9 +176,9 @@ const Order = () => {
                   </thead>
 
                   <tbody>
-                    {filter?.reverse().map((order: any) => (
+                    {filter?.reverse().map((order) => (
                       <OrderItem
-                        key={order?.reference_no}
+                        key={order}
                         cancel_request={cancel_request}
                         item={order}
                       />
@@ -162,10 +196,8 @@ const Order = () => {
 
 export default Order;
 
-const OrderItem = ({ item, cancel_request }: any) => {
+const OrderItem = ({ item, cancel_request }:any) => {
   const date = new Date(item?.created_at);
-
-  console.log(item, "order item");
 
   return (
     <tr
@@ -196,7 +228,9 @@ const OrderItem = ({ item, cancel_request }: any) => {
     >
       {/* order reference no  */}
       <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-        <Link href={"/profile/order/" + item?.id}>#{item?.reference_no}</Link>
+        <Link href={"/profile/order/" + item?.id}>
+          #{item?.reference_no}
+        </Link>
       </td>
       {/* date  */}
       <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
@@ -224,7 +258,7 @@ const OrderItem = ({ item, cancel_request }: any) => {
             onClick={() => cancel_request(item?.id)}
             className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
-            Cancel Request
+            {"Cancel Request"}
           </button>
         ) : null}
       </td>
