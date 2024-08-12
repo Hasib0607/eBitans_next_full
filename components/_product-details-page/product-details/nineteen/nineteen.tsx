@@ -43,15 +43,17 @@ const Nineteen = ({ data, updatedData }: any) => {
           <IoIosArrowForward className="text-xs mt-1" />
           <p>{productDetailsData?.product?.category}</p>
           <IoIosArrowForward className="text-xs mt-1" />
-          <p className="text-gray-500 font-medium">{productDetailsData?.product?.name}</p>
+          <p className="text-gray-500 font-medium">
+            {productDetailsData?.product?.name}
+          </p>
         </div>
         <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+          fetchStatus={fetchStatus}
+          product={product}
+          variant={variant}
+          vrcolor={vrcolor}
+          data={data}
+        />
 
         {/* ************************ tab component start ***************************** */}
         <div className="pt-20">
@@ -94,10 +96,10 @@ const Nineteen = ({ data, updatedData }: any) => {
                       No Found Review
                     </h3>
                   </div>
-                ) : (
+                ) : reviews?.error ? (
                   reviews?.error
-                ? reviews?.error
-                : reviews?.map((item: any) => (
+                ) : (
+                  reviews?.map((item: any) => (
                     <UserReview key={item?.id} review={item} />
                   ))
                 )}

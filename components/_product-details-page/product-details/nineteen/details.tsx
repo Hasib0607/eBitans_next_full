@@ -31,7 +31,14 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-const Details = ({  fetchStatus, product,variant,vrcolor , data, children }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
@@ -71,7 +78,7 @@ const Details = ({  fetchStatus, product,variant,vrcolor , data, children }: any
       }
 
       // set state with the result
- 
+
       setLoad(false);
       setColor(null);
       setUnit(null);

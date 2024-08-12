@@ -16,8 +16,14 @@ import CallForPrice from "@/utils/call-for-price";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import OvalLoader from "@/components/loader/oval-loader";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any) => {
- 
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
@@ -56,7 +62,7 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any)
       }
 
       // set state with the result
-  
+
       setColor(null);
       setSize(null);
       setUnit(null);
@@ -301,13 +307,13 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any)
   const buttonSeventeen =
     "font-bold search-bg hover:bg-blue-300 duration-300 rounded-md w-60 text-center py-3";
 
-    if (fetchStatus === "fetching") {
-      return (
-        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-          <OvalLoader />
-        </div>
-      );
-    }
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="">

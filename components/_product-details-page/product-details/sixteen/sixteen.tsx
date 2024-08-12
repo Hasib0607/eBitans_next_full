@@ -1,4 +1,4 @@
- "use client";
+"use client";
 import Card25 from "@/components/card/card25";
 import DefaultSlider from "@/components/slider/default-slider";
 import { profileImg } from "@/site-settings/siteUrl";

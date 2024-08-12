@@ -14,7 +14,14 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import { HSlider } from "./slider";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState([]);
@@ -53,7 +60,7 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) 
       }
 
       // set state with the result
-     
+
       setColor(null);
       setUnit(null);
       setSize(null);
@@ -306,14 +313,13 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) 
   const buttonTwenty =
     "bg-black btn-hover text-white font-thin sm:py-[16px] py-2 px-5 sm:px-16 w-max";
 
-    if (fetchStatus === "fetching") {
-      return (
-        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-          <OvalLoader />
-        </div>
-      );
-    }
-
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white">

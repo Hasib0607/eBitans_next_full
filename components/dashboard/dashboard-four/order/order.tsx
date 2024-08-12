@@ -6,14 +6,13 @@ import { confirmAlert } from "react-confirm-alert";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-
 const Order = () => {
   const [call, setCall] = useState(false);
   const [orders, setOrder] = useState<any>([]);
   const [filter, setFilter] = useState([]);
   const [btn, setBtn] = useState("All");
   const { store_id, design } = useTheme();
-  const { user } = useSelector((state:any) => state.auth);
+  const { user } = useSelector((state: any) => state.auth);
 
   // console.log(user,"user");
   // console.log(orders, "orders");
@@ -39,7 +38,7 @@ const Order = () => {
       });
   }, [user?.details?.id, store_id, call]);
 
-  const cancel_request = (id:any) => {
+  const cancel_request = (id: any) => {
     confirmAlert({
       title: "Confirm to Done",
       message: "Are you sure to cancel this order.",
@@ -70,28 +69,28 @@ const Order = () => {
       ],
     });
   };
-  const get_filter = (key:any) => {
+  const get_filter = (key: any) => {
     setBtn(key);
     if (key === "All") {
       setFilter(orders);
     }
     if (key === "Pending") {
-      setFilter(orders.filter((i:any) => i.status === "Pending"));
+      setFilter(orders.filter((i: any) => i.status === "Pending"));
     }
     if (key === "Shipping") {
-      setFilter(orders.filter((i:any) => i.status === "Shipping"));
+      setFilter(orders.filter((i: any) => i.status === "Shipping"));
     }
     if (key === "Processing") {
-      setFilter(orders.filter((i:any) => i.status === "Processing"));
+      setFilter(orders.filter((i: any) => i.status === "Processing"));
     }
     if (key === "Delivered") {
-      setFilter(orders.filter((i:any) => i.status === "Delivered"));
+      setFilter(orders.filter((i: any) => i.status === "Delivered"));
     }
     if (key === "Returned") {
-      setFilter(orders.filter((i:any) => i.status === "Returned"));
+      setFilter(orders.filter((i: any) => i.status === "Returned"));
     }
     if (key === "Cancelled") {
-      setFilter(orders.filter((i:any) => i.status === "Cancelled"));
+      setFilter(orders.filter((i: any) => i.status === "Cancelled"));
     }
   };
 
@@ -198,7 +197,7 @@ const Order = () => {
 
 export default Order;
 
-const OrderItem = ({ item, cancel_request }:any) => {
+const OrderItem = ({ item, cancel_request }: any) => {
   const date = new Date(item?.created_at);
 
   return (
@@ -230,9 +229,7 @@ const OrderItem = ({ item, cancel_request }:any) => {
     >
       {/* order reference no  */}
       <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">
-        <Link href={"/profile/order/" + item?.id}>
-          #{item?.reference_no}
-        </Link>
+        <Link href={"/profile/order/" + item?.id}>#{item?.reference_no}</Link>
       </td>
       {/* date  */}
       <td className="text-sm text-gray-900 font-medium px-6 py-4 whitespace-nowrap">

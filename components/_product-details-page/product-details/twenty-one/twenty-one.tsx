@@ -40,17 +40,16 @@ const TwentyOne = ({ data, updatedData }: any) => {
     <div className="bg-white mx-auto">
       {/* <style>{styleCss }</style> */}
 
-      
       <div className="">
         <div className="sm:container px-5 sm:py-10 py-5">
           {/* start here */}
           <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+            fetchStatus={fetchStatus}
+            product={product}
+            variant={variant}
+            vrcolor={vrcolor}
+            data={data}
+          />
         </div>
         {/* ************************ tab component start ***************************** */}
         <div className="my-10 bg-gray-100 sm:py-10 py-5">
@@ -93,12 +92,12 @@ const TwentyOne = ({ data, updatedData }: any) => {
                       No Found Review
                     </h3>
                   </div>
-                ) : (
+                ) : reviews?.error ? (
                   reviews?.error
-                    ? reviews?.error
-                    : reviews?.map((item: any) => (
-                        <UserReview key={item?.id} review={item} />
-                      ))
+                ) : (
+                  reviews?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))
                 )}
               </Tab.Panel>
             </Tab.Panels>

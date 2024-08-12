@@ -74,12 +74,12 @@ const According = ({ text, reviews }: any) => {
             <div className="flex flex-1 justify-center items-center">
               <h3 className="text-xl font-sans font-bold">No Found Review</h3>
             </div>
-          ) : (
+          ) : reviews?.error ? (
             reviews?.error
-              ? reviews?.error
-              : reviews?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
+          ) : (
+            reviews?.map((item: any) => (
+              <UserReview key={item?.id} review={item} />
+            ))
           )}
         </motion.div>
       )}

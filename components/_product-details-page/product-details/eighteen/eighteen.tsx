@@ -38,7 +38,7 @@ const Eighteen = ({ data, updatedData }: any) => {
 
   return (
     <div className="pt-10 sm:container px-5 pb-20">
-       <Details
+      <Details
         fetchStatus={fetchStatus}
         product={product}
         variant={variant}
@@ -75,12 +75,12 @@ const According = ({ text, reviews }: any) => {
             <div className="flex flex-1 justify-center items-center">
               <h3 className="text-xl font-sans font-bold">No Found Review</h3>
             </div>
-          ) : (
+          ) : reviews?.error ? (
             reviews?.error
-              ? reviews?.error
-              : reviews?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
+          ) : (
+            reviews?.map((item: any) => (
+              <UserReview key={item?.id} review={item} />
+            ))
           )}
         </motion.div>
       )}

@@ -44,9 +44,13 @@ const Seventeen = ({ data, updatedData }: any) => {
             <h1 className="text-5xl font-medium text-white">Products</h1>
           </div>
           <div className="flex gap-1 items-center">
-            <p className="text-white">{productDetailsData?.product?.category}</p>
+            <p className="text-white">
+              {productDetailsData?.product?.category}
+            </p>
             <IoIosArrowForward className="text-xs mt-1 text-white" />
-            <p className="font-medium text-white">{productDetailsData?.product?.name}</p>
+            <p className="font-medium text-white">
+              {productDetailsData?.product?.name}
+            </p>
           </div>
         </div>
         <div className="bg-image-details absolute bottom-0"></div>
@@ -54,13 +58,13 @@ const Seventeen = ({ data, updatedData }: any) => {
       </div>
       <div className="container mx-auto">
         <div className="xl:mx-80 mx-5">
-        <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+          <Details
+            fetchStatus={fetchStatus}
+            product={product}
+            variant={variant}
+            vrcolor={vrcolor}
+            data={data}
+          />
         </div>
       </div>
       <div className="py-14">
@@ -102,10 +106,10 @@ const Seventeen = ({ data, updatedData }: any) => {
                   <SectionHeadingSeventeen text={"Customer Reviews"} />
                 </div>
                 {reviews?.error
-                ? reviews?.error
-                : reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))}
+                  ? reviews?.error
+                  : reviews?.map((item: any) => (
+                      <UserReview key={item?.id} review={item} />
+                    ))}
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>

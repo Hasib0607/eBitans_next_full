@@ -121,8 +121,6 @@ const YourOrders = ({
   const handleCheckout = async () => {
     setLoading(true);
 
-
-
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
@@ -217,7 +215,7 @@ const YourOrders = ({
     // for (let key in data) {
     //     formData.append(key, data[key]);
     // }
-    console.log(formData, "fromdata")
+    console.log(formData, "fromdata");
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
@@ -278,7 +276,7 @@ const YourOrders = ({
                 "Content-Type": "application/json",
               },
             });
-            console.log('response:', formData, apiOrder);
+            console.log("response:", formData, apiOrder);
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
