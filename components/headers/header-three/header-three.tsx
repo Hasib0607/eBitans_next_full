@@ -82,7 +82,7 @@ const HeaderThree = () => {
                   <span style={{ color: design?.text_color }} className="pr-2">
                     {location}
                   </span>
-                  {headerSetting?.address} 
+                  {headerSetting?.address}
                 </li>
                 <li>|</li>
 

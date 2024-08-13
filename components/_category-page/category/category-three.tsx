@@ -460,7 +460,7 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
             setPage(1);
             setHasMore(true);
           }}
-          href={ item.id}
+          href={item.id}
           className={`flex-1 text-sm font-medium ${
             select === item.id ? "text-red-500" : "text-gray-800"
           }`}
@@ -496,7 +496,7 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
                     setPage(1);
                     setHasMore(true);
                   }}
-                  href={ sub?.id}
+                  href={sub?.id}
                 >
                   {" "}
                   <p

@@ -13,7 +13,7 @@ const Order = () => {
   const [btn, setBtn] = useState("All");
   const { store_id, design } = useTheme();
   const { user } = useSelector((state: any) => state.auth);
-  console.log(filter.reverse(), "filter")
+  console.log(filter.reverse(), "filter");
 
   // console.log(user,"user");
   // console.log(orders, "orders");
@@ -176,7 +176,8 @@ const Order = () => {
                   </thead>
 
                   <tbody>
-                    {filter?.reverse()
+                    {filter
+                      ?.reverse()
                       .map((order: any) => (
                         <OrderItem
                           key={order?.reference_no}
