@@ -1,41 +1,47 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import OvalLoader from "@/components/loader/oval-loader";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import { buyNow } from "@/utils/buy-now";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import parse from "html-react-parser";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { VscCreditCard } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import parse from "html-react-parser";
 import {
   FacebookIcon,
   FacebookShareButton,
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import { Swiper, SwiperSlide } from "swiper/react";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import OvalLoader from "@/components/loader/oval-loader";
-import { buyNow } from "@/utils/buy-now";
-import { useRouter } from "next/navigation";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
+import { toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
-import { productImg } from "@/site-settings/siteUrl";
-import Link from "next/link";
-import Rate from "@/utils/rate";
-import BDT from "@/utils/bdt";
-import CallForPrice from "@/utils/call-for-price";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { Swiper, SwiperSlide } from "swiper/react";
 
-const Details = ({ data }: any) => {
+const Details = ({
+  data,
+  children,
+  open,
+  setOpen,
+  variant,
+  vrcolor,
+  product,
+  fetchStatus,
+}: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState(false);
   const [camp, setCamp] = useState<any>(null);
 
@@ -70,10 +76,6 @@ const Details = ({ data }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setLoad(false);
       setColor(null);
       setSize(null);
@@ -83,20 +85,19 @@ const Details = ({ data }: any) => {
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
+  }, [data, store_id, fetchStatus]);
 
   const buyNowBtn = () => {
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
       </div>
     );
   }
-
   const regularPrice =
     parseInt(product?.regular_price) +
     (size?.additional_price ? parseInt(size?.additional_price) : 0) +

@@ -1,48 +1,44 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import RelatedProducts from "./related-products";
-import { Tab } from "@headlessui/react";
-import moment from "moment";
-import httpReq from "@/utils/http/axios/http.service";
-import useTheme from "@/hooks/use-theme";
-import Details from "./details";
 import { profileImg } from "@/site-settings/siteUrl";
 import Rate from "@/utils/rate";
+import { Tab } from "@headlessui/react";
+import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
+import RelatedProducts from "./related-products";
 
-const One = ({ data }: any) => {
-  const { store_id } = useTheme();
+const One = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-1"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-1"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-1"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">
       <div className="mx-auto">
-        <Details data={data} />
+        <Details
+          fetchStatus={fetchStatus}
+          data={data}
+          product={product}
+          vrcolor={vrcolor}
+          variant={variant}
+        />
         {/* ************************ tab component start ***************************** */}
         <div className="mt-5">
           <Tab.Group>
@@ -71,24 +67,18 @@ const One = ({ data }: any) => {
                 <div className="p-5">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: productDetails?.description,
+                      __html: productDetailsData?.product?.description,
                     }}
                     className="apiHtml"
                   ></div>
                 </div>
               </Tab.Panel>
               <Tab.Panel>
-                {reviews.length ? (
-                  reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))
-                ) : (
-                  <div className="flex flex-1 justify-center items-center">
-                    <h3 className="text-xl font-sans font-bold">
-                      No Found Review
-                    </h3>
-                  </div>
-                )}
+                {reviews?.error
+                  ? reviews?.error
+                  : reviews?.map((item: any) => (
+                      <UserReview key={item?.id} review={item} />
+                    ))}
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
@@ -96,7 +86,7 @@ const One = ({ data }: any) => {
         {/* ************************ tab component end ***************************** */}
 
         <div className="py-4"></div>
-        <RelatedProducts product={relatedProduct} />
+        <RelatedProducts product={relatedProducts} />
       </div>
     </div>
   );

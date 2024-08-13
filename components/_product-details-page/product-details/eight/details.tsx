@@ -21,14 +21,18 @@ import {
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -81,10 +85,6 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setLoad(false);
       setColor(null);
       setSize(null);
@@ -94,30 +94,7 @@ const Details = ({ data, children }: any) => {
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
-
-  // useEffect(() => {
-  //     async function handleCampaign() {
-  //         try {
-  //             const response = await getCampaignProduct(product, store_id);
-  //             if (!response?.error) {
-  //                 setCamp(response)
-  //             } // the API response object
-  //         } catch (error) {
-  //             console.error(error);
-  //         }
-  //     }
-
-  //     handleCampaign();
-  // }, [product, store_id])
-
-  //   if (load) {
-  //     return (
-  //       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-  //         <OvalLoader />
-  //       </div>
-  //     );
-  //   }
+  }, [data, store_id, fetchStatus]);
 
   const regularPrice =
     parseInt(product?.regular_price) +
@@ -369,17 +346,7 @@ const Details = ({ data, children }: any) => {
   }
   `;
 
-  useEffect(() => {
-    // Set a timer to stop the loading state after 2 seconds
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 4000);
-
-    // Clean up the timer when the component unmounts
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (loading) {
+  if (fetchStatus === "fecthing") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />

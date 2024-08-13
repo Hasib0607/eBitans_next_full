@@ -26,15 +26,19 @@ import {
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
 
@@ -86,10 +90,6 @@ const Details = ({ data, children }: any) => {
 
       const sizeVariant = variant?.find((item: any) => item?.size !== null);
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setLoad(false);
       setUnit(!sizeVariant && !vrcolor ? variant[0] : null);
       setSize(sizeVariant ? sizeVariant : null);
@@ -102,9 +102,9 @@ const Details = ({ data, children }: any) => {
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
+  }, [data, store_id, fetchStatus]);
 
-  if (loading) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
