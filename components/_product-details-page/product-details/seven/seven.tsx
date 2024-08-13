@@ -40,7 +40,7 @@ const Seven = ({ data, updatedData }: Props) => {
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
-  const { product, vrcolor, variant } = productDetailsData;
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div className="container px-5">
