@@ -14,7 +14,7 @@ import Card54 from "@/components/card/card54";
 import { useQuery } from "@tanstack/react-query";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const Thirty = ({ data,updatedData }: any) => {
+const Thirty = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-30"],
@@ -96,12 +96,12 @@ const Thirty = ({ data,updatedData }: any) => {
                     No Found Review
                   </h3>
                 </div>
-              ) : (
+              ) : reviews?.error ? (
                 reviews?.error
-                    ? reviews?.error
-                    : reviews?.map((item: any) => (
-                        <UserReview key={item?.id} review={item} />
-                      ))
+              ) : (
+                reviews?.map((item: any) => (
+                  <UserReview key={item?.id} review={item} />
+                ))
               )}
             </Tab.Panel>
           </Tab.Panels>

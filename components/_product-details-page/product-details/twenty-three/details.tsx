@@ -22,7 +22,14 @@ import Rate from "@/utils/rate";
 import Link from "next/link";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({fetchStatus, product,variant,vrcolor , data, children   }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);

@@ -21,7 +21,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
 const TwentyThree = ({ data, updatedData }: any) => {
-  const {design, store_id}=useTheme()
+  const { design, store_id } = useTheme();
 
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-23"],
@@ -42,7 +42,7 @@ const TwentyThree = ({ data, updatedData }: any) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
- 
+
   const styleCss = `
     .active-des-review {
       color:  ${design?.header_color};
@@ -70,22 +70,22 @@ const TwentyThree = ({ data, updatedData }: any) => {
       <style>{styleCss}</style>
       {store_id !== 1850 ? (
         <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+          fetchStatus={fetchStatus}
+          product={product}
+          variant={variant}
+          vrcolor={vrcolor}
+          data={data}
+        />
       ) : (
         <div className="grid lg:grid-cols-7 gap-5">
           <div className="lg:col-span-6 w-full">
-          <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+            <Details
+              fetchStatus={fetchStatus}
+              product={product}
+              variant={variant}
+              vrcolor={vrcolor}
+              data={data}
+            />
           </div>
           <div className="w-full hidden lg:block">
             <RelatedProduct product={relatedProducts} />
@@ -134,12 +134,12 @@ const TwentyThree = ({ data, updatedData }: any) => {
                     No Review Found
                   </h3>
                 </div>
-              ) : (
+              ) : reviews?.error ? (
                 reviews?.error
-                ? reviews?.error
-                : reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))
+              ) : (
+                reviews?.map((item: any) => (
+                  <UserReview key={item?.id} review={item} />
+                ))
               )}
             </Tab.Panel>
           </Tab.Panels>

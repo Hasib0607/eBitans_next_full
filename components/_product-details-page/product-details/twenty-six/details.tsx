@@ -22,7 +22,14 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import ImageModal from "@/utils/image-modal";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
@@ -77,7 +84,6 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children }: any)
       } else {
         setCamp(null);
       }
-
 
       setLoad(false);
       setColor(null);

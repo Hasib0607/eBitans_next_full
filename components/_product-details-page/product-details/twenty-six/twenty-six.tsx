@@ -97,12 +97,12 @@ const TwentySix = ({ data, updatedData }: any) => {
                     No Found Review
                   </h3>
                 </div>
-              ) : (
+              ) : reviews?.error ? (
                 reviews?.error
-                ? reviews?.error
-                : reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))
+              ) : (
+                reviews?.map((item: any) => (
+                  <UserReview key={item?.id} review={item} />
+                ))
               )}
             </Tab.Panel>
           </Tab.Panels>

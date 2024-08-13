@@ -219,10 +219,9 @@ const ProductDetails = () => {
 
   const { design, store_id } = useTheme();
 
-  useEffect(() => { 
+  useEffect(() => {
     setUpdatedData({ product_id, store_id, slug });
   }, [product_id, store_id, slug]);
-
 
   const RenderComponent = componentsMap[design?.single_product_page] || null;
 

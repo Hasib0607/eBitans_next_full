@@ -37,7 +37,6 @@ const ThirtyFour = ({ data, updatedData }: any) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
- 
 
   return (
     <div className="bg-[#F9F8FF]">
@@ -48,7 +47,9 @@ const ThirtyFour = ({ data, updatedData }: any) => {
               <AiOutlineHome className="" />
             </Link>
             <p>
-              <Link href={"/category/" + productDetailsData?.product?.category_id}>
+              <Link
+                href={"/category/" + productDetailsData?.product?.category_id}
+              >
                 {productDetailsData?.product?.category}
               </Link>
               {productDetailsData?.product?.name}
@@ -57,13 +58,13 @@ const ThirtyFour = ({ data, updatedData }: any) => {
         </div>
       </div>
       <div className="sm:container px-5 py-5">
-      <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+        <Details
+          fetchStatus={fetchStatus}
+          product={product}
+          variant={variant}
+          vrcolor={vrcolor}
+          data={data}
+        />
 
         {/* ************************ tab component start ***************************** */}
         <div className="mt-14">
@@ -96,12 +97,12 @@ const ThirtyFour = ({ data, updatedData }: any) => {
                   No Found Review
                 </h3>
               </div>
-            ) : (
+            ) : reviews?.error ? (
               reviews?.error
-                    ? reviews?.error
-                    : reviews?.map((item: any) => (
-                        <UserReview key={item?.id} review={item} />
-                      ))
+            ) : (
+              reviews?.map((item: any) => (
+                <UserReview key={item?.id} review={item} />
+              ))
             )}
           </div>
         </div>

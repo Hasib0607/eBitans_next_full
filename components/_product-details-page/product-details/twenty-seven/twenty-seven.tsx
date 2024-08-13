@@ -14,7 +14,6 @@ import { useQuery } from "@tanstack/react-query";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
 const TwentySeven = ({ data, updatedData }: any) => {
-
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-27"],
     queryFn: () => getProductDetails(updatedData),
@@ -74,12 +73,12 @@ const According = ({ text, reviews }: any) => {
             <div className="flex flex-1 justify-center items-center">
               <h3 className="text-xl font-sans font-bold">No Found Review</h3>
             </div>
-          ) : (
+          ) : reviews?.error ? (
             reviews?.error
-            ? reviews?.error
-            : reviews?.map((item: any) => (
-                <UserReview key={item?.id} review={item} />
-              ))
+          ) : (
+            reviews?.map((item: any) => (
+              <UserReview key={item?.id} review={item} />
+            ))
           )}
         </motion.div>
       )}

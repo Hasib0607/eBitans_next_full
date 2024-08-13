@@ -22,13 +22,18 @@ import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-
   const [filterV, setFilterV] = useState<any>([]);
- 
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -60,7 +65,6 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) 
         setCamp(null);
       }
 
-  
       setLoad(false);
       setColor(null);
       setSize(null);

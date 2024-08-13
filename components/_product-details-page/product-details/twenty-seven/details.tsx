@@ -25,11 +25,17 @@ import CallForPrice from "@/utils/call-for-price";
 import BDT from "@/utils/bdt";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-const Details = ({fetchStatus, product,variant,vrcolor , data, children}: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
- 
   const [filterV, setFilterV] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
 
@@ -66,7 +72,7 @@ const Details = ({fetchStatus, product,variant,vrcolor , data, children}: any) =
       }
 
       // set state with the result
-   
+
       setColor(null);
       setUnit(null);
       setSize(null);
