@@ -44,9 +44,6 @@ const SubCategoryComponent = async () => {
   const {
     design: { shop_page: theme },
   } = await getSubdomainName(url, "design");
-
-  return <CategoryEight />;
-
   return (
     <>
       {theme === "one" && <CategoryOne />}
