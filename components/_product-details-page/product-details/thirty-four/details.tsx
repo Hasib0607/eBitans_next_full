@@ -26,11 +26,17 @@ import Rate from "@/utils/rate";
 import BDT from "@/utils/bdt";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-
 
   const [filterV, setFilterV] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
@@ -68,7 +74,6 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) 
         setCamp(null);
       }
 
-    
       setColor(null);
       setUnit(null);
       setSize(null);

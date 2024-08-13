@@ -26,7 +26,14 @@ import {
 } from "@heroicons/react/24/outline";
 import OvalLoader from "@/components/loader/oval-loader";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children   }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, store_id } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
@@ -70,7 +77,7 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children   }: an
       const sizeVariant = variant?.find((item: any) => item?.size !== null);
 
       // set state with the result
-      
+
       setUnit(!sizeVariant && !vrcolor ? variant[0] : null);
       setSize(sizeVariant ? sizeVariant : null);
       setColor(
@@ -319,9 +326,6 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children   }: an
       setQty((prevCount: any) => prevCount - 1);
     }
   };
-
- 
-
 
   return (
     <div className="grid md:grid-cols-8 grid-cols-1 md:gap-4 ">

@@ -71,13 +71,13 @@ const TwentyFour = ({ data, updatedData }: any) => {
       </div>
       <style>{styleCss}</style>
       <div className="sm:container px-5 pt-10">
-      <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+        <Details
+          fetchStatus={fetchStatus}
+          product={product}
+          variant={variant}
+          vrcolor={vrcolor}
+          data={data}
+        />
       </div>
       {/* ************************ tab component start ***************************** */}
       <div className="mt-14 pb-20 sm:container px-5">
@@ -120,12 +120,12 @@ const TwentyFour = ({ data, updatedData }: any) => {
                     No Found Review
                   </h3>
                 </div>
-              ) : (
+              ) : reviews?.error ? (
                 reviews?.error
-                ? reviews?.error
-                : reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))
+              ) : (
+                reviews?.map((item: any) => (
+                  <UserReview key={item?.id} review={item} />
+                ))
               )}
             </Tab.Panel>
           </Tab.Panels>

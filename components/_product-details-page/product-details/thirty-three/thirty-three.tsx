@@ -57,13 +57,13 @@ const ThirtyThree = ({ data, updatedData }: any) => {
       </div>
       <style>{styleCss}</style>
       <div className="sm:container px-5 sm:pb-10 pb-5">
-      <Details
-        fetchStatus={fetchStatus}
-        product={product}
-        variant={variant}
-        vrcolor={vrcolor}
-        data={data}
-      />
+        <Details
+          fetchStatus={fetchStatus}
+          product={product}
+          variant={variant}
+          vrcolor={vrcolor}
+          data={data}
+        />
 
         {/* ************************ tab component start ***************************** */}
         <div className="my-14 border-b pb-10">
@@ -106,12 +106,12 @@ const ThirtyThree = ({ data, updatedData }: any) => {
                       No Found Review
                     </h3>
                   </div>
-                ) : (
+                ) : reviews?.error ? (
                   reviews?.error
-                    ? reviews?.error
-                    : reviews?.map((item: any) => (
-                        <UserReview key={item?.id} review={item} />
-                      ))
+                ) : (
+                  reviews?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))
                 )}
               </Tab.Panel>
             </Tab.Panels>

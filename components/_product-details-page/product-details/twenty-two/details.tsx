@@ -21,11 +21,17 @@ import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children  }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
-
 
   const [color, setColor] = useState<any>(null);
   const [size, setSize] = useState<any>(null);
@@ -327,14 +333,13 @@ const Details = ({ fetchStatus, product,variant,vrcolor , data, children  }: any
   const buttonTwentyTwo =
     " cart-btn  font-bold py-[11px] px-10 w-max rounded-full ";
 
-
-    if (fetchStatus === "fetching") {
-      return (
-        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-          <OvalLoader />
-        </div>
-      );
-    }
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white h-full ">

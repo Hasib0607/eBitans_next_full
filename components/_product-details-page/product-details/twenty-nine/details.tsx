@@ -23,13 +23,19 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 
-const Details = ({ fetchStatus, product,variant,vrcolor , data, children}: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
   const [filterV, setFilterV] = useState<any>([]);
-
 
   // select variant state
   const [color, setColor] = useState<any>(null);

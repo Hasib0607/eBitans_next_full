@@ -77,7 +77,7 @@ const Two = ({ data }: any) => {
         setRelatedProduct(res);
       }
     });
-  }, [data, store_id]);
+  }, [data, store_id, ]);
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5">

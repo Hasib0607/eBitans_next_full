@@ -1,20 +1,20 @@
 "use client";
-import { motion, AnimatePresence } from "framer-motion";
-import { SwiperSlide } from "swiper/react";
-import Details from "./details";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import moment from "moment";
-import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
-import Arrow from "@/utils/arrow";
-import SliderFive from "@/components/slider/slider-five";
 import Card12 from "@/components/card/card12";
 import { UpdateData } from "@/components/product-details";
-import { useQuery } from "@tanstack/react-query";
-import { useState } from "react";
-import { getProductDetails, getRelatedProducts, getReviews } from "./apis";
+import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
 import SkeletonWrapper from "@/components/skeleton-wrapper";
+import SliderFive from "@/components/slider/slider-five";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import moment from "moment";
+import { useState } from "react";
+import { SwiperSlide } from "swiper/react";
+import { getProductDetails, getRelatedProducts, getReviews } from "./apis";
+import Details from "./details";
 
 interface Props {
   data: any;

@@ -57,7 +57,10 @@ const ThirtyFive = ({ data, updatedData }: any) => {
             </p>
           )}
         </div>
-        <Accordion text="Product Details" desc={productDetailsData?.product?.description} />
+        <Accordion
+          text="Product Details"
+          desc={productDetailsData?.product?.description}
+        />
         <Accordion text="Customer Reviews" desc={reviews} />
       </Details>
       <Related products={relatedProducts} />
@@ -88,10 +91,10 @@ const Accordion = ({ text, desc }: any) => {
           {desc[0]?.id ? (
             <div>
               {desc?.error
-                    ? desc?.error
-                    : desc?.map((item: any) => (
-                        <UserReview key={item?.id} review={item} />
-                      ))}
+                ? desc?.error
+                : desc?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))}
             </div>
           ) : (
             <div
@@ -99,7 +102,6 @@ const Accordion = ({ text, desc }: any) => {
               className="apiHtml"
             ></div>
           )}
-          
         </motion.div>
       )}
     </AnimatePresence>

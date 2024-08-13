@@ -14,11 +14,19 @@ import Link from "next/link";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import useTheme from "@/hooks/use-theme";
 
-const Details = ({fetchStatus, product,variant,vrcolor , data, children, open, setOpen }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+  open,
+  setOpen,
+}: any) => {
   const { makeid, store_id, headerSetting, design } = useTheme();
 
   const dispatch = useDispatch();
-
 
   const [filterV, setFilterV] = useState<any>([]);
 

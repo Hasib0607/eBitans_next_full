@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch, useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
-import { BsEye, BsEyeSlash } from "react-icons/bs";
 import useTheme from "@/hooks/use-theme";
 import { login } from "@/redux/features/auth.slice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { BsEye, BsEyeSlash } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
 const cls =
   "py-3 px-4 border border-gray-300 rounded-md placeholder:text-gray-500 text-sm focus:outline-0 w-full";
 
