@@ -27,7 +27,7 @@ import { toast } from "react-toastify";
 
 const Details = ({
   data,
-  product,
+  productx,
   variant,
   vrcolor,
   fetchStatus,
@@ -36,6 +36,7 @@ const Details = ({
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
+  const [product, setProduct] = useState<any>(productx);
 
   const [filterV, setFilterV] = useState<any>([]);
   const [load, setLoad] = useState(false);
@@ -69,7 +70,7 @@ const Details = ({
       } else {
         setCamp(null);
       }
-
+      setProduct(product);
       setLoad(false);
       setColor(null);
       setSize(null);

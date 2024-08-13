@@ -39,7 +39,7 @@ const Three = ({ data, updatedData }: any) => {
     <div className="sm:container px-5 sm:py-10 py-5">
       <Details
         fetchStatus={fetchStatus}
-        product={product}
+        productx={product}
         variant={variant}
         vrcolor={vrcolor}
         data={data}
