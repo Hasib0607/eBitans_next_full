@@ -37,7 +37,7 @@ const HeaderDown = () => {
               ) : (
                 <Link href="/">
                   <p className="text-xl uppercase">
-                    {headerSetting?.website_name}
+                    {headerSetting?.website_name}  
                   </p>
                 </Link>
               )}
