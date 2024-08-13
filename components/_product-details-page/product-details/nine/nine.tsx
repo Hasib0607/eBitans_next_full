@@ -1,83 +1,80 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import Details from "./details";
-import { motion, AnimatePresence } from "framer-motion";
-import { SwiperSlide } from "swiper/react";
-import moment from "moment";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card22 from "@/components/card/card22";
+import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import moment from "moment";
+import { useState } from "react";
+import { SwiperSlide } from "swiper/react";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
-const Nine = ({ data }: any) => {
-  const { store_id } = useTheme();
+const Nine = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-9"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-9"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-9"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
-      <Details data={data}>
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      >
         <div className="h-[1px] bg-gray-300 w-full my-3"></div>
         <div className="flex flex-col space-y-3 font-seven">
           <p className="text-sm text-[#5a5a5a] font-seven">
             <span className="font-semibold text-[#212121] font-seven">
               SKU:
             </span>{" "}
-            {productDetails?.SKU}
+            {productDetailsData?.product?.SKU}
           </p>
           <p className="text-sm text-[#5a5a5a] font-seven">
             <span className="font-semibold text-[#212121] font-seven">
               Category:
             </span>{" "}
-            {productDetails?.category}
+            {productDetailsData?.product?.category}
           </p>
-          {productDetails?.tags && (
+          {productDetailsData?.product?.tags && (
             <p className="text-sm text-[#5a5a5a] font-seven">
               <span className="font-semibold text-[#212121] font-seven">
                 Tags:
               </span>{" "}
-              {productDetails?.tags}
+              {productDetailsData?.product?.tags}
             </p>
           )}
         </div>
         <div className="h-[1px] bg-gray-300 w-full my-3"></div>
         <According
           text={"Product Details"}
-          desc={productDetails?.description}
+          desc={productDetailsData?.product?.description}
         />
         <According text={"Customer Reviews"} desc={reviews} />
       </Details>
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };
@@ -85,6 +82,7 @@ const Nine = ({ data }: any) => {
 export default Nine;
 
 const According = ({ text, desc }: any) => {
+  console.log(desc?.error, "desc");
   const [show, setShow] = useState(false);
 
   return (
@@ -104,19 +102,13 @@ const According = ({ text, desc }: any) => {
           transition={{ duration: 0.5 }}
           className="font-seven"
         >
-          {desc[0]?.id ? (
+          {text === "Customer Reviews" ? (
             <div>
-              {desc.length === 0 ? (
-                <div className="flex flex-1 justify-center items-center">
-                  <h3 className="text-xl font-sans font-bold">
-                    No Found Review
-                  </h3>
-                </div>
-              ) : (
-                desc?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
-              )}
+              {desc?.error
+                ? desc?.error
+                : desc?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))}
             </div>
           ) : (
             <div

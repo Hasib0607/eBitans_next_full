@@ -33,11 +33,7 @@ const HeaderTop = () => {
 
         <div className="flex items-center gap-x-4">
           {isLoggedIn ? (
-            <div
-              className="lg:cursor-pointer"
-
-              onClick={() => logout()}
-            >
+            <div className="lg:cursor-pointer" onClick={() => logout()}>
               <HeaderTopMenu icon={logoutIcon} doc={"Logout"} />
             </div>
           ) : (

@@ -74,7 +74,7 @@ const Details = ({
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
+  }, [data, store_id, fetchStatus]);
 
   const regularPrice =
     parseInt(product?.regular_price) +

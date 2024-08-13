@@ -6,7 +6,13 @@
 *,
 html {
   scroll-behavior: smooth;
+  /* scrollbar-gutter: stable;
+  scrollbar-width: thin; */
 }
+
+/* fix radix dropdown-menu layout shift html body[data-scroll-locked] {
+  margin-right: 0 !important;
+} */
 
 body {
   overflow-x: hidden;

@@ -4,55 +4,37 @@ import SectionHeadingTwentyOne from "@/components/section-heading/section-headin
 import DefaultSlider from "@/components/slider/default-slider";
 import useTheme from "@/hooks/use-theme";
 import { profileImg } from "@/site-settings/siteUrl";
-import httpReq from "@/utils/http/axios/http.service";
 import Rate from "@/utils/rate";
 import { Tab } from "@headlessui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
-import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import Details from "./details";
 
 const Eight = ({ data, updatedData }: any) => {
-  const { store_id, design } = useTheme();
+  const { design } = useTheme();
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
-
-  const [loadingState, setLoadingState] = useState({
-    productDetailsLoaded: false,
-    reviewsLoaded: false,
-    relatedProductsLoaded: false,
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-8"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-8"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-8"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-        setLoadingState((prev) => ({ ...prev, productDetailsLoaded: true }));
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-        setLoadingState((prev) => ({ ...prev, reviewsLoaded: true }));
-      } else {
-        setReview([]);
-        setLoadingState((prev) => ({ ...prev, reviewsLoaded: true }));
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-        setLoadingState((prev) => ({ ...prev, relatedProductsLoaded: true }));
-      }
-    });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   const styleCss = `
     .active-des-review {
@@ -61,22 +43,18 @@ const Eight = ({ data, updatedData }: any) => {
     }
     `;
 
-  console.log(loadingState, "loadingState");
-
-  // loading status checking
-
-  const isLoadedAll = Object.values(loadingState).every((e) => e);
-
-  // if (!isLoadedAll) {
-  //   return <p>Loading</p>;
-  // }
-
   return (
     <div className="bg-white mx-auto">
       <style>{styleCss}</style>
       <div className="">
         <div className="sm:container px-5 sm:py-10 py-5">
-          <Details data={data} />
+          <Details
+            fetchStatus={fetchStatus}
+            product={product}
+            variant={variant}
+            vrcolor={vrcolor}
+            data={data}
+          />
         </div>
         {/* ************************ tab component start ***************************** */}
 
@@ -107,24 +85,18 @@ const Eight = ({ data, updatedData }: any) => {
                 <div className="rounded-lg p-5">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: productDetails?.description,
+                      __html: productDetailsData?.product?.description,
                     }}
                     className="apiHtml"
                   ></div>
                 </div>
               </Tab.Panel>
               <Tab.Panel>
-                {reviews.length === 0 ? (
-                  <div className="flex flex-1 justify-center items-center">
-                    <h3 className="text-xl font-sans font-bold">
-                      No Found Review
-                    </h3>
-                  </div>
-                ) : (
-                  reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))
-                )}
+                {reviews?.error
+                  ? reviews?.error
+                  : reviews?.map((item: any) => (
+                      <UserReview key={item?.id} review={item} />
+                    ))}
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
@@ -132,7 +104,7 @@ const Eight = ({ data, updatedData }: any) => {
 
         {/* ************************ tab component end ***************************** */}
         <div className="sm:container px-5 sm:py-10 py-5">
-          <Related product={relatedProduct} />
+          <Related product={relatedProducts} />
         </div>
       </div>
     </div>

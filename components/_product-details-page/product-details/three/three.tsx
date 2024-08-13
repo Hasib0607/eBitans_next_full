@@ -1,81 +1,78 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import moment from "moment";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import Details from "./details";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
-import { SwiperSlide } from "swiper/react";
 import Card23 from "@/components/card/card23";
+import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import moment from "moment";
+import { useState } from "react";
+import { SwiperSlide } from "swiper/react";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
-const Three = ({ data }: any) => {
-  const { store_id } = useTheme();
+const Three = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-3"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState<any>([]);
-  const [reviews, setReview] = useState<any>([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-3"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-3"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
-      <Details data={data}>
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      >
         <div className="flex flex-col space-y-3 my-3">
           <p className="text-sm text-[#5a5a5a] font-seven">
             <span className="font-semibold text-[#212121] font-seven">
               SKU:
             </span>{" "}
-            {productDetails?.SKU}
+            {productDetailsData?.product?.SKU}
           </p>
           <p className="text-sm text-[#5a5a5a] font-seven">
             <span className="font-semibold text-[#212121] font-seven">
               Category:
             </span>{" "}
-            {productDetails?.category}
+            {productDetailsData?.product?.category}
           </p>
-          {productDetails?.tags && (
+          {productDetailsData?.product?.tags && (
             <p className="text-sm text-[#5a5a5a] font-seven">
               <span className="font-semibold text-[#212121] font-seven">
                 Tags:
               </span>{" "}
-              {productDetails?.tags}
+              {productDetailsData?.product?.tags}
             </p>
           )}
         </div>
         <According
           text={"Product Details"}
-          desc={productDetails?.description}
+          desc={productDetailsData?.product?.description}
         />
         <According text={"Customer Reviews"} desc={reviews} />
       </Details>
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };
@@ -104,17 +101,11 @@ const According = ({ text, desc }: any) => {
         >
           {desc[0]?.id || desc.length === 0 ? (
             <div>
-              {desc.length === 0 ? (
-                <div className="flex flex-1 justify-center items-center">
-                  <h3 className="text-xl font-sans font-bold">
-                    No Found Review
-                  </h3>
-                </div>
-              ) : (
-                desc?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
-              )}
+              {desc?.error
+                ? desc?.error
+                : desc?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))}
             </div>
           ) : (
             <div
