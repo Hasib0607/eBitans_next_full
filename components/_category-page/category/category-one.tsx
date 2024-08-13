@@ -4,14 +4,14 @@ import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
 import Skeleton from "react-loading-skeleton";
 import Pagination from "./pagination";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
 const CategoryOne = () => {
   const { id: data }: any = useParams<{ id: string }>();

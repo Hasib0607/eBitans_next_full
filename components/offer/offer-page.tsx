@@ -71,7 +71,7 @@ const OfferPage = () => {
   ]);
 
   useEffect(() => {
-    // setLoad(true)
+    setLoad(true);
     fetchCampaignData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

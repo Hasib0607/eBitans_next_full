@@ -1,50 +1,51 @@
 // "use client";
-import React from "react";
-import CategorySevenNew from "./_category-page/category/category-seven-new";
-import getUrl from "@/utils/get-url";
 import { getSubdomainName } from "@/lib";
+import getUrl from "@/utils/get-url";
 import CategoryEight from "./_category-page/category/category-eight-old";
-import CategoryNine from "./_category-page/category/category-nine";
-import CategoryTen from "./_category-page/category/category-ten";
-import CategoryEleven from "./_category-page/category/category-eleven";
-import CategoryTwelve from "./_category-page/category/category-twelve";
-import CategoryThirteen from "./_category-page/category/category-thirteen";
-import CategoryFourteen from "./_category-page/category/category-fourteen";
-import CategorySixteen from "./_category-page/category/category-sixteen";
-import CategorySeventeen from "./_category-page/category/category-seventeen";
 import CategoryEighteen from "./_category-page/category/category-eighteen";
-import CategoryNineteen from "./_category-page/category/category-nineteen";
-import CategoryTwenty from "./_category-page/category/category-twenty";
-import CategoryTwentyOne from "./_category-page/category/category-twentyone";
-import CategoryTwentyTwo from "./_category-page/category/category-twentytwo";
-import CategoryTwentyThree from "./_category-page/category/category-twentythree";
-import CategoryTwentyFour from "./_category-page/category/category-twentyfour";
-import CategoryTwentyFive from "./_category-page/category/category-twentyfive";
-import CategoryTwentySix from "./_category-page/category/category-twentysix";
-import CategoryTwentySeven from "./_category-page/category/category-twentyseven";
-import CategoryTwentyEight from "./_category-page/category/category-twentyeight";
-import CategoryTwentyNine from "./_category-page/category/category-twentynine";
-import CategoryThirty from "./_category-page/category/category-thirty";
-import CategoryThirtyThree from "./_category-page/category/category-thirtythree";
-import CategoryThirtyFour from "./_category-page/category/category-thirtyfour";
-import CategoryThirtyFive from "./_category-page/category/category-thirtyfive";
-import CategoryThirtySix from "./_category-page/category/category-thirtysix";
-import CategoryThirtySeven from "./_category-page/category/category-thirtyseven";
-import CategoryThirtyEight from "./_category-page/category/category-thirtyeight";
-import CategoryThirtyNine from "./_category-page/category/category-thirtynine";
-import CategoryForty from "./_category-page/category/category-forty";
-import CategoryOne from "./_category-page/category/category-one";
-import CategoryTwo from "./_category-page/category/category-two";
-import CategoryThree from "./_category-page/category/category-three";
+import CategoryEleven from "./_category-page/category/category-eleven";
 import CategoryFive from "./_category-page/category/category-five";
+import CategoryForty from "./_category-page/category/category-forty";
 import CategoryFour from "./_category-page/category/category-four";
+import CategoryFourteen from "./_category-page/category/category-fourteen";
+import CategoryNine from "./_category-page/category/category-nine";
+import CategoryNineteen from "./_category-page/category/category-nineteen";
+import CategoryOne from "./_category-page/category/category-one";
+import CategorySevenNew from "./_category-page/category/category-seven-new";
+import CategorySeventeen from "./_category-page/category/category-seventeen";
 import CategorySix from "./_category-page/category/category-six";
+import CategorySixteen from "./_category-page/category/category-sixteen";
+import CategoryTen from "./_category-page/category/category-ten";
+import CategoryThirteen from "./_category-page/category/category-thirteen";
+import CategoryThirty from "./_category-page/category/category-thirty";
+import CategoryThirtyEight from "./_category-page/category/category-thirtyeight";
+import CategoryThirtyFive from "./_category-page/category/category-thirtyfive";
+import CategoryThirtyFour from "./_category-page/category/category-thirtyfour";
+import CategoryThirtyNine from "./_category-page/category/category-thirtynine";
+import CategoryThirtySeven from "./_category-page/category/category-thirtyseven";
+import CategoryThirtySix from "./_category-page/category/category-thirtysix";
+import CategoryThirtyThree from "./_category-page/category/category-thirtythree";
+import CategoryThree from "./_category-page/category/category-three";
+import CategoryTwelve from "./_category-page/category/category-twelve";
+import CategoryTwenty from "./_category-page/category/category-twenty";
+import CategoryTwentyEight from "./_category-page/category/category-twentyeight";
+import CategoryTwentyFive from "./_category-page/category/category-twentyfive";
+import CategoryTwentyFour from "./_category-page/category/category-twentyfour";
+import CategoryTwentyNine from "./_category-page/category/category-twentynine";
+import CategoryTwentyOne from "./_category-page/category/category-twentyone";
+import CategoryTwentySeven from "./_category-page/category/category-twentyseven";
+import CategoryTwentySix from "./_category-page/category/category-twentysix";
+import CategoryTwentyThree from "./_category-page/category/category-twentythree";
+import CategoryTwentyTwo from "./_category-page/category/category-twentytwo";
+import CategoryTwo from "./_category-page/category/category-two";
 
 const SubCategoryComponent = async () => {
   const url = getUrl();
   const {
     design: { shop_page: theme },
   } = await getSubdomainName(url, "design");
+
+  return <CategoryEight />;
 
   return (
     <>
