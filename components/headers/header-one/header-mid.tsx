@@ -21,9 +21,9 @@ export default function HeaderMid() {
 
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
-    // const logOut = () => {
-    //   dispatch(logout());
-    // };
+  // const logOut = () => {
+  //   dispatch(logout());
+  // };
 
   const classes = `
    .group:hover .phn{
@@ -209,16 +209,16 @@ const SingleMenuItem = ({ item, category }: any) => {
             href={`/${item.url}`}
             className="text-base font-medium text-gray-500 hoverText"
           >
-            {item.name} 
+            {item.name}
           </Link>
         </MultiStep>
       ) : (
         <Link
-         href={item?.url ? `/${item?.url}` : '/'}
+          href={item?.url ? `/${item?.url}` : "/"}
           className="text-base font-medium text-gray-500 hoverText"
-           >
-            {item.name}
-          </Link>
+        >
+          {item.name}
+        </Link>
       )}
     </>
   );

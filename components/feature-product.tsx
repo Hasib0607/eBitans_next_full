@@ -38,7 +38,6 @@ const FeatureProduct = ({
   product,
   banner,
 }: any) => {
-
   return (
     <>
       {theme === "two" && (
