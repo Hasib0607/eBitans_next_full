@@ -1,23 +1,23 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import FilterByColor from "@/components/filter-by-color";
-import FilterByPrice from "@/components/filter-by-price";
 import Pagination from "@/components/_category-page/category/pagination";
-import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
 import Card23 from "@/components/card/card23";
 import Card6 from "@/components/card/card6";
-import { CgMenuGridO } from "react-icons/cg";
+import FilterByColor from "@/components/filter-by-color";
+import FilterByPrice from "@/components/filter-by-price";
+import OvalLoader from "@/components/loader/oval-loader";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import {
   MinusIcon,
   PlusIcon,
   TableCellsIcon,
 } from "@heroicons/react/24/outline";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { CgMenuGridO } from "react-icons/cg";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
 
 const Three = ({ data }: any) => {
   const { category, module, design } = useTheme();
