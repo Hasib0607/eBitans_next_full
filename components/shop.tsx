@@ -1,4 +1,4 @@
-import Three from "@/components/_shop-page/shops/three/three";
+import Seven from "./_shop-page/shops/seven/seven";
 
 const ShopComponent = async () => {
   // const url = getUrl();
@@ -6,7 +6,7 @@ const ShopComponent = async () => {
   //   design: { shop_page },
   // } = await getSubdomainName(url, "design");
 
-  return <Three data={{}} />;
+  return <Seven />;
 
   // return (
   //   <>
