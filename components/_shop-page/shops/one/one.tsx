@@ -42,7 +42,7 @@ const One = ({ data }: any) => {
             ? pageShop
             : `?page=${pageShop}`
           : `?page=1`
-      }&name=${"siam.localhost:3000"}&priceFilter=${
+      }&name=${window.location.host}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );

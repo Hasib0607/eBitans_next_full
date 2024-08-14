@@ -110,7 +110,7 @@ const Product = ({
     const { data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${"siam.localhost:3000"}`
+      }&name=${window.location.host}`
     );
 
     if (error) {
