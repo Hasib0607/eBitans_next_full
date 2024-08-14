@@ -172,7 +172,7 @@ export default function HeaderFour() {
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-3 bg-white px-2 py-4 sm:gap-8 sm:p-8">
                           {headermenu?.map((item: any) => (
-                            <Link key={item?.id} href={item?.url}>
+                            <Link key={item?.id} href={item?.url ? `/${item?.url}` : "/"}>
                               <Popover.Button className="-m-3 p-2 flex items-start rounded-lg hover:bg-gray-50">
                                 {/* <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" /> */}
                                 <div className="">

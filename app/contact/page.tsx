@@ -7,43 +7,35 @@ import {
 } from "react-icons/fa";
 
 const ContactPage = () => {
+  const bangla = true;
+
   return (
     <div>
       <hr className="lg:mt-5" />
-      <section className=" lg:px-20 bg-emerald-50 ">
-        <div className="container px-6 py-12  mx-auto">
+      <section className="lg:px-20 bg-emerald-50">
+        <div className="container px-6 py-12 mx-auto">
           <div>
             <p className="font-medium text-blue-500 text-3xl dark:text-blue-400">
               𝙲𝚘𝚗𝚝𝚊𝚌𝚝 𝚞𝚜
             </p>
 
             <p className="mt-3 text-gray-500 dark:text-gray-400">
-              Our friendly team would love to hear from you.
+              {bangla
+                ? "আমাদের বন্ধুত্বপূর্ণ দল আপনার সাথে কথা বলতে ভালোবাসবে।"
+                : "Our friendly team would love to hear from you."}
             </p>
             <hr className="w-[20%]" />
-            <div className="flex divide-x  space-x-4">
-              <button
-                aria-label="Log in with Facebook"
-                className="p-3 rounded-sm"
-              >
+            <div className="flex divide-x space-x-4">
+              <button aria-label={bangla ? "Facebook দিয়ে লগইন করুন" : "Log in with Facebook"} className="p-3 rounded-sm">
                 <FaFacebookF className="w-5 h-5 fill-current" />
               </button>
-              <button
-                aria-label="Log in with YouTube"
-                className="p-3 rounded-sm"
-              >
+              <button aria-label={bangla ? "YouTube দিয়ে লগইন করুন" : "Log in with YouTube"} className="p-3 rounded-sm">
                 <FaYoutube className="w-5 h-5 fill-current" />
               </button>
-              <button
-                aria-label="Log in with Instagram"
-                className="p-3 rounded-sm"
-              >
+              <button aria-label={bangla ? "Instagram দিয়ে লগইন করুন" : "Log in with Instagram"} className="p-3 rounded-sm">
                 <FaInstagram className="w-5 h-5 fill-current" />
               </button>
-              <button
-                aria-label="Log in with LinkedIn"
-                className="p-3 rounded-sm"
-              >
+              <button aria-label={bangla ? "LinkedIn দিয়ে লগইন করুন" : "Log in with LinkedIn"} className="p-3 rounded-sm">
                 <FaLinkedinIn className="w-5 h-5 fill-current" />
               </button>
             </div>
@@ -52,9 +44,9 @@ const ContactPage = () => {
 
           <div className="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3">
             <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-1">
-              <div className="flex divide-x-2 ">
+              <div className="flex divide-x-2">
                 <div>
-                  <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-200 ">
+                  <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-200">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="none"
@@ -70,11 +62,13 @@ const ContactPage = () => {
                       />
                     </svg>
                   </span>
-                  <h2 className="mt-4 text-base font-medium text-gray-800 ">
-                    Email
+                  <h2 className="mt-4 text-base font-medium text-gray-800">
+                    {bangla ? "ইমেইল" : "Email"}
                   </h2>
-                  <p className="mt-2 text-sm text-gray-500 ">
-                    Our friendly team is here to help.
+                  <p className="mt-2 text-sm text-gray-500">
+                    {bangla
+                      ? "আমাদের বন্ধুত্বপূর্ণ দল সাহায্য করার জন্য এখানে আছে।"
+                      : "Our friendly team is here to help."}
                   </p>
                   <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
                     info@ebitans.com <br />
@@ -104,11 +98,13 @@ const ContactPage = () => {
                       />
                     </svg>
                   </span>
-                  <h2 className="mt-4 text-base font-medium text-gray-800 ">
-                    Office
+                  <h2 className="mt-4 text-base font-medium text-gray-800">
+                    {bangla ? "অফিস" : "Office"}
                   </h2>
                   <p className="mt-2 text-sm text-gray-500">
-                    Come say hello at our office HQ.
+                    {bangla
+                      ? "আমাদের অফিসে এসে হ্যালো বলুন।"
+                      : "Come say hello at our office HQ."}
                   </p>
                   <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
                     4th Floor, House: 39, Road: 20, Nikunja 2, Dhaka-1229
@@ -133,11 +129,13 @@ const ContactPage = () => {
                     />
                   </svg>
                 </span>
-                <h2 className="mt-4 text-base font-medium text-gray-800 ">
-                  Phone
+                <h2 className="mt-4 text-base font-medium text-gray-800">
+                  {bangla ? "ফোন" : "Phone"}
                 </h2>
-                <p className="mt-2 text-sm text-gray-500 ">
-                  Sat-Thus from 9am to 6pm.
+                <p className="mt-2 text-sm text-gray-500">
+                  {bangla
+                    ? "শনিবার থেকে বৃহস্পতিবার সকাল ৯টা থেকে সন্ধ্যা ৬টা পর্যন্ত।"
+                    : "Sat-Thus from 9am to 6pm."}
                 </p>
                 <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
                   +88 01886 515579
@@ -156,8 +154,12 @@ const ContactPage = () => {
                 marginHeight={0}
                 marginWidth={0}
                 scrolling="no"
-                src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
-              ></iframe>
+                src={
+                  bangla
+                    ? "https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=bn&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                    : "https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                }
+              />
             </div>
           </div>
         </div>
