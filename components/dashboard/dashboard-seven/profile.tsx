@@ -1,12 +1,12 @@
 "use client";
+import DataLoader from "@/components/loader/data-loader";
 import useTheme from "@/hooks/use-theme";
 import { profileImg } from "@/site-settings/siteUrl";
 import httpReq from "@/utils/http/axios/http.service";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import DataLoader from "@/components/loader/data-loader";
 
 const Profile = () => {
   const { user } = useSelector((state: any) => state.auth);
