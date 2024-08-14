@@ -8,12 +8,12 @@ import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Rate from "@/utils/rate";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import QuikView from "../quick-view";
 import Details from "../_product-details-page/product-details/three/details";
+import QuikView from "../quick-view";
 
 const Card21 = ({ item }: any) => {
   const [open, setOpen] = useState(false);

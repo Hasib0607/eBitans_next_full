@@ -16,7 +16,7 @@ import { addToCartList } from "@/redux/features/product.slice";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import { useDispatch } from "react-redux";
-import Details from "../_product-details-page/product-details/eight/details";
+import Details from "../_product-details-page/product-details/three/details";
 
 const Card15 = ({ item }: any) => {
   const { design, store_id, makeid } = useTheme();

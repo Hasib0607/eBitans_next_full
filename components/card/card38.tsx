@@ -1,17 +1,17 @@
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoIosEye } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import QuikView from "../quick-view";
 import Details from "../_product-details-page/product-details/three/details";
-import BDT from "@/utils/bdt";
+import QuikView from "../quick-view";
 
 // import Details from '../../layouts/productDetails/fourteen/Details';
 

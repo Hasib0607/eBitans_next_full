@@ -19,7 +19,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/eight/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card50 = ({ item }: any) => {

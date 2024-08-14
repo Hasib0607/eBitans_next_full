@@ -13,7 +13,7 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import Details from "../_product-details-page/product-details/eight/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card18 = ({ item, store_id }: any) => {

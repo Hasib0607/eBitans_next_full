@@ -17,7 +17,7 @@ import Link from "next/link";
 import { AiFillThunderbolt } from "react-icons/ai";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/five/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card63 = ({ item }: any) => {
