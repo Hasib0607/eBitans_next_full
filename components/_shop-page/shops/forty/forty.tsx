@@ -83,7 +83,7 @@ const Product = ({
   setPage,
   shop_load,
   setHasMore,
-  hasMore
+  hasMore,
 }: any) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
@@ -91,7 +91,6 @@ const Product = ({
   useEffect(() => {
     setLoad(true);
     fetchData();
-    
   }, [shop_load === 1 && page, setShops, sort]);
 
   const fetchData = async () => {
@@ -99,7 +98,7 @@ const Product = ({
     const { data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${"siam.localhost:3000"}&filter=${sort}`
+      }&name=${window.location.host}&filter=${sort}`
     );
 
     if (error) {

@@ -1,39 +1,43 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { HSlider } from "./slider";
+import imgCall from "@/assets/img/call.png";
+import OvalLoader from "@/components/loader/oval-loader";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import BDT from "@/utils/bdt";
+import { buyNow } from "@/utils/buy-now";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
+import parse from "html-react-parser";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { IoCall } from "react-icons/io5";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import {
   FacebookIcon,
   FacebookShareButton,
-  WhatsappShareButton,
   WhatsappIcon,
+  WhatsappShareButton,
 } from "react-share";
-import parse from "html-react-parser";
-import imgCall from "@/assets/img/call.png";
-import { IoCall } from "react-icons/io5";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { buyNow } from "@/utils/buy-now";
-import { useRouter } from "next/navigation";
-import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
-import BDT from "@/utils/bdt";
-import Rate from "@/utils/rate";
-import CallForPrice from "@/utils/call-for-price";
+import { toast } from "react-toastify";
+import { HSlider } from "./slider";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
 
   // select variant state
@@ -68,10 +72,6 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setColor(null);
       setUnit(null);
       setSize(null);
@@ -82,13 +82,13 @@ const Details = ({ data, children }: any) => {
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
+  }, [data, store_id, fetchStatus]);
 
   const buyNowBtn = () => {
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
@@ -351,8 +351,8 @@ const Details = ({ data, children }: any) => {
               <BDT />
               {camp?.status === "active" ? campPrice : price}{" "}
               {camp?.status !== "active" &&
-              (product.discount_type === "no_discount" ||
-                product.discount_price === "0.00") ? (
+              (product?.discount_type === "no_discount" ||
+                product?.discount_price === "0.00") ? (
                 " "
               ) : (
                 <span className="text-gray-500 font-thin line-through text-xl font-seven">
@@ -386,9 +386,12 @@ const Details = ({ data, children }: any) => {
           </p>
 
           {/* unit  */}
-          {!vrcolor && variant?.length !== 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
-          )}
+          {!vrcolor &&
+            variant?.length !== 0 &&
+            variant?.length > 0 &&
+            variant[0]?.unit && (
+              <Units unit={unit} setUnit={setUnit} variant={variant} />
+            )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
             <>
@@ -401,7 +404,7 @@ const Details = ({ data, children }: any) => {
               />
             </>
           )}
-          {filterV[0]?.size && vrcolor && (
+          {filterV && filterV[0]?.size && vrcolor && (
             <Sizes size={size} setSize={setSize} variant={filterV} />
           )}
           {/* color only  */}

@@ -16,11 +16,11 @@ const NewArrivalProductFourteen = ({ product, design, store_id }: any) => {
 
   const styleCss = `
     .new-fourteen-prev:hover {
-      color:  ${design.text_color};
+      color:  ${design?.text_color};
       background: ${design?.header_color};
   }
     .new-fourteen-next:hover {
-      color:  ${design.text_color};
+      color:  ${design?.text_color};
       background: ${design?.header_color};
   }
 

@@ -1,26 +1,26 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import parse from "html-react-parser";
+import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { useRouter } from "next/navigation";
-import { buyNow } from "@/utils/buy-now";
-import { getPrice } from "@/utils/get-price";
 import {
   addToCartList,
   decrementQty,
   incrementQty,
 } from "@/redux/features/product.slice";
-import { HSlider } from "./slider";
 import BDT from "@/utils/bdt";
+import { buyNow } from "@/utils/buy-now";
 import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import OvalLoader from "@/components/loader/oval-loader";
+import parse from "html-react-parser";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import { HSlider } from "./slider";
 
-const Details = ({ data, children }: any) => {
+const Details = ({ data, children, fetchStatus }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
@@ -92,7 +92,7 @@ const Details = ({ data, children }: any) => {
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
@@ -336,6 +336,14 @@ const Details = ({ data, children }: any) => {
   const buttonTwenty =
     "bg-black btn-hover text-white font-semibold h-14 w-full";
 
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white">
       <style>{styleCss}</style>
@@ -466,7 +474,7 @@ const AddCart = ({
   useEffect(() => {
     const result = cartList.find((i: any) => i?.id === product?.id);
     setalready(result);
-  }, [cartList, product.id]);
+  }, [cartList, product?.id]);
 
   console.log(qty, "qty");
 
@@ -530,11 +538,11 @@ const AddCart = ({
             type="text"
             className="form-control w-full text-center border-0 outline-none ring-0 focus:outline-none focus:ring-0 focus:border-0 py-[7px] text-lg font-semibold"
             value={
-              already?.qty && variant.length === 0
+              already?.qty && variant?.length === 0
                 ? already?.qty
-                : variant.length === 0
-                ? 0
-                : qty
+                : variant?.length === 0
+                  ? 0
+                  : qty
             }
             onChange={handleChange}
             disabled
@@ -561,14 +569,14 @@ const AddCart = ({
                 </div>
             </div> */}
 
-      {variant.length !== 0 && (
+      {variant?.length !== 0 && (
         <div onClick={onClick} className="w-full">
           <button className={buttonTwenty}>Add to bag</button>
         </div>
       )}
       <div
         onClick={buyNowBtn}
-        className={`w-full ${variant.length !== 0 && "col-span-3"}`}
+        className={`w-full ${variant?.length !== 0 && "col-span-3"}`}
       >
         <button className={buttonTwenty}>Buy now</button>
       </div>

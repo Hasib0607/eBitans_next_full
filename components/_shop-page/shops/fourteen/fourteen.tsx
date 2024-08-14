@@ -189,7 +189,7 @@ const Product = ({
   setPage,
   shop_load,
   setHasMore,
-  hasMore
+  hasMore,
 }: any) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
@@ -204,7 +204,7 @@ const Product = ({
     sort,
     setColors,
     activeColor,
-    val
+    val,
   ]);
 
   const fetchData = async () => {

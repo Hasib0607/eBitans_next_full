@@ -22,11 +22,11 @@ const FeatureProductThirtyFour = ({
           border: 1px solid ${design?.header_color};
     }
       .new-product-prev:hover {
-        color:  ${design.text_color};
+        color:  ${design?.text_color};
         background: ${design?.header_color};
     }
       .new-product-next:hover {
-        color:  ${design.text_color};
+        color:  ${design?.text_color};
         background: ${design?.header_color};
     }
     .arrow-hov:hover .arrow {

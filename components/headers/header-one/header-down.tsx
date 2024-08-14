@@ -56,8 +56,8 @@ const HeaderDown = () => {
                         userData?.image
                           ? profileImg + userData?.image
                           : userData?.social_img
-                          ? profileImg + userData?.social_img
-                          : "https://ebitans.com/Image/theme/default-user-image.png"
+                            ? profileImg + userData?.social_img
+                            : "https://ebitans.com/Image/theme/default-user-image.png"
                       }
                       alt=""
                       className="object-fit"

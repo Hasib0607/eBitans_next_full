@@ -1,38 +1,42 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import OvalLoader from "@/components/loader/oval-loader";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import parse from "html-react-parser";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { VscCreditCard } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
-import parse from "html-react-parser";
 import {
   FacebookIcon,
   FacebookShareButton,
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import OvalLoader from "@/components/loader/oval-loader";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import useTheme from "@/hooks/use-theme";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
 import { toast } from "react-toastify";
-import { productImg } from "@/site-settings/siteUrl";
 import ImageZoom from "../image-zoom";
-import Link from "next/link";
-import Rate from "@/utils/rate";
-import BDT from "@/utils/bdt";
-import CallForPrice from "@/utils/call-for-price";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 
-const Details = ({ data }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState(false);
   const [camp, setCamp] = useState<any>(null);
 
@@ -66,10 +70,6 @@ const Details = ({ data }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setLoad(false);
       setColor(null);
       setSize(null);
@@ -79,7 +79,7 @@ const Details = ({ data }: any) => {
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
+  }, [data, store_id, fetchStatus]);
 
   const regularPrice =
     parseInt(product?.regular_price) +
@@ -300,14 +300,13 @@ const Details = ({ data }: any) => {
   const buttonOne =
     "font-bold text-white bg-gray-600 rounded-md w-max px-10 py-3 text-center";
 
-  // if (load) {
-  //   return (
-  //     <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-  //       <OvalLoader />
-  //     </div>
-  //   );
-  // }
-
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
   return (
     <div className="grid md:grid-cols-8 grid-cols-1 gap-4 w-full overflow-hidden">
       <div className="md:col-span-4 lg2:col-span-3 col-span-1 h-full overflow-hidden">

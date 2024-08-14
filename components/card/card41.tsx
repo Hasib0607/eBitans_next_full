@@ -1,25 +1,23 @@
 "use client";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Taka from "@/utils/taka";
 import { LinkIcon, ShoppingBagIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { IoSearchCircleOutline } from "react-icons/io5";
-import QuikView from "../quick-view";
-import Details from "../_product-details-page/product-details/three/details";
-import { addToCartList } from "@/redux/features/product.slice";
-import { getPrice } from "@/utils/get-price";
-import httpReq from "@/utils/http/axios/http.service";
-import { toast } from "react-toastify";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { useStateHistory } from "@mantine/hooks";
-import useTheme from "@/hooks/use-theme";
 import { useDispatch } from "react-redux";
-import BDT from "@/utils/bdt";
+import { toast } from "react-toastify";
+import Details from "../_product-details-page/product-details/three/details";
+import QuikView from "../quick-view";
 
 const Card41 = ({ item }: any) => {
-
-  console.log(item, "FAHF")
+  console.log(item, "FAHF");
   const [open, setOpen] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
   const dispatch = useDispatch();
@@ -32,7 +30,9 @@ const Card41 = ({ item }: any) => {
   );
   const campPrice = getPrice(
     productGetPrice,
-    isNaN(parseInt(camp?.discount_amount)) ? 0 : parseInt(camp?.discount_amount),
+    isNaN(parseInt(camp?.discount_amount))
+      ? 0
+      : parseInt(camp?.discount_amount),
     camp?.discount_type
   );
 
@@ -115,14 +115,13 @@ const Card41 = ({ item }: any) => {
   };
 
   const add_cart_item = () => {
-    console.log(item, "hello items")
+    console.log(item, "hello items");
     if (item?.variant.length !== 0) {
       setOpen(!open);
     } else {
       filterOfferProduct(item);
     }
   };
-
 
   return (
     <div>

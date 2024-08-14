@@ -343,8 +343,8 @@ const Card54 = ({ item }: any) => {
                       {camp?.status === "active"
                         ? campPrice
                         : store_id === 2109
-                        ? productGetPrice
-                        : price}{" "}
+                          ? productGetPrice
+                          : price}{" "}
                       {camp?.status !== "active" &&
                       (item.discount_type === "no_discount" ||
                         item.discount_price === "0.00") ? (

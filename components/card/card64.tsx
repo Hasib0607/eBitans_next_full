@@ -6,7 +6,7 @@ import { getPrice } from "@/utils/get-price";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Details from "../_product-details-page/product-details/eight/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card64 = ({ item }: any) => {

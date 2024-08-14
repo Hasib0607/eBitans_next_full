@@ -24,11 +24,11 @@ const FeatureProductTwentySix = ({
         border: 1px solid ${design?.header_color};
   }
     .feature-product-prev:hover {
-      color:  ${design.text_color};
+      color:  ${design?.text_color};
       background: ${design?.header_color};
   }
     .feature-product-next:hover {
-      color:  ${design.text_color};
+      color:  ${design?.text_color};
       background: ${design?.header_color};
   }
 

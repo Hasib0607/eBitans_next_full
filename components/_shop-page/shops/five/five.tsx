@@ -24,7 +24,7 @@ const Five = ({ data }: any) => {
   const { category, design, module } = useTheme();
 
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
-  
+
   const [grid, setGrid] = useState("H");
   const [paginate, setPaginate] = useState({});
   const [products, setProducts] = useState([]);
@@ -179,7 +179,7 @@ const Product = ({
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${"siam.localhost:3000"}&filter=${sort}&priceFilter=${
+      }&name=${window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );

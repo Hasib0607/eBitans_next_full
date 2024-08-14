@@ -155,16 +155,18 @@ const CheckOutFortyAddress = ({
                   <div>Loading</div>
                 ) : (
                   <div className="grid md:grid-cols-2 gap-4">
-                    {address?.slice(0, 4).map((item: any) => (
-                      <Single
-                        token={token}
-                        item={item}
-                        key={item?.id}
-                        selectAddress={selectAddress}
-                        setSelectAddress={setSelectAddress}
-                        setCall={setCall}
-                      />
-                    ))}
+                    {address
+                      ?.slice(0, 4)
+                      .map((item: any) => (
+                        <Single
+                          token={token}
+                          item={item}
+                          key={item?.id}
+                          selectAddress={selectAddress}
+                          setSelectAddress={setSelectAddress}
+                          setCall={setCall}
+                        />
+                      ))}
                   </div>
                 )}
               </div>

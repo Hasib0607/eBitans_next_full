@@ -1,12 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import Address from "./address/address";
-import YourOrders from "./your-orders/your-order";
+import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import Address from "./address/address";
 import Discount from "./discount";
+import YourOrders from "./your-orders/your-order";
 
 const CheckOutTwentyOne = () => {
   const { design, store_id, headerSetting } = useTheme();

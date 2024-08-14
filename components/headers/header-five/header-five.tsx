@@ -49,7 +49,7 @@ const HeaderFive = () => {
   }
   .sticky-menu {
     background: ${design?.header_color};
-    color: ${design.text_color};
+    color: ${design?.text_color};
   }
   h1, h2, h3, h4, h5, h6, li, ul, a, p, span, button, option, select, input, div {
     font-family: 'Montserrat', sans-serif;

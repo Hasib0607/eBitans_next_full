@@ -23,15 +23,19 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -65,9 +69,7 @@ const Details = ({ data, children }: any) => {
       }
 
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+
       setLoad(false);
       setColor(null);
       setSize(null);
@@ -83,7 +85,7 @@ const Details = ({ data, children }: any) => {
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />

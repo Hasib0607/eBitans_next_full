@@ -21,14 +21,17 @@ import useTheme from "@/hooks/use-theme";
 import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -41,8 +44,8 @@ const Details = ({ data, children }: any) => {
   const sizeV = variant?.find((item: any) => item.size !== null);
 
   const vPrice = variant?.map((item: any) => item?.additional_price);
-  const smallest = Math.min(...vPrice);
-  const largest = Math.max(...vPrice);
+  const smallest = Math.min(vPrice);
+  const largest = Math.max(vPrice);
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -66,10 +69,7 @@ const Details = ({ data, children }: any) => {
       }
 
       // const sizeVariant = variant?.filter(item => item?.size !== null)
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+
       setLoad(false);
       setColor(null);
       setSize(null);
@@ -81,7 +81,7 @@ const Details = ({ data, children }: any) => {
       .catch(console.error);
   }, [data, store_id]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
@@ -462,7 +462,7 @@ const Details = ({ data, children }: any) => {
               />
             </>
           )}
-          {filterV[0]?.size && vrcolor && (
+          {filterV?.size && vrcolor && (
             <Sizes size={size} setSize={setSize} variant={filterV} />
           )}
           {/* color only  */}

@@ -1,33 +1,32 @@
 "use client";
-import React, { useEffect } from "react";
-import {
-  MdOutlineKeyboardArrowUp,
-  MdKeyboardArrowDown,
-  MdDelete,
-} from "react-icons/md";
-import { useDispatch, useSelector } from "react-redux";
-import { useState } from "react";
+import MyModal from "@/components/modal";
 import useTheme from "@/hooks/use-theme";
-import { getPrice } from "@/utils/get-price";
-import { toast } from "react-toastify";
-import axios from "axios";
+import { login } from "@/redux/features/auth.slice";
 import {
   clearCartList,
   decrementQty,
   incrementQty,
   removeToCartList,
 } from "@/redux/features/product.slice";
-import { login } from "@/redux/features/auth.slice";
-import { useRouter } from "next/navigation";
+import { productImg } from "@/site-settings/siteUrl";
+import { btnhover } from "@/site-settings/style";
 import httpReq from "@/utils/http/axios/http.service";
 import Taka from "@/utils/taka";
-import { btnhover } from "@/site-settings/style";
-import MyModal from "@/components/modal";
-import { productImg } from "@/site-settings/siteUrl";
+import axios from "axios";
 import Link from "next/link";
-import { FaEdit } from "react-icons/fa";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { AiOutlineUpload } from "react-icons/ai";
+import { FaEdit } from "react-icons/fa";
+import {
+  MdDelete,
+  MdKeyboardArrowDown,
+  MdOutlineKeyboardArrowUp,
+} from "react-icons/md";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
+import { getPrice } from "@/utils/get-price";
 import "./checkoutfiveorder.css";
 const CheckOutFiveOrder = ({
   couponDis,
@@ -130,9 +129,9 @@ const CheckOutFiveOrder = ({
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
-      // discount:
-      //   item.regular_price -
-      //   getPrice(item.regular_price, item.discount_price, item.discount_type),
+      discount:
+        item.regular_price -
+        getPrice(item.regular_price, item.discount_price, item.discount_type)!,
       price: item?.price - item.additional_price,
       size: item.size,
       color: item.color,
@@ -141,7 +140,6 @@ const CheckOutFiveOrder = ({
       volume: item.volume,
       items: item?.items,
     }));
-
     const formData = new FormData();
 
     for (let i = 0; i < cart.length; i++) {
@@ -173,7 +171,6 @@ const CheckOutFiveOrder = ({
         }
       }
     }
-
     const data = {
       store_id: store_id,
       name: selectAddress?.name,
@@ -182,7 +179,8 @@ const CheckOutFiveOrder = ({
       address: selectAddress?.address,
       subtotal: total,
       shipping: parseInt(shipping_area),
-      total: total + tax + parseInt(shipping_area) - couponDis,
+      total:
+        parseInt(total) + parseInt(tax) + parseInt(shipping_area) - couponDis,
       discount: couponDis,
       product: cart,
       tax: tax,
@@ -208,8 +206,16 @@ const CheckOutFiveOrder = ({
         : selectAddress?.address
     );
     formData.append("subtotal", total);
-    // formData.append("shipping", parseInt(shipping_area));
-    // formData.append("total", total + tax + parseInt(shipping_area) - couponDis);
+    formData.append("shipping", shipping_area);
+    formData.append(
+      "total",
+      (
+        parseInt(total) +
+        parseInt(tax) +
+        parseInt(shipping_area) -
+        couponDis
+      ).toString()
+    );
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");

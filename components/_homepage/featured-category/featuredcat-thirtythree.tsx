@@ -52,16 +52,16 @@ const FeatureCatSix = ({ item, index }: any) => {
           index === 0
             ? "bg-[#FDDDE4]"
             : index === 1
-            ? "bg-[#D1E8F2]"
-            : index === 2
-            ? "bg-[#CDD4F8]"
-            : index === 3
-            ? "bg-[#F6DBF6]"
-            : index === 4
-            ? "bg-[#FFF2E5]"
-            : index === 5
-            ? "bg-[#FFFCEB]"
-            : "bg-gray-100"
+              ? "bg-[#D1E8F2]"
+              : index === 2
+                ? "bg-[#CDD4F8]"
+                : index === 3
+                  ? "bg-[#F6DBF6]"
+                  : index === 4
+                    ? "bg-[#FFF2E5]"
+                    : index === 5
+                      ? "bg-[#FFFCEB]"
+                      : "bg-gray-100"
         }`}
       >
         <img

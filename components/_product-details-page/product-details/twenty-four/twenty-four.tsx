@@ -14,36 +14,31 @@ import SectionHeadingTwentyThree from "@/components/section-heading/section-head
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card49 from "@/components/card/card49";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const TwentyFour = ({ data }: any) => {
+const TwentyFour = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
 
-  const [relatedProduct, setRelatedProduct] = useState<any>([]);
-  const [reviews, setReview] = useState<any>([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-24"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-24"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res: any) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-24"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("get/review", data).then((res: any) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   const styleCss = `
     .active-des-review {
@@ -76,7 +71,13 @@ const TwentyFour = ({ data }: any) => {
       </div>
       <style>{styleCss}</style>
       <div className="sm:container px-5 pt-10">
-        <Details data={data} />
+        <Details
+          fetchStatus={fetchStatus}
+          product={product}
+          variant={variant}
+          vrcolor={vrcolor}
+          data={data}
+        />
       </div>
       {/* ************************ tab component start ***************************** */}
       <div className="mt-14 pb-20 sm:container px-5">
@@ -106,19 +107,21 @@ const TwentyFour = ({ data }: any) => {
               <div className="p-5 ">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: productDetails?.description,
+                    __html: productDetailsData?.product?.description,
                   }}
                   className="apiHtml"
                 ></div>
               </div>
             </Tab.Panel>
             <Tab.Panel>
-              {reviews.length === 0 ? (
+              {reviews?.length === 0 ? (
                 <div className="flex flex-1 justify-center items-center p-5">
                   <h3 className="text-xl font-sans font-bold">
                     No Found Review
                   </h3>
                 </div>
+              ) : reviews?.error ? (
+                reviews?.error
               ) : (
                 reviews?.map((item: any) => (
                   <UserReview key={item?.id} review={item} />
@@ -129,7 +132,7 @@ const TwentyFour = ({ data }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };

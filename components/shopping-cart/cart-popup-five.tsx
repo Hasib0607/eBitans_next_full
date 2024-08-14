@@ -6,16 +6,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { Dialog, Transition } from "@headlessui/react";
 import { toast } from "react-toastify";
 import useTheme from "@/hooks/use-theme";
-import { ShoppingBagIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  ShoppingBagIcon,
+  TrashIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
-import {motion} from "framer-motion"
+import { motion } from "framer-motion";
 import { productImg } from "@/site-settings/siteUrl";
 import { removeToCartList } from "@/redux/features/product.slice";
 
 const CartPopUpFive = () => {
   const { design } = useTheme();
   const [open, setOpen] = useState(false);
-  const cartList = useSelector((state:any) => state.cart.cartList);
+  const cartList = useSelector((state: any) => state.cart.cartList);
 
   return (
     <>
@@ -65,12 +69,12 @@ const CartPopUpFive = () => {
 
 export default CartPopUpFive;
 
-const ShoppingCart = ({ setOpen }:any) => {
-  const cartList = useSelector((state:any) => state.cart.cartList);
+const ShoppingCart = ({ setOpen }: any) => {
+  const cartList = useSelector((state: any) => state.cart.cartList);
 
-  const priceList = cartList?.map((p:any) => p.qty * p.price);
+  const priceList = cartList?.map((p: any) => p.qty * p.price);
   const total = priceList.reduce(
-    (previousValue:any, currentValue:any) => previousValue + currentValue,
+    (previousValue: any, currentValue: any) => previousValue + currentValue,
     0
   );
 
@@ -79,7 +83,7 @@ const ShoppingCart = ({ setOpen }:any) => {
   const handleNavLink = () => {
     setOpen(false);
 
-    const mapped = cartList.map((cart:any) => {
+    const mapped = cartList.map((cart: any) => {
       return {
         item_id: cart.pid,
         item_name: cart.name,
@@ -125,7 +129,7 @@ const ShoppingCart = ({ setOpen }:any) => {
         <div className="my-20 mb-24 px-6">
           <div className="flow-root">
             <ul role="list" className="-my-6 divide-y divide-gray-200">
-              {cartList?.map((product:any, id:any) => (
+              {cartList?.map((product: any, id: any) => (
                 <SingleCartProduct key={id} product={product} />
               ))}
             </ul>
@@ -157,7 +161,7 @@ const ShoppingCart = ({ setOpen }:any) => {
   );
 };
 
-export const Drawer = ({ open, setOpen, children }:any) => {
+export const Drawer = ({ open, setOpen, children }: any) => {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-30" onClose={setOpen}>
@@ -197,7 +201,7 @@ export const Drawer = ({ open, setOpen, children }:any) => {
   );
 };
 
-const SingleCartProduct = ({ product }:any) => {
+const SingleCartProduct = ({ product }: any) => {
   const dispatch = useDispatch();
   const deleteBtn = () => {
     toast("Remove from cart this item", {
@@ -266,8 +270,9 @@ const SingleCartProduct = ({ product }:any) => {
         <div className="flex flex-1 items-end justify-start text-sm">
           {/* <p className="text-gray-500">Qty {product.qty}</p> */}
           <p className="text-gray-900 flex text-center font-semibold text-base">
-            {parseInt(product?.price)} BDT <XMarkIcon width={15} className="mx-1" />{" "}
-            {product?.qty} = {parseInt(product?.price) * product?.qty} BDT
+            {parseInt(product?.price)} BDT{" "}
+            <XMarkIcon width={15} className="mx-1" /> {product?.qty} ={" "}
+            {parseInt(product?.price) * product?.qty} BDT
           </p>
         </div>
       </div>

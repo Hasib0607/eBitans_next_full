@@ -1,5 +1,3 @@
-import React from "react";
-
 const BookingInformation = ({ booking }: any) => {
   return (
     <>
@@ -71,4 +69,3 @@ const BookingInformation = ({ booking }: any) => {
 };
 
 export default BookingInformation;
- 

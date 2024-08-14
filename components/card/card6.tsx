@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { IoSearchCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/eight/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card6 = ({ item }: any) => {

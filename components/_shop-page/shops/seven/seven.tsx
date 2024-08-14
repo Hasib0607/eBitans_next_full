@@ -10,12 +10,12 @@ import {
   MinusIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
+import { useIntersection } from "@mantine/hooks";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineAdjustments } from "react-icons/hi";
 import Skeleton from "react-loading-skeleton";
-import { useIntersection } from "@mantine/hooks";
 
 const fetchData = async (
   page: any,

@@ -1,9 +1,8 @@
-import React from "react";
 import "./card9.css";
 
-import { HiOutlineLink } from "react-icons/hi";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
+import Link from "next/link";
+import { HiOutlineLink } from "react-icons/hi";
 
 const Card9 = ({ item }: any) => {
   return (

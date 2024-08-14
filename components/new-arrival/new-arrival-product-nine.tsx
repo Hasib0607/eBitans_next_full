@@ -29,11 +29,11 @@ const NewArrivalProductNine = ({ product, design }: any) => {
 
   const styleCss = `
     .new-product-prev:hover {
-      color:  ${design.text_color};
+      color:  ${design?.text_color};
       background: ${design?.header_color};
   }
     .new-product-next:hover {
-      color:  ${design.text_color};
+      color:  ${design?.text_color};
       background: ${design?.header_color};
   }
     `;

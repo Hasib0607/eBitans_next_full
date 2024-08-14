@@ -7,7 +7,6 @@ if (typeof window !== "undefined") {
   user = JSON.parse(localStorage.getItem("user")!);
 }
 
-
 // const user = JSON.parse(localStorage.getItem("user") as any);
 
 export const signUp = createAsyncThunk(

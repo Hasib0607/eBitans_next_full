@@ -1,39 +1,43 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { HiMinus, HiPlus } from "react-icons/hi";
-import { toast } from "react-toastify";
 import parse from "html-react-parser";
+import { useEffect, useState } from "react";
+import { HiMinus, HiPlus } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay } from "swiper/modules";
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/effect-creative";
-import "swiper/css/effect-fade";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { bookNow } from "@/utils/book-now";
+import BookingForm from "@/components/booking-form";
 import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
+import QuikView from "@/components/quick-view";
+import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
-import Rate from "@/utils/rate";
+import { bookNow } from "@/utils/book-now";
 import CallForPrice from "@/utils/call-for-price";
-import QuikView from "@/components/quick-view";
-import BookingForm from "@/components/booking-form";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
+import "swiper/css";
+import "swiper/css/effect-creative";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting, bookingData } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
   const [openBooking, setOpenBooking] = useState<any>(false);
 
@@ -67,10 +71,6 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setColor(null);
       setSize(null);
       setUnit(null);
@@ -356,6 +356,14 @@ const Details = ({ data, children }: any) => {
   const buttonFourteen =
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 text-center w-60 lg:cursor-pointer my-2";
 
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white h-full mt-5">
       <style>{styleCss}</style>
@@ -368,8 +376,8 @@ const Details = ({ data, children }: any) => {
           modules={[Pagination, Autoplay]}
           className="mySwiper md:col-span-4 grid grid-cols-2 gap-5 w-full"
         >
-          {product?.image?.map((s: any) => (
-            <SwiperSlide key={s.id}>
+          {product?.image?.map((s: any, key: number) => (
+            <SwiperSlide key={key}>
               <div className="">
                 <img
                   className="h-auto min-w-full"

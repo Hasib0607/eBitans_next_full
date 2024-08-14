@@ -41,14 +41,16 @@ const NewArrivalProductSeventeen = ({ product, design, store_id }: any) => {
         </div>
 
         <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 gap-2 xl:gap-5 mt-16">
-          {product?.slice(0, 8).map((data: any) => (
-            <Card35
-              item={data}
-              key={data?.id}
-              design={design}
-              store_id={store_id}
-            />
-          ))}
+          {product
+            ?.slice(0, 8)
+            .map((data: any) => (
+              <Card35
+                item={data}
+                key={data?.id}
+                design={design}
+                store_id={store_id}
+              />
+            ))}
         </div>
       </div>
     </div>

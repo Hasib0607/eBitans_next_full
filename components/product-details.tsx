@@ -103,55 +103,55 @@ const componentsMap: any = {
     () =>
       import("@/components/_product-details-page/product-details/twenty/twenty")
   ),
-  twenty_one: lazy(
+  twentyone: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-one/twenty-one"
       )
   ),
-  twenty_two: lazy(
+  twentytwo: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-two/twentytwo"
       )
   ),
-  twenty_three: lazy(
+  twentythree: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-three/twentythree"
       )
   ),
-  twenty_four: lazy(
+  twentyfour: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-four/twenty-four"
       )
   ),
-  twenty_five: lazy(
+  twentyfive: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-five/twenty-five"
       )
   ),
-  twenty_six: lazy(
+  twentysix: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-six/twenty-six"
       )
   ),
-  twenty_seven: lazy(
+  twentyseven: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-seven/twenty-seven"
       )
   ),
-  twenty_eight: lazy(
+  twentyeight: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-eight/twenty-eight"
       )
   ),
-  twenty_nine: lazy(
+  twentynine: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/twenty-nine/twenty-nine"
@@ -161,43 +161,43 @@ const componentsMap: any = {
     () =>
       import("@/components/_product-details-page/product-details/thirty/thirty")
   ),
-  thirty_three: lazy(
+  thirtythree: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-three/thirty-three"
       )
   ),
-  thirty_four: lazy(
+  thirtyfour: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-four/thirty-four"
       )
   ),
-  thirty_five: lazy(
+  thirtyfive: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-five/thirty-five"
       )
   ),
-  thirty_six: lazy(
+  thirtysix: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-six/thirty-six"
       )
   ),
-  thirty_seven: lazy(
+  thirtyseven: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-seven/thirty-seven"
       )
   ),
-  thirty_eight: lazy(
+  thirtyeight: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-eight/thirty-eight"
       )
   ),
-  thirty_nine: lazy(
+  thirtynine: lazy(
     () =>
       import(
         "@/components/_product-details-page/product-details/thirty-nine/thirty-nine"
@@ -223,9 +223,7 @@ const ProductDetails = () => {
     setUpdatedData({ product_id, store_id, slug });
   }, [product_id, store_id, slug]);
 
-  const RenderComponent = componentsMap["sixteen"] || null;
-
-  // const RenderComponent = componentsMap[design?.single_product_page] || null;
+  const RenderComponent = componentsMap[design?.single_product_page] || null;
 
   return (
     <>

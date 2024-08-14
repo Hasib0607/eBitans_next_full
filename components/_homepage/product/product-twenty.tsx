@@ -74,6 +74,7 @@ const ProductTwenty = ({ category, design }: any) => {
           {products?.slice(0, 8).map((productData: any) => (
             <div key={productData.id}>
               <Card44 item={productData} />
+              {/* <Card50 item={productData} /> */}
             </div>
           ))}
         </div>

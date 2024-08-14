@@ -22,14 +22,17 @@ import Rate from "@/utils/rate";
 import Link from "next/link";
 import CallForPrice from "@/utils/call-for-price";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  fetchStatus,
+  product,
+  variant,
+  vrcolor,
+  data,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState([]);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -69,9 +72,7 @@ const Details = ({ data, children }: any) => {
       const sizeVariant = variant?.find((item: any) => item?.size !== null);
 
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
+
       setLoad(false);
       setUnit(!sizeVariant && !vrcolor ? variant[0] : null);
       setSize(sizeVariant ? sizeVariant : null);
@@ -351,7 +352,7 @@ const Details = ({ data, children }: any) => {
 
   const buttonTwentyThree = "cart-btn-details font-bold py-[11px] w-48 ";
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />

@@ -17,7 +17,7 @@ import Card6 from "@/components/card/card6";
 import {
   MinusIcon,
   PlusIcon,
-  TableCellsIcon
+  TableCellsIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -173,7 +173,7 @@ const Product = ({
   setPage,
   shop_load,
   setHasMore,
-  hasMore
+  hasMore,
 }: any) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
@@ -189,7 +189,7 @@ const Product = ({
     sort,
     setColors,
     activeColor,
-    val
+    val,
   ]);
 
   const fetchData = async () => {
@@ -197,7 +197,7 @@ const Product = ({
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${"siam.localhost:3000"}&filter=${sort}&priceFilter=${
+      }&name=${window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );
@@ -304,7 +304,7 @@ const Product = ({
                       transition={{
                         duration: 0.5,
                         ease: "linear",
-                        type: "tween"
+                        type: "tween",
                       }}
                     >
                       <Card6 item={item} />
@@ -343,7 +343,7 @@ const Product = ({
                     transition={{
                       duration: 0.5,
                       ease: "linear",
-                      type: "tween"
+                      type: "tween",
                     }}
                   >
                     <Card6 item={item} />

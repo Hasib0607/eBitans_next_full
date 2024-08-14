@@ -1,32 +1,36 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
-import parse from "html-react-parser";
-import { HiShoppingCart } from "react-icons/hi";
+import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import BDT from "@/utils/bdt";
+import { buyNow } from "@/utils/buy-now";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { useRouter } from "next/navigation";
-import { buyNow } from "@/utils/buy-now";
-import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
-import { HSlider } from "./slider";
-import BDT from "@/utils/bdt";
-import Rate from "@/utils/rate";
-import CallForPrice from "@/utils/call-for-price";
 import ImageModal from "@/utils/image-modal";
+import Rate from "@/utils/rate";
+import parse from "html-react-parser";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { HiShoppingCart } from "react-icons/hi";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { HSlider } from "./slider";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
 
   // select variant state
@@ -63,9 +67,6 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
       // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setColor(null);
       setUnit(null);
       setSize(null);
@@ -85,7 +86,7 @@ const Details = ({ data, children }: any) => {
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />

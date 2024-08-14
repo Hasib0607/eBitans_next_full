@@ -110,7 +110,7 @@ const Finding = ({ setPage, setUser }: any) => {
           className="text-left py-3 px-8 w-28 rounded-md text-gray-400"
           style={{
             backgroundColor: design?.header_color,
-            color: design.text_color,
+            color: design?.text_color,
           }}
         >
           Loading
@@ -184,7 +184,7 @@ const Verifying = ({ setPage, setUser, user }: any) => {
             className="text-left py-3 px-8 w-28 rounded-md text-gray-400"
             style={{
               backgroundColor: design?.header_color,
-              color: design.text_color,
+              color: design?.text_color,
             }}
           >
             Loading
@@ -294,7 +294,7 @@ const Changeing = ({ setPage, setUser, user }: any) => {
             className="text-left py-3 px-8 w-28 rounded-md text-gray-400"
             style={{
               backgroundColor: design?.header_color,
-              color: design.text_color,
+              color: design?.text_color,
             }}
           >
             Loading

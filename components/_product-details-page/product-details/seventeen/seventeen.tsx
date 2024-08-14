@@ -12,36 +12,29 @@ import Arrow from "@/utils/arrow";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card31 from "@/components/card/card31";
 import useTheme from "@/hooks/use-theme";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import { useQuery } from "@tanstack/react-query";
 
-const Seventeen = ({ data }: any) => {
-  const { store_id } = useTheme();
+const Seventeen = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-17"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState<any>([]);
-  const [reviews, setReview] = useState<any>([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-17"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-17"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq.post("related-product", { id: data?.product_id }).then((res) => {
-      if (!res?.error) {
-        setRelatedProduct(res);
-      }
-    });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <>
@@ -51,9 +44,13 @@ const Seventeen = ({ data }: any) => {
             <h1 className="text-5xl font-medium text-white">Products</h1>
           </div>
           <div className="flex gap-1 items-center">
-            <p className="text-white">{productDetails?.category}</p>
+            <p className="text-white">
+              {productDetailsData?.product?.category}
+            </p>
             <IoIosArrowForward className="text-xs mt-1 text-white" />
-            <p className="font-medium text-white">{productDetails?.name}</p>
+            <p className="font-medium text-white">
+              {productDetailsData?.product?.name}
+            </p>
           </div>
         </div>
         <div className="bg-image-details absolute bottom-0"></div>
@@ -61,7 +58,13 @@ const Seventeen = ({ data }: any) => {
       </div>
       <div className="container mx-auto">
         <div className="xl:mx-80 mx-5">
-          <Details data={data} />
+          <Details
+            fetchStatus={fetchStatus}
+            product={product}
+            variant={variant}
+            vrcolor={vrcolor}
+            data={data}
+          />
         </div>
       </div>
       <div className="py-14">
@@ -92,7 +95,7 @@ const Seventeen = ({ data }: any) => {
                 <div className="p-5">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: productDetails?.description,
+                      __html: productDetailsData?.product?.description,
                     }}
                     className="apiHtml"
                   ></div>
@@ -102,23 +105,17 @@ const Seventeen = ({ data }: any) => {
                 <div className="border-b mx-5">
                   <SectionHeadingSeventeen text={"Customer Reviews"} />
                 </div>
-                {reviews.length === 0 ? (
-                  <div className="flex flex-1 justify-center items-center">
-                    <h3 className="text-xl font-sans font-bold py-10">
-                      No Found Review
-                    </h3>
-                  </div>
-                ) : (
-                  reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))
-                )}
+                {reviews?.error
+                  ? reviews?.error
+                  : reviews?.map((item: any) => (
+                      <UserReview key={item?.id} review={item} />
+                    ))}
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>
         </div>
       </div>
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </>
   );
 };

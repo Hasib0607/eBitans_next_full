@@ -14,38 +14,31 @@ import SectionHeadingTwentyNine from "@/components/section-heading/section-headi
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import DefaultSlider from "@/components/slider/default-slider";
 import Card53 from "@/components/card/card53";
+import { useQuery } from "@tanstack/react-query";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 
-const TwentyNine = ({ data }: any) => {
+const TwentyNine = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-29"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-29"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res: any) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-29"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("get/review", data).then((res: any) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq
-      .post("related-product", { id: data?.product_id })
-      .then((res: any) => {
-        if (!res?.error) {
-          setRelatedProduct(res);
-        }
-      });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   const styleCss = `
     .active-des-review {
@@ -63,12 +56,18 @@ const TwentyNine = ({ data }: any) => {
           <p>Home</p>
         </Link>
         <RiArrowRightSLine />
-        <p>{productDetails?.category}</p>
+        <p>{productDetailsData?.product?.category}</p>
         <RiArrowRightSLine />
-        <p>{productDetails?.name}</p>
+        <p>{productDetailsData?.product?.name}</p>
       </div>
       <style>{styleCss}</style>
-      <Details data={data} />
+      <Details
+        fetchStatus={fetchStatus}
+        product={product}
+        variant={variant}
+        vrcolor={vrcolor}
+        data={data}
+      />
 
       {/* ************************ tab component start ***************************** */}
       <div className="mt-14 border-b pb-10">
@@ -98,19 +97,21 @@ const TwentyNine = ({ data }: any) => {
               <div className="p-5 ">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: productDetails?.description,
+                    __html: productDetailsData?.product?.description,
                   }}
                   className="apiHtml"
                 ></div>
               </div>
             </Tab.Panel>
             <Tab.Panel>
-              {reviews.length === 0 ? (
+              {reviews?.length === 0 ? (
                 <div className="flex flex-1 justify-center items-center p-5">
                   <h3 className="text-xl font-sans font-bold">
                     No Found Review
                   </h3>
                 </div>
+              ) : reviews?.error ? (
+                reviews?.error
               ) : (
                 reviews?.map((item: any) => (
                   <UserReview key={item?.id} review={item} />
@@ -121,7 +122,7 @@ const TwentyNine = ({ data }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
-      <Related product={relatedProduct} />
+      <Related product={relatedProducts} />
     </div>
   );
 };

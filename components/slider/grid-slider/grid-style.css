@@ -1,4 +1,3 @@
-
 .swiperjs {
   width: 100%;
   height: 400px;
@@ -23,7 +22,6 @@
   -webkit-align-items: center;
   align-items: center;
 }
-
 
 .swiperjs_grid_two {
   height: calc((100% - 30px) / 2) !important;

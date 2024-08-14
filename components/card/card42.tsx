@@ -186,8 +186,8 @@ const Card42 = ({ item }: any) => {
               {store_id === 1187
                 ? "অর্ডার করুন"
                 : store_id === 2669
-                ? "Buy Now"
-                : "Add to Cart"}
+                  ? "Buy Now"
+                  : "Add to Cart"}
             </div>
           </div>
         </div>

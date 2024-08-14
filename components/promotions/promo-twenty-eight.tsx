@@ -69,12 +69,12 @@ const PromoTwentyEight = ({ nextEl, prevEl, banner }: any) => {
                     index === 0
                       ? "bg-[#F8F6E3]"
                       : index === 1
-                      ? "bg-[#FEF2F2]"
-                      : index === 2
-                      ? "bg-[#EFF6FF]"
-                      : index === 3
-                      ? "bg-[#F0FDF4]"
-                      : null
+                        ? "bg-[#FEF2F2]"
+                        : index === 2
+                          ? "bg-[#EFF6FF]"
+                          : index === 3
+                            ? "bg-[#F0FDF4]"
+                            : null
                   }`}
                 >
                   <div className="relative">

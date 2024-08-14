@@ -11,7 +11,7 @@ import { useEffect, useState } from "react";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/four/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card59 = ({ item }: any) => {

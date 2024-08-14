@@ -15,7 +15,7 @@ import Taka from "@/utils/taka";
 import QuikView from "../quick-view";
 import Details from "../_product-details-page/product-details/three/details";
 
-const Card57 = ({ item }:any) => {
+const Card57 = ({ item }: any) => {
   const { store_id, makeid } = useTheme();
   const [camp, setCamp] = useState<any>(null);
 
@@ -27,13 +27,11 @@ const Card57 = ({ item }:any) => {
     item.discount_price,
     item.discount_type
   );
-  const campPrice = 
-    getPrice(
-      productGetPrice,
-      parseInt(camp?.discount_amount),
-      camp?.discount_type
-    )
-
+  const campPrice = getPrice(
+    productGetPrice,
+    parseInt(camp?.discount_amount),
+    camp?.discount_type
+  );
 
   useEffect(() => {
     async function handleCampaign() {
@@ -50,7 +48,7 @@ const Card57 = ({ item }:any) => {
     handleCampaign();
   }, [item, store_id]);
 
-  const filterOfferProduct = (item:any) => {
+  const filterOfferProduct = (item: any) => {
     let cartItem = {};
     let productDetails = {
       id: item?.id,
@@ -63,20 +61,17 @@ const Card57 = ({ item }:any) => {
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
-        let itemRegularPrice = 
-          getPrice(
-            item?.regular_price,
-            item?.discount_price,
-            item?.discount_type
-          )
-        
-        let campaignPrice = 
-          getPrice(
-            itemRegularPrice,
-            parseInt(res?.discount_amount),
-            res?.discount_type
-          )
-        
+        let itemRegularPrice = getPrice(
+          item?.regular_price,
+          item?.discount_price,
+          item?.discount_type
+        );
+
+        let campaignPrice = getPrice(
+          itemRegularPrice,
+          parseInt(res?.discount_amount),
+          res?.discount_type
+        );
 
         cartItem = {
           cartId: makeid(100),
@@ -130,7 +125,7 @@ const Card57 = ({ item }:any) => {
           <div className="w-auto h-full">
             <img
               className="h-[190px] w-auto scale-110"
-              src={productImg  + item.image[0]}
+              src={productImg + item.image[0]}
               alt="Mountain"
             />
           </div>

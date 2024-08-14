@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { HiShoppingCart } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/eighteen/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card66 = ({ item }: any) => {

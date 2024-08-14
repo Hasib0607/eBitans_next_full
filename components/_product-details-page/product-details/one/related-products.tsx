@@ -10,9 +10,9 @@ const RelatedProducts = ({ product }: any) => {
         </h4>
       </div>
       <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl2:grid-cols-5 xl:grid-cols-6 gap-2">
-        {product?.slice(0, 6).map((p: any) => (
-          <ProductCardOne key={p?.id} item={p} />
-        ))}
+        {product
+          ?.slice(0, 6)
+          .map((p: any) => <ProductCardOne key={p?.id} item={p} />)}
       </div>
     </div>
   );

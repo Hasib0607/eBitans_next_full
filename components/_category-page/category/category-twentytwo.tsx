@@ -50,8 +50,8 @@ const CategoryTwentyTwo = () => {
 
   const styleCss = `
     .grid-active {
-      color:  ${design?.header_color};
-      border: 1px solid ${design?.header_color};
+      color:  ${design.header_color};
+      border: 1px solid ${design.header_color};
   }
  `;
 

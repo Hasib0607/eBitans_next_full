@@ -19,7 +19,6 @@ import {
 import Link from "next/link";
 import httpReq from "@/utils/http/axios/http.service";
 
-
 const TwentyEight = ({ data }: any) => {
   const { category, design, module } = useTheme();
 
@@ -49,8 +48,6 @@ const TwentyEight = ({ data }: any) => {
         border-bottom: 2px solid ${design?.header_color};
     }
  `;
-
-
 
   return (
     <div>
@@ -174,7 +171,7 @@ const Product = ({
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${"siam.localhost:3000"}&filter=${sort}&priceFilter=${
+      }&name=${window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );
@@ -305,7 +302,7 @@ const Product = ({
                   exit={{ scale: 0 }}
                   transition={{ duration: 0.5, ease: "linear" }}
                 >
-                  <Card58  item={item} />
+                  <Card58 item={item} />
                 </motion.div>
               ))}
             </div>

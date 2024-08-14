@@ -1,15 +1,15 @@
 "use client";
-import React, { useEffect } from "react";
-import LoginOne from "./sign-in/signin-one";
-import LoginFour from "./sign-in/signin-four";
-import LoginSeven from "./sign-in/signin-seven";
-import LoginFive from "./sign-in/signin-five";
-import LoginEleven from "./sign-in/signin-eleven";
-import LoginTwentyOne from "./sign-in/signin-twentyone";
-import LoginTwentyNine from "./sign-in/signin-twentynine";
-import { useSelector } from "react-redux";
-import { useRouter } from "next/navigation";
 import useTheme from "@/hooks/use-theme";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import LoginEleven from "./sign-in/signin-eleven";
+import LoginFive from "./sign-in/signin-five";
+import LoginFour from "./sign-in/signin-four";
+import LoginOne from "./sign-in/signin-one";
+import LoginSeven from "./sign-in/signin-seven";
+import LoginTwentyNine from "./sign-in/signin-twentynine";
+import LoginTwentyOne from "./sign-in/signin-twentyone";
 
 const themeMapping: any = {
   default: LoginOne,

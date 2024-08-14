@@ -1,33 +1,37 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { IoMdCart } from "react-icons/io";
-import { TiTickOutline } from "react-icons/ti";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { useRouter } from "next/navigation";
-import { buyNow } from "@/utils/buy-now";
+import BookingForm from "@/components/booking-form";
 import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
+import QuikView from "@/components/quick-view";
+import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
-import CallForPrice from "@/utils/call-for-price";
-import QuikView from "@/components/quick-view";
-import BookingForm from "@/components/booking-form";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { bookNow } from "@/utils/book-now";
+import { buyNow } from "@/utils/buy-now";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { IoMdCart } from "react-icons/io";
+import { TiTickOutline } from "react-icons/ti";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const { makeid, store_id, headerSetting, design, bookingData } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
   const [openBooking, setOpenBooking] = useState<any>(false);
 
@@ -63,10 +67,6 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setColor(null);
       setSize(null);
       setUnit(null);
@@ -361,6 +361,14 @@ const Details = ({ data, children }: any) => {
 
   const buttonSeven =
     "w-full lg:w-96 flex items-center gap-2 rounded-md text-center py-3 justify-center lg:cursor-pointer cart-btn-thirty-seven";
+
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <OvalLoader />
+      </div>
+    );
+  }
 
   return (
     <div className="pt-5 pb-20">

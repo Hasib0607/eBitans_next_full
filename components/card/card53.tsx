@@ -16,7 +16,7 @@ import { BsEye } from "react-icons/bs";
 import { FaCartPlus } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/eight/details";
+import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card53 = ({ item }: any) => {

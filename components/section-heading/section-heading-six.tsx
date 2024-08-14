@@ -5,9 +5,9 @@ interface Props {
 
 const SectionHeadingSix = ({ title, subtitle }: Props) => {
   return (
-    <div className='container space-y-2 mb-3'>
-      <h3 className='text-[22px] font-semibold'>{title}</h3>
-      <p className='text-lg font-sans text-gray-500'>{subtitle}</p>
+    <div className="container space-y-2 mb-3">
+      <h3 className="text-[22px] font-semibold">{title}</h3>
+      <p className="text-lg font-sans text-gray-500">{subtitle}</p>
     </div>
   );
 };

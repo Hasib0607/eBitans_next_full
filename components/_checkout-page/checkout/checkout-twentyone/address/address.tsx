@@ -203,16 +203,18 @@ const Address = ({
                   </div>
                 ) : (
                   <div className="grid xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
-                    {address?.slice(0, 4).map((item: any) => (
-                      <Single
-                        token={token}
-                        item={item}
-                        key={item?.id}
-                        selectAddress={selectAddress}
-                        setSelectAddress={setSelectAddress}
-                        setCall={setCall}
-                      />
-                    ))}
+                    {address
+                      ?.slice(0, 4)
+                      .map((item: any) => (
+                        <Single
+                          token={token}
+                          item={item}
+                          key={item?.id}
+                          selectAddress={selectAddress}
+                          setSelectAddress={setSelectAddress}
+                          setCall={setCall}
+                        />
+                      ))}
                   </div>
                 )}
               </div>
@@ -294,14 +296,14 @@ const Single = ({
           selectAddress?.id === item?.id
             ? design?.header_color
             : design?.template_id === "34"
-            ? "#000"
-            : "#fff",
+              ? "#000"
+              : "#fff",
         color:
           selectAddress?.id === item?.id
             ? design?.text_color
             : design?.template_id === "34"
-            ? "#fff"
-            : "#000",
+              ? "#fff"
+              : "#000",
       }}
       className={`border border-gray-300 p-5 rounded space-y-2 w-full transition-colors duration-300 relative`}
     >

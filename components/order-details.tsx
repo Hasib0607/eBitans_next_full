@@ -1,8 +1,7 @@
-import React from "react";
-import OrderDetails from "./dashboard/dashboard-seven/order-details";
+import OrderDetailsSeven from "@/app/profile/order/order-details-seven";
 
 const OrderDetailsComponent = () => {
-  return <OrderDetails />;
+  return <OrderDetailsSeven />;
 };
 
 export default OrderDetailsComponent;

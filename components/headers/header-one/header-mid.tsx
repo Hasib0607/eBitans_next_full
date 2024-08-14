@@ -13,6 +13,7 @@ import {
   TableCellsIcon,
   Bars4Icon,
 } from "@heroicons/react/24/outline";
+import { logout } from "@/redux/features/auth.slice";
 
 export default function HeaderMid() {
   const { menu, headerSetting, category, design } = useTheme();
@@ -20,9 +21,9 @@ export default function HeaderMid() {
 
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
-  //   const logOut = () => {
-  //     dispatch(logout());
-  //   };
+  // const logOut = () => {
+  //   dispatch(logout());
+  // };
 
   const classes = `
    .group:hover .phn{
@@ -66,7 +67,7 @@ export default function HeaderMid() {
           ) : (
             <div className="col-span-1 flex md:hidden justify-center  items-center">
               <div className=" h-[45px] w-auto overflow-hidden">
-                <Link href="/"> {headerSetting?.website_name}</Link>
+                <Link href="/"> {headerSetting?.website_name} </Link>
               </div>
             </div>
           )}
@@ -213,7 +214,7 @@ const SingleMenuItem = ({ item, category }: any) => {
         </MultiStep>
       ) : (
         <Link
-          href={`/${item.url}`}
+          href={item?.url ? `/${item?.url}` : "/"}
           className="text-base font-medium text-gray-500 hoverText"
         >
           {item.name}

@@ -46,7 +46,7 @@ const Slider1 = ({
         nextEl: `.${nextEl}`,
       }}
       breakpoints={breakpoints}
-      className='mySwiper'
+      className="mySwiper"
     >
       {children}
     </Swiper>

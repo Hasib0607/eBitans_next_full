@@ -1,34 +1,38 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { HiMinus, HiPlus } from "react-icons/hi";
-import { toast } from "react-toastify";
-import parse from "html-react-parser";
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  WhatsappShareButton,
-  WhatsappIcon,
-} from "react-share";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
 import OvalLoader from "@/components/loader/oval-loader";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { getPrice } from "@/utils/get-price";
+import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
-import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
+import parse from "html-react-parser";
+import { useEffect, useState } from "react";
+import { HiMinus, HiPlus } from "react-icons/hi";
+import { useDispatch } from "react-redux";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
+import { toast } from "react-toastify";
 
-const Details = ({ data, children }: any) => {
+const Details = ({
+  data,
+  product,
+  variant,
+  vrcolor,
+  fetchStatus,
+  children,
+}: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
 
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>([]);
   const [filterV, setFilterV] = useState<any>([]);
-  const [vrcolor, setVrcolor] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
 
   // select variant state
@@ -38,7 +42,7 @@ const Details = ({ data, children }: any) => {
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
 
-  const sizeV = variant.find((item: any) => item?.size !== null);
+  const sizeV = variant?.find((item: any) => item?.size !== null);
 
   // console.log(filterV, "VA");
 
@@ -63,10 +67,6 @@ const Details = ({ data, children }: any) => {
         setCamp(null);
       }
 
-      // set state with the result
-      setProduct(product);
-      setVariant(variant);
-      setVrcolor(vrcolor);
       setColor(null);
       setUnit(null);
       setSize(null);
@@ -77,9 +77,9 @@ const Details = ({ data, children }: any) => {
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
+  }, [data, store_id, fetchStatus]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
@@ -377,9 +377,12 @@ const Details = ({ data, children }: any) => {
           </p>
 
           {/* unit  */}
-          {!vrcolor && variant?.length !== 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
-          )}
+          {!vrcolor &&
+            variant?.length !== 0 &&
+            variant?.length > 0 &&
+            variant[0]?.unit && (
+              <Units unit={unit} setUnit={setUnit} variant={variant} />
+            )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
             <>
@@ -392,7 +395,7 @@ const Details = ({ data, children }: any) => {
               />
             </>
           )}
-          {filterV[0]?.size && vrcolor && (
+          {filterV && filterV[0]?.size && vrcolor && (
             <Sizes size={size} setSize={setSize} variant={filterV} />
           )}
           {/* color only  */}

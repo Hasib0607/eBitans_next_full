@@ -1,26 +1,26 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import parse from "html-react-parser";
-import { Swiper, SwiperSlide } from "swiper/react";
+import BookingForm from "@/components/booking-form";
+import QuikView from "@/components/quick-view";
+import SkeletonWrapper from "@/components/skeleton-wrapper";
 import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import { bookNow } from "@/utils/book-now";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { bookNow } from "@/utils/book-now";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
-import { Autoplay, Pagination } from "swiper/modules";
-import { productImg } from "@/site-settings/siteUrl";
-import { HSlider } from "../twenty-three/slider";
-import BDT from "@/utils/bdt";
-import CallForPrice from "@/utils/call-for-price";
-import QuikView from "@/components/quick-view";
-import BookingForm from "@/components/booking-form";
-import Link from "next/link";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { toast } from "react-toastify";
+import parse from "html-react-parser";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
-import SkeletonWrapper from "@/components/skeleton-wrapper";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { Autoplay, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { HSlider } from "../twenty-three/slider";
 
 const Details = ({
   data,
@@ -30,7 +30,7 @@ const Details = ({
   variant,
   vrcolor,
   product,
-  fetchStatus
+  fetchStatus,
 }: any) => {
   const { makeid, store_id, headerSetting, bookingData } = useTheme();
   const dispatch = useDispatch();
@@ -59,6 +59,8 @@ const Details = ({
 
       const response = await getCampaignProduct(product, store_id);
 
+      console.log(response, "response");
+
       if (!response?.error) {
         setCamp(response);
       } else {
@@ -75,7 +77,7 @@ const Details = ({
     fetchData()
       // make sure to catch any error
       .catch(console.error);
-  }, [data, store_id]);
+  }, [data, store_id, fetchStatus]);
 
   const bookNowBtn = () => {
     bookNow(variant, size, color, unit, filterV, setOpenBooking, openBooking);
@@ -105,10 +107,9 @@ const Details = ({
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
-      store_id
+      store_id,
     };
 
-    console.log(productDetails, "pd");
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
         if (variant?.length) {
@@ -122,15 +123,18 @@ const Details = ({
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
                 ...unit,
-                ...product
+                ...product,
               })
             );
 
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
-          } else if (size && filterV) {
+          }
+
+          // size and color also with offer
+          else if (size && filterV) {
             dispatch(
               addToCartList({
                 cartId: makeid(100),
@@ -139,15 +143,18 @@ const Details = ({
                 variant_quantity: size?.quantity,
                 variantId: size.id,
                 ...size,
-                ...product
+                ...product,
               })
             );
 
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
-          } else if (color && filterV.length === 0) {
+          }
+
+          // color with offer
+          else if (color && filterV.length === 0) {
             dispatch(
               addToCartList({
                 cartId: makeid(100),
@@ -156,22 +163,25 @@ const Details = ({
                 variant_quantity: color?.quantity,
                 variantId: color.id,
                 ...color,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
-          } else if (filterV.length === 0) {
+          }
+
+          // alert variant add
+          else if (filterV.length === 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           } else if (filterV.length > 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
         } else {
@@ -185,12 +195,12 @@ const Details = ({
               additional_price: null,
               volume: null,
               unit: null,
-              ...product
+              ...product,
             })
           );
           toast("Successfully you added to cart", {
             type: "success",
-            autoClose: 1000
+            autoClose: 1000,
           });
         }
       } else {
@@ -205,14 +215,16 @@ const Details = ({
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
                 ...unit,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
-          } else if (size && filterV) {
+          }
+          // size with regular price
+          else if (size && filterV) {
             dispatch(
               addToCartList({
                 cartId: makeid(100),
@@ -221,14 +233,16 @@ const Details = ({
                 variant_quantity: size?.quantity,
                 variantId: size.id,
                 ...size,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
-          } else if (color && !size && filterV.length === 0) {
+          }
+          // color with regular price
+          else if (color && !size && filterV.length === 0) {
             dispatch(
               addToCartList({
                 cartId: makeid(100),
@@ -237,22 +251,25 @@ const Details = ({
                 variant_quantity: color?.quantity,
                 variantId: color.id,
                 ...color,
-                ...product
+                ...product,
               })
             );
             toast("Successfully you added to cart", {
               type: "success",
-              autoClose: 1000
+              autoClose: 1000,
             });
-          } else if (filterV.length === 0) {
+          }
+
+          // alert for variant
+          else if (filterV.length === 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           } else if (filterV.length > 0) {
             toast("Please Select Variant", {
               type: "warning",
-              autoClose: 1000
+              autoClose: 1000,
             });
           }
         } else {
@@ -266,12 +283,12 @@ const Details = ({
               additional_price: null,
               volume: null,
               unit: null,
-              ...product
+              ...product,
             })
           );
           toast("Successfully you added to cart", {
             type: "success",
-            autoClose: 1000
+            autoClose: 1000,
           });
         }
       }

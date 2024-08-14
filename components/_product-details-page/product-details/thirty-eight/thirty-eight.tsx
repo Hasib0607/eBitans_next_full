@@ -1,52 +1,40 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { SwiperSlide } from "swiper/react";
-import Details from "./details";
+import Card65 from "@/components/card/card65";
+import SectionHeadingFive from "@/components/section-heading/section-heading-five";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
-import useTheme from "@/hooks/use-theme";
 import Link from "next/link";
 import { AiOutlineHome } from "react-icons/ai";
-import httpReq from "@/utils/http/axios/http.service";
-import { FacebookShareButton, WhatsappShareButton } from "react-share";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingFive from "@/components/section-heading/section-heading-five";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
-import Card65 from "@/components/card/card65";
+import { FacebookShareButton, WhatsappShareButton } from "react-share";
+import { SwiperSlide } from "swiper/react";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
-const ThirtyEight = ({ data }: any) => {
-  const { store_id } = useTheme();
+const ThirtyEight = ({ data, updatedData }: any) => {
+  const { data: productDetailsData, fetchStatus } = useQuery({
+    queryKey: ["pd-38"],
+    queryFn: () => getProductDetails(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  const [relatedProduct, setRelatedProduct] = useState([]);
-  const [reviews, setReview] = useState([]);
-  const [productDetails, setProductDetails] = useState<any>([]);
+  const { data: relatedProducts } = useQuery({
+    queryKey: ["rp-38"],
+    queryFn: () => getRelatedProducts(updatedData?.product_id),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-  useEffect(() => {
-    data["store_id"] = store_id;
+  const { data: reviews } = useQuery({
+    queryKey: ["rv-38"],
+    queryFn: () => getReviews(updatedData),
+    enabled: !!updatedData.slug && !!updatedData.store_id,
+  });
 
-    httpReq.post("product-details", data).then((res: any) => {
-      if (!res?.error) {
-        setProductDetails(res?.product);
-      }
-    });
-
-    httpReq.post("get/review", data).then((res) => {
-      if (!res?.error) {
-        setReview(res);
-      } else {
-        setReview([]);
-      }
-    });
-    httpReq
-      .post("related-product", { id: data?.product_id })
-      .then((res: any) => {
-        if (!res?.error) {
-          setRelatedProduct(res);
-        }
-      });
-  }, [data, store_id]);
+  const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
     <div className="">
@@ -58,10 +46,12 @@ const ThirtyEight = ({ data }: any) => {
             </Link>
             <p className="truncate">
               {" "}
-              <Link href={"/category/" + productDetails?.category_id}>
-                {productDetails?.category}
+              <Link
+                href={"/category/" + productDetailsData?.product?.category_id}
+              >
+                {productDetailsData?.product?.category}
               </Link>
-              {productDetails?.name}
+              {productDetailsData?.product?.name}
             </p>
           </div>
           <div className="shadow-2xl rounded-full mt-4 py-2 px-5">
@@ -81,7 +71,13 @@ const ThirtyEight = ({ data }: any) => {
       </div>
       <div className="">
         <section>
-          <Details data={data} />
+          <Details
+            fetchStatus={fetchStatus}
+            data={data}
+            product={product}
+            vrcolor={vrcolor}
+            variant={variant}
+          />
         </section>
 
         {/* ************************ tab component start ***************************** */}
@@ -93,17 +89,12 @@ const ThirtyEight = ({ data }: any) => {
                   Reviews
                 </h2>
               </div>
-              {reviews.length === 0 ? (
-                <div className="flex flex-1 justify-center items-center">
-                  <h3 className="text-xl font-sans font-bold py-5">
-                    No Found Review
-                  </h3>
-                </div>
-              ) : (
-                reviews?.map((item: any) => (
-                  <UserReview key={item?.id} review={item} />
-                ))
-              )}
+
+              {reviews?.error
+                ? reviews?.error
+                : reviews?.map((item: any) => (
+                    <UserReview key={item?.id} review={item} />
+                  ))}
             </div>
             <div className="bg-white px-5 mb-5 rounded-md border">
               <div className="relative mt-5">
@@ -114,7 +105,7 @@ const ThirtyEight = ({ data }: any) => {
               <div className="my-5">
                 <div
                   dangerouslySetInnerHTML={{
-                    __html: productDetails?.description,
+                    __html: productDetailsData?.product?.description,
                   }}
                   className="apiHtml"
                 ></div>
@@ -123,7 +114,7 @@ const ThirtyEight = ({ data }: any) => {
           </div>
         </section>
         {/* ************************ tab component end ***************************** */}
-        <Related product={relatedProduct} />
+        <Related product={relatedProducts} />
       </div>
     </div>
   );

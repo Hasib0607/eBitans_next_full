@@ -15,9 +15,11 @@ const ProductFive = ({ product, store_id }: any) => {
         />
         <div className="flex justify-center mt-10">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 lg:grid-cols-3 xl:grid-cols-4 justify-center">
-            {product?.slice(0, 12).map((item: any, id: any) => (
-              <Card5 item={item} key={id} store_id={store_id} />
-            ))}
+            {product
+              ?.slice(0, 12)
+              .map((item: any, id: any) => (
+                <Card5 item={item} key={id} store_id={store_id} />
+              ))}
           </div>
         </div>
       </div>

@@ -4,10 +4,12 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { mobile, location, logoutIcon, userIcon } from "@/assets/svg";
 import Link from "next/link";
+import { logout } from "@/redux/features/auth.slice";
 
 const HeaderTop = () => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
+
   // const logOut = () => {
   //   dispatch(logout());
   // };
@@ -31,11 +33,7 @@ const HeaderTop = () => {
 
         <div className="flex items-center gap-x-4">
           {isLoggedIn ? (
-            <div
-              className="lg:cursor-pointer"
-
-              // onClick={() => logOut()}
-            >
+            <div className="lg:cursor-pointer" onClick={() => logout()}>
               <HeaderTopMenu icon={logoutIcon} doc={"Logout"} />
             </div>
           ) : (

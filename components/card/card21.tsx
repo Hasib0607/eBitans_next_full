@@ -1,4 +1,3 @@
-"use client";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -13,16 +12,14 @@ import { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { v4 as uuidv4 } from "uuid";
 import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
-const Card21 = ({ item, design, store_id }: any) => {
-  const router = useRouter();
-  const [open, setOpen] = useState(false);
 
-  const { makeid } = useTheme();
+const Card21 = ({ item }: any) => {
+  const [open, setOpen] = useState(false);
   const [camp, setCamp] = useState<any>(null);
 
+  const { design, store_id, makeid } = useTheme();
   const dispatch = useDispatch();
 
   const productGetPrice = getPrice(
@@ -39,7 +36,7 @@ const Card21 = ({ item, design, store_id }: any) => {
   useEffect(() => {
     async function handleCampaign() {
       try {
-        const response: any = await getCampaignProduct(item, store_id);
+        const response = await getCampaignProduct(item, store_id);
         if (!response?.error) {
           setCamp(response);
         } // the API response object
@@ -62,7 +59,7 @@ const Card21 = ({ item, design, store_id }: any) => {
       autoClose: 1000,
     });
 
-    httpReq.post("get/offer/product", productDetails).then((res: any) => {
+    httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
         let itemRegularPrice = getPrice(
           item?.regular_price,
@@ -77,7 +74,7 @@ const Card21 = ({ item, design, store_id }: any) => {
 
         if (res?.discount_amount === null) {
           cartItem = {
-            cartId: uuidv4(),
+            cartId: makeid(100),
             price: itemRegularPrice,
             color: null,
             size: null,
@@ -88,7 +85,7 @@ const Card21 = ({ item, design, store_id }: any) => {
           };
         } else {
           cartItem = {
-            cartId: uuidv4(),
+            cartId: makeid(100),
             price: campaignPrice,
             color: null,
             size: null,
@@ -100,7 +97,7 @@ const Card21 = ({ item, design, store_id }: any) => {
         }
       } else {
         cartItem = {
-          cartId: uuidv4(),
+          cartId: makeid(100),
           price: productGetPrice,
           color: null,
           size: null,
@@ -114,8 +111,9 @@ const Card21 = ({ item, design, store_id }: any) => {
     });
   };
 
+  const router = useRouter();
+
   const addBtn = (item: any) => {
-    console.log("products added");
     if (item?.variant.length !== 0) {
       setOpen(!open);
     } else {
@@ -160,7 +158,7 @@ const Card21 = ({ item, design, store_id }: any) => {
             />
           </Link>
           <div
-            className="absolute top-1/2 -translate-y-1/2 rounded-xl hidden group-hover:flex h-[60px] px-3 left-1/2 -translate-x-1/2  justify-start items-center hover:border hover:border-green-700 hover:rounded-full "
+            className="absolute top-1/2 -translate-y-1/2 rounded-xl hidden group-hover:flex h-[60px] px-3 left-1/2 -translate-x-1/2  justify-start items-center bg-white"
             onClick={() => setOpen(!open)}
           >
             <AiOutlineEye

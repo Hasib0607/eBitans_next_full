@@ -233,8 +233,8 @@ const Card23 = ({ item }: any) => {
                 {camp?.status === "active"
                   ? campPrice
                   : store_id === 2109
-                  ? productGetPrice
-                  : price}
+                    ? productGetPrice
+                    : price}
               </div>
               {camp?.status !== "active" &&
               (item.discount_type === "no_discount" ||

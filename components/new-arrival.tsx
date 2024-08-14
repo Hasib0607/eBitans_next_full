@@ -48,15 +48,6 @@ import NewArrivalProductTwentyThree from "./new-arrival/new-arrival-product-twen
 import NewArrivalProductTwentyTwo from "./new-arrival/new-arrival-product-twentytwo";
 
 const NewArrival = ({ product, theme, design, store_id, category }: any) => {
-
-  return   <NewArrivalProductThirtySeven
-  product={product}
-  store_id={store_id}
-  design={design}
-/>
-
-
- 
   return (
     <>
       {theme === "default" && <NewArrivalProductFive product={product} />}
