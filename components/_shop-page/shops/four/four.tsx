@@ -36,7 +36,7 @@ const Four = ({ data }: any) => {
             ? pageShop
             : `?page=${pageShop}`
           : `?page=1`
-      }&name=${"siam.localhost:3000"}`
+      }&name=${window.location.host}`
     );
 
     if (error) {
