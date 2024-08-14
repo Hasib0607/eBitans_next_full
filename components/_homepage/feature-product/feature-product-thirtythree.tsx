@@ -17,20 +17,20 @@ const FeatureProductThirtyThree = ({
   const styleCss = `
    
     .new-product-prev {
-        color:  ${design.header_color};
-        border: 1px solid ${design.header_color};
+        color:  ${design?.header_color};
+        border: 1px solid ${design?.header_color};
     }
       .new-product-next{
-          color:  ${design.header_color};
-          border: 1px solid ${design.header_color};
+          color:  ${design?.header_color};
+          border: 1px solid ${design?.header_color};
     }
       .new-product-prev:hover {
         color:  ${design.text_color};
-        background: ${design.header_color};
+        background: ${design?.header_color};
     }
       .new-product-next:hover {
         color:  ${design.text_color};
-        background: ${design.header_color};
+        background: ${design?.header_color};
     }
     .arrow-hov:hover .arrow {
       opacity:1;

@@ -46,8 +46,8 @@ const TwentyOne = ({ data }: any) => {
 
   const styleCss = `
     .active-des-review {
-      color:  ${design.header_color};
-      text-decoration-color: ${design.header_color};
+      color:  ${design?.header_color};
+      text-decoration-color: ${design?.header_color};
     }
     `;
 

@@ -16,11 +16,11 @@ const ProductSixteen = ({ product, design, store_id }: any) => {
   const styleCss = `
     .product-sixteen-prev:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
     .product-sixteen-next:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
 
   .arrow-hov:hover .arrow {

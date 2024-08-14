@@ -42,13 +42,13 @@ const HeaderFive = () => {
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 
   .menu-hover:hover {
-    color:  ${design.header_color};
+    color:  ${design?.header_color};
   }
   .active-menu {
-    color: ${design.header_color};
+    color: ${design?.header_color};
   }
   .sticky-menu {
-    background: ${design.header_color};
+    background: ${design?.header_color};
     color: ${design.text_color};
   }
   h1, h2, h3, h4, h5, h6, li, ul, a, p, span, button, option, select, input, div {

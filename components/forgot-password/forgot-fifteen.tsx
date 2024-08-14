@@ -369,7 +369,7 @@ const Changeing = ({ setPage, setUser, user }: any) => {
             value="Change Password"
             className={`w-full rounded-md font-semibold tracking-wider py-3 px-5 bg-black text-base text-white lg:cursor-pointer hover:bg-opacity-90 transition ${btnhover}`}
             style={{
-              backgroundColor: design.header_color,
+              backgroundColor: design?.header_color,
               color: design.text_color,
             }}
           />

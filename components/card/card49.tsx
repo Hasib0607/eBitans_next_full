@@ -57,7 +57,7 @@ const Card49 = ({ item }: any) => {
       }
     .bg-color {
         color:  ${design?.text_color};
-        background: ${design.header_color};
+        background: ${design?.header_color};
     }
   `;
 

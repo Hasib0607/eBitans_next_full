@@ -29,7 +29,7 @@ const CartPopUpFour = () => {
 
   return (
     <>
-      {design.store_id === "6227" ? (
+      {design?.store_id === "6227" ? (
         ""
       ) : (
         <>

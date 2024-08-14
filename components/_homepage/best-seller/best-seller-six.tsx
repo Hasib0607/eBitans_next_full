@@ -145,7 +145,7 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
                 <button
                   className="border py-2 px-6 mt-2 font-semibold font-six"
                   style={{
-                    background: design.header_color,
+                    background: design?.header_color,
                     color: design.text_color,
                   }}
                 >

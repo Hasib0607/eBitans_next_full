@@ -128,7 +128,7 @@ const Finding = ({ setPage, setUser }: any) => {
           value="Find"
           className={`text-center py-3 px-8 rounded-md  font-sans font-bold tracking-wider ${btnhover}`}
           style={{
-            backgroundColor: design.header_color,
+            backgroundColor: design?.header_color,
             color: design.text_color,
           }}
         />
@@ -198,7 +198,7 @@ const Verifying = ({ setPage, setUser, user }: any) => {
             value="Verify"
             className={`text-left py-3 px-8 rounded-md text-white font-sans font-bold tracking-wider ${btnhover}`}
             style={{
-              backgroundColor: design.header_color,
+              backgroundColor: design?.header_color,
               color: design.text_color,
             }}
           />
@@ -305,7 +305,7 @@ const Changeing = ({ setPage, setUser, user }: any) => {
             value="Submit"
             className={`py-3 px-8 rounded-md font-sans font-bold tracking-wider ${btnhover}`}
             style={{
-              backgroundColor: design.header_color,
+              backgroundColor: design?.header_color,
               color: design.text_color,
             }}
           />

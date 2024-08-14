@@ -28,11 +28,11 @@ const FeatureProductNine = ({ feature_product, design }: any) => {
     const styleCss = `
     .feature-product-prev:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
     .feature-product-next:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
  
     `

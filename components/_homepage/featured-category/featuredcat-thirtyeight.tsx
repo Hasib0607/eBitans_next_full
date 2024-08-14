@@ -9,11 +9,11 @@ const FeaturedThirtyEight = ({ category, design }: any) => {
   const styleCss = `
     .feature-category-prev:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
     .feature-category-next:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
  
     `;

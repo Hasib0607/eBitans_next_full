@@ -171,7 +171,7 @@ const VerifyOtpTwentyOne = () => {
                     ) : (
                       <input
                         style={{
-                          backgroundColor: design.header_color,
+                          backgroundColor: design?.header_color,
                           color: design.text_color,
                         }}
                         type="submit"

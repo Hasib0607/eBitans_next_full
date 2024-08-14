@@ -16,20 +16,20 @@ const FeatureProductTwentySix = ({
 
   const styleCss = `
     .feature-product-prev {
-      color:  ${design.header_color};
-      border: 1px solid ${design.header_color};
+      color:  ${design?.header_color};
+      border: 1px solid ${design?.header_color};
   }
     .feature-product-next{
-        color:  ${design.header_color};
-        border: 1px solid ${design.header_color};
+        color:  ${design?.header_color};
+        border: 1px solid ${design?.header_color};
   }
     .feature-product-prev:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
     .feature-product-next:hover {
       color:  ${design.text_color};
-      background: ${design.header_color};
+      background: ${design?.header_color};
   }
 
 

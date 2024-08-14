@@ -31,8 +31,8 @@ const ProductFourteen = ({ category, design, store_id }: any) => {
 
   const styleCss = `
     .active-cat {
-      color:  ${design.header_color};
-      border-bottom: 2px solid ${design.header_color};
+      color:  ${design?.header_color};
+      border-bottom: 2px solid ${design?.header_color};
       
   }
 
