@@ -46,7 +46,7 @@ const Details = ({
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
 
-  const sizeV = variant.find((item: any) => item.size !== null);
+  const sizeV = variant?.find((item: any) => item.size !== null);
 
   // console.log(filterV, "VA");
 
@@ -352,8 +352,8 @@ const Details = ({
             <BDT />
             {camp?.status === "active" ? campPrice : price}{" "}
             {camp?.status !== "active" &&
-            (product.discount_type === "no_discount" ||
-              product.discount_price === "0.00") ? (
+            (product?.discount_type === "no_discount" ||
+              product?.discount_price === "0.00") ? (
               " "
             ) : (
               <span className="text-gray-500 font-thin line-through text-xl font-seven">
@@ -368,7 +368,7 @@ const Details = ({
           </p>
           <div className="mt-5">
             {/* unit  */}
-            {!vrcolor && variant?.length !== 0 && variant[0]?.unit && (
+            {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
               <Units unit={unit} setUnit={setUnit} variant={variant} />
             )}
             {/* color and size  */}
@@ -383,7 +383,7 @@ const Details = ({
                 />
               </>
             )}
-            {filterV[0]?.size && vrcolor && (
+            {filterV?.size && vrcolor && (
               <Sizes size={size} setSize={setSize} variant={filterV} />
             )}
             {/* color only  */}

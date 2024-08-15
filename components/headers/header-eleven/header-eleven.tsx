@@ -55,7 +55,7 @@ const HeaderEleven = () => {
               {headerSetting?.logo === null ? (
                 <Link href="/">
                   <p className="text-xl uppercase">
-                    {headerSetting?.website_name}
+                    {headerSetting?.website_name} 
                   </p>
                 </Link>
               ) : (

@@ -1,5 +1,3 @@
-"use client";
-
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -9,27 +7,30 @@ import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Rate from "@/utils/rate";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../_product-details-page/product-details/three/details";
 
-const Card4 = ({ item, design, store_id }: any) => {
-  const { makeid } = useTheme();
+
+const Card4 = ({ item }:any) => {
   const [open, setOpen] = useState(false);
   const [camp, setCamp] = useState<any>(null);
 
+  const { design, store_id, makeid } = useTheme();
+
+  // console.log(camp, "v");
+
   const dispatch = useDispatch();
-  const router = useRouter();
 
   const styleCss = `
   .text-hover:hover {
     color:  ${design?.header_color};
   }
   .search:hover {
-    color:${design?.text_color};
+    color:${design.text_color};
     background:${design?.header_color};
   }
   .border-hover:hover {
@@ -41,7 +42,7 @@ const Card4 = ({ item, design, store_id }: any) => {
   useEffect(() => {
     async function handleCampaign() {
       try {
-        const response: any = await getCampaignProduct(item, store_id);
+        const response = await getCampaignProduct(item, store_id);
         if (!response?.error) {
           setCamp(response);
         }
@@ -58,13 +59,15 @@ const Card4 = ({ item, design, store_id }: any) => {
     item.discount_price,
     item.discount_type
   );
-  const campPrice = getPrice(
-    productGetPrice,
-    parseInt(camp?.discount_amount),
-    camp?.discount_type
+  const campPrice = (
+    getPrice(
+      productGetPrice,
+      parseInt(camp?.discount_amount),
+      camp?.discount_type
+    )
   );
 
-  const filterOfferProduct = (item: any) => {
+  const filterOfferProduct = (item:any) => {
     let cartItem = {};
     let productDetails = {
       id: item?.id,
@@ -76,18 +79,22 @@ const Card4 = ({ item, design, store_id }: any) => {
       autoClose: 1000,
     });
 
-    httpReq.post("get/offer/product", productDetails).then((res: any) => {
+    httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
-        let itemRegularPrice = getPrice(
-          item?.regular_price,
-          item?.discount_price,
-          item?.discount_type
-        );
-        let campaignPrice = getPrice(
-          itemRegularPrice,
-          parseInt(res?.discount_amount),
-          res?.discount_type
-        );
+        let itemRegularPrice = 
+          getPrice(
+            item?.regular_price,
+            item?.discount_price,
+            item?.discount_type
+          )
+        
+        let campaignPrice = 
+          getPrice(
+            itemRegularPrice,
+            parseInt(res?.discount_amount),
+            res?.discount_type
+          )
+       
 
         cartItem = {
           cartId: makeid(100),
@@ -114,8 +121,7 @@ const Card4 = ({ item, design, store_id }: any) => {
       dispatch(addToCartList({ ...cartItem }));
     });
   };
-
-  // const navigate = useNavigate();
+const router = useRouter()
 
   const add_cart_item = () => {
     if (item?.variant.length !== 0) {
@@ -123,7 +129,7 @@ const Card4 = ({ item, design, store_id }: any) => {
     } else {
       filterOfferProduct(item);
       if (store_id === 2680) {
-        router.push("/checkout");
+        router.push("/checkout")
       }
     }
   };
@@ -186,8 +192,8 @@ const Card4 = ({ item, design, store_id }: any) => {
               <p>BDT {campPrice ? campPrice : productGetPrice}</p>
               <h1 className="line-through lg:text-sm text-xs ">
                 {!campPrice &&
-                (item.discount_type === "no_discount" ||
-                  item.discount_price === "0.00") ? (
+                  (item.discount_type === "no_discount" ||
+                    item.discount_price === "0.00") ? (
                   " "
                 ) : (
                   <p> BDT {Math.trunc(item.regular_price)}</p>
@@ -198,11 +204,7 @@ const Card4 = ({ item, design, store_id }: any) => {
               className="menu-hover lg:absolute bottom-6 left-4 hover:-translate-y-1 lg:group-hover:scale-110 lg:cursor-pointer duration-500 lg:opacity-0 lg:group-hover:opacity-100 font-semibold text-sm underline"
               onClick={add_cart_item}
             >
-              {store_id === 2669
-                ? "Buy Now"
-                : store_id === 2680
-                  ? "Order Now"
-                  : "ADD TO CART"}
+              {store_id === 2669 ? "Buy Now" : store_id === 2680 ? "Order Now" : "ADD TO CART"}
             </div>
           </div>
         </div>

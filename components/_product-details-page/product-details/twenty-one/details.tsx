@@ -45,8 +45,8 @@ const Details = ({
   const sizeV = variant?.find((item: any) => item.size !== null);
 
   const vPrice = variant?.map((item: any) => item?.additional_price);
-  const smallest = Math.min(...vPrice);
-  const largest = Math.max(...vPrice);
+  const smallest = Math.min(vPrice);
+  const largest = Math.max(vPrice);
 
   const router = useRouter();
 
@@ -386,7 +386,7 @@ const Details = ({
             {product?.name}
           </h2>
           {/* price range  */}
-          {variant.length !== 0 && !color && !size && !unit && (
+          {variant?.length !== 0 && !color && !size && !unit && (
             <div className="flex items-center gap-1">
               <p
                 className={`${
@@ -415,7 +415,7 @@ const Details = ({
               )}
             </div>
           )}
-          {(variant.length === 0 || color || size || unit) &&
+          {(variant?.length === 0 || color || size || unit) &&
             store_id !== 6227 && (
               <div className="flex justify-start items-center gap-x-4">
                 <div
@@ -462,7 +462,7 @@ const Details = ({
           </p>
 
           {/* unit  */}
-          {!vrcolor && variant?.length !== 0 && variant[0]?.unit && (
+          {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
             <Units unit={unit} setUnit={setUnit} variant={variant} />
           )}
           {/* color and size  */}
@@ -477,7 +477,7 @@ const Details = ({
               />
             </>
           )}
-          {filterV[0]?.size && vrcolor && (
+          {filterV?.size && vrcolor && (
             <Sizes size={size} setSize={setSize} variant={filterV} />
           )}
           {/* color only  */}

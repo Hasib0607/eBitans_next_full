@@ -14,6 +14,7 @@ import Search from "../header-ten/search";
 import { imgUrl } from "@/site-settings/siteUrl";
 import { headerBg } from "@/site-settings/color";
 import useTheme from "@/hooks/use-theme";
+import { logout } from "@/redux/features/auth.slice";
 
 const HeaderElevenHeaderMenu = () => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
@@ -28,11 +29,11 @@ const HeaderElevenHeaderMenu = () => {
 
   const bgColor = design?.header_color;
 
-  //   const cartList = useSelector((state) => state.cart.cartList);
 
-  //   const logOut = () => {
-  //     dispatch(logout());
-  //   };
+
+    const logOut = () => {
+     logout();
+    };
   return (
     <div>
       {/* cart open  */}
@@ -134,11 +135,11 @@ const HeaderElevenHeaderMenu = () => {
                       </div>
                     </Link>
                     <div
-                    //  onClick={() => logOut()}
+                     onClick={() => logOut()}
                     >
                       <div className="flex gap-2">
                         <BiLogOut className="text-2xl font-thin" />
-                        <h1 style={{ color: design?.text_color }}>Logout </h1>
+                        <h1 className="text-black" >Logout </h1>
                       </div>
                     </div>
                   </div>

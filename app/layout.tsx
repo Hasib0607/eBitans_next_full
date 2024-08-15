@@ -25,7 +25,9 @@ export default async function RootLayout({
       <body className={`${inter.className} lg2 `}>
         <NextTopLoader />
         <AppWrapper headerSetting={headersetting} design={design}>
+      
           {children}
+         
         </AppWrapper>
       </body>
     </html>

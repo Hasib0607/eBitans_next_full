@@ -520,7 +520,7 @@ const HeaderTwentyOne = () => {
                       }}
                       className="group relative hover:bg-gray-100 w-full rounded"
                     >
-                      <Link href={"/category/" + item?.id}>
+                      <Link href={'/category/' + `${item.id}`}>
                         <h1
                           className={`menu-hover group p-3 font-twelve text-[13px] hover:font-bold `}
                         >
@@ -550,7 +550,7 @@ const HeaderTwentyOne = () => {
                                 heading === item.name ? "lg:block" : "hidden"
                               }`}
                             >
-                              <Link href={"/category/" + subItem?.id}>
+                              <Link href={'/category/' + `${subItem?.id}`}>
                                 <h1 className="hover:scale-105 menu-hover">
                                   {subItem.name}{" "}
                                 </h1>
@@ -570,7 +570,7 @@ const HeaderTwentyOne = () => {
           <div className="flex gap-5 uppercase text-[14px] ">
             {menu?.map((menu: any) => (
               <ul key={menu.id}>
-                <Link href={menu.url}>
+                <Link href={menu?.url ? `${menu?.url}`: '/' }>
                   <li className="duration-500 px-3 py-1.5 border border-transparent border-hover-menu rounded-full">
                     {menu.name}
                   </li>
