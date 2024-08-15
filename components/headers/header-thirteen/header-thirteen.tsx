@@ -139,7 +139,7 @@ const HeaderDown = () => {
         </div>
         <div className="hidden lg:flex space-x-3 mt-2">
           {category?.slice(0, 5).map((item: any, id: any) => (
-            <Link href={"/category/" + item?.id} key={item?.id}>
+            <Link href={"category/" + item?.id} key={item?.id}>
               <SingleCats item={item} color={colors[id]} />
             </Link>
           ))}
@@ -241,7 +241,7 @@ const SingleCat = ({ item, setOpen }: any) => {
       <div className="w-full flex py-2 lg:cursor-pointer">
         <Link
           onClick={() => setOpen(false)}
-          href={item.url}
+          href={item?.url ? `${item.url}` : "/"}
           className="flex-1 text-sm text-gray-900 font-medium"
         >
           {" "}

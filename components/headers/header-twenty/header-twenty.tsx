@@ -31,11 +31,11 @@ export default function HeaderTwenty() {
           <Popover.Group as="nav" className="hidden lg:flex space-x-6">
             {menu?.slice(0, 5)?.map((data: any) => (
               <Link
-                href={data?.url}
+                href={data?.url ? `${data?.url}` : '/'}
                 key={data?.id}
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                {data?.name}
+                {data?.name}  
               </Link>
             ))}
           </Popover.Group>

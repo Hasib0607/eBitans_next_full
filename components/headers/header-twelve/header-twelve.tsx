@@ -282,7 +282,7 @@ const HeaderTwelve = () => {
         <div className="flex gap-10 uppercase font-twelve text-[14px] text-gray-600">
           {menu?.map((menu: any) => (
             <ul key={menu.id}>
-              <Link href={menu.url}>
+              <Link href={menu?.url ? `/${menu?.url}` : "/"}>
                 <li className="hover:scale-105 duration-100 menu-hover">
                   {menu.name}
                 </li>

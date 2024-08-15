@@ -123,7 +123,7 @@ const HeroSeventeen = ({ slider, design }: any) => {
                 <a href={s?.link}>
                   <img
                     className="min-w-full h-auto"
-                    src={sliderImg + s.image}
+                    src={sliderImg + s.image.src}
                     alt=""
                   />
                 </a>

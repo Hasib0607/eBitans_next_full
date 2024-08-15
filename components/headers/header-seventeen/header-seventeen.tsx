@@ -334,7 +334,7 @@ const SideMenu = ({ setOpen, open }: any) => {
                     : setHeading("");
                 }}
               >
-                <Link href={item?.url}>
+                <Link href={item?.url ? `${item?.url}` : "/"}>
                   <h1 className="hover-color w-max uppercase font-semibold text-base lg:text-white menu-hover">
                     {item.name}
                   </h1>
@@ -348,6 +348,7 @@ const SideMenu = ({ setOpen, open }: any) => {
                       : setHeading("");
                   }}
                   className={`${
+                    
                     heading === item.name ? "rotate-180" : "rotate-0"
                   } hover-color h-4 absolute transition-all duration-500  ease-linear lg:cursor-pointer lg:-right-5 lg:top-[6px] top-[20px] lg:text-white right-0 `}
                 />

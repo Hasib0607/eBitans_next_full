@@ -12,7 +12,7 @@ const NewArrivalProductThirtySeven = ({ product, design, store_id }: any) => {
     <div className="shadow-lg py-5 sm:py-10 rounded-sm bg-[#F1F9DD]">
       <div className="sm:container px-5">
         <div>
-          <Image src={img} alt="margin" className="mx-auto" />
+          <Image src={img} fill alt="margin" className="mx-auto" />
           <h1 className="text-2xl text-center">NEW ARRIVAL PRODUCTS</h1>
         </div>
         <div className="flex justify-center mt-10">

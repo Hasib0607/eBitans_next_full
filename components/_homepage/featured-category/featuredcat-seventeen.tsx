@@ -24,6 +24,7 @@ const FeaturedSeventeen = ({ category }: any) => {
           <ParallaxBanner className="aspect-[2/1] bg-[#ff7380] w-full">
             <ParallaxBannerLayer
               image={img1.src}
+              
               speed={-50}
               style={{
                 backgroundSize: "auto",
@@ -39,7 +40,7 @@ const FeaturedSeventeen = ({ category }: any) => {
             <Link key={cat?.id} href={`/category/${cat.id}`}>
               <div className="hover:-translate-y-6 duration-500 h-full w-full justify-self-center">
                 <div className={`relative max-h-[200px] w-max mx-auto`}>
-                  <Image src={img2.src} alt="" className="h-20 md:h-auto" />
+                  <Image src={img2.src} alt="" fill className="h-20 md:h-auto" />
                   <img
                     src={iconImg + cat?.icon}
                     alt=""
@@ -61,7 +62,7 @@ const FeaturedSeventeen = ({ category }: any) => {
           <SectionHeadingSeventeen text={"Most popular creations"} />
         </div>
         <div className="flex justify-center pt-2">
-          <Image src={image.src} alt="" />
+          <Image src={image.src} fill alt="" />
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg2:grid-cols-4 gap-y-10 md:gap-x-10 mt-14 z-10 sm:container px-5 xl:px-80 mx-auto pb-10 xl:pb-32">
           <Link href={`/category/${cat[0]?.cat[0]?.id}`}>
@@ -79,6 +80,7 @@ const FeaturedSeventeen = ({ category }: any) => {
           <Link href={`/category/${cat[1]?.cat[0]?.id}`}>
             <div>
               <img
+              
                 src={catImg + cat[1]?.cat[0]?.banner}
                 alt=""
                 className="h-auto min-w-full hover:scale-105 duration-500"
