@@ -76,6 +76,14 @@ const HeaderTwentyTwo = () => {
  
     `;
 
+    const handleClick = () => {
+      if (window !== undefined) {
+        window.localStorage.removeItem("persist:root");
+  
+        window.location.href = "/";
+      }
+    };
+
   return (
     <>
       <div className="py-3 px-6 block lg:hidden">
@@ -196,7 +204,7 @@ const HeaderTwentyTwo = () => {
                         <Cat item={menuData} key={idx} />
                       ) : (
                         <Link
-                          href={menuData?.url}
+                          href={menuData?.url ? `${menuData?.url}` : '/'}
                           // style={({ isActive }) =>
                           //   isActive
                           //     ? {
@@ -307,7 +315,7 @@ const HeaderTwentyTwo = () => {
                               <Menu.Item>
                                 {({ active }) => (
                                   <div
-                                    // onClick={() => dispatch(logout())}
+                                    onClick={() => handleClick()}
                                     className={classNames(
                                       active ? "bg-gray-100" : "",
                                       "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"
@@ -374,9 +382,9 @@ const HeaderTwentyTwo = () => {
                   <style>{styleCss}</style>
                   {menu?.map((item: any) => (
                     <div key={item.id}>
-                      <Link onClick={() => setOpen(false)} href={item.url}>
+                      <Link onClick={() => setOpen(false)} href={item?.url? `${item?.url}` : '/'}>
                         <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
-                          {item.name}
+                          {item.name} 
                         </p>
                       </Link>
                     </div>

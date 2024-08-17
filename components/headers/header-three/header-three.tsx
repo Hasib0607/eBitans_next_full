@@ -61,6 +61,14 @@ const HeaderThree = () => {
   
      `;
 
+     const handleClick = () => {
+      if (window !== undefined) {
+        window.localStorage.removeItem("persist:root");
+  
+        window.location.href = "/";
+      }
+    };
+
   return (
     <div className="w-full">
       <style>{styleCss}</style>
@@ -144,7 +152,7 @@ const HeaderThree = () => {
                               <div>
                                 <Link
                                   href="/login"
-                                  // onClick={() => dispatch(logout())}
+                                  onClick={() => handleClick()}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
@@ -286,7 +294,7 @@ const HeaderThree = () => {
                             <div>
                               <Link
                                 href="/login"
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"

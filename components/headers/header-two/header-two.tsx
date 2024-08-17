@@ -46,6 +46,14 @@ const HeaderTwo = () => {
      }
   `;
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   return (
     <div className="sm:container px-5">
       <style>{styleCss}</style>
@@ -206,7 +214,7 @@ const HeaderTwo = () => {
                           <div>
                             <Link
                               href="/login"
-                              // onClick={() => dispatch(logout())}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"

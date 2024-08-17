@@ -55,6 +55,14 @@ export default function HeaderFour() {
    
       `;
 
+      const handleClick = () => {
+        if (window !== undefined) {
+          window.localStorage.removeItem("persist:root");
+    
+          window.location.href = "/";
+        }
+      };
+
   return (
     <Popover
       className={`${
@@ -260,7 +268,7 @@ export default function HeaderFour() {
                       <Menu.Item>
                         {({ active }) => (
                           <div
-                            // onClick={() => dispatch(logout())}
+                            onClick={() => handleClick()}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
@@ -341,7 +349,7 @@ export default function HeaderFour() {
               <div>
                 {user?.verify ? (
                   <p
-                    // onClick={() => dispatch(logout())}
+                    onClick={() => handleClick()}
                     style={{
                       backgroundColor: design?.header_color,
                       color: design?.text_color,

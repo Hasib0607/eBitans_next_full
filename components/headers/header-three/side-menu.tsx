@@ -19,13 +19,21 @@ const SideMenu = React.memo(({ setOpen }: any) => {
   }
     `;
 
+    const handleClick = () => {
+      if (window !== undefined) {
+        window.localStorage.removeItem("persist:root");
+    
+        window.location.href = "/";
+      }
+    };
+
   return (
     <div className="lg:hidden mt-5 z-50">
       <style>{styleCss}</style>
       <div className="flex flex-col gap-3">
         {menu?.map((item: any) => (
           <div key={item.id}>
-            <Link onClick={() => setOpen(false)} href={`/${item.url}`}>
+            <Link onClick={() => setOpen(false)} href={item?.url? `/${item.url}` : "/"}>
               <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
                 {item.name}
               </p>
@@ -37,7 +45,7 @@ const SideMenu = React.memo(({ setOpen }: any) => {
         {user?.verify ? (
           <p
             onClick={() => {
-              // dispatch(logout());
+             handleClick();
               setOpen(false);
             }}
             style={{

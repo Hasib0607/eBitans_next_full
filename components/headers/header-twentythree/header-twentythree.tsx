@@ -53,6 +53,14 @@ const HeaderTwentyThree = () => {
     window.addEventListener("scroll", changeNavbar);
   }, []);
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   // css class
   const styleCss = `
   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -259,7 +267,7 @@ const HeaderTwentyThree = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <div
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"
@@ -294,9 +302,9 @@ const HeaderTwentyThree = () => {
         <div className="flex gap-10 uppercase text-[14px] sm:container px-5 py-4">
           {menu?.map((menu: any) => (
             <ul key={menu.id}>
-              <Link href={menu.url}>
+              <Link href={menu?.url ? `${menu?.url}` : '/'}>
                 <li className="duration-500 border border-transparent border-hover-menu">
-                  {menu.name}
+                  {menu.name} 
                 </li>
               </Link>
             </ul>

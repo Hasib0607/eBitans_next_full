@@ -24,6 +24,14 @@ const HeaderEleven = () => {
   };
   window.addEventListener("scroll", changeNavbar);
 
+  const handleClick = () => {
+      if (window !== undefined) {
+        window.localStorage.removeItem("persist:root");
+  
+        window.location.href = "/";
+      }
+    };
+
   return (
     <div className="pb-0 ">
       <div className="lg:block hidden ">

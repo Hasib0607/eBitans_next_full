@@ -34,6 +34,14 @@ const HeaderTwentyNine = () => {
     window.addEventListener("scroll", changeNavbar);
   }, []);
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+  
+      window.location.href = "/";
+    }
+  };
+
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
 
@@ -153,7 +161,7 @@ const HeaderTwentyNine = () => {
                               <div>
                                 <Link
                                   href="/login"
-                                  // onClick={() => dispatch(logout())}
+                                  onClick={() => handleClick()}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
@@ -263,9 +271,9 @@ const HeaderTwentyNine = () => {
               {menu.map((item: any) => (
                 <div key={item.id} className="">
                   <li>
-                    <Link href={item.url}>
+                    <Link href={item?.url ? `${item?.url}` : "/"}>
                       <h1 className="flex uppercase justify-between items-center group font-semibold text-sm menu-hover">
-                        {item.name}
+                        {item.name} 
                       </h1>
                     </Link>
                   </li>

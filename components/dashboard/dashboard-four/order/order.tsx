@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 import { confirmAlert } from "react-confirm-alert";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 const Order = () => {
   const [call, setCall] = useState(false);
@@ -40,36 +41,43 @@ const Order = () => {
   }, [user?.details?.id, store_id, call]);
 
   const cancel_request = (id: any) => {
-    confirmAlert({
-      title: "Confirm to Done",
-      message: "Are you sure to cancel this order.",
-      buttons: [
-        {
-          label: "Yes",
-          onClick: () => {
-            httpReq
-              .post("order/cancel", { id, user_id: user?.details?.id })
-              .then((res) => {
-                // console.log(res);
-                if (res?.success) {
-                  setCall(!call);
-                  toast(res?.success, {
-                    type: "success",
-                  });
-                }
+    console.log(id, 'id');
+    Swal.fire({
+      title: 'Confirm to Cancel',
+      text: 'Are you sure you want to cancel this order?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, cancel it!',
+      cancelButtonText: 'No, keep it',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        httpReq
+          .post('order/cancel', { id, user_id: user?.details?.id })
+          .then((res) => {
+            if (res?.success) {
+              setCall(!call);
+              toast('Order successfully canceled', {
+                type: 'success',
               });
-          },
-        },
-        {
-          label: "No",
-          onClick: () =>
-            toast("rejected", {
-              type: "warning",
-            }),
-        },
-      ],
+            } else {
+              toast('Failed to cancel the order', {
+                type: 'error',
+              });
+            }
+          })
+          .catch((error) => {
+            toast('Error occurred while canceling the order', {
+              type: 'error',
+            });
+          });
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        toast('Order not canceled', {
+          type: 'warning',
+        });
+      }
     });
   };
+  
   const get_filter = (key: any) => {
     setBtn(key);
     if (key === "All") {

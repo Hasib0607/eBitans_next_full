@@ -74,6 +74,14 @@ const HeaderFive = () => {
 
   const { user } = useSelector((state: any) => state.auth);
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   return (
     <div>
       <style>{styleCss}</style>
@@ -213,7 +221,7 @@ const HeaderFive = () => {
                             <div>
                               <Link
                                 href="/login"
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"
@@ -340,7 +348,7 @@ const HeaderFive = () => {
                             <div>
                               <Link
                                 href="/login"
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"

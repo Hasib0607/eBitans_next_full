@@ -20,10 +20,14 @@ export default function HeaderMid() {
   const { logo, phone } = headerSetting;
 
   const { user } = useSelector((state: any) => state.auth);
-  const dispatch = useDispatch();
-  // const logOut = () => {
-  //   dispatch(logout());
-  // };
+ 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   const classes = `
    .group:hover .phn{
@@ -156,7 +160,7 @@ export default function HeaderMid() {
             <div className="py-6 px-5 space-y-6">
               {user?.verify ? (
                 <div
-                  //   onClick={() => logOut()}
+                    onClick={() => handleClick()}
                   style={{
                     backgroundColor: design?.header_color,
                     color: design?.text_color,

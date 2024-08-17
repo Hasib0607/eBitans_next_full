@@ -77,7 +77,7 @@ const HeaderTwentyNineMenu = () => {
               {menu.map((item: any) => (
                 <div key={item.id} className="">
                   <li>
-                    <Link href={item?.url}>
+                    <Link href={item?.url ? `${item?.url}` : "/"}>
                       <h1 className="flex uppercase justify-between items-center group font-semibold text-sm ">
                         {item.name}
                       </h1>

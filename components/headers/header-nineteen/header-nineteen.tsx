@@ -53,6 +53,14 @@ const HeaderNineteen = () => {
   };
   window.addEventListener("scroll", changeNavbar);
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap');
 
@@ -214,7 +222,7 @@ const HeaderNineteen = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                              //   onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

@@ -21,6 +21,15 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import { IoSearchCircleOutline } from "react-icons/io5";
 import Search from "../header-seven/search";
 
+const handleClick = () => {
+  if (window !== undefined) {
+    window.localStorage.removeItem("persist:root");
+
+    window.location.href = "/";
+  }
+};
+
+
 const HeaderTwentyFive = () => {
   return (
     <div className="fixed top-0 left-0 right-0" style={{ zIndex: 10 }}>
@@ -128,7 +137,7 @@ const HeaderTop = () => {
         )}
         {user?.verify && (
           <div
-            //   onClick={() => dispatch(logout())}
+              onClick={() => handleClick()}
 
             className="lg:cursor-pointer"
           >
@@ -195,7 +204,7 @@ const HeaderDown = () => {
             placeholder={"Search a product..."}
             value={searchTxt}
             onChange={(e) => setSearch(e.target.value)}
-            className="border border-gray-300 rounded-full w-full h-full focus:border focus:ring-0 focus:outline-0 focus:border-gray-100 px-4 transition-all duration-300 ease-linear bg-gray-100 text-xs flex items-center"
+            className="border border-gray-300 rounded-full h-8 w-full  focus:border focus:ring-0 focus:outline-0 focus:border-gray-100 px-4 transition-all duration-300 ease-linear bg-gray-100 text-xs flex items-center"
             type="text"
           />
           <div className="absolute right-2 top-0 bottom-0 flex items-center">
@@ -206,7 +215,7 @@ const HeaderDown = () => {
               }}
               className="rounded-full p-1"
             >
-              <IoSearchCircleOutline className="h-4 w-4" />
+              <IoSearchCircleOutline className="h-6 w-4" />
             </div>
           </div>
           <div className="lg:w-full left-0 absolute top-8 z-50">
@@ -290,7 +299,7 @@ const HeaderDown = () => {
             <div className="flex flex-col space-y-3 mt-5 z-50">
               {menu?.map((item: any) => (
                 <div key={item.id}>
-                  <Link onClick={() => setOpen(false)} href={item.url}>
+                  <Link onClick={() => setOpen(false)} href={item?.url ? `${item?.url}` : '/'}>
                     <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
                       {item.name}
                     </p>

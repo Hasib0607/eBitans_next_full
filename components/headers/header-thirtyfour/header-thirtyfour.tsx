@@ -18,7 +18,7 @@ import Search from "./search";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 import Taka from "@/utils/taka";
-import { handleLogout } from "@/utils/handle-logout";
+
 
 const HeaderThirtyFour = () => {
   const { category, design, subcategory, headerSetting, menu, userData } =
@@ -83,6 +83,14 @@ const HeaderThirtyFour = () => {
     };
     window.addEventListener("scroll", changeNavbar);
   }, []);
+
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+  
+      window.location.href = "/";
+    }
+  };
 
   // CSS START FROM HERE
 
@@ -266,7 +274,7 @@ const HeaderThirtyFour = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                              onClick={handleLogout}
+                              onClick={()=> handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"
@@ -452,7 +460,7 @@ const HeaderThirtyFour = () => {
             <div className={`flex gap-5 uppercase text-sm`}>
               {menu?.map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={"/" + menu.url}>
+                  <Link href={menu?.url ? `${menu?.url}` : "/"}>
                     <li className="duration-500 px-3 py-1.5 hover:text-yellow-200 rounded-full">
                       {menu.name}
                     </li>

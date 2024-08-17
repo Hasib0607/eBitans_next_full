@@ -47,6 +47,14 @@ const HeaderEighteen = () => {
   };
   window.addEventListener("scroll", changeNavbar);
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   const styleCss = `
 
     @import url('https://fonts.googleapis.com/css2?family=Saira&display=swap');
@@ -266,7 +274,7 @@ const HeaderEighteen = () => {
                             <div>
                               <Link
                                 href="/login"
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"

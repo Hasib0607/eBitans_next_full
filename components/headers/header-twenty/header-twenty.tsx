@@ -24,6 +24,14 @@ export default function HeaderTwenty() {
 
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
+
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
   return (
     <Popover className="relative bg-white">
       <div className="sm:container px-5">
@@ -127,7 +135,7 @@ export default function HeaderTwenty() {
                               <div>
                                 <Link
                                   href="/login"
-                                  //   onClick={() => dispatch(logout())}
+                                    onClick={() => handleClick()}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"
@@ -215,7 +223,7 @@ export default function HeaderTwenty() {
               <div>
                 {user?.verify ? (
                   <p
-                    // onClick={() => dispatch(logout())}
+                    onClick={() => handleClick()}
                     style={{
                       backgroundColor: design?.header_color,
                       color: design?.text_color,

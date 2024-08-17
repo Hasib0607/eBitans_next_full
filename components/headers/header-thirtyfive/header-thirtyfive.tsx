@@ -29,6 +29,14 @@ const HeaderThirtyFive = () => {
     setSearch("");
   };
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+  
+      window.location.href = "/";
+    }
+  };
+
   //   const cartList = useSelector((state) => state.cart.cartList);
 
   // CSS START FROM HERE
@@ -225,7 +233,7 @@ const HeaderThirtyFive = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <div
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"

@@ -29,6 +29,14 @@ const HeaderThirtySix = () => {
     setSearch("");
   };
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+  
+      window.location.href = "/";
+    }
+  };
+
   return (
     <>
       <div className="bg-[#FDD670] h-16 fixed w-full top-0 left-0 z-[6] flex items-center">
@@ -155,7 +163,7 @@ const HeaderThirtySix = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <div
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700"

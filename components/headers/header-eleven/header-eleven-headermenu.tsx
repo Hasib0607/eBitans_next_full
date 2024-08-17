@@ -31,9 +31,13 @@ const HeaderElevenHeaderMenu = () => {
 
 
 
-    const logOut = () => {
-     logout();
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
   return (
     <div>
       {/* cart open  */}
@@ -135,7 +139,7 @@ const HeaderElevenHeaderMenu = () => {
                       </div>
                     </Link>
                     <div
-                     onClick={() => logOut()}
+                     onClick={() => handleClick()}
                     >
                       <div className="flex gap-2">
                         <BiLogOut className="text-2xl font-thin" />

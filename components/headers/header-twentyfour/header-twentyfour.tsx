@@ -47,6 +47,15 @@ const HeaderTwentyFour = () => {
     window.addEventListener("scroll", changeNavbar);
   }, []);
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
+
   // css class
   const styleCss = `
   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -125,7 +134,7 @@ const HeaderTwentyFour = () => {
             <div className="flex justify-center xl:gap-10 gap-4 uppercase text-[14px] py-4">
               {menu?.slice(0, 7).map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={menu.url}>
+                  <Link href={menu?.url ? `${menu?.url}` : '/'}>
                     <li className="">{menu.name}</li>
                   </Link>
                 </ul>
@@ -227,7 +236,7 @@ const HeaderTwentyFour = () => {
                           <Menu.Item>
                             {({ active }) => (
                               <div
-                                // onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                                 className={classNames(
                                   active ? "bg-gray-100" : "",
                                   "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

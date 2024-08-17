@@ -73,6 +73,15 @@ const HeaderThirtyThree = () => {
     window.addEventListener("scroll", changeNavbar);
   }, []);
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+  
+      window.location.href = "/";
+    }
+  };
+
+
   // CSS START FROM HERE
 
   const styleCss = `
@@ -244,7 +253,7 @@ const HeaderThirtyThree = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <div
-                            // onClick={() => dispatch(logout())}
+                            onClick={() => handleClick()}
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"
@@ -389,7 +398,7 @@ const HeaderThirtyThree = () => {
             >
               {menu?.map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={menu.url}>
+                  <Link href={menu?.url ? `${menu?.url}` : "/"}>
                     <li className="duration-500 px-3 py-1.5 hover:text-yellow-200 rounded-full">
                       {menu.name}
                     </li>

@@ -29,6 +29,14 @@ const HeaderFifteen = () => {
   const { user } = useSelector((state: any) => state.auth);
   const { userData, setDarktheme, darktheme, darkThemeColor } = useTheme();
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   return (
     <>
       <Popover
@@ -184,7 +192,7 @@ const HeaderFifteen = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                              //   onClick={() => dispatch(logout())}
+                                onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -267,7 +275,7 @@ const HeaderFifteen = () => {
                 <div>
                   {user?.verify ? (
                     <p
-                      //   onClick={() => dispatch(logout())}
+                        onClick={() => handleClick()}
                       style={{
                         backgroundColor: design?.header_color,
                         color: design?.text_color,

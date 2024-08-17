@@ -20,6 +20,14 @@ const HeaderSixteen = () => {
     return classes.filter(Boolean).join(" ");
   }
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
@@ -131,7 +139,7 @@ const HeaderSixteen = () => {
                       <Menu.Item>
                         {({ active }) => (
                           <div
-                            // onClick={() => dispatch(logout())}
+                            onClick={() => handleClick()}
                             className={classNames(
                               active ? "bg-gray-100 lg:cursor-pointer" : "",
                               "block px-4 py-2 text-sm text-gray-700"

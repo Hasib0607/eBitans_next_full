@@ -26,6 +26,7 @@ import Taka from "@/utils/taka";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 import useTheme from "@/hooks/use-theme";
+import { logout } from "@/redux/features/auth.slice";
 
 const HeaderTwentyOne = () => {
   const {
@@ -149,6 +150,15 @@ const HeaderTwentyOne = () => {
       
     
         `;
+
+        const handleClick = () => {
+          if (window !== undefined) {
+            window.localStorage.removeItem("persist:root");
+      
+            window.location.href = "/";
+          }
+        };
+      
 
   return (
     <div className="">
@@ -386,7 +396,7 @@ const HeaderTwentyOne = () => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                              // onClick={() => dispatch(logout())}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"
@@ -570,9 +580,9 @@ const HeaderTwentyOne = () => {
           <div className="flex gap-5 uppercase text-[14px] ">
             {menu?.map((menu: any) => (
               <ul key={menu.id}>
-                <Link href={menu?.url ? `${menu?.url}`: '/' }>
+                <Link href={menu?.url ? `${menu?.url}` : '/' }>
                   <li className="duration-500 px-3 py-1.5 border border-transparent border-hover-menu rounded-full">
-                    {menu.name}
+                    {menu.name}  
                   </li>
                 </Link>
               </ul>
@@ -642,7 +652,7 @@ const HeaderTwentyOne = () => {
                             <Menu.Item>
                               {({ active }) => (
                                 <div
-                                  // onClick={() => dispatch(logout())}
+                                  onClick={() => handleClick()}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "lg:cursor-pointer block px-4 py-2 text-sm text-gray-700"
