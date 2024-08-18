@@ -329,7 +329,7 @@ const Details = ({
   };
 
   return (
-    <div className="grid md:grid-cols-8 grid-cols-1 md:gap-4 ">
+    <div className="grid md:grid-cols-8 grid-cols-1 mt-20 md:gap-4 ">
       <div className="md:col-span-4 h-full sm:cursor-zoom-in overflow-hidden ">
         {product?.image
           ?.slice(0, 1)

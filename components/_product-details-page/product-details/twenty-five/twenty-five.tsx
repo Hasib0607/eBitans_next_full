@@ -38,7 +38,7 @@ const TwentyFive = ({ data, updatedData }: any) => {
 
   return (
     <div>
-      <div className="sm:px-10 px-5 pt-10">
+      <div className="sm:px-10 mt-16 lg:mt-10 px-5 pt-10">
         <Details
           fetchStatus={fetchStatus}
           product={product}
