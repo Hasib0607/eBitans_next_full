@@ -1,5 +1,6 @@
 "use client";
 import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -85,7 +86,7 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

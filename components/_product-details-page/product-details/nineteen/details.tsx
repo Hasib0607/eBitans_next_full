@@ -30,6 +30,7 @@ import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -91,13 +92,13 @@ const Details = ({
       .catch(console.error);
   }, [data, store_id]);
 
-  // if (fetchStatus === "fetching") {
-  //   return (
-  //     <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-  //       <OvalLoader />
-  //     </div>
-  //   );
-  // }
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
+  }
 
   const regularPrice =
     parseInt(product?.regular_price) +
@@ -339,13 +340,6 @@ const Details = ({
   const prev = "single_Prev";
   const next = "single_Next";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
 
   return (
     <div className="h-full">

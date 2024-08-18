@@ -19,6 +19,7 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
   const { makeid, store_id, headerSetting, design } = useTheme();
@@ -86,7 +87,7 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

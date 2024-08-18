@@ -13,6 +13,7 @@ import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import { HSlider } from "./slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -73,10 +74,10 @@ const Details = ({
       .catch(console.error);
   }, [data, store_id]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -313,13 +314,7 @@ const Details = ({
   const buttonTwenty =
     "bg-black btn-hover text-white font-thin sm:py-[16px] py-2 px-5 sm:px-16 w-max";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
+ 
 
   return (
     <div className="bg-white">

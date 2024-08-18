@@ -16,6 +16,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import "./five.css";
 import { HSlider } from "./slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -323,13 +324,13 @@ const Details = ({
   const buttonSixteen =
     "custom-all text-white font-bold py-[11px] px-10 w-max rounded-full";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
+    if (fetchStatus === "fetching") {
+      return (
+        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+          <Skeleton />
+        </div>
+      );
+    }
 
   return (
     <div className="">

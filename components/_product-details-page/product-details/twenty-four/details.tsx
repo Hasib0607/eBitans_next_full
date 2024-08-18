@@ -20,6 +20,7 @@ import { addToCartList } from "@/redux/features/product.slice";
 import { HSlider } from "./slider";
 import BDT from "@/utils/bdt";
 import CallForPrice from "@/utils/call-for-price";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -75,15 +76,13 @@ const Details = ({
       // make sure to catch any error
       .catch(console.error);
   }, [data, store_id]);
-
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
-
   const regularPrice =
     parseInt(product?.regular_price) +
     (size?.additional_price ? parseInt(size?.additional_price) : 0) +
@@ -346,13 +345,7 @@ const Details = ({
   const buttonTwentyFour =
     "font-bold py-[11px] px-10 w-max bg-color lg:cursor-pointer ";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
+ 
 
   return (
     <div className="bg-white h-full ">

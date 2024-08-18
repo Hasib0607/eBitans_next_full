@@ -26,6 +26,7 @@ import ImageModal from "@/utils/image-modal";
 import { buyNow } from "@/utils/buy-now";
 import { getPrice } from "@/utils/get-price";
 import { ProductSlider } from "./product-slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -93,7 +94,7 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

@@ -25,6 +25,7 @@ import "swiper/css/effect-creative";
 import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -86,14 +87,13 @@ const Details = ({
     bookNow(variant, size, color, unit, filterV, setOpenBooking, openBooking);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
-
   const regularPrice =
     parseInt(product?.regular_price) +
     (size?.additional_price ? parseInt(size?.additional_price) : 0) +
@@ -356,13 +356,7 @@ const Details = ({
   const buttonFourteen =
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 text-center w-60 lg:cursor-pointer my-2";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
+  
 
   return (
     <div className="bg-white h-full mt-5">

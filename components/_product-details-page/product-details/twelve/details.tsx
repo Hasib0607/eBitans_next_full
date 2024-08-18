@@ -22,6 +22,7 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -80,10 +81,10 @@ const Details = ({
       .catch(console.error);
   }, [data, store_id]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

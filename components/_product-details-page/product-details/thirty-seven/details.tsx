@@ -20,6 +20,7 @@ import { TiTickOutline } from "react-icons/ti";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -84,10 +85,10 @@ const Details = ({
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -351,13 +352,7 @@ const Details = ({
   const buttonSeven =
     "w-full flex items-center gap-2 rounded-md w-full text-center py-3 justify-center lg:cursor-pointer cart-btn-thirty-seven";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
+
 
   return (
     <div className="pt-5 pb-20">

@@ -23,6 +23,7 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -107,10 +108,10 @@ const Details = ({
       .catch(console.error);
   }, [data, store_id]);
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -352,13 +353,8 @@ const Details = ({
   const callForPrice =
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 sm:px-16 px-2";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
+    
+ 
 
   return (
     <div className="bg-white h-full ">

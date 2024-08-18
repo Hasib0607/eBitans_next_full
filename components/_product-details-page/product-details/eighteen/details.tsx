@@ -14,6 +14,7 @@ import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
 import parse from "html-react-parser";
 import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -72,13 +73,13 @@ const Details = ({
       .catch(console.error);
   }, [data, store_id]);
 
-  //   if (load) {
-  //     return (
-  //       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-  //         <OvalLoader />
-  //       </div>
-  //     );
-  //   }
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
+  }
 
   const regularPrice =
     parseInt(product?.regular_price) +
@@ -317,13 +318,6 @@ const Details = ({
   const buttonEighteen =
     "bg-black btn-hover text-white font-thin sm:py-[16px] py-2 px-5 sm:px-16 w-max";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
 
   return (
     <div className=" bg-white">

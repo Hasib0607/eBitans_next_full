@@ -18,6 +18,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -89,11 +90,10 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
-
   const regularPrice =
     parseInt(product?.regular_price) +
     (size?.additional_price ? parseInt(size?.additional_price) : 0) +

@@ -1,6 +1,7 @@
 "use client";
 import BookingForm from "@/components/booking-form";
 import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import QuikView from "@/components/quick-view";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
@@ -89,10 +90,10 @@ const Details = ({
     bookNow(variant, size, color, unit, filterV, setOpenBooking, openBooking);
   };
 
-  if (load) {
+  if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -362,13 +363,7 @@ const Details = ({
   const buttonSeven =
     "w-full lg:w-96 flex items-center gap-2 rounded-md text-center py-3 justify-center lg:cursor-pointer cart-btn-thirty-seven";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
-      </div>
-    );
-  }
+ 
 
   return (
     <div className="pt-5 pb-20">

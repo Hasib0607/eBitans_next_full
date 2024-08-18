@@ -25,6 +25,7 @@ import {
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
 import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -95,7 +96,7 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

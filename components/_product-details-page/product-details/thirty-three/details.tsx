@@ -21,6 +21,7 @@ import { HSlider } from "./slider";
 import BDT from "@/utils/bdt";
 import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
+import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -79,7 +80,7 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
