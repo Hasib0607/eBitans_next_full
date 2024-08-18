@@ -11,6 +11,7 @@ import OvalLoader from "@/components/loader/oval-loader";
 import Card51 from "@/components/card/card51";
 import Link from "next/link";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Skeleton from "@/components/loader/skeleton";
 
 const TwentySeven = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -188,7 +189,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

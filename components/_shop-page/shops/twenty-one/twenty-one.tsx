@@ -18,6 +18,7 @@ import {
   TableCellsIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import Skeleton from "@/components/loader/skeleton";
 
 const TwentyOne = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -207,7 +208,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

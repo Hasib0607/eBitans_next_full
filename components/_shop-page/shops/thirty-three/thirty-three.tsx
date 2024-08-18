@@ -12,6 +12,7 @@ import Card59 from "@/components/card/card59";
 import Link from "next/link";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import useTheme from "@/hooks/use-theme";
+import Skeleton from "@/components/loader/skeleton";
 
 const ThirtyThree = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -205,7 +206,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
