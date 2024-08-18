@@ -401,14 +401,14 @@ const HeaderFive = () => {
                 style={{ background: bgColor, color: design?.text_color }}
                 className="text-sm absolute bottom-1 flex justify-center right-0 items-center rounded-full w-fit px-1.5 h-fit"
               >
-                {cartList.length}
+                {cartList?.length}
               </p>
             </div>
           </div>
         </div>
         <div className='relative flex items-center '>
           <input type="text" value={searchTxt} onChange={(e) => setSearch(e.target.value)} className='w-full border-gray-200 opacity-50 outline-none focus:outline-none focus:border-gray-200 focus:ring-0 text-black' placeholder='Search our catalog' />
-          {searchTxt.length === 0 ? <SearchIcon /> : <AiOutlineClose onClick={handleClose} className=' right-6 absolute lg:cursor-pointer h-7' />}
+          {searchTxt?.length === 0 ? <SearchIcon /> : <AiOutlineClose onClick={handleClose} className=' right-6 absolute lg:cursor-pointer h-7' />}
           {searchTxt && <Search search={searchTxt} setSearch={setSearch} />}
         </div>
       </div>
