@@ -114,7 +114,7 @@ const TwentyFour = ({ data, updatedData }: any) => {
               </div>
             </Tab.Panel>
             <Tab.Panel>
-              {reviews?.length === 0 ? (
+              {reviews?.length <= 0? (
                 <div className="flex flex-1 justify-center items-center p-5">
                   <h3 className="text-xl font-sans font-bold">
                     No Found Review
