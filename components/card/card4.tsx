@@ -30,7 +30,7 @@ const Card4 = ({ item }:any) => {
     color:  ${design?.header_color};
   }
   .search:hover {
-    color:${design.text_color};
+    color:${design?.text_color};
     background:${design?.header_color};
   }
   .border-hover:hover {

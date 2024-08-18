@@ -4,6 +4,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AiFillLinkedin,
+  AiOutlineClose,
   AiOutlineInstagram,
   AiOutlineWhatsApp,
   AiOutlineYoutube,
@@ -27,6 +28,8 @@ import { headerBg } from "@/site-settings/color";
 import SideMenu from "../header-three/side-menu";
 import "./header-five.css";
 import { location } from "@/assets/svg";
+import { SearchIcon } from "@/assets/svgComp";
+import Search from "./search";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -37,6 +40,9 @@ const HeaderFive = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
+  const [searchTxt, setSearchTxt] = useState<any>()
+  const [search, setSearch] = useState<any>()
+  const [close, setClose] = useState(true)
 
   const styleCss = `
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -59,7 +65,7 @@ const HeaderFive = () => {
 
   const bgColor = design?.header_color;
 
-  // const cartList = useSelector((state: any) => state.cart.cartList);
+  const cartList = useSelector((state: any) => state.cart.cartList);
 
   useEffect(() => {
     const changeNavbar = () => {
@@ -81,6 +87,11 @@ const HeaderFive = () => {
       window.location.href = "/";
     }
   };
+
+  const handleClose = () =>
+  {
+    setClose(false)
+  }
 
   return (
     <div>
@@ -386,20 +397,20 @@ const HeaderFive = () => {
               <p>
                 <HiOutlineShoppingBag className="text-3xl font-thin" />
               </p>
-              {/* <p
+              <p
                 style={{ background: bgColor, color: design?.text_color }}
                 className="text-sm absolute bottom-1 flex justify-center right-0 items-center rounded-full w-fit px-1.5 h-fit"
               >
                 {cartList.length}
-              </p> */}
+              </p>
             </div>
           </div>
         </div>
-        {/* <div className='relative flex items-center '>
+        <div className='relative flex items-center '>
           <input type="text" value={searchTxt} onChange={(e) => setSearch(e.target.value)} className='w-full border-gray-200 opacity-50 outline-none focus:outline-none focus:border-gray-200 focus:ring-0 text-black' placeholder='Search our catalog' />
-          {searchTxt.length === 0 ? <SearchIcon className=' right-6 absolute lg:cursor-pointer h-7' /> : <AiOutlineClose onClick={handleClose} className=' right-6 absolute lg:cursor-pointer h-7' />}
+          {searchTxt.length === 0 ? <SearchIcon /> : <AiOutlineClose onClick={handleClose} className=' right-6 absolute lg:cursor-pointer h-7' />}
           {searchTxt && <Search search={searchTxt} setSearch={setSearch} />}
-        </div> */}
+        </div>
       </div>
 
       <div>
