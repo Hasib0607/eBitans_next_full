@@ -33,7 +33,7 @@ const ThirtyFive = ({ data, updatedData }: any) => {
   const { product, vrcolor, variant } = productDetailsData || {};
 
   return (
-    <div className="container px-5">
+    <div className="container lg:py-24 md:py-20 py-16 px-5">
       <Details
         fetchStatus={fetchStatus}
         product={product}
