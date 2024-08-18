@@ -290,7 +290,7 @@ const HeaderTwo = () => {
             <div className="lg:hidden flex flex-col space-y-3 ml-36 z-50">
               <SideMenu setOpen={setOpen} />  
             </div>
-            <div className="lg:hidden flex flex-col space-y-3 mt-5 ml-36 z-50" >
+            {/* <div className="lg:hidden flex flex-col space-y-3 mt-5 ml-36 z-50" >
               {
                 menu?.map((item:any) =>
                   <div key={item.id} >
@@ -298,7 +298,7 @@ const HeaderTwo = () => {
                   </div>
                 )
               }
-            </div>
+            </div> */}
           </div>
         </ul>
       </div>
