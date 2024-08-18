@@ -36,7 +36,7 @@ const Fourteen = ({ data, updatedData }: any) => {
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
-      <div className="flex flex-wrap gap-2 items-center">
+      <div className="flex lg:mt-10 mt-16 md:my-12 flex-wrap gap-2 items-center">
         <p>Home</p>
         <IoIosArrowForward className="text-xs mt-1" />
         <p>{productDetailsData?.product?.category}</p>
