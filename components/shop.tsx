@@ -19,6 +19,7 @@ import ThirtyEight from "./_shop-page/shops/thirty-eight/thirty-eight";
 import ThirtyFive from "./_shop-page/shops/thirty-five/thirty-five";
 import ThirtyFour from "./_shop-page/shops/thirty-four/thirty-four";
 import ThirtyNine from "./_shop-page/shops/thirty-nine/thirty-nine";
+// up sesh
 import ThirtySeven from "./_shop-page/shops/thirty-seven/thirty-seven";
 import ThirtySix from "./_shop-page/shops/thirty-six/thirty-six";
 import ThirtyThree from "./_shop-page/shops/thirty-three/thirty-three";

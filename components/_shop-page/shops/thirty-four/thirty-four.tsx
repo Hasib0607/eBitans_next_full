@@ -19,6 +19,7 @@ import {
   TableCellsIcon,
 } from "@heroicons/react/24/outline";
 import httpReq from "@/utils/http/axios/http.service";
+import Skeleton from "@/components/loader/skeleton";
 
 const ThirtyFour = ({ data }: any) => {
   const { category, design, module, store_id } = useTheme();
@@ -218,7 +219,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

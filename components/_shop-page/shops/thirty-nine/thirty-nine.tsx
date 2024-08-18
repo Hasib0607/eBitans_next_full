@@ -10,6 +10,7 @@ import httpReq from "@/utils/http/axios/http.service";
 import OvalLoader from "@/components/loader/oval-loader";
 import Card68 from "@/components/card/card68";
 import Link from "next/link";
+import Skeleton from "@/components/loader/skeleton";
 
 const ThirtyNine = ({ data }: any) => {
   const { category, module } = useTheme();
@@ -136,7 +137,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

@@ -16,6 +16,7 @@ import Link from "next/link";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
 import Pagination from "../one/pagination";
+import Skeleton from "@/components/loader/skeleton";
 
 const Eight = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -216,7 +217,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

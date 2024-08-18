@@ -13,6 +13,7 @@ import { ThreeDots } from "react-loader-spinner";
 import Link from "next/link";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Card32 from "@/components/card/card32";
+import Skeleton from "@/components/loader/skeleton";
 
 const Fourteen = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -252,7 +253,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

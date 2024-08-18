@@ -9,6 +9,7 @@ import httpReq from "@/utils/http/axios/http.service";
 import Pagination from "@/components/_category-page/category/pagination";
 import OvalLoader from "@/components/loader/oval-loader";
 import Card26 from "@/components/card/card26";
+import Skeleton from "@/components/loader/skeleton";
 
 const Sixteen = ({ data }: any) => {
   const { design, module } = useTheme();
@@ -174,7 +175,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

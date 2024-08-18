@@ -12,6 +12,7 @@ import httpReq from "@/utils/http/axios/http.service";
 import OvalLoader from "@/components/loader/oval-loader";
 import Link from "next/link";
 import Card66 from "@/components/card/card66";
+import Skeleton from "@/components/loader/skeleton";
 
 const ThirtyEight = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -207,7 +208,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

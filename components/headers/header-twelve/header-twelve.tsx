@@ -51,7 +51,7 @@ const HeaderTwelve = () => {
     setSearch("");
   };
 
-  // const cartList = useSelector((state) => state.cart.cartList);
+  const cartList = useSelector((state :any) => state.cart.cartList);
 
   const changeNavbar = () => {
     if (window.scrollY >= 120) {
@@ -431,12 +431,12 @@ const HeaderTwelve = () => {
               <p>
                 <HiOutlineShoppingBag className="text-3xl font-thin" />
               </p>
-              {/* <p
+              <p
                 style={{ background: bgColor, color: design?.text_color }}
                 className="text-sm text-white absolute bottom-1 flex justify-center right-0 items-center rounded-full w-fit px-1.5 h-fit"
               >
                 {cartList.length}
-              </p> */}
+              </p>
             </div>
           </div>
         </div>
