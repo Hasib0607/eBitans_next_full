@@ -27,8 +27,8 @@ const HeaderThirteen = () => {
 
 export default HeaderThirteen;
 
-const HeaderTop = () => {
-  const { design, headerSetting } = useTheme();
+const HeaderTop = ({headerSetting}:any) => {
+  const { design } = useTheme();
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
 

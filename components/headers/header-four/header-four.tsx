@@ -21,11 +21,11 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HeaderFour() {
+export default function HeaderFour({headerSetting}:any) {
   const [open, setOpen] = useState(false);
   const [searchTxt, setSearch] = useState<any>(null);
   const [openMenu, setOpenMenu] = useState<any>(null);
-  const { headerSetting, menu, design, userData } = useTheme();
+  const {  menu, design, userData } = useTheme();
   const headermenu = menu.filter((i: any) => i.url !== "category");
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);

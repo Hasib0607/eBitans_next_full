@@ -28,12 +28,11 @@ import SideMenu from "../header-three/side-menu";
 import useTheme from "@/hooks/use-theme";
 import { logout } from "@/redux/features/auth.slice";
 
-const HeaderTwentyOne = () => {
+const HeaderTwentyOne = ({headerSetting}:any) => {
   const {
     category,
     design,
     subcategory,
-    headerSetting,
     menu,
     userData,
     store_id,

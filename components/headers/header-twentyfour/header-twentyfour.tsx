@@ -12,8 +12,8 @@ import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import Search from "./search";
 
-const HeaderTwentyFour = () => {
-  const { design, headerSetting, menu, userData } = useTheme();
+const HeaderTwentyFour = ({headerSetting}:any) => {
+  const { design, menu, userData } = useTheme();
 
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);

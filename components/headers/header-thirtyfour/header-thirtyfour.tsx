@@ -19,9 +19,8 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 import Taka from "@/utils/taka";
 
-const HeaderThirtyFour = () => {
-  const { category, design, subcategory, headerSetting, menu, userData } =
-    useTheme();
+const HeaderThirtyFour = ({headerSetting}:any) => {
+  const { category, design, subcategory, menu, userData } =  useTheme();
 
   const [openCat, setOpenCat] = useState(false);
   const [searchTxt, setSearch] = useState("");

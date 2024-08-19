@@ -14,8 +14,8 @@ import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderNine = () => {
-  const { design, headerSetting } = useTheme();
+const HeaderNine = ({headerSetting}:any) => {
+  const { design } = useTheme();
 
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);

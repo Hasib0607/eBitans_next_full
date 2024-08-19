@@ -17,8 +17,8 @@ import Search from "./search";
 import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderTwentyEight = () => {
-  const { design, headerSetting, category, userData } = useTheme();
+const HeaderTwentyEight = ({headerSetting}:any) => {
+  const { design, category, userData } = useTheme();
 
   const [open, setOpen] = useState(false);
   const [openCat, setOpenCat] = useState(false);

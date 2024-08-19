@@ -15,8 +15,8 @@ import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderTwentySeven = () => {
-  const { design, headerSetting, menu, userData } = useTheme();
+const HeaderTwentySeven = ({headerSetting}:any) => {
+  const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
   const [open, setOpen] = useState(false);
