@@ -20,6 +20,8 @@ export default async function RootLayout({
     "design,headersetting"
   );
 
+  console.log(design, "design");
+
   return (
     <html lang="en">
       <body className={`${inter.className} lg2 `}>

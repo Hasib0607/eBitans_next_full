@@ -1,21 +1,21 @@
 "use client";
-import React, { useState, Fragment, useEffect } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { FaHeadphonesAlt } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
 import { IoIosArrowForward } from "react-icons/io";
 import { RiArrowDownSLine } from "react-icons/ri";
-import { useSelector, useDispatch } from "react-redux";
-import { Menu, Transition } from "@headlessui/react";
-import { FiUser } from "react-icons/fi";
 import { TbLayoutGrid } from "react-icons/tb";
-import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import Search from "./search";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { useDispatch, useSelector } from "react-redux";
 import SideMenu from "../header-three/side-menu";
+import Search from "./search";
 
 const HeaderThirtyThree = () => {
   const { category, design, subcategory, headerSetting, menu, userData } =
@@ -395,9 +395,10 @@ const HeaderThirtyThree = () => {
                 openMenu ? "hidden" : "block"
               }`}
             >
+              {/* check here */}
               {menu?.map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={menu?.url ? `${menu?.url}` : "/"}>
+                  <Link href={menu.url}>
                     <li className="duration-500 px-3 py-1.5 hover:text-yellow-200 rounded-full">
                       {menu.name}
                     </li>
