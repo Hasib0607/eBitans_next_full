@@ -17,8 +17,8 @@ import Search from "./search";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderThirtyThree = () => {
-  const { category, design, subcategory, headerSetting, menu, userData } =
+const HeaderThirtyThree = ({headerSetting}:any) => {
+  const { category, design, subcategory, menu, userData } =
     useTheme();
   const [openCat, setOpenCat] = useState(false);
   const [searchTxt, setSearch] = useState("");

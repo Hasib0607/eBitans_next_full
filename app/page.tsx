@@ -7,13 +7,13 @@ import getUrl from "../utils/get-url";
 export async function generateMetadata() {
   const url = getUrl();
   const {
-    headersetting: { website_name, favicon },
+    headersetting,
   } = await getSubdomainName(url, "headersetting");
-  const websiteName = capitalizeFirstLetter(website_name);
+  const websiteName = capitalizeFirstLetter(headersetting?.website_name);
 
   return {
     title: `${websiteName} | Home`,
-    icons: { icon: imgUrl + favicon },
+    icons: { icon: imgUrl + headersetting?.favicon },
   };
 }
 
