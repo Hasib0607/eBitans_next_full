@@ -19,10 +19,8 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 import Taka from "@/utils/taka";
 
-
 const HeaderThirtyFour = ({headerSetting}:any) => {
-  const { category, design, subcategory, menu, userData } =
-    useTheme();
+  const { category, design, subcategory, menu, userData } =  useTheme();
 
   const [openCat, setOpenCat] = useState(false);
   const [searchTxt, setSearch] = useState("");
@@ -87,7 +85,7 @@ const HeaderThirtyFour = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
@@ -274,7 +272,7 @@ const HeaderThirtyFour = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                              onClick={()=> handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

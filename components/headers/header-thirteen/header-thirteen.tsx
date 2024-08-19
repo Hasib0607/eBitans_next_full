@@ -40,8 +40,6 @@ const HeaderTop = ({headerSetting}:any) => {
     }
   };
 
-  
-
   return (
     <div
       style={{

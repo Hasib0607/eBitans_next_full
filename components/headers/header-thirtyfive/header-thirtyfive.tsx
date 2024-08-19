@@ -32,7 +32,7 @@ const HeaderThirtyFive = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };

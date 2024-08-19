@@ -26,16 +26,36 @@ const ContactPage = () => {
             </p>
             <hr className="w-[20%]" />
             <div className="flex divide-x space-x-4">
-              <button aria-label={bangla ? "Facebook দিয়ে লগইন করুন" : "Log in with Facebook"} className="p-3 rounded-sm">
+              <button
+                aria-label={
+                  bangla ? "Facebook দিয়ে লগইন করুন" : "Log in with Facebook"
+                }
+                className="p-3 rounded-sm"
+              >
                 <FaFacebookF className="w-5 h-5 fill-current" />
               </button>
-              <button aria-label={bangla ? "YouTube দিয়ে লগইন করুন" : "Log in with YouTube"} className="p-3 rounded-sm">
+              <button
+                aria-label={
+                  bangla ? "YouTube দিয়ে লগইন করুন" : "Log in with YouTube"
+                }
+                className="p-3 rounded-sm"
+              >
                 <FaYoutube className="w-5 h-5 fill-current" />
               </button>
-              <button aria-label={bangla ? "Instagram দিয়ে লগইন করুন" : "Log in with Instagram"} className="p-3 rounded-sm">
+              <button
+                aria-label={
+                  bangla ? "Instagram দিয়ে লগইন করুন" : "Log in with Instagram"
+                }
+                className="p-3 rounded-sm"
+              >
                 <FaInstagram className="w-5 h-5 fill-current" />
               </button>
-              <button aria-label={bangla ? "LinkedIn দিয়ে লগইন করুন" : "Log in with LinkedIn"} className="p-3 rounded-sm">
+              <button
+                aria-label={
+                  bangla ? "LinkedIn দিয়ে লগইন করুন" : "Log in with LinkedIn"
+                }
+                className="p-3 rounded-sm"
+              >
                 <FaLinkedinIn className="w-5 h-5 fill-current" />
               </button>
             </div>

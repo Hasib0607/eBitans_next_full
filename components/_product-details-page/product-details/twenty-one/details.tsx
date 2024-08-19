@@ -118,13 +118,13 @@ const Details = ({
     product?.quantity ||
     "Out of Stock";
 
-    if (fetchStatus === "fetching") {
-      return (
-        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-          <Skeleton />
-        </div>
-      );
-    }
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
+  }
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
@@ -365,8 +365,6 @@ const Details = ({
         border: 1px solid ${design?.header_color};
     }
   `;
-
- 
 
   return (
     <div className=" bg-white h-full ">

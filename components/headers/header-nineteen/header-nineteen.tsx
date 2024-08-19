@@ -222,7 +222,7 @@ const HeaderNineteen = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                                onClick={() => handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

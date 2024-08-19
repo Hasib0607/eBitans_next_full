@@ -55,7 +55,6 @@ const HeaderTwentyFour = ({headerSetting}:any) => {
     }
   };
 
-
   // css class
   const styleCss = `
   @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -134,7 +133,7 @@ const HeaderTwentyFour = ({headerSetting}:any) => {
             <div className="flex justify-center xl:gap-10 gap-4 uppercase text-[14px] py-4">
               {menu?.slice(0, 7).map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={menu?.url ? `${menu?.url}` : '/'}>
+                  <Link href={menu?.url ? `${menu?.url}` : "/"}>
                     <li className="">{menu.name}</li>
                   </Link>
                 </ul>

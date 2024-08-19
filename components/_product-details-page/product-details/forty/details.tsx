@@ -356,8 +356,6 @@ const Details = ({
   const buttonFourteen =
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 text-center w-60 lg:cursor-pointer my-2";
 
-  
-
   return (
     <div className="bg-white h-full mt-5">
       <style>{styleCss}</style>

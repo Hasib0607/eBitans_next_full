@@ -356,7 +356,6 @@ const SideMenu = ({ setOpen, open }: any) => {
                       : setHeading("");
                   }}
                   className={`${
-                    
                     heading === item.name ? "rotate-180" : "rotate-0"
                   } hover-color h-4 absolute transition-all duration-500  ease-linear lg:cursor-pointer lg:-right-5 lg:top-[6px] top-[20px] lg:text-white right-0 `}
                 />

@@ -41,43 +41,43 @@ const Order = () => {
   }, [user?.details?.id, store_id, call]);
 
   const cancel_request = (id: any) => {
-    console.log(id, 'id');
+    console.log(id, "id");
     Swal.fire({
-      title: 'Confirm to Cancel',
-      text: 'Are you sure you want to cancel this order?',
-      icon: 'warning',
+      title: "Confirm to Cancel",
+      text: "Are you sure you want to cancel this order?",
+      icon: "warning",
       showCancelButton: true,
-      confirmButtonText: 'Yes, cancel it!',
-      cancelButtonText: 'No, keep it',
+      confirmButtonText: "Yes, cancel it!",
+      cancelButtonText: "No, keep it",
     }).then((result) => {
       if (result.isConfirmed) {
         httpReq
-          .post('order/cancel', { id, user_id: user?.details?.id })
+          .post("order/cancel", { id, user_id: user?.details?.id })
           .then((res) => {
             if (res?.success) {
               setCall(!call);
-              toast('Order successfully canceled', {
-                type: 'success',
+              toast("Order successfully canceled", {
+                type: "success",
               });
             } else {
-              toast('Failed to cancel the order', {
-                type: 'error',
+              toast("Failed to cancel the order", {
+                type: "error",
               });
             }
           })
           .catch((error) => {
-            toast('Error occurred while canceling the order', {
-              type: 'error',
+            toast("Error occurred while canceling the order", {
+              type: "error",
             });
           });
       } else if (result.dismiss === Swal.DismissReason.cancel) {
-        toast('Order not canceled', {
-          type: 'warning',
+        toast("Order not canceled", {
+          type: "warning",
         });
       }
     });
   };
-  
+
   const get_filter = (key: any) => {
     setBtn(key);
     if (key === "All") {

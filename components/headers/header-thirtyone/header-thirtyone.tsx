@@ -50,11 +50,10 @@ const HeaderThirtyOne = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
-
 
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');
