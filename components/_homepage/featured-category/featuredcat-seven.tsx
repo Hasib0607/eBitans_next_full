@@ -1,13 +1,12 @@
-import React from "react";
 import { SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
+import Card9 from "@/components/card/card9";
 import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
 import DefaultSlider from "@/components/slider/default-slider";
-import Card9 from "@/components/card/card9";
 import Arrowbetween from "@/utils/arrow-between";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const FeaturedSeven = ({ category }: any) => {
   const prev = "best_seller_seven_Prev";
@@ -51,7 +50,7 @@ const FeaturedSeven = ({ category }: any) => {
             },
           }}
         >
-          {category.map((product9Data: any) => (
+          {category?.map((product9Data: any) => (
             <SwiperSlide key={product9Data.id}>
               <Card9 item={product9Data} />
             </SwiperSlide>

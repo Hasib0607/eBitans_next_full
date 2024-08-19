@@ -15,8 +15,8 @@ import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Category from "./category";
 
-const HeaderEighteen = ({headerSetting}:any) => {
-  const {  design, category } = useTheme();
+const HeaderEighteen = ({ headerSetting }: any) => {
+  const { design, category } = useTheme();
 
   const dispatch = useDispatch();
 

@@ -10,8 +10,8 @@ import { profileImg } from "@/site-settings/siteUrl";
 import Link from "next/link";
 import HeaderMenu from "./header-menu";
 
-const HeaderSixteen = ({headerSetting}:any) => {
-  const {  userData, design } = useTheme();
+const HeaderSixteen = ({ headerSetting }: any) => {
+  const { userData, design } = useTheme();
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);

@@ -1,18 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { ThreeDots } from "react-loader-spinner";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card59 from "@/components/card/card59";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import Pagination from "@/components/_category-page/category/pagination";
-import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
-import Card59 from "@/components/card/card59";
-import Link from "next/link";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import useTheme from "@/hooks/use-theme";
 import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
 
 const ThirtyThree = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -248,7 +247,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 sm:gap-4 px-2 sm:px-0">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item?.id}
                   initial={{ scale: 0 }}
@@ -264,7 +263,7 @@ const Product = ({
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 sm:gap-4 px-2 sm:px-0">
-          {products.map((item: any) => (
+          {products?.map((item: any) => (
             <motion.div
               key={item?.id}
               initial={{ scale: 0 }}

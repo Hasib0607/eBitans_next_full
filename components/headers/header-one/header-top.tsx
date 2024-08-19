@@ -6,7 +6,7 @@ import { mobile, location, logoutIcon, userIcon } from "@/assets/svg";
 import Link from "next/link";
 import { logout } from "@/redux/features/auth.slice";
 
-const HeaderTop = ({headerSetting}:any) => {
+const HeaderTop = ({ headerSetting }: any) => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
 
@@ -14,7 +14,7 @@ const HeaderTop = ({headerSetting}:any) => {
   //   dispatch(logout());
   // };
 
-  const {  design } = useTheme();
+  const { design } = useTheme();
   const { phone, address } = headerSetting;
 
   return (

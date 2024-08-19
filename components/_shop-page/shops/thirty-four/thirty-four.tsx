@@ -1,25 +1,24 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { AnimatePresence, motion } from "framer-motion";
-import { IoGridSharp } from "react-icons/io5";
-import { AiOutlineHome } from "react-icons/ai";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card6 from "@/components/card/card6";
+import Card60 from "@/components/card/card60";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import Pagination from "@/components/_category-page/category/pagination";
-import OvalLoader from "@/components/loader/oval-loader";
-import Card60 from "@/components/card/card60";
-import Card6 from "@/components/card/card6";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import {
   MinusIcon,
   PlusIcon,
   TableCellsIcon,
 } from "@heroicons/react/24/outline";
-import httpReq from "@/utils/http/axios/http.service";
-import Skeleton from "@/components/loader/skeleton";
+import { AnimatePresence, motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { AiOutlineHome } from "react-icons/ai";
+import { IoGridSharp } from "react-icons/io5";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
 
 const ThirtyFour = ({ data }: any) => {
   const { category, design, module, store_id } = useTheme();
@@ -262,7 +261,7 @@ const Product = ({
           >
             {grid === "H" && (
               <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg2:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
-                {products.map((item: any) => (
+                {products?.map((item: any) => (
                   <motion.div
                     key={item?.id}
                     initial={{ scale: 0 }}
@@ -278,7 +277,7 @@ const Product = ({
             <AnimatePresence>
               {grid === "V" && (
                 <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                  {products.map((item: any) => (
+                  {products?.map((item: any) => (
                     <motion.div
                       key={item?.id}
                       initial={{ translateX: 200 }}
@@ -301,7 +300,7 @@ const Product = ({
         <div>
           {grid === "H" && (
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg2:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item?.id}
                   initial={{ scale: 0 }}
@@ -317,7 +316,7 @@ const Product = ({
           <AnimatePresence>
             {grid === "V" && (
               <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                {products.map((item: any) => (
+                {products?.map((item: any) => (
                   <motion.div
                     key={item?.id}
                     initial={{ translateX: 200 }}

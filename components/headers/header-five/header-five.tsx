@@ -35,7 +35,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderFive = ({headerSetting}:any) => {
+const HeaderFive = ({ headerSetting }: any) => {
   const { design } = useTheme();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);

@@ -3,7 +3,7 @@ import useTheme from "@/hooks/use-theme";
 import { iconImg } from "@/site-settings/siteUrl";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 
 const SideCat = () => {
   const { category, subcategory } = useTheme();
@@ -12,7 +12,7 @@ const SideCat = () => {
   return (
     <nav>
       <div className="flex flex-col gap-3">
-        {category.map((item: any) => (
+        {category?.map((item: any) => (
           <div key={item.id} className="relative z-[1]">
             <div
               onClick={() => {

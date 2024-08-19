@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { SwiperSlide } from "swiper/react";
+import { useState } from "react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { SwiperSlide } from "swiper/react";
 
-import { AiOutlineArrowRight } from "react-icons/ai";
-import Link from "next/link";
 import DefaultSlider from "@/components/slider/default-slider";
 import { catImg } from "@/site-settings/siteUrl";
+import Link from "next/link";
+import { AiOutlineArrowRight } from "react-icons/ai";
 
 const FeaturedThirtySix = ({ category, design }: any) => {
   const prevEl = "feature-category-prev";
@@ -69,7 +69,7 @@ const FeaturedThirtySix = ({ category, design }: any) => {
           },
         }}
       >
-        {category.map((productData: any) => (
+        {category?.map((productData: any) => (
           <SwiperSlide key={productData.id}>
             <div className="py-3 px-2">
               <Card item={productData} />

@@ -15,7 +15,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderTwentySeven = ({headerSetting}:any) => {
+const HeaderTwentySeven = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");

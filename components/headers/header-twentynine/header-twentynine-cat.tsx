@@ -1,14 +1,13 @@
 "use client";
-import React from "react";
+import useTheme from "@/hooks/use-theme";
+import { motion } from "framer-motion";
+import Link from "next/link";
 import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { HiMenu } from "react-icons/hi";
-import { RiArrowDownSLine } from "react-icons/ri";
-import { motion } from "framer-motion";
-import { AiOutlineClose } from "react-icons/ai";
 import { IoIosArrowForward } from "react-icons/io";
-import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
+import { RiArrowDownSLine } from "react-icons/ri";
 import Search from "./search";
 
 const HeaderTwentyNineCat = () => {
@@ -63,7 +62,7 @@ const HeaderTwentyNineCat = () => {
                 onMouseLeave={() => setHeading("")}
                 className="flex flex-col duration-1000 font-twelve relative"
               >
-                {category.map((item: any) => (
+                {category?.map((item: any) => (
                   <div key={item.id} className="">
                     <li
                       onMouseEnter={() => {

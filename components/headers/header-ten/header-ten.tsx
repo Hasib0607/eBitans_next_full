@@ -22,7 +22,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderTen = ({headerSetting}:any) => {
+const HeaderTen = ({ headerSetting }: any) => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);

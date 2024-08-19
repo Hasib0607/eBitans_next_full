@@ -13,7 +13,7 @@ import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderThirtyFive = ({headerSetting}:any) => {
+const HeaderThirtyFive = ({ headerSetting }: any) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
 

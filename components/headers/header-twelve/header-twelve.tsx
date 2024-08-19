@@ -38,7 +38,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderTwelve = ({headerSetting}:any) => {
+const HeaderTwelve = ({ headerSetting }: any) => {
   const { design, menu, store_id } = useTheme();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
