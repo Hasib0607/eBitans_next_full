@@ -5,6 +5,7 @@ import { PersistGate } from "redux-persist/integration/react";
 
 import CartPopUp from "@/components/cart-popup";
 import Footer from "@/components/footer";
+import Header from "@/components/header";
 import ThemeProvider from "@/hooks/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
@@ -16,7 +17,7 @@ const AppWrapper = ({ children, design, headerSetting }: any) => {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            {/* <Header design={design} headerSetting={headerSetting} /> */}
+            <Header design={design} headerSetting={headerSetting} />
             {children}
             <Footer />
             <CartPopUp />
