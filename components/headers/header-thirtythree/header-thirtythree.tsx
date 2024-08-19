@@ -397,7 +397,9 @@ const HeaderThirtyThree = ({ headerSetting }: any) => {
               {/* check here */}
               {menu?.map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={menu.url}>
+
+                  <Link href={"/" + menu?.url}>
+
                     <li className="duration-500 px-3 py-1.5 hover:text-yellow-200 rounded-full">
                       {menu.name}
                     </li>

@@ -332,10 +332,9 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
           <div className={`flex gap-4`}>
             {menu?.slice(0, 7).map((menu: any) => (
               <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
-                <Link
-                  href={menu?.url ? `${menu?.url}` : "/"}
-                  className="flex items-center"
-                >
+
+                <Link href={"/" + menu?.url} className="flex items-center">
+
                   <li className="text-lg font-medium py-3 uppercase menu-hover">
                     {menu?.name}
                   </li>
@@ -352,10 +351,11 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
           <div className="sm:container px-5 flex gap-4">
             {menu?.slice(0, 7).map((menu: any) => (
               <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
-                <Link
-                  href={menu?.url ? `${menu?.url}` : "/"}
-                  className="flex items-center"
-                >
+
+                <Link href={"/" + menu?.url} className="flex items-center">
+
+               
+
                   <li className="text-lg font-medium py-3 uppercase menu-hover">
                     {menu?.name}
                   </li>

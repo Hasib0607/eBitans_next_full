@@ -259,7 +259,7 @@ const HeaderFifteen = ({ headerSetting }: any) => {
                     {menu?.map((item: any) => (
                       <a
                         key={item.id}
-                        href={item.url}
+                        href={"/" + item.url}
                         className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
                       >
                         <span className=" text-base font-medium text-gray-900">

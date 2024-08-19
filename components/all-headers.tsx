@@ -107,8 +107,10 @@ const headers: any = {
   ),
 };
 
+
 const AllHeaders = ({ design, headerSetting }: any) => {
   const HeaderComponent = headers[design?.header];
+
 
   return (
     <>
