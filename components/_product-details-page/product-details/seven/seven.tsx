@@ -119,7 +119,6 @@ const Seven = ({ data, updatedData }: Props) => {
 export default Seven;
 
 const According = ({ text, desc }: any) => {
-  console.log(desc, "desc");
   const [show, setShow] = useState(false);
   return (
     <AnimatePresence>
