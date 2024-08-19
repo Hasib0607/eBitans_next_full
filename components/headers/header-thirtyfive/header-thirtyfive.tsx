@@ -152,7 +152,7 @@ const HeaderThirtyFive = ({headerSetting}:any) => {
                 key={item.id}
                 className="text-base font-semibold leading-4 lg:cursor-pointer"
               >
-                <Link href={item.url}>{item.name}</Link>
+                <Link href={"/" + item.url}>{item.name}</Link>
               </p>
             ))}
           </div>

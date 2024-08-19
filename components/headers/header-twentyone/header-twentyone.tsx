@@ -579,7 +579,7 @@ const HeaderTwentyOne = ({headerSetting}:any) => {
           <div className="flex gap-5 uppercase text-[14px] ">
             {menu?.map((menu: any) => (
               <ul key={menu.id}>
-                <Link href={menu?.url ? `${menu?.url}` : '/' }>
+                <Link href={"/" + menu?.url }>
                   <li className="duration-500 px-3 py-1.5 border border-transparent border-hover-menu rounded-full">
                     {menu.name}  
                   </li>

@@ -349,7 +349,7 @@ const HeaderThirtyOne = ({headerSetting}:any) => {
           >
             {menu?.slice(0, 5).map((menuItem: any) => (
               <ul className="group relative px-5" key={menuItem?.id}>
-                <Link href={menuItem?.url} className="flex items-center">
+                <Link href={"/" + menuItem?.url} className="flex items-center">
                   <li className="text-xl font-medium py-3">{menuItem?.name}</li>
                 </Link>
               </ul>

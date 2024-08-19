@@ -304,7 +304,7 @@ const HeaderNineteen = ({headerSetting}:any) => {
         <div className="col-span-3 justify-self-center lg:block hidden">
           <ul className=" flex gap-10 justify-center item-center">
             {menu?.map((menuData: any, id: any) => (
-              <Link key={id} href={menuData?.url ? `${menuData?.url}` : "/"}>
+              <Link key={id} href={"/" + menuData?.url }>
                 <h1 className={`flex justify-between items-center group`}>
                   {menuData?.name}
                 </h1>

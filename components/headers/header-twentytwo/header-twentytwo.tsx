@@ -382,7 +382,7 @@ const HeaderTwentyTwo = ({headerSetting}:any) => {
                   <style>{styleCss}</style>
                   {menu?.map((item: any) => (
                     <div key={item.id}>
-                      <Link onClick={() => setOpen(false)} href={item?.url? `${item?.url}` : '/'}>
+                      <Link onClick={() => setOpen(false)} href={"/" + item?.url}>
                         <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
                           {item.name} 
                         </p>

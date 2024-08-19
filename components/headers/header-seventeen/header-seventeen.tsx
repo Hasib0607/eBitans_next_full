@@ -342,7 +342,7 @@ const SideMenu = ({ setOpen, open }: any) => {
                     : setHeading("");
                 }}
               >
-                <Link href={item?.url ? `${item?.url}` : "/"}>
+                <Link href={"/" + item?.url}>
                   <h1 className="hover-color w-max uppercase font-semibold text-base lg:text-white menu-hover">
                     {item.name}
                   </h1>
