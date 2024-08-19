@@ -1,5 +1,5 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -23,7 +23,6 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -304,7 +303,7 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <Skeleton/>
+        <Skeleton />
       </div>
     );
   }
@@ -313,7 +312,6 @@ const Details = ({
       <div className="md:col-span-4 lg2:col-span-3 col-span-1 h-full overflow-hidden">
         <div className="h-full w-full object-cover">
           {product?.image?.slice(0, 1).map((item: any, idx: any) => {
-            console.log(item, "item");
             return <ImageZoom img={productImg + item} key={idx} />;
           })}
         </div>

@@ -29,7 +29,6 @@ const handleClick = () => {
   }
 };
 
-
 const HeaderTwentyFive = () => {
   return (
     <div className="fixed top-0 left-0 right-0" style={{ zIndex: 10 }}>
@@ -136,11 +135,7 @@ const HeaderTop = () => {
           </Link>
         )}
         {user?.verify && (
-          <div
-              onClick={() => handleClick()}
-
-            className="lg:cursor-pointer"
-          >
+          <div onClick={() => handleClick()} className="lg:cursor-pointer">
             <p className=" hover:text-red-600">Logout</p>
           </div>
         )}
@@ -149,8 +144,8 @@ const HeaderTop = () => {
   );
 };
 
-const HeaderDown = ({headerSetting}:any) => {
-  const {  design, menu } = useTheme();
+const HeaderDown = ({ headerSetting }: any) => {
+  const { design, menu } = useTheme();
   const [searchTxt, setSearch] = useState("");
   // const [searchInput, setSearchInput] = useState(false);
   const [open, setOpen] = useState(false);
@@ -299,7 +294,10 @@ const HeaderDown = ({headerSetting}:any) => {
             <div className="flex flex-col space-y-3 mt-5 z-50">
               {menu?.map((item: any) => (
                 <div key={item.id}>
-                  <Link onClick={() => setOpen(false)} href={item?.url ? `${item?.url}` : '/'}>
+                  <Link
+                    onClick={() => setOpen(false)}
+                    href={item?.url ? `${item?.url}` : "/"}
+                  >
                     <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
                       {item.name}
                     </p>

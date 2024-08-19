@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { SwiperSlide } from "swiper/react";
+import { useState } from "react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { SwiperSlide } from "swiper/react";
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import DefaultSlider from "@/components/slider/default-slider";
 import { iconImg } from "@/site-settings/siteUrl";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const FeaturedThirtyOne = ({ category, design }: any) => {
@@ -72,7 +72,7 @@ const FeaturedThirtyOne = ({ category, design }: any) => {
             },
           }}
         >
-          {category.map((productData: any) => (
+          {category?.map((productData: any) => (
             <SwiperSlide key={productData.id}>
               <Card item={productData} />
             </SwiperSlide>

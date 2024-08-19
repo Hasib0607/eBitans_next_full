@@ -353,9 +353,6 @@ const Details = ({
   const callForPrice =
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 sm:px-16 px-2";
 
-    
- 
-
   return (
     <div className="bg-white h-full ">
       <style>{styleCss}</style>

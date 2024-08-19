@@ -1,8 +1,15 @@
 "use client";
-import React, { useState, Fragment, useEffect } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
 import { AiFillLinkedin, AiOutlineClose } from "react-icons/ai";
+import { BiBarChart } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 import { GiShoppingCart } from "react-icons/gi";
 import { GrInstagram, GrYoutube } from "react-icons/gr";
 import { HiMenu } from "react-icons/hi";
@@ -13,30 +20,15 @@ import {
   IoLogoWhatsapp,
 } from "react-icons/io";
 import { RiArrowDownSLine } from "react-icons/ri";
-import { useSelector, useDispatch } from "react-redux";
-import { Menu, Transition } from "@headlessui/react";
-import { FiUser } from "react-icons/fi";
-import { BiBarChart } from "react-icons/bi";
 import { SiGmail } from "react-icons/si";
+import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
-import Search from "./search";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import Taka from "@/utils/taka";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
-import useTheme from "@/hooks/use-theme";
-import { logout } from "@/redux/features/auth.slice";
+import Search from "./search";
 
-const HeaderTwentyOne = ({headerSetting}:any) => {
-  const {
-    category,
-    design,
-    subcategory,
-    menu,
-    userData,
-    store_id,
-  } = useTheme();
+const HeaderTwentyOne = ({ headerSetting }: any) => {
+  const { category, design, subcategory, menu, userData, store_id } =
+    useTheme();
   const [openCat, setOpenCat] = useState(false);
   const [searchTxt, setSearch] = useState("");
   const [searchTxtUp, setSearchUp] = useState("");
@@ -150,14 +142,13 @@ const HeaderTwentyOne = ({headerSetting}:any) => {
     
         `;
 
-        const handleClick = () => {
-          if (window !== undefined) {
-            window.localStorage.removeItem("persist:root");
-      
-            window.location.href = "/";
-          }
-        };
-      
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="">
@@ -518,7 +509,7 @@ const HeaderTwentyOne = ({headerSetting}:any) => {
                   border ? "border-0" : "border-cat"
                 }`}
               >
-                {category.map((item: any) => (
+                {category?.map((item: any) => (
                   <div key={item.id} className="relative">
                     <li
                       onClick={() => setOpenCat(!openCat)}
@@ -529,7 +520,7 @@ const HeaderTwentyOne = ({headerSetting}:any) => {
                       }}
                       className="group relative hover:bg-gray-100 w-full rounded"
                     >
-                      <Link href={'/category/' + `${item.id}`}>
+                      <Link href={"/category/" + `${item.id}`}>
                         <h1
                           className={`menu-hover group p-3 font-twelve text-[13px] hover:font-bold `}
                         >
@@ -559,7 +550,7 @@ const HeaderTwentyOne = ({headerSetting}:any) => {
                                 heading === item.name ? "lg:block" : "hidden"
                               }`}
                             >
-                              <Link href={'/category/' + `${subItem?.id}`}>
+                              <Link href={"/category/" + `${subItem?.id}`}>
                                 <h1 className="hover:scale-105 menu-hover">
                                   {subItem.name}{" "}
                                 </h1>
@@ -579,9 +570,9 @@ const HeaderTwentyOne = ({headerSetting}:any) => {
           <div className="flex gap-5 uppercase text-[14px] ">
             {menu?.map((menu: any) => (
               <ul key={menu.id}>
-                <Link href={menu?.url ? `${menu?.url}` : '/' }>
+                <Link href={menu?.url ? `${menu?.url}` : "/"}>
                   <li className="duration-500 px-3 py-1.5 border border-transparent border-hover-menu rounded-full">
-                    {menu.name}  
+                    {menu.name}
                   </li>
                 </Link>
               </ul>

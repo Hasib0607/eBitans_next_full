@@ -17,8 +17,8 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HeaderTwenty({headerSetting}:any) {
-  const {  menu, design } = useTheme();
+export default function HeaderTwenty({ headerSetting }: any) {
+  const { menu, design } = useTheme();
   const [searchInput, setSearchInput] = useState(false);
   const [searchTxt, setSearch] = useState("");
 
@@ -39,11 +39,11 @@ export default function HeaderTwenty({headerSetting}:any) {
           <Popover.Group as="nav" className="hidden lg:flex space-x-6">
             {menu?.slice(0, 5)?.map((data: any) => (
               <Link
-                href={data?.url ? `${data?.url}` : '/'}
+                href={data?.url ? `${data?.url}` : "/"}
                 key={data?.id}
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
-                {data?.name}  
+                {data?.name}
               </Link>
             ))}
           </Popover.Group>
@@ -135,7 +135,7 @@ export default function HeaderTwenty({headerSetting}:any) {
                               <div>
                                 <Link
                                   href="/login"
-                                    onClick={() => handleClick()}
+                                  onClick={() => handleClick()}
                                   className={classNames(
                                     active ? "bg-gray-100" : "",
                                     "block px-4 py-2 text-sm text-gray-700"

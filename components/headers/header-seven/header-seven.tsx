@@ -1,17 +1,17 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
-import { CgMenuLeft, CgShoppingBag } from "react-icons/cg";
-import { useDispatch, useSelector } from "react-redux";
-import { BsSearch } from "react-icons/bs";
-import { Menu, Transition } from "@headlessui/react";
 import useTheme from "@/hooks/use-theme";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import Search from "./search";
-import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import CategorySeven from "./category-seven";
+import { Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
+import { BsSearch } from "react-icons/bs";
+import { CgMenuLeft, CgShoppingBag } from "react-icons/cg";
+import { useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
+import CategorySeven from "./category-seven";
+import Search from "./search";
 
 const HeaderSeven = ({ headerSetting, design }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -145,7 +145,7 @@ const HeaderSeven = ({ headerSetting, design }: any) => {
                 <Link href="/">
                   <img
                     className="h-[45px] w-auto overflow-hidden sm:mr-20"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

@@ -1,16 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card44 from "@/components/card/card44";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import Pagination from "@/components/_category-page/category/pagination";
-import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
-import Card44 from "@/components/card/card44";
-import Link from "next/link";
-import Skeleton from "@/components/loader/skeleton";
 
 const Twenty = ({ data }: any) => {
   const { category, module } = useTheme();
@@ -167,7 +166,7 @@ const Product = ({
             }
           >
             <div className="grid sm:grid-cols-2 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-8">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item?.id}
                   initial={{ scale: 0 }}
@@ -184,7 +183,7 @@ const Product = ({
       ) : (
         <div>
           <div className="grid sm:grid-cols-2 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-8">
-            {products.map((item: any) => (
+            {products?.map((item: any) => (
               <motion.div
                 key={item?.id}
                 initial={{ scale: 0 }}

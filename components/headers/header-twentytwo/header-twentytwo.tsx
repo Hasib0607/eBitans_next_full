@@ -1,23 +1,23 @@
 "use client";
-import React, { useState, Fragment } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
+import { Fragment, useState } from "react";
 import { FaSearch } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 import { GiShoppingBag } from "react-icons/gi";
 import { RiCloseCircleLine, RiMenu2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { FiUser } from "react-icons/fi";
-import { Menu, Transition } from "@headlessui/react";
 import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import Search from "./search";
-import useTheme from "@/hooks/use-theme";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderTwentyTwo = ({headerSetting}:any) => {
-  const {  design, menu, userData } = useTheme();
+const HeaderTwentyTwo = ({ headerSetting }: any) => {
+  const { design, menu, userData } = useTheme();
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
@@ -76,13 +76,13 @@ const HeaderTwentyTwo = ({headerSetting}:any) => {
  
     `;
 
-    const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <>
@@ -204,7 +204,7 @@ const HeaderTwentyTwo = ({headerSetting}:any) => {
                         <Cat item={menuData} key={idx} />
                       ) : (
                         <Link
-                          href={menuData?.url ? `${menuData?.url}` : '/'}
+                          href={menuData?.url ? `${menuData?.url}` : "/"}
                           // style={({ isActive }) =>
                           //   isActive
                           //     ? {
@@ -382,9 +382,12 @@ const HeaderTwentyTwo = ({headerSetting}:any) => {
                   <style>{styleCss}</style>
                   {menu?.map((item: any) => (
                     <div key={item.id}>
-                      <Link onClick={() => setOpen(false)} href={item?.url? `${item?.url}` : '/'}>
+                      <Link
+                        onClick={() => setOpen(false)}
+                        href={item?.url ? `${item?.url}` : "/"}
+                      >
                         <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
-                          {item.name} 
+                          {item.name}
                         </p>
                       </Link>
                     </div>
@@ -415,7 +418,7 @@ const Cat = ({ item }: any) => {
         <h1 className=" font-bold text-sm py-2">{item?.name}</h1>
       </Link>
       <div className="absolute top-10 z-10 left-0 max-h-fit bg-white  min-w-[200px] hidden group-hover:flex  flex-col space-y-2">
-        {category.map((item: any) => (
+        {category?.map((item: any) => (
           <Link
             key={item.id}
             href={"/category/" + item?.id}

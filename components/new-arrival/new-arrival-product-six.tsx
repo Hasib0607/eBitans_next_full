@@ -1,19 +1,17 @@
 "use client";
-import React from "react";
 import { SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 // import required modules
 
 // import "./NewArrivalProductSix.css";
-import SectionHeadingSix from "../section-heading/section-heading-six";
 import ArrowSquare from "@/utils/arrow-square";
-import SliderFive from "../slider/slider-five";
-import Card57 from "../card/card57";
 import Card7 from "../card/card7";
+import SectionHeadingSix from "../section-heading/section-heading-six";
+import SliderFive from "../slider/slider-five";
 
 const NewArrivalProductSix = ({ product, design, store_id }: any) => {
   const prev = "new_arrival_Prev";
@@ -38,7 +36,6 @@ const NewArrivalProductSix = ({ product, design, store_id }: any) => {
         </div>
         <SliderFive prevEl={prev} nextEl={next}>
           {product.slice(0, 10).map((productData: any) => {
-            console.log(productData, "productData");
             return (
               <SwiperSlide key={productData.id} className="flex justify-center">
                 <Card7 item={productData} store_id={store_id} />

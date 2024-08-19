@@ -15,8 +15,8 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import Search from "./search";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderThirtyNine = ({headerSetting}:any) => {
-  const { design,  menu, userData } = useTheme();
+const HeaderThirtyNine = ({ headerSetting }: any) => {
+  const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
   const [open, setOpen] = useState(false);
@@ -49,11 +49,11 @@ const HeaderThirtyNine = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
-  
+
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
@@ -229,7 +229,7 @@ const HeaderThirtyNine = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                                onClick={() => handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

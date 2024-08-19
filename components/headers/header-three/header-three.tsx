@@ -20,7 +20,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderThree = ({headerSetting}:any) => {
+const HeaderThree = ({ headerSetting }: any) => {
   const { design, userData } = useTheme();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -61,13 +61,13 @@ const HeaderThree = ({headerSetting}:any) => {
   
      `;
 
-     const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="w-full">

@@ -10,9 +10,6 @@ const CheckoutComponent = () => {
   const { user } = useSelector((state: any) => state.auth);
   const { design, store } = useTheme();
 
-  console.log(user, "user");
-  console.log(store, "store");
-
   useEffect(() => {
     if (!user?.verify && store?.auth_type !== "EasyOrder") {
       router.push("/login"); // Navigate to login page if conditions are not met

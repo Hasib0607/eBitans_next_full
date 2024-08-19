@@ -82,7 +82,6 @@ const Nine = ({ data, updatedData }: any) => {
 export default Nine;
 
 const According = ({ text, desc }: any) => {
-  console.log(desc?.error, "desc");
   const [show, setShow] = useState(false);
 
   return (

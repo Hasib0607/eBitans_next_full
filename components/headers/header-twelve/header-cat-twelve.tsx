@@ -1,16 +1,14 @@
 "use client";
-import React from "react";
-import { useState } from "react";
-import { BsSearch } from "react-icons/bs";
-import { HiMenu } from "react-icons/hi";
-import { RiArrowDownSLine } from "react-icons/ri";
-import { AiOutlineClose } from "react-icons/ai";
-import { CgShoppingBag } from "react-icons/cg";
-import { useSelector } from "react-redux";
-import { IoIosArrowForward } from "react-icons/io";
 import useTheme from "@/hooks/use-theme";
-import { BottomCart } from "../card-popup-three";
 import Link from "next/link";
+import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import { CgShoppingBag } from "react-icons/cg";
+import { HiMenu } from "react-icons/hi";
+import { IoIosArrowForward } from "react-icons/io";
+import { RiArrowDownSLine } from "react-icons/ri";
+import { BottomCart } from "../card-popup-three";
 import Search from "./search";
 
 const HeaderCatTwelve = () => {
@@ -79,7 +77,7 @@ const HeaderCatTwelve = () => {
                 openCat ? "max-h-[1000px]" : "max-h-[0]"
               } ${active ? "overflow-hidden" : ""}`}
             >
-              {category.map((item: any) => (
+              {category?.map((item: any) => (
                 <div key={item.id} className="relative">
                   <li
                     onMouseEnter={() => {

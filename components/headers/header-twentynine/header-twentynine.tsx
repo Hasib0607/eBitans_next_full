@@ -16,7 +16,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderTwentyNine = ({headerSetting}:any) => {
+const HeaderTwentyNine = ({ headerSetting }: any) => {
   const { design, menu } = useTheme();
   const dispatch = useDispatch();
   const [openMenu, setOpenMenu] = useState(false);
@@ -37,7 +37,7 @@ const HeaderTwentyNine = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
@@ -273,7 +273,7 @@ const HeaderTwentyNine = ({headerSetting}:any) => {
                   <li>
                     <Link href={item?.url ? `${item?.url}` : "/"}>
                       <h1 className="flex uppercase justify-between items-center group font-semibold text-sm menu-hover">
-                        {item.name} 
+                        {item.name}
                       </h1>
                     </Link>
                   </li>

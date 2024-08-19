@@ -1,17 +1,16 @@
 "use client";
-import useTheme from "@/hooks/use-theme";
-import React, { useEffect, useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card63 from "@/components/card/card63";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import Pagination from "@/components/_category-page/category/pagination";
-import OvalLoader from "@/components/loader/oval-loader";
-import InfiniteScroll from "react-infinite-scroll-component";
-import Card63 from "@/components/card/card63";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import httpReq from "@/utils/http/axios/http.service";
 import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
 
 const ThirtySix = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -252,7 +251,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 lg:gap-0">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item?.id}
                   initial={{ scale: 0 }}
@@ -268,7 +267,7 @@ const Product = ({
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2.5 lg:gap-0">
-          {products.map((item: any) => (
+          {products?.map((item: any) => (
             <motion.div
               key={item?.id}
               initial={{ scale: 0 }}

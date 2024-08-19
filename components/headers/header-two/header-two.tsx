@@ -17,8 +17,8 @@ import Search from "./search";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-fourteen/side-menu";
 
-const HeaderTwo = ({headerSetting}:any) => {
-  const {  design, menu, userData } = useTheme();
+const HeaderTwo = ({ headerSetting }: any) => {
+  const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState(false);
@@ -288,7 +288,7 @@ const HeaderTwo = ({headerSetting}:any) => {
               <SideCategory />
             </div>
             <div className="lg:hidden flex flex-col space-y-3 ml-36 z-50">
-              <SideMenu setOpen={setOpen} />  
+              <SideMenu setOpen={setOpen} />
             </div>
             {/* <div className="lg:hidden flex flex-col space-y-3 mt-5 ml-36 z-50" >
               {

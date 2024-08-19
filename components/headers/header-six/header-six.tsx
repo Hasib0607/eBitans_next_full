@@ -18,7 +18,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderSix = ({headerSetting}:any) => {
+const HeaderSix = ({ headerSetting }: any) => {
   const { design, menu } = useTheme();
   const dispatch = useDispatch();
   const [openMenuSix, setOpenMenu] = useState(false);
@@ -70,13 +70,13 @@ const HeaderSix = ({headerSetting}:any) => {
  
     `;
 
-    const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <>

@@ -18,8 +18,8 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderThirtySeven = ({headerSetting}:any) => {
-  const {  userData, category, design } = useTheme();
+const HeaderThirtySeven = ({ headerSetting }: any) => {
+  const { userData, category, design } = useTheme();
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
@@ -48,7 +48,7 @@ const HeaderThirtySeven = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };

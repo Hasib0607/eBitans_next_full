@@ -290,7 +290,6 @@ const SingleItem = ({
 
   useEffect(() => {
     let copyText = document.querySelector(".copy-text");
-    console.log(copyText);
 
     if (copyText !== null) {
       copyText.querySelector("button")?.addEventListener("click", function () {

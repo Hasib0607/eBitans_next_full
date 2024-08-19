@@ -1,19 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { IoIosArrowForward } from "react-icons/io";
-import { BiFilterAlt } from "react-icons/bi";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { ThreeDots } from "react-loader-spinner";
-import { useParams } from "next/navigation";
-import useTheme from "@/hooks/use-theme";
-import Pagination from "./pagination";
+import Card32 from "@/components/card/card32";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import httpReq from "@/utils/http/axios/http.service";
 import OvalLoader from "@/components/loader/oval-loader";
-import Card32 from "@/components/card/card32";
-import Link from "next/link";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { BiFilterAlt } from "react-icons/bi";
+import { IoIosArrowForward } from "react-icons/io";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
+import Pagination from "./pagination";
 
 const CategoryFourteen = () => {
   const { id: data }: any = useParams<{ id: string }>();
@@ -326,7 +326,7 @@ const Product = ({
             }
           >
             <div className="">
-              {products.map((item: any, key: number) => (
+              {products?.map((item: any, key: number) => (
                 <div key={key}>
                   <Card32 item={item} />
                 </div>
@@ -337,7 +337,7 @@ const Product = ({
       ) : (
         <div>
           <div className="">
-            {products.map((item: any, key: any) => (
+            {products?.map((item: any, key: any) => (
               <div key={key}>
                 <Card32 item={item} />
               </div>

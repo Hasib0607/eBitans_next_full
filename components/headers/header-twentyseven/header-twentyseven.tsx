@@ -15,7 +15,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderTwentySeven = ({headerSetting}:any) => {
+const HeaderTwentySeven = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
@@ -36,11 +36,10 @@ const HeaderTwentySeven = ({headerSetting}:any) => {
     return classes.filter(Boolean).join(" ");
   }
 
-
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
@@ -114,7 +113,7 @@ const HeaderTwentySeven = ({headerSetting}:any) => {
             <div className="flex justify-start xl:gap-10 gap-4 uppercase text-[14px] py-4">
               {menu?.map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={menu?.url ? `${menu?.url}` : '/'}>
+                  <Link href={menu?.url ? `${menu?.url}` : "/"}>
                     <li className="">{menu.name}</li>
                   </Link>
                 </ul>
@@ -224,7 +223,7 @@ const HeaderTwentySeven = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                                onClick={() => handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

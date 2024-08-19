@@ -12,7 +12,7 @@ export async function generateMetadata() {
 
   return {
     title: `${websiteName} | Checkout`,
-    icons: { icon: imgUrl + headersetting.favicon },
+    icons: { icon: imgUrl + headersetting?.favicon },
   };
 }
 

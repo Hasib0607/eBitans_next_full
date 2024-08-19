@@ -16,7 +16,7 @@ import userImg from "@/assets/img/user.png";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderTwentyThree = ({headerSetting}:any) => {
+const HeaderTwentyThree = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
@@ -302,9 +302,9 @@ const HeaderTwentyThree = ({headerSetting}:any) => {
         <div className="flex gap-10 uppercase text-[14px] sm:container px-5 py-4">
           {menu?.map((menu: any) => (
             <ul key={menu.id}>
-              <Link href={menu?.url ? `${menu?.url}` : '/'}>
+              <Link href={menu?.url ? `${menu?.url}` : "/"}>
                 <li className="duration-500 border border-transparent border-hover-menu">
-                  {menu.name} 
+                  {menu.name}
                 </li>
               </Link>
             </ul>

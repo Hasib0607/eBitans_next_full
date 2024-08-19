@@ -38,7 +38,7 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderTwelve = ({headerSetting}:any) => {
+const HeaderTwelve = ({ headerSetting }: any) => {
   const { design, menu, store_id } = useTheme();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -51,7 +51,7 @@ const HeaderTwelve = ({headerSetting}:any) => {
     setSearch("");
   };
 
-  const cartList = useSelector((state :any) => state.cart.cartList);
+  const cartList = useSelector((state: any) => state.cart.cartList);
 
   const changeNavbar = () => {
     if (window.scrollY >= 120) {
@@ -86,13 +86,13 @@ const HeaderTwelve = ({headerSetting}:any) => {
   }
     `;
 
-    const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="bg-white">

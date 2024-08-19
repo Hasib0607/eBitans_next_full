@@ -1,24 +1,24 @@
 "use client";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { HiOutlineAdjustments } from "react-icons/hi";
 import {
   ArrowLeftIcon,
   MinusIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
+import { HiOutlineAdjustments } from "react-icons/hi";
 
 import Card12 from "@/components/card/card12";
 import useTheme from "@/hooks/use-theme";
-import { useParams } from "next/navigation";
 import httpReq from "@/utils/http/axios/http.service";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
+import { useParams } from "next/navigation";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import PaginationComponent from "./pagination-new";
 import FilterByColorNew from "./filter-by-color-new";
 import FilterByPriceNew from "./filter-by-price-new";
+import PaginationComponent from "./pagination-new";
 
 const fetchData = async (
   id: any,
@@ -94,7 +94,7 @@ const CategorySevenNew = () => {
             <h1 className="mb-10 text-2xl text-gray-700 font-medium">
               Category
             </h1>
-            {category.map((item: any) => (
+            {category?.map((item: any) => (
               <div key={item.id} className="">
                 <SingleCat key={item?.id} item={item} />
               </div>
@@ -177,7 +177,7 @@ const CategorySevenNew = () => {
                 Category
               </h1>
 
-              {category.map((item: any) => (
+              {category?.map((item: any) => (
                 <div key={item.id} className="">
                   <SingleCat item={item} />
                 </div>
