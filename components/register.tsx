@@ -1,13 +1,13 @@
 "use client";
-import React, { useEffect } from "react";
-import RegisterOne from "./register/register-one";
-import RegisterFour from "./register/register-four";
-import RegisterFive from "./register/register-five";
-import RegisterSeven from "./register/register-seven";
-import RegisterEleven from "./register/register-eleven";
 import useTheme from "@/hooks/use-theme";
-import { useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
+import RegisterEleven from "./register/register-eleven";
+import RegisterFive from "./register/register-five";
+import RegisterFour from "./register/register-four";
+import RegisterOne from "./register/register-one";
+import RegisterSeven from "./register/register-seven";
 
 const componentMap: any = {
   one: RegisterOne,
@@ -52,8 +52,6 @@ const Register = () => {
       router.push("/login");
     }
   }, [user, router]);
-
-  console.log(user, "user from register");
 
   const Component = componentMap[design?.login_page];
 

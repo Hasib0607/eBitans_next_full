@@ -1,20 +1,20 @@
 /* eslint-disable no-cond-assign */
 /* eslint-disable jsx-a11y/no-redundant-roles */
 
-import React, { Fragment, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Dialog, Transition } from "@headlessui/react";
-import { toast } from "react-toastify";
 import useTheme from "@/hooks/use-theme";
+import { removeToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   ShoppingBagIcon,
   TrashIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
-import Link from "next/link";
 import { motion } from "framer-motion";
-import { productImg } from "@/site-settings/siteUrl";
-import { removeToCartList } from "@/redux/features/product.slice";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const CartPopUpFive = () => {
   const { design } = useTheme();
@@ -77,8 +77,6 @@ const ShoppingCart = ({ setOpen }: any) => {
     (previousValue: any, currentValue: any) => previousValue + currentValue,
     0
   );
-
-  console.log(cartList, "cartList777", total);
 
   const handleNavLink = () => {
     setOpen(false);

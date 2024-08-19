@@ -59,16 +59,6 @@ const Card54 = ({ item }: any) => {
     camp?.discount_type
   );
 
-  console.log(camp, "camp");
-
-  console.log({
-    unitAddPrice,
-    productGetPrice,
-    campPriceUnit,
-    campPrice,
-    price,
-  });
-
   useEffect(() => {
     async function handleCampaign() {
       try {

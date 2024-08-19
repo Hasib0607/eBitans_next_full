@@ -29,7 +29,6 @@ const LoginFive = () => {
     dispatch(login({ store_id, ...data }) as any)
       .unwrap()
       .then(({ verify, error }: any) => {
-        console.log(verify, "verify");
         if (error) {
           toast(error, { type: "error" });
         }

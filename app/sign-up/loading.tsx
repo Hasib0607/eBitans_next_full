@@ -1,9 +1,9 @@
-import SpinerOne from "@/components/spinner/spiner-one";
-import SpinerTwo from "@/components/spinner/spiner-two";
-import SpinerThree from "@/components/spinner/spiner-three";
-import SpinerFour from "@/components/spinner/spiner-four";
 import SpinerFive from "@/components/spinner/spiner-five";
+import SpinerFour from "@/components/spinner/spiner-four";
+import SpinerOne from "@/components/spinner/spiner-one";
 import SpinerSix from "@/components/spinner/spiner-six";
+import SpinerThree from "@/components/spinner/spiner-three";
+import SpinerTwo from "@/components/spinner/spiner-two";
 
 import { getSubdomainName } from "@/lib";
 import getUrl from "@/utils/get-url";
@@ -13,11 +13,7 @@ const Loading = async () => {
   const data = await getSubdomainName(url);
   const { design } = data;
 
-  console.log(design, "from loading");
-
   const No_Of_Loading_Spinner = design?.header || "one";
-
-  console.log(No_Of_Loading_Spinner, "load");
 
   const renderLoader = () => {
     switch (No_Of_Loading_Spinner) {

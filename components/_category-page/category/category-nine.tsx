@@ -1,18 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { CgMenuGridO } from "react-icons/cg";
 import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
+import { CgMenuGridO } from "react-icons/cg";
 
-import InfiniteScroll from "react-infinite-scroll-component";
-import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import FilterByColor from "@/components/filter-by-color";
-import FilterByPrice from "@/components/filter-by-price";
-import Pagination from "./pagination";
-import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
 import Card22 from "@/components/card/card22";
 import Card6 from "@/components/card/card6";
+import FilterByColor from "@/components/filter-by-color";
+import FilterByPrice from "@/components/filter-by-price";
+import OvalLoader from "@/components/loader/oval-loader";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import {
   MinusIcon,
   PlusIcon,
@@ -20,6 +17,9 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
+import Pagination from "./pagination";
 
 const CategoryNine = () => {
   const { id: data }: any = useParams<{ id: string }>();
@@ -64,8 +64,6 @@ const CategoryNine = () => {
     }
  
     `;
-
-  console.log(data, "params");
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white">

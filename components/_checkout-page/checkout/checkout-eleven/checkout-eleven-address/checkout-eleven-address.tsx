@@ -87,8 +87,6 @@ const CheckOutElevenAddress = ({
     }
   }, [store_id, call, setSelectAddress, token, store?.auth_type, user]);
 
-  console.log(open, "open");
-
   return (
     <>
       <div className="shadow sm:rounded-md sm:overflow-hidden my-5">
@@ -649,8 +647,6 @@ export function UpdateAddress({
     }
   };
 
-  console.log("update addressxx");
-
   return (
     <Modal open={open} setOpen={setOpen}>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
@@ -729,7 +725,6 @@ export function UpdateAddress({
 // modal for address update
 export function Modal({ open, setOpen, children }: any) {
   const cancelButtonRef = useRef(null);
-  console.log(open, setOpen);
 
   return (
     <Transition.Root show={open} as={Fragment}>
