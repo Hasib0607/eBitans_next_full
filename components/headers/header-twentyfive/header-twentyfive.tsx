@@ -149,8 +149,8 @@ const HeaderTop = () => {
   );
 };
 
-const HeaderDown = () => {
-  const { headerSetting, design, menu } = useTheme();
+const HeaderDown = ({headerSetting}:any) => {
+  const {  design, menu } = useTheme();
   const [searchTxt, setSearch] = useState("");
   // const [searchInput, setSearchInput] = useState(false);
   const [open, setOpen] = useState(false);

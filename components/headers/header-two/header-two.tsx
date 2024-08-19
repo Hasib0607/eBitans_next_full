@@ -17,8 +17,8 @@ import Search from "./search";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-fourteen/side-menu";
 
-const HeaderTwo = () => {
-  const { headerSetting, design, menu, userData } = useTheme();
+const HeaderTwo = ({headerSetting}:any) => {
+  const {  design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState(false);

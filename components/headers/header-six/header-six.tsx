@@ -18,8 +18,8 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderSix = () => {
-  const { design, headerSetting, menu } = useTheme();
+const HeaderSix = ({headerSetting}:any) => {
+  const { design, menu } = useTheme();
   const dispatch = useDispatch();
   const [openMenuSix, setOpenMenu] = useState(false);
   const [searchTxt, setSearch] = useState<any>("");

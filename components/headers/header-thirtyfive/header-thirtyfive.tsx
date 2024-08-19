@@ -13,11 +13,11 @@ import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderThirtyFive = () => {
+const HeaderThirtyFive = ({headerSetting}:any) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
 
-  const { headerSetting, userData, design, menu } = useTheme();
+  const { userData, design, menu } = useTheme();
   const [open, setOpen] = useState(false);
   const [searchTxt, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState(false);

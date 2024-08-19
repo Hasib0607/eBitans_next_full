@@ -19,8 +19,8 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HeaderEight() {
-  const { menu, headerSetting, design } = useTheme();
+export default function HeaderEight({headerSetting}:any) {
+  const { menu, design } = useTheme();
   const dispatch = useDispatch();
 
   const [searchTxt, setSearch] = useState("");

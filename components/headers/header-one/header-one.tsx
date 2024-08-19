@@ -3,10 +3,10 @@ import HeaderTop from "./header-top";
 import HeaderDown from "./header-down";
 import HeaderMid from "./header-mid";
 
-const HeaderOne = () => {
+const HeaderOne = ({headerSetting}:any) => {
   return (
     <div className="flex flex-col gap-1">
-      <HeaderTop />
+      <HeaderTop headerSetting={headerSetting}/>
       <HeaderDown />
       <HeaderMid />
     </div>

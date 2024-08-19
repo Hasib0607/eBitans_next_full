@@ -20,8 +20,8 @@ import SideMenu from "../header-three/side-menu";
 import Taka from "@/utils/taka";
 
 
-const HeaderThirtyFour = () => {
-  const { category, design, subcategory, headerSetting, menu, userData } =
+const HeaderThirtyFour = ({headerSetting}:any) => {
+  const { category, design, subcategory, menu, userData } =
     useTheme();
 
   const [openCat, setOpenCat] = useState(false);

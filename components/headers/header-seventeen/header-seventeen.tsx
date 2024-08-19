@@ -20,8 +20,8 @@ import {
 } from "@heroicons/react/24/outline";
 import NavLinks from "./navlinks";
 
-const HeaderSeventeen = () => {
-  const { headerSetting, design } = useTheme();
+const HeaderSeventeen = ({headerSetting}:any) => {
+  const {  design } = useTheme();
 
   const [searchInput, setSearchInput] = useState(false);
   const [searchTxt, setSearch] = useState("");

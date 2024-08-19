@@ -16,8 +16,8 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderTwentyTwo = () => {
-  const { headerSetting, design, menu, userData } = useTheme();
+const HeaderTwentyTwo = ({headerSetting}:any) => {
+  const {  design, menu, userData } = useTheme();
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
