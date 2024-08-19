@@ -17,9 +17,8 @@ import { useDispatch, useSelector } from "react-redux";
 import SideMenu from "../header-three/side-menu";
 import Search from "./search";
 
-const HeaderThirtyThree = ({headerSetting}:any) => {
-  const { category, design, subcategory, menu, userData } =
-    useTheme();
+const HeaderThirtyThree = ({ headerSetting }: any) => {
+  const { category, design, subcategory, menu, userData } = useTheme();
   const [openCat, setOpenCat] = useState(false);
   const [searchTxt, setSearch] = useState("");
 
