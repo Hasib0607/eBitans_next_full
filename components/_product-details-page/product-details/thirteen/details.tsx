@@ -328,13 +328,13 @@ const Details = ({
   const buttonThirteen =
     "h-full px-2 grow flex items-center justify-center hover:bg-gray-100 bg-gray-200 w-60 py-2 transition-all duration-200 ease-linear";
 
-    if (fetchStatus === "fetching") {
-      return (
-        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-          <Skeleton />
-        </div>
-      );
-    }
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="">

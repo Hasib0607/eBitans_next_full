@@ -25,12 +25,12 @@ const HeaderEleven = () => {
   window.addEventListener("scroll", changeNavbar);
 
   const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="pb-0 ">
@@ -63,7 +63,7 @@ const HeaderEleven = () => {
               {headerSetting?.logo === null ? (
                 <Link href="/">
                   <p className="text-xl uppercase">
-                    {headerSetting?.website_name} 
+                    {headerSetting?.website_name}
                   </p>
                 </Link>
               ) : (

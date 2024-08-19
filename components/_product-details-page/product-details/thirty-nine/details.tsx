@@ -363,8 +363,6 @@ const Details = ({
   const buttonSeven =
     "w-full lg:w-96 flex items-center gap-2 rounded-md text-center py-3 justify-center lg:cursor-pointer cart-btn-thirty-seven";
 
- 
-
   return (
     <div className="pt-5 pb-20">
       <style>{styleCss}</style>

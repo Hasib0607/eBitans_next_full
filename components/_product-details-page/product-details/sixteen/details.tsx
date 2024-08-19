@@ -324,13 +324,13 @@ const Details = ({
   const buttonSixteen =
     "custom-all text-white font-bold py-[11px] px-10 w-max rounded-full";
 
-    if (fetchStatus === "fetching") {
-      return (
-        <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-          <Skeleton />
-        </div>
-      );
-    }
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
+  }
 
   return (
     <div className="">

@@ -40,9 +40,9 @@ const HeaderFive = () => {
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-  const [searchTxt, setSearchTxt] = useState<any>()
-  const [search, setSearch] = useState<any>()
-  const [close, setClose] = useState(true)
+  const [searchTxt, setSearchTxt] = useState<any>();
+  const [search, setSearch] = useState<any>();
+  const [close, setClose] = useState(true);
 
   const styleCss = `
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -88,10 +88,9 @@ const HeaderFive = () => {
     }
   };
 
-  const handleClose = () =>
-  {
-    setClose(false)
-  }
+  const handleClose = () => {
+    setClose(false);
+  };
 
   return (
     <div>
@@ -406,9 +405,22 @@ const HeaderFive = () => {
             </div>
           </div>
         </div>
-        <div className='relative flex items-center '>
-          <input type="text" value={searchTxt} onChange={(e) => setSearch(e.target.value)} className='w-full border-gray-200 opacity-50 outline-none focus:outline-none focus:border-gray-200 focus:ring-0 text-black' placeholder='Search our catalog' />
-          {searchTxt?.length === 0 ? <SearchIcon /> : <AiOutlineClose onClick={handleClose} className=' right-6 absolute lg:cursor-pointer h-7' />}
+        <div className="relative flex items-center ">
+          <input
+            type="text"
+            value={searchTxt}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full border-gray-200 opacity-50 outline-none focus:outline-none focus:border-gray-200 focus:ring-0 text-black"
+            placeholder="Search our catalog"
+          />
+          {searchTxt?.length === 0 ? (
+            <SearchIcon />
+          ) : (
+            <AiOutlineClose
+              onClick={handleClose}
+              className=" right-6 absolute lg:cursor-pointer h-7"
+            />
+          )}
           {searchTxt && <Search search={searchTxt} setSearch={setSearch} />}
         </div>
       </div>

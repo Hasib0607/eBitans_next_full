@@ -48,11 +48,10 @@ const HeaderTwentySix = () => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
-  
 
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Yantramanav&display=swap');
@@ -333,7 +332,10 @@ const HeaderTwentySix = () => {
           <div className={`flex gap-4`}>
             {menu?.slice(0, 7).map((menu: any) => (
               <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
-                <Link href={menu?.url ? `${menu?.url}` : '/'} className="flex items-center">
+                <Link
+                  href={menu?.url ? `${menu?.url}` : "/"}
+                  className="flex items-center"
+                >
                   <li className="text-lg font-medium py-3 uppercase menu-hover">
                     {menu?.name}
                   </li>
@@ -350,7 +352,10 @@ const HeaderTwentySix = () => {
           <div className="sm:container px-5 flex gap-4">
             {menu?.slice(0, 7).map((menu: any) => (
               <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
-                <Link href={menu?.url ? `${menu?.url}` : '/'} className="flex items-center">
+                <Link
+                  href={menu?.url ? `${menu?.url}` : "/"}
+                  className="flex items-center"
+                >
                   <li className="text-lg font-medium py-3 uppercase menu-hover">
                     {menu?.name}
                   </li>

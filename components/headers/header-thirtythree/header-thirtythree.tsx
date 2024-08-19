@@ -76,11 +76,10 @@ const HeaderThirtyThree = () => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
-
 
   // CSS START FROM HERE
 

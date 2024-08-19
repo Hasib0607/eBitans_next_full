@@ -20,7 +20,7 @@ export default function HeaderMid() {
   const { logo, phone } = headerSetting;
 
   const { user } = useSelector((state: any) => state.auth);
- 
+
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
@@ -160,7 +160,7 @@ export default function HeaderMid() {
             <div className="py-6 px-5 space-y-6">
               {user?.verify ? (
                 <div
-                    onClick={() => handleClick()}
+                  onClick={() => handleClick()}
                   style={{
                     backgroundColor: design?.header_color,
                     color: design?.text_color,
