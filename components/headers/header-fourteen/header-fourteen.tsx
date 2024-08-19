@@ -16,8 +16,8 @@ import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import SideMenu from "./side-menu";
 
-const HeaderFourteen = ({headerSetting}:any) => {
-  const {  design, userData } = useTheme();
+const HeaderFourteen = ({ headerSetting }: any) => {
+  const { design, userData } = useTheme();
   const dispatch = useDispatch();
 
   const [searchInput, setSearchInput] = useState(false);

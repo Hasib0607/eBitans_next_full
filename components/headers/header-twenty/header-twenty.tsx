@@ -17,8 +17,8 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HeaderTwenty({headerSetting}:any) {
-  const {  menu, design } = useTheme();
+export default function HeaderTwenty({ headerSetting }: any) {
+  const { menu, design } = useTheme();
   const [searchInput, setSearchInput] = useState(false);
   const [searchTxt, setSearch] = useState("");
 

@@ -20,10 +20,10 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderFifteen = ({headerSetting}:any) => {
+const HeaderFifteen = ({ headerSetting }: any) => {
   const [open, setOpen] = useState(false);
   const [searchTxt, setSearch] = useState<any>(null);
-  const {  menu, design } = useTheme();
+  const { menu, design } = useTheme();
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);

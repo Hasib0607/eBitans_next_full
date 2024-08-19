@@ -16,7 +16,7 @@ import userImg from "@/assets/img/user.png";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderTwentyThree = ({headerSetting}:any) => {
+const HeaderTwentyThree = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");

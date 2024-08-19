@@ -16,11 +16,11 @@ import SideMenu from "../header-three/side-menu";
 import useTheme from "@/hooks/use-theme";
 import Search from "./search";
 
-const HeaderNineteen = ({headerSetting}:any) => {
+const HeaderNineteen = ({ headerSetting }: any) => {
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
   }
-  const {  design, menu, userData, category } = useTheme();
+  const { design, menu, userData, category } = useTheme();
 
   const dispatch = useDispatch();
   // const cartList = useSelector((state) => state.cart.cartList)
