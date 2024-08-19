@@ -1,4 +1,3 @@
-
 function capitalizeFirstLetter(string: string | undefined) {
   if (string) {
     if (string?.length === 0) {
