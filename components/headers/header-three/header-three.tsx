@@ -1,19 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import useTheme from "@/hooks/use-theme";
 import { location } from "@/assets/svg";
-import "./header-three.css";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
 import {
-  ChevronDownIcon,
-  Bars4Icon,
   ArrowLeftIcon,
+  Bars4Icon,
+  ChevronDownIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderMenu from "./header-menu";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import "./header-three.css";
 import SideMenu from "./side-menu";
 
 function classNames(...classes: any) {

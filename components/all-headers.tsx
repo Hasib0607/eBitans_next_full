@@ -1,4 +1,3 @@
-import useTheme from "@/hooks/use-theme";
 import dynamic from "next/dynamic";
 
 const headers: any = {
@@ -110,7 +109,6 @@ const headers: any = {
 
 const AllHeaders = ({ design, headerSetting }: any) => {
   const HeaderComponent = headers[design?.header];
-  // const HeaderComponent = headers["seven"];
 
   return (
     <>

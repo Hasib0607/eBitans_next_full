@@ -1,16 +1,16 @@
 "use client";
+import useTheme from "@/hooks/use-theme";
 import { Menu, Transition } from "@headlessui/react";
-import React, { Fragment, useEffect, useState } from "react";
-import { AiFillLinkedin } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { IoLogoWhatsapp } from "react-icons/io5";
-import { GrInstagram, GrYoutube } from "react-icons/gr";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import HeaderTwentyNineMenu from "./header-twentynine-menu";
+import { Fragment, useEffect, useState } from "react";
+import { AiFillLinkedin } from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa";
+import { GrInstagram, GrYoutube } from "react-icons/gr";
+import { IoLogoWhatsapp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderTwentyNineCat from "./header-twentynine-cat";
-import useTheme from "@/hooks/use-theme";
+import HeaderTwentyNineMenu from "./header-twentynine-menu";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -271,7 +271,7 @@ const HeaderTwentyNine = ({ headerSetting }: any) => {
               {menu.map((item: any) => (
                 <div key={item.id} className="">
                   <li>
-                    <Link href={item?.url ? `${item?.url}` : "/"}>
+                    <Link href={"/" + item?.url}>
                       <h1 className="flex uppercase justify-between items-center group font-semibold text-sm menu-hover">
                         {item.name}
                       </h1>

@@ -158,7 +158,7 @@ const HeaderThirtyFour = ({ headerSetting }: any) => {
               <Link href="/">
                 <img
                   className="h-10"
-                  src={imgUrl + headerSetting.logo}
+                  src={imgUrl + headerSetting?.logo}
                   alt="logo"
                 />
               </Link>
@@ -458,7 +458,7 @@ const HeaderThirtyFour = ({ headerSetting }: any) => {
             <div className={`flex gap-5 uppercase text-sm`}>
               {menu?.map((menu: any) => (
                 <ul key={menu.id}>
-                  <Link href={menu?.url ? `${menu?.url}` : "/"}>
+                  <Link href={"/" + menu?.url}>
                     <li className="duration-500 px-3 py-1.5 hover:text-yellow-200 rounded-full">
                       {menu.name}
                     </li>
@@ -497,7 +497,7 @@ const HeaderThirtyFour = ({ headerSetting }: any) => {
                 <Link href="/">
                   <img
                     className="h-10"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

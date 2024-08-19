@@ -1,19 +1,18 @@
 "use client";
-import React, { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { IoSearchOutline } from "react-icons/io5";
-import { AiOutlineClose } from "react-icons/ai";
-import { RiShoppingBagLine } from "react-icons/ri";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HiMenu } from "react-icons/hi";
 import useTheme from "@/hooks/use-theme";
-import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import Search from "./search";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { HiMenu } from "react-icons/hi";
+import { IoSearchOutline } from "react-icons/io5";
+import { RiShoppingBagLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
+import Search from "./search";
 
 const HeaderThirtyNine = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
@@ -116,7 +115,7 @@ const HeaderThirtyNine = ({ headerSetting }: any) => {
           <div className="flex justify-start xl:gap-10 gap-4 uppercase text-[14px] py-4">
             {menu?.map((menu: any) => (
               <ul key={menu.id}>
-                <Link href={menu.url}>
+                <Link href={"/" + menu.url}>
                   <li className="">{menu.name}</li>
                 </Link>
               </ul>

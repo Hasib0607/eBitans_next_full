@@ -1,15 +1,15 @@
 "use client";
-import React, { useState, Fragment, useEffect } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { IoMdMenu } from "react-icons/io";
 import { IoSearchOutline } from "react-icons/io5";
 import { RiShoppingBagLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { Menu, Transition } from "@headlessui/react";
-import useTheme from "@/hooks/use-theme";
 import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import Search from "./search";
 
 const HeaderTwentyFour = ({ headerSetting }: any) => {
@@ -290,7 +290,7 @@ const HeaderTwentyFour = ({ headerSetting }: any) => {
           </div>
           <div className="pb-5 pt-20 pl-4 text-white">
             {menu?.slice(0, 7).map((menu: any) => (
-              <ul key={menu.id}>
+              <ul key={"/" + menu.id}>
                 <Link href={menu.url}>
                   <li className="">{menu.name}</li>
                 </Link>

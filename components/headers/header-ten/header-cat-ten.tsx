@@ -1,13 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import { useSelector } from "react-redux";
-import { BsSearch } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
 import useTheme from "@/hooks/use-theme";
-import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
 import { ChevronDownIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { BottomCart } from "../card-popup-three";
 import Search from "./search";
 
 const HeaderCatTen = () => {
@@ -108,7 +107,7 @@ const HeaderCatTen = () => {
                 {menu.map((menuItem: any, j: any) => (
                   <div key={menuItem.id} className="relative ">
                     <div className="px-6 py-2 hover:bg-gray-300 hover:text-gray-900 ">
-                      <Link href={menuItem?.url}>
+                      <Link href={"/" + menuItem?.url}>
                         <h1>{menuItem.name} </h1>
                       </Link>
                     </div>

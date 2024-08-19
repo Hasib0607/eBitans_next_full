@@ -1,22 +1,20 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { Fragment, useEffect, useState } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
-import "./header-ten.css";
-import { HiMenu } from "react-icons/hi";
-import { FiPhoneCall } from "react-icons/fi";
-import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import {
   ArrowLeftIcon,
   ChevronDownIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
-import HeaderCatTen from "./header-cat-ten";
+import Link from "next/link";
+import { FiPhoneCall } from "react-icons/fi";
+import { HiMenu } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import SideMenu from "../header-three/side-menu";
-import useTheme from "@/hooks/use-theme";
+import HeaderCatTen from "./header-cat-ten";
+import "./header-ten.css";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");

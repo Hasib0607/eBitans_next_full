@@ -1,13 +1,12 @@
 "use client";
-import React, { useState } from "react";
-import "./header-eleven.css";
-import useTheme from "@/hooks/use-theme";
-import HeaderElevenHeaderMenu from "./header-eleven-headermenu";
-import HeaderElevenCategory from "./header-eleven-category";
+import { imgUrl } from "@/site-settings/siteUrl";
 import { TableCellsIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { imgUrl } from "@/site-settings/siteUrl";
+import { useState } from "react";
 import SideMenu from "../header-three/side-menu";
+import HeaderElevenCategory from "./header-eleven-category";
+import HeaderElevenHeaderMenu from "./header-eleven-headermenu";
+import "./header-eleven.css";
 
 const HeaderEleven = ({ headerSetting }: any) => {
   const [open, setOpen] = useState(false);

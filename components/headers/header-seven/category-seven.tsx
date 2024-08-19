@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
-import "./header-seven.css";
 import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import "./header-seven.css";
 
 const CategorySeven = ({ openMenu }: any) => {
   const { category, subcategory, menu } = useTheme();
@@ -60,7 +59,7 @@ const CategorySeven = ({ openMenu }: any) => {
                     <div className="px-6 py-2 hover:bg-gray-200 ">
                       <Link href={"/category/" + subItem?.id}>
                         <h1 className=" text-sm capitalize text-black menu-hover">
-                          {subItem.name}{" "}
+                          {subItem.name}
                         </h1>
                       </Link>
                     </div>

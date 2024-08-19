@@ -1,7 +1,6 @@
-import React from "react";
-import HeaderTop from "./header-top";
 import HeaderDown from "./header-down";
 import HeaderMid from "./header-mid";
+import HeaderTop from "./header-top";
 
 const HeaderOne = ({ headerSetting }: any) => {
   return (

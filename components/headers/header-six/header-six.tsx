@@ -1,17 +1,17 @@
 "use client";
-import { Menu, Transition } from "@headlessui/react";
-import { AiFillLinkedin, AiOutlineClose } from "react-icons/ai";
-import { FaFacebook } from "react-icons/fa";
-import { useDispatch, useSelector } from "react-redux";
-import { GrInstagram, GrYoutube } from "react-icons/gr";
-import { BsSearch } from "react-icons/bs";
 import useTheme from "@/hooks/use-theme";
-import { Fragment, useState } from "react";
+import { Menu, Transition } from "@headlessui/react";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { Fragment, useState } from "react";
+import { AiFillLinkedin, AiOutlineClose } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import { FaFacebook } from "react-icons/fa";
+import { GrInstagram, GrYoutube } from "react-icons/gr";
 import { IoLogoWhatsapp } from "react-icons/io5";
-import HeaderSixMenu from "./header-six-menu";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderSixCat from "./header-six-cat";
+import HeaderSixMenu from "./header-six-menu";
 import Search from "./search";
 
 function classNames(...classes: any) {
@@ -261,7 +261,7 @@ const HeaderSix = ({ headerSetting }: any) => {
               {menu.map((item: any) => (
                 <div key={item.id} className="">
                   <li>
-                    <Link href={item.url}>
+                    <Link href={"/" + item.url}>
                       <h1 className="flex uppercase justify-between items-center group font-semibold text-sm menu-hover">
                         {item.name}
                       </h1>

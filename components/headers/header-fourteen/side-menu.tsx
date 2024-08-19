@@ -2,7 +2,7 @@
 import useTheme from "@/hooks/use-theme";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React, { useState } from "react";
+import { useState } from "react";
 import SideCategory from "./side-category";
 
 const SideMenu = ({ setOpen }: any) => {
@@ -36,7 +36,7 @@ const SideMenu = ({ setOpen }: any) => {
                     : setHeading("");
                 }}
               >
-                <Link href={item?.url ? `${item?.url}` : "/"}>
+                <Link href={"/" + item?.url}>
                   <h1 className=" w-max uppercase font-semibold text-lg text-hover">
                     {item.name}
                   </h1>

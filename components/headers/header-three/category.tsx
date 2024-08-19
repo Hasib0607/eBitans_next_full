@@ -2,7 +2,6 @@
 import useTheme from "@/hooks/use-theme";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React from "react";
 
 const Category = () => {
   const { category, subcategory, design, menu } = useTheme();
@@ -86,7 +85,7 @@ const Category = () => {
             {menu.map((menuItem: any) => (
               <div key={menuItem.id} className="relative ">
                 <div className="px-6 py-2 menu-hover border-b-2 ">
-                  <Link href={menuItem?.url}>
+                  <Link href={"/" + menuItem?.url}>
                     <h1 className=" hover:pl-2 duration-500">
                       {menuItem.name}{" "}
                     </h1>

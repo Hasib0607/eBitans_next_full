@@ -1,15 +1,13 @@
-import React from "react";
-
-import { FaFacebookF } from "react-icons/fa";
+import { imgUrl } from "@/site-settings/siteUrl";
+import Link from "next/link";
 import {
   AiFillLinkedin,
   AiFillYoutube,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
+import { FaFacebookF } from "react-icons/fa";
 import { RiInstagramLine } from "react-icons/ri";
 import Newsletter from "./components/newsletter";
-import { imgUrl } from "@/site-settings/siteUrl";
-import Link from "next/link";
 
 const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
   const date = new Date().getFullYear();
@@ -120,7 +118,7 @@ const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
               key={item.id}
               className="menu-hover text-base leading-4 mt-6 text-gray-800 lg:cursor-pointer"
             >
-              <Link href={item.url}>{item.name}</Link>
+              <Link href={"/" + item.url}>{item.name}</Link>
             </p>
           ))}
         </div>

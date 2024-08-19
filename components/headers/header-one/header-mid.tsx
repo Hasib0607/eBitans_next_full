@@ -1,19 +1,18 @@
 "use client";
-import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import MultiStep from "./multistep";
 import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import {
-  PhoneIcon,
-  XMarkIcon,
-  TableCellsIcon,
   Bars4Icon,
+  PhoneIcon,
+  TableCellsIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { logout } from "@/redux/features/auth.slice";
+import Link from "next/link";
+import { useSelector } from "react-redux";
+import MultiStep from "./multistep";
 
 export default function HeaderMid() {
   const { menu, headerSetting, category, design } = useTheme();

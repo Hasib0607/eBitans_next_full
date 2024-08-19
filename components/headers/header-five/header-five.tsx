@@ -1,19 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  AiFillLinkedin,
-  AiOutlineClose,
-  AiOutlineInstagram,
-  AiOutlineWhatsApp,
-  AiOutlineYoutube,
-} from "react-icons/ai";
-import { GoLocation } from "react-icons/go";
-import { FaFacebookF } from "react-icons/fa";
-import { Fragment } from "react";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+import { location } from "@/assets/svg";
+import { SearchIcon } from "@/assets/svgComp";
 import useTheme from "@/hooks/use-theme";
+import { headerBg } from "@/site-settings/color";
+import { imgUrl } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
 import {
   ArrowLeftIcon,
   Bars4Icon,
@@ -21,15 +12,23 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import HeaderMenu from "./headermenu";
-import StickyNav from "./sticky-nav";
-import { imgUrl } from "@/site-settings/siteUrl";
-import { headerBg } from "@/site-settings/color";
+import { Fragment, useEffect, useState } from "react";
+import {
+  AiFillLinkedin,
+  AiOutlineClose,
+  AiOutlineInstagram,
+  AiOutlineWhatsApp,
+  AiOutlineYoutube,
+} from "react-icons/ai";
+import { FaFacebookF } from "react-icons/fa";
+import { GoLocation } from "react-icons/go";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import SideMenu from "../header-three/side-menu";
 import "./header-five.css";
-import { location } from "@/assets/svg";
-import { SearchIcon } from "@/assets/svgComp";
+import HeaderMenu from "./headermenu";
 import Search from "./search";
+import StickyNav from "./sticky-nav";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");

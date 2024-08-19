@@ -1,20 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { RiMenu2Line } from "react-icons/ri";
 import img from "@/assets/custom_menu_icon.png";
 import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
+import { iconImg, imgUrl } from "@/site-settings/siteUrl";
 import {
   ShoppingBagIcon,
   UserGroupIcon,
   UserIcon,
 } from "@heroicons/react/24/outline";
 import { LogoutIcon } from "assets/svgComp";
-import { iconImg, imgUrl } from "@/site-settings/siteUrl";
-import { logout } from "@/redux/features/auth.slice";
+import Link from "next/link";
+import { RiMenu2Line } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
 
 const HeaderThirteen = () => {
   return (
@@ -241,7 +240,7 @@ const SingleCat = ({ item, setOpen }: any) => {
       <div className="w-full flex py-2 lg:cursor-pointer">
         <Link
           onClick={() => setOpen(false)}
-          href={item?.url ? `${item.url}` : "/"}
+          href={"/" + item?.url}
           className="flex-1 text-sm text-gray-900 font-medium"
         >
           {" "}
