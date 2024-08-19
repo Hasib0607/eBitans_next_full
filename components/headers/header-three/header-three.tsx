@@ -61,13 +61,13 @@ const HeaderThree = () => {
   
      `;
 
-     const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="w-full">

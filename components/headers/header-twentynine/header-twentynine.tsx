@@ -37,7 +37,7 @@ const HeaderTwentyNine = () => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
@@ -273,7 +273,7 @@ const HeaderTwentyNine = () => {
                   <li>
                     <Link href={item?.url ? `${item?.url}` : "/"}>
                       <h1 className="flex uppercase justify-between items-center group font-semibold text-sm menu-hover">
-                        {item.name} 
+                        {item.name}
                       </h1>
                     </Link>
                   </li>

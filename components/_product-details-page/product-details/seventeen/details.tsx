@@ -308,7 +308,6 @@ const Details = ({
   const buttonSeventeen =
     "font-bold search-bg hover:bg-blue-300 duration-300 rounded-md w-60 text-center py-3";
 
-
   return (
     <div className="">
       <style>{customDetailsSeventeen}</style>

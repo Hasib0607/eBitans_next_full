@@ -29,8 +29,6 @@ const HeaderElevenHeaderMenu = () => {
 
   const bgColor = design?.header_color;
 
-
-
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
@@ -138,12 +136,10 @@ const HeaderElevenHeaderMenu = () => {
                         <h1>Profile </h1>
                       </div>
                     </Link>
-                    <div
-                     onClick={() => handleClick()}
-                    >
+                    <div onClick={() => handleClick()}>
                       <div className="flex gap-2">
                         <BiLogOut className="text-2xl font-thin" />
-                        <h1 className="text-black" >Logout </h1>
+                        <h1 className="text-black">Logout </h1>
                       </div>
                     </div>
                   </div>

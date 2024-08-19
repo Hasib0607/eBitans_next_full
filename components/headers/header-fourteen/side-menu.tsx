@@ -38,7 +38,7 @@ const SideMenu = ({ setOpen }: any) => {
               >
                 <Link href={item?.url ? `${item?.url}` : "/"}>
                   <h1 className=" w-max uppercase font-semibold text-lg text-hover">
-                    {item.name} 
+                    {item.name}
                   </h1>
                 </Link>
               </li>

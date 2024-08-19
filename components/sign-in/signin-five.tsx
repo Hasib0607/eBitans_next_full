@@ -1,13 +1,13 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { useRouter } from "next/navigation";
 import { login } from "@/redux/features/auth.slice";
 import Link from "next/link";
-import Loading from "../register/loading";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import Loading from "../register/loading";
 
 export const cls =
   "w-full rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary ";

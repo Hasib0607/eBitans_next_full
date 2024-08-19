@@ -288,7 +288,7 @@ const HeaderTwo = () => {
               <SideCategory />
             </div>
             <div className="lg:hidden flex flex-col space-y-3 ml-36 z-50">
-              <SideMenu setOpen={setOpen} />  
+              <SideMenu setOpen={setOpen} />
             </div>
             {/* <div className="lg:hidden flex flex-col space-y-3 mt-5 ml-36 z-50" >
               {

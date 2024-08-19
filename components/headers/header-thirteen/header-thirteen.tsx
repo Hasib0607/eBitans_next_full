@@ -40,8 +40,6 @@ const HeaderTop = () => {
     }
   };
 
-  
-
   return (
     <div
       style={{

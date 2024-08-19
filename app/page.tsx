@@ -6,9 +6,7 @@ import getUrl from "../utils/get-url";
 
 export async function generateMetadata() {
   const url = getUrl();
-  const {
-    headersetting,
-  } = await getSubdomainName(url, "headersetting");
+  const { headersetting } = await getSubdomainName(url, "headersetting");
   const websiteName = capitalizeFirstLetter(headersetting?.website_name);
 
   return {
@@ -19,5 +17,4 @@ export async function generateMetadata() {
 
 export default async function Home() {
   return <HomePage />;
- 
 }
