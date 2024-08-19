@@ -12,9 +12,9 @@ const HomePage = async () => {
   return (
     <>
       <div
-        className={`${
-          design?.template_id === "34" ? "bg-thirty-one" : "bg-white"
-        } mx-auto`}
+      // className={`${
+      //   design?.template_id === "34" ? "bg-thirty-one" : "bg-white"
+      // } mx-auto`}
       >
         <Suspense>
           {layout &&
