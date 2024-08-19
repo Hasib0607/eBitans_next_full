@@ -176,7 +176,7 @@ const Product = ({
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}&filter=${sort}&priceFilter=${
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );

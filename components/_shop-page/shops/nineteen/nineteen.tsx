@@ -110,7 +110,7 @@ const Product = ({
     const { data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}`
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
     );
 
     if (error) {

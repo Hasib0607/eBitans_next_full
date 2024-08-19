@@ -2,9 +2,9 @@
 import { useCallback, useEffect, useState } from "react";
 // import { token } from "../services/AxiosInstance";
 // import { isMobile, isTablet, isBrowser } from "react-device-detect";
-import axios from "axios";
 import httpReq from "@/utils/http/axios/http.service";
 import { getFromLocalStorage, saveToLocalStorage } from "@/utils/localstorage";
+import axios from "axios";
 // import httpReq from "../services/http.service";
 // import {
 //   getFromLocalStorage,
@@ -326,7 +326,11 @@ const useData = () => {
     async (data: any) => {
       const res = await axios.post(
         "https://admin.ebitans.com/api/v1/" + "getsubdomain/name",
-        { name: window.location.host }
+        {
+          name: window.location.host.startsWith("www.")
+            ? window.location.host.slice(4)
+            : window.location.host,
+        }
       );
 
       const {
@@ -382,7 +386,9 @@ const useData = () => {
   );
 
   useEffect(() => {
-    const domain = window.location.host;
+    const domain = window.location.host.startsWith("www.")
+      ? window.location.host.slice(4)
+      : window.location.host;
     const data = { name: domain };
     // call the function
     fetchHeader(data)

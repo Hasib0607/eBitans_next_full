@@ -26,7 +26,7 @@ const fetchData = async (
   const encodedColor = encodeURIComponent(activeColor);
 
   const { colors, data } = await httpReq.get(
-    `/shoppage/products?name=${window.location.host}&page=${page}&colorFilter=${encodedColor}&priceFilter=${priceValue}&filter=${sort}`
+    `/shoppage/products?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&page=${page}&colorFilter=${encodedColor}&priceFilter=${priceValue}&filter=${sort}`
   );
   return { data, colors };
 };
