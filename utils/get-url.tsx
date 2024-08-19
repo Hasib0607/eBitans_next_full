@@ -6,8 +6,6 @@ const getUrl = () => {
   const forwardedPath = headersList.get("x-forwarded-path") || "";
   const url = `${host}${forwardedPath}`;
 
-  console.log(host, "host");
-
   return url;
 };
 

@@ -17,7 +17,6 @@ import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
 const Card41 = ({ item }: any) => {
-  console.log(item, "FAHF");
   const [open, setOpen] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
   const dispatch = useDispatch();

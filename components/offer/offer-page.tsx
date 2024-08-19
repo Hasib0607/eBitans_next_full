@@ -96,8 +96,6 @@ const OfferPage = () => {
   const sDate: any = campaign?.map((item: any) => item?.start_date);
   const eDate: any = campaign?.map((item: any) => item?.end_date);
 
-  console.log(campaign, "campaign");
-
   // Renderer callback with condition
   const renderer = ({ days, hours, minutes, seconds, completed }: any) => {
     if (completed) {
