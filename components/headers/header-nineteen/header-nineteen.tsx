@@ -16,11 +16,11 @@ import SideMenu from "../header-three/side-menu";
 import useTheme from "@/hooks/use-theme";
 import Search from "./search";
 
-const HeaderNineteen = ({headerSetting}:any) => {
+const HeaderNineteen = ({ headerSetting }: any) => {
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
   }
-  const {  design, menu, userData, category } = useTheme();
+  const { design, menu, userData, category } = useTheme();
 
   const dispatch = useDispatch();
   // const cartList = useSelector((state) => state.cart.cartList)
@@ -222,7 +222,7 @@ const HeaderNineteen = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                                onClick={() => handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

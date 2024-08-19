@@ -1,26 +1,25 @@
 "use client";
-import { Fragment } from "react";
 import { Popover, Transition } from "@headlessui/react";
+import { Fragment } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import MultiStep from "./multistep";
 import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import {
-  PhoneIcon,
-  XMarkIcon,
-  TableCellsIcon,
   Bars4Icon,
+  PhoneIcon,
+  TableCellsIcon,
+  XMarkIcon,
 } from "@heroicons/react/24/outline";
-import { logout } from "@/redux/features/auth.slice";
+import Link from "next/link";
+import { useSelector } from "react-redux";
+import MultiStep from "./multistep";
 
 export default function HeaderMid() {
   const { menu, headerSetting, category, design } = useTheme();
   const { logo, phone } = headerSetting;
 
   const { user } = useSelector((state: any) => state.auth);
- 
+
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
@@ -160,7 +159,7 @@ export default function HeaderMid() {
             <div className="py-6 px-5 space-y-6">
               {user?.verify ? (
                 <div
-                    onClick={() => handleClick()}
+                  onClick={() => handleClick()}
                   style={{
                     backgroundColor: design?.header_color,
                     color: design?.text_color,

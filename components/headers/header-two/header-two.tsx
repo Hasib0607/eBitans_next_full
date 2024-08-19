@@ -1,24 +1,23 @@
 "use client";
-import React, { useState } from "react";
-import { Fragment } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { Menu, Transition } from "@headlessui/react";
-import { HiMenu } from "react-icons/hi";
-import { useSelector, useDispatch } from "react-redux";
-import { BsSearch } from "react-icons/bs";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
 import { CgShoppingBag } from "react-icons/cg";
 import { FaUser } from "react-icons/fa";
-import SideCategory from "./side-category";
-import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import Search from "./search";
+import { HiMenu } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-fourteen/side-menu";
+import Search from "./search";
+import SideCategory from "./side-category";
 
-const HeaderTwo = ({headerSetting}:any) => {
-  const {  design, menu, userData } = useTheme();
+const HeaderTwo = ({ headerSetting }: any) => {
+  const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
   const [searchInput, setSearchInput] = useState(false);
@@ -288,7 +287,7 @@ const HeaderTwo = ({headerSetting}:any) => {
               <SideCategory />
             </div>
             <div className="lg:hidden flex flex-col space-y-3 ml-36 z-50">
-              <SideMenu setOpen={setOpen} />  
+              <SideMenu setOpen={setOpen} />
             </div>
             {/* <div className="lg:hidden flex flex-col space-y-3 mt-5 ml-36 z-50" >
               {

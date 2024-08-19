@@ -1,28 +1,26 @@
 "use client";
-import React, { useState, Fragment, useEffect } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import Taka from "@/utils/taka";
+import { Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { HiMenu, HiShoppingCart } from "react-icons/hi";
-import { TiArrowSortedUp } from "react-icons/ti";
-import { useSelector, useDispatch } from "react-redux";
-import { Menu, Transition } from "@headlessui/react";
 import { FaBars } from "react-icons/fa";
-import { TbPhoneCall } from "react-icons/tb";
-import { ImUser } from "react-icons/im";
 import { FiBarChart } from "react-icons/fi";
-import useTheme from "@/hooks/use-theme";
+import { HiMenu, HiShoppingCart } from "react-icons/hi";
+import { ImUser } from "react-icons/im";
+import { TbPhoneCall } from "react-icons/tb";
+import { TiArrowSortedUp } from "react-icons/ti";
+import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import Search from "./search";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
-import Taka from "@/utils/taka";
+import Search from "./search";
 
-
-const HeaderThirtyFour = ({headerSetting}:any) => {
-  const { category, design, subcategory, menu, userData } =
-    useTheme();
+const HeaderThirtyFour = ({ headerSetting }: any) => {
+  const { category, design, subcategory, menu, userData } = useTheme();
 
   const [openCat, setOpenCat] = useState(false);
   const [searchTxt, setSearch] = useState("");
@@ -87,7 +85,7 @@ const HeaderThirtyFour = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
@@ -160,7 +158,7 @@ const HeaderThirtyFour = ({headerSetting}:any) => {
               <Link href="/">
                 <img
                   className="h-10"
-                  src={imgUrl + headerSetting.logo}
+                  src={imgUrl + headerSetting?.logo}
                   alt="logo"
                 />
               </Link>
@@ -274,7 +272,7 @@ const HeaderThirtyFour = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                              onClick={()=> handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"
@@ -399,7 +397,7 @@ const HeaderThirtyFour = ({headerSetting}:any) => {
                     border ? "border-0" : "border-cat"
                   }`}
                 >
-                  {category.map((item: any) => (
+                  {category?.map((item: any) => (
                     <div key={item.id} className="">
                       <li
                         onClick={() => setOpenCat(!openCat)}
@@ -499,7 +497,7 @@ const HeaderThirtyFour = ({headerSetting}:any) => {
                 <Link href="/">
                   <img
                     className="h-10"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

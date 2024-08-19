@@ -2,7 +2,6 @@
 import useTheme from "@/hooks/use-theme";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React from "react";
 import { useState } from "react";
 
 const Category = () => {
@@ -95,7 +94,7 @@ const Category = () => {
             {menu.map((menuItem: any, k: any) => (
               <div key={menuItem.id} className="relative ">
                 <div className="px-6 py-4 text-[#7a7a7a]">
-                  <Link href={menuItem?.url}>
+                  <Link href={"/" + menuItem?.url}>
                     <h1
                       style={{
                         color: hoverMenu === k ? bgColor : "",

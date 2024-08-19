@@ -38,8 +38,6 @@ const ProductFourteen = ({ category, design, store_id }: any) => {
 
     `;
 
-  console.log(category[id], "cat");
-
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5 mx-auto">
       <style>{styleCss}</style>

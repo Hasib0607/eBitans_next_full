@@ -1,20 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import "./header-nine.css";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { AiOutlineSetting } from "react-icons/ai";
 import useTheme from "@/hooks/use-theme";
-import HeaderMenu from "./header-menu";
-import Category from "./category";
-import StickyNav from "./sticky-nav";
+import { imgUrl } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
 import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { imgUrl } from "@/site-settings/siteUrl";
+import { Fragment, useEffect, useState } from "react";
+import { AiOutlineSetting } from "react-icons/ai";
+import { useDispatch, useSelector } from "react-redux";
 import SideMenu from "../header-three/side-menu";
+import Category from "./category";
+import HeaderMenu from "./header-menu";
+import "./header-nine.css";
+import StickyNav from "./sticky-nav";
 
-const HeaderNine = ({headerSetting}:any) => {
+const HeaderNine = ({ headerSetting }: any) => {
   const { design } = useTheme();
 
   const [open, setOpen] = useState(false);

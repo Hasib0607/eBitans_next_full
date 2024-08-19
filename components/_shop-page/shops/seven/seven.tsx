@@ -26,7 +26,7 @@ const fetchData = async (
   const encodedColor = encodeURIComponent(activeColor);
 
   const { colors, data } = await httpReq.get(
-    `/shoppage/products?name=${window.location.host}&page=${page}&colorFilter=${encodedColor}&priceFilter=${priceValue}&filter=${sort}`
+    `/shoppage/products?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&page=${page}&colorFilter=${encodedColor}&priceFilter=${priceValue}&filter=${sort}`
   );
   return { data, colors };
 };
@@ -91,7 +91,7 @@ const Seven = () => {
             Category{" "}
           </h1>
 
-          {category.map((item: any) => (
+          {category?.map((item: any) => (
             <div key={item.id} className="">
               <SingleCat item={item} />
             </div>
@@ -180,7 +180,7 @@ const Seven = () => {
             <h1 className="mb-10 text-2xl text-gray-700 font-medium">
               Category
             </h1>
-            {category.map((item: any) => (
+            {category?.map((item: any) => (
               <div key={item.id} className="">
                 <SingleCat item={item} />
               </div>

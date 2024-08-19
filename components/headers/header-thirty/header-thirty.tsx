@@ -17,7 +17,7 @@ import { Menu, Transition } from "@headlessui/react";
 import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderThirty = ({headerSetting}:any) => {
+const HeaderThirty = ({ headerSetting }: any) => {
   const { design, category, userData } = useTheme();
 
   const [open, setOpen] = useState(false);
@@ -47,15 +47,13 @@ const HeaderThirty = ({headerSetting}:any) => {
     return classes.filter(Boolean).join(" ");
   }
 
-
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
-
 
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Kanit&display=swap');

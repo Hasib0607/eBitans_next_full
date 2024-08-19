@@ -1,6 +1,4 @@
 "use client";
-import { useState } from "react";
-import { CgMenuGridO } from "react-icons/cg";
 import Card21 from "@/components/card/card21";
 import Card6 from "@/components/card/card6";
 import useTheme from "@/hooks/use-theme";
@@ -10,6 +8,8 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
+import { useState } from "react";
+import { CgMenuGridO } from "react-icons/cg";
 import { RiMenuFill } from "react-icons/ri";
 import FilterByColorNew from "./filter-by-color-new";
 import FilterByPriceNew from "./filter-by-price-new";
@@ -30,8 +30,6 @@ const fetchData = async (
     );
     const { colors, data } = categoryResponse;
 
-    console.log(data, "categorydata");
-
     if (!data) {
       try {
         // Encode activeColor using encodeURIComponent
@@ -43,8 +41,6 @@ const fetchData = async (
         );
 
         const { colors, data } = subcategoryResponse;
-
-        console.log(data, "subcategorydata");
 
         return { colors, data };
       } catch (err) {
@@ -116,8 +112,6 @@ const CategoryEight = () => {
     }
  
     `;
-
-  console.log(data?.data?.data, "category data");
 
   // return <p>hello</p>;
   return (

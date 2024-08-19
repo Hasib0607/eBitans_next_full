@@ -1,14 +1,11 @@
-import React from "react";
+import { getSubdomainName } from "@/lib";
+import getUrl from "@/utils/get-url";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import AppWrapper from "./app-wrapper";
-import getUrl from "@/utils/get-url";
-import { getSubdomainName } from "@/lib";
-import NextTopLoader from "nextjs-toploader";
-import Image from "next/image";
-import WrongUrl from "@/components/wrongUrl";
-
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,32 +20,14 @@ export default async function RootLayout({
     "design,headersetting"
   );
 
-console.log(design, 'this is url')
-
-
-let api = true
-
-  if (design !== undefined) {
-    return (
-      <html lang="en">
-        <body className={`${inter.className} lg2`}>
-          <NextTopLoader />
-          <AppWrapper headerSetting={headersetting} design={design}>
-            {children}
-          </AppWrapper>
-        </body>
-      </html>
-    );
-  }  
-
   return (
-
     <html lang="en">
-    <body className={`${inter.className} lg2`}>
-      <WrongUrl/>
-    </body>
-  </html>
-   
-  ); 
+      <body className={`${inter.className} lg2 `}>
+        <NextTopLoader />
+        <AppWrapper headerSetting={headersetting} design={design}>
+          {children}
+        </AppWrapper>
+      </body>
+    </html>
+  );
 }
-

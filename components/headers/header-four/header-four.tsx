@@ -21,11 +21,11 @@ function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HeaderFour({headerSetting}:any) {
+export default function HeaderFour({ headerSetting }: any) {
   const [open, setOpen] = useState(false);
   const [searchTxt, setSearch] = useState<any>(null);
   const [openMenu, setOpenMenu] = useState<any>(null);
-  const {  menu, design, userData } = useTheme();
+  const { menu, design, userData } = useTheme();
   const headermenu = menu.filter((i: any) => i.url !== "category");
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
@@ -55,13 +55,13 @@ export default function HeaderFour({headerSetting}:any) {
    
       `;
 
-      const handleClick = () => {
-        if (window !== undefined) {
-          window.localStorage.removeItem("persist:root");
-    
-          window.location.href = "/";
-        }
-      };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <Popover
@@ -180,7 +180,10 @@ export default function HeaderFour({headerSetting}:any) {
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-3 bg-white px-2 py-4 sm:gap-8 sm:p-8">
                           {headermenu?.map((item: any) => (
-                            <Link key={item?.id} href={item?.url ? `/${item?.url}` : "/"}>
+                            <Link
+                              key={item?.id}
+                              href={item?.url ? `/${item?.url}` : "/"}
+                            >
                               <Popover.Button className="-m-3 p-2 flex items-start rounded-lg hover:bg-gray-50">
                                 {/* <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" /> */}
                                 <div className="">

@@ -1,23 +1,22 @@
 "use client";
-import React, { useState } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { GiShoppingBag } from "react-icons/gi";
+import { GoLocation } from "react-icons/go";
+import { HiUser } from "react-icons/hi";
 import { RiCloseCircleLine, RiMenu2Line } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { HiUser } from "react-icons/hi";
-import { GoLocation } from "react-icons/go";
-import useTheme from "@/hooks/use-theme";
 import { BottomCart } from "../card-popup-three";
 import Search from "./search";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
 import SideMenu from "./side-menu";
 
-const HeaderFourteen = ({headerSetting}:any) => {
-  const {  design, userData } = useTheme();
+const HeaderFourteen = ({ headerSetting }: any) => {
+  const { design, userData } = useTheme();
   const dispatch = useDispatch();
 
   const [searchInput, setSearchInput] = useState(false);
@@ -77,13 +76,13 @@ const HeaderFourteen = ({headerSetting}:any) => {
       }
     `;
 
-    const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div

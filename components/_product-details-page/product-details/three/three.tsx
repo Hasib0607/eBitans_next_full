@@ -81,7 +81,6 @@ export default Three;
 
 const According = ({ text, desc }: any) => {
   const [show, setShow] = useState(false);
-  console.log(desc, "desc");
   return (
     <AnimatePresence>
       <div

@@ -1,19 +1,19 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { BsSearch } from "react-icons/bs";
 import { CgMenuLeft } from "react-icons/cg";
 import { HiOutlineShoppingBag } from "react-icons/hi";
 import { useDispatch, useSelector } from "react-redux";
-import { BsSearch } from "react-icons/bs";
-import { Menu, Transition } from "@headlessui/react";
-import useTheme from "@/hooks/use-theme";
-import { XMarkIcon } from "@heroicons/react/24/outline";
-import Search from "./search";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
+import Search from "./search";
 
-const HeaderThirtyFive = ({headerSetting}:any) => {
+const HeaderThirtyFive = ({ headerSetting }: any) => {
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
 
@@ -32,7 +32,7 @@ const HeaderThirtyFive = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };

@@ -1,22 +1,21 @@
 "use client";
-import React, { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { IoSearchOutline } from "react-icons/io5";
-import { AiOutlineClose } from "react-icons/ai";
-import { RiShoppingBagLine } from "react-icons/ri";
-import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { HiMenu } from "react-icons/hi";
 import useTheme from "@/hooks/use-theme";
-import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import Search from "./search";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { HiMenu } from "react-icons/hi";
+import { IoSearchOutline } from "react-icons/io5";
+import { RiShoppingBagLine } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
+import Search from "./search";
 
-const HeaderThirtyNine = ({headerSetting}:any) => {
-  const { design,  menu, userData } = useTheme();
+const HeaderThirtyNine = ({ headerSetting }: any) => {
+  const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
   const [open, setOpen] = useState(false);
@@ -49,11 +48,11 @@ const HeaderThirtyNine = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };
-  
+
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600;700&display=swap');
 
@@ -116,7 +115,7 @@ const HeaderThirtyNine = ({headerSetting}:any) => {
           <div className="flex justify-start xl:gap-10 gap-4 uppercase text-[14px] py-4">
             {menu?.map((menu: any) => (
               <ul key={menu.id}>
-                <Link href={menu.url}>
+                <Link href={"/" + menu.url}>
                   <li className="">{menu.name}</li>
                 </Link>
               </ul>
@@ -229,7 +228,7 @@ const HeaderThirtyNine = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                                onClick={() => handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700 lg:cursor-pointer"

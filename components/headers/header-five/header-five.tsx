@@ -1,19 +1,10 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  AiFillLinkedin,
-  AiOutlineClose,
-  AiOutlineInstagram,
-  AiOutlineWhatsApp,
-  AiOutlineYoutube,
-} from "react-icons/ai";
-import { GoLocation } from "react-icons/go";
-import { FaFacebookF } from "react-icons/fa";
-import { Fragment } from "react";
-import { HiOutlineShoppingBag } from "react-icons/hi";
+import { location } from "@/assets/svg";
+import { SearchIcon } from "@/assets/svgComp";
 import useTheme from "@/hooks/use-theme";
+import { headerBg } from "@/site-settings/color";
+import { imgUrl } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
 import {
   ArrowLeftIcon,
   Bars4Icon,
@@ -21,28 +12,36 @@ import {
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import HeaderMenu from "./headermenu";
-import StickyNav from "./sticky-nav";
-import { imgUrl } from "@/site-settings/siteUrl";
-import { headerBg } from "@/site-settings/color";
+import { Fragment, useEffect, useState } from "react";
+import {
+  AiFillLinkedin,
+  AiOutlineClose,
+  AiOutlineInstagram,
+  AiOutlineWhatsApp,
+  AiOutlineYoutube,
+} from "react-icons/ai";
+import { FaFacebookF } from "react-icons/fa";
+import { GoLocation } from "react-icons/go";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import SideMenu from "../header-three/side-menu";
 import "./header-five.css";
-import { location } from "@/assets/svg";
-import { SearchIcon } from "@/assets/svgComp";
+import HeaderMenu from "./headermenu";
 import Search from "./search";
+import StickyNav from "./sticky-nav";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderFive = ({headerSetting}:any) => {
+const HeaderFive = ({ headerSetting }: any) => {
   const { design } = useTheme();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
-  const [searchTxt, setSearchTxt] = useState<any>()
-  const [search, setSearch] = useState<any>()
-  const [close, setClose] = useState(true)
+  const [searchTxt, setSearchTxt] = useState<any>();
+  const [search, setSearch] = useState<any>();
+  const [close, setClose] = useState(true);
 
   const styleCss = `
   @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
@@ -88,10 +87,9 @@ const HeaderFive = ({headerSetting}:any) => {
     }
   };
 
-  const handleClose = () =>
-  {
-    setClose(false)
-  }
+  const handleClose = () => {
+    setClose(false);
+  };
 
   return (
     <div>
@@ -406,9 +404,22 @@ const HeaderFive = ({headerSetting}:any) => {
             </div>
           </div>
         </div>
-        <div className='relative flex items-center '>
-          <input type="text" value={searchTxt} onChange={(e) => setSearch(e.target.value)} className='w-full border-gray-200 opacity-50 outline-none focus:outline-none focus:border-gray-200 focus:ring-0 text-black' placeholder='Search our catalog' />
-          {searchTxt?.length === 0 ? <SearchIcon /> : <AiOutlineClose onClick={handleClose} className=' right-6 absolute lg:cursor-pointer h-7' />}
+        <div className="relative flex items-center ">
+          <input
+            type="text"
+            value={searchTxt}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full border-gray-200 opacity-50 outline-none focus:outline-none focus:border-gray-200 focus:ring-0 text-black"
+            placeholder="Search our catalog"
+          />
+          {searchTxt?.length === 0 ? (
+            <SearchIcon />
+          ) : (
+            <AiOutlineClose
+              onClick={handleClose}
+              className=" right-6 absolute lg:cursor-pointer h-7"
+            />
+          )}
           {searchTxt && <Search search={searchTxt} setSearch={setSearch} />}
         </div>
       </div>

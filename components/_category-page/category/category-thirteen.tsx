@@ -271,7 +271,7 @@ const Product = ({
           >
             {grid === "H" && (
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 px-2 sm:px-0">
-                {products.map((item: any, key: number) => (
+                {products?.map((item: any, key: number) => (
                   <motion.div
                     key={key}
                     initial={{ scale: 0 }}
@@ -287,7 +287,7 @@ const Product = ({
             <AnimatePresence>
               {grid === "V" && (
                 <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                  {products.map((item: any, idx: number) => (
+                  {products?.map((item: any, idx: number) => (
                     <motion.div
                       key={idx}
                       initial={{ translateX: 200 }}
@@ -310,7 +310,7 @@ const Product = ({
         <div>
           {grid === "H" && (
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 px-2 sm:px-0">
-              {products.map((item: any, key: number) => (
+              {products?.map((item: any, key: number) => (
                 <motion.div
                   key={key}
                   initial={{ scale: 0 }}
@@ -326,7 +326,7 @@ const Product = ({
           <AnimatePresence>
             {grid === "V" && (
               <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                {products.map((item: any, key: number) => (
+                {products?.map((item: any, key: number) => (
                   <motion.div
                     key={key}
                     initial={{ translateX: 200 }}

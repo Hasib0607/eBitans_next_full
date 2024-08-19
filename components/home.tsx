@@ -9,13 +9,12 @@ const HomePage = async () => {
   const data = await getSubdomainName(url);
   const { layout, design } = data;
 
-
   return (
     <>
       <div
-        className={`${
-          design?.template_id === "34" ? "bg-thirty-one" : "bg-white"
-        } mx-auto`}
+      // className={`${
+      //   design?.template_id === "34" ? "bg-thirty-one" : "bg-white"
+      // } mx-auto`}
       >
         <Suspense>
           {layout &&

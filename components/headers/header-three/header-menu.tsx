@@ -1,17 +1,17 @@
 "use client";
-import React, { useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import { BsSearch } from "react-icons/bs";
-import { useSelector } from "react-redux";
 import useTheme from "@/hooks/use-theme";
-import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
-import { imgUrl } from "@/site-settings/siteUrl";
-import Category from "./category";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { headerBg } from "@/site-settings/color";
+import { imgUrl } from "@/site-settings/siteUrl";
 import Taka from "@/utils/taka";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import { HiOutlineShoppingBag } from "react-icons/hi";
+import { useSelector } from "react-redux";
+import { BottomCart } from "../card-popup-three";
+import Category from "./category";
 import Search from "./search";
 
 const HeaderMenu = () => {

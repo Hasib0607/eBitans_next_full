@@ -1,20 +1,20 @@
 "use client";
-import React, { Fragment, useState } from "react";
-import { CgShoppingBag } from "react-icons/cg";
-import { HiMenu } from "react-icons/hi";
-import "../header-six/header-six.css";
-import { FaFacebook } from "react-icons/fa";
-import { AiFillLinkedin } from "react-icons/ai";
-import { Menu, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { IoLogoWhatsapp } from "react-icons/io5";
-import { GrInstagram, GrYoutube } from "react-icons/gr";
 import useTheme from "@/hooks/use-theme";
-import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import SideMenu from "../header-three/side-menu";
 import { imgUrl } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { AiFillLinkedin } from "react-icons/ai";
+import { CgShoppingBag } from "react-icons/cg";
+import { FaFacebook } from "react-icons/fa";
+import { GrInstagram, GrYoutube } from "react-icons/gr";
+import { HiMenu } from "react-icons/hi";
+import { IoLogoWhatsapp } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { BottomCart } from "../card-popup-three";
+import "../header-six/header-six.css";
+import SideMenu from "../header-three/side-menu";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -77,7 +77,7 @@ const HeaderTwentyNineMenu = () => {
               {menu.map((item: any) => (
                 <div key={item.id} className="">
                   <li>
-                    <Link href={item?.url ? `${item?.url}` : "/"}>
+                    <Link href={"/" + item?.url}>
                       <h1 className="flex uppercase justify-between items-center group font-semibold text-sm ">
                         {item.name}
                       </h1>

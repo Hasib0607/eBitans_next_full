@@ -404,8 +404,6 @@ const YourOrders = ({
     }
   };
 
-  console.log(total, "total");
-
   return (
     <div>
       {/* {error && <SnackBar open={true} msg={error} />} */}

@@ -1,19 +1,18 @@
 "use client";
-import useTheme from "@/hooks/use-theme";
-import React, { useEffect, useState } from "react";
-import { BiFilterAlt } from "react-icons/bi";
-import { IoIosArrowForward } from "react-icons/io";
 import Pagination from "@/components/_category-page/category/pagination";
+import Card32 from "@/components/card/card32";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { BiFilterAlt } from "react-icons/bi";
+import { IoIosArrowForward } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import Link from "next/link";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import Card32 from "@/components/card/card32";
-import Skeleton from "@/components/loader/skeleton";
 
 const Fourteen = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -213,7 +212,7 @@ const Product = ({
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}&filter=${sort}&priceFilter=${
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );
@@ -295,7 +294,7 @@ const Product = ({
             }
           >
             <div className="">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <div key={item?.id}>
                   <Card32 item={item} />
                 </div>
@@ -305,7 +304,7 @@ const Product = ({
         </div>
       ) : (
         <div className="">
-          {products.map((item: any) => (
+          {products?.map((item: any) => (
             <div key={item?.id}>
               <Card32 item={item} />
             </div>

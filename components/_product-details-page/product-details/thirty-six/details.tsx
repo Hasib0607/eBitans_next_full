@@ -337,8 +337,6 @@ const Details = ({ data, children, fetchStatus }: any) => {
   const buttonTwenty =
     "bg-black btn-hover text-white font-semibold h-14 w-full";
 
-  
-
   return (
     <div className="bg-white">
       <style>{styleCss}</style>

@@ -1,21 +1,21 @@
 "use client";
-import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
-import React, { useEffect, useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
+import Card12 from "@/components/card/card12";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import { HiOutlineAdjustments } from "react-icons/hi";
-import Pagination from "./pagination";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import {
   ArrowLeftIcon,
   MinusIcon,
   PlusIcon,
 } from "@heroicons/react/24/outline";
-import httpReq from "@/utils/http/axios/http.service";
-import Skeleton from "@/components/loader/skeleton";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { HiOutlineAdjustments } from "react-icons/hi";
 import InfiniteScroll from "react-infinite-scroll-component";
-import Card12 from "@/components/card/card12";
+import { ThreeDots } from "react-loader-spinner";
+import Pagination from "./pagination";
 
 const CategorySeven = ({ data }: any) => {
   const { category, module } = useTheme();
@@ -55,7 +55,7 @@ const CategorySeven = ({ data }: any) => {
 
         <div className="mt-10 ">
           <h1 className="mb-10 text-2xl text-gray-700 font-medium">Category</h1>
-          {category.map((item: any) => (
+          {category?.map((item: any) => (
             <div key={item.id} className="">
               <SingleCat key={item?.id} item={item} />
             </div>
@@ -157,7 +157,7 @@ const CategorySeven = ({ data }: any) => {
               Category
             </h1>
 
-            {category.map((item: any) => (
+            {category?.map((item: any) => (
               <div key={item.id} className="">
                 <SingleCat item={item} />
               </div>

@@ -1,17 +1,14 @@
 "use client";
-import React, { useState } from "react";
-import "./header-eleven.css";
-import useTheme from "@/hooks/use-theme";
-import HeaderElevenHeaderMenu from "./header-eleven-headermenu";
-import HeaderElevenCategory from "./header-eleven-category";
+import { imgUrl } from "@/site-settings/siteUrl";
 import { TableCellsIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { imgUrl } from "@/site-settings/siteUrl";
+import { useState } from "react";
 import SideMenu from "../header-three/side-menu";
+import HeaderElevenCategory from "./header-eleven-category";
+import HeaderElevenHeaderMenu from "./header-eleven-headermenu";
+import "./header-eleven.css";
 
-const HeaderEleven = ({headerSetting}:any) => {
- 
-
+const HeaderEleven = ({ headerSetting }: any) => {
   const [open, setOpen] = useState(false);
   const [openMenu, setOpenMenu] = useState(false);
 
@@ -25,12 +22,12 @@ const HeaderEleven = ({headerSetting}:any) => {
   window.addEventListener("scroll", changeNavbar);
 
   const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="pb-0 ">
@@ -63,7 +60,7 @@ const HeaderEleven = ({headerSetting}:any) => {
               {headerSetting?.logo === null ? (
                 <Link href="/">
                   <p className="text-xl uppercase">
-                    {headerSetting?.website_name} 
+                    {headerSetting?.website_name}
                   </p>
                 </Link>
               ) : (

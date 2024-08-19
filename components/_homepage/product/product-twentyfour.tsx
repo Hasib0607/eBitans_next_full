@@ -39,8 +39,6 @@ const ProductTwentyFour = ({ product, store_id, design, category }: any) => {
     }
  `;
 
-  console.log(products, "prd");
-
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>

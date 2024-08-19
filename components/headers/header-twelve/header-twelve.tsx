@@ -1,44 +1,44 @@
 "use client";
-import React, { useState, Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
-import {
-  AiFillLinkedin,
-  AiOutlineClose,
-  AiOutlineInstagram,
-  AiOutlineYoutube,
-} from "react-icons/ai";
-import { GrFacebookOption, GrInstagram, GrYoutube } from "react-icons/gr";
-import { FaFacebook } from "react-icons/fa";
 import useTheme from "@/hooks/use-theme";
-import { useDispatch, useSelector } from "react-redux";
+import { headerBg } from "@/site-settings/color";
+import { imgUrl } from "@/site-settings/siteUrl";
 import {
   ArrowLeftIcon,
   ChevronDownIcon,
   TableCellsIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
+import { location } from "assets/svg";
 import Link from "next/link";
+import {
+  AiFillLinkedin,
+  AiOutlineClose,
+  AiOutlineInstagram,
+  AiOutlineYoutube,
+} from "react-icons/ai";
+import { FaFacebook } from "react-icons/fa";
+import { GrFacebookOption, GrInstagram, GrYoutube } from "react-icons/gr";
+import { HiOutlineShoppingBag } from "react-icons/hi";
 import {
   IoLocationOutline,
   IoLogoWhatsapp,
   IoSearchCircleOutline,
 } from "react-icons/io5";
-import { imgUrl } from "@/site-settings/siteUrl";
+import { useDispatch, useSelector } from "react-redux";
 import HeaderCatTwelve from "./header-cat-twelve";
-import StickyNav from "./sticky-nav";
-import { headerBg } from "@/site-settings/color";
-import { HiOutlineShoppingBag } from "react-icons/hi";
-import Search from "./search";
-import { location } from "assets/svg";
-import SideCategory from "./side-category";
 import "./header-twelve.css";
+import Search from "./search";
+import SideCategory from "./side-category";
+import StickyNav from "./sticky-nav";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderTwelve = ({headerSetting}:any) => {
+const HeaderTwelve = ({ headerSetting }: any) => {
   const { design, menu, store_id } = useTheme();
   const dispatch = useDispatch();
   const [open, setOpen] = useState(false);
@@ -51,7 +51,7 @@ const HeaderTwelve = ({headerSetting}:any) => {
     setSearch("");
   };
 
-  const cartList = useSelector((state :any) => state.cart.cartList);
+  const cartList = useSelector((state: any) => state.cart.cartList);
 
   const changeNavbar = () => {
     if (window.scrollY >= 120) {
@@ -86,13 +86,13 @@ const HeaderTwelve = ({headerSetting}:any) => {
   }
     `;
 
-    const handleClick = () => {
-      if (window !== undefined) {
-        window.localStorage.removeItem("persist:root");
-  
-        window.location.href = "/";
-      }
-    };
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
 
   return (
     <div className="bg-white">
@@ -290,7 +290,7 @@ const HeaderTwelve = ({headerSetting}:any) => {
         <div className="flex gap-10 uppercase font-twelve text-[14px] text-gray-600">
           {menu?.map((menu: any) => (
             <ul key={menu.id}>
-              <Link href={menu?.url ? `/${menu?.url}` : "/"}>
+              <Link href={"/" + menu?.url}>
                 <li className="hover:scale-105 duration-100 menu-hover">
                   {menu.name}
                 </li>

@@ -1,11 +1,10 @@
 "use client";
-import { Fragment, useState } from "react";
 import { Menu, Popover, Transition } from "@headlessui/react";
+import { Fragment, useState } from "react";
 
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
 import useTheme from "@/hooks/use-theme";
-import HeaderFifteenRight from "./header-fifteen-right";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { btnhover } from "@/site-settings/style";
 import {
   MoonIcon,
   SunIcon,
@@ -13,17 +12,17 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import { btnhover } from "@/site-settings/style";
+import { useDispatch, useSelector } from "react-redux";
+import HeaderFifteenRight from "./header-fifteen-right";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-const HeaderFifteen = ({headerSetting}:any) => {
+const HeaderFifteen = ({ headerSetting }: any) => {
   const [open, setOpen] = useState(false);
   const [searchTxt, setSearch] = useState<any>(null);
-  const {  menu, design } = useTheme();
+  const { menu, design } = useTheme();
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
@@ -192,7 +191,7 @@ const HeaderFifteen = ({headerSetting}:any) => {
                         <Menu.Item>
                           {({ active }) => (
                             <div
-                                onClick={() => handleClick()}
+                              onClick={() => handleClick()}
                               className={classNames(
                                 active ? "bg-gray-100" : "",
                                 "block px-4 py-2 text-sm text-gray-700"
@@ -275,7 +274,7 @@ const HeaderFifteen = ({headerSetting}:any) => {
                 <div>
                   {user?.verify ? (
                     <p
-                        onClick={() => handleClick()}
+                      onClick={() => handleClick()}
                       style={{
                         backgroundColor: design?.header_color,
                         color: design?.text_color,

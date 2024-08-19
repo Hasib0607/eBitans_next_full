@@ -1,16 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card69 from "@/components/card/card69";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import Pagination from "@/components/_category-page/category/pagination";
-import OvalLoader from "@/components/loader/oval-loader";
-import Link from "next/link";
-import httpReq from "@/utils/http/axios/http.service";
-import Card69 from "@/components/card/card69";
-import Skeleton from "@/components/loader/skeleton";
 
 const Forty = ({ data }: any) => {
   const { category, module } = useTheme();
@@ -99,7 +98,7 @@ const Product = ({
     const { data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}&filter=${sort}`
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}`
     );
 
     if (error) {
@@ -177,7 +176,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-2 lg:gap-8">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item?.id}
                   initial={{ scale: 0 }}
@@ -194,7 +193,7 @@ const Product = ({
       ) : (
         <div>
           <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-2 lg:gap-8">
-            {products.map((item: any) => (
+            {products?.map((item: any) => (
               <motion.div
                 key={item?.id}
                 initial={{ scale: 0 }}

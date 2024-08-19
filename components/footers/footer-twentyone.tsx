@@ -1,5 +1,7 @@
 "use client";
-import React from "react";
+import { imgUrl } from "@/site-settings/siteUrl";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { AiFillGift, AiFillLinkedin } from "react-icons/ai";
 import { BiSupport } from "react-icons/bi";
@@ -8,15 +10,12 @@ import { GrInstagram, GrYoutube } from "react-icons/gr";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { RiSecurePaymentLine } from "react-icons/ri";
 import { TbFileCertificate } from "react-icons/tb";
-import { useRouter } from "next/navigation";
 import AnimateMarquee from "../slider/animate-marquee";
-import NewsletterThree from "./components/newsletter-three";
-import MyAccount from "./components/myaccount";
-import MenuList from "./components/menu-list";
 import CategoryList from "./components/category-list";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { imgUrl } from "@/site-settings/siteUrl";
 import CopyrightAll from "./components/copyrightall";
+import MenuList from "./components/menu-list";
+import MyAccount from "./components/myaccount";
+import NewsletterThree from "./components/newsletter-three";
 
 const FooterTwentyOne = ({
   headerSetting,
@@ -32,7 +31,6 @@ const FooterTwentyOne = ({
   const cls = "text-gray-400 hover:text-white";
 
   // const location = useLocation();
-  console.log(headerSetting, "s");
 
   return (
     <>

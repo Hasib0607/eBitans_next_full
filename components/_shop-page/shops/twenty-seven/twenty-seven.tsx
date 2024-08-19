@@ -1,17 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card51 from "@/components/card/card51";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { IoIosArrowDown } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import Pagination from "@/components/_category-page/category/pagination";
-import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
-import Card51 from "@/components/card/card51";
-import Link from "next/link";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import Skeleton from "@/components/loader/skeleton";
 
 const TwentySeven = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -153,7 +152,7 @@ const Product = ({
     const { data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}&filter=${sort}`
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}`
     );
 
     if (error) {
@@ -232,7 +231,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item?.id}
                   initial={{ scale: 0 }}
@@ -248,7 +247,7 @@ const Product = ({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
-          {products.map((item: any) => (
+          {products?.map((item: any) => (
             <motion.div
               key={item?.id}
               initial={{ scale: 0 }}

@@ -1,15 +1,14 @@
 "use client";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card26 from "@/components/card/card26";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
-import React, { useEffect, useState } from "react";
+import httpReq from "@/utils/http/axios/http.service";
+import { useEffect, useState } from "react";
 import { IoFilter } from "react-icons/io5";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
 import FilterCat from "./filter-cat";
-import httpReq from "@/utils/http/axios/http.service";
-import Pagination from "@/components/_category-page/category/pagination";
-import OvalLoader from "@/components/loader/oval-loader";
-import Card26 from "@/components/card/card26";
-import Skeleton from "@/components/loader/skeleton";
 
 const Sixteen = ({ data }: any) => {
   const { design, module } = useTheme();
@@ -139,7 +138,7 @@ const Product = ({
     const { data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}&filter=${sort}`
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}`
     );
 
     if (error) {
@@ -217,7 +216,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2.5">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <div key={item?.id}>
                   <Card26 item={item} />
                 </div>
@@ -227,7 +226,7 @@ const Product = ({
         </div>
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2.5">
-          {products.map((item: any) => (
+          {products?.map((item: any) => (
             <div key={item?.id}>
               <Card26 item={item} />
             </div>

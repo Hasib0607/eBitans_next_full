@@ -340,7 +340,6 @@ const Details = ({
   const prev = "single_Prev";
   const next = "single_Next";
 
-
   return (
     <div className="h-full">
       <style>{styleCss}</style>

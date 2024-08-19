@@ -1,25 +1,25 @@
 "use client";
-import React, { Fragment, useState } from "react";
-import { Disclosure, Menu, Transition } from "@headlessui/react";
-import { motion } from "framer-motion";
-import { useDispatch, useSelector } from "react-redux";
-import { IoIosClose, IoIosSearch } from "react-icons/io";
 import useTheme from "@/hooks/use-theme";
-import Search from "./search";
-import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
+import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   ChevronDownIcon,
   TableCellsIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { IoIosClose, IoIosSearch } from "react-icons/io";
 import { IoSearchCircleOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import Search from "./search";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
 }
 
-export default function HeaderEight({headerSetting}:any) {
+export default function HeaderEight({ headerSetting }: any) {
   const { menu, design } = useTheme();
   const dispatch = useDispatch();
 
@@ -460,7 +460,7 @@ const Cat = ({ item }: any) => {
       </Link>
       {show && (
         <div className="absolute top-12 z-10 left-0 max-h-fit bg-black text-black min-w-[200px] py-2 flex flex-col space-y-2">
-          {category.map((item: any) => (
+          {category?.map((item: any) => (
             <Link
               key={item?.id}
               href={"/category/" + item?.id}

@@ -2,7 +2,6 @@
 import useTheme from "@/hooks/use-theme";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React from "react";
 import { useState } from "react";
 
 const Category = ({ openMenu }: any) => {
@@ -102,7 +101,7 @@ const Category = ({ openMenu }: any) => {
                 <div className="px-6 py-1 menu-hover">
                   <Link
                     onClick={() => setActive(menuItem.id)}
-                    href={menuItem?.url}
+                    href={"/" + menuItem?.url}
                   >
                     <h1
                       className={`${

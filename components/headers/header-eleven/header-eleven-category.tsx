@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { FiHeadphones } from "react-icons/fi";
-import { BsGrid } from "react-icons/bs";
 import useTheme from "@/hooks/use-theme";
-import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import { iconImg } from "@/site-settings/siteUrl";
+import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
+import { useState } from "react";
+import { BsGrid } from "react-icons/bs";
+import { FiHeadphones } from "react-icons/fi";
 
 const HeaderElevenCategory = () => {
   const { category, design, menu, headerSetting } = useTheme();
@@ -73,14 +73,14 @@ const HeaderElevenCategory = () => {
               return (
                 <Link
                   key={menuData?.id}
-                  href={menuData?.url ? `/${menuData?.url}`: '/'}
-                  //   style={({ isActive }: any): any =>
-                  //     isActive
-                  //       ? {
-                  //           color: `${design?.header_color}`,
-                  //         }
-                  //       : { color: `black` }
-                  //   }
+                  href={"/" + menuData?.url}
+                  // style={({ isActive }: any): any =>
+                  //   isActive
+                  //     ? {
+                  //         color: `${design?.header_color}`,
+                  //       }
+                  //     : { color: `black` }
+                  // }
                   className="font-bold text-sm "
                 >
                   <h1

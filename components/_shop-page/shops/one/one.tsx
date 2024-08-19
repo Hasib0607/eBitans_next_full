@@ -1,16 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Fragment } from "react";
-import { motion } from "framer-motion";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import Link from "next/link";
+import ProductCardOne from "@/components/card/product-card/product-card-one";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
 import Skeleton from "@/components/loader/skeleton";
-import ProductCardOne from "@/components/card/product-card/product-card-one";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
 import Pagination from "./pagination";
 
 const One = ({ data }: any) => {
@@ -42,7 +41,7 @@ const One = ({ data }: any) => {
             ? pageShop
             : `?page=${pageShop}`
           : `?page=1`
-      }&name=${window.location.host}&priceFilter=${
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );

@@ -4,7 +4,6 @@ import Card23 from "@/components/card/card23";
 import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import OvalLoader from "@/components/loader/oval-loader";
 import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
@@ -187,7 +186,7 @@ const Product = ({
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}&filter=${sort}&priceFilter=${
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );
@@ -284,7 +283,7 @@ const Product = ({
           >
             {grid === "H" && (
               <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-2 xl:grid-cols-4 md:gap-5 grid-cols-2 gap-2 mt-10">
-                {products.map((item: any, idx: any) => (
+                {products?.map((item: any, idx: any) => (
                   <motion.div
                     key={idx}
                     initial={{ scale: 0 }}
@@ -299,7 +298,7 @@ const Product = ({
             <AnimatePresence>
               {grid === "V" && (
                 <div className="grid grid-cols-1 lg:gap-5 md:gap-5 gap-2 mt-10">
-                  {products.map((item: any, idx: any) => (
+                  {products?.map((item: any, idx: any) => (
                     <motion.div
                       key={idx}
                       className="border-hover"
@@ -323,7 +322,7 @@ const Product = ({
         <div>
           {grid === "H" && (
             <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-2 xl:grid-cols-4 md:gap-5 grid-cols-2 gap-2 mt-10">
-              {products.map((item: any, idx: any) => (
+              {products?.map((item: any, idx: any) => (
                 <motion.div
                   key={idx}
                   initial={{ scale: 0 }}
@@ -338,7 +337,7 @@ const Product = ({
           <AnimatePresence>
             {grid === "V" && (
               <div className="grid grid-cols-1 lg:gap-5 md:gap-5 gap-2 mt-10">
-                {products.map((item: any) => (
+                {products?.map((item: any) => (
                   <motion.div
                     key={item?.id}
                     className="border-hover"

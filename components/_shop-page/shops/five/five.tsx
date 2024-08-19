@@ -1,25 +1,24 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import "./five.css";
-import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
+import Pagination from "@/components/_category-page/category/pagination";
+import Card42 from "@/components/card/card42";
+import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import Pagination from "@/components/_category-page/category/pagination";
-import OvalLoader from "@/components/loader/oval-loader";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { AnimatePresence, motion } from "framer-motion";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import Card6 from "@/components/card/card6";
-import { CgMenuGridO } from "react-icons/cg";
 import {
   MinusIcon,
   PlusIcon,
   TableCellsIcon,
 } from "@heroicons/react/24/outline";
+import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
-import Card42 from "@/components/card/card42";
-import Skeleton from "@/components/loader/skeleton";
+import { useEffect, useState } from "react";
+import { CgMenuGridO } from "react-icons/cg";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
+import "./five.css";
 
 const Five = ({ data }: any) => {
   const { category, design, module } = useTheme();
@@ -180,7 +179,7 @@ const Product = ({
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host}&filter=${sort}&priceFilter=${
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );
@@ -277,7 +276,7 @@ const Product = ({
           >
             {grid === "H" && (
               <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-2 xl:grid-cols-3 md:gap-5 sm:grid-cols-2 grid-cols-2 gap-2 mt-10">
-                {products.map((item: any) => (
+                {products?.map((item: any) => (
                   <motion.div
                     key={item?.id}
                     initial={{ scale: 0 }}
@@ -292,7 +291,7 @@ const Product = ({
             <AnimatePresence>
               {grid === "V" && (
                 <div className="grid grid-cols-1 lg:gap-5 md:gap-5 gap-2 mt-10">
-                  {products.map((item: any) => (
+                  {products?.map((item: any) => (
                     <motion.div
                       key={item?.id}
                       className=""
@@ -316,7 +315,7 @@ const Product = ({
         <div>
           {grid === "H" && (
             <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-2 xl:grid-cols-3 md:gap-5 sm:grid-cols-2 grid-cols-2 gap-2 mt-10">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item?.id}
                   initial={{ scale: 0 }}
@@ -331,7 +330,7 @@ const Product = ({
           <AnimatePresence>
             {grid === "V" && (
               <div className="grid grid-cols-1 lg:gap-5 md:gap-5 gap-2 mt-10">
-                {products.map((item: any) => (
+                {products?.map((item: any) => (
                   <motion.div
                     key={item?.id}
                     className=""

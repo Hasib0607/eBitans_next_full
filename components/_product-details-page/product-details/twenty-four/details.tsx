@@ -345,8 +345,6 @@ const Details = ({
   const buttonTwentyFour =
     "font-bold py-[11px] px-10 w-max bg-color lg:cursor-pointer ";
 
- 
-
   return (
     <div className="bg-white h-full ">
       <style>{styleCss}</style>

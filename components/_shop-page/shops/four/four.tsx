@@ -1,12 +1,12 @@
 "use client";
+import Pagination from "@/components/_category-page/category/pagination";
+import ProductCardTwo from "@/components/card/product-card/product-card-two";
+import ShopWrapper from "@/components/shop-wrapper";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import ShopWrapper from "@/components/shop-wrapper";
-import ProductCardTwo from "@/components/card/product-card/product-card-two";
-import Pagination from "@/components/_category-page/category/pagination";
 
 const Four = ({ data }: any) => {
   const { module } = useTheme();
@@ -36,7 +36,7 @@ const Four = ({ data }: any) => {
             ? pageShop
             : `?page=${pageShop}`
           : `?page=1`
-      }&name=${window.location.host}`
+      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
     );
 
     if (error) {

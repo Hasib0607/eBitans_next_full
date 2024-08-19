@@ -14,8 +14,8 @@ import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import SideMenu from "../header-three/side-menu";
 
-const HeaderForty = ({headerSetting}:any) => {
-  const {  userData, category } = useTheme();
+const HeaderForty = ({ headerSetting }: any) => {
+  const { userData, category } = useTheme();
   const [searchTxt, setSearch] = useState("");
   const [open, setOpen] = useState(false);
   const [cartOpen, setCartOpen] = useState(false);
@@ -35,7 +35,7 @@ const HeaderForty = ({headerSetting}:any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-  
+
       window.location.href = "/";
     }
   };

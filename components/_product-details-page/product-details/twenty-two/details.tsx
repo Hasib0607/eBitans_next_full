@@ -334,7 +334,6 @@ const Details = ({
   const buttonTwentyTwo =
     " cart-btn  font-bold py-[11px] px-10 w-max rounded-full ";
 
-
   return (
     <div className="bg-white h-full ">
       <style>{styleCss}</style>
