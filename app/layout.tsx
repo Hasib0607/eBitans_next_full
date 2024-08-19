@@ -1,11 +1,11 @@
-import React from "react";
+import { getSubdomainName } from "@/lib";
+import getUrl from "@/utils/get-url";
 import { Inter } from "next/font/google";
-import "./globals.css";
+import NextTopLoader from "nextjs-toploader";
+import React from "react";
 import "react-toastify/dist/ReactToastify.css";
 import AppWrapper from "./app-wrapper";
-import getUrl from "@/utils/get-url";
-import { getSubdomainName } from "@/lib";
-import NextTopLoader from "nextjs-toploader";
+import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +25,7 @@ export default async function RootLayout({
       <body className={`${inter.className} lg2 `}>
         <NextTopLoader />
         <AppWrapper headerSetting={headersetting} design={design}>
-      
           {children}
-         
         </AppWrapper>
       </body>
     </html>
