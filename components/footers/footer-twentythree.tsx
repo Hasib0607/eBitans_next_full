@@ -1,18 +1,16 @@
 "use client";
-import React from "react";
+import { imgUrl } from "@/site-settings/siteUrl";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 import { useState } from "react";
+import { AiFillLinkedin } from "react-icons/ai";
 import { FaFacebook } from "react-icons/fa";
 import { GrInstagram, GrYoutube } from "react-icons/gr";
 import { IoLogoWhatsapp } from "react-icons/io5";
-
-import { AiFillLinkedin } from "react-icons/ai";
-import Newsletter from "./components/newsletter";
-import MyAccount from "./components/myaccount";
-import MenuList from "./components/menu-list";
 import CategoryList from "./components/category-list";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import Link from "next/link";
-import { imgUrl } from "@/site-settings/siteUrl";
+import MenuList from "./components/menu-list";
+import MyAccount from "./components/myaccount";
+import Newsletter from "./components/newsletter";
 
 const FooterTwentyThree = ({
   headerSetting,

@@ -23,6 +23,7 @@ export default async function RootLayout({
   console.log(design, "design");
 
   return (
+
     <html lang="en">
       <body className={`${inter.className} lg2 `}>
         <NextTopLoader />
@@ -33,3 +34,4 @@ export default async function RootLayout({
     </html>
   );
 }
+
