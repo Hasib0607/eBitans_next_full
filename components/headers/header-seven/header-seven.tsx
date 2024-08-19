@@ -145,7 +145,7 @@ const HeaderSeven = ({ headerSetting, design }: any) => {
                 <Link href="/">
                   <img
                     className="h-[45px] w-auto overflow-hidden sm:mr-20"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

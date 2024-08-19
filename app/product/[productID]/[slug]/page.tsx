@@ -22,10 +22,10 @@ export async function generateMetadata(
     product_id: params.productID,
   });
   const { name } = product;
-  const websiteName = capitalizeFirstLetter(headersetting.website_name);
+  const websiteName = capitalizeFirstLetter(headersetting?.website_name);
   return {
     title: `${websiteName} | ${name}`,
-    icons: { icon: imgUrl + headersetting.favicon },
+    icons: { icon: imgUrl + headersetting?.favicon },
   };
 }
 
