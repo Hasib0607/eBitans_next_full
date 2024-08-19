@@ -1,17 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { ThreeDots } from "react-loader-spinner";
-import InfiniteScroll from "react-infinite-scroll-component";
-import useTheme from "@/hooks/use-theme";
-import { useParams } from "next/navigation";
-import { IoIosArrowDown } from "react-icons/io";
-import Pagination from "./pagination";
-import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
-import { motion } from "framer-motion";
 import Card51 from "@/components/card/card51";
-import Link from "next/link";
+import OvalLoader from "@/components/loader/oval-loader";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { motion } from "framer-motion";
+import Link from "next/link";
+import { useParams } from "next/navigation";
+import { useEffect, useState } from "react";
+import { IoIosArrowDown } from "react-icons/io";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
+import Pagination from "./pagination";
 
 const CategoryTwentySeven = () => {
   const { id: data }: any = useParams<{ id: string }>();
@@ -268,7 +268,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
-              {products.map((item: any, key: number) => (
+              {products?.map((item: any, key: number) => (
                 <motion.div
                   key={key}
                   initial={{ scale: 0 }}
@@ -285,7 +285,7 @@ const Product = ({
       ) : (
         <div>
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
-            {products.map((item: any, key: number) => (
+            {products?.map((item: any, key: number) => (
               <motion.div
                 key={key}
                 initial={{ scale: 0 }}

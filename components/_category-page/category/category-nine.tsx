@@ -323,7 +323,7 @@ const Product = ({
           >
             {grid === "H" && (
               <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-2 xl:grid-cols-4 md:gap-5 grid-cols-2 gap-2 mt-10">
-                {products.map((item: any) => (
+                {products?.map((item: any) => (
                   <motion.div
                     key={item.id}
                     initial={{ scale: 0 }}
@@ -338,7 +338,7 @@ const Product = ({
             <AnimatePresence>
               {grid === "V" && (
                 <div className="grid grid-cols-1 lg:gap-5 md:gap-5 gap-2 mt-10">
-                  {products.map((item: any) => (
+                  {products?.map((item: any) => (
                     <motion.div
                       key={item.id}
                       className="border-hover"
@@ -362,7 +362,7 @@ const Product = ({
         <div>
           {grid === "H" && (
             <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-2 xl:grid-cols-4 md:gap-5 grid-cols-2 gap-2 mt-10">
-              {products.map((item: any) => (
+              {products?.map((item: any) => (
                 <motion.div
                   key={item.id}
                   initial={{ scale: 0 }}
@@ -377,7 +377,7 @@ const Product = ({
           <AnimatePresence>
             {grid === "V" && (
               <div className="grid grid-cols-1 lg:gap-5 md:gap-5 gap-2 mt-10">
-                {products.map((item: any) => (
+                {products?.map((item: any) => (
                   <motion.div
                     key={item.id}
                     className="border-hover"

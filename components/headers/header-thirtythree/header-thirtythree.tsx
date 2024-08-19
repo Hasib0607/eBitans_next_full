@@ -331,7 +331,7 @@ const HeaderThirtyThree = ({ headerSetting }: any) => {
                     border ? "border-0" : "border-cat"
                   }`}
                 >
-                  {category.map((item: any) => (
+                  {category?.map((item: any) => (
                     <div key={item.id} className="">
                       <li
                         onClick={() => setOpenCat(!openCat)}

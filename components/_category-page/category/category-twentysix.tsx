@@ -290,7 +290,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-3 xl:grid-cols-3 xl3:grid-cols-4 gap-4 px-2 sm:px-0">
-              {products.map((item: any, key: number) => (
+              {products?.map((item: any, key: number) => (
                 <motion.div
                   key={key}
                   initial={{ scale: 0 }}
@@ -306,7 +306,7 @@ const Product = ({
         </div>
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-3 xl:grid-cols-3 xl3:grid-cols-4 gap-4 px-2 sm:px-0">
-          {products.map((item: any, key: number) => (
+          {products?.map((item: any, key: number) => (
             <motion.div
               key={key}
               initial={{ scale: 0 }}

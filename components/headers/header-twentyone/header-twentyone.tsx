@@ -1,8 +1,15 @@
 "use client";
-import React, { useState, Fragment, useEffect } from "react";
+import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
 import { AiFillLinkedin, AiOutlineClose } from "react-icons/ai";
+import { BiBarChart } from "react-icons/bi";
 import { BsSearch } from "react-icons/bs";
 import { FaFacebook } from "react-icons/fa";
+import { FiUser } from "react-icons/fi";
 import { GiShoppingCart } from "react-icons/gi";
 import { GrInstagram, GrYoutube } from "react-icons/gr";
 import { HiMenu } from "react-icons/hi";
@@ -13,30 +20,15 @@ import {
   IoLogoWhatsapp,
 } from "react-icons/io";
 import { RiArrowDownSLine } from "react-icons/ri";
-import { useSelector, useDispatch } from "react-redux";
-import { Menu, Transition } from "@headlessui/react";
-import { FiUser } from "react-icons/fi";
-import { BiBarChart } from "react-icons/bi";
 import { SiGmail } from "react-icons/si";
+import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
-import Search from "./search";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import Taka from "@/utils/taka";
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
-import useTheme from "@/hooks/use-theme";
-import { logout } from "@/redux/features/auth.slice";
+import Search from "./search";
 
-const HeaderTwentyOne = ({headerSetting}:any) => {
-  const {
-    category,
-    design,
-    subcategory,
-    menu,
-    userData,
-    store_id,
-  } = useTheme();
+const HeaderTwentyOne = ({ headerSetting }: any) => {
+  const { category, design, subcategory, menu, userData, store_id } =
+    useTheme();
   const [openCat, setOpenCat] = useState(false);
   const [searchTxt, setSearch] = useState("");
   const [searchTxtUp, setSearchUp] = useState("");
@@ -517,7 +509,7 @@ const HeaderTwentyOne = ({headerSetting}:any) => {
                   border ? "border-0" : "border-cat"
                 }`}
               >
-                {category.map((item: any) => (
+                {category?.map((item: any) => (
                   <div key={item.id} className="relative">
                     <li
                       onClick={() => setOpenCat(!openCat)}

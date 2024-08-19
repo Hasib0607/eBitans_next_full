@@ -1,16 +1,16 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
-import { ThreeDots } from "react-loader-spinner";
-import InfiniteScroll from "react-infinite-scroll-component";
-import useTheme from "@/hooks/use-theme";
-import { useParams } from "next/navigation";
 import FilterCat from "@/components/_shop-page/shops/sixteen/filter-cat";
-import { IoFilter } from "react-icons/io5";
-import Pagination from "./pagination";
-import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
 import Card26 from "@/components/card/card26";
+import OvalLoader from "@/components/loader/oval-loader";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
+import { useParams } from "next/navigation";
+import { IoFilter } from "react-icons/io5";
+import InfiniteScroll from "react-infinite-scroll-component";
+import { ThreeDots } from "react-loader-spinner";
+import Pagination from "./pagination";
 
 const CategorySixteen = () => {
   const { id: data }: any = useParams<{ id: string }>();
@@ -255,7 +255,7 @@ const Product = ({
             }
           >
             <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2.5">
-              {products.map((item: any, key: number) => (
+              {products?.map((item: any, key: number) => (
                 <div key={key}>
                   <Card26 item={item} />
                 </div>
@@ -266,7 +266,7 @@ const Product = ({
       ) : (
         <div>
           <div className="grid grid-cols-2 sm:grid-cols-2 xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 gap-2.5">
-            {products.map((item: any, key: number) => (
+            {products?.map((item: any, key: number) => (
               <div key={key}>
                 <Card26 item={item} />
               </div>
