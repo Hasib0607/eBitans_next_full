@@ -1,0 +1,22 @@
+"use client";
+
+import { sendGTMEvent } from "@next/third-parties/google";
+import { useCallback, useEffect } from "react";
+import { useSelector } from "react-redux";
+
+const CheckoutGtm = () => {
+  const cartList = useSelector((state: any) => state.cart.cartList);
+  console.log(cartList, "cartlist");
+  const checkoutEvent = useCallback(() => {
+    sendGTMEvent({
+      event: "checkout",
+      value: cartList,
+    });
+  }, [cartList]);
+  useEffect(() => {
+    checkoutEvent();
+  }, []);
+  return null;
+};
+
+export default CheckoutGtm;

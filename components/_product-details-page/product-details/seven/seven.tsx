@@ -8,7 +8,6 @@ import { profileImg } from "@/site-settings/siteUrl";
 import Arrow from "@/utils/arrow";
 import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { sendGTMEvent } from "@next/third-parties/google";
 import { useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import moment from "moment";
@@ -46,10 +45,6 @@ const Seven = ({ data, updatedData }: Props) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
-
-  if (status === "success") {
-    sendGTMEvent({ event: "view_content", value: productDetailsData?.product });
-  }
 
   return (
     <div className="container px-5">

@@ -1,14 +1,14 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import CheckOutSevenAddress from "./checkout-seven-address/checkout-seven-address";
-import CheckOutSevenDiscount from "./checkout-seven-discount/checkout-seven-discount";
-import CheckOutSevenPaymentGateway from "./checkout-seven-payment-gateway/checkout-seven-payment-gateway";
-import CheckOutSevenOrder from "./checkout-seven-order/checkout-seven-order";
-import { useSelector } from "react-redux";
+import Booking from "@/components/booking";
+import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
-import Booking from "@/components/booking";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import CheckOutSevenAddress from "./checkout-seven-address/checkout-seven-address";
+import CheckOutSevenDiscount from "./checkout-seven-discount/checkout-seven-discount";
+import CheckOutSevenOrder from "./checkout-seven-order/checkout-seven-order";
+import CheckOutSevenPaymentGateway from "./checkout-seven-payment-gateway/checkout-seven-payment-gateway";
 
 const CheckOutSeven = () => {
   const { store_id, bookingData } = useTheme();

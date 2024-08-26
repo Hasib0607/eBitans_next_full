@@ -1,8 +1,13 @@
 import ThankYou from "@/components/thank-you";
-import React from "react";
+import PurchaseGtm from "./PurchaseGtm";
 
 const ThankYouPage = () => {
-  return <ThankYou></ThankYou>;
+  return (
+    <>
+      <PurchaseGtm />
+      <ThankYou />
+    </>
+  );
 };
 
 export default ThankYouPage;

@@ -4,6 +4,7 @@ import useTheme from "@/hooks/use-theme";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
+import CheckoutGtm from "./CheckoutGtm";
 
 const CheckoutComponent = () => {
   const router = useRouter();
@@ -17,7 +18,12 @@ const CheckoutComponent = () => {
   }, [user, store, router]);
 
   if (user?.verify || store?.auth_type === "EasyOrder") {
-    return <Checkout theme={design?.checkout_page} />;
+    return (
+      <>
+        <CheckoutGtm />
+        <Checkout theme={design?.checkout_page} />;
+      </>
+    );
   }
 };
 
