@@ -58,7 +58,7 @@ const Card19 = ({ item, design, store_id }: any) => {
 
     httpReq
       .post(
-        "https://admin.ebitans.com/api/v1/" + "get/offer/product",
+        process.env.NEXT_PUBLIC_API_URL + "get/offer/product",
         productDetails
       )
       .then((res: any) => {

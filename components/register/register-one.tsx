@@ -37,7 +37,6 @@ const RegisterOne = () => {
 
   const { user } = useSelector((state: any) => state.auth);
 
-
   const onSubmit = (data: any, e: any) => {
     e.preventDefault();
     window.localStorage.setItem("authType", data?.email || data?.phone);

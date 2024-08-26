@@ -2,7 +2,7 @@
 import { iconImg } from "@/site-settings/siteUrl";
 import axios from "axios";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 const FeaturedTwentyOne = ({ category, design }: any) => {
   const [text, setText] = useState("");
@@ -50,7 +50,7 @@ const FeatureCatSix = ({ item, setText, text }: any) => {
   const [result, setResult] = useState(null);
   const fetchData = async () => {
     const data = await axios.post(
-      "https://admin.ebitans.com/api/v1/" + `getcatproducts`,
+      process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
       { id: item?.id }
     );
     setResult(data?.data?.total);

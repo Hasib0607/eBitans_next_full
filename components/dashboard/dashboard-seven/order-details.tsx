@@ -27,7 +27,6 @@ const OrderDetails = () => {
 
   const { order_id } = useParams();
 
-
   useEffect(() => {
     // const fetchData = async () => {
     //   // get the data from the api
@@ -53,7 +52,6 @@ const OrderDetails = () => {
     fetchData().catch((error) => console.log(error));
     // make sure to catch any error
   }, [order_id, call]);
-
 
   return (
     <div className="md:w-full mt-4 md:mt-0">

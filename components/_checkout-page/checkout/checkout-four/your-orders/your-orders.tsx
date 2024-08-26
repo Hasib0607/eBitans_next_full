@@ -116,33 +116,7 @@ const YourOrders = ({
     }
   }, [headerSetting?.tax, total]);
 
-  // facebook tracking
-  // useEffect(() => {
-  //   const names = cartList.map((cart: any) => {
-  //     return cart.name;
-  //   });
-
-  //   AddToCart(names, "product");
-  // }, [cartList]);
-
-  // const onSubmit = async () => {
-
-  //     const dataInfo = {
-  //         name: userName,
-  //         phone: userPhone,
-  //         address:userAddress,
-  //         store_id: store_id,
-  //     }
-
-  //     if (store?.auth_type === 'EasyOrder' && !user) {
-
-  //         const response = await axios.post('https://admin.ebitans.com/api/v1/address/easy-order/save', dataInfo)
-  //         setToken(response?.data?.token)
-  //         toast(response?.data?.success, { type: 'success' })
-  //     }
-  // };
-
-  const apiOrder = "https://admin.ebitans.com/api/v1/placeorder";
+  const apiOrder = process.env.NEXT_PUBLIC_API_URL + "placeorder";
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -289,7 +263,7 @@ const YourOrders = ({
           store_id: store_id,
         };
         const responseInfo = await axios.post(
-          "https://admin.ebitans.com/api/v1/address/easy-order/save",
+          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
           dataInfo
         );
         const placeOrder = async () => {

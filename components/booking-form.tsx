@@ -77,7 +77,7 @@ const BookingForm = ({
     });
   };
 
-  const apiOrder = "https://admin.ebitans.com/api/v1/placeorder";
+  const apiOrder = process.env.NEXT_PUBLIC_API_URL + "placeorder";
 
   const handleSubmit = async (e: any) => {
     e.preventDefault();
@@ -119,7 +119,7 @@ const BookingForm = ({
         store_id: store_id,
       };
       const responseInfo = await axios.post(
-        "https://admin.ebitans.com/api/v1/address/easy-order/save",
+        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
         dataInfo
       );
       const placeOrder = async () => {

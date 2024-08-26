@@ -1,8 +1,8 @@
 "use client";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import SectionHeadingTen from "../section-heading/section-heading-ten";
+import { useEffect, useState } from "react";
 import Card15 from "../card/card15";
+import SectionHeadingTen from "../section-heading/section-heading-ten";
 
 const NewArrivalProductTen = ({ category, design, store_id }: any) => {
   const [active, setActive] = useState(0);
@@ -13,7 +13,7 @@ const NewArrivalProductTen = ({ category, design, store_id }: any) => {
     async function handleCategory() {
       try {
         const response: any = await axios.post<any>(
-          "https://admin.ebitans.com/api/v1/" + `getcatproducts`,
+          process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
           {
             id: category[id].id,
           }

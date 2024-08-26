@@ -134,7 +134,7 @@ const useData = () => {
     async function fetchBookingData() {
       try {
         const data = await axios.post(
-          "https://admin.ebitans.com/api/v1/booking-from",
+          process.env.NEXT_PUBLIC_API_URL + "booking-from",
           { store_id: store_id, modulus_id: 108 }
         );
         setBookingData(data?.data);
@@ -324,7 +324,7 @@ const useData = () => {
   const fetchHeader = useCallback(
     async (data: any) => {
       const res = await axios.post(
-        "https://admin.ebitans.com/api/v1/" + "getsubdomain/name",
+        process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
         {
           name: window.location.host.startsWith("www.")
             ? window.location.host.slice(4)

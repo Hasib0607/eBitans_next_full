@@ -114,7 +114,7 @@ const CheckOutElevenOrder = ({
     }
   }, [headerSetting?.tax, total]);
 
-  const apiOrder = "https://admin.ebitans.com/api/v1/placeorder";
+  const apiOrder = process.env.NEXT_PUBLIC_API_URL + "placeorder";
 
   const handleCheckout = async () => {
     setLoading(true);
@@ -259,7 +259,7 @@ const CheckOutElevenOrder = ({
           store_id: store_id,
         };
         const responseInfo = await axios.post(
-          "https://admin.ebitans.com/api/v1/address/easy-order/save",
+          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
           dataInfo
         );
         const placeOrder = async () => {

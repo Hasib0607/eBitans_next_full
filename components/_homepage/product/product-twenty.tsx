@@ -14,7 +14,7 @@ const ProductTwenty = ({ category, design }: any) => {
     async function handleCategory() {
       try {
         const response: any = await axios.post(
-          "https://admin.ebitans.com/api/v1/" + `getcatproducts`,
+          process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
           {
             id: category[id].id,
           }

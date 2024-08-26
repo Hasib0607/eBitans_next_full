@@ -29,7 +29,7 @@ const CheckOutSevenAddress = ({
 
   const { user } = useSelector((state: any) => state.auth);
 
-  const apiUrl = "https://admin.ebitans.com/api/v1/address";
+  const apiUrl = process.env.NEXT_PUBLIC_API_URL + "address";
 
   useEffect(() => {
     if (store?.auth_type === "EasyOrder" && !user) {
@@ -217,7 +217,7 @@ const Single = ({
 
   const { user } = useSelector((state: any) => state.auth);
 
-  const apiDelete = "https://admin.ebitans.com/api/v1/address/delete";
+  const apiDelete = process.env.NEXT_PUBLIC_API_URL + "delete";
 
   const delete_address = (id: any) => {
     if (store?.auth_type === "EasyOrder" && !user) {
@@ -320,7 +320,7 @@ export function SaveAddress({
     data["store_id"] = store_id;
     if (store?.auth_type === "EasyOrder" && !user && !token) {
       const response = await axios.post(
-        "https://admin.ebitans.com/api/v1/address/easy-order/save",
+        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
         data
       );
       reset();
@@ -330,7 +330,7 @@ export function SaveAddress({
       setOpen(!open);
     } else if (store?.auth_type === "EasyOrder" && !user && token) {
       const response = await axios.post(
-        "https://admin.ebitans.com/api/v1/address/save",
+        process.env.NEXT_PUBLIC_API_URL + "address/save",
         data,
         {
           headers: {
@@ -459,7 +459,7 @@ export function UpdateAddress({
 
   const { user } = useSelector((state: any) => state.auth);
 
-  const apiEdit = "https://admin.ebitans.com/api/v1/address/edit";
+  const apiEdit = process.env.NEXT_PUBLIC_API_URL + "address/edit";
 
   const {
     register,

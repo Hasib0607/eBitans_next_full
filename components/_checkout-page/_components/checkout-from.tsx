@@ -44,7 +44,7 @@ const CheckoutFrom = ({ store, setCall, store_id, setToken, user }: any) => {
 
     if (store?.auth_type === "EasyOrder" && !user) {
       const response = await axios.post(
-        "https://admin.ebitans.com/api/v1/address/easy-order/save",
+        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
         data
       );
       reset();

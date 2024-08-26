@@ -152,7 +152,7 @@ const ProductsCount = ({ subId }: any) => {
   useEffect(() => {
     const fetchData = async () => {
       const data = await axios.post(
-        "https://admin.ebitans.com/api/v1/" + `getsubcatproduct`,
+        process.env.NEXT_PUBLIC_API_URL + `getsubcatproduct`,
         { id: subId }
       );
       setResult(data?.data?.total);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Countdown from "react-countdown";
 
 const PaymentAgain = ({ order, transaction }: any) => {
@@ -61,7 +61,7 @@ const PaymentAgain = ({ order, transaction }: any) => {
             <p
               onClick={() =>
                 window.location.replace(
-                  `https://admin.ebitans.com/api/v1/bkash/checkout-url/orderPay?order=${order?.id}`
+                  `${process.env.NEXT_PUBLIC_API_URL}bkash/checkout-url/orderPay?order=${order?.id}`
                 )
               }
               className="py-3 hover:bg-gray-800 hover:text-white transition-colors duration-500 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800 border border-gray-800 font-semibold font-sans w-full text-center lg:cursor-pointer text-base text-gray-800"
