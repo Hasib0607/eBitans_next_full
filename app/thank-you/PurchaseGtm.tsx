@@ -1,5 +1,6 @@
 "use client";
 
+import { Purchase } from "@/helper/fb-tracking";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useSearchParams } from "next/navigation";
 import { useEffect } from "react";
@@ -13,6 +14,7 @@ const PurchaseGtm = () => {
       event: "purchase",
       total,
     });
+    Purchase(total);
   }, []);
 
   return null;

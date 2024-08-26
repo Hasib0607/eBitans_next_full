@@ -1,5 +1,6 @@
 "use client";
 
+import { PageView } from "@/helper/fb-tracking";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useEffect } from "react";
 
@@ -8,6 +9,7 @@ const HomepageLoad = () => {
     sendGTMEvent({
       event: "page_load",
     });
+    PageView();
   }, []);
   return <div></div>;
 };

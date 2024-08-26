@@ -1,5 +1,6 @@
 "use client";
 
+import { Checkout } from "@/helper/fb-tracking";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useCallback, useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -12,6 +13,7 @@ const CheckoutGtm = () => {
       event: "checkout",
       value: cartList,
     });
+    Checkout(cartList);
   }, [cartList]);
   useEffect(() => {
     checkoutEvent();
