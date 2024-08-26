@@ -113,9 +113,7 @@ const HeaderTwentySeven = ({ headerSetting }: any) => {
             <div className="flex justify-start xl:gap-10 gap-4 uppercase text-[14px] py-4">
               {menu?.map((menu: any) => (
                 <ul key={menu.id}>
-
                   <Link href={"/" + menu?.url}>
-
                     <li className="">{menu.name}</li>
                   </Link>
                 </ul>

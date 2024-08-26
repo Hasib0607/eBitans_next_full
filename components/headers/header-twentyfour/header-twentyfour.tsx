@@ -133,9 +133,7 @@ const HeaderTwentyFour = ({ headerSetting }: any) => {
             <div className="flex justify-center xl:gap-10 gap-4 uppercase text-[14px] py-4">
               {menu?.slice(0, 7).map((menu: any) => (
                 <ul key={menu.id}>
-
                   <Link href={"/" + menu?.url}>
-
                     <li className="">{menu.name}</li>
                   </Link>
                 </ul>

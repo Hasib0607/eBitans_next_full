@@ -39,9 +39,7 @@ export default function HeaderTwenty({ headerSetting }: any) {
           <Popover.Group as="nav" className="hidden lg:flex space-x-6">
             {menu?.slice(0, 5)?.map((data: any) => (
               <Link
-
                 href={"/" + data?.url}
-
                 key={data?.id}
                 className="text-base font-medium text-gray-500 hover:text-gray-900"
               >
