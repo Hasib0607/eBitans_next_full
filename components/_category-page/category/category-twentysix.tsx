@@ -43,8 +43,6 @@ const CategoryTwentySix = () => {
     setDataId(data);
   }, [data]);
 
-  console.log(hasMore, "hasMore");
-
   const styleCss = `
     .grid-active {
       color:  ${design?.header_color};
@@ -324,7 +322,6 @@ const Product = ({
 };
 
 const Location = ({ category, cat }: any) => {
-  // console.log(category,"category");
   return (
     <div className="w-full bg-[#f1f1f1] flex flex-col justify-center items-center py-5 mb-5">
       <h1 className="text-3xl font-medium ">Product</h1>

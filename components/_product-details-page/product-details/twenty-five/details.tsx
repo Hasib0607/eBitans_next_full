@@ -1,31 +1,30 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
-import {
-  FacebookIcon,
-  FacebookShareButton,
-  WhatsappShareButton,
-  WhatsappIcon,
-} from "react-share";
-import parse from "html-react-parser";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
-import { useDispatch } from "react-redux";
+import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
-import { toast } from "react-toastify";
-import { productImg } from "@/site-settings/siteUrl";
-import ImageZoom from "../image-zoom";
-import BDT from "@/utils/bdt";
 import {
   ExclamationCircleIcon,
   MinusIcon,
   PlusIcon,
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
-import OvalLoader from "@/components/loader/oval-loader";
-import Skeleton from "@/components/loader/skeleton";
+import parse from "html-react-parser";
+import { useDispatch } from "react-redux";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
+import { toast } from "react-toastify";
+import ImageZoom from "../image-zoom";
 
 const Details = ({
   fetchStatus,
@@ -49,7 +48,7 @@ const Details = ({
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-  // console.log(filterV, "VA");
+  //
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

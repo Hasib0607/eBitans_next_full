@@ -141,7 +141,7 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  // console.log(product,"product");
+  //
   const { design } = useTheme();
 
   const prevEl = "feature-product-prev";

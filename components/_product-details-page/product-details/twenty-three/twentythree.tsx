@@ -1,24 +1,24 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Tab } from "@headlessui/react";
-import { SwiperSlide } from "swiper/react";
-import moment from "moment";
-import { RiArrowRightSLine } from "react-icons/ri";
 import userImg from "@/assets/img/user.png";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import Link from "next/link";
-import Details from "./details";
-import { productImg, profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingTwentyThree from "@/components/section-heading/section-heading-twentythree";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card47 from "@/components/card/card47";
-import { getPrice } from "@/utils/get-price";
+import SectionHeadingTwentyThree from "@/components/section-heading/section-heading-twentythree";
+import DefaultSlider from "@/components/slider/default-slider";
+import useTheme from "@/hooks/use-theme";
+import { productImg, profileImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import Rate from "@/utils/rate";
+import { Tab } from "@headlessui/react";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
+import Link from "next/link";
+import { useEffect, useState } from "react";
+import { RiArrowRightSLine } from "react-icons/ri";
+import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
 const TwentyThree = ({ data, updatedData }: any) => {
   const { design, store_id } = useTheme();
@@ -186,7 +186,7 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  // console.log(product,"product");
+  //
   const { design } = useTheme();
 
   const prevEl = "feature-product-prev";

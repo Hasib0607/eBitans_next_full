@@ -93,7 +93,6 @@ const ShoppingCart = ({ open, setOpen }: any) => {
   const { design, store_id } = useTheme();
 
   const handleNavLink = () => {
-    console.log("handle checkout clicked");
     setOpen(false);
 
     // TagManager.dataLayer({

@@ -1,5 +1,4 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
 import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
@@ -44,8 +43,6 @@ const Details = ({
   const [camp, setCamp] = useState<any>(null);
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
-
-  // console.log(filterV, "VA");
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

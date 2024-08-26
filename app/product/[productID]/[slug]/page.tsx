@@ -37,7 +37,6 @@ const SingleProductDetails = async ({ params }: Props) => {
     store_id,
     product_id: params.productID,
   });
-  console.log(product, product.name, "pd details");
 
   return (
     <div>

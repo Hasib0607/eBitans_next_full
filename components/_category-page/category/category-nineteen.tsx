@@ -1,17 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import img from "@/components/_shop-page/shops/nineteen/imageBg/shop-header.webp";
+import { useEffect, useState } from "react";
 // import img from "shops/nineteen/imageBg/shop-header.webp";
+import Card39 from "@/components/card/card39";
+import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
+import Link from "next/link";
+import { useParams } from "next/navigation";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import useTheme from "@/hooks/use-theme";
-import { useParams } from "next/navigation";
-import Pagination from "./pagination";
-import httpReq from "@/utils/http/axios/http.service";
 import Skeleton from "react-loading-skeleton";
-import Card39 from "@/components/card/card39";
-import Link from "next/link";
+import Pagination from "./pagination";
 
 const CategoryNineteen = () => {
   const { id: data }: any = useParams<{ id: string }>();
@@ -112,7 +112,6 @@ const Product = ({
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
-  // console.log(page, "page");
 
   useEffect(() => {
     setLoad(true);

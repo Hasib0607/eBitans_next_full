@@ -1,15 +1,15 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { FaFacebookF } from "react-icons/fa";
-import { AiFillYoutube } from "react-icons/ai";
-import { RiInstagramLine } from "react-icons/ri";
-import { useDispatch } from "react-redux";
-import httpReq from "@/utils/http/axios/http.service";
 import useTheme from "@/hooks/use-theme";
-import { getPrice } from "@/utils/get-price";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg, profileImg } from "@/site-settings/siteUrl";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
 import Rate from "@/utils/rate";
+import { useEffect, useState } from "react";
+import { AiFillYoutube } from "react-icons/ai";
+import { FaFacebookF } from "react-icons/fa";
+import { RiInstagramLine } from "react-icons/ri";
+import { useDispatch } from "react-redux";
 // import { addToCartList, decrementQty } from '../../../../redux/slices/productslice';
 const Fifteen = ({ data }: any) => {
   const [relatedProduct, setRelatedProduct] = useState<any>([]);
@@ -45,14 +45,12 @@ const Fifteen = ({ data }: any) => {
     rest?.discount_type
   );
   const filterOfferProduct = (item: any) => {
-    // console.log(item)
     let cartItem = {};
     let productDetails = {
       id: item?.id,
       store_id,
     };
     httpReq.post("get/offer/product", productDetails).then((res) => {
-      // console.log('res',res)
       if (!res?.error) {
         let itemRegularPrice = getPrice(
           item?.regular_price,

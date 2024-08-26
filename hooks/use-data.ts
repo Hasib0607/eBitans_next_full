@@ -139,7 +139,6 @@ const useData = () => {
         );
         setBookingData(data?.data);
       } catch (error) {
-        // setError(error)
         console.log(error, "error");
       }
     }

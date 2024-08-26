@@ -1,16 +1,16 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
 import { clearMessage } from "@/redux/features/message.slice";
+import { imgUrl } from "@/site-settings/siteUrl";
+import { btnhover } from "@/site-settings/style";
 import httpReq from "@/utils/http/axios/http.service";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Loading from "../register/loading";
-import { imgUrl } from "@/site-settings/siteUrl";
-import { useRouter } from "next/navigation";
-import { btnhover } from "@/site-settings/style";
 
 const ForgotEleven = () => {
   const [user, setUser] = useState({});
@@ -58,7 +58,7 @@ const Finding = ({ setPage, setUser }: any) => {
       httpReq
         .post("forget-pass", { phone: data.phone, store_id })
         .then((res) => {
-          // console.log(res);
+          // ;
 
           if (res.user_id) {
             setPage("otp");

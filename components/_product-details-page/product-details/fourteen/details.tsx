@@ -39,8 +39,6 @@ const Details = ({
 
   const sizeV: any = variant?.find((item: any) => item?.size !== null);
 
-  // console.log(filterV, "VA");
-
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);

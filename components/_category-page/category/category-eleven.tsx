@@ -209,25 +209,6 @@ const Product = ({
           { id }
         );
         ({ colors, data, error } = response);
-
-        // if (error) {
-        //   console.error("Error fetching subcategory products:", error);
-        //   setHasMore(false);
-        //   setLoad(false);
-
-        //   if (!shop_load && page !== 1) {
-        //     console.log("here sdmsdlkmfs");
-        //     setProducts((prevProducts: any) => {
-        //       return [...prevProducts, ...data.data];
-        //     });
-        //   } else {
-        //     console.log("here");
-        //     setProducts([]);
-        //     setPaginate(null);
-        //   }
-        //   setColors(colors);
-        //   return setError(error);
-        // }
       }
 
       if (data?.data?.length > 0) {

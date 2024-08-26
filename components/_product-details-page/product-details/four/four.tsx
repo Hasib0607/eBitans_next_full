@@ -140,7 +140,6 @@ const UserReview = ({ review }: any) => {
 const Related = ({ product }: any) => {
   const prev = "best_seller_Prev";
   const next = "best_seller_Next";
-  // console.log(product);
   return (
     <div className="sm:py-10 py-5 ">
       <div className="my-5 pt-1 flex justify-between items-center">

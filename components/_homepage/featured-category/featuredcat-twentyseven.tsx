@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 import bgImg from "@/components/_homepage/featured-category/twentyseven-bg-img/bg-cat.svg";
 import bgImg1 from "@/components/_homepage/featured-category/twentyseven-bg-img/bg-cat1.svg";
@@ -8,10 +8,10 @@ import bgImg3 from "@/components/_homepage/featured-category/twentyseven-bg-img/
 import bgImg4 from "@/components/_homepage/featured-category/twentyseven-bg-img/bg-cat4.svg";
 import bgImg5 from "@/components/_homepage/featured-category/twentyseven-bg-img/bg-cat5.svg";
 
-import { useState } from "react";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
 import axios from "axios";
+import Link from "next/link";
+import { useState } from "react";
 
 const FeaturedTwentySeven = ({ category, design, product }: any) => {
   const [catId, setCatId] = useState(category[0].id);
@@ -147,10 +147,6 @@ const FeaturedTwentySeven = ({ category, design, product }: any) => {
 export default FeaturedTwentySeven;
 
 const ProductsCount = ({ subId }: any) => {
-  // console.log(subId, "subId");
-  // const { product, category } = useTheme();
-  // const [products, setProducts] = useState([])
-
   const [result, setResult] = useState(null);
 
   useEffect(() => {

@@ -58,9 +58,6 @@ const Details = ({
     const fetchData = async () => {
       data["store_id"] = store_id;
       const response = await getCampaignProduct(product, store_id);
-
-      console.log(response, "response");
-
       if (!response?.error) {
         setCamp(response);
       } else {

@@ -213,7 +213,6 @@ const Product = ({
         { id }
       );
       if (error) {
-        // console.log("hdfshsd");
         setHasMore(false);
         setLoad(false);
 

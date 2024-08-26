@@ -60,7 +60,6 @@ const CheckOutFiveAddress = ({
         .then(({ address }: any) => {
           setAddress(address);
           setSelectAddress(address[0]);
-          // console.log(address, 'address');
           setLoading(false);
         })
         .catch((err: any) => console.log(err, "error"));

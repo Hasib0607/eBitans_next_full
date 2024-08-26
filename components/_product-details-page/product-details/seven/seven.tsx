@@ -168,7 +168,6 @@ const According = ({ text, desc }: any) => {
 };
 
 const UserReview = ({ review }: any) => {
-  console.log(review, "review");
   return (
     <div className=" bg-slate-50 p-5">
       <div className="avatar">

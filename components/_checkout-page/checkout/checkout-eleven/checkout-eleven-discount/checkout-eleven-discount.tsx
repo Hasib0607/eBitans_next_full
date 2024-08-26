@@ -3,7 +3,7 @@ import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
 import httpReq from "@/utils/http/axios/http.service";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -90,7 +90,6 @@ const CheckOutElevenDiscount = ({
     fetchData()
       // make sure to catch any error
       .catch((er) => {
-        // setLoad(false)
         console.log(er);
       });
   };

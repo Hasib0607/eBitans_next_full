@@ -77,7 +77,6 @@ const Address = ({
         .then(({ address }) => {
           setAddress(address);
           setSelectAddress(address[0]);
-          // console.log(address, 'address');
           setLoading(false);
         })
         .catch((err) => console.log(err, "error"));
@@ -268,8 +267,6 @@ const Single = ({
           });
           toast(response.data.success, { type: "success" });
           setCall(Math.random() * 100);
-
-          // console.log('Post successful:', response.data);
         } catch (error) {
           console.error("Error posting data:", error);
           // Handle any errors here

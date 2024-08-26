@@ -1,31 +1,30 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import imgCall from "@/assets/img/call.png";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import BDT from "@/utils/bdt";
+import { buyNow } from "@/utils/buy-now";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
+import parse from "html-react-parser";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { HiShoppingCart } from "react-icons/hi";
+import { IoCall } from "react-icons/io5";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { useDispatch } from "react-redux";
 import {
   FacebookIcon,
   FacebookShareButton,
-  WhatsappShareButton,
   WhatsappIcon,
+  WhatsappShareButton,
 } from "react-share";
-import parse from "html-react-parser";
-import imgCall from "@/assets/img/call.png";
-import { IoCall } from "react-icons/io5";
-import { HiShoppingCart } from "react-icons/hi";
-import useTheme from "@/hooks/use-theme";
-import { useDispatch } from "react-redux";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { useRouter } from "next/navigation";
-import { buyNow } from "@/utils/buy-now";
-import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
-import Rate from "@/utils/rate";
-import BDT from "@/utils/bdt";
-import CallForPrice from "@/utils/call-for-price";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -51,7 +50,7 @@ const Details = ({
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-  // console.log(filterV, "VA");
+  //
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

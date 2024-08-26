@@ -1,5 +1,5 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";
@@ -18,7 +18,6 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -44,7 +43,7 @@ const Details = ({
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-  // console.log(filterV, "VA");
+  //
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

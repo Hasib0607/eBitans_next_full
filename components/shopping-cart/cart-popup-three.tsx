@@ -1,21 +1,21 @@
 "use client";
 /* eslint-disable no-cond-assign */
 /* eslint-disable jsx-a11y/no-redundant-roles */
-import React, { Fragment, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Dialog, Transition } from "@headlessui/react";
-import { motion } from "framer-motion";
-import { toast } from "react-toastify";
 import useTheme from "@/hooks/use-theme";
+import { decrementQty, incrementQty } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import { Dialog, Transition } from "@headlessui/react";
 import {
   MinusIcon,
   PlusIcon,
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
-import { XIcon } from "react-share";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { decrementQty, incrementQty } from "@/redux/features/product.slice";
-import { productImg } from "@/site-settings/siteUrl";
+import { Fragment, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { XIcon } from "react-share";
+import { toast } from "react-toastify";
 
 const CartPopUpThree = () => {
   const { design } = useTheme();
@@ -193,7 +193,7 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
       autoClose: 1000,
     });
   };
-  console.log(product, "product");
+
   return (
     <motion.li
       initial={{ y: 0, opacity: 1 }}

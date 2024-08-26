@@ -1,30 +1,29 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { toast } from "react-toastify";
-import { HiMinus, HiPlus } from "react-icons/hi";
-import { motion, AnimatePresence } from "framer-motion";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { AnimatePresence, motion } from "framer-motion";
+import { useEffect, useState } from "react";
 import { FaShippingFast } from "react-icons/fa";
-import { TbTruckReturn, TbWorld } from "react-icons/tb";
+import { HiMinus, HiPlus } from "react-icons/hi";
 import { RiRefund2Line } from "react-icons/ri";
+import { TbTruckReturn, TbWorld } from "react-icons/tb";
+import { useDispatch } from "react-redux";
 import {
   FacebookIcon,
   FacebookShareButton,
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
-import { productImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import CallForPrice from "@/utils/call-for-price";
-import BDT from "@/utils/bdt";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import Skeleton from "@/components/loader/skeleton";
+import { toast } from "react-toastify";
 
 const Details = ({
   fetchStatus,
@@ -49,7 +48,7 @@ const Details = ({
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-  // console.log(filterV, "VA");
+  //
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

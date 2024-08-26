@@ -4,7 +4,7 @@ import { VscCreditCard } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 // import ImageSection from './ImageSection';
 // import Zoom from '../Zoom';
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -25,7 +25,6 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -52,8 +51,6 @@ const Details = ({
   const [loading, setLoading] = useState(true);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
-
-  // console.log(filterV, "VA");
 
   useEffect(() => {
     // Set a timer to stop the loading state after 2 seconds

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import ReactImageZoom from "react-image-zoom";
 
 // import Swiper core and required modules
@@ -8,18 +8,17 @@ import { FreeMode, Navigation, Thumbs } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
+import { productImg } from "@/site-settings/siteUrl";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import "swiper/css";
+import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import { productImg } from "@/site-settings/siteUrl";
 // import Zoom from './Zoom';
 // import ImageZoom from '../../"@/components/utils/ImageZoom'
 
 const ImageSection = ({ images }: any) => {
   const [thumbsSwiper, setThumbsSwiper] = useState(null);
-  // console.log(images);
   return (
     <>
       <Swiper

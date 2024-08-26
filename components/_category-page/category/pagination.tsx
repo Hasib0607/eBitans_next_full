@@ -2,7 +2,6 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 export default function Pagination({ data, paginate }: any) {
-  // console.log(data,"data");
   const scroll = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };

@@ -130,7 +130,6 @@ const Card6 = ({ item }: any) => {
   };
 
   const add_cart_item = () => {
-    console.log("hello cart");
     if (item?.variant.length !== 0) {
       setView(!view);
     } else {

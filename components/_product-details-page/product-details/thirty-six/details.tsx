@@ -1,5 +1,5 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import {
   addToCartList,
@@ -19,7 +19,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({ data, children, fetchStatus }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
@@ -40,7 +39,7 @@ const Details = ({ data, children, fetchStatus }: any) => {
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-  // console.log(filterV, "VA");
+  //
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -468,8 +467,6 @@ const AddCart = ({
     const result = cartList.find((i: any) => i?.id === product?.id);
     setalready(result);
   }, [cartList, product?.id]);
-
-  console.log(qty, "qty");
 
   let incNum = () => {
     if (already && variant.length === 0) {

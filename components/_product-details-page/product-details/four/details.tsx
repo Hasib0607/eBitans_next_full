@@ -4,7 +4,7 @@ import { VscCreditCard } from "react-icons/vsc";
 import { useDispatch } from "react-redux";
 // import ImageSection from './ImageSection';
 // import Zoom from '../Zoom';
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -25,7 +25,6 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -312,8 +311,6 @@ const Details = ({
 
   const buttonOne =
     "font-bold text-white bg-gray-600 rounded-md w-60 py-3 text-center";
-
-  // console.log(camp,"camp");
 
   return (
     <div className="grid md:grid-cols-8 grid-cols-1 gap-4 w-full overflow-hidden">

@@ -7,7 +7,6 @@ import { useSelector } from "react-redux";
 
 const CheckoutGtm = () => {
   const cartList = useSelector((state: any) => state.cart.cartList);
-  console.log(cartList, "cartlist");
   const checkoutEvent = useCallback(() => {
     sendGTMEvent({
       event: "checkout",

@@ -199,7 +199,7 @@ const Product = ({
     } else {
       setHasMore(false);
     }
-    // console.log(result);
+    // ;
     setLoad(false);
   };
 

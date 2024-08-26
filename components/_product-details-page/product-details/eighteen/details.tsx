@@ -1,20 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
-import { useDispatch } from "react-redux";
+import { addToCartList } from "@/redux/features/product.slice";
+import BDT from "@/utils/bdt";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
+import Rate from "@/utils/rate";
+import parse from "html-react-parser";
+import { useEffect, useState } from "react";
+import { HiMinus, HiPlus } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
-import BDT from "@/utils/bdt";
-import Rate from "@/utils/rate";
-import CallForPrice from "@/utils/call-for-price";
-import parse from "html-react-parser";
-import OvalLoader from "@/components/loader/oval-loader";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -37,8 +36,6 @@ const Details = ({
   const [camp, setCamp] = useState<any>(null);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
-
-  // console.log(filterV, "VA");
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

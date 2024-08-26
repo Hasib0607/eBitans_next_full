@@ -63,13 +63,7 @@ const Profile = () => {
       .catch((er) => {});
   };
 
-  // useEffect(() => {
-  //   return () => URL.revokeObjectURL(imageUrl);
-  // }, [imageUrl]);
-  // console.log(previewUrl,"imageUrl");
-
   const onSubmit = (data: any) => {
-    //  console.log(data, "data");
     if (data?.name === "" || data?.email === "") {
       alert("Please fill up your input field ");
     } else {

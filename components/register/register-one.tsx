@@ -37,7 +37,6 @@ const RegisterOne = () => {
 
   const { user } = useSelector((state: any) => state.auth);
 
-  console.log(user, "user");
 
   const onSubmit = (data: any, e: any) => {
     e.preventDefault();

@@ -14,7 +14,6 @@ const Order = () => {
   const [btn, setBtn] = useState("All");
   const { store_id, design } = useTheme();
   const { user } = useSelector((state: any) => state.auth);
-  console.log(filter.reverse(), "filter");
 
   // console.log(user,"user");
   // console.log(orders, "orders");
@@ -41,7 +40,6 @@ const Order = () => {
   }, [user?.details?.id, store_id, call]);
 
   const cancel_request = (id: any) => {
-    console.log(id, "id");
     Swal.fire({
       title: "Confirm to Cancel",
       text: "Are you sure you want to cancel this order?",

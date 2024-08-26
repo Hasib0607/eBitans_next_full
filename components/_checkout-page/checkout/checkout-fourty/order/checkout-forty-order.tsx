@@ -45,8 +45,6 @@ const CheckOutFortyOrder = ({
   let [files, setFiles] = useState([]);
   let [index, setIndex] = useState(null);
 
-  // console.log(loading,"loading");
-
   const {
     headerSetting,
     store_id,
@@ -360,7 +358,6 @@ const CheckOutFortyOrder = ({
           "https://admin.ebitans.com/api/v1/address/easy-order/save",
           dataInfo
         );
-        // console.log(responseInfo, "responseInfo");
         const placeOrder = async () => {
           try {
             const response = await axios.post(apiOrder, formData, {
@@ -434,7 +431,6 @@ const CheckOutFortyOrder = ({
         httpReq
           .post(`placeorder`, formData)
           .then((response: any) => {
-            // console.log('successful:', response);
             if (response?.url) {
               window.location.replace(response.url);
               dispatch(clearCartList());

@@ -213,7 +213,6 @@ const CheckOutElevenOrder = ({
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
 
-    // console.log(data, "address");
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
         type: "warning",
@@ -330,7 +329,6 @@ const CheckOutElevenOrder = ({
         httpReq
           .post(`placeorder`, formData)
           .then((response: any) => {
-            // console.log('successful:', response);
             if (response?.url) {
               window.location.replace(response.url);
               dispatch(clearCartList());

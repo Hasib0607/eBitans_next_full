@@ -45,7 +45,7 @@ const One = ({ data }: any) => {
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
     );
-    // console.log(data);
+    //
     if (error) {
       setPaginate(null);
       setProducts([]);
@@ -73,7 +73,7 @@ const One = ({ data }: any) => {
     } else {
       setHasMore(false);
     }
-    // console.log(result);
+    // ;
     setLoad(false);
   };
 

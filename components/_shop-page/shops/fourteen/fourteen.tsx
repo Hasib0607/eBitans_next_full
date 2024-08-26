@@ -29,7 +29,6 @@ const Fourteen = ({ data }: any) => {
   const [page, setPage] = useState<any>(1);
   const [hasMore, setHasMore] = useState<any>(true);
 
-  console.log(sort, "sort");
 
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
@@ -245,7 +244,7 @@ const Product = ({
     } else {
       setHasMore(false);
     }
-    // console.log(result);
+    // ;
     setLoad(false);
   };
 

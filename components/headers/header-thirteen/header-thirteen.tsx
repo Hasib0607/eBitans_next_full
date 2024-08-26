@@ -34,7 +34,6 @@ const HeaderTop = ({ headerSetting }: any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-      console.log("Item removed from localStorage");
       window.location.href = "/";
     }
   };

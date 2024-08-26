@@ -8,7 +8,6 @@ import { useEffect } from "react";
 const PurchaseGtm = () => {
   const searchParams = useSearchParams();
   const total = searchParams.get("total");
-  console.log(total);
   useEffect(() => {
     sendGTMEvent({
       event: "purchase",

@@ -1,26 +1,25 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 // import { NavLink } from 'react-router-dom';
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import BDT from "@/utils/bdt";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import parse from "html-react-parser";
 import {
   FacebookIcon,
   FacebookShareButton,
-  WhatsappShareButton,
   WhatsappIcon,
+  WhatsappShareButton,
 } from "react-share";
-import parse from "html-react-parser";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
-import { addToCartList } from "@/redux/features/product.slice";
 import { HSlider } from "./slider";
-import BDT from "@/utils/bdt";
-import CallForPrice from "@/utils/call-for-price";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -116,8 +115,8 @@ const Details = ({
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
-        // console.log("campaignPrice", campaignPrice);
-        // console.log("res", res);
+        //
+        //
         if (variant?.length) {
           // unit with offer
           if (unit) {
@@ -302,7 +301,7 @@ const Details = ({
     });
   };
 
-  // console.log(product, "product");
+  //
 
   const styleCss = `
     .btn-hover:hover {

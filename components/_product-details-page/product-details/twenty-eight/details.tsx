@@ -1,9 +1,21 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { HiMinus, HiPlus } from "react-icons/hi";
-import { toast } from "react-toastify";
+import Skeleton from "@/components/loader/skeleton";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import BDT from "@/utils/bdt";
+import { buyNow } from "@/utils/buy-now";
+import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import ImageModal from "@/utils/image-modal";
+import Rate from "@/utils/rate";
 import parse from "html-react-parser";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { FaPhoneSquareAlt } from "react-icons/fa";
+import { HiMinus, HiPlus } from "react-icons/hi";
+import { useDispatch } from "react-redux";
 import {
   FacebookIcon,
   FacebookMessengerIcon,
@@ -12,21 +24,8 @@ import {
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import { FaPhoneSquareAlt } from "react-icons/fa";
-import { useRouter } from "next/navigation";
-import OvalLoader from "@/components/loader/oval-loader";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import httpReq from "@/utils/http/axios/http.service";
-import { addToCartList } from "@/redux/features/product.slice";
-import BDT from "@/utils/bdt";
-import Rate from "@/utils/rate";
-import CallForPrice from "@/utils/call-for-price";
-import useTheme from "@/hooks/use-theme";
-import ImageModal from "@/utils/image-modal";
-import { buyNow } from "@/utils/buy-now";
-import { getPrice } from "@/utils/get-price";
+import { toast } from "react-toastify";
 import { ProductSlider } from "./product-slider";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   fetchStatus,
@@ -132,8 +131,8 @@ const Details = ({
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
-        // console.log("campaignPrice", campaignPrice);
-        // console.log("res", res);
+        //
+        //
         if (variant?.length) {
           // unit with offer
           if (unit) {
@@ -318,7 +317,7 @@ const Details = ({
     });
   };
 
-  // console.log(product, "product");
+  //
 
   const styleCss = `
     .btn-hover:hover {

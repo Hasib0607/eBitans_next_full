@@ -1,12 +1,12 @@
 "use client";
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 // import { getPrice } from '../../../services/utils';
-import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux";
 import useTheme from "@/hooks/use-theme";
-import { useRouter } from "next/navigation";
 import { login } from "@/redux/features/auth.slice";
+import { useRouter } from "next/navigation";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 import httpReq from "../utils/http/axios/http.service";
 
 const BookingForm = ({
@@ -105,21 +105,12 @@ const BookingForm = ({
     formData.append("drop_location", formBookData?.dropLocation);
     formData.append("comment", formBookData?.comment);
     formData.append("time", formBookData?.time);
-    // formData.append(
-    //   "from_type",
-    //   bookingData?.from_type === "single"
-    //     ? 1
-    //     : bookingData?.from_type === "double"
-    //     ? 0
-    //     : 10
-    // );
+
     formData.append("subtotal", price);
     formData.append("shipping", "0");
     formData.append("total", price);
     formData.append("discount", "0");
     formData.append("tax", "0");
-
-    // console.log(responseInfo);
 
     if (store?.auth_type === "EasyOrder" && !user) {
       const dataInfo = {
@@ -131,7 +122,6 @@ const BookingForm = ({
         "https://admin.ebitans.com/api/v1/address/easy-order/save",
         dataInfo
       );
-      // console.log(responseInfo, "responseInfo");
       const placeOrder = async () => {
         try {
           const response = await axios.post(apiOrder, formData, {

@@ -3,7 +3,6 @@ import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
 import httpReq from "@/utils/http/axios/http.service";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -70,32 +69,9 @@ const Discount = ({
     }
   };
 
-  // wavestar coupon system
-
-  //     const fetchData = async () => {
-  //         // get the data from the api
-  //         const res = await httpReq.post('verifycoupon', {store_id : store_id, user_id: userData?.id, code : coupon})
-  //         setCouponResult(res)
-  //         if (res?.error) {
-  //             setCouponDis(0)
-  //             return toast(res.error, { type: 'danger', autoClose: 1500, })
-  //         }
-  //         if (res?.id) {
-  //             const result = get_discount(res)
-  //             setCouponDis(result)
-  //         }
-
-  //     }
-
-  // useEffect(() => {
-  //      // call the function
-  //      fetchData()
-  // }, [])
-
   const onSubmit = (data: any) => {
     data["store_id"] = store_id;
     data["user_id"] = userData?.id;
-    // console.log(data);
     // declare the async data fetching function
     const fetchData = async () => {
       // get the data from the api

@@ -1,15 +1,15 @@
 "use client";
+import Card69 from "@/components/card/card69";
 import useTheme from "@/hooks/use-theme";
+import httpReq from "@/utils/http/axios/http.service";
+import Link from "next/link";
 import { useParams } from "next/navigation";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import Pagination from "./pagination";
-import httpReq from "@/utils/http/axios/http.service";
 import Skeleton from "react-loading-skeleton";
-import Card69 from "@/components/card/card69";
-import Link from "next/link";
+import Pagination from "./pagination";
 
 const CategoryForty = () => {
   const { id: data }: any = useParams<{ id: string }>();
@@ -109,7 +109,6 @@ const Product = ({
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
-  // console.log(page, "page");
 
   useEffect(() => {
     setLoad(true);

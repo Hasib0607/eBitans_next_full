@@ -74,7 +74,6 @@ const Seven = () => {
     setPage(1);
   }, [activeColor, priceValue, sort]);
 
-  console.log("");
   return (
     <div className="grid grid-cols-5 lg:gap-8 sm:container px-5 bg-white">
       <div className="lg:col-span-1 lg:block hidden">

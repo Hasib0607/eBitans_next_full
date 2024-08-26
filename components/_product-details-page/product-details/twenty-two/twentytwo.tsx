@@ -1,20 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { Tab } from "@headlessui/react";
 import { SwiperSlide } from "swiper/react";
 
-import moment from "moment";
+import Card45 from "@/components/card/card45";
+import SectionHeadingTwentyOne from "@/components/section-heading/section-heading-twentyone";
+import DefaultSlider from "@/components/slider/default-slider";
 import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import Details from "./details";
 import { profileImg } from "@/site-settings/siteUrl";
 import Rate from "@/utils/rate";
-import SectionHeadingTwentyOne from "@/components/section-heading/section-heading-twentyone";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import DefaultSlider from "@/components/slider/default-slider";
-import Card45 from "@/components/card/card45";
 import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
 const TwentyTwo = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -136,7 +134,7 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  // console.log(product,"product");
+  //
   const { design } = useTheme();
 
   const prevEl = "feature-product-prev";

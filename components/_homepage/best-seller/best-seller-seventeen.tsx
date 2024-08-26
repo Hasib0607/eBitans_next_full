@@ -1,18 +1,17 @@
-import React from "react";
 import "./best-seller-seventeen.css";
 import image from "./bg-img/17/show_divider_2_69x61.webp";
 
-import { SwiperSlide } from "swiper/react";
-import img1 from "./bg-img/17/offer_bg.webp";
+import Card31 from "@/components/card/card31";
+import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
+import DefaultSlider from "@/components/slider/default-slider";
+import Arrowbetween from "@/utils/arrow-between";
 import {
   ParallaxBanner,
   ParallaxBannerLayer,
   ParallaxProvider,
 } from "react-scroll-parallax";
-import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
-import Card31 from "@/components/card/card31";
-import Arrowbetween from "@/utils/arrow-between";
-import DefaultSlider from "@/components/slider/default-slider";
+import { SwiperSlide } from "swiper/react";
+import img1 from "./bg-img/17/offer_bg.webp";
 
 const BestSellerSeventeen = ({ best_sell_product, design, store_id }: any) => {
   const topBestDeals = best_sell_product.slice(0, 2);
@@ -20,8 +19,6 @@ const BestSellerSeventeen = ({ best_sell_product, design, store_id }: any) => {
 
   const prev = "best_deals_seller_Prev";
   const next = "best_deals_seller_Next";
-
-  console.log("topBestSecondDeals", image);
 
   return (
     <div className="relative z-0 h-full overflow-hidden">

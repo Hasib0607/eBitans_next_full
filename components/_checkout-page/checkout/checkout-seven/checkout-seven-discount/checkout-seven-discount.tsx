@@ -3,7 +3,6 @@ import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
 import httpReq from "@/utils/http/axios/http.service";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -23,7 +22,6 @@ const CheckOutSevenDiscount = ({
   } = useForm();
   const { store_id, design, headerSetting, userData } = useTheme();
   const cartList = useSelector((state: any) => state.cart.cartList);
-  // console.log(userData,"userData");
   const get_discount = (res: any) => {
     setCoupon(res?.code);
     const priceList = cartList?.map((p: any) => p.qty * p?.price);
@@ -93,7 +91,6 @@ const CheckOutSevenDiscount = ({
       // make sure to catch any error
       .catch((er) => {
         // setLoad(false)
-        // console.log(er);
       });
   };
 

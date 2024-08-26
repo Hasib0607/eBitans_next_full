@@ -35,7 +35,6 @@ const fetchData = async (
     );
     const { colors, data } = categoryResponse;
 
-    console.log(data, "categorydata");
 
     if (!data) {
       try {

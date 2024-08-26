@@ -1,21 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { Tab } from "@headlessui/react";
-import { SwiperSlide } from "swiper/react";
-import Details from "./details";
-import moment from "moment";
-import httpReq from "@/utils/http/axios/http.service";
-import Link from "next/link";
-import { RiArrowRightSLine } from "react-icons/ri";
+import Card53 from "@/components/card/card53";
+import SectionHeadingTwentyNine from "@/components/section-heading/section-heading-twentynine";
+import DefaultSlider from "@/components/slider/default-slider";
 import useTheme from "@/hooks/use-theme";
 import { profileImg } from "@/site-settings/siteUrl";
 import Rate from "@/utils/rate";
-import SectionHeadingTwentyNine from "@/components/section-heading/section-heading-twentynine";
+import { Tab } from "@headlessui/react";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import DefaultSlider from "@/components/slider/default-slider";
-import Card53 from "@/components/card/card53";
 import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
+import Link from "next/link";
+import { RiArrowRightSLine } from "react-icons/ri";
+import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import Details from "./details";
 
 const TwentyNine = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
@@ -157,7 +155,7 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  // console.log(product,"product");
+  //
   const { design } = useTheme();
 
   const prevEl = "feature-product-prev";

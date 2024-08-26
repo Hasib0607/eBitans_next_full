@@ -63,7 +63,6 @@ const CheckOutSevenOrder = ({
 
   const dispatch = useDispatch();
   const priceList = cartList?.map((p: any) => p.qty * p?.price);
-  // console.log();
   const total = priceList.reduce(
     (previousValue: any, currentValue: any) => previousValue + currentValue,
     0

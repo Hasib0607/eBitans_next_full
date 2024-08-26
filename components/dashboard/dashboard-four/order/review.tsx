@@ -1,10 +1,10 @@
 "use client";
-import { Fragment, useRef, useState } from "react";
-import { Dialog, Transition } from "@headlessui/react";
-import { useForm } from "react-hook-form";
-import { toast } from "react-toastify";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
+import { Dialog, Transition } from "@headlessui/react";
+import { Fragment, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { toast } from "react-toastify";
 
 export default function GiveReview({
   setOpen,
@@ -55,7 +55,7 @@ export default function GiveReview({
           setCall(!call);
           setOpen(false);
         }
-        // console.log(res);
+        // ;
 
         if (error) {
           toast(error, { type: "warning" });

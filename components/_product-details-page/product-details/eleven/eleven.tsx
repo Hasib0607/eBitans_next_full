@@ -44,8 +44,6 @@ const Eleven = ({ data, updatedData }: any) => {
  
     `;
 
-  console.log({ product, vrcolor, variant });
-
   return (
     <div className="container px-5 bg-white pt-10">
       <style>{styleCss}</style>

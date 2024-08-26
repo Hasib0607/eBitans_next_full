@@ -212,11 +212,6 @@ const YourOrders = ({
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
 
-    // for (let key in data) {
-    //     formData.append(key, data[key]);
-    // }
-    console.log(formData, "fromdata");
-
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
         type: "warning",
@@ -333,7 +328,6 @@ const YourOrders = ({
         httpReq
           .post(`placeorder`, formData)
           .then((response: any) => {
-            // console.log('response:', response);
             if (response?.url) {
               window.location.replace(response.url);
               dispatch(clearCartList());

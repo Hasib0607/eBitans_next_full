@@ -1,9 +1,8 @@
 import httpReq from "@/utils/http/axios/http.service";
+import { yupResolver } from "@hookform/resolvers/yup";
 import axios from "axios";
-import React from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
-import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 const phoneRegExp = /^(01\d{9}|8801\d{9}|\+8801\d{9})$/;
@@ -63,8 +62,6 @@ const CheckoutFrom = ({ store, setCall, store_id, setToken, user }: any) => {
         })
         .catch((err) => console.log(err));
     }
-
-    console.log(data, "data");
   };
 
   return (

@@ -1,18 +1,17 @@
 "use client";
-import React, { createRef, useEffect } from "react";
-import { useState } from "react";
+import { createRef, useEffect, useState } from "react";
 // import "./style.css";
+import useTheme from "@/hooks/use-theme";
+import { productImg } from "@/site-settings/siteUrl";
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment } from "react";
-import Slider from "react-slick";
 import {
   BsFillArrowDownSquareFill,
   BsFillArrowUpSquareFill,
 } from "react-icons/bs";
-import { MdOutlineZoomOutMap } from "react-icons/md";
 import { CgClose } from "react-icons/cg";
-import useTheme from "@/hooks/use-theme";
-import { productImg } from "@/site-settings/siteUrl";
+import { MdOutlineZoomOutMap } from "react-icons/md";
+import Slider from "react-slick";
 import ImageZoom from "../image-zoom";
 
 export const HSlider = ({ product }: any) => {
@@ -101,18 +100,6 @@ export const HSlider = ({ product }: any) => {
       console.log("after change", currentSlide);
     },
   };
-  // const settingsSmall = {
-  //     infinite: images.length > 4 && true,
-  //     slidesToShow: 4,
-  //     slidesToScroll: 1,
-  //     verticalSwiping: true,
-  //     beforeChange: function (currentSlide, nextSlide) {
-  //         console.log("before change", currentSlide, nextSlide);
-  //     },
-  //     afterChange: function (currentSlide) {
-  //         console.log("after change", currentSlide);
-  //     }
-  // };
 
   return (
     <div>

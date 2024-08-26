@@ -1,6 +1,6 @@
 "use client";
 import imgCall from "@/assets/img/call.png";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";
@@ -24,7 +24,6 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({
   data,
@@ -49,8 +48,6 @@ const Details = ({
   const [camp, setCamp] = useState<any>(null);
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
-
-  // console.log(filterV, "VA");
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

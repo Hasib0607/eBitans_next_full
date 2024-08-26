@@ -359,7 +359,6 @@ const Location = ({ categoy }: any) => {
 };
 
 const Filter = ({ paginate, onChange, setGrid }: any) => {
-  console.log(paginate, "paginate");
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap justify-between items-center px-2">
       <div className="text-gray-500 font-thin">

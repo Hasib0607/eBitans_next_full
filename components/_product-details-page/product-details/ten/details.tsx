@@ -1,5 +1,5 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";
@@ -19,7 +19,6 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
-import Skeleton from "@/components/loader/skeleton";
 
 const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
   const { makeid, store_id, headerSetting, design } = useTheme();
@@ -39,8 +38,6 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
   const [camp, setCamp] = useState<any>(null);
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
-
-  // console.log(filterV, "VA");
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -91,8 +88,6 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
       </div>
     );
   }
-
-  console.log(data, " data");
 
   const regularPrice =
     parseInt(product?.regular_price) +

@@ -2,7 +2,7 @@ import axios from "axios";
 
 const getSubdomainName = async (url: string, head: string = "") => {
   const res = await axios.post(
-    "https://admin.ebitans.com/api/v1/getsubdomain/name",
+    process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
     {
       name: url,
       head: head,
@@ -19,7 +19,7 @@ const getProductDetails = async ({
   product_id: string;
 }) => {
   const { data } = await axios.post(
-    "https://admin.ebitans.com/api/v1/product-details",
+    process.env.NEXT_PUBLIC_API_URL + "product-details",
     { store_id, product_id }
   );
   const { product: productDetails } = data;
@@ -27,4 +27,4 @@ const getProductDetails = async ({
 };
 
 const getSiteInfo = async () => {};
-export { getSubdomainName, getProductDetails };
+export { getProductDetails, getSubdomainName };

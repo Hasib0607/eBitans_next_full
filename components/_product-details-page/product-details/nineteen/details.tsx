@@ -1,36 +1,34 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { IoMdArrowDropleft, IoMdArrowDropright } from "react-icons/io";
-import { SwiperSlide } from "swiper/react";
 import {
-  Navigation,
   A11y,
-  EffectFade,
   Autoplay,
   Controller,
+  EffectFade,
+  Navigation,
 } from "swiper/modules";
-import { Swiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import parse from "html-react-parser";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import OvalLoader from "@/components/loader/oval-loader";
-import { getPrice } from "@/utils/get-price";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
-import ImageZoom from "../image-zoom";
 import BDT from "@/utils/bdt";
-import Rate from "@/utils/rate";
 import CallForPrice from "@/utils/call-for-price";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import Skeleton from "@/components/loader/skeleton";
+import parse from "html-react-parser";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import ImageZoom from "../image-zoom";
 
 const Details = ({
   fetchStatus,
@@ -54,8 +52,6 @@ const Details = ({
   const [camp, setCamp] = useState<any>(null);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
-
-  // console.log(filterV, "VA");
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));

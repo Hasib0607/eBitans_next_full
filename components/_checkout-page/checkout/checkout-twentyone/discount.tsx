@@ -1,15 +1,14 @@
 "use client";
-import React, { useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useSelector } from "react-redux";
-import { toast } from "react-toastify";
-import { useState } from "react";
-import { RotatingLines } from "react-loader-spinner";
-import { FaRegArrowAltCircleRight } from "react-icons/fa";
 import useTheme from "@/hooks/use-theme";
+import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
 import httpReq from "@/utils/http/axios/http.service";
-import { btnhover } from "@/site-settings/style";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { FaRegArrowAltCircleRight } from "react-icons/fa";
+import { RotatingLines } from "react-loader-spinner";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 const Discount = ({
   setCouponDis,
@@ -76,7 +75,6 @@ const Discount = ({
     setLoading(true);
     data["store_id"] = store_id;
     data["user_id"] = userData?.id;
-    // console.log(data);
     // declare the async data fetching function
     const fetchData = async () => {
       // get the data from the api

@@ -131,7 +131,6 @@ const Details = ({
     };
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
-      console.log(res, "responseee");
       if (!res?.error) {
         if (variant?.length) {
           // unit with offer

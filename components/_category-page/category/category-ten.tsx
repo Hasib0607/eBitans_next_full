@@ -193,82 +193,6 @@ const Product = ({
     val,
   ]);
 
-  // const fetchData = async () => {
-  //   // get the data from the api
-  //   const { colors, data, error } = await httpReq.post(
-  //     `getcatproducts${
-  //       page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-  //     }&filter=${sort}&priceFilter=${
-  //       Number(val) !== 0 ? Number(val) : ""
-  //     }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`,
-  //     { id }
-  //   );
-
-  //   if (error) {
-  //     const { colors, data, error } = await httpReq.post(
-  //       `getsubcatproduct${
-  //         page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
-  //       }&filter=${sort}&priceFilter=${
-  //         Number(val) !== 0 ? Number(val) : ""
-  //       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`,
-  //       { id }
-  //     );
-  //     if (error) {
-  //       // console.log("hdfshsd");
-  //       setHasMore(false);
-  //       setLoad(false);
-
-  //       if (!shop_load && page !== 1) {
-  //         if (Array.isArray(data?.data)) {
-  //           setProducts([...products, ...data?.data]);
-  //         } else {
-  //           setProducts([...products]);
-  //         }
-  //       } else {
-  //         setProducts([]);
-  //         setPaginate(null);
-  //       }
-  //       setColors(colors);
-  //       return setError(error);
-  //     } else if (data?.data?.length > 0) {
-  //       setHasMore(true);
-  //       setColors(colors);
-  //       if (!shop_load) {
-  //         if (data?.current_page === 1) {
-  //           setProducts(data?.data);
-  //         } else {
-  //           setProducts([...products, ...data?.data]);
-  //         }
-  //         setPage(page + 1);
-  //       } else {
-  //         setProducts(data?.data);
-  //       }
-  //       setPaginate(data);
-  //       setLoad(false);
-  //       setError(null);
-  //     }
-  //   } else if (data?.data?.length > 0) {
-  //     setHasMore(true);
-  //     if (!shop_load) {
-  //       if (data?.current_page === 1) {
-  //         setProducts(data?.data);
-  //       } else {
-  //         setProducts([...products, ...data?.data]);
-  //       }
-  //       setPage(page + 1);
-  //     } else {
-  //       setProducts(data?.data);
-  //     }
-  //     setColors(colors);
-  //     setPaginate(data);
-  //     setLoad(false);
-  //     setError(null);
-  //   } else {
-  //     setHasMore(false);
-  //   }
-  //   setLoad(false);
-  // };
-
   const fetchData = async () => {
     try {
       const pageQuery = page
@@ -291,25 +215,6 @@ const Product = ({
           { id }
         );
         ({ colors, data, error } = response);
-
-        // if (error) {
-        //   console.error("Error fetching subcategory products:", error);
-        //   setHasMore(false);
-        //   setLoad(false);
-
-        //   if (!shop_load && page !== 1) {
-        //     console.log("here sdmsdlkmfs");
-        //     setProducts((prevProducts: any) => {
-        //       return [...prevProducts, ...data.data];
-        //     });
-        //   } else {
-        //     console.log("here");
-        //     setProducts([]);
-        //     setPaginate(null);
-        //   }
-        //   setColors(colors);
-        //   return setError(error);
-        // }
       }
 
       if (data?.data?.length > 0) {

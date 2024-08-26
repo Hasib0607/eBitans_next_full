@@ -26,9 +26,7 @@ const OrderDetails = () => {
   const [copied, setCopied] = useState(false);
 
   const { order_id } = useParams();
-  console.log(order_id, "order id");
 
-  console.log(order, order?.due, "total ammount");
 
   useEffect(() => {
     // const fetchData = async () => {
@@ -56,7 +54,6 @@ const OrderDetails = () => {
     // make sure to catch any error
   }, [order_id, call]);
 
-  console.log(order, "order");
 
   return (
     <div className="md:w-full mt-4 md:mt-0">

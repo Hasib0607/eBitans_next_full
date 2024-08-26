@@ -2,7 +2,7 @@
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import { EyeIcon, EyeSlashIcon } from "@heroicons/react/24/outline";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "react-toastify";
 
@@ -11,7 +11,7 @@ const ChangePasswordFour = () => {
   const { register, handleSubmit } = useForm();
 
   const onSubmit = (data: any) => {
-    // console.log(data);
+    //
     if (data.password === data.confirm_password) {
       httpReq
         .post("password-change", {
