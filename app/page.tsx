@@ -1,3 +1,4 @@
+import HomepageLoad from "@/components/gtm/homepage-load";
 import HomePage from "@/components/home";
 
 // export async function generateMetadata() {
@@ -12,5 +13,10 @@ import HomePage from "@/components/home";
 // }
 
 export default async function Home() {
-  return <HomePage />;
+  return (
+    <>
+      <HomepageLoad />
+      <HomePage />;
+    </>
+  );
 }

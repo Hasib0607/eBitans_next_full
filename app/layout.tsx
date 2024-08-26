@@ -1,5 +1,6 @@
 import { getSubdomainName } from "@/lib";
 import getUrl from "@/utils/get-url";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { Inter } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import React from "react";
@@ -20,9 +21,12 @@ export default async function RootLayout({
     "design,headersetting"
   );
 
+  console.log(headersetting?.gtm);
+
   return (
     <html lang="en">
       <body className={`${inter.className} lg2 `}>
+        <GoogleTagManager gtmId={headersetting?.gtm} />
         <NextTopLoader />
         <AppWrapper headerSetting={headersetting} design={design}>
           {children}
