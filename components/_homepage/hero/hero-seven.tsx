@@ -1,14 +1,14 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Pagination, Autoplay, Navigation, Controller } from "swiper/modules";
 import { BsArrowRight } from "react-icons/bs";
+import { Autoplay, Controller, Navigation, Pagination } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
 
-import "./hero-seven.css";
 import { sliderImg } from "@/site-settings/siteUrl";
+import "./hero-seven.css";
 
 const HeroSeven = ({ slider, design }: any) => {
   let menu = [""];

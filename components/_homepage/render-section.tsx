@@ -1,5 +1,4 @@
 import dynamic from "next/dynamic";
-import { memo } from "react";
 const Hero = dynamic(() => import("../hero"), { ssr: false });
 const FeaturedCategory = dynamic(() => import("../featured-category"), {
   ssr: false,
@@ -44,7 +43,7 @@ interface RenderSectionProps {
   };
 }
 
-const RenderSection = memo(({ component, data }: RenderSectionProps) => {
+const RenderSection = ({ component, data }: RenderSectionProps) => {
   const {
     headersetting,
     slider,
@@ -147,7 +146,7 @@ const RenderSection = memo(({ component, data }: RenderSectionProps) => {
     default:
       return null;
   }
-});
+};
 
 RenderSection.displayName = "RenderSection";
 export default RenderSection;

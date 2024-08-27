@@ -2,10 +2,7 @@
 import axios from "axios";
 const axiosInstance = axios.create({
   baseURL:
-    process.env.NEXT_PUBLIC_REACT_APP_BASE_URL_DEV ||
-    process.env.NEXT_PUBLIC_REACT_APP_BASE_URL,
-
-  // timeout: 10000
+    process.env.NEXT_PUBLIC_API_URL || "https://admin.ebitans.com/api/v1/",
 });
 
 if (typeof window !== "undefined") {

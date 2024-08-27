@@ -115,6 +115,8 @@ const componentsMap: any = {
         "@/components/_product-details-page/product-details/twenty-two/twentytwo"
       )
   ),
+
+  // gtm here
   twentythree: lazy(
     () =>
       import(
@@ -157,6 +159,8 @@ const componentsMap: any = {
         "@/components/_product-details-page/product-details/twenty-nine/twenty-nine"
       )
   ),
+
+  // gtm start here
   thirty: lazy(
     () =>
       import("@/components/_product-details-page/product-details/thirty/thirty")
