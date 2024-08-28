@@ -14,26 +14,7 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import Details from "./details";
 
 const ThirtySix = ({ data, updatedData }: any) => {
-  // const [relatedProduct, setRelatedProduct] = useState<any>([]);
-  // const [reviews, setReview] = useState([]);
-
-  // useEffect(() => {
-  //   httpReq.post("get/review", data).then((res: any) => {
-  //     if (!res?.error) {
-  //       setReview(res);
-  //     } else {
-  //       setReview([]);
-  //     }
-  //   });
-  //   httpReq
-  //     .post("related-product", { id: data?.product_id })
-  //     .then((res: any) => {
-  //       if (!res?.error) {
-  //         setRelatedProduct(res);
-  //       }
-  //     });
-  // }, [data]);
-
+  
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-7"],
     queryFn: () => getProductDetails(updatedData),

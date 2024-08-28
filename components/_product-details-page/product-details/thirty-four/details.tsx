@@ -10,6 +10,7 @@ import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Rate from "@/utils/rate";
+import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -138,7 +139,18 @@ const Details = ({
                 ...product,
               })
             );
-
+            sendGTMEvent({
+              event: "add_to_cart",
+              value: {
+                cartId: makeid(100),
+                price: campPrice,
+                qty: parseInt(qty),
+                variant_quantity: unit?.quantity,
+                variantId: unit.id,
+                ...unit,
+                ...product,
+              },
+            });
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -158,7 +170,18 @@ const Details = ({
                 ...product,
               })
             );
-
+            sendGTMEvent({
+              event: "add_to_cart",
+              value: {
+                cartId: makeid(100),
+                price: campPrice,
+                qty: parseInt(qty),
+                variant_quantity: size?.quantity,
+                variantId: size.id,
+                ...size,
+                ...product,
+              },
+            });
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -178,6 +201,18 @@ const Details = ({
                 ...product,
               })
             );
+            sendGTMEvent({
+              event: "add_to_cart",
+              value: {
+                cartId: makeid(100),
+                price: campPrice,
+                qty: parseInt(qty),
+                variant_quantity: color?.quantity,
+                variantId: color.id,
+                ...color,
+                ...product,
+              },
+            });
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -210,6 +245,20 @@ const Details = ({
               ...product,
             })
           );
+          sendGTMEvent({
+            event: "add_to_cart",
+            value: {
+              cartId: makeid(100),
+              price: campPrice,
+              qty: parseInt(qty),
+              color: null,
+              size: null,
+              additional_price: null,
+              volume: null,
+              unit: null,
+              ...product,
+            },
+          });
           toast("Successfully you added to cart", {
             type: "success",
             autoClose: 1000,
@@ -230,6 +279,18 @@ const Details = ({
                 ...product,
               })
             );
+            sendGTMEvent({
+              event: "add_to_cart",
+              value: {
+                cartId: makeid(100),
+                price: price,
+                qty: parseInt(qty),
+                variant_quantity: unit?.quantity,
+                variantId: unit.id,
+                ...unit,
+                ...product,
+              },
+            });
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -248,6 +309,18 @@ const Details = ({
                 ...product,
               })
             );
+            sendGTMEvent({
+              event: "add_to_cart",
+              value: {
+                cartId: makeid(100),
+                price: price,
+                qty: parseInt(qty),
+                variant_quantity: size?.quantity,
+                variantId: size.id,
+                ...size,
+                ...product,
+              },
+            });
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -266,6 +339,18 @@ const Details = ({
                 ...product,
               })
             );
+            sendGTMEvent({
+              event: "add_to_cart",
+              value: {
+                cartId: makeid(100),
+                price: price,
+                qty: parseInt(qty),
+                variant_quantity: color?.quantity,
+                variantId: color.id,
+                ...color,
+                ...product,
+              },
+            });
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -298,6 +383,20 @@ const Details = ({
               ...product,
             })
           );
+          sendGTMEvent({
+            event: "add_to_cart",
+            value: {
+              cartId: makeid(100),
+              price: price,
+              qty: parseInt(qty),
+              color: null,
+              size: null,
+              additional_price: null,
+              volume: null,
+              unit: null,
+              ...product,
+            },
+          });
           toast("Successfully you added to cart", {
             type: "success",
             autoClose: 1000,
