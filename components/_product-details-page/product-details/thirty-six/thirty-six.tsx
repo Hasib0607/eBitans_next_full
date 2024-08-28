@@ -14,7 +14,6 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import Details from "./details";
 
 const ThirtySix = ({ data, updatedData }: any) => {
-  
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-7"],
     queryFn: () => getProductDetails(updatedData),
