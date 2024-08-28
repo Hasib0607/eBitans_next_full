@@ -267,6 +267,8 @@
 import useTheme from "@/hooks/use-theme";
 import { removeToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import Taka from "@/utils/taka";
 import { Dialog, Transition } from "@headlessui/react";
 import { TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
@@ -384,7 +386,9 @@ const ShoppingCart = ({ setOpen }: any) => {
         <div className="grid grid-cols-2 bg-white shadow-lg py-3 px-6">
           <p className="text-sm font-medium text-gray-900 text-right">Total</p>
           <p className="text-sm font-medium text-gray-900 text-right">
-            {total} BDT
+            <span>
+              <BDT price={total} />
+            </span>
           </p>
         </div>
 
@@ -512,10 +516,15 @@ const SingleCartProduct = ({ product }: any) => {
         </div>
         <div className="flex flex-1 items-end justify-start text-sm">
           {/* <p className="text-gray-500">Qty {product.qty}</p> */}
-          <p className="text-gray-900 flex text-center text-sm">
-            {parseInt(product?.price)} BDT{" "}
-            <XMarkIcon width={15} className="mx-1" /> {product?.qty} ={" "}
-            {parseInt(product?.price) * product?.qty} BDT
+          <p className="text-gray-900 flex items-center text-center text-sm">
+            <span>
+              Unit Price: <Taka tk={parseInt(product?.price)} />
+            </span>
+            <XMarkIcon width={15} className="mx-1" />
+            <span>
+              {product?.qty} ={" "}
+              <Taka tk={parseInt(product?.price) * product?.qty} />
+            </span>
           </p>
         </div>
       </div>

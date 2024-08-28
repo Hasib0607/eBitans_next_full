@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const Taka = ({ tk }: any) => {
@@ -11,6 +11,8 @@ const Taka = ({ tk }: any) => {
         process.env.NEXT_PUBLIC_API_URL +
           `header_settings?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
       ),
+    placeholderData: keepPreviousData,
+    refetchOnWindowFocus: true,
   });
 
   if (status === "pending") {
@@ -18,7 +20,7 @@ const Taka = ({ tk }: any) => {
   }
 
   if (error) {
-    return <p>Money symbol not defined.</p>;
+    return <p>Currency not defined.</p>;
   }
 
   // ৳ default

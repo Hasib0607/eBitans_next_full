@@ -1,6 +1,6 @@
 "use client";
 
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import axios from "axios";
 
 const BDT = ({ price }: any) => {
@@ -11,6 +11,8 @@ const BDT = ({ price }: any) => {
         process.env.NEXT_PUBLIC_API_URL +
           `header_settings?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
       ),
+    placeholderData: keepPreviousData,
+    refetchOnWindowFocus: true,
   });
 
   if (status === "pending") {
@@ -19,8 +21,7 @@ const BDT = ({ price }: any) => {
 
   return (
     <>
-      {error ? "BDT" : data?.data?.currency?.code}
-      {price}
+      {error ? "BDT" : data?.data?.currency?.code} {price}
     </>
   );
 };

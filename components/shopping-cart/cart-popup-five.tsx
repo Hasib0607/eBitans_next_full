@@ -4,6 +4,7 @@
 import useTheme from "@/hooks/use-theme";
 import { removeToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   ShoppingBagIcon,
@@ -139,7 +140,7 @@ const ShoppingCart = ({ setOpen }: any) => {
         <div className="grid grid-cols-2 bg-white shadow-lg py-3 px-6">
           <p className="text-sm font-medium text-gray-900 text-right">Total</p>
           <p className="text-sm font-medium text-gray-900 text-right">
-            {total} BDT
+            <BDT price={total} />
           </p>
         </div>
 
@@ -268,9 +269,9 @@ const SingleCartProduct = ({ product }: any) => {
         <div className="flex flex-1 items-end justify-start text-sm">
           {/* <p className="text-gray-500">Qty {product.qty}</p> */}
           <p className="text-gray-900 flex text-center font-semibold text-base">
-            {parseInt(product?.price)} BDT{" "}
+            <BDT price={parseInt(product?.price)} />
             <XMarkIcon width={15} className="mx-1" /> {product?.qty} ={" "}
-            {parseInt(product?.price) * product?.qty} BDT
+            <BDT price={parseInt(product?.price) * product?.qty} />
           </p>
         </div>
       </div>

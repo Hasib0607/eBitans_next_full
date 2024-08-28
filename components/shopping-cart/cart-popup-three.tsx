@@ -4,6 +4,7 @@
 import useTheme from "@/hooks/use-theme";
 import { decrementQty, incrementQty } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import Taka from "@/utils/taka";
 import { Dialog, Transition } from "@headlessui/react";
 import {
   MinusIcon,
@@ -244,7 +245,9 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
               ) : null}
             </div>
             <p className="sm:text-sm text-xs text-gray-600">
-              Unit Price: {parseInt(product?.price)} BDT
+              <span>
+                Unit Price: <Taka tk={parseInt(product?.price)} />
+              </span>
             </p>
           </div>
           <div className="hidden sm:flex gap-3 items-center justify-between text-sm">
@@ -281,8 +284,10 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
               </div>
             </div>
             <p className="text-gray-900 flex text-center font-semibold text-base">
-              {" "}
-              {parseInt(product?.price) * product?.qty} BDT
+              <span>
+                Unit Price:{" "}
+                <Taka tk={parseInt(product?.price) * product?.qty} />
+              </span>
             </p>
           </div>
         </div>
