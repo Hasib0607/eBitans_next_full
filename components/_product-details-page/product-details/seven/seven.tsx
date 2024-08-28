@@ -8,7 +8,7 @@ import { profileImg } from "@/site-settings/siteUrl";
 import Arrow from "@/utils/arrow";
 import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { useQuery } from "@tanstack/react-query";
+import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import moment from "moment";
 import { useState } from "react";
@@ -22,26 +22,29 @@ interface Props {
 }
 
 const Seven = ({ data, updatedData }: Props) => {
+  const { slug } = updatedData;
   const {
     data: productDetailsData,
     fetchStatus,
     status,
   } = useQuery({
-    queryKey: ["pd-7"],
+    // queryKey: ["pd-7"],
+    queryKey: ["product-details", { slug }],
     queryFn: () => getProductDetails(updatedData),
-    enabled: !!updatedData.slug && !!updatedData.store_id,
+    placeholderData: keepPreviousData,
+    // enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { data: relatedProducts } = useQuery({
     queryKey: ["rp-7"],
     queryFn: () => getRelatedProducts(updatedData?.product_id),
-    enabled: !!updatedData.slug && !!updatedData.store_id,
+    // enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { data: reviews } = useQuery({
     queryKey: ["rv-7"],
     queryFn: () => getReviews(updatedData),
-    enabled: !!updatedData.slug && !!updatedData.store_id,
+    // enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
