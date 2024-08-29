@@ -1,7 +1,6 @@
 "use client";
 import BookingForm from "@/components/booking-form";
 import QuikView from "@/components/quick-view";
-import SkeletonWrapper from "@/components/skeleton-wrapper";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -10,18 +9,29 @@ import { bookNow } from "@/utils/book-now";
 import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
-import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
+import { useQuery } from "@tanstack/react-query";
 import parse from "html-react-parser";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { MagnifyingGlass } from "react-loader-spinner";
 import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HSlider } from "../twenty-three/slider";
+
+export const fetchCampaignProduct = async (id: any, store_id: any) => {
+  try {
+    const response = await httpReq.post("get/offer/product", { id, store_id });
+    return response;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
 const Details = ({
   data,
@@ -33,6 +43,9 @@ const Details = ({
   product,
   fetchStatus,
 }: any) => {
+  // this is product
+  console.log(product, "product form product details");
+
   const { makeid, store_id, headerSetting, bookingData } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
@@ -44,37 +57,44 @@ const Details = ({
   const [size, setSize] = useState<any>(null);
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
-  const [camp, setCamp] = useState<any>(null);
+  // const [camp, setCamp] = useState<any>(null);
   const [colorid, setColorid] = useState(null);
+
+  // Use TanStack Query to fetch campaign product data
+  const { data: camp, isLoading } = useQuery({
+    queryKey: ["campaignProduct", { id: product?.id }],
+    queryFn: () => fetchCampaignProduct(product?.id, store_id),
+  });
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
-  useEffect(() => {
-    setLoad(true);
-    // declare the async data fetching function
-    const fetchData = async () => {
-      data["store_id"] = store_id;
-      const response = await getCampaignProduct(product, store_id);
-      if (!response?.error) {
-        setCamp(response);
-      } else {
-        setCamp(null);
-      }
 
-      setColor(null);
-      setSize(null);
-      setUnit(null);
-      setLoad(false);
-    };
+  // useEffect(() => {
+  //   setLoad(true);
+  //   // declare the async data fetching function
+  //   const fetchData = async () => {
+  //     data["store_id"] = store_id;
+  //     const response = await getCampaignProduct(product, store_id);
+  //     if (!response?.error) {
+  //       setCamp(response);
+  //     } else {
+  //       setCamp(null);
+  //     }
 
-    // call the function
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);
-  }, [data, store_id, fetchStatus]);
+  //     setColor(null);
+  //     setSize(null);
+  //     setUnit(null);
+  //     setLoad(false);
+  //   };
+
+  //   // call the function
+  //   fetchData()
+  //     // make sure to catch any error
+  //     .catch(console.error);
+  // }, [data, store_id, fetchStatus]);
 
   const bookNowBtn = () => {
     bookNow(variant, size, color, unit, filterV, setOpenBooking, openBooking);
@@ -405,6 +425,23 @@ const Details = ({
   const buttonSeven =
     "font-bold text-white bg-gray-600 rounded-md w-60 text-center py-3 font-seven lg:cursor-pointer";
 
+  if (isLoading) {
+    return (
+      <div className="h-[90vh] flex justify-center items-center">
+        <MagnifyingGlass
+          visible={true}
+          height="80"
+          width="80"
+          ariaLabel="magnifying-glass-loading"
+          wrapperStyle={{}}
+          wrapperClass="magnifying-glass-wrapper"
+          glassColor="#c0efff"
+          color="#e15b64"
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="pt-5 pb-20 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-9 gap-x-10 gap-y-5">
@@ -447,17 +484,17 @@ const Details = ({
                       className={`w-full h-full flex justify-center`}
                       key={idx}
                     >
-                      <SkeletonWrapper
+                      {/* <SkeletonWrapper
                         fetchStatus={fetchStatus}
                         height={"600px"}
                         width={"400px"}
-                      >
-                        <img
-                          className="w-auto max-h-[500px] border-2 border-gray-200"
-                          src={productImg + data}
-                          alt=""
-                        />
-                      </SkeletonWrapper>
+                      > */}
+                      <img
+                        className="w-auto max-h-[500px] border-2 border-gray-200"
+                        src={productImg + data}
+                        alt=""
+                      />
+                      {/* </SkeletonWrapper> */}
                     </div>
                   ))}
               </div>
@@ -472,17 +509,17 @@ const Details = ({
                         product?.image.length === 1 && "col-span-2"
                       } w-full h-full flex justify-center`}
                     >
-                      <SkeletonWrapper
+                      {/* <SkeletonWrapper
                         fetchStatus={fetchStatus}
                         height={"600px"}
                         width={"400px"}
-                      >
-                        <img
-                          className="w-auto max-h-[500px] border-2 border-gray-200"
-                          src={productImg + data}
-                          alt=""
-                        />
-                      </SkeletonWrapper>
+                      > */}
+                      <img
+                        className="w-auto max-h-[500px] border-2 border-gray-200"
+                        src={productImg + data}
+                        alt=""
+                      />
+                      {/* </SkeletonWrapper> */}
                     </div>
                   ))}
               </div>
@@ -491,51 +528,51 @@ const Details = ({
         )}
 
         <div className="md:col-span-4 space-y-8 font-seven">
-          <SkeletonWrapper
+          {/* <SkeletonWrapper
             fetchStatus={fetchStatus}
             width={"200px"}
             height={"30px"}
             className="mb-5"
-          >
-            <h2 className="text-2xl text-[#212121] font-bold mb-3">
-              {product?.name}
-            </h2>
-          </SkeletonWrapper>
-          <SkeletonWrapper fetchStatus={fetchStatus} count={3} className="mb-6">
-            <p className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml">
-              {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-              {product?.description?.length > 250 && "..."}
-            </p>
-          </SkeletonWrapper>
-          <SkeletonWrapper
+          > */}
+          <h2 className="text-2xl text-[#212121] font-bold mb-3">
+            {product?.name}
+          </h2>
+          {/* </SkeletonWrapper> */}
+          {/* <SkeletonWrapper fetchStatus={fetchStatus} count={3} className="mb-6"> */}
+          <p className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml">
+            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
+            {product?.description?.length > 250 && "..."}
+          </p>
+          {/* </SkeletonWrapper> */}
+          {/* <SkeletonWrapper
             fetchStatus={fetchStatus}
             width={"200px"}
             height={"30px"}
-          >
-            <div className="flex justify-start items-center gap-x-4">
-              <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
-                <BDT />
-                {camp?.status === "active" ? campPrice : price}{" "}
-                {camp?.status !== "active" &&
-                (product?.discount_type === "no_discount" ||
-                  product?.discount_price === "0.00") ? (
-                  " "
-                ) : (
-                  <span className="text-gray-500 font-thin line-through text-xl font-seven">
-                    <BDT />
-                    {regularPrice}
-                  </span>
-                )}
-              </div>
-              {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
-              {product?.discount_type === "percent" && (
-                <p className="text-md text-gray-400">
-                  {" "}
-                  {product?.discount_price}% Off
-                </p>
+          > */}
+          <div className="flex justify-start items-center gap-x-4">
+            <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
+              <BDT />
+              {camp?.status === "active" ? campPrice : price}{" "}
+              {camp?.status !== "active" &&
+              (product?.discount_type === "no_discount" ||
+                product?.discount_price === "0.00") ? (
+                " "
+              ) : (
+                <span className="text-gray-500 font-thin line-through text-xl font-seven">
+                  <BDT />
+                  {regularPrice}
+                </span>
               )}
             </div>
-          </SkeletonWrapper>
+
+            {product?.discount_type === "percent" && (
+              <p className="text-md text-gray-400">
+                {" "}
+                {product?.discount_price}% Off
+              </p>
+            )}
+          </div>
+          {/* </SkeletonWrapper> */}
 
           {product?.quantity !== "0" && (
             <div className="h-[1px] bg-gray-300 w-full"></div>
@@ -544,63 +581,63 @@ const Details = ({
           {/* unit  */}
           {/* && variant[0]?.unit */}
           {!vrcolor && variant?.length !== 0 && (
-            <SkeletonWrapper
-              fetchStatus={fetchStatus}
-              width={"200px"}
-              height={"30px"}
-            >
-              <Units unit={unit} setUnit={setUnit} variant={variant} />
-            </SkeletonWrapper>
+            // <SkeletonWrapper
+            //   fetchStatus={fetchStatus}
+            //   width={"200px"}
+            //   height={"30px"}
+            // >
+            <Units unit={unit} setUnit={setUnit} variant={variant} />
+            // </SkeletonWrapper>
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
-            <SkeletonWrapper
-              fetchStatus={fetchStatus}
-              width={"200px"}
-              height={"200px"}
-            >
-              <Colors
-                color={color}
-                setColor={setColor}
-                vrcolor={vrcolor}
-                setSize={setSize}
-              />
-            </SkeletonWrapper>
+            // <SkeletonWrapper
+            //   fetchStatus={fetchStatus}
+            //   width={"200px"}
+            //   height={"200px"}
+            // >
+            <Colors
+              color={color}
+              setColor={setColor}
+              vrcolor={vrcolor}
+              setSize={setSize}
+            />
+            // </SkeletonWrapper>
           )}
           {/* filterV[0]?.size && */}
           {filterV && filterV[0]?.size && vrcolor && (
-            <SkeletonWrapper
-              fetchStatus={fetchStatus}
-              width={"200px"}
-              height={"30px"}
-            >
-              <Sizes size={size} setSize={setSize} variant={filterV} />
-            </SkeletonWrapper>
+            // <SkeletonWrapper
+            //   fetchStatus={fetchStatus}
+            //   width={"200px"}
+            //   height={"30px"}
+            // >
+            <Sizes size={size} setSize={setSize} variant={filterV} />
+            // </SkeletonWrapper>
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
-            <SkeletonWrapper
-              fetchStatus={fetchStatus}
-              width="200px"
-              height="30px"
-            >
-              <ColorsOnly
-                color={color}
-                setColor={setColor}
-                variant={variant}
-                setColorid={setColorid}
-              />
-            </SkeletonWrapper>
+            // <SkeletonWrapper
+            //   fetchStatus={fetchStatus}
+            //   width="200px"
+            //   height="30px"
+            // >
+            <ColorsOnly
+              color={color}
+              setColor={setColor}
+              variant={variant}
+              setColorid={setColorid}
+            />
+            // </SkeletonWrapper>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            <SkeletonWrapper
-              fetchStatus={fetchStatus}
-              width="200px"
-              height="30px"
-            >
-              <Sizes size={size} setSize={setSize} variant={filterV} />
-            </SkeletonWrapper>
+            // <SkeletonWrapper
+            //   fetchStatus={fetchStatus}
+            //   width="200px"
+            //   height="30px"
+            // >
+            <Sizes size={size} setSize={setSize} variant={filterV} />
+            // </SkeletonWrapper>
           )}
 
           <div className="mt-5">
