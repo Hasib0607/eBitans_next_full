@@ -1,10 +1,10 @@
-import ProductDetails from "@/components/product-details";
 import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
 import { getProductDetails, getSubdomainName } from "@/lib";
 import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
 import { Metadata, ResolvingMetadata } from "next";
 import ViewContentGtm from "./ViewContentGtm";
+import ProductDetailsTest from "./ProductDetailsTest";
 
 type Props = {
   params: { productID: string; slug: string };
@@ -38,10 +38,13 @@ const SingleProductDetails = async ({ params }: Props) => {
     product_id: params.productID,
   });
 
+  console.log(product, "product");
+
   return (
     <div>
       <ViewContentGtm product={product} />
-      <ProductDetails />
+      {/* <ProductDetails /> */}
+      <ProductDetailsTest />
     </div>
   );
 };

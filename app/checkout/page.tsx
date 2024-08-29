@@ -1,8 +1,8 @@
+import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
+import { getSubdomainName } from "@/lib";
+import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
 import CheckoutComponent from "./checkout-component";
-import { getSubdomainName } from "@/lib";
-import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
-import { imgUrl } from "@/site-settings/siteUrl";
 
 export async function generateMetadata() {
   const url = getUrl();

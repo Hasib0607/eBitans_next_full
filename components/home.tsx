@@ -6,9 +6,8 @@ import RenderSection from "./_homepage/render-section";
 const HomePage = async () => {
   const url = getUrl();
   const data = await getSubdomainName(url);
+  console.log(data, "data");
   const { layout } = data;
-
-  console.log(layout, "layout");
 
   return (
     <>

@@ -108,7 +108,7 @@ const OfferPage = () => {
           {days ? (
             <>
               <span
-                className="sm:font-semibold sm:text-lg text-center min-w-16 w-full  min-w-fit sm:h-10  sm:py-1 sm:px-4 px-4 rounded"
+                className="sm:font-semibold sm:text-lg text-center  w-full  min-w-fit sm:h-10  sm:py-1 sm:px-4 px-4 rounded"
                 style={{
                   backgroundColor: design?.header_color,
                   color: design?.text_color,
@@ -121,7 +121,7 @@ const OfferPage = () => {
             </>
           ) : null}
           <span
-            className="sm:font-semibold  sm:text-lg text-center min-w-16 w-full  min-w-fit sm:h-10  sm:py-1 sm:px-2 px-4 rounded"
+            className="sm:font-semibold  sm:text-lg text-center  w-full  min-w-fit sm:h-10  sm:py-1 sm:px-2 px-4 rounded"
             style={{
               backgroundColor: design?.header_color,
               color: design?.text_color,
@@ -131,7 +131,7 @@ const OfferPage = () => {
           </span>{" "}
           <span>:</span>
           <span
-            className="sm:font-semibold  sm:text-lg text-center min-w-16 w-full  min-w-fit sm:h-10  sm:py-1 sm:px-2 px-4 rounded"
+            className="sm:font-semibold  sm:text-lg text-center  w-full  min-w-fit sm:h-10  sm:py-1 sm:px-2 px-4 rounded"
             style={{
               backgroundColor: design?.header_color,
               color: design?.text_color,
@@ -141,7 +141,7 @@ const OfferPage = () => {
           </span>
           <span>:</span>
           <span
-            className="sm:font-semibold  sm:text-lg text-center min-w-16 w-full  min-w-fit sm:h-10  sm:py-1 sm:px-2 px-4 rounded"
+            className="sm:font-semibold  sm:text-lg text-center  w-full  min-w-fit sm:h-10  sm:py-1 sm:px-2 px-4 rounded"
             style={{
               backgroundColor: design?.header_color,
               color: design?.text_color,

@@ -4,8 +4,6 @@ import { getSubdomainName } from "@/lib";
 import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
 
-import React from "react";
-
 export async function generateMetadata() {
   const url = getUrl();
   const {
