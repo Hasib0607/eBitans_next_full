@@ -23,7 +23,6 @@ export default async function RootLayout({
   );
 
   const fbPixel = headersetting.facebook_pixel;
-  console.log(fbPixel, "fb pixel");
 
   return (
     <html lang="en">

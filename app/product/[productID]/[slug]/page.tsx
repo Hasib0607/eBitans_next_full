@@ -38,8 +38,6 @@ const SingleProductDetails = async ({ params }: Props) => {
     product_id: params.productID,
   });
 
-  console.log(product, "product");
-
   return (
     <div>
       <ViewContentGtm product={product} />

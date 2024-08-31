@@ -6,15 +6,11 @@ import RenderSection from "./_homepage/render-section";
 const HomePage = async () => {
   const url = getUrl();
   const data = await getSubdomainName(url);
-  console.log(data, "data");
   const { layout } = data;
 
   return (
     <>
       <div>
-        {/* {layout.map((c: any) => (
-          <p>{c}</p>
-        ))} */}
         <Suspense
           fallback={
             <p className="h-screen flex justify-center items-center bg-red-500">

@@ -6,7 +6,7 @@ import {
 } from "react-icons/fa";
 
 const ContactPage = () => {
-  const bangla = true;
+  const bangla = false;
 
   return (
     <div>

@@ -23,6 +23,7 @@ interface Props {
 
 const Seven = ({ data, updatedData }: Props) => {
   const { slug } = updatedData;
+
   const {
     data: productDetailsData,
     fetchStatus,

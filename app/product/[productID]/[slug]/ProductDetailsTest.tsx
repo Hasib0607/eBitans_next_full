@@ -29,11 +29,6 @@ const ProductDetailsTest = () => {
   const variant = productDetailsData?.variant || [];
   const vrColor = productDetailsData?.vrcolor || [];
 
-  console.log(productDetailsData, "pd details");
-  console.log(product, "productxxx");
-  console.log(variant, "variantxxx");
-  console.log(vrColor, "vrColorxxx");
-
   return (
     <div className="container px-5">
       <div className="pt-5 pb-20 bg-white">

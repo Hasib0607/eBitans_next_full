@@ -9,7 +9,7 @@ const BDT = ({ price }: any) => {
     queryFn: async () =>
       await axios.post(
         process.env.NEXT_PUBLIC_API_URL +
-          `header_settings?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
+          `header-settings?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
       ),
     placeholderData: keepPreviousData,
     refetchOnWindowFocus: true,

@@ -137,7 +137,6 @@ const heroComponents: any = {
 };
 
 const Hero = ({ theme, slider, design }: any) => {
-  console.log("server or client?");
   const SelectedHeroComponent = heroComponents[theme];
   return <SelectedHeroComponent slider={slider} design={design} />;
 };
