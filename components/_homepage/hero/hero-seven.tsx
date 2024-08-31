@@ -64,7 +64,7 @@ const HeroSeven = ({ slider, design }: any) => {
               {s?.link && (
                 <a href={s?.link} target="_blank" rel="noopener noreferrer">
                   <h1 className="md:mt-10 mt-3 lg:px-5 px-2 lg:py-2 py-1 bg-black text-white font-seven lg:text-lg text-xs rounded-md w-max">
-                    Go To Collection{" "}
+                    Go To Collection
                     <BsArrowRight className="inline lg:ml-3 ml-1 lg:text-2xl text-sm " />
                   </h1>
                 </a>

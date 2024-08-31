@@ -6,6 +6,7 @@ import BDT from "@/utils/bdt";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
@@ -145,6 +146,11 @@ const Card61 = ({ item }: any) => {
     }
   };
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { button } = cDesign?.feature_product[0] || {};
+
   return (
     <div className="group overlay-group relative">
       <div className="">
@@ -212,7 +218,7 @@ const Card61 = ({ item }: any) => {
                     className="relative lg:cursor-pointer font-bold"
                   >
                     <p className="lg:text-lg text-base relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black">
-                      {store_id === 2272 ? "Buy Now" : "Add To Cart"}
+                      {button}
                     </p>
                     <div className="absolute top-1.5 left-1.5 group-hover:top-0 group-hover:left-0 duration-500 z-[1] h-full w-full cart-thirty-five border border-black"></div>
                   </div>

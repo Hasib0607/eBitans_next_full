@@ -2,16 +2,16 @@ import React from "react";
 
 import { Swiper, SwiperSlide } from "swiper/react";
 
-import { Navigation, EffectFade, Autoplay, Controller } from "swiper/modules";
+import { Autoplay, Controller, EffectFade, Navigation } from "swiper/modules";
 
 // Import Swiper styles
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import "swiper/css/effect-fade";
+import { catImg } from "@/site-settings/siteUrl";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { catImg } from "@/site-settings/siteUrl";
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const FeaturedThirtySeven = ({ category, design }: any) => {
   const customCss = `

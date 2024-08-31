@@ -3,6 +3,7 @@ import { productImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
 import { getPrice } from "@/utils/get-price";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Details from "../_product-details-page/product-details/three/details";
@@ -71,6 +72,11 @@ const Card65 = ({ item, design, store_id }: any) => {
         border: 1px solid ${bgColor};
     }
   `;
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_product[0] || {};
 
   return (
     <div className="bg-white relative rounded-md overflow-hidden">

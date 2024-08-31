@@ -1,11 +1,10 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import img from "@/assets/img/thirtyfive/01.webp";
-import SliderThirtyFive from "@/components/slider/slider-thirty-five";
 import Card61 from "@/components/card/card61";
+import SliderThirtyFive from "@/components/slider/slider-thirty-five";
 import { bannerImg } from "@/site-settings/siteUrl";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductThirtyFive = ({
   feature_product,
@@ -40,6 +39,7 @@ const FeatureProductThirtyFive = ({
         background:  ${design?.header_color};
     }
  `;
+
   const prevEl = "feature-product-prev";
   const nextEl = "feature-product-next";
 
