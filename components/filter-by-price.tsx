@@ -1,4 +1,4 @@
-import React, { useRef } from "react";
+import { useRef } from "react";
 // import { useRouter } from "next/navigation";
 import Taka from "../utils/taka";
 const FilterByPrice = ({ setVal, val, id, setPage, setHasMore }: any) => {

@@ -1,3 +1,6 @@
+import { getSubdomainName } from "@/lib";
+import getUrl from "@/utils/get-url";
+import Link from "next/link";
 import {
   FaFacebookF,
   FaInstagram,
@@ -5,8 +8,24 @@ import {
   FaYoutube,
 } from "react-icons/fa";
 
-const ContactPage = () => {
+const ContactPage = async () => {
   const bangla = false;
+  const url = getUrl();
+  const data = await getSubdomainName(url, "headersetting");
+  const headerSetting = data.headersetting;
+  const {
+    facebook_link,
+    phone,
+    email,
+    address,
+    instagram_link,
+    youtube_link,
+    lined_in_link,
+    map_address,
+  } = headerSetting;
+
+  const srcMatch = map_address.match(/src="([^"]+)"/);
+  const iframeSrc = srcMatch ? srcMatch[1] : null;
 
   return (
     <div>
@@ -25,38 +44,42 @@ const ContactPage = () => {
             </p>
             <hr className="w-[20%]" />
             <div className="flex divide-x space-x-4">
-              <button
+              <Link
+                href={facebook_link}
                 aria-label={
                   bangla ? "Facebook দিয়ে লগইন করুন" : "Log in with Facebook"
                 }
                 className="p-3 rounded-sm"
               >
                 <FaFacebookF className="w-5 h-5 fill-current" />
-              </button>
-              <button
+              </Link>
+              <Link
+                href={youtube_link}
                 aria-label={
                   bangla ? "YouTube দিয়ে লগইন করুন" : "Log in with YouTube"
                 }
                 className="p-3 rounded-sm"
               >
                 <FaYoutube className="w-5 h-5 fill-current" />
-              </button>
-              <button
+              </Link>
+              <Link
+                href={instagram_link}
                 aria-label={
                   bangla ? "Instagram দিয়ে লগইন করুন" : "Log in with Instagram"
                 }
                 className="p-3 rounded-sm"
               >
                 <FaInstagram className="w-5 h-5 fill-current" />
-              </button>
-              <button
+              </Link>
+              <Link
+                href={lined_in_link}
                 aria-label={
                   bangla ? "LinkedIn দিয়ে লগইন করুন" : "Log in with LinkedIn"
                 }
                 className="p-3 rounded-sm"
               >
                 <FaLinkedinIn className="w-5 h-5 fill-current" />
-              </button>
+              </Link>
             </div>
             <hr className="w-[20%]" />
           </div>
@@ -84,14 +107,9 @@ const ContactPage = () => {
                   <h2 className="mt-4 text-base font-medium text-gray-800">
                     {bangla ? "ইমেইল" : "Email"}
                   </h2>
-                  <p className="mt-2 text-sm text-gray-500">
-                    {bangla
-                      ? "আমাদের বন্ধুত্বপূর্ণ দল সাহায্য করার জন্য এখানে আছে।"
-                      : "Our friendly team is here to help."}
-                  </p>
+
                   <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
-                    info@ebitans.com <br />
-                    assist@ebitans.com
+                    {email}
                   </p>
                 </div>
 
@@ -120,13 +138,9 @@ const ContactPage = () => {
                   <h2 className="mt-4 text-base font-medium text-gray-800">
                     {bangla ? "অফিস" : "Office"}
                   </h2>
-                  <p className="mt-2 text-sm text-gray-500">
-                    {bangla
-                      ? "আমাদের অফিসে এসে হ্যালো বলুন।"
-                      : "Come say hello at our office HQ."}
-                  </p>
+
                   <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
-                    4th Floor, House: 39, Road: 20, Nikunja 2, Dhaka-1229
+                    {address}
                   </p>
                 </div>
               </div>
@@ -157,9 +171,7 @@ const ContactPage = () => {
                     : "Sat-Thus from 9am to 6pm."}
                 </p>
                 <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
-                  +88 01886 515579
-                  <br />
-                  +88 01886 515578
+                  {phone}
                 </p>
               </div>
             </div>
@@ -173,7 +185,7 @@ const ContactPage = () => {
                 marginHeight={0}
                 marginWidth={0}
                 scrolling="no"
-                src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%C4%B0zmir+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
+                src={iframeSrc}
               ></iframe>
             </div>
           </div>
