@@ -3,6 +3,7 @@ import store, { persistor } from "@/redux/store";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 
+import Announcement from "@/components/announcement";
 import CartPopUp from "@/components/cart-popup";
 import Footer from "@/components/footer";
 import Header from "@/components/header";
@@ -17,6 +18,7 @@ const AppWrapper = ({ children, design, headerSetting }: any) => {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
+            <Announcement design={design} />
             <Header design={design} headerSetting={headerSetting} />
             {children}
             <Footer />

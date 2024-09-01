@@ -40,7 +40,10 @@ const FeaturedThirtyFive = ({ category, design }: any) => {
     <div className="bg-[#F2F2F2] border-t-2 border-b-2 border-black">
       <style>{styleCss}</style>
       <div className="sm:container px-5 sm:py-10 py-5 relative">
-        <SectionHeadingThirtyFive title_color={title_color} title={title || "✦ COLLECTIONS ✦"} />
+        <SectionHeadingThirtyFive
+          title_color={title_color}
+          title={title || "✦ COLLECTIONS ✦"}
+        />
 
         <div className="hidden lg:flex lg:cursor-pointer">
           <div
