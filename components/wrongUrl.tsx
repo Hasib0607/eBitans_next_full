@@ -1,3 +1,4 @@
+"use client";
 import img1 from "../assets/img/ebitans/404.png";
 import img2 from "../assets/img/ebitans/404robot.png";
 

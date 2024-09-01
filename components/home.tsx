@@ -14,7 +14,7 @@ const HomePage = async () => {
         <Suspense
           fallback={
             <p className="h-screen flex justify-center items-center bg-red-500">
-              Loading...
+              Loading from home...
             </p>
           }
         >
