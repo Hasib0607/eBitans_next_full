@@ -45,7 +45,7 @@ const ProductEleven = ({
       <div className=" grid grid-cols-1 md:grid-cols-2 lg2:grid-cols-3 gap-10 ">
         <div>
           <div className="title-border ">
-            <SectionHeadingSeven title={"Best Seller"} />
+            <SectionHeadingSeven titleColor="#000" title={"Best Seller"} />
           </div>
           <div className="pt-5">
             <div className="grid grid-cols-1 gap-5">
@@ -57,7 +57,7 @@ const ProductEleven = ({
         </div>
         <div>
           <div className="title-border ">
-            <SectionHeadingSeven title={"Top Selling"} />
+            <SectionHeadingSeven titleColor="#000" title={"Top Selling"} />
           </div>
           <div className="pt-5">
             <div className="grid grid-cols-1 gap-5">
@@ -69,7 +69,7 @@ const ProductEleven = ({
         </div>
         <div>
           <div className="title-border ">
-            <SectionHeadingSeven title={"Recently Added"} />
+            <SectionHeadingSeven titleColor="#000" title={"Recently Added"} />
           </div>
           <div className="pt-5">
             <div className="grid grid-cols-1 gap-5">

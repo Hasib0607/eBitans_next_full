@@ -1,8 +1,9 @@
 interface Props {
   title: string;
   title_color?: string;
+  subtitle?: string;
 }
-const SectionHeadingTwelve = ({ title, title_color }: Props) => {
+const SectionHeadingTwelve = ({ title, title_color, subtitle }: Props) => {
   return (
     <div className=" bg-white  mb-3 font-twelve ">
       <h3

@@ -13,7 +13,11 @@ const ProductThree = ({ product, design, store_id }: any) => {
   return (
     <div className=" relative sm:py-10 py-5">
       <div className="sm:container px-5 mx-auto">
-        <SectionHeadingSeven title={"Regular Product"} subtitle={""} />
+        <SectionHeadingSeven
+          titleColor="#000"
+          title={"Regular Product"}
+          subtitle={""}
+        />
         <div className="sm:container px-5 mt-20 absolute inset-0 flex items-center mx-auto">
           <Arrowbetween prevEl={prev} nextEl={next}></Arrowbetween>
         </div>

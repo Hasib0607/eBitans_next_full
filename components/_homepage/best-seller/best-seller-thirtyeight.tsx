@@ -1,3 +1,4 @@
+"use client";
 import Card65 from "@/components/card/card65";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 
@@ -6,14 +7,14 @@ const BestSellerThirtyEight = ({
   design,
   store_id,
 }: any) => {
-  if (best_sell_product.length === 0) {
-    return null;
-  }
-
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design;
   const { title, title_color } = cDesign?.feature_product[0] || {};
+
+  if (best_sell_product.length === 0) {
+    return null;
+  }
 
   return (
     <div className="py-5 sm:py-10 bg-[#F2F4F8]">

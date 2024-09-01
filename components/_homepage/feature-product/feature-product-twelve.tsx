@@ -1,18 +1,18 @@
 "use client";
-import React, { useState } from "react";
-import { SwiperSlide } from "swiper/react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import SectionHeadingTwelve from "@/components/section-heading/section-heading-twelve";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import SliderFive from "@/components/slider/slider-five";
-import { getPrice } from "@/utils/get-price";
-import Link from "next/link";
-import { productImg } from "@/site-settings/siteUrl";
-import Taka from "@/utils/taka";
-import QuikView from "@/components/quick-view";
 import Details from "@/components/_product-details-page/product-details/three/details";
+import QuikView from "@/components/quick-view";
+import SectionHeadingTwelve from "@/components/section-heading/section-heading-twelve";
+import SliderFive from "@/components/slider/slider-five";
+import { productImg } from "@/site-settings/siteUrl";
+import { getPrice } from "@/utils/get-price";
+import Taka from "@/utils/taka";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductTwelve = ({ feature_product, design }: any) => {
   const prevEl = "feature-product-prev";
@@ -33,7 +33,7 @@ const FeatureProductTwelve = ({ feature_product, design }: any) => {
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white relative group">
       <style>{styleCss}</style>
-      <SectionHeadingTwelve title={"Featured For You"} subtitle={""} />
+      <SectionHeadingTwelve title={"Featured For You"} title_color="#000" />
       <div className="relative">
         <div className=" gap-2 hidden group-hover:block lg:cursor-pointer ">
           <div

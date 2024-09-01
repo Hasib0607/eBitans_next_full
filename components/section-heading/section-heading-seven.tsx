@@ -1,5 +1,5 @@
 interface Props {
-  titleColor: string;
+  titleColor?: string;
   title: string;
   subtitle?: string;
 }

@@ -5,14 +5,14 @@ import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
 
 const FeaturedFour = ({ category, design }: any) => {
-  if (category.length === 0) {
-    return;
-  }
-
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design;
   const { title, title_color, button } = cDesign?.feature_category[0] || {};
+
+  if (category.length === 0) {
+    return;
+  }
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-gray-50">

@@ -8,6 +8,11 @@ import Card67 from "../card/card67";
 import DefaultSlider from "../slider/default-slider";
 
 const NewArrivalProductThirtyNine = ({ product, design, store_id }: any) => {
+  const { data, error } = useHeaderSettings();
+
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.new_arrival_product[0] || {};
+
   const [animate, setAnimate] = useState(false);
 
   const prevEl = "new-product-prev-thirtynine";
@@ -17,14 +22,11 @@ const NewArrivalProductThirtyNine = ({ product, design, store_id }: any) => {
   
  `;
 
+  if (error) return <p>error from header-settings</p>;
+
   if (product.length === 0) {
     return null;
   }
-
-  const { data, error } = useHeaderSettings();
-  if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design;
-  const { title, title_color } = cDesign?.new_arrival_product[0] || {};
 
   return (
     <div className="pl-5 sm:py-10 py-5">
