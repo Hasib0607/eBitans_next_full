@@ -1,10 +1,8 @@
 import { catImg } from "@/site-settings/siteUrl";
 import Link from "next/link";
-import React from "react";
 
 const FeaturedTwentyThree = ({ category, design }: any) => {
   const bgColor = design?.header_color;
-  // const textColor = design?.text_color;
 
   const styleCss = `
 
@@ -34,12 +32,6 @@ const FeaturedTwentyThree = ({ category, design }: any) => {
 export default FeaturedTwentyThree;
 
 const FeatureCatSix = ({ item }: any) => {
-  // const { product } = useTheme();
-
-  // const result = product.filter((product) => {
-  //     return item.id === Number(product?.category_id)
-  // })
-
   return (
     <div>
       <Link
@@ -55,7 +47,6 @@ const FeatureCatSix = ({ item }: any) => {
           <span className={`text-xl font-bold text-white category-hover`}>
             {item.name}
           </span>
-          {/* <span className='font-medium text-base'>({result?.length} items)</span> */}
         </div>
       </Link>
     </div>

@@ -1,10 +1,11 @@
-import React from "react";
+"use client";
 
-import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
+import Card62 from "@/components/card/card62";
 import SectionHeadingThirtyFive from "@/components/section-heading/section-heading-thirty-five";
 import SliderThirtyFive from "@/components/slider/slider-thirty-five";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { IoIosArrowBack, IoIosArrowForward } from "react-icons/io";
 import { SwiperSlide } from "swiper/react";
-import Card62 from "@/components/card/card62";
 
 const FeaturedThirtyFive = ({ category, design }: any) => {
   const bgColor = design?.header_color;
@@ -30,11 +31,16 @@ const FeaturedThirtyFive = ({ category, design }: any) => {
   const prevEl = "feature-category-prev";
   const nextEl = "feature-category-next";
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="bg-[#F2F2F2] border-t-2 border-b-2 border-black">
       <style>{styleCss}</style>
       <div className="sm:container px-5 sm:py-10 py-5 relative">
-        <SectionHeadingThirtyFive title={"✦ COLLECTIONS ✦"} />
+        <SectionHeadingThirtyFive title_color={title_color} title={title || "✦ COLLECTIONS ✦"} />
 
         <div className="hidden lg:flex lg:cursor-pointer">
           <div

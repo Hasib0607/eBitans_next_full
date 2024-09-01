@@ -1,13 +1,18 @@
 interface Props {
+  title_color?: string;
   title: string;
   subtitle?: string;
 }
 
-const SectionHeadingSixteen = ({ title, subtitle }: Props) => {
+const SectionHeadingSixteen = ({ title, title_color }: Props) => {
   return (
     <div className="text-center mb-8">
-      <h3 className="sm:text-[35px] text-2xl font-semibold">{title}</h3>
-      <p className="text-lg font-sans text-gray-500">{subtitle}</p>
+      <h3
+        style={{ color: title_color }}
+        className="sm:text-[35px] text-2xl font-semibold"
+      >
+        {title}
+      </h3>
     </div>
   );
 };

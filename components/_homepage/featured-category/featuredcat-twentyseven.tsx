@@ -9,6 +9,7 @@ import bgImg4 from "@/components/_homepage/featured-category/twentyseven-bg-img/
 import bgImg5 from "@/components/_homepage/featured-category/twentyseven-bg-img/bg-cat5.svg";
 
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import axios from "axios";
 import Link from "next/link";
 import { useState } from "react";
@@ -45,12 +46,17 @@ const FeaturedTwentySeven = ({ category, design, product }: any) => {
     }
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 ">
       <style>{styleCss}</style>
       <div className="bg-gray-100 px-5 sm:py-10 py-5 rounded-3xl">
         <div className="text-2xl md:text-5xl text-black font-semibold mb-14 text-center">
-          <p>Start exploring.</p>
+          <p style={{ color: title_color }}>{title || "Start exploring."}</p>
         </div>
 
         <div className="bg-white flex flex-wrap justify-around lg:rounded-full rounded-md py-2 shadow-2xl xl:mx-40 mx-0 px-5 mb-14">

@@ -1,25 +1,26 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { useRouter } from "next/navigation";
 import {
-  Navigation,
   A11y,
-  EffectFade,
-  Grid,
   Autoplay,
   Controller,
+  EffectFade,
+  Grid,
+  Navigation,
 } from "swiper/modules";
-import { useRouter } from "next/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
+import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
+import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useRef } from "react";
 import "swiper/css";
+import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
-import Link from "next/link";
-import { iconImg } from "@/site-settings/siteUrl";
-import { useRef } from "react";
 
 const FeaturedEleven = ({ category, design, store_id }: any) => {
   const navigationPrevRef = useRef<any>(null);
@@ -31,12 +32,21 @@ const FeaturedEleven = ({ category, design, store_id }: any) => {
     }
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color, button } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 group">
       <style>{customCss}</style>
       <div className="flex justify-between items-center">
         <div>
-          <SectionHeadingSeven title={"Shop by Categories "} subtitle={""} />
+          <SectionHeadingSeventeen
+            title_color={title_color}
+            title={title || "Shop by Categories"}
+            subtitle={""}
+          />
         </div>
         <div className="lg:cursor-pointer flex items-center gap-3">
           <div

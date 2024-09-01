@@ -1,11 +1,11 @@
-import React from "react";
-
-import { SwiperSlide } from "swiper/react";
+"use client";
 import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
-import Arrow from "@/utils/arrow";
 import DefaultSlider from "@/components/slider/default-slider";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Link from "next/link";
+import { SwiperSlide } from "swiper/react";
 
 const FeaturedEight = ({ category, design }: any) => {
   const prev1 = "shop_best_seller_Prev1";
@@ -15,11 +15,21 @@ const FeaturedEight = ({ category, design }: any) => {
         border:1px solid ${design?.header_color}
     }
     `;
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <style>{customCss}</style>
       <div className="h-[40px]">
-        <SectionHeadingSeven title={"Shop by Categories "} subtitle={""} />
+        <SectionHeadingSeven
+          titleColor={title_color}
+          title={title || "Shop by Categories "}
+          subtitle={""}
+        />
       </div>
       <div className=" pb-4 pt-4 h-[50px]">
         <Arrow prevEl={prev1} nextEl={next1}></Arrow>

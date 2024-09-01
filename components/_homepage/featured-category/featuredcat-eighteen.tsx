@@ -1,3 +1,4 @@
+"use client";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -6,6 +7,7 @@ import { SwiperSlide } from "swiper/react";
 import SectionHeadingEighteen from "@/components/section-heading/section-heading-eighteen";
 import DefaultSlider from "@/components/slider/default-slider";
 import { catImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -37,10 +39,19 @@ const FeaturedEighteen = ({ category, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color, button } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 relative group ">
       <style>{styleCss}</style>
-      <SectionHeadingEighteen title={"Shop by Category"} subtitle={""} />
+      <SectionHeadingEighteen
+        titleColor={title_color}
+        title={title || "Shop by Category"}
+        subtitle={""}
+      />
       <div className="relative z-[6]">
         <div className="gap-2 lg:cursor-pointer group-hover:opacity-100  opacity-0  duration-500">
           <div

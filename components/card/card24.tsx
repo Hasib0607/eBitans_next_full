@@ -50,7 +50,6 @@ const Card24 = ({ item }: any) => {
     color:${design?.text_color};
 }
 `;
-  // console.log(item)
 
   return (
     <>
@@ -66,7 +65,6 @@ const Card24 = ({ item }: any) => {
           onMouseLeave={() => setCardBorder(false)}
         >
           <style>{customStyle}</style>
-
           <div className="flex justify-center ">
             <div className="flex sm:flex-row flex-col md:max-w-xl   ">
               <div className=" border flex items-center relative">

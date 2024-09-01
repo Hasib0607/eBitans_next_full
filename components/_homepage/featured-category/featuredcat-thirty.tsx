@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -6,6 +7,7 @@ import { SwiperSlide } from "swiper/react";
 
 import DefaultSlider from "@/components/slider/default-slider";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -25,6 +27,11 @@ const FeaturedThirty = ({ category, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div
       data-aos="fade-up"
@@ -34,7 +41,7 @@ const FeaturedThirty = ({ category, design }: any) => {
       <div className="text-center py-10 flex items-center justify-center">
         <p className="border-b-[3px] border-dashed sm:w-full w-10"></p>
         <p className=" min-w-max px-2 text-3xl xl:text-4xl font-bold">
-          Find Your Category
+          {title || "Category"}
         </p>
         <p className="border-b-[3px] border-dashed sm:w-full w-10"></p>
       </div>

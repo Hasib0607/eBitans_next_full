@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import { SwiperSlide } from "swiper/react";
 
-import ScrollTrigger from "react-scroll-trigger";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import DefaultSlider from "../slider/default-slider";
 import Card67 from "../card/card67";
+import DefaultSlider from "../slider/default-slider";
 
 const NewArrivalProductThirtyNine = ({ product, design, store_id }: any) => {
   const [animate, setAnimate] = useState(false);
@@ -21,12 +21,22 @@ const NewArrivalProductThirtyNine = ({ product, design, store_id }: any) => {
     return null;
   }
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.new_arrival_product[0] || {};
+
   return (
     <div className="pl-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="py-5 relative">
         <div className="text-center pb-10">
-          <p className="font-semibold text-[24px]">New Arrival Products</p>
+          <p
+            className="font-semibold text-[24px]"
+            style={{ color: title_color || "#000000" }}
+          >
+            {title || "New Arrival Product"}
+          </p>
         </div>
 
         <div className="gap-10 flex lg:cursor-pointer absolute bottom-8 left-1/2 -translate-x-1/2 z-[2]">

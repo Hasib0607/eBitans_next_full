@@ -1,8 +1,14 @@
+"use client";
 import { catImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
-import React from "react";
 
 const FeaturedForty = ({ category }: any) => {
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color, button } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="mb-10">
       {category?.slice(0, 6).map((data: any) => (
@@ -15,7 +21,7 @@ const FeaturedForty = ({ category }: any) => {
             />
             <div className="absolute bottom-0 left-1/2 -translate-x-1/2 bg-black text-white text-center py-2 px-8">
               <h1 className="py-2 text-sm uppercase">{data?.name}</h1>
-              <p>SHOP NOW</p>
+              <p>{button || "SHOP NOW"}</p>
             </div>
           </div>
         </Link>

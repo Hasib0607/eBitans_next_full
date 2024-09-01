@@ -1,3 +1,4 @@
+"use client";
 import Arrow from "@/utils/arrow";
 
 import Card24 from "@/components/card/card24";
@@ -26,7 +27,7 @@ const FeaturedThree = ({ product, category, design, store_id }: any) => {
     .footerFiveBorderCustom:before {
         position: absolute;
         background: linear-gradient(to right, ${design?.header_color} 60px, rgb(235, 235, 235) 10px) !important;
-        height: 2px;import httpReq from './../../../../services/http.service';
+        height: 2px;
 
         content: '';
         bottom: 0;

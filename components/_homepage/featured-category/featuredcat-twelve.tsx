@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -7,6 +8,7 @@ import { SwiperSlide } from "swiper/react";
 import SectionHeadingTwelve from "@/components/section-heading/section-heading-twelve";
 import SliderFive from "@/components/slider/slider-five";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -26,10 +28,18 @@ const FeaturedTwelve = ({ category, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white relative group ">
       <style>{styleCss}</style>
-      <SectionHeadingTwelve title={"Feature Categories"} subtitle={""} />
+      <SectionHeadingTwelve
+        title_color={title_color}
+        title={title || "Feature Categories"}
+      />
       <div className="relative">
         <div className=" gap-2 lg:cursor-pointer group-hover:block hidden">
           <div

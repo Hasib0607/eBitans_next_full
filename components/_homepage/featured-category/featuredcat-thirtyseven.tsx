@@ -6,6 +6,7 @@ import { Autoplay, Controller, EffectFade, Navigation } from "swiper/modules";
 
 // Import Swiper styles
 import { catImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import "swiper/css";
@@ -23,13 +24,21 @@ const FeaturedThirtySeven = ({ category, design }: any) => {
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="bg-[#F1F9DD]">
       <div className="sm:container px-5 sm:py-10 py-5 group relative">
         <style>{customCss}</style>
         <div>
-          <h1 className="text-2xl text-center w-full mb-10">
-            SHOP BY CATEGORY
+          <h1
+            style={{ color: title_color }}
+            className="text-2xl text-center w-full mb-10"
+          >
+            {title || "Shop by category"}
           </h1>
         </div>
 

@@ -1,16 +1,27 @@
-import React from "react";
+"use client";
 import SectionHeading from "@/components/section-heading/section-heading";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Link from "next/link";
 
 const FeaturedFour = ({ category, design }: any) => {
   if (category.length === 0) {
     return;
   }
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color, button } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-gray-50">
       <div className="">
-        <SectionHeading text={"Featured Categories"} design={design} />
+        <SectionHeading
+          text={title || "Featured Categories"}
+          design={design}
+          title_color={title_color}
+        />
       </div>
       <div className="flex justify-center shadow-lg bg-white mt-4">
         <div className="flex  flex-wrap justify-center my-4  py-10 rounded-md  ">

@@ -1,7 +1,8 @@
-import React from "react";
+"use client";
 import SectionHeadingTen from "@/components/section-heading/section-heading-ten";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Link from "next/link";
 
 const FeaturedTwo = ({ category, design }: any) => {
   const styleCss = `
@@ -10,10 +11,19 @@ const FeaturedTwo = ({ category, design }: any) => {
         color: ${design?.text_color};
     }
     `;
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
-      <SectionHeadingTen title={"Featured Categories"} />
+      <SectionHeadingTen
+        title_color={title_color}
+        title={title || "Featured Categories"}
+      />
       <div className="">
         <div className="">
           <div className="md:flex flex-row justify-between relative">

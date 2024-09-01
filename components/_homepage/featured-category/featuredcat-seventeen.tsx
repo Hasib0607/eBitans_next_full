@@ -1,17 +1,17 @@
 "use client";
-import image from "@/components/_homepage/featured-category/seventeen-bg-img/show_divider_1_104x62.webp";
 import img2 from "@/components/_homepage/featured-category/seventeen-bg-img/border.webp";
 import img1 from "@/components/_homepage/featured-category/seventeen-bg-img/icon_wrapper_bg_1.webp";
-import "./featuredcat-seventeen.css";
-import Link from "next/link";
-import { catImg, iconImg } from "@/site-settings/siteUrl";
+import image from "@/components/_homepage/featured-category/seventeen-bg-img/show_divider_1_104x62.webp";
 import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
+import { catImg, iconImg } from "@/site-settings/siteUrl";
 import Image from "next/image";
+import Link from "next/link";
 import {
   ParallaxBanner,
   ParallaxBannerLayer,
   ParallaxProvider,
 } from "react-scroll-parallax";
+import "./featuredcat-seventeen.css";
 
 const FeaturedSeventeen = ({ category }: any) => {
   const cat = category.filter((item: any) => item?.cat !== null);

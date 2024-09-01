@@ -1,5 +1,3 @@
-import React from "react";
-
 const FeaturedTwentySix = () => {
   const waveStyle = `
     .svg {
@@ -32,16 +30,6 @@ const FeaturedTwentySix = () => {
             d="M0,0L40,26.7C80,53,160,107,240,138.7C320,171,400,181,480,170.7C560,160,640,128,720,138.7C800,149,880,203,960,202.7C1040,203,1120,149,1200,122.7C1280,96,1360,96,1400,96L1440,96L1440,320L1400,320C1360,320,1280,320,1200,320C1120,320,1040,320,960,320C880,320,800,320,720,320C640,320,560,320,480,320C400,320,320,320,240,320C160,320,80,320,40,320L0,320Z"
           ></path>
         </svg>
-        {/* <svg viewBox="0 0 500 500"
-                    preserveAspectRatio="xMinYMin meet">
-
-                    <path d="M0, 100 C150, 200 350,
-                0 500, 100 L500, 00 L0, 0 Z"
-                        style={{ stroke: 'none', fill: ' rgb(78.4, 80.8, 83.5)' }}
-
-                    >
-                    </path>
-                </svg> */}
       </div>
       <div className="z-[1] relative">twenty six</div>
       <div className="">

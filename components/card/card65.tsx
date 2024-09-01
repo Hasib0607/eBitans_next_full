@@ -21,6 +21,7 @@ const Card65 = ({ item, design, store_id }: any) => {
     item.discount_price,
     item.discount_type
   );
+
   const campPrice = getPrice(
     productGetPrice,
     parseInt(camp?.discount_amount),

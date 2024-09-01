@@ -1,6 +1,5 @@
 import { iconImg } from "@/site-settings/siteUrl";
 import Link from "next/link";
-import React from "react";
 
 const FeaturedThirtyThree = ({ category, design }: any) => {
   const bgColor = design?.header_color;

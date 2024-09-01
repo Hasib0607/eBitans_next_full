@@ -1,6 +1,5 @@
 import { catImg } from "@/site-settings/siteUrl";
 import Link from "next/link";
-import React from "react";
 
 const FeaturedNineteen = ({ category }: any) => {
   return (

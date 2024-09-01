@@ -6,6 +6,7 @@ import { SwiperSlide } from "swiper/react";
 
 import DefaultSlider from "@/components/slider/default-slider";
 import { catImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
 import { AiOutlineArrowRight } from "react-icons/ai";
 
@@ -25,6 +26,11 @@ const FeaturedThirtySix = ({ category, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div
       data-aos="fade-up"
@@ -33,7 +39,9 @@ const FeaturedThirtySix = ({ category, design }: any) => {
       <style>{styleCss}</style>
       <div className="text-center py-10 flex items-center justify-between">
         <div></div>
-        <p className="text-xl xl:text-2xl">Popular Categories</p>
+        <p style={{ color: title_color }} className="text-xl xl:text-2xl">
+          {title || "Popular Categories"}
+        </p>
         <Link href="/shop">
           <div className="lg:flex justify-center items-center gap-2 font-bold hidden">
             <p className="border-b border-black">View all</p>

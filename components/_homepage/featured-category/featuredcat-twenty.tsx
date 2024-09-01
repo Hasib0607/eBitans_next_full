@@ -1,12 +1,21 @@
-import React from "react";
+"use client";
 import SectionHeadingEighteen from "@/components/section-heading/section-heading-eighteen";
-import Link from "next/link";
 import { catImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Link from "next/link";
 
 const FeaturedTwenty = ({ category }: any) => {
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 relative group">
-      <SectionHeadingEighteen title={"Featured Categories"} subtitle={""} />
+      <SectionHeadingEighteen
+        titleColor={title_color}
+        title={title || "Featured Categories"}
+      />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {category.slice(0, 3).map((productData: any, index: number) => (
           <Card key={index} item={productData} />

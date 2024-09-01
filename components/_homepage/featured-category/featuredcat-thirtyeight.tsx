@@ -1,9 +1,10 @@
-import React, { useState } from "react";
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Link from "next/link";
+import { useState } from "react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 const FeaturedThirtyEight = ({ category, design }: any) => {
   const styleCss = `
@@ -18,14 +19,18 @@ const FeaturedThirtyEight = ({ category, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="bg-[#F2F4F8]">
       <div className="sm:container px-5 sm:py-10 py-5 relative">
         <style>{styleCss}</style>
         <div className="text-center pb-10">
-          <p className="font-bold text-[20px]">Featured Category</p>
-          <p className="text-[15px] mt-1">
-            Get Your Desired Product from Featured Category!
+          <p style={{ color: title_color }} className="font-bold text-[20px]">
+            {title || "Featured Category"}
           </p>
         </div>
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-8 gap-x-2 gap-y-5 justify-center rounded-md">

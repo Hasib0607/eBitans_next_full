@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import "swiper/css";
 import "swiper/css/navigation";
@@ -7,6 +8,7 @@ import { SwiperSlide } from "swiper/react";
 import SectionHeadingSixteen from "@/components/section-heading/section-heading-sixteen";
 import DefaultSlider from "@/components/slider/default-slider";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
@@ -33,10 +35,18 @@ const FeaturedSixteen = ({ category, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 mx-auto  bg-white relative group ">
       <style>{styleCss}</style>
-      <SectionHeadingSixteen title={"Top Categories"} subtitle={""} />
+      <SectionHeadingSixteen
+        title_color={title_color}
+        title={title || "Top Categories"}
+      />
       <div className="relative z-[2]">
         <div className=" gap-2 lg:cursor-pointer lg:group-hover:opacity-100  lg:opacity-0 duration-500">
           <div
@@ -115,7 +125,6 @@ const Card = ({ item }: any) => {
         <div className="text-center font-twelve">
           <Link href={"/category/" + item.id}>
             <p className="uppercase text-sm font-semibold text-gray-800 mb-4">
-              {" "}
               {item.name}
             </p>
           </Link>

@@ -1,19 +1,26 @@
 "úse client";
-import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
-import { SwiperSlide } from "swiper/react";
 import Slider1 from "@/components/slider/slider-one";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ArrowLeftIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
+import Link from "next/link";
+import { SwiperSlide } from "swiper/react";
 
 const FeaturedOne = ({ category, design }: any) => {
   const prev = "cat_Prev";
   const next = "cat_Next";
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color, button } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <div className="">
         <div className="my-5 w-full pt-1 flex justify-between items-center flex-wrap">
-          <Title text={"Popular"}>Categories</Title>
+          <Title title_color={title_color} text={title || "Popular"} />
           <Arrow design={design} prevEl={prev} nextEl={next}></Arrow>
         </div>
         <Slider1
@@ -72,14 +79,13 @@ const SingleCard = ({ cat }: any) => {
   );
 };
 
-const Title = ({ text, children, color }: any) => {
+const Title = ({ text, title_color }: any) => {
   return (
     <h3
       style={{ fontSize: "22px" }}
       className="font-semibold flex gap-1 text-black"
     >
-      <span>{text}</span>
-      {children}
+      <span style={{ color: title_color }}>{text}</span>
     </h3>
   );
 };

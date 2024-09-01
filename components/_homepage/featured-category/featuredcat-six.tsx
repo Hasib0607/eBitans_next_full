@@ -3,12 +3,13 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { SwiperSlide } from "swiper/react";
 
 // Import Swiper styles
+import SectionHeadingSix from "@/components/section-heading/section-heading-six";
+import GridSliderSixCat from "@/components/slider/grid-slider/grid-slider-six-cat";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import "swiper/css";
 import "swiper/css/grid";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import SectionHeadingSix from "@/components/section-heading/section-heading-six";
-import GridSliderSixCat from "@/components/slider/grid-slider/grid-slider-six-cat";
 import FeatureCatSix from "./suppliment/catsix";
 
 const FeaturedSix = ({ category, design }: any) => {
@@ -29,11 +30,19 @@ const FeaturedSix = ({ category, design }: any) => {
   }
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div>
       <div className="sm:container px-5 sm:py-10 py-5 bg-gray-200 xl:block hidden">
         <div className="pb-3">
-          <SectionHeadingSix title={"Featured Categories"} subtitle={""} />
+          <SectionHeadingSix
+            title_color={title_color}
+            title={title || "Featured Categories"}
+          />
         </div>
         <div className=" xl:grid-cols-5 lg:grid-cols-5 bg-white grid ">
           {category?.map((item: any) => {

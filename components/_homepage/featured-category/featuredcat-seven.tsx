@@ -1,9 +1,11 @@
+"use client";
 import { SwiperSlide } from "swiper/react";
 // Import Swiper styles
 import Card9 from "@/components/card/card9";
-import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
+import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import DefaultSlider from "@/components/slider/default-slider";
 import Arrowbetween from "@/utils/arrow-between";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -12,9 +14,17 @@ const FeaturedSeven = ({ category }: any) => {
   const prev = "best_seller_seven_Prev";
   const next = "best_seller_seven_Next";
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color, button } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="container px-5 bg-white relative py-5">
-      <SectionHeadingSeven title={"Featured Categories"} subtitle={""} />
+      <SectionHeadingSeventeen
+        title={title || "Featured Categories"}
+        title_color={title_color}
+      />
       <div className="relative px-5">
         <DefaultSlider
           prevEl={prev}

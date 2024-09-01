@@ -1,15 +1,21 @@
-import React from "react";
+"use client";
 import SectionHeadingTwentyFive from "@/components/section-heading/section-heading-twenty-five";
-import Link from "next/link";
 import { iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Link from "next/link";
 
 const FeaturedTwentyFive = ({ category, design }: any) => {
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design;
+  const { title, title_color } = cDesign?.feature_category[0] || {};
+
   return (
     <div className="sm:px-10 px-5">
       <SectionHeadingTwentyFive
         design={design}
-        title={"Featured Categories"}
-        subtitle={""}
+        title={title || "Featured Categories"}
+        title_color={title_color}
       />
 
       <div className="grid md:grid-cols-5 grid-cols-2 gap-4 my-2 ">

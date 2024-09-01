@@ -1,4 +1,3 @@
-// "use client";
 import { getSubdomainName } from "@/lib";
 import getUrl from "@/utils/get-url";
 import CategoryEight from "./_category-page/category/category-eight-old";
