@@ -3,7 +3,7 @@
 import { SwiperSlide } from "swiper/react";
 
 import Card40 from "@/components/card/card40";
-import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
+import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import DefaultSlider from "@/components/slider/default-slider";
 import Arrowbetween from "@/utils/arrow-between";
 import "swiper/css";
@@ -17,7 +17,11 @@ const BestSellerEight = ({ product, store_id }: any) => {
   return (
     <div className="bg-white ">
       <div className="sm:container px-5 sm:py-10 py-5 relative">
-        <SectionHeadingSeven title={"Best Seller Products"} subtitle={""} />
+        <SectionHeadingSeventeen
+          title_color={""}
+          title={"Best Seller Products"}
+          subtitle={""}
+        />
         <div className="demo">
           <div className="sm:container px-5 mt-20 absolute inset-0 flex items-center ">
             <Arrowbetween prevEl={prev} nextEl={next}></Arrowbetween>

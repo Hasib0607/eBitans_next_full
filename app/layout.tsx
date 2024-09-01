@@ -22,7 +22,7 @@ export default async function RootLayout({
     "design,headersetting"
   );
 
-  const fbPixel = headersetting.facebook_pixel;
+  const fbPixel = headersetting?.facebook_pixel;
 
   return (
     <html lang="en">

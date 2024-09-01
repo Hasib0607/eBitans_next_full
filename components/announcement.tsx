@@ -28,12 +28,17 @@ const Announcement = ({ design }: any) => {
   for (let i = 0; i < anArry.length * 4; i++) {
     alternatedArry.push(anArry[i % anArry.length]);
   }
+
   return (
     <div style={{ background: design?.header_color }}>
       <div className="relative flex overflow-x-hidden container">
         <div className="py-2 animate-marquee whitespace-nowrap">
           {alternatedArry.map((an: any, index: number) => (
-            <span key={index} className="text-xl mx-4">
+            <span
+              style={{ color: design?.text_color }}
+              key={index}
+              className="text-xl mx-4"
+            >
               {an.announcement}
             </span>
           ))}
@@ -44,7 +49,11 @@ const Announcement = ({ design }: any) => {
           className="absolute top-0 py-2 animate-marquee2 whitespace-nowrap"
         >
           {alternatedArry.map((an: any, index: number) => (
-            <span key={index} className="text-xl mx-4">
+            <span
+              style={{ color: design?.text_color }}
+              key={index}
+              className="text-xl mx-4"
+            >
               {an.announcement}
             </span>
           ))}
