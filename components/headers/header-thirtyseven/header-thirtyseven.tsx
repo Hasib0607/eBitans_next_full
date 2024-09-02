@@ -1,18 +1,18 @@
 "use client";
-import React, { Fragment, useEffect, useState } from "react";
-import { FaUser } from "react-icons/fa";
-import { Menu, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { BsSearch } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
-import { HiMenu } from "react-icons/hi";
 import useTheme from "@/hooks/use-theme";
-import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import Search from "./search";
+import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import { FaUser } from "react-icons/fa";
+import { HiMenu } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
+import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
+import Search from "./search";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -259,7 +259,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
         } bg-white text-black lg:flex items-center hidden shadow-[0px_1px_10px_1px_rgba(0,0,0,0.1)] z-[1] relative`}
       >
         <div className="sm:container px-5 flex justify-center gap-x-5">
-          {category.slice(0, 7).map((item: any) => (
+          {category?.slice(0, 7).map((item: any) => (
             <div key={item.id} className="relative">
               <div className="group relative flex items-center justify-between ">
                 <Link href={"/category/" + item?.id}>

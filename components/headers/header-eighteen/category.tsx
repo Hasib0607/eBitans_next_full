@@ -2,7 +2,6 @@
 import useTheme from "@/hooks/use-theme";
 import { ChevronDownIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import React from "react";
 import { useState } from "react";
 
 const Category = ({ openMenu }: any) => {
@@ -41,7 +40,7 @@ const Category = ({ openMenu }: any) => {
             <h1>Home</h1>
           </Link>
         </li>
-        {category.slice(0, 5).map((item: any) => (
+        {category?.slice(0, 5).map((item: any) => (
           <div key={item.id} className="group relative">
             <li className={`lg:py-7 menu-hover  `}>
               <Link

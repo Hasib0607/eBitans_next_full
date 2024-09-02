@@ -148,8 +148,9 @@ const Card61 = ({ item }: any) => {
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design;
-  const { button } = cDesign?.feature_product[0] || {};
+  const cDesign = data?.data?.custom_design || {};
+  const featureProduct = cDesign?.feature_product[0] || {};
+  const { button = "Default Button" } = featureProduct;
 
   return (
     <div className="group overlay-group relative">

@@ -1,4 +1,3 @@
-import React from "react";
 import {
   AiFillLinkedin,
   AiFillYoutube,
@@ -10,12 +9,12 @@ import services2 from "@/assets/img/icons/services2.svg";
 import services3 from "@/assets/img/icons/services3.svg";
 import services4 from "@/assets/img/icons/services4.svg";
 
+import { imgUrl } from "@/site-settings/siteUrl";
+import Link from "next/link";
 import { FaFacebookF } from "react-icons/fa";
 import { RiInstagramLine } from "react-icons/ri";
-import Newsletter from "./components/newsletter";
-import Link from "next/link";
-import { imgUrl } from "@/site-settings/siteUrl";
 import CopyrightAll from "./components/copyrightall";
+import Newsletter from "./components/newsletter";
 
 const FooterTwentyFour = ({
   headerSetting,
@@ -176,7 +175,7 @@ const FooterTwentyFour = ({
               </h1>
             </div>
             <div className="flex flex-col gap-3 text-gray-400 text-sm ">
-              {category.slice(0, 6).map((item: any) => (
+              {category?.slice(0, 6).map((item: any) => (
                 <div key={item.id} className="">
                   <li className="list-none w-max menu-hover hover:underline">
                     <Link href={"/category/" + item?.id}>

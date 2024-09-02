@@ -1,14 +1,13 @@
-import React from "react";
+import Link from "next/link";
 import {
   AiFillLinkedin,
   AiOutlineInstagram,
   AiOutlineMail,
   AiOutlineWhatsApp,
 } from "react-icons/ai";
-import { BsYoutube, BsFacebook, BsTelephone } from "react-icons/bs";
+import { BsFacebook, BsTelephone, BsYoutube } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import Newsletter from "./components/newsletter";
-import Link from "next/link";
 
 const FooterSix = ({
   headerSetting,
@@ -169,7 +168,7 @@ const FooterSix = ({
               <h1 className="text-sm font-semibold  ">Top Category</h1>
             </div>
             <div className="flex flex-col gap-3 text-[13px] text-gray-500">
-              {category.slice(0, 6).map((item: any) => (
+              {category?.slice(0, 6).map((item: any) => (
                 <div key={item.id} className="">
                   <li className="list-none  menu-hover">
                     <Link href={"/category/" + item?.id}>

@@ -1,7 +1,6 @@
 import Link from "next/link";
-import React from "react";
 import { AiOutlineInstagram, AiOutlineMail } from "react-icons/ai";
-import { BsYoutube, BsFacebook, BsTelephone } from "react-icons/bs";
+import { BsFacebook, BsTelephone, BsYoutube } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import CopyrightAll from "./components/copyrightall";
 
@@ -100,7 +99,7 @@ const FooterDefault = ({ headerSetting, category }: any) => {
                 <h1 className="text-2xl">Top Category</h1>
               </div>
               <div className="flex flex-col gap-3 text-gray-500">
-                {category.slice(0, 4).map((item: any) => (
+                {category?.slice(0, 4).map((item: any) => (
                   <div key={item.id} className="">
                     <li className="list-none">
                       <Link href={"/category/" + item?.id}>

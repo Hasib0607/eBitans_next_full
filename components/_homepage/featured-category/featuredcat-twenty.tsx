@@ -7,8 +7,13 @@ import Link from "next/link";
 const FeaturedTwenty = ({ category }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design;
-  const { title, title_color } = cDesign?.feature_category[0] || {};
+
+  // Safely access cDesign
+  const cDesign = data?.data?.custom_design || {};
+  const featureCategory = cDesign.feature_category?.[0] || {};
+
+  // Destructure with default values
+  const { title = "Default Title", title_color = "#000000" } = featureCategory;
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5 relative group">
@@ -17,9 +22,11 @@ const FeaturedTwenty = ({ category }: any) => {
         title={title || "Featured Categories"}
       />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        {category.slice(0, 3).map((productData: any, index: number) => (
-          <Card key={index} item={productData} />
-        ))}
+        {category
+          ?.slice(0, 3)
+          .map((productData: any, index: number) => (
+            <Card key={index} item={productData} />
+          ))}
       </div>
     </div>
   );

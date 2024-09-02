@@ -1,19 +1,18 @@
 "use client";
-import React, { useState } from "react";
-import { ImCross } from "react-icons/im";
-import { BsCart2, BsSearch } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
-import { useDispatch, useSelector } from "react-redux";
-import { Fragment } from "react";
-import { Menu, Transition } from "@headlessui/react";
-import { RiMenu2Line, RiUser2Fill } from "react-icons/ri";
-import { GoLocation } from "react-icons/go";
-import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
-import { imgUrl, profileImg } from "@/site-settings/siteUrl";
-import { ArrowLeftIcon } from "@heroicons/react/24/outline";
-import SideMenu from "../header-three/side-menu";
 import useTheme from "@/hooks/use-theme";
+import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import { ArrowLeftIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsCart2, BsSearch } from "react-icons/bs";
+import { GoLocation } from "react-icons/go";
+import { ImCross } from "react-icons/im";
+import { RiMenu2Line, RiUser2Fill } from "react-icons/ri";
+import { useDispatch, useSelector } from "react-redux";
+import { BottomCart } from "../card-popup-three";
+import SideMenu from "../header-three/side-menu";
 import Search from "./search";
 
 const HeaderNineteen = ({ headerSetting }: any) => {
@@ -382,7 +381,7 @@ const HeaderNineteen = ({ headerSetting }: any) => {
             )}
           </div>
           <div className="flex">
-            {category.slice(0, 5).map((item: any) => (
+            {category?.slice(0, 5).map((item: any) => (
               <div key={item.id} className="group relative">
                 <p className={``}>
                   <Link href={"/category/" + item?.id}>

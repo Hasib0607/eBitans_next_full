@@ -31,7 +31,7 @@ const Category = () => {
             <h1>Home</h1>
           </Link>
         </li>
-        {category.slice(0, 4).map((item: any, i: any) => (
+        {category?.slice(0, 4).map((item: any, i: any) => (
           <div key={item.id} className="group relative">
             <li className="py-7 menu-hover">
               <Link href={"/category/" + item?.id}>

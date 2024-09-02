@@ -36,7 +36,7 @@ const FeaturedThree = ({ product, category, design, store_id }: any) => {
     }
     `;
 
-  const latestCategory = category.slice(category.length - 3);
+  const latestCategory = category?.slice(category.length - 3);
 
   const categoryOne = product.filter((data: any) => {
     return parseInt(data?.category_id) === latestCategory[0]?.id;

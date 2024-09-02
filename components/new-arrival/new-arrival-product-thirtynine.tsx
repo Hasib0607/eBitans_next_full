@@ -10,8 +10,9 @@ import DefaultSlider from "../slider/default-slider";
 const NewArrivalProductThirtyNine = ({ product, design, store_id }: any) => {
   const { data, error } = useHeaderSettings();
 
-  const cDesign = data?.data?.custom_design;
-  const { title, title_color } = cDesign?.new_arrival_product[0] || {};
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
 
   const [animate, setAnimate] = useState(false);
 

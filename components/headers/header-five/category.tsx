@@ -28,7 +28,7 @@ const Category = ({ openMenu }: any) => {
     <nav>
       <style>{styleCss}</style>
       <ul className="flex lg:flex-row lg:gap-1 lg:justify-center flex-col gap-3 mt-4 lg:mt-0">
-        {category.slice(0, 4).map((item: any) => (
+        {category?.slice(0, 4).map((item: any) => (
           <div key={item.id} className="group relative">
             <Link
               className="menu-hover"

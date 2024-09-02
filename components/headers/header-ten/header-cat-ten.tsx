@@ -44,7 +44,7 @@ const HeaderCatTen = () => {
               </Link>
             </li>
 
-            {category.slice(0, 5).map((item: any) => (
+            {category?.slice(0, 5).map((item: any) => (
               <div key={item.id} className="group relative">
                 <li className="menu-seven relative py-6">
                   <Link href={"/category/" + item?.id}>

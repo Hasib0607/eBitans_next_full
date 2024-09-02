@@ -9,8 +9,10 @@ const BestSellerThirtyEight = ({
 }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design;
-  const { title, title_color } = cDesign?.feature_product[0] || {};
+  const cDesign = data?.data?.custom_design || {};
+  const featureProduct = cDesign?.feature_product[0] || {};
+
+  const { title = "Default Title", title_color = "#000" } = featureProduct;
 
   if (best_sell_product.length === 0) {
     return null;
