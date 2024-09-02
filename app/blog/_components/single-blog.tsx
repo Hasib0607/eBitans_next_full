@@ -6,7 +6,7 @@ const SingleBlog = ({ blogData }: any) => {
   return (
     <div className="relative basis-3/5 ">
       {blogData.length > 0 && (
-        <Link href={`/resources/blogs/${blogData[0]?.slug}`}>
+        <Link href={`blog/${blogData[0]?.permalink || blogData[0]?.slug}`}>
           <div className="group">
             <Image
               width={500}

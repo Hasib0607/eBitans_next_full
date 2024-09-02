@@ -6,7 +6,7 @@ const BlogCard = ({ item }: any) => {
   return (
     <>
       <Link
-        href={`/blog/${item?.slug}`}
+        href={`/blog/${item?.permalink || item?.slug}`}
         className="border rounded-lg pb-5 group hover:shadow-[12px_12px_1px_1px_gray] hover:scale-[.95] duration-1000"
       >
         <div className="relative rounded-lg overflow-hidden">

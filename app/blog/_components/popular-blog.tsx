@@ -4,7 +4,7 @@ import Link from "next/link";
 const PopularBlog = ({ blog }: any) => {
   return (
     <>
-      <Link href={`/resources/blogs/${blog?.slug}`}>
+      <Link href={`blog/${blog?.permalink || blog?.slug}`}>
         <div key={blog?.id} className="flex gap-2 border-b-2 py-5">
           <div className="max-h-28 w-28">
             <Image

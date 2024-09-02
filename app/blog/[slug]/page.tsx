@@ -1,12 +1,14 @@
+import getUrl from "@/utils/get-url";
 import moment from "moment";
 import Image from "next/image";
 import Link from "next/link";
 import { fetchBlogData, fetchBlogDetailsData } from "../helper/api";
 
 export async function generateMetadata({ params }: any) {
-  const { details } = (await fetchBlogDetailsData(params)) ?? [];
+  const url = getUrl();
+  const { details } = (await fetchBlogDetailsData(params, url)) ?? [];
   return {
-    title: details.title,
+    title: details?.title,
     description: details?.sub_title,
     openGraph: {
       images: [
@@ -29,8 +31,9 @@ const truncateTitle = (title: any, maxLength: any) => {
 };
 
 const BlogDetails = async ({ params }: any) => {
-  const blogData = (await fetchBlogData()) ?? [];
-  const { details } = (await fetchBlogDetailsData(params)) ?? [];
+  const url = getUrl();
+  const blogData = (await fetchBlogData(url)) ?? [];
+  const { details } = (await fetchBlogDetailsData(params, url)) ?? [];
 
   const filterBlog = blogData?.filter(
     (blog: any) => blog?.type === details?.type && blog?.id !== details?.id

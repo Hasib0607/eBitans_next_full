@@ -6,7 +6,7 @@ import BlogPagination from "./blog-pagination";
 
 const BlogType = ({ blogTypeData }: any) => {
   const [blogType, setBlogType] = useState<any>("");
-  const [blogTypeId, setBlogTypeId] = useState(1);
+  const [blogTypeId, setBlogTypeId] = useState(blogTypeData[0].id);
   const [typePage, setTypePage] = useState("?page=1");
   const [paginationType, setTypePagination] = useState(null);
 

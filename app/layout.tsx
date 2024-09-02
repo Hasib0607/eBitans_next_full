@@ -17,11 +17,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const url = getUrl();
-  const { design, headersetting } = await getSubdomainName(
-    url,
-    "design,headersetting"
-  );
+  const subDomain = await getSubdomainName(url, "design,headersetting");
 
+  const headersetting = subDomain?.headersetting;
+  const design = subDomain?.design;
   const fbPixel = headersetting?.facebook_pixel;
 
   return (

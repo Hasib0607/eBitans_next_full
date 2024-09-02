@@ -8,6 +8,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "admin.ebitans.com",
       },
+      {
+        protocol: "https",
+        hostname: "admin.rongmoshal.store",
+      },
     ],
   },
 };

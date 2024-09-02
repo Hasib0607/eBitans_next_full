@@ -1,17 +1,16 @@
 import AllBlog from "./_components/all-blog";
-import BlogType from "./_components/blog-type";
 import Loading from "./_components/loading";
 import PopularBlog from "./_components/popular-blog";
 import SingleBlog from "./_components/single-blog";
 
-import Image from "next/image";
+import getUrl from "@/utils/get-url";
 import { Suspense } from "react";
+import BlogType from "./_components/blog-type";
 import {
   fetchBlogData,
   fetchBlogPopularData,
   fetchBlogTypeData,
 } from "./helper/api";
-import images from "./lib/images";
 
 export const metadata = {
   title: "Blogs",
@@ -20,9 +19,10 @@ export const metadata = {
 };
 
 const BlogPage = async () => {
-  const blogData = (await fetchBlogData()) ?? [];
-  const blogPopularData = (await fetchBlogPopularData()) ?? [];
-  const blogTypeData = (await fetchBlogTypeData()) ?? [];
+  const url = getUrl();
+  const blogData = (await fetchBlogData(url)) ?? [];
+  const blogPopularData = (await fetchBlogPopularData(url)) ?? [];
+  const blogTypeData = (await fetchBlogTypeData(url)) ?? [];
 
   return (
     <div className="sm:pt-[85px] pt-[50px] relative z-[1]">
@@ -64,23 +64,6 @@ const BlogPage = async () => {
         </div>
       </div>
 
-      {/* banner section  */}
-      <a
-        href="https://admin.ebitans.com/register"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div className="container px-5 lg:px-10 my-10">
-          <Image
-            width={500}
-            height={500}
-            src={images?.blogBanner}
-            alt="blogImage"
-            className="h-auto min-w-full"
-          />
-        </div>
-      </a>
-
       {/* type of blog section  */}
       <div className="container px-5 lg:px-10 my-10">
         <div>
@@ -91,11 +74,13 @@ const BlogPage = async () => {
               </div>
             }
           >
+            {/* done */}
             <BlogType blogTypeData={blogTypeData} />
           </Suspense>
         </div>
       </div>
 
+      {/* done */}
       {/* all blog section  */}
       <div className="container px-5 lg:px-10 my-10">
         <Suspense

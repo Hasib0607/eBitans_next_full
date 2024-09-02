@@ -1,4 +1,5 @@
 "use client";
+import { getClientUrl } from "@/app/product/utils/getClientUrl";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
@@ -16,7 +17,8 @@ const AllBlog = () => {
   const fetchAllBlogData = async () => {
     try {
       const response = await fetch(
-        process.env.NEXT_PUBLIC_API_URL_BLOG + `blog?page=${page}`,
+        process.env.NEXT_PUBLIC_API_URL_BLOG +
+          `blog/get?page=${page}&name=${getClientUrl()}`,
         {
           cache: "no-store",
         }
@@ -29,7 +31,6 @@ const AllBlog = () => {
         } else {
           setAllBlog([...allBlog, ...data?.results?.data]);
           setPage(page + 1);
-          // setAllBlogLoad(false)
         }
       } else {
         setHasMore(false);

@@ -1,3 +1,5 @@
+import { getClientUrl } from "@/app/product/utils/getClientUrl";
+
 // pricing api
 export const fetchPricingData = async () => {
   try {
@@ -43,22 +45,10 @@ export const fetchBlogSitemapData = async () => {
   }
 };
 
-export const fetchBlogData = async () => {
-  try {
-    const response = await fetch(`https://admin.ebitans.com/api/v1/blog`, {
-      next: { revalidate: 10 },
-    });
-    const data = await response.json();
-    return data?.results?.data;
-  } catch (error) {
-    console.error("There was an error fetching the data", error);
-  }
-};
-
-export const fetchBlogPopularData = async () => {
+export const fetchBlogData = async (url: string) => {
   try {
     const response = await fetch(
-      `https://admin.ebitans.com/api/v1/blog/popular`,
+      `https://admin.rongmoshal.store/api/v1/blog/get?name=${url}`,
       {
         next: { revalidate: 10 },
       }
@@ -70,10 +60,25 @@ export const fetchBlogPopularData = async () => {
   }
 };
 
-export const fetchBlogTypeData = async () => {
+export const fetchBlogPopularData = async (url: string) => {
   try {
     const response = await fetch(
-      `https://admin.ebitans.com/api/v1/blog/types`,
+      `https://admin.rongmoshal.store/api/v1/blog/popular?name=${url}`,
+      {
+        next: { revalidate: 10 },
+      }
+    );
+    const data = await response.json();
+    return data?.results?.data;
+  } catch (error) {
+    console.error("There was an error fetching the data", error);
+  }
+};
+
+export const fetchBlogTypeData = async (url: string) => {
+  try {
+    const response = await fetch(
+      `https://admin.rongmoshal.store/api/v1/blog/types?name=${url}`,
       {
         next: { revalidate: 10 },
       }
@@ -88,7 +93,7 @@ export const fetchBlogTypeData = async () => {
 export const fetchTypeWiseBlogData = async (blogTypeId: any, typePage: any) => {
   try {
     const response = await fetch(
-      `https://admin.ebitans.com/api/v1/blog/types/${blogTypeId}${typePage}`,
+      `https://admin.rongmoshal.store/api/v1/blog/types/${blogTypeId}${typePage}&name=${getClientUrl()}`,
       { next: { revalidate: 10 } }
     );
     const data = await response.json();
@@ -98,10 +103,11 @@ export const fetchTypeWiseBlogData = async (blogTypeId: any, typePage: any) => {
   }
 };
 
-export const fetchBlogDetailsData = async (params: any) => {
+// single blog data
+export const fetchBlogDetailsData = async (params: any, url:string) => {
   try {
     const response = await fetch(
-      `https://admin.ebitans.com/api/v1/blog/details/${params?.slug}`,
+      "https://admin.rongmoshal.store/api/v1/blog/details/" + params?.slug + `?name=${url}`,
       {
         next: { revalidate: 10 },
       }
