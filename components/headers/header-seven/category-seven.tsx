@@ -24,7 +24,7 @@ const CategorySeven = ({ openMenu }: any) => {
           </Link>
         </li>
 
-        {category.slice(0, 3).map((item: any) => (
+        {category?.slice(0, 3).map((item: any) => (
           <div key={item.id} className="group relative">
             <li className={`menu-seven relative ${openMenu ? "py-4" : "py-4"}`}>
               <Link href={"/category/" + item?.id}>
@@ -32,7 +32,7 @@ const CategorySeven = ({ openMenu }: any) => {
                   {item.name}
                 </h1>
               </Link>
-              {subcategory.map((dataId: any) => (
+              {subcategory?.map((dataId: any) => (
                 <div key={dataId.id}>
                   {item.id === Number(dataId.parent) && (
                     <ChevronDownIcon
@@ -50,7 +50,7 @@ const CategorySeven = ({ openMenu }: any) => {
                 openMenu ? "top-[100%]" : "top-[100%]"
               }`}
             >
-              {subcategory.map((subItem: any) => (
+              {subcategory?.map((subItem: any) => (
                 <div
                   key={subItem.id}
                   className="relative group-hover:block hidden"
@@ -88,7 +88,7 @@ const CategorySeven = ({ openMenu }: any) => {
               openMenu ? "top-[100%]" : "top-[100%]"
             }`}
           >
-            {menu.map((menuItem: any, j: any) => (
+            {menu?.map((menuItem: any, j: any) => (
               <div key={menuItem.id} className="relative ">
                 <div className="px-6 py-2 hover:bg-gray-200 ">
                   <Link href={"/" + menuItem?.url}>
