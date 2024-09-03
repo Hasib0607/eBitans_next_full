@@ -104,10 +104,12 @@ export const fetchTypeWiseBlogData = async (blogTypeId: any, typePage: any) => {
 };
 
 // single blog data
-export const fetchBlogDetailsData = async (params: any, url:string) => {
+export const fetchBlogDetailsData = async (params: any, url: string) => {
   try {
     const response = await fetch(
-      "https://admin.rongmoshal.store/api/v1/blog/details/" + params?.slug + `?name=${url}`,
+      "https://admin.rongmoshal.store/api/v1/blog/details/" +
+        params?.slug +
+        `?name=${url}`,
       {
         next: { revalidate: 10 },
       }

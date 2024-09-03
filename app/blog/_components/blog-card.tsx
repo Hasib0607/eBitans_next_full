@@ -17,7 +17,7 @@ const BlogCard = ({ item }: any) => {
             alt="blogImage"
             className="h-auto min-w-full"
           />
-          <p className="absolute top-5 left-5 text-lg text-[#f1593a] font-medium mb-3 z-[2]">
+          <p className="absolute top-5 left-5 text-lg bg-[#f1593a] font-medium mb-3 z-[2] px-2 py-0.5">
             {item?.type}
           </p>
           <p className="absolute top-0 left-0 right-0 group-hover:bottom-0 duration-1000 group-hover:bg-black group-hover:bg-opacity-75 z-[1]"></p>

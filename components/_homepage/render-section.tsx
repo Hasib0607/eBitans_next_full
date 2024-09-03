@@ -1,4 +1,6 @@
 import dynamic from "next/dynamic";
+import { Suspense } from "react";
+import BlogSection from "./blog/blog-section";
 const Hero = dynamic(() => import("../hero"), { ssr: false });
 const FeaturedCategory = dynamic(() => import("../featured-category"), {
   ssr: false,
@@ -57,6 +59,31 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
     store_id,
     brand,
   } = data;
+
+  const renderTestimonialAndBlog = () => {
+    if (component === "testimonial") {
+      return (
+        <>
+          {/* Render BlogSection before testimonials */}
+          <Suspense fallback={<p>Loading...</p>}>
+            <BlogSection />
+          </Suspense>
+
+          {/* Testimonials section */}
+          <Testimonial
+            testimonials={testimonials}
+            theme={design?.testimonial}
+            design={design}
+          />
+        </>
+      );
+    }
+    return (
+      <Suspense fallback={<p>Loading...</p>}>
+        <BlogSection />
+      </Suspense>
+    );
+  };
 
   switch (component) {
     case "hero_slider":
@@ -136,13 +163,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
         />
       );
     case "testimonial":
-      return (
-        <Testimonial
-          testimonials={testimonials}
-          theme={design?.testimonial}
-          design={design}
-        />
-      );
+      return renderTestimonialAndBlog();
     default:
       return null;
   }
