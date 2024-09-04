@@ -46,15 +46,19 @@ const CheckOutSeven = () => {
   }, []);
 
   const fetchCampaignData = async () => {
-    // get the data from the api
-    const { yourData, status } = await httpReq.post(`campaign`, {
-      store_id: store_id,
-    });
+    try {
+      // get the data from the api
+      const { yourData, status } = await httpReq.post(`campaign`, {
+        store_id: store_id,
+      });
 
-    if (status === "200") {
-      setCampaign(yourData?.campaign);
-    } else {
-      setCampaign([]);
+      if (status === "200") {
+        setCampaign(yourData?.campaign);
+      } else {
+        setCampaign([]);
+      }
+    } catch (error: any) {
+      console.log(error?.message);
     }
   };
 

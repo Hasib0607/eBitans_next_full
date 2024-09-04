@@ -223,11 +223,14 @@ const ProductDetails = () => {
 
   const { design, store_id } = useTheme();
 
+  console.log(design, "design");
+
   useEffect(() => {
     setUpdatedData({ product_id, store_id, slug });
   }, [product_id, store_id, slug]);
 
-  const RenderComponent = componentsMap[design?.single_product_page] || null;
+  const RenderComponent = componentsMap["one"] || null;
+  // const RenderComponent = componentsMap[design?.single_product_page] || null;
 
   return (
     <>

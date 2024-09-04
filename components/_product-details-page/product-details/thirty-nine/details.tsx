@@ -12,6 +12,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useRouter } from "next/navigation";
@@ -631,6 +632,7 @@ const AddCart = ({
   buyNowBtn,
   bookingData,
 }: any) => {
+  const { data, error } = useHeaderSettings();
   let incrementNum = () => {
     setQty((prevCount: any) => prevCount + 1);
   };
@@ -642,6 +644,11 @@ const AddCart = ({
     }
   };
 
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
   return (
     <>
       {bookingData?.from_type !== "single" && (
@@ -672,7 +679,7 @@ const AddCart = ({
           </div>
           <div className={`${buttonSeven}`} onClick={buyNowBtn}>
             <IoMdCart />
-            <button>Buy it now</button>
+            <button>{button || "Buy it now"}</button>
           </div>
         </div>
       )}

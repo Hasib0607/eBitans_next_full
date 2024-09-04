@@ -1,3 +1,4 @@
+import Announcement from "@/components/announcement";
 import { getSubdomainName } from "@/lib";
 import getUrl from "@/utils/get-url";
 import { GoogleTagManager } from "@next/third-parties/google";
@@ -28,6 +29,7 @@ export default async function RootLayout({
       <body className={`${inter.className} lg2 `}>
         <GoogleTagManager gtmId={headersetting?.gtm} />
         <NextTopLoader />
+        <Announcement design={design} url={url} />
         <AppWrapper headerSetting={headersetting} design={design}>
           {children}
         </AppWrapper>

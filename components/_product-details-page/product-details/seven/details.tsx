@@ -9,6 +9,7 @@ import { bookNow } from "@/utils/book-now";
 import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useQuery } from "@tanstack/react-query";
@@ -712,6 +713,8 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
+  const { data, error } = useHeaderSettings();
+
   const { store_id } = useTheme();
 
   let incrementNum = () => {
@@ -724,6 +727,10 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
       setQty((prevCount: any) => prevCount - 1);
     }
   };
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) return <p>error from header setting</p>;
 
   return (
     <>
@@ -748,7 +755,7 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
           </div>
           <div className="">
             <button className={buttonSeven} onClick={onClick}>
-              {store_id === 1187 ? "অর্ডার করুন" : "Add to Cart"}
+              {button || "Add to Cart"}
             </button>
           </div>
         </div>

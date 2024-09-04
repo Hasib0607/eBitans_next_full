@@ -7,6 +7,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
@@ -585,6 +586,8 @@ export default Details;
 const AddCart = ({ setQty, qty, onClick }: any) => {
   const { design } = useTheme();
 
+  const { data, error } = useHeaderSettings();
+
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -608,6 +611,12 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
     }
 
   `;
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <>
@@ -645,7 +654,8 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
         type="submit"
         className="rounded-md cart-btn-thirty font-bold py-[11px] px-10 w-max"
       >
-        <AiOutlineShoppingCart className="inline mr-1 text-xl" /> ADD TO CART
+        <AiOutlineShoppingCart className="inline mr-1 text-xl" />
+        {button || "ADD TO CART"}
       </button>
     </>
   );

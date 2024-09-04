@@ -9,6 +9,7 @@ import BDT from "@/utils/bdt";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import {
   ExclamationCircleIcon,
   MinusIcon,
@@ -36,6 +37,7 @@ const Details = ({
   children,
 }: any) => {
   const { makeid, store_id } = useTheme();
+  const { data: x, error } = useHeaderSettings();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
@@ -426,6 +428,12 @@ const Details = ({
     }
   };
 
+  const { button } = x?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
+
   return (
     <div className="grid md:grid-cols-8 grid-cols-1 mt-20 md:gap-4 ">
       <div className="md:col-span-4 h-full sm:cursor-zoom-in overflow-hidden ">
@@ -537,7 +545,7 @@ const Details = ({
             >
               <ShoppingBagIcon className="h-5 w-5" />
               <p className="font-bold text-[12px] md:text-[14px] ">
-                Add To Cart
+                {button || "Add To Cart"}
               </p>
             </div>
           </div>

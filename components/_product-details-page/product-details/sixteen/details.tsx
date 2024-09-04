@@ -8,6 +8,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
@@ -28,6 +29,7 @@ const Details = ({
 }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
+  const { data: x, error } = useHeaderSettings();
   const dispatch = useDispatch();
 
   const [filterV, setFilterV] = useState<any>([]);
@@ -429,6 +431,11 @@ const Details = ({
     );
   }
 
+  const { button } = x?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
   return (
     <div className="">
       <div className=" grid grid-cols-1 lg:grid-cols-9 lg:gap-6 gap-8 bg-white ">
@@ -574,7 +581,7 @@ const Details = ({
                         type="submit"
                         className={buttonSixteen}
                       >
-                        + ADD TO CART
+                        {button || "+ ADD TO CART"}
                       </button>
                     </div>
                   </div>

@@ -12,6 +12,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
 import {
@@ -571,6 +572,7 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick, variant, buttonTwentyFour }: any) => {
+  const { data, error } = useHeaderSettings();
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -588,6 +590,11 @@ const AddCart = ({ setQty, qty, onClick, variant, buttonTwentyFour }: any) => {
 
   
   `;
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <>
@@ -622,7 +629,7 @@ const AddCart = ({ setQty, qty, onClick, variant, buttonTwentyFour }: any) => {
           className="relative group w-max bg-color lg:cursor-pointer"
         >
           <button type="submit" className="font-bold py-[11px] px-10 w-max ">
-            + ADD TO CART
+            {button || "+ ADD TO CART"}
           </button>
           <p className="absolute bg-black bg-opacity-20 top-0 left-0 right-0 scale-x-0 group-hover:scale-x-100 transform origin-[0%_100%] group-hover:ease-[cubic-bezier(0.52,1.64,0.87,.70)] ease-[cubic-bezier(0.52,1.64,0.87,0.66)] duration-500 bottom-0"></p>
         </div>

@@ -10,6 +10,7 @@ import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import ImageModal from "@/utils/image-modal";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useRouter } from "next/navigation";
@@ -594,6 +595,7 @@ export default Details;
 const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
   const { headerSetting } = useTheme();
 
+  const { data, error } = useHeaderSettings();
   let incrementNum = () => {
     setQty((prevCount: any) => prevCount + 1);
   };
@@ -605,6 +607,11 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
     }
   };
 
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
   return (
     <div className="flex flex-col justify-start items-center gap-3 py-1 w-96">
       <div className="flex border border-gray-300 divide-x-2 rounded-md">
@@ -633,7 +640,7 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
         onClick={buyNowBtn}
       >
         <IoMdCart />
-        <button>অর্ডার করুন</button>
+        <button>{button || "অর্ডার করুন"}</button>
       </div>
       <a
         href={"tel:+88" + headerSetting?.phone}

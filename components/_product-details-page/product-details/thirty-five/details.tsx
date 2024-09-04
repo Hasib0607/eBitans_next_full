@@ -8,6 +8,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import Link from "next/link";
@@ -583,6 +584,8 @@ export default Details;
 const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
   // const { store_id } = useTheme()
 
+  const { data, error } = useHeaderSettings();
+
   let incrementNum = () => {
     setQty((prevCount: any) => prevCount + 1);
   };
@@ -593,6 +596,12 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
       setQty((prevCount: any) => prevCount - 1);
     }
   };
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <div className="py-5">
@@ -620,7 +629,7 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
         <Link href="/checkout">
           {" "}
           <button onClick={onClick} className={buttonSeven}>
-            Buy now
+            {button || "Buy now"}
           </button>
         </Link>
       </div>

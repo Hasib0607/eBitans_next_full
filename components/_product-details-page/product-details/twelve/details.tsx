@@ -9,6 +9,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
@@ -543,6 +544,7 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick, buttonTwelve, buyNowBtn }: any) => {
+  const { data, error } = useHeaderSettings();
   const { store_id } = useTheme();
   let incNum = () => {
     setQty(qty + 1);
@@ -558,6 +560,11 @@ const AddCart = ({ setQty, qty, onClick, buttonTwelve, buyNowBtn }: any) => {
     setQty(e.target.value);
   };
 
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
   return (
     <>
       <div className="flex sm:flex-row items-center gap-3 ">
@@ -595,7 +602,7 @@ const AddCart = ({ setQty, qty, onClick, buttonTwelve, buyNowBtn }: any) => {
           </div>
         ) : (
           <div onClick={() => buyNowBtn()} className="w-max ">
-            <button className={buttonTwelve}>Order Now</button>
+            <button className={buttonTwelve}>{button || "Order Now"}</button>
           </div>
         )}
       </div>

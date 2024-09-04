@@ -15,26 +15,33 @@ import Details from "./details";
 
 const ThirtySix = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
-    queryKey: ["pd-7"],
+    queryKey: ["pd-36"],
     queryFn: () => getProductDetails(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { data: relatedProducts } = useQuery({
-    queryKey: ["rp-7"],
+    queryKey: ["rp-36"],
     queryFn: () => getRelatedProducts(updatedData?.product_id),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
   const { data: reviews } = useQuery({
-    queryKey: ["rv-7"],
+    queryKey: ["rv-36"],
     queryFn: () => getReviews(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
+  const { product, vrcolor, variant } = productDetailsData || {};
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
-      <Details fetchStatus={fetchStatus} data={data}>
+      <Details
+        fetchStatus={fetchStatus}
+        data={data}
+        product={product}
+        vrcolor={vrcolor}
+        variant={variant}
+      >
         <div className="h-[1px] bg-gray-300 w-full "></div>
         <According text={"Customer Reviews"} reviews={reviews} />
       </Details>

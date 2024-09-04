@@ -13,6 +13,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
@@ -594,6 +595,7 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
+  const { data, error } = useHeaderSettings();
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -604,6 +606,12 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
       setQty((prevCount: any) => prevCount - 1);
     }
   };
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
@@ -627,7 +635,7 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
           <button className={buttonOne}>Out of Stock</button>
         ) : (
           <button className={buttonOne} onClick={onClick}>
-            Add to cart
+            {button || "Add to cart"}
           </button>
         )}
       </div>

@@ -7,6 +7,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
@@ -628,6 +629,7 @@ const AddCart = ({
   buttonTwentyThree,
   productQuantity,
 }: any) => {
+  const { data, error } = useHeaderSettings();
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -641,6 +643,12 @@ const AddCart = ({
   let handleChange = (e: any) => {
     setQty(e.target.value);
   };
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <>
@@ -686,7 +694,7 @@ const AddCart = ({
         </div>
         <Link href="/checkout">
           <button onClick={onClick} type="submit" className={buttonTwentyThree}>
-            BUY NOW
+            {button || "BUY NOW"}
           </button>
         </Link>
       </div>

@@ -12,14 +12,15 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { HSlider } from "./slider";
-import { sendGTMEvent } from "@next/third-parties/google";
 
 const Details = ({ data, children, fetchStatus }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
@@ -449,7 +450,7 @@ const Details = ({ data, children, fetchStatus }: any) => {
 
           <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
             <BDT />
-            {camp?.status === "active" ? campPrice : price}{" "}
+            {camp?.status === "active" ? campPrice : price}
             {camp?.status !== "active" &&
             (product?.discount_type === "no_discount" ||
               product?.discount_price === "0.00") ? (
@@ -562,6 +563,8 @@ const AddCart = ({
 
   const [already, setalready] = useState<any>(null);
 
+  const { data, error } = useHeaderSettings();
+
   useEffect(() => {
     const result = cartList.find((i: any) => i?.id === product?.id);
     setalready(result);
@@ -597,20 +600,11 @@ const AddCart = ({
     setQty(e.target.value);
   };
 
-  // let incNum = () => {
-  //     setQty(qty + 1);
-  // };
-  // let decNum = () => {
-  //     if (qty <= 1) {
-  //         setQty(1)
-  //     }
-  //     else {
-  //         setQty(prevCount => prevCount - 1)
-  //     }
-  // };
-  // let handleChange = (e) => {
-  //     setQty(e.target.value);
-  // };
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <div className="flex flex-wrap md:flex-nowrap gap-3 w-full md:grid grid-cols-3">
@@ -646,28 +640,17 @@ const AddCart = ({
         </div>
       </div>
 
-      {/* <div className="flex items-center col-span-2 lg:cursor-pointer justify-between w-full bg-red-500 text-white text-sm md:text-base font-bold gap-1 h-14">
-                <div onClick={onClick={decNum}} className="w-16 text-center border-r border-red-50 h-full flex justify-center items-center">
-                    <MinusIcon className='h-5' />
-                </div>
-                <div className="w-full text-center">
-                    <p className=''>{(already?.qty && !variant) ? already?.qty : variant ? qty : 1} in bag</p>
-                </div>
-                <div onClick={incNum} className="w-16 text-center border-l border-red-50 h-full flex justify-center items-center">
-                    <PlusIcon className='h-5' />
-                </div>
-            </div> */}
-
       {variant?.length !== 0 && (
         <div onClick={onClick} className="w-full">
           <button className={buttonTwenty}>Add to bag</button>
         </div>
       )}
+
       <div
         onClick={buyNowBtn}
         className={`w-full ${variant?.length !== 0 && "col-span-3"}`}
       >
-        <button className={buttonTwenty}>Buy now</button>
+        <button className={buttonTwenty}>{button || "Buy Now"}</button>
       </div>
     </div>
   );

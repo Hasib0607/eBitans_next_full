@@ -8,6 +8,7 @@ import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import ImageModal from "@/utils/image-modal";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
@@ -588,6 +589,8 @@ export default Details;
 const AddCart = ({ setQty, qty, onClick, variant }: any) => {
   const { design } = useTheme();
 
+  const { data, error } = useHeaderSettings();
+
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -608,6 +611,12 @@ const AddCart = ({ setQty, qty, onClick, variant }: any) => {
     }
 
   `;
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <>
@@ -642,7 +651,7 @@ const AddCart = ({ setQty, qty, onClick, variant }: any) => {
           type="submit"
           className=" cart-btn-details font-bold px-4 py-2 lg:py-[11px] lg:px-10 w-max rounded-full "
         >
-          + ADD TO CART
+          {button || "+ ADD TO CART"}
         </button>
       </div>
     </>

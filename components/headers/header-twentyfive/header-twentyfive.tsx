@@ -1,24 +1,24 @@
 "use client";
-import React, { useState } from "react";
-import { FaFacebookF } from "react-icons/fa";
-import {
-  AiFillLinkedin,
-  AiOutlineInstagram,
-  AiOutlineWhatsApp,
-  AiOutlineYoutube,
-} from "react-icons/ai";
-import { useSelector, useDispatch } from "react-redux";
-import { CgShoppingBag } from "react-icons/cg";
 import useTheme from "@/hooks/use-theme";
+import { imgUrl } from "@/site-settings/siteUrl";
 import {
   PhoneIcon,
   TableCellsIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { BottomCart } from "../card-popup-three";
-import { imgUrl } from "@/site-settings/siteUrl";
+import { useState } from "react";
+import {
+  AiFillLinkedin,
+  AiOutlineInstagram,
+  AiOutlineWhatsApp,
+  AiOutlineYoutube,
+} from "react-icons/ai";
+import { CgShoppingBag } from "react-icons/cg";
+import { FaFacebookF } from "react-icons/fa";
 import { IoSearchCircleOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
+import { BottomCart } from "../card-popup-three";
 import Search from "../header-seven/search";
 
 const handleClick = () => {

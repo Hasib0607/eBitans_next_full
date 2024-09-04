@@ -8,6 +8,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
@@ -618,6 +619,8 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick, product, store_id, buyNow }: any) => {
+  const { data, error } = useHeaderSettings();
+
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -631,6 +634,12 @@ const AddCart = ({ setQty, qty, onClick, product, store_id, buyNow }: any) => {
   let handleChange = (e: any) => {
     setQty(e.target.value);
   };
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <>
@@ -684,7 +693,7 @@ const AddCart = ({ setQty, qty, onClick, product, store_id, buyNow }: any) => {
                   store_id === 3144 ? "bg-red-500" : "bg-black"
                 } btn-hover text-white text-xs font-bold sm:py-[16px] py-3 sm:px-16 px-2`}
               >
-                {store_id === 1187 ? "অর্ডার করুন" : "Order Now"}
+                {button || "Order Now"}
               </button>
             </div>
           )}

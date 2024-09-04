@@ -8,6 +8,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
@@ -608,6 +609,8 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick }: any) => {
+  const { data, error } = useHeaderSettings();
+
   let incNum = () => {
     setQty((prevCount: any) => prevCount + 1);
   };
@@ -622,6 +625,11 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
     setQty(e.target.value);
   };
 
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
   return (
     <div className="flex gap-3 ">
       <div className=" bg-gray-100 w-max flex px-4 rounded-full">
@@ -662,7 +670,7 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
 
       <div onClick={onClick} className="w-full ">
         <button className="bg-black btn-hover text-white font-thin sm:py-[16px] py-2 px-5 sm:px-16 rounded-full">
-          ADD TO CART
+          {button || "ADD TO CART"}
         </button>
       </div>
     </div>

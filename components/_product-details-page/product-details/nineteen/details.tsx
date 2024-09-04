@@ -21,6 +21,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
@@ -597,6 +598,7 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick }: any) => {
+  const { data, error } = useHeaderSettings();
   let incrementNum = () => {
     setQty((prevCount: any) => prevCount + 1);
   };
@@ -607,6 +609,11 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
       setQty((prevCount: any) => prevCount - 1);
     }
   };
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
 
   return (
     <div className="space-y-5">
@@ -629,7 +636,7 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
       </div>
       <div onClick={onClick} className="w-full ">
         <button className="bg-gray-50 border border-black btn-hover text-[#a39e7b] py-[16px] px-16 w-full">
-          ADD TO CART
+          {button || "ADD TO CART"}
         </button>
       </div>
     </div>

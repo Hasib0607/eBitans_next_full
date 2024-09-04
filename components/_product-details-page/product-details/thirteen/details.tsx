@@ -8,6 +8,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import {
   ChevronDownIcon,
   ChevronUpIcon,
@@ -35,6 +36,8 @@ const Details = ({
   fetchStatus,
   children,
 }: any) => {
+  const { data: x, error } = useHeaderSettings();
+
   const { makeid, design, headerSetting, store_id } = useTheme();
   const dispatch = useDispatch();
 
@@ -440,6 +443,12 @@ const Details = ({
     );
   }
 
+  const { button } = x?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
+
   return (
     <div className="">
       <div className=" grid grid-cols-1 xl:grid-cols-2 md:grid-cols-2 gap-10 bg-white ">
@@ -565,7 +574,7 @@ const Details = ({
                   </div>
                   <div className="h-full px-2 grow flex items-center justify-center hover:bg-gray-100  transition-all duration-200 ease-linear">
                     <p className="uppercase px-1 text-xs sm:text-sm ">
-                      Add To Cart
+                      {button || " Add To Cart"}
                     </p>
                   </div>
                 </button>

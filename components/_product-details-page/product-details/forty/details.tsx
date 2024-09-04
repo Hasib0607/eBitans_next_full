@@ -19,6 +19,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import "swiper/css";
@@ -628,6 +629,7 @@ const AddCart = ({
   buttonFourteen,
   bookingData,
 }: any) => {
+  const { data, error } = useHeaderSettings();
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -642,6 +644,11 @@ const AddCart = ({
     setQty(e.target.value);
   };
 
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
   return (
     <>
       {bookingData?.from_type !== "single" && (
@@ -675,7 +682,7 @@ const AddCart = ({
           </div>
 
           <div onClick={onClick} className="w-max ">
-            <button className={buttonFourteen}>ADD TO BAG</button>
+            <button className={buttonFourteen}>{button || "ADD TO BAG"}</button>
           </div>
         </div>
       )}

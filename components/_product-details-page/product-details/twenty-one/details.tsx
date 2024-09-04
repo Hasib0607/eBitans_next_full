@@ -7,6 +7,7 @@ import { buyNow } from "@/utils/buy-now";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
@@ -628,6 +629,8 @@ const AddCart = ({
   product,
   buyNowBtn,
 }: any) => {
+  const { data, error } = useHeaderSettings();
+
   const { design, store_id } = useTheme();
 
   let incNum = () => {
@@ -660,6 +663,11 @@ const AddCart = ({
     }
   `;
 
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
   return (
     <>
       <style>{styleCss}</style>
@@ -702,7 +710,7 @@ const AddCart = ({
                 type="submit"
                 className=" cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full "
               >
-                + ADD TO CART
+                {button || "+ ADD TO CART"}
               </button>
             )}
           </>
