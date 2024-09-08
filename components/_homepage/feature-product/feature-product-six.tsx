@@ -1,20 +1,30 @@
 "use client";
-import React from "react";
+import Card8 from "@/components/card/card8";
+import SectionHeadingSix from "@/components/section-heading/section-heading-six";
+import GridSliderFour from "@/components/slider/grid-slider/grid-slider-four";
+import ArrowSquare from "@/utils/arrow-square";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 import "./feature-product-six.css";
-import SectionHeadingSix from "@/components/section-heading/section-heading-six";
-import ArrowSquare from "@/utils/arrow-square";
-import GridSliderFour from "@/components/slider/grid-slider/grid-slider-four";
-import Card8 from "@/components/card/card8";
 
 const FeatureProductSix = ({ product, store_id }: any) => {
   const prev = "feature_product_prev";
   const next = "feature_product_next";
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="bg-white relative sm:container px-5 sm:py-10 py-5">
       <div className="py-3">
-        <SectionHeadingSix title={"Trending Products"} subtitle={""} />
+        <SectionHeadingSix
+          title={title}
+          subtitle={""}
+          title_color={title_color}
+        />
         <div
           className="mt-10 group featureCustomHoverSix"
           style={{ border: "2px solid #f5f5f5", padding: "10px" }}

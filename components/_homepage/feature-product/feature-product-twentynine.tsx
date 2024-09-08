@@ -1,20 +1,21 @@
 "use client";
-import React, { useState } from "react";
-import parse from "html-react-parser";
-import useTheme from "@/hooks/use-theme";
-import { useDispatch } from "react-redux";
-import { getPrice } from "@/utils/get-price";
-import { toast } from "react-toastify";
-import httpReq from "@/utils/http/axios/http.service";
-import { addToCartList } from "@/redux/features/product.slice";
-import SectionHeadingTwentyNine from "@/components/section-heading/section-heading-twentynine";
-import Link from "next/link";
-import { productImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import BDT from "@/utils/bdt";
-import { FaCartPlus } from "react-icons/fa";
-import QuikView from "@/components/quick-view";
 import Details from "@/components/_product-details-page/product-details/three/details";
+import QuikView from "@/components/quick-view";
+import SectionHeadingTwentyNine from "@/components/section-heading/section-heading-twentynine";
+import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Rate from "@/utils/rate";
+import parse from "html-react-parser";
+import Link from "next/link";
+import { useState } from "react";
+import { FaCartPlus } from "react-icons/fa";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 
 const FeatureProductTwentyNine = ({
   feature_product,
@@ -24,6 +25,12 @@ const FeatureProductTwentyNine = ({
   const { makeid } = useTheme();
   const dispatch = useDispatch();
   const [view, setView] = useState(false);
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
 
   if (feature_product.length === 0) {
     return null;
@@ -123,7 +130,7 @@ const FeatureProductTwentyNine = ({
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
       <div>
-        <SectionHeadingTwentyNine title={"Top Featured Products"} />
+        <SectionHeadingTwentyNine title={title} title_color={title_color} />
       </div>
       <div className="md:grid lg2:grid-cols-2 md:grid-cols-1 gap-5">
         <div className="hidden md:block w-full">

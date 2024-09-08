@@ -1,9 +1,9 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
+import Card54 from "@/components/card/card54";
 import SectionHeadingThirty from "@/components/section-heading/section-heading-thirty";
 import DefaultSlider from "@/components/slider/default-slider";
-import Card54 from "@/components/card/card54";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductThirty = ({ feature_product, design, store_id }: any) => {
   const prevEl = "new-product-prev";
@@ -33,6 +33,12 @@ const FeatureProductThirty = ({ feature_product, design, store_id }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div data-aos="fade-up" className="">
       <style>{styleCss}</style>
@@ -41,7 +47,7 @@ const FeatureProductThirty = ({ feature_product, design, store_id }: any) => {
         className="gap-4 sm:container px-5 sm:py-10 py-5 relative arrow-hov"
       >
         <div className="">
-          <SectionHeadingThirty title={"Feature Edition"} />
+          <SectionHeadingThirty title={title} title_color={title_color} />
         </div>
 
         <DefaultSlider

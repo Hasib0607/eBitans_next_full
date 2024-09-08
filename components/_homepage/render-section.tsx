@@ -60,8 +60,6 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
     brand,
   } = data;
 
-  console.log(component, "component");
-
   const renderTestimonialAndBlog = () => {
     if (component === "testimonial") {
       return (
@@ -144,6 +142,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
           category={category}
         />
       );
+    // add new design
     case "best_seller_product":
       return (
         <BestSellerProduct
@@ -155,6 +154,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
           banner={banner}
         />
       );
+    //  add new design
     case "feature_product":
       return (
         <FeatureProduct

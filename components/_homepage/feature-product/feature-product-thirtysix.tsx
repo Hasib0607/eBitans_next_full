@@ -1,8 +1,8 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card63 from "@/components/card/card63";
+import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductThirtySix = ({
   feature_product,
@@ -36,6 +36,12 @@ const FeatureProductThirtySix = ({
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div data-aos="fade-up" className="">
       <style>{styleCss}</style>
@@ -44,7 +50,9 @@ const FeatureProductThirtySix = ({
         className="gap-4 sm:container px-5 sm:py-10 py-5 relative arrow-hov"
       >
         <div className="text-center py-10 flex items-center justify-center">
-          <p className="text-xl xl:text-2xl">Feature Products</p>
+          <p style={{ color: title_color }} className="text-xl xl:text-2xl">
+            {title}
+          </p>
         </div>
 
         <DefaultSlider

@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
-import SectionHeadingNineteen from "@/components/section-heading/section-heading-nineteen";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card39 from "@/components/card/card39";
+import SectionHeadingNineteen from "@/components/section-heading/section-heading-nineteen";
+import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductNineteen = ({ feature_product, design, store_id }: any) => {
   const prevEl = "feature-product-prev";
@@ -33,13 +33,20 @@ const FeatureProductNineteen = ({ feature_product, design, store_id }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:container px-5 py-16">
       <style>{styleCss}</style>
       <div className="">
         <SectionHeadingNineteen
-          title={"FEATURE CATEGORIES"}
-          subtitle={"Add products to weekly line up"}
+          title={title}
+          subtitle={""}
+          title_color={title_color}
         />
       </div>
 

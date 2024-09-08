@@ -3,17 +3,25 @@ import Card19 from "@/components/card/card19";
 import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import SliderNine from "@/components/slider/slider-nine";
 import Arrowbetween from "@/utils/arrow-between";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
 const FeatureProductEight = ({ feature_product, design, store_id }: any) => {
   const prev = "daily_best_seller_Prev";
   const next = "daily_best_seller_Next";
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white relative">
       <SectionHeadingSeventeen
-        title={"Daily Best Sells"}
+        title={title}
         subtitle={""}
-        title_color={"#000"}
+        title_color={title_color || "#000"}
       />
       <div className="mb-16 absolute inset-1 flex items-center">
         <Arrowbetween prevEl={prev} nextEl={next}></Arrowbetween>

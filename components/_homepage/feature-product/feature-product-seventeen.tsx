@@ -1,8 +1,8 @@
-import React from "react";
-import image from "./img/17/show_divider_4_69x61.png";
-import "./feature-product-seventeen.css";
-import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import Card34 from "@/components/card/card34";
+import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import "./feature-product-seventeen.css";
+import image from "./img/17/show_divider_4_69x61.png";
 
 const FeatureProductSeventeen = ({
   feature_product,
@@ -12,11 +12,18 @@ const FeatureProductSeventeen = ({
   const styleCss = `
   
  `;
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="pt-10">
       <style>{styleCss}</style>
       <div className="flex justify-center ">
-        <SectionHeadingSeventeen text={"Popular Cupcake Flavors"} />
+        <SectionHeadingSeventeen text={title} title_color={title_color} />
       </div>
       <div className="flex justify-center pt-2">
         <img src={image.src} alt="" />

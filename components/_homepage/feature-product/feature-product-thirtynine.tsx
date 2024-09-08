@@ -1,11 +1,11 @@
 "use client";
-import React, { useState } from "react";
-import { SwiperSlide } from "swiper/react";
-import { Pagination } from "swiper/modules";
-import ScrollTrigger from "react-scroll-trigger";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card67 from "@/components/card/card67";
+import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { Pagination } from "swiper/modules";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductThirtyNine = ({
   feature_product,
@@ -50,6 +50,12 @@ const FeatureProductThirtyNine = ({
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   if (feature_product?.length === 0) {
     return null;
   }
@@ -59,7 +65,12 @@ const FeatureProductThirtyNine = ({
       <style>{styleCss}</style>
       <div className="py-5 relative">
         <div className="text-center pb-12">
-          <p className="font-semibold text-[24px]">Feature Products</p>
+          <p
+            style={{ color: title_color }}
+            className="font-semibold text-[24px]"
+          >
+            {title}
+          </p>
         </div>
 
         <div className="gap-10 flex lg:cursor-pointer absolute bottom-8 left-1/2 -translate-x-1/2 z-[2]">

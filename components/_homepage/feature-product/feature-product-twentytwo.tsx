@@ -1,17 +1,28 @@
-import React from "react";
-import ProductCardFive from "@/components/card/product-card/product-card-five";
-import ProductCardSix from "@/components/card/product-card/product-card-six";
-import ProductCardSeven from "@/components/card/product-card/product-card-seven";
+"use client";
 import ProductCardEight from "@/components/card/product-card/product-card-eight";
+import ProductCardFive from "@/components/card/product-card/product-card-five";
 import ProductCardNine from "@/components/card/product-card/product-card-nine";
+import ProductCardSeven from "@/components/card/product-card/product-card-seven";
+import ProductCardSix from "@/components/card/product-card/product-card-six";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 
 const FeatureProductTwentyTwo = ({ product }: any) => {
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <div className="grid lg:grid-cols-10 grid-cols-1 ">
         <div className="flex justify-center lg:justify-end lg:col-span-2 col-span-4 lg:mt-[120px] mb-10 pr-4">
           <div>
-            <h1 className="text-3xl font-semibold">copy the look</h1>
+            <h1
+              style={{ color: title_color }}
+              className="text-3xl font-semibold"
+            >
+              {title}
+            </h1>
             <div className="flex justify-end">
               <div
                 className="w-[30%] mt-3"

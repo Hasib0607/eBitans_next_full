@@ -1,10 +1,11 @@
 "use client";
 
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import Card45 from "@/components/card/card45";
 import SectionHeadingTwentyOne from "@/components/section-heading/section-heading-twentyone";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { SwiperSlide } from "swiper/react";
-import Card45 from "@/components/card/card45";
 
 const FeatureProductTwentyOne = ({
   feature_product,
@@ -37,11 +38,21 @@ const FeatureProductTwentyOne = ({
   }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full ">
       <style>{styleCss}</style>
       <div className="pb-2">
-        <SectionHeadingTwentyOne title={"FEATURE"} subtitle={"PRODUCTS"} />
+        <SectionHeadingTwentyOne
+          title={title}
+          title_color={title_color}
+          subtitle={"PRODUCTS"}
+        />
       </div>
       <div className="h-[1px] w-full bg-gray-300 mb-5"></div>
       <div className="arrow-hov relative">

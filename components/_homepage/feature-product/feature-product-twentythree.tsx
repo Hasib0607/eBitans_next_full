@@ -1,12 +1,12 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
 import SectionHeadingTwentyThree from "@/components/section-heading/section-heading-twentythree";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import DefaultSlider from "@/components/slider/default-slider";
-import Link from "next/link";
 import { productImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import parse from "html-react-parser";
+import Link from "next/link";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductTwentyThree = ({ feature_product, design }: any) => {
   const prevEl = "feature-product-prev";
@@ -46,13 +46,20 @@ const FeatureProductTwentyThree = ({ feature_product, design }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
       <div className="pb-5 arrow-hov relative">
         <div>
           <SectionHeadingTwentyThree
-            title={"FEATURE PRODUCTS"}
+            title={title}
+            title_color={title_color}
             design={design}
           />
         </div>

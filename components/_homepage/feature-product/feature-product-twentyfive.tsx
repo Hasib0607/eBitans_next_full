@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
 
-import { SwiperSlide } from "swiper/react";
+import Card50 from "@/components/card/card50";
 import SectionHeadingTwentyFive from "@/components/section-heading/section-heading-twenty-five";
 import DefaultSlider from "@/components/slider/default-slider";
-import Card50 from "@/components/card/card50";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductTwentyFive = ({
   feature_product,
@@ -23,10 +23,20 @@ const FeatureProductTwentyFive = ({
       background: ${design?.header_color};
   }
  `;
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
   return (
     <div className="sm:px-10 px-5 pb-10">
       <style>{styleCss}</style>
-      <SectionHeadingTwentyFive design={design} title={"Running Product"} />
+      <SectionHeadingTwentyFive
+        design={design}
+        title={title}
+        title_color={title_color}
+      />
 
       <DefaultSlider
         prevEl={prevEl}

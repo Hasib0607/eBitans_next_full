@@ -1,14 +1,20 @@
 "use client";
-import { SwiperSlide } from "swiper/react";
-import { Swiper } from "swiper/react";
+import { Swiper, SwiperSlide } from "swiper/react";
 // Import Swiper styles
+import Details from "@/components/_product-details-page/product-details/three/details";
+import QuikView from "@/components/quick-view";
+import SectionHeadingNine from "@/components/section-heading/section-heading-nine";
+import { productImg } from "@/site-settings/siteUrl";
+import { getPrice } from "@/utils/get-price";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Taka from "@/utils/taka";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useState } from "react";
 import "swiper/css";
+import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
-import "swiper/css/effect-fade";
-import useTheme from "@/hooks/use-theme";
-import SectionHeadingNine from "@/components/section-heading/section-heading-nine";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import {
   A11y,
   Autoplay,
@@ -16,13 +22,6 @@ import {
   EffectFade,
   Navigation,
 } from "swiper/modules";
-import { getPrice } from "@/utils/get-price";
-import Link from "next/link";
-import { productImg } from "@/site-settings/siteUrl";
-import Taka from "@/utils/taka";
-import QuikView from "@/components/quick-view";
-import Details from "@/components/_product-details-page/product-details/three/details";
-import { useState } from "react";
 
 const FeatureProductNine = ({ feature_product, design }: any) => {
   const prevEl: any = "feature-product-prev";
@@ -40,11 +39,21 @@ const FeatureProductNine = ({ feature_product, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">
       <div className="relative group">
         <style>{styleCss}</style>
-        <SectionHeadingNine title={"Feature Products"} subtitle={""} />
+        <SectionHeadingNine
+          title={title}
+          subtitle={""}
+          title_color={title_color}
+        />
         <div className="relative">
           <div className=" gap-2 hidden group-hover:block lg:cursor-pointer ">
             <div

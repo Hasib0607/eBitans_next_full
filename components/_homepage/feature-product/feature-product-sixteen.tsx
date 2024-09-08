@@ -1,14 +1,14 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { SwiperSlide } from "swiper/react";
 
-import { BsPlay } from "react-icons/bs";
+import Card25 from "@/components/card/card25";
 import SectionHeadingSixteen from "@/components/section-heading/section-heading-sixteen";
 import DefaultSlider from "@/components/slider/default-slider";
-import Card25 from "@/components/card/card25";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { BsPlay } from "react-icons/bs";
 
 const FeatureProductSixteen = ({ feature_product, design, store_id }: any) => {
   const prevEl = "feature_product-sixteen-prev";
@@ -30,10 +30,20 @@ const FeatureProductSixteen = ({ feature_product, design, store_id }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 relative arrow-hov">
       <style>{styleCss}</style>
-      <SectionHeadingSixteen title={"Trending Products"} subtitle={""} />
+      <SectionHeadingSixteen
+        title={title}
+        subtitle={""}
+        title_color={title_color}
+      />
       <div className="relative z-[2] ">
         <div className=" gap-2 lg:cursor-pointer arrow lg:opacity-0  duration-500">
           <div

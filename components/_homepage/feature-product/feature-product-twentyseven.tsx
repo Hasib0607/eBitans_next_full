@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import Card52 from "@/components/card/card52";
 import SectionHeadingTwentySeven from "@/components/section-heading/section-heading-twenty-seven";
 import DefaultSlider from "@/components/slider/default-slider";
-import Card52 from "@/components/card/card52";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductTwentySeven = ({
   feature_product,
@@ -39,11 +39,17 @@ const FeatureProductTwentySeven = ({
   }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
       <div className="pb-2 flex justify-between items-center">
-        <SectionHeadingTwentySeven title={"Chosen by our experts"} />
+        <SectionHeadingTwentySeven title={title} title_color={title_color} />
         <div className=" gap-2 flex lg:cursor-pointer">
           <div
             className={`${prevEl}   text-gray-600 h-10 w-10 flex justify-center items-center bg-white rounded-full left-4 top-[50%] -translate-y-1/2`}

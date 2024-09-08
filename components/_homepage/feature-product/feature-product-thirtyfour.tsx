@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
 
-import { SwiperSlide } from "swiper/react";
+import Card60 from "@/components/card/card60";
 import SectionHeadingThirtyFour from "@/components/section-heading/section-heading-thirtyfour";
 import DefaultSlider from "@/components/slider/default-slider";
-import Card60 from "@/components/card/card60";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductThirtyFour = ({
   feature_product,
@@ -41,13 +41,19 @@ const FeatureProductThirtyFour = ({
   const prevEl = "feature-product-prev";
   const nextEl = "feature-product-next";
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="bg-[#F9F8FF]">
       <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
         <div className="relative arrow-hov">
           <div className="text-center mb-5">
-            <SectionHeadingThirtyFour title={"Feature Product"} />
+            <SectionHeadingThirtyFour title={title} title_color={title_color} />
           </div>
 
           <DefaultSlider

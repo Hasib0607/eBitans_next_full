@@ -5,6 +5,7 @@ import SectionHeadingTwelve from "@/components/section-heading/section-heading-t
 import SliderFive from "@/components/slider/slider-five";
 import { productImg } from "@/site-settings/siteUrl";
 import { getPrice } from "@/utils/get-price";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Taka from "@/utils/taka";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -30,10 +31,16 @@ const FeatureProductTwelve = ({ feature_product, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white relative group">
       <style>{styleCss}</style>
-      <SectionHeadingTwelve title={"Featured For You"} title_color="#000" />
+      <SectionHeadingTwelve title={title} title_color={title_color} />
       <div className="relative">
         <div className=" gap-2 hidden group-hover:block lg:cursor-pointer ">
           <div

@@ -1,14 +1,20 @@
 "use client";
 // created by iazadur
-import React from "react";
-import { SwiperSlide } from "swiper/react";
+import Card18 from "@/components/card/card18";
 import SectionHeadingThirteen from "@/components/section-heading/section-heading-thirteen";
 import DefaultSlider from "@/components/slider/default-slider";
-import Card18 from "@/components/card/card18";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { SwiperSlide } from "swiper/react";
 
 const FeatureProductThirteen = ({ feature_product, store_id }: any) => {
   const prev = "feature_productThirteen_prev";
   const next = "feature_productThirteen_next";
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
 
   return (
     <div className="bg-white">
@@ -16,7 +22,8 @@ const FeatureProductThirteen = ({ feature_product, store_id }: any) => {
         <SectionHeadingThirteen
           prev={prev}
           next={next}
-          title={"Feature Products"}
+          title={title}
+          title_color={title_color}
         />
         <DefaultSlider
           prevEl={prev}

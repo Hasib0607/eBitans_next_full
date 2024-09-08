@@ -1,11 +1,11 @@
 "use client";
-import React from "react";
 import { SwiperSlide } from "swiper/react";
 
 import hot from "@/assets/bg-image/hot-deal-logo.gif";
-import { IoIosArrowForward } from "react-icons/io";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card58 from "@/components/card/card58";
+import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { IoIosArrowForward } from "react-icons/io";
 
 const FeatureProductTwentyEight = ({
   feature_product,
@@ -39,14 +39,20 @@ const FeatureProductTwentyEight = ({
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featuredProduct = cDesign?.feature_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   return (
     <div className="sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="sm:container py-5 px-5 relative arrow-hov bg-[#FFEFCF]">
         <div className="mb-5 flex justify-between items-center">
           <img src={hot.src} alt="" className="h-10" />
-          <p className="text-xl text-orange-600">
-            সকল হট ডিল
+          <p style={{ color: title_color }} className="text-xl text-orange-600">
+            {title}
             <IoIosArrowForward className="inline" />
           </p>
         </div>
