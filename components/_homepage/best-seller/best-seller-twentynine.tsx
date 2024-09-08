@@ -1,6 +1,7 @@
 import Card53 from "@/components/card/card53";
 import SectionHeadingTwentyNine from "@/components/section-heading/section-heading-twentynine";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { SwiperSlide } from "swiper/react";
 
@@ -41,12 +42,18 @@ const BestSellerTwentyNine = ({ best_sell_product, design, store_id }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="relative arrow-hov">
         <div className=" pb-2">
-          <SectionHeadingTwentyNine title={"Recommended For You"} />
+          <SectionHeadingTwentyNine title={title} title_color={title_color} />
         </div>
         <div className="">
           <div className="arrow gap-2 lg:cursor-pointer opacity-0">

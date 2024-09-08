@@ -4,6 +4,7 @@ import { useState } from "react";
 
 import Card67 from "@/components/card/card67";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
 const BestSellerThirtyNine = ({ best_sell_product, design, store_id }: any) => {
@@ -12,16 +13,22 @@ const BestSellerThirtyNine = ({ best_sell_product, design, store_id }: any) => {
   const prevEl = "best-product-prev-thirtynine";
   const nextEl = "best-product-next-thirtynine";
 
-  const styleCss = `
-    
- `;
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
   return (
     <div className="pl-5 sm:py-10 py-5">
-      <style>{styleCss}</style>
       <div className="py-5 relative">
         <div className="text-center pb-10">
-          <p className="font-semibold text-[24px]">Best Selling Products</p>
+          <p
+            style={{ color: title_color }}
+            className="font-semibold text-[24px]"
+          >
+            {title}
+          </p>
         </div>
 
         <div className="gap-10 flex lg:cursor-pointer absolute bottom-8 left-1/2 -translate-x-1/2 z-[2]">

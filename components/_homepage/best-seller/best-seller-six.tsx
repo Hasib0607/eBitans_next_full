@@ -1,22 +1,28 @@
 "use client";
-import React, { useState } from "react";
-import { SwiperSlide } from "swiper/react";
-import "./best-seller-six.css";
-import { getPrice } from "@/utils/get-price";
-import axios from "axios";
-import { v4 as uuidv4 } from "uuid";
-import SectionHeadingSix from "@/components/section-heading/section-heading-six";
-import { productImg } from "@/site-settings/siteUrl";
-import Taka from "@/utils/taka";
-import ArrowSquare from "@/utils/arrow-square";
-import GridSliderFive from "@/components/slider/grid-slider/grid-slider-five";
 import Card7 from "@/components/card/card7";
-import { toast } from "react-toastify";
-import httpReq from "@/utils/http/axios/http.service";
-import { addToCartList } from "@/redux/features/product.slice";
-import { useDispatch } from "react-redux";
+import SectionHeadingSix from "@/components/section-heading/section-heading-six";
+import GridSliderFive from "@/components/slider/grid-slider/grid-slider-five";
 import useTheme from "@/hooks/use-theme";
+import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
+import ArrowSquare from "@/utils/arrow-square";
+import { getPrice } from "@/utils/get-price";
+import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Taka from "@/utils/taka";
+import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
+import { SwiperSlide } from "swiper/react";
+import { v4 as uuidv4 } from "uuid";
+import "./best-seller-six.css";
 const BestSellerSix = ({ product, design, store_id }: any) => {
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   const { makeid } = useTheme();
   const [open, setOpen] = useState(false);
   const dispatch = useDispatch();
@@ -104,7 +110,11 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">
       <div className="">
-        <SectionHeadingSix title={"Best Sellers "} subtitle={""} />
+        <SectionHeadingSix
+          title={title || "Best Sellers "}
+          subtitle={""}
+          title_color={title_color || "#000"}
+        />
         <div
           className="grid grid-cols-1 mt-10 lg:grid-cols-3 md:grid-cols-2 py-3 group"
           style={{ border: "2px solid #f5f5f5", padding: "10px" }}

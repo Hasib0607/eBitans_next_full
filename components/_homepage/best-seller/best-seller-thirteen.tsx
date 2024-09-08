@@ -3,16 +3,28 @@
 import Card20 from "@/components/card/card20";
 import SectionHeadingThirteen from "@/components/section-heading/section-heading-thirteen";
 import GridSliderThirteen from "@/components/slider/grid-slider/grid-slider-thirteen";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
 const BestSellerThirteen = ({ best_sell_product, store_id }: any) => {
   const prev = "bestseller_productThirteen_prev";
   const next = "bestseller_productThirteen_next";
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="bg-white ">
       <div className="sm:container px-5 sm:py-10 py-5">
-        <SectionHeadingThirteen prev={prev} next={next} title={"Best Seller"} />
+        <SectionHeadingThirteen
+          prev={prev}
+          next={next}
+          title={title || "Best Seller"}
+          title_color={title_color || "#000"}
+        />
         <GridSliderThirteen
           prevEl={prev}
           nextEl={next}

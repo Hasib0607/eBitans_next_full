@@ -37,6 +37,7 @@ const BestSellerProduct = ({
   headerSetting,
   banner,
 }: any) => {
+  console.log(theme, "theme best sell");
   return (
     <>
       {theme === "four" && (

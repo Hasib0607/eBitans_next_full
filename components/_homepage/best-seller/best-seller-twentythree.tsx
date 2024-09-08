@@ -12,6 +12,7 @@ import {
 // Import Swiper styles
 import Card47 from "@/components/card/card47";
 import SectionHeadingTwentyThree from "@/components/section-heading/section-heading-twentythree";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import "swiper/css";
 import "swiper/css/effect-fade";
@@ -66,12 +67,18 @@ const BestSellerTwentyThree = ({
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
       <div className="pb-5 md:arrow-hov relative">
         <div>
-          <SectionHeadingTwentyThree title={"TRENDING NOW"} />
+          <SectionHeadingTwentyThree title={title} title_color={title_color} />
         </div>
         <div className="">
           <div className="md:arrow gap-2 lg:cursor-pointer md:opacity-0">

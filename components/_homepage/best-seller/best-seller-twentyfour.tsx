@@ -1,5 +1,6 @@
 import Card49 from "@/components/card/card49";
 import SectionHeadingTwentyFour from "@/components/section-heading/section-heading-twenty-four";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
 
 const BestSellerTwentyFour = ({ best_sell_product, design, store_id }: any) => {
@@ -19,15 +20,20 @@ const BestSellerTwentyFour = ({ best_sell_product, design, store_id }: any) => {
   }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
       <div>
         <SectionHeadingTwentyFour
-          title={"TOP PICK"}
-          subtitle={
-            "In fact, the stress factor in the eros is the sad element. The course of the family, I want to decorate cartoons, sometimes there is no pain."
-          }
+          title={title}
+          subtitle={""}
+          title_color={title_color}
         />
       </div>
       <div className="grid grid-cols-3 gap-5">

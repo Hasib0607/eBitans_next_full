@@ -1,9 +1,9 @@
 "use client";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card58 from "@/components/card/card58";
+import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { SwiperSlide } from "swiper/react";
 
 const BestSellerTwentyEight = ({
   best_sell_product,
@@ -46,13 +46,22 @@ const BestSellerTwentyEight = ({
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="relative arrow-hov">
         <div className="mb-3 pb-2">
-          <h3 className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine">
-            সেরা বিক্রি পণ্য
+          <h3
+            style={{ color: title_color }}
+            className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine"
+          >
+            {title || "সেরা বিক্রি পণ্য"}
           </h3>
         </div>
         <div className="absolute h-[1px] bg-gray-300 w-full top-10"></div>

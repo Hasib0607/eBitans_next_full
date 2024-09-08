@@ -6,6 +6,7 @@ import Card40 from "@/components/card/card40";
 import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import DefaultSlider from "@/components/slider/default-slider";
 import Arrowbetween from "@/utils/arrow-between";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -14,12 +15,18 @@ const BestSellerEight = ({ product, store_id }: any) => {
   const prev = "best_seller_Prev";
   const next = "best_seller_Next";
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="bg-white ">
       <div className="sm:container px-5 sm:py-10 py-5 relative">
         <SectionHeadingSeventeen
-          title_color={""}
-          title={"Best Seller Products"}
+          title_color={title_color || "#000"}
+          title={title || "Best Seller Products"}
           subtitle={""}
         />
         <div className="demo">

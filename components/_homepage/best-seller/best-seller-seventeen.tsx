@@ -5,6 +5,7 @@ import Card31 from "@/components/card/card31";
 import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import DefaultSlider from "@/components/slider/default-slider";
 import Arrowbetween from "@/utils/arrow-between";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import {
   ParallaxBanner,
   ParallaxBannerLayer,
@@ -19,6 +20,12 @@ const BestSellerSeventeen = ({ best_sell_product, design, store_id }: any) => {
 
   const prev = "best_deals_seller_Prev";
   const next = "best_deals_seller_Next";
+
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
   return (
     <div className="relative z-0 h-full overflow-hidden">
@@ -39,7 +46,10 @@ const BestSellerSeventeen = ({ best_sell_product, design, store_id }: any) => {
       </div>
       <div className="lg:absolute top-1/2 lg:-translate-y-1/2 left-1/2 lg:-translate-x-1/2 z-[1] sm:container px-5 xl:px-80 mx-auto">
         <div className="flex justify-center lg:pt-0 pt-10">
-          <SectionHeadingSeventeen text={"Best Deals"} />
+          <SectionHeadingSeventeen
+            text={title || "Best Deals"}
+            title_color={title_color || "#000"}
+          />
         </div>
         <div className="flex justify-center pt-2">
           <img src={image.src} alt="" />

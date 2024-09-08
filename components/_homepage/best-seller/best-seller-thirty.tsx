@@ -3,6 +3,7 @@
 import Card54 from "@/components/card/card54";
 import SectionHeadingThirty from "@/components/section-heading/section-heading-thirty";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
 const BestSellerThirty = ({ best_sell_product, design, store_id }: any) => {
@@ -42,12 +43,21 @@ const BestSellerThirty = ({ best_sell_product, design, store_id }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="py-5 relative">
         <div className="pb-2">
-          <SectionHeadingThirty title={"Our Special Editions"} />
+          <SectionHeadingThirty
+            title={title || "Our Special Editions"}
+            title_color={title_color || "#000"}
+          />
         </div>
 
         <DefaultSlider

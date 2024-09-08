@@ -1,6 +1,6 @@
 interface Props {
   title: string;
-  design: any;
+  design?: any;
   title_color?: string;
 }
 

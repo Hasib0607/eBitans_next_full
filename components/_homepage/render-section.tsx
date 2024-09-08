@@ -60,6 +60,8 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
     brand,
   } = data;
 
+  console.log(component, "component");
+
   const renderTestimonialAndBlog = () => {
     if (component === "testimonial") {
       return (
@@ -131,6 +133,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
           headerSetting={headersetting}
         />
       );
+    // add new design
     case "new_arrival":
       return (
         <NewArrival

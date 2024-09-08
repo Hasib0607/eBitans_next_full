@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
-import SectionHeadingNine from "@/components/section-heading/section-heading-nine";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
-import GridSliderThirteen from "@/components/slider/grid-slider/grid-slider-thirteen";
 import Card22 from "@/components/card/card22";
+import SectionHeadingNine from "@/components/section-heading/section-heading-nine";
+import GridSliderThirteen from "@/components/slider/grid-slider/grid-slider-thirteen";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { SwiperSlide } from "swiper/react";
 
 const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
   const prev = "best_seller_nine_prev";
@@ -34,13 +34,20 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="space-y-10">
         <SectionHeadingNine
-          title={"Best Sellers"}
-          subtitle={"Add our best sellers to your weekly lineup"}
+          title={title || "Best Sellers"}
+          subtitle={""}
+          title_color={title_color || "#000"}
         />
         <div className="arrow-hov relative">
           <div className=" gap-2 lg:cursor-pointer hidden arrow ">

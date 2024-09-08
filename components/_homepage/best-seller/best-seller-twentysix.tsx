@@ -1,5 +1,6 @@
 import Card56 from "@/components/card/card56";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { SwiperSlide } from "swiper/react";
 
@@ -32,11 +33,17 @@ const BestSellerTwentySix = ({ best_sell_product, design, store_id }: any) => {
   }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
       <div className="flex justify-between items-center pb-2 text-2xl">
-        <p>BEST SELLER PRODUCTS</p>
+        <p style={{ color: title_color }}>{title}</p>
         <div className="">
           <div className="lg:cursor-pointer flex items-center gap-2">
             <div

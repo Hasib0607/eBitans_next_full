@@ -1,5 +1,6 @@
 import Card60 from "@/components/card/card60";
 import SectionHeadingThirtyFour from "@/components/section-heading/section-heading-thirtyfour";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 
 const BestSellerThirtyFour = ({ best_sell_product, design, store_id }: any) => {
   const styleCss = `
@@ -30,13 +31,22 @@ const BestSellerThirtyFour = ({ best_sell_product, design, store_id }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="bg-[#F9F8FF]">
       <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
         <div className="relative arrow-hov">
           <div className="text-center mb-5">
-            <SectionHeadingThirtyFour title={"Best Sell Product"} />
+            <SectionHeadingThirtyFour
+              title={title || "Best Sell Product"}
+              title_color={title_color || "#000"}
+            />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 sm:gap-5">

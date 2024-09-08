@@ -1,6 +1,7 @@
 import Card59 from "@/components/card/card59";
 import SectionHeadingThirtyThree from "@/components/section-heading/section-heading-thirtythree";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
 import { SwiperSlide } from "swiper/react";
 
@@ -45,12 +46,21 @@ const BestSellerThirtyThree = ({
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="py-5 relative">
         <div className="flex justify-between items-center mb-3">
-          <SectionHeadingThirtyThree title={"Best Sell Product"} />
+          <SectionHeadingThirtyThree
+            title={title || "Best Sell Product"}
+            title_color={title_color || "#000"}
+          />
           <Link href="/shop">
             <p className="see py-1.5 px-2 font-bold rounded-md">See More</p>
           </Link>
