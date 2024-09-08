@@ -1,12 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import { useState } from "react";
 import "swiper/css";
 import "swiper/css/pagination";
 
-import "swiper/css/navigation";
-import { IoIosArrowRoundForward } from "react-icons/io";
-import Link from "next/link";
 import { catImg } from "@/site-settings/siteUrl";
+import Link from "next/link";
+import { IoIosArrowRoundForward } from "react-icons/io";
+import "swiper/css/navigation";
 import "./featuredcat-thirtynine";
 
 const FeaturedThirtyNine = ({ category, design }: any) => {

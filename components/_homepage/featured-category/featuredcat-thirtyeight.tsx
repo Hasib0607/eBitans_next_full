@@ -18,13 +18,11 @@ const FeaturedThirtyEight = ({ category, design }: any) => {
   }
  
     `;
-
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
-  const featureCategory = cDesign?.feature_category[0] || {};
-
-  const { title = "Default Title", title_color = "#000" } = featureCategory;
+  const featureCategory = cDesign?.feature_category?.[0] || {};
+  const { title, title_color } = featureCategory;
 
   return (
     <div className="bg-[#F2F4F8]">

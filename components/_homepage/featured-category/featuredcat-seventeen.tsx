@@ -4,6 +4,7 @@ import img1 from "@/components/_homepage/featured-category/seventeen-bg-img/icon
 import image from "@/components/_homepage/featured-category/seventeen-bg-img/show_divider_1_104x62.webp";
 import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import { catImg, iconImg } from "@/site-settings/siteUrl";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -14,6 +15,11 @@ import {
 import "./featuredcat-seventeen.css";
 
 const FeaturedSeventeen = ({ category }: any) => {
+  const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const featureCategory = cDesign?.feature_category?.[0] || {};
+  const { title, title_color } = featureCategory;
   const cat = category.filter((item: any) => item?.cat !== null);
 
   return (
@@ -63,7 +69,7 @@ const FeaturedSeventeen = ({ category }: any) => {
 
       <div className="styleSeventeenbackgroundImage">
         <div className="flex justify-center pt-10">
-          <SectionHeadingSeventeen text={"Most popular creations"} />
+          <SectionHeadingSeventeen text={title} title_color={title_color} />
         </div>
         <div className="flex justify-center pt-2">
           <Image src={image.src} fill alt="" />

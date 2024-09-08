@@ -7,9 +7,8 @@ const FeaturedForty = ({ category }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
-  const featureCategory = cDesign?.feature_category[0] || {};
-  const { button = "Default Button" } = featureCategory;
-
+  const featureCategory = cDesign?.feature_category?.[0] || {};
+  const { button } = featureCategory;
   return (
     <div className="mb-10">
       {category?.slice(0, 6).map((data: any) => (

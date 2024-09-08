@@ -7,13 +7,9 @@ import Link from "next/link";
 const FeaturedTwenty = ({ category }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-
-  // Safely access cDesign
   const cDesign = data?.data?.custom_design || {};
-  const featureCategory = cDesign.feature_category?.[0] || {};
-
-  // Destructure with default values
-  const { title = "Default Title", title_color = "#000000" } = featureCategory;
+  const featureCategory = cDesign?.feature_category?.[0] || {};
+  const { title, title_color } = featureCategory;
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5 relative group">

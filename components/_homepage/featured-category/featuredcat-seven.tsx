@@ -17,9 +17,8 @@ const FeaturedSeven = ({ category }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
-  const featureCategory = cDesign?.feature_category[0] || {};
-
-  const { title = "Default Title", title_color = "#000" } = featureCategory;
+  const featureCategory = cDesign?.feature_category?.[0] || {};
+  const { title, title_color } = featureCategory;
 
   return (
     <div className="container px-5 bg-white relative py-5">
