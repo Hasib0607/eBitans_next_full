@@ -137,8 +137,7 @@ const heroComponents: any = {
 };
 
 const Hero = ({ theme, slider, design }: any) => {
-  const SelectedHeroComponent = heroComponents["thirtyfive"];
-  // const SelectedHeroComponent = heroComponents[theme];
+  const SelectedHeroComponent = heroComponents[theme];
   return <SelectedHeroComponent slider={slider} design={design} />;
 };
 export default Hero;

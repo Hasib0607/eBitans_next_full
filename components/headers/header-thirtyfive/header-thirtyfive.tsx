@@ -1,6 +1,7 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import useAnnouncementScroll from "@/utils/use-annoucement-height";
 import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -37,10 +38,6 @@ const HeaderThirtyFive = ({ headerSetting }: any) => {
     }
   };
 
-  //   const cartList = useSelector((state) => state.cart.cartList);
-
-  // CSS START FROM HERE
-
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&display=swap');
  
@@ -75,10 +72,13 @@ const HeaderThirtyFive = ({ headerSetting }: any) => {
         font-family: 'Orbitron', sans-serif;
     }
      `;
+
+  const { announcementHeight, scrollPassed } = useAnnouncementScroll();
   return (
     <div>
       <div
-        className={`bg-white fixed top-0 z-[5] w-full border-b shadow-xl lg:border-b-2 border-black h-20 flex items-center`}
+        style={{ top: scrollPassed ? 0 : announcementHeight }}
+        className={`bg-white fixed  z-[5] w-full border-b shadow-xl lg:border-b-2 border-black h-20 flex items-center`}
       >
         <style>{styleCss}</style>
         <div className="w-full flex flex-row justify-between items-center nav-menu sm:container px-5 lg:py-0 py-1">
