@@ -18,10 +18,6 @@ import { v4 as uuidv4 } from "uuid";
 import "./best-seller-six.css";
 const BestSellerSix = ({ product, design, store_id }: any) => {
   const { data, error } = useHeaderSettings();
-  if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
-  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
-  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
   const { makeid } = useTheme();
   const [open, setOpen] = useState(false);
@@ -106,6 +102,11 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
       filterOfferProduct(item);
     }
   };
+
+  if (error) return <p>error from header-settings</p>;
+  const cDesign = data?.data?.custom_design || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">

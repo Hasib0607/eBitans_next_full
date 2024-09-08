@@ -9,6 +9,7 @@ import { Tab } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 import "./five.css";
 
@@ -88,6 +89,11 @@ const Thirteen = ({ data, updatedData }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       <Related product={relatedProducts} />
     </div>
   );

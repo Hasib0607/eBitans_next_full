@@ -1,18 +1,18 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { SwiperSlide } from "swiper/react";
-import httpReq from "@/utils/http/axios/http.service";
-import Details from "./details";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingEighteen from "@/components/section-heading/section-heading-eighteen";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card44 from "@/components/card/card44";
+import SectionHeadingEighteen from "@/components/section-heading/section-heading-eighteen";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import { useState } from "react";
+import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
+import Details from "./details";
 
 const Twenty = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -44,6 +44,11 @@ const Twenty = ({ data, updatedData }: any) => {
         vrcolor={vrcolor}
         data={data}
       />
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       <Related product={relatedProducts} />
     </div>
   );

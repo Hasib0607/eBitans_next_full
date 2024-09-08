@@ -1,18 +1,16 @@
 "use client";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import React, { useEffect, useState } from "react";
+import Card39 from "@/components/card/card39";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { Tab } from "@headlessui/react";
+import { useQuery } from "@tanstack/react-query";
 import { IoIosArrowForward } from "react-icons/io";
 import { SwiperSlide } from "swiper/react";
-import Details from "./details";
-import { Tab } from "@headlessui/react";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
-import Card39 from "@/components/card/card39";
-import { useQuery } from "@tanstack/react-query";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
+import Details from "./details";
 
 const Nineteen = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -108,6 +106,11 @@ const Nineteen = ({ data, updatedData }: any) => {
           </Tab.Group>
         </div>
         {/* ************************ tab component end ***************************** */}
+
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
+
         <Related product={relatedProducts} />
       </div>
     </div>

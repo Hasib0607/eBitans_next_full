@@ -18,6 +18,7 @@ import { useEffect, useState } from "react";
 import { RiArrowRightSLine } from "react-icons/ri";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 
 const TwentyThree = ({ data, updatedData }: any) => {
@@ -146,6 +147,11 @@ const TwentyThree = ({ data, updatedData }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       {store_id !== 1850 && <Related product={relatedProducts} />}
       {store_id === 1850 && (
         <div className="w-full block lg:hidden py-3">

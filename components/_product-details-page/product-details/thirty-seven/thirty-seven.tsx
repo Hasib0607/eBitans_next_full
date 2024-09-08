@@ -7,6 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import Details from "./details";
+import VideoPlayer from "../video-player";
 
 const ThirtySeven = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -85,6 +86,11 @@ const ThirtySeven = ({ data, updatedData }: any) => {
           </Tab.Group>
         </div>
         {/* ************************ tab component end ***************************** */}
+
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
+
         <Related product={relatedProducts} />
       </div>
     </div>

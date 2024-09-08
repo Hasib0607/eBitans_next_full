@@ -13,6 +13,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import moment from "moment";
 import { useState } from "react";
 import { SwiperSlide } from "swiper/react";
+import VideoPlayer from "../video-player";
 import { getProductDetails, getRelatedProducts, getReviews } from "./apis";
 import Details from "./details";
 
@@ -120,6 +121,11 @@ const Seven = ({ data, updatedData }: Props) => {
           desc={reviews?.error ? reviews.error : reviews}
         />
       </Details>
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       {relatedProducts && <Related product={relatedProducts} />}
     </div>
   );

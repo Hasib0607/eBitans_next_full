@@ -1,19 +1,17 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { SwiperSlide } from "swiper/react";
-import { Tab } from "@headlessui/react";
-import { IoIosArrowForward } from "react-icons/io";
-import "./style.css";
-import httpReq from "@/utils/http/axios/http.service";
-import Details from "./details";
-import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
-import Rate from "@/utils/rate";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card31 from "@/components/card/card31";
-import useTheme from "@/hooks/use-theme";
-import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
+import DefaultSlider from "@/components/slider/default-slider";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
+import { Tab } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
+import { IoIosArrowForward } from "react-icons/io";
+import { SwiperSlide } from "swiper/react";
+import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
+import Details from "./details";
+import "./style.css";
 
 const Seventeen = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -115,6 +113,11 @@ const Seventeen = ({ data, updatedData }: any) => {
           </Tab.Group>
         </div>
       </div>
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       <Related product={relatedProducts} />
     </>
   );

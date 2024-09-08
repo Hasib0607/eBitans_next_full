@@ -1,21 +1,19 @@
 "use client";
-import React, { useEffect, useState } from "react";
-import { SwiperSlide } from "swiper/react";
-import "./five.css";
-import Details from "./details";
-import moment from "moment";
-import { AiOutlineHome } from "react-icons/ai";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import Link from "next/link";
-import { profileImg } from "@/site-settings/siteUrl";
-import Rate from "@/utils/rate";
-import SectionHeadingFive from "@/components/section-heading/section-heading-five";
-import Arrow from "@/utils/arrow";
-import DefaultSlider from "@/components/slider/default-slider";
 import Card60 from "@/components/card/card60";
+import SectionHeadingFive from "@/components/section-heading/section-heading-five";
+import DefaultSlider from "@/components/slider/default-slider";
+import { profileImg } from "@/site-settings/siteUrl";
+import Arrow from "@/utils/arrow";
+import Rate from "@/utils/rate";
 import { useQuery } from "@tanstack/react-query";
+import moment from "moment";
+import Link from "next/link";
+import { AiOutlineHome } from "react-icons/ai";
+import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
+import Details from "./details";
+import "./five.css";
 
 const ThirtyFour = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -107,6 +105,11 @@ const ThirtyFour = ({ data, updatedData }: any) => {
           </div>
         </div>
         {/* ************************ tab component end ***************************** */}
+
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
+
         <Related product={relatedProducts} />
       </div>
     </div>

@@ -6,6 +6,7 @@ import { Tab } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 
 const ThirtyNine = ({ data, updatedData }: any) => {
@@ -84,6 +85,10 @@ const ThirtyNine = ({ data, updatedData }: any) => {
           </Tab.Group>
         </div>
         {/* ************************ tab component end ***************************** */}
+
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
 
         <Related product={relatedProducts} />
       </div>

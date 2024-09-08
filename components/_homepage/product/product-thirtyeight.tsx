@@ -10,10 +10,6 @@ const ProductThirtyEight = ({ category, design, store_id }: any) => {
   const [id, setId] = useState(0);
 
   const { data, error } = useHeaderSettings();
-  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
-  if (error) {
-    return <p> error from headersettings</p>;
-  }
 
   useEffect(() => {
     async function handleCategory() {
@@ -44,6 +40,11 @@ const ProductThirtyEight = ({ category, design, store_id }: any) => {
         border-bottom: 2px solid ${design?.header_color};
     }
  `;
+
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
 
   return (
     <div className="bg-[#F2F4F8]">

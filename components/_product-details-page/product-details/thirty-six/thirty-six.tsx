@@ -11,6 +11,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 
 const ThirtySix = ({ data, updatedData }: any) => {
@@ -33,6 +34,8 @@ const ThirtySix = ({ data, updatedData }: any) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
+
+  console.log(reviews, "reviews");
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <Details
@@ -43,8 +46,13 @@ const ThirtySix = ({ data, updatedData }: any) => {
         variant={variant}
       >
         <div className="h-[1px] bg-gray-300 w-full "></div>
-        <According text={"Customer Reviews"} reviews={reviews} />
+        {reviews && <According text={"Customer Reviews"} reviews={reviews} />}
       </Details>
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       <Related product={relatedProducts} />
     </div>
   );

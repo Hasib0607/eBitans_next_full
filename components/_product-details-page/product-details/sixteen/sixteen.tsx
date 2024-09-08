@@ -11,6 +11,7 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import Details from "./details";
 import "./five.css";
+import VideoPlayer from "../video-player";
 
 const Sixteen = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -88,6 +89,10 @@ const Sixteen = ({ data, updatedData }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
 
       <Related product={relatedProducts} />
     </div>

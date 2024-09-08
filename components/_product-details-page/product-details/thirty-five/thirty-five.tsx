@@ -1,15 +1,16 @@
 "use client";
-import React, { useState } from "react";
-import Details from "./details";
-import { motion, AnimatePresence } from "framer-motion";
-import moment from "moment";
-import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import Card61 from "@/components/card/card61";
+import SectionHeadingThirtyFive from "@/components/section-heading/section-heading-thirty-five";
 import { profileImg } from "@/site-settings/siteUrl";
 import Rate from "@/utils/rate";
-import SectionHeadingThirtyFive from "@/components/section-heading/section-heading-thirty-five";
-import Card61 from "@/components/card/card61";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
+import { AnimatePresence, motion } from "framer-motion";
+import moment from "moment";
+import { useState } from "react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
+import Details from "./details";
 
 const ThirtyFive = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -63,6 +64,11 @@ const ThirtyFive = ({ data, updatedData }: any) => {
         />
         <Accordion text="Customer Reviews" desc={reviews} />
       </Details>
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       <Related products={relatedProducts} />
     </div>
   );

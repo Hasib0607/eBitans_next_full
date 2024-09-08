@@ -12,6 +12,7 @@ import Link from "next/link";
 import { IoIosArrowForward } from "react-icons/io";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 
 const Forty = ({ data, updatedData }: any) => {
@@ -113,6 +114,9 @@ const Forty = ({ data, updatedData }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
+
+      {product && <VideoPlayer videoUrl={product?.video_link} />}
+
       <Related product={relatedProducts} />
     </div>
   );

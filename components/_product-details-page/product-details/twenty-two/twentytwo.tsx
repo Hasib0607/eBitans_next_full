@@ -12,6 +12,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 
 const TwentyTwo = ({ data, updatedData }: any) => {
@@ -99,6 +100,11 @@ const TwentyTwo = ({ data, updatedData }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       <Related product={relatedProducts} />
     </div>
   );

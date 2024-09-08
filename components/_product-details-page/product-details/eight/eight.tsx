@@ -11,6 +11,7 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 
 const Eight = ({ data, updatedData }: any) => {
@@ -103,6 +104,10 @@ const Eight = ({ data, updatedData }: any) => {
         </div>
 
         {/* ************************ tab component end ***************************** */}
+
+        {/* Video */}
+        {<VideoPlayer videoUrl={product?.video_link} />}
+
         <div className="sm:container px-5 sm:py-10 py-5">
           <Related product={relatedProducts} />
         </div>

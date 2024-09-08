@@ -13,11 +13,6 @@ const ProductThirty = ({ category, design, store_id }: any) => {
 
   const { data, error } = useHeaderSettings();
 
-  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
-  if (error) {
-    return <p> error from headersettings</p>;
-  }
-
   useEffect(() => {
     async function handleCategory() {
       try {
@@ -48,6 +43,11 @@ const ProductThirty = ({ category, design, store_id }: any) => {
         border-bottom: 2px solid ${design?.header_color};
     }
  `;
+
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">

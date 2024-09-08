@@ -13,6 +13,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 
 const TwentyOne = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -103,6 +104,10 @@ const TwentyOne = ({ data, updatedData }: any) => {
         </div>
         {/* ************************ tab component end ***************************** */}
         <div className="sm:container px-5 sm:py-10 py-5">
+          {product && product?.video_link && (
+            <VideoPlayer videoUrl={product?.video_link} />
+          )}
+
           <Related product={relatedProducts} />
         </div>
       </div>

@@ -13,6 +13,7 @@ import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { FacebookShareButton, WhatsappShareButton } from "react-share";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 
 const ThirtyEight = ({ data, updatedData }: any) => {
@@ -114,6 +115,11 @@ const ThirtyEight = ({ data, updatedData }: any) => {
           </div>
         </section>
         {/* ************************ tab component end ***************************** */}
+
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
+
         <Related product={relatedProducts} />
       </div>
     </div>

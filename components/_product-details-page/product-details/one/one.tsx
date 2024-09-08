@@ -5,6 +5,7 @@ import { Tab } from "@headlessui/react";
 import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
+import VideoPlayer from "../video-player";
 import Details from "./details";
 import RelatedProducts from "./related-products";
 
@@ -29,6 +30,7 @@ const One = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
+  console.log(productDetailsData, "pd");
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">
       <div className="mx-auto">
@@ -84,6 +86,10 @@ const One = ({ data, updatedData }: any) => {
           </Tab.Group>
         </div>
         {/* ************************ tab component end ***************************** */}
+
+        {/* Video */}
+
+        {product && <VideoPlayer videoUrl={product?.video_link} />}
 
         <div className="py-4"></div>
         <RelatedProducts product={relatedProducts} />

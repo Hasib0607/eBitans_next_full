@@ -14,6 +14,7 @@ import { RiArrowRightSLine } from "react-icons/ri";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import Details from "./details";
+import VideoPlayer from "../video-player";
 
 const TwentyNine = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
@@ -120,6 +121,11 @@ const TwentyNine = ({ data, updatedData }: any) => {
         </Tab.Group>
       </div>
       {/* ************************ tab component end ***************************** */}
+
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
+
       <Related product={relatedProducts} />
     </div>
   );
