@@ -4,9 +4,14 @@ import {
   ChevronRightIcon,
   StarIcon,
 } from "@heroicons/react/24/outline";
-import React from "react";
 
-const SectionHeadingThirteen = ({ prev, next, title, design }: any) => {
+const SectionHeadingThirteen = ({
+  prev,
+  next,
+  title,
+  design,
+  title_color,
+}: any) => {
   const classes = `
     .arrow{
         color: ${design?.header_color};
@@ -24,7 +29,10 @@ const SectionHeadingThirteen = ({ prev, next, title, design }: any) => {
         <div className="bg-red-500 p-2 ">
           <StarIcon className="h-8 w-8 font-thin text-white" />
         </div>
-        <h3 className="text-xl md:text-2xl text-[#414141] font-medium">
+        <h3
+          style={{ color: title_color }}
+          className="text-xl md:text-2xl text-[#414141] font-medium"
+        >
           {title}
         </h3>
       </div>

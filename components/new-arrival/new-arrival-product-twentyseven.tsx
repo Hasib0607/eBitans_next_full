@@ -1,17 +1,28 @@
 "use client";
-import React from "react";
 
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
+import Card51 from "../card/card51";
 import SectionHeadingTwentySeven from "../section-heading/section-heading-twenty-seven";
 import DefaultSlider from "../slider/default-slider";
-import Card51 from "../card/card51";
 
 const NewArrivalProductTwentySeven = ({ product, design, store_id }: any) => {
+  const { data, error } = useHeaderSettings();
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
+
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5 ">
       <div className="">
         <div className=" pb-2">
-          <SectionHeadingTwentySeven title={"New Arrival"} />
+          <SectionHeadingTwentySeven
+            title={title || "New Arrival"}
+            title_color={title_color || "#000"}
+          />
         </div>
         <DefaultSlider
           breakpoints={{

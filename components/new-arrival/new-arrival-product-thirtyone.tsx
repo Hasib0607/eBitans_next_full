@@ -1,11 +1,19 @@
 "use client";
-import React from "react";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
+import Card54 from "../card/card54";
 import SectionHeadingThirty from "../section-heading/section-heading-thirty";
 import DefaultSlider from "../slider/default-slider";
-import Card54 from "../card/card54";
 
 const NewArrivalProductThirtyOne = ({ product, design, store_id }: any) => {
+  const { data, error } = useHeaderSettings();
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
+
   const prevEl = "new-product-prev";
   const nextEl = "new-product-next";
 
@@ -38,7 +46,10 @@ const NewArrivalProductThirtyOne = ({ product, design, store_id }: any) => {
       <style>{styleCss}</style>
       <div className="relative arrow-hov">
         <div className="">
-          <SectionHeadingThirty title={"The Biggest New Books"} />
+          <SectionHeadingThirty
+            title={title || "The Biggest New Books"}
+            title_color={title_color || "#000"}
+          />
         </div>
 
         <DefaultSlider

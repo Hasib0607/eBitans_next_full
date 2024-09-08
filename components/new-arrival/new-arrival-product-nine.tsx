@@ -16,6 +16,7 @@ import "swiper/css/pagination";
 
 import { productImg } from "@/site-settings/siteUrl";
 import { getPrice } from "@/utils/get-price";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Taka from "@/utils/taka";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -38,11 +39,23 @@ const NewArrivalProductNine = ({ product, design }: any) => {
   }
     `;
 
+  const { data, error } = useHeaderSettings();
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
+
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">
       <div className="relative group">
         <style>{styleCss}</style>
-        <SectionHeadingNine title={"New Arrivals"} subtitle={""} />
+        <SectionHeadingNine
+          title={title || "New Arrivals"}
+          subtitle={""}
+          title_color={title_color || "#000"}
+        />
         <div className="relative">
           <div className=" gap-2 hidden group-hover:block lg:cursor-pointer ">
             <div

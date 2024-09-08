@@ -1,12 +1,22 @@
-import React from "react";
-import SectionHeadingTwentyTwo from "../section-heading/section-heading-twentytwo";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Card46 from "../card/card46";
+import SectionHeadingTwentyTwo from "../section-heading/section-heading-twentytwo";
 
 const NewArrivalProductTwentyTwo = ({ product, store_id }: any) => {
+  const { data, error } = useHeaderSettings();
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <div className="flex justify-center ">
-        <SectionHeadingTwentyTwo text={"Shopping Everyday"} />
+        <SectionHeadingTwentyTwo
+          text={title || "Shopping Everyday"}
+          title_color={title_color || "#000"}
+        />
       </div>
       <div className="flex justify-center">
         <div

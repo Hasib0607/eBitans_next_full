@@ -1,6 +1,4 @@
-import React from "react";
-
-const SectionHeadingTwentyNine = ({ title, design }: any) => {
+const SectionHeadingTwentyNine = ({ title, design, title_color }: any) => {
   const classes = `
     .sec-twenty-nine{
         border-bottom: 2px solid ${design?.header_color};
@@ -12,7 +10,10 @@ const SectionHeadingTwentyNine = ({ title, design }: any) => {
     <div className="my-5 pb-5 w-full relative">
       <style>{classes}</style>
       <div className="z-[1] relative">
-        <h3 className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine">
+        <h3
+          style={{ color: title_color }}
+          className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine"
+        >
           {title}
         </h3>
       </div>

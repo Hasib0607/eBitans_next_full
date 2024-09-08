@@ -1,14 +1,14 @@
 "use client";
-import React from "react";
-import { SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { SwiperSlide } from "swiper/react";
 
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { BsPlay } from "react-icons/bs";
+import Card29 from "../card/card29";
 import SectionHeadingSixteen from "../section-heading/section-heading-sixteen";
 import DefaultSlider from "../slider/default-slider";
-import Card29 from "../card/card29";
 
 const NewArrivalProductFourteen = ({ product, design, store_id }: any) => {
   const prevEl = "new-fourteen-prev";
@@ -31,10 +31,23 @@ const NewArrivalProductFourteen = ({ product, design, store_id }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white relative  arrow-hov">
       <style>{styleCss}</style>
-      <SectionHeadingSixteen title={"New Arrivals"} subtitle={""} />
+      <SectionHeadingSixteen
+        title={title || "New Arrivals"}
+        title_color={title_color || "#000"}
+        subtitle={""}
+      />
       <div className="relative z-10 ">
         <div className=" gap-2 lg:cursor-pointer arrow opacity-0  duration-500">
           <div

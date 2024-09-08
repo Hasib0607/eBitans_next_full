@@ -1,21 +1,21 @@
 "use client";
-import React from "react";
 import { SwiperSlide } from "swiper/react";
 
+import { productImg } from "@/site-settings/siteUrl";
+import { getPrice } from "@/utils/get-price";
+import useHeaderSettings from "@/utils/query/use-header-settings";
+import Taka from "@/utils/taka";
 import {
   ChevronLeftIcon,
   ChevronRightIcon,
   LinkIcon,
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
-import SectionHeadingFive from "../section-heading/section-heading-five";
 import Link from "next/link";
-import { productImg } from "@/site-settings/siteUrl";
-import Taka from "@/utils/taka";
-import { getPrice } from "@/utils/get-price";
 import { IoSearchCircleOutline } from "react-icons/io5";
-import GridSliderThirteen from "../slider/grid-slider/grid-slider-thirteen";
 import Card14 from "../card/card14";
+import SectionHeadingFive from "../section-heading/section-heading-five";
+import GridSliderThirteen from "../slider/grid-slider/grid-slider-thirteen";
 
 const NewArrivalProductsEight = ({ product, design }: any) => {
   const prev = "new_arrival_prev";
@@ -45,12 +45,21 @@ const NewArrivalProductsEight = ({ product, design }: any) => {
  
     `;
 
+  const { data, error } = useHeaderSettings();
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white">
       <div className="py-5">
         <style>{styleCss}</style>
         <div className="">
-          <SectionHeadingFive title={"New Arrivals"} subtitle={""} />
+          <SectionHeadingFive
+            title={title || "New Arrivals"}
+            title_color={title_color || "#000"}
+            subtitle={""}
+          />
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-14">
           <div className="col-span-1 mt-2 hidden lg:block">

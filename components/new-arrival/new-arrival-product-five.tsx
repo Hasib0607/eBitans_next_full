@@ -1,21 +1,28 @@
 "use client";
-import React from "react";
-import Arrow from "@/utils/arrow";
+import Card41 from "@/components/card/card41";
 import SectionHeadingFive from "@/components/section-heading/section-heading-five";
 import DefaultSlider from "@/components/slider/default-slider";
+import Arrow from "@/utils/arrow";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
-import Card41 from "@/components/card/card41";
 
 const NewArrivalProductFive = ({ product }: any) => {
   const prev1 = "best_seller_Prev1";
   const next1 = "best_seller_Next1";
 
+  const { data, error } = useHeaderSettings();
+
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+
   return (
     <div className="shadow-lg sm:container px-5 sm:py-10 py-5 rounded-md">
       <div className="py-5 pt-1 flex justify-between items-center">
         <SectionHeadingFive
-          title={"New Arrivals"}
-          subtitle={"New arrivals products to our weekly lineup"}
+          title={title || "New Arrivals"}
+          subtitle={""}
+          title_color={title_color || "#000"}
         />
         <div className="pt-14 hidden sm:block">
           <Arrow prevEl={prev1} nextEl={next1}></Arrow>

@@ -117,6 +117,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
           brand={brand}
         />
       );
+    // add new design
     case "product":
       return (
         <Product

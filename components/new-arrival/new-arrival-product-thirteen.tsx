@@ -1,14 +1,22 @@
 "use client";
 // created by iazadur
-import React from "react";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
+import Card18 from "../card/card18";
 import SectionHeadingThirteen from "../section-heading/section-heading-thirteen";
 import GridSliderThirteen from "../slider/grid-slider/grid-slider-thirteeen";
-import Card18 from "../card/card18";
 
 const NewArrivalProductThirteeen = ({ product, design, store_id }: any) => {
   const prev = "newArrrival_productThirteen_prev";
   const next = "newArrrival_productThirteen_next";
+
+  const { data, error } = useHeaderSettings();
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
 
   return (
     <div className="bg-white ">
@@ -16,8 +24,9 @@ const NewArrivalProductThirteeen = ({ product, design, store_id }: any) => {
         <SectionHeadingThirteen
           prev={prev}
           next={next}
-          title={"New Arrival Products"}
+          title={title || "New Arrival Products"}
           design={design}
+          title_color={title_color || "#000"}
         />
         <GridSliderThirteen
           prevEl={prev}

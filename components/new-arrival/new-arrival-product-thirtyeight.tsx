@@ -1,16 +1,27 @@
-import React from "react";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Card65 from "../card/card65";
 
 const NewArrivalProductThirtyEight = ({ product, design, store_id }: any) => {
+  const { data, error } = useHeaderSettings();
+
   if (product.length === 0) {
     return null;
   }
+
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
+
   return (
     <div className="py-5 sm:py-10 bg-[#F2F4F8]">
       <div className="container px-5">
         <div className="text-center pb-10">
-          <p className="font-bold text-[20px]">New Arrival Products</p>
-          <p className="text-[15px] mt-1">Check & Get Your Desired Product!</p>
+          <p style={{ color: title_color }} className="font-bold text-[20px]">
+            {title}
+          </p>
         </div>
         <div className="flex justify-center">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-3 justify-center">

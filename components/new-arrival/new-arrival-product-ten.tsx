@@ -1,4 +1,5 @@
 "use client";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import Card15 from "../card/card15";
@@ -40,12 +41,22 @@ const NewArrivalProductTen = ({ category, design, store_id }: any) => {
   }
 
     `;
+
+  const { data, error } = useHeaderSettings();
+  const cDesign = data?.data?.custom_design || {};
+  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
+  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  if (error) {
+    return <p>error from new arrival product</p>;
+  }
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <SectionHeadingTen
-        title={"New Arrivals"}
-        subtitle={"New arrival products to our weekly lineup"}
+        title={title || "New Arrivals"}
+        subtitle={""}
+        title_color={title_color || "#000"}
       />
 
       <div className="flex gap-5 text-lg justify-center pb-8 lg:cursor-pointer uppercase">
