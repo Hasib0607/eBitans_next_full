@@ -1,6 +1,7 @@
 "use client";
 import Card63 from "@/components/card/card63";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
 const ProductThirtySix = ({ product, design, store_id }: any) => {
@@ -35,13 +36,21 @@ const ProductThirtySix = ({ product, design, store_id }: any) => {
   const prevEl = "product-prev";
   const nextEl = "product-next";
 
+  const { data, error } = useHeaderSettings();
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="">
       <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
         <div className="relative arrow-hov">
           <div className="text-center py-10 flex items-center justify-center">
-            <p className="text-xl xl:text-2xl">Products</p>
+            <p className="text-xl xl:text-2xl" style={{ color: title_color }}>
+              {title || "Products"}
+            </p>
           </div>
 
           <DefaultSlider

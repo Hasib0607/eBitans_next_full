@@ -2,12 +2,15 @@
 import Card16 from "@/components/card/card16";
 import SectionHeadingTen from "@/components/section-heading/section-heading-ten";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { useEffect, useState } from "react";
 
 const ProductTwo = ({ category, design, store_id }: any) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
+
+  const { data, error } = useHeaderSettings();
 
   useEffect(() => {
     async function handleCategory() {
@@ -35,13 +38,19 @@ const ProductTwo = ({ category, design, store_id }: any) => {
     }
     `;
 
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 mx-auto">
       <style>{styleCss}</style>
       <div className="">
         <SectionHeadingTen
-          title={"Our Products"}
-          subtitle={"Add our products to your weekly lineup"}
+          title={title || "Our Products"}
+          subtitle={""}
+          title_color={title_color || "#000"}
         />
         <div className="flex flex-wrap gap-y-3 gap-x-5 text-lg justify-center pb-8 lg:cursor-pointer uppercase">
           {category?.slice(0, 3).map((item: any, index: any) => (

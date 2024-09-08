@@ -1,6 +1,7 @@
 "use client";
 import Card67 from "@/components/card/card67";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { useEffect, useState } from "react";
 
 const ProductThirtyNine = ({ category, design, store_id }: any) => {
@@ -40,6 +41,12 @@ const ProductThirtyNine = ({ category, design, store_id }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="">
       <div className="sm:container px-5 sm:py-10 py-5 w-full">
@@ -47,7 +54,12 @@ const ProductThirtyNine = ({ category, design, store_id }: any) => {
 
         <div className="w-full relative flex flex-col gap-5">
           <div className="text-center pb-10">
-            <p className="font-semibold text-[24px]">Products</p>
+            <p
+              style={{ color: title_color }}
+              className="font-semibold text-[24px]"
+            >
+              {title || "Products"}
+            </p>
           </div>
           <div
             className={`flex justify-center items-center flex-wrap gap-x-16 gap-y-3 lg:cursor-pointer font-medium mb-5`}
@@ -71,7 +83,6 @@ const ProductThirtyNine = ({ category, design, store_id }: any) => {
         </div>
 
         {products?.length > 0 ? (
-          // <ScrollTrigger onEnter={() => setAnimate(true)}>
           <div
             className={`${
               animate ? "translate-y-0" : "translate-y-[200px]"

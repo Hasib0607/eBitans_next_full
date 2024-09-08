@@ -1,6 +1,9 @@
-import React from "react";
-
-const SectionHeadingTwentyOne = ({ title, subtitle, design }: any) => {
+const SectionHeadingTwentyOne = ({
+  title,
+  subtitle,
+  design,
+  title_color,
+}: any) => {
   const classes = `
     .sec-head-bg{
         background-color:${design?.header_color};
@@ -18,7 +21,10 @@ const SectionHeadingTwentyOne = ({ title, subtitle, design }: any) => {
 
         <div className="h-4 w-4 rounded-full sec-head-bg sec-head-outline mx-2"></div>
         <div className="">
-          <h3 className="sm:text-xl md:text-2xl text-black font-medium uppercase">
+          <h3
+            style={{ color: title_color }}
+            className="sm:text-xl md:text-2xl text-black font-medium uppercase"
+          >
             {title}
           </h3>
         </div>

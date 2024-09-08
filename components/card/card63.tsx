@@ -12,6 +12,7 @@ import BDT from "@/utils/bdt";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { AiFillThunderbolt } from "react-icons/ai";
@@ -22,6 +23,9 @@ import QuikView from "../quick-view";
 
 const Card63 = ({ item }: any) => {
   const { design, store_id, makeid } = useTheme();
+
+  const { data, error } = useHeaderSettings();
+
   const [camp, setCamp] = useState<any>(null);
   const { cartList } = useSelector((state: any) => state.cart);
   const dispatch = useDispatch();
@@ -210,6 +214,11 @@ const Card63 = ({ item }: any) => {
     }
   };
 
+  const { button } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="group overlay-group-thirty-six">
       <div className="lg:border lg:group-hover:border-gray-200 lg:border-transparent relative lg:p-2 rounded-md">
@@ -341,7 +350,7 @@ const Card63 = ({ item }: any) => {
               className="w-full mt-2 bg-white text-color-thirty text-sm md:text-base border font-bold flex px-2 h-10 justify-center gap-1 items-center lg:cursor-pointer"
             >
               <AiFillThunderbolt />
-              <p className="">Add to Cart</p>
+              <p className="">{button || "Add to Cart"}</p>
             </div>
           )}
         </div>

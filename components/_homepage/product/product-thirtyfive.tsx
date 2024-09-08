@@ -2,6 +2,7 @@
 import Card61 from "@/components/card/card61";
 import SectionHeadingThirtyFive from "@/components/section-heading/section-heading-thirty-five";
 import DefaultSlider from "@/components/slider/default-slider";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
 const ProductThirtyFive = ({ product, design, store_id }: any) => {
@@ -36,13 +37,22 @@ const ProductThirtyFive = ({ product, design, store_id }: any) => {
   const prevEl = "product-prev";
   const nextEl = "product-next";
 
+  const { data, error } = useHeaderSettings();
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="">
       <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
         <div className="relative arrow-hov">
           <div className="text-center mb-5">
-            <SectionHeadingThirtyFive title={"✦ PRODUCTS ✦"} />
+            <SectionHeadingThirtyFive
+              title={title || "✦ PRODUCTS ✦"}
+              title_color={title_color || "#000"}
+            />
           </div>
 
           <DefaultSlider

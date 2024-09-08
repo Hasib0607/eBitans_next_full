@@ -1,12 +1,19 @@
 "use client";
 import Card65 from "@/components/card/card65";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { useEffect, useState } from "react";
 
 const ProductThirtyEight = ({ category, design, store_id }: any) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
+
+  const { data, error } = useHeaderSettings();
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
 
   useEffect(() => {
     async function handleCategory() {
@@ -45,9 +52,8 @@ const ProductThirtyEight = ({ category, design, store_id }: any) => {
 
         <div className="w-full relative flex flex-col gap-5">
           <div className="text-center pb-10">
-            <p className="font-bold text-[20px]">Products</p>
-            <p className="text-[15px] mt-1">
-              Check & Get Your Desired Product!
+            <p style={{ color: title_color }} className="font-bold text-[20px]">
+              {title || "Products"}
             </p>
           </div>
           <div

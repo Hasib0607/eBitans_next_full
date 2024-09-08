@@ -1,7 +1,10 @@
 const SectionHeading = ({ text, design, title_color }: any) => {
   return (
     <div className="py-1">
-      <h3 style={title_color} className="text-center font-semibold text-2xl">
+      <h3
+        style={{ color: title_color }}
+        className="text-center font-semibold text-2xl"
+      >
         {text}
       </h3>
       <div

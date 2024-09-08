@@ -1,12 +1,15 @@
 "use client";
 import Card53 from "@/components/card/card53";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { useEffect, useState } from "react";
 
 const ProductTwentyNine = ({ category, design, store_id }: any) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
+
+  const { data, error } = useHeaderSettings();
 
   useEffect(() => {
     async function handleCategory() {
@@ -39,14 +42,22 @@ const ProductTwentyNine = ({ category, design, store_id }: any) => {
     }
  `;
 
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
 
       <div className="my-5 w-full relative flex flex-col lg2:flex-row justify-between lg2:items-center">
         <div className="z-[1] relative">
-          <h3 className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine">
-            Top Selling Products
+          <h3
+            style={{ color: title_color }}
+            className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine"
+          >
+            {title || "Top Selling Products"}
           </h3>
         </div>
         <div className="flex flex-wrap gap-5 lg:cursor-pointer uppercase text-sm font-medium text-gray-600 justify-center pt-10 lg2:pt-0">

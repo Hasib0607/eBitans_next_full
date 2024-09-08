@@ -4,6 +4,7 @@ import QuikView from "@/components/quick-view";
 import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
 import { productImg } from "@/site-settings/siteUrl";
 import { getPrice } from "@/utils/get-price";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import Taka from "@/utils/taka";
 import Link from "next/link";
@@ -15,6 +16,8 @@ const ProductEleven = ({
   best_sell_product,
   feature_product,
 }: any) => {
+  const { data, error } = useHeaderSettings();
+
   if (product.length === 0) {
     return;
   }
@@ -39,13 +42,21 @@ const ProductEleven = ({
     }
     `;
 
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 mx-auto">
       <style>{styleCss}</style>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg2:grid-cols-3 gap-10 ">
         <div>
           <div className="title-border ">
-            <SectionHeadingSeven titleColor="#000" title={"Best Seller"} />
+            <SectionHeadingSeven
+              titleColor={title_color || "#000"}
+              title={title || "Best Seller"}
+            />
           </div>
           <div className="pt-5">
             <div className="grid grid-cols-1 gap-5">

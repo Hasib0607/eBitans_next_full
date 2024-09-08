@@ -1,12 +1,15 @@
 "use client";
 import Card51 from "@/components/card/card51";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import { useEffect, useState } from "react";
 
 const ProductTwentySeven = ({ category, design, store_id }: any) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
+
+  const { data, error } = useHeaderSettings();
 
   useEffect(() => {
     async function handleCategory() {
@@ -35,12 +38,17 @@ const ProductTwentySeven = ({ category, design, store_id }: any) => {
     }
  `;
 
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5  w-full">
       <style>{styleCss}</style>
       <div className='flex flex-col "text-2xl md:text-3xl text-black font-semibold mb-6 mt-14'>
         <div className="xl:text-5xl text-2xl md:text-3xl">
-          <p>What&apos;s trending now</p>
+          <p style={{ color: title_color }}>{title || "What's trending now"}</p>
         </div>
         <div className="flex gap-x-5 lg:cursor-pointer uppercase text-sm font-medium text-gray-600 mt-5">
           {category?.slice(0, 3).map((item: any, index: any) => (

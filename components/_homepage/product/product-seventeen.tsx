@@ -13,6 +13,7 @@ import SliderSeventeenSingleSlide from "@/components/slider/slider-seventeen-sin
 import { iconImg } from "@/site-settings/siteUrl";
 import ArrowSeventeen from "@/utils/arrow-seventeen";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import img3 from "./bg-img/17/brown.png";
 import img4 from "./bg-img/17/green.png";
 import img1 from "./bg-img/17/offer_bg.webp";
@@ -25,6 +26,8 @@ const ProductSeventeen = ({ category, product, design, store_id }: any) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
+
+  const { data, error } = useHeaderSettings();
 
   useEffect(() => {
     async function handleCategory() {
@@ -49,6 +52,10 @@ const ProductSeventeen = ({ category, product, design, store_id }: any) => {
   const prev = "layer_seller_Prev";
   const next = "layer_seller_Next";
 
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
   return (
     <div className="relative z-0 overflow-hidden h-full py-4 ">
       <div className="hidden lg:block">
@@ -68,7 +75,10 @@ const ProductSeventeen = ({ category, product, design, store_id }: any) => {
       </div>
       <div className="lg:absolute top-1/2 lg:-translate-y-1/2 left-1/2 lg:-translate-x-1/2 z-[1] sm:container px-5 xl:px-80 mx-auto">
         <div className="flex justify-center pt-4">
-          <SectionHeadingSeventeen text={"Layer cakes"} />
+          <SectionHeadingSeventeen
+            text={title || "Layer cakes"}
+            title_color={title_color || "#000"}
+          />
         </div>
         <div className="flex justify-center pt-2 pb-10">
           <img src={image.src} alt="" />

@@ -1,5 +1,6 @@
 import Card60 from "@/components/card/card60";
 import SectionHeadingThirtyFour from "@/components/section-heading/section-heading-thirtyfour";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 
 const ProductThirtyFour = ({ product, design, store_id }: any) => {
   const styleCss = `
@@ -30,13 +31,22 @@ const ProductThirtyFour = ({ product, design, store_id }: any) => {
     }
  `;
 
+  const { data, error } = useHeaderSettings();
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="bg-[#F9F8FF]">
       <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
         <div className="relative arrow-hov">
           <div className="text-center mb-5">
-            <SectionHeadingThirtyFour title={"Just For You"} />
+            <SectionHeadingThirtyFour
+              title={title || "Just For You"}
+              title_color={title_color || "#00"}
+            />
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-1 sm:gap-5">

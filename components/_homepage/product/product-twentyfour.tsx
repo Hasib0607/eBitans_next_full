@@ -4,12 +4,15 @@ import { useEffect, useState } from "react";
 import Card49 from "@/components/card/card49";
 import SectionHeadingTwentyFour from "@/components/section-heading/section-heading-twenty-four";
 import httpReq from "@/utils/http/axios/http.service";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 import "./product-twentyfour.css";
 
-const ProductTwentyFour = ({ product, store_id, design, category }: any) => {
+const ProductTwentyFour = ({ design, category }: any) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
+
+  const { data, error } = useHeaderSettings();
 
   useEffect(() => {
     async function handleCategory() {
@@ -39,16 +42,20 @@ const ProductTwentyFour = ({ product, store_id, design, category }: any) => {
     }
  `;
 
+  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
 
       <div>
         <SectionHeadingTwentyFour
-          title={"POPULAR PRODUCTS"}
-          subtitle={
-            "In fact, the stress factor in the eros is the sad element. The course of the family, I want to decorate cartoons, sometimes there is no pain."
-          }
+          title={title || "POPULAR PRODUCTS"}
+          subtitle={""}
+          title_color={title_color || "#000"}
         />
       </div>
 
