@@ -1,14 +1,15 @@
 "use client";
-import React, { Fragment, useState } from "react";
-import { FaBars } from "react-icons/fa";
-import { Menu, Transition } from "@headlessui/react";
-import { useDispatch, useSelector } from "react-redux";
-import { HiOutlineLocationMarker } from "react-icons/hi";
-import { BsSearch } from "react-icons/bs";
-import { AiOutlineClose } from "react-icons/ai";
 import useTheme from "@/hooks/use-theme";
-import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
+import useAnnouncementScroll from "@/utils/use-annoucement-height";
+import { Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
+import { Fragment, useState } from "react";
+import { AiOutlineClose } from "react-icons/ai";
+import { BsSearch } from "react-icons/bs";
+import { FaBars } from "react-icons/fa";
+import { HiOutlineLocationMarker } from "react-icons/hi";
+import { useDispatch, useSelector } from "react-redux";
 import Search from "./search";
 import SideCat from "./side-cat";
 
@@ -17,6 +18,8 @@ function classNames(...classes: any) {
 }
 
 const HeaderThirtySix = ({ headerSetting }: any) => {
+  const { announcementHeight, scrollPassed } = useAnnouncementScroll();
+
   const { userData } = useTheme();
 
   const dispatch = useDispatch();
@@ -32,14 +35,16 @@ const HeaderThirtySix = ({ headerSetting }: any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-
       window.location.href = "/";
     }
   };
 
   return (
     <>
-      <div className="bg-[#FDD670] h-16 fixed w-full top-0 left-0 z-[6] flex items-center">
+      <div
+        style={{ top: scrollPassed ? 0 : announcementHeight }}
+        className="bg-[#FDD670] h-16 fixed w-full  left-0 z-[6] flex items-center"
+      >
         <div className="sm:container px-5 flex justify-between items-center gap-x-5 w-full">
           <div className="flex gap-5 justify-between items-center w-full lg:w-max">
             <div
@@ -66,13 +71,13 @@ const HeaderThirtySix = ({ headerSetting }: any) => {
               )}
             </div>
           </div>
-          <div className="w-full lg:block hidden relative">
+          <div className="w-full lg:block hidden relative ">
             <input
               value={searchTxt}
               onChange={(e) => setSearch(e.target.value)}
               type="text"
               placeholder="Search Products"
-              className="w-full border border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
+              className="w-full border border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0 p-2"
             />
             <div
               onClick={handleClose}

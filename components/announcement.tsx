@@ -15,7 +15,7 @@ const Announcement = async ({ design, url }: any) => {
   }
 
   return (
-    <div style={{ background: design?.header_color }}>
+    <div id="annoucement" style={{ background: design?.header_color }}>
       <div className="relative flex overflow-x-hidden container">
         <div className="py-2 animate-marquee whitespace-nowrap">
           {alternatedArry.map((an: any, index: number) => (

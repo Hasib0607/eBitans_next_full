@@ -1,3 +1,4 @@
+"use client";
 import img from "@/assets/bg-image/thirtySeven/MARGIN.png";
 import Card64 from "@/components/card/card64";
 import useHeaderSettings from "@/utils/query/use-header-settings";

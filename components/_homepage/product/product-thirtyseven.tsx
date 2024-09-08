@@ -1,3 +1,4 @@
+"use client";
 import Card64 from "@/components/card/card64";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import img from "./bg-img/37/MARGIN.png";

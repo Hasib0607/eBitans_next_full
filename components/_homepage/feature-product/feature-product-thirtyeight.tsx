@@ -1,3 +1,4 @@
+"use client";
 import Card65 from "@/components/card/card65";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 

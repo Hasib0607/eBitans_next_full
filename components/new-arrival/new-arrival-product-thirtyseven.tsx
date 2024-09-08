@@ -1,7 +1,5 @@
 "use client";
-import img from "@/components/new-arrival/bg-img/37/MARGIN.png";
 import useHeaderSettings from "@/utils/query/use-header-settings";
-import Image from "next/image";
 import Card64 from "../card/card64";
 
 const NewArrivalProductThirtySeven = ({ product, design, store_id }: any) => {
@@ -20,7 +18,6 @@ const NewArrivalProductThirtySeven = ({ product, design, store_id }: any) => {
     <div className="shadow-lg py-5 sm:py-10 rounded-sm bg-[#F1F9DD]">
       <div className="sm:container px-5">
         <div>
-          <Image src={img} fill alt="margin" className="mx-auto" />
           <h1 style={{ color: title_color }} className="text-2xl text-center">
             {title || "NEW ARRIVAL PRODUCTS"}
           </h1>
