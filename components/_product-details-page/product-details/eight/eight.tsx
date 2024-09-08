@@ -106,7 +106,9 @@ const Eight = ({ data, updatedData }: any) => {
         {/* ************************ tab component end ***************************** */}
 
         {/* Video */}
-        {<VideoPlayer videoUrl={product?.video_link} />}
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
 
         <div className="sm:container px-5 sm:py-10 py-5">
           <Related product={relatedProducts} />

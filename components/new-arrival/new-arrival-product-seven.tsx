@@ -1,3 +1,4 @@
+"use client";
 import SectionHeadingSeven from "@/components/section-heading/section-heading-seven";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import Card12 from "../card/card12";

@@ -114,7 +114,9 @@ const Eleven = ({ data, updatedData }: any) => {
       </div>
       {/* ************************ tab component end ***************************** */}
 
-      {product && <VideoPlayer videoUrl={product?.video_link} />}
+      {product && product?.video_link && (
+        <VideoPlayer videoUrl={product?.video_link} />
+      )}
       <Related product={relatedProducts} />
     </div>
   );

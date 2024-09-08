@@ -1,3 +1,4 @@
+"use client";
 import { getClientUrl } from "@/app/product/utils/getClientUrl";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";

@@ -89,7 +89,9 @@ const One = ({ data, updatedData }: any) => {
 
         {/* Video */}
 
-        {product && <VideoPlayer videoUrl={product?.video_link} />}
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
 
         <div className="py-4"></div>
         <RelatedProducts product={relatedProducts} />
