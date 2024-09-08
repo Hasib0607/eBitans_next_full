@@ -1,4 +1,3 @@
-import React from "react";
 import ProductCardOne from "@/components/card/product-card/product-card-one";
 
 const RelatedProducts = ({ product }: any) => {

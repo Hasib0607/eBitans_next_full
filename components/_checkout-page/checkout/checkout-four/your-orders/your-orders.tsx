@@ -216,7 +216,6 @@ const YourOrders = ({
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
 
-    // console.log(data, "address");
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
         type: "warning",

@@ -29,7 +29,6 @@ const Discount = ({
       (previousValue: any, currentValue: any) => previousValue + currentValue,
       0
     );
-    // console.log(total,"total");
     if (res?.max_purchase >= total && res?.min_purchase <= total) {
       const result: any = getDiscount(
         total,

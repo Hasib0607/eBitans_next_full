@@ -55,7 +55,6 @@ const Product = ({
   category,
   headerSetting,
 }: any) => {
-  console.log(theme, "theme");
   return (
     <>
       {theme === "default" && <DynamicDefaultProduct product={product} />}

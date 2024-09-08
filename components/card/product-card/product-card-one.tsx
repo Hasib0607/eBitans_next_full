@@ -199,13 +199,16 @@ const ProductCardOne = ({ item }: any) => {
             ""
           ) : (
             <div className="absolute z-[3] top-2 right-2 bg-[#ff576d] px-[5px] py-[2px] h-[22px] rounded-md text-white flex justify-center items-center text-xs font-semibold">
-              {" "}
               Save
-              {(camp?.discount_type || item.discount_type) === "fixed" &&
-                " ৳"}{" "}
-              {parseInt(
-                campPrice ? camp?.discount_amount : item?.discount_price
-              )}{" "}
+              {(camp?.discount_type || item.discount_type) === "fixed" && (
+                <Taka
+                  tk={
+                    parseInt(
+                      campPrice ? camp?.discount_amount : item?.discount_price
+                    ) || 0
+                  }
+                />
+              )}
               {(camp?.discount_type || item.discount_type) === "percent" && "%"}
             </div>
           )}

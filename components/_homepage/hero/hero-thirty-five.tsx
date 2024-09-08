@@ -1,23 +1,20 @@
 "use client";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { sliderImg } from "@/site-settings/siteUrl";
+import { BiRightArrowAlt } from "react-icons/bi";
+import "swiper/css";
+import "swiper/css/effect-creative";
+import "swiper/css/effect-fade";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import {
-  Pagination,
   Autoplay,
-  Navigation,
   Controller,
   EffectCreative,
   EffectFade,
+  Navigation,
+  Pagination,
 } from "swiper/modules";
-// Import Swiper styles
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-
-// import './heroSixteenCss/herosixteen.css'
-import "swiper/css/effect-creative";
-import "swiper/css/effect-fade";
-import { BiRightArrowAlt } from "react-icons/bi";
-import { sliderImg } from "@/site-settings/siteUrl";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 const HeroThirtyFive = ({ slider }: any) => {
   const styleCss = `
@@ -54,7 +51,6 @@ const HeroThirtyFive = ({ slider }: any) => {
                   <h1 className="xl:text-4xl md:text-[28px] text-[16px] font-bold md:text-center md:leading-7">
                     {s?.title}
                   </h1>
-                  {/* <p className='h-[2px] w-10 bg-black mx-auto md:block hidden'></p> */}
                   <p className="md:text-lg text-xs md:text-center md:leading-5">
                     {s?.subtitle}
                   </p>

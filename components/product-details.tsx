@@ -223,7 +223,6 @@ const ProductDetails = () => {
 
   const { design, store_id } = useTheme();
 
-  console.log(design, "design");
 
   useEffect(() => {
     setUpdatedData({ product_id, store_id, slug });

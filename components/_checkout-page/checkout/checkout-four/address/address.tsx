@@ -77,7 +77,6 @@ const Address = ({
         .then(({ address }: any) => {
           setAddress(address);
           setSelectAddress(address[0]);
-          // console.log(address, 'address');
           setLoading(false);
         })
         .catch((err: any) => console.log(err, "error"));
@@ -226,8 +225,6 @@ const Single = ({
           });
           toast(response.data.success, { type: "success" });
           setCall(Math.random() * 100);
-
-          // console.log('Post successful:', response.data);
         } catch (error) {
           console.error("Error posting data:", error);
           // Handle any errors here
@@ -245,12 +242,6 @@ const Single = ({
         })
         .catch((err) => console.log(err));
     }
-
-    // httpReq.post('address/delete', { id })
-    //     .then(({ success }) => {
-    //         toast(success, { type: 'success' })
-    //         setCall(Math.random() * 100)
-    //     }).catch(err => console.log(err))
   };
   return (
     <label

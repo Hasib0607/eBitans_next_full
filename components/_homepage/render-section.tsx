@@ -90,6 +90,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       return (
         <Hero slider={slider} theme={design?.hero_slider} design={design} />
       );
+    // add new design
     case "feature_category":
       return (
         <FeaturedCategory
