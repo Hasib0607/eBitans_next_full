@@ -5,11 +5,22 @@ import Link from "next/link";
 
 const BlogSection = async () => {
   const url = getUrl();
-  const data = await axios.get(
-    process.env.NEXT_PUBLIC_API_URL_BLOG + `blog/get?page=${1}&name=${url}`
-  );
 
-  const allBlogs = data.data.results.data;
+  let allBlogs;
+  try {
+    const data = await axios.get(
+      process.env.NEXT_PUBLIC_API_URL_BLOG + `blog/get?page=${1}&name=${url}`
+    );
+
+    allBlogs = data.data.results.data;
+  } catch (error) {
+    console.log(error);
+  }
+
+  if (!allBlogs) {
+    return <p>No blogs found</p>;
+  }
+
   return (
     <div className="container px-5">
       <h2 className="py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center">
