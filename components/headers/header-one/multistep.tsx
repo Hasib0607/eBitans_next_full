@@ -1,9 +1,8 @@
 "use client";
-import React from "react";
-import "./multistep.css";
-import Link from "next/link";
-import { iconImg } from "@/site-settings/siteUrl";
 import useTheme from "@/hooks/use-theme";
+import { iconImg } from "@/site-settings/siteUrl";
+import Link from "next/link";
+import "./multistep.css";
 
 const MultiStep = ({ category, children }: any) => {
   return (
@@ -47,12 +46,7 @@ export const Cat = ({ cat }: any) => {
             />
 
             <div className="ml-4">
-              <p
-                onClick={() => setPageCat("?page=1")}
-                className="text-base font-medium text-gray-900"
-              >
-                {cat?.name}
-              </p>
+              <p className="text-base font-medium text-gray-900">{cat?.name}</p>
             </div>
           </Link>
         </li>
@@ -72,7 +66,7 @@ export const Cat = ({ cat }: any) => {
             />
             <div className="ml-4 flex items-center gap-2">
               <p
-                onClick={() => setPageCat("?page=1")}
+                // onClick={() => setPageCat("?page=1")}
                 className="text-base font-medium text-gray-900"
               >
                 {cat?.name}
@@ -107,7 +101,7 @@ export const Cat = ({ cat }: any) => {
                   )}
                   <div className="ml-4">
                     <p
-                      onClick={() => setPageCat("?page=1")}
+                      // onClick={() => setPageCat("?page=1")}
                       className="text-base font-medium text-gray-900"
                     >
                       {i?.name}

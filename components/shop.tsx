@@ -40,9 +40,9 @@ import Two from "./_shop-page/shops/two/two";
 
 const ShopComponent = async () => {
   const url = getUrl();
-  const {
-    design: { shop_page },
-  } = await getSubdomainName(url, "design");
+  const data = await getSubdomainName(url, "design");
+  const design = data?.design || {};
+  const shop_page = design?.shop_page;
 
   return (
     <>
