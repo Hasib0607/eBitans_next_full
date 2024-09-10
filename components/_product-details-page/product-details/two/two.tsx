@@ -54,7 +54,7 @@ const Two = ({ data, updatedData }: any) => {
                   : "bg-white text-black fiveUn "
               }
             >
-              Descriptionx
+              Description
             </Tab>
             <Tab
               className={({ selected }) =>
