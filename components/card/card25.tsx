@@ -1,6 +1,7 @@
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
@@ -164,11 +165,16 @@ const Card25 = ({ item }: any) => {
               item.discount_price === "0.00") ? (
               " "
             ) : (
-              <p> BDT {Math.trunc(item.regular_price)}</p>
+              <p>
+                {" "}
+                <BDT price={Math.trunc(item.regular_price)} />
+              </p>
             )}
           </h1>
           <p className="text-color sm:text-base text-sm">
-            BDT {camp?.status === "active" ? campPrice : productGetPrice}
+            <BDT
+              price={camp?.status === "active" ? campPrice : productGetPrice}
+            />{" "}
           </p>
         </div>
 

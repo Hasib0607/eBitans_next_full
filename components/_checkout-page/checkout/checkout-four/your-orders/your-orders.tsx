@@ -545,11 +545,7 @@ const Single = ({ item, setIsOpen, files, index }: any) => {
           </p>
         </div>
       </div>
-      {/* <div className="flex flex-col gap-1 justify-center items-center">
-            <MdOutlineKeyboardArrowUp onClick={() => dispatch(addToCartList({ ...item }))} />
-            <p>{item.qty}</p>
-            <MdKeyboardArrowDown onClick={() => dispatch(decrementQty(item.cartId))} />
-        </div> */}
+
       <div className="text-md font-semibold justify-self-center">
         <Taka tk={item?.price * item?.qty} />
       </div>

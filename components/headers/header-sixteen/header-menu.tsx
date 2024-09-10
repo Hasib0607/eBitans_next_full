@@ -1,17 +1,17 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
-import React, { useEffect, useState } from "react";
+import { imgUrl } from "@/site-settings/siteUrl";
+import Taka from "@/utils/taka";
+import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
+import { useEffect, useState } from "react";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
 import { RiCloseCircleLine, RiMenu3Fill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
-import { imgUrl } from "@/site-settings/siteUrl";
-import Taka from "@/utils/taka";
-import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
+import SideMenu from "../header-three/side-menu";
 import Search from "./search";
 import SideCategory from "./side-category";
-import SideMenu from "../header-three/side-menu";
 
 const HeaderMenu = () => {
   const { headerSetting, menu, design } = useTheme();
@@ -28,12 +28,12 @@ const HeaderMenu = () => {
     setSearch("");
   };
 
-  //   const cartList = useSelector((state: any) => state.cart.cartList);
-  //   const priceList = cartList?.map((p) => p.qty * p.price);
-  //   const total = priceList.reduce(
-  //     (previousValue, currentValue) => previousValue + currentValue,
-  //     0
-  //   );
+  const cartList = useSelector((state: any) => state.cart.cartList);
+  const priceList = cartList?.map((p: any) => p.qty * p.price);
+  const total = priceList.reduce(
+    (previousValue: any, currentValue: any) => previousValue + currentValue,
+    0
+  );
 
   useEffect(() => {
     const changeNavbar = () => {
@@ -47,7 +47,6 @@ const HeaderMenu = () => {
   }, []);
 
   const styleCss = `
-  
     .navbarSixteen.openMenu {
         display: block;
         position: fixed;
@@ -92,10 +91,10 @@ const HeaderMenu = () => {
               ) : (
                 <Link href="/">
                   <img
-                    className={`h-auto  ${
+                    className={`h-[40px] w-[40px]  ${
                       openMenu ? "max-w-[100px]" : "max-w-[120px]"
                     }`}
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>
@@ -125,7 +124,7 @@ const HeaderMenu = () => {
               <div onClick={() => setCartOpen(!cartOpen)} className="relative">
                 <FaShoppingCart className="text-3xl menu-hover lg:cursor-pointer" />
                 <div className="absolute h-6 w-6 rounded-full bg-color flex items-center justify-center -top-2 -right-2">
-                  {/* <p className="text-white text-sm">{cartList.length}</p> */}
+                  <p className="text-white text-sm">{cartList.length}</p>
                 </div>
               </div>
               <div className="md:block hidden">
@@ -133,8 +132,7 @@ const HeaderMenu = () => {
                   Shopping Cart
                 </p>
                 <p className="text-lg font-medium">
-                  <Taka />
-                  {/* {total} */}
+                  <Taka tk={total} />
                 </p>
               </div>
             </div>
@@ -185,6 +183,7 @@ const HeaderMenu = () => {
 
       {/* tablet and mobile view  */}
       {/* screen touch menu close  */}
+
       {view && (
         <div
           onClick={() => setView(false)}

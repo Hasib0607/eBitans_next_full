@@ -1,13 +1,13 @@
 "use client";
-import React, { Fragment } from "react";
+import useTheme from "@/hooks/use-theme";
+import { profileImg } from "@/site-settings/siteUrl";
+import { Menu, Transition } from "@headlessui/react";
+import Link from "next/link";
+import { Fragment } from "react";
 import { HiUser, HiUserAdd } from "react-icons/hi";
 import { IoLocationOutline } from "react-icons/io5";
 import { MdLocalPhone } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { Menu, Transition } from "@headlessui/react";
-import useTheme from "@/hooks/use-theme";
-import { profileImg } from "@/site-settings/siteUrl";
-import Link from "next/link";
 import HeaderMenu from "./header-menu";
 
 const HeaderSixteen = ({ headerSetting }: any) => {
@@ -30,8 +30,6 @@ const HeaderSixteen = ({ headerSetting }: any) => {
 
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
-
-
     .bg-color {
         background: ${design?.header_color};
         color:  ${design?.text_color};
@@ -62,10 +60,7 @@ const HeaderSixteen = ({ headerSetting }: any) => {
   
   h1, h2, h3, h4, h5, h6, li, ul, a, p, span, button, option, select, input, div {
     font-family: 'Roboto', sans-serif;
-  }
-  
- 
-    `;
+  }`;
 
   return (
     <div>

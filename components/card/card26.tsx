@@ -3,6 +3,7 @@ import Details from "@/components/_product-details-page/product-details/three/de
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
@@ -138,6 +139,8 @@ const Card26 = ({ item }: any) => {
     }
   };
 
+  console.log(item, "item");
+
   return (
     <div>
       <div className="group cardHover border-[1px] rounded-lg relative overflow-hidden lg:hover:-translate-y-2 duration-700">
@@ -167,8 +170,12 @@ const Card26 = ({ item }: any) => {
         ) : (
           <div className="absolute text-xs px-2 py-1 bg-color text-white top-2 left-2 rounded-md">
             <p>
-              {item.discount_type === "fixed" ? "BDT" : ""}{" "}
-              {Math.trunc(item.discount_price)}{" "}
+              {item.discount_type === "fixed" ? (
+                <BDT price={Math.trunc(item.discount_price)} />
+              ) : (
+                ""
+              )}
+              {Math.trunc(item.discount_price)}
               {item.discount_type === "percent" ? "%" : ""}
             </p>
           </div>
@@ -179,7 +186,7 @@ const Card26 = ({ item }: any) => {
             <h1 className="whitespace-nowrap overflow-hidden text-ellipsis sm:max-w-[170px] max-w-[150px]">
               {item?.name}
             </h1>
-          </div>{" "}
+          </div>
         </Link>
 
         <div className="text-gray-600 text-lg font-semibold flex gap-1 pb-6 px-5">
@@ -189,11 +196,15 @@ const Card26 = ({ item }: any) => {
               item.discount_price === "0.00") ? (
               " "
             ) : (
-              <p> BDT {Math.trunc(item.regular_price)}</p>
+              <p>
+                <BDT price={Math.trunc(item.regular_price)} />
+              </p>
             )}
           </h1>
           <p className="text-color sm:text-base text-sm">
-            BDT {camp?.status === "active" ? campPrice : productGetPrice}
+            <BDT
+              price={camp?.status === "active" ? campPrice : productGetPrice}
+            />
           </p>
         </div>
 
