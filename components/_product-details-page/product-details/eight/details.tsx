@@ -448,10 +448,6 @@ const Details = ({
     );
   }
 
-  console.log(variant, "variant");
-  console.log(vrcolor, "vrcolor");
-  console.log(filterV, "fiterv");
-
   return (
     <div className=" bg-white h-full ">
       <style>{styleCss}</style>

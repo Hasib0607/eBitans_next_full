@@ -27,6 +27,7 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
+import ImageZoomNew from "../image-zoom-new";
 
 const Details = ({
   data,
@@ -440,7 +441,7 @@ const Details = ({
           {product?.image
             ?.slice(0, 1)
             .map((item: any) => (
-              <ImageZoom key={item?.id} img={productImg + item} />
+              <ImageZoomNew key={item?.id} img={productImg + item} />
             ))}
         </div>
       </div>

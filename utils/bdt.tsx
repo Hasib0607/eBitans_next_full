@@ -19,7 +19,6 @@ const BDT = ({ price }: any) => {
     return <p>Loading...</p>;
   }
 
-  console.log(data?.data?.currency?.code, "currency code");
   return (
     <>
       {error ? "BDT" : data?.data?.currency?.code} {price}

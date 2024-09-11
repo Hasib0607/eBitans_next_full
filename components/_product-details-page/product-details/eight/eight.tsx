@@ -44,9 +44,6 @@ const Eight = ({ data, updatedData }: any) => {
     }
     `;
 
-  console.log(productDetailsData, "productDetailsData");
-  
-
   return (
     <div className="bg-white mx-auto">
       <style>{styleCss}</style>

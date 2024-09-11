@@ -7,7 +7,6 @@ import useHeaderSettings from "@/utils/query/use-header-settings";
 import { useEffect, useState } from "react";
 
 const ProductTwenty = ({ category, design }: any) => {
-  console.log(category, "category");
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
@@ -47,10 +46,6 @@ const ProductTwenty = ({ category, design }: any) => {
   if (error) {
     return <p> error from headersettings</p>;
   }
-
-  console.log(title, "title");
-
-  console.log(products, "products something");
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full mx-auto">
