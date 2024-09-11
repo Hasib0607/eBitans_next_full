@@ -16,7 +16,8 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const url = getUrl();
   const subDomainData = await getSubdomainName(url, "headersetting");
-  const { store_id, headersetting } = subDomainData;
+  const store_id = subDomainData?.store_id;
+  const headersetting = subDomainData?.headersetting;
   const product = await getProductDetails({
     store_id,
     product_id: params.productID,

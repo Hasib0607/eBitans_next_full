@@ -30,12 +30,12 @@ export const HSlider = ({ product }: any) => {
 
   // setting slider configurations
   // const [sliderSettings, setSliderSettings] = useState({
-  //     infinite: true,
-  //     speed: 500,
-  //     slidesToShow: 2,
-  //     slidesToScroll: 2,
-  //     arrows: false,
-  // })
+  //   infinite: true,
+  //   speed: 500,
+  //   slidesToShow: 2,
+  //   slidesToScroll: 2,
+  //   arrows: false,
+  // });
 
   // slider navigation button
   const gotoNext = () => {
@@ -199,13 +199,20 @@ export const HSlider = ({ product }: any) => {
         <div className="relative z-[1] col-span-4 overflow-hidden">
           <div className="sm:hidden h-full w-full">
             <img
-              src={productImg + images[id]}
+              src={productImg + images?.[id]}
               alt=""
               className="h-auto min-w-full"
             />
           </div>
           <div className="sm:block hidden sm:cursor-zoom-in relative">
-            <ImageZoom img={productImg + images[id]} />
+            {images && images?.[id] && (
+              <ImageZoom
+                img={productImg + images[id]}
+                zoomPosition="original"
+                height="500"
+                width="500"
+              />
+            )}
             <div className="z-[2] search-color flex lg:cursor-pointer absolute top-3 right-3 bg-white h-8 w-8 rounded-full  items-center justify-center">
               <MdOutlineZoomOutMap onClick={openModal} className="text-lg" />
             </div>
@@ -214,7 +221,7 @@ export const HSlider = ({ product }: any) => {
       </div>
 
       {/* modal image show  */}
-      <Transition appear show={isOpen} as={Fragment}>
+      {/* <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-50" onClose={closeModal}>
           <Transition.Child
             as={Fragment}
@@ -276,7 +283,7 @@ export const HSlider = ({ product }: any) => {
             </div>
           </div>
         </Dialog>
-      </Transition>
+      </Transition> */}
     </div>
   );
 };
