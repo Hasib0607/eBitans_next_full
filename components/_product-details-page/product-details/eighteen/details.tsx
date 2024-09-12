@@ -745,7 +745,10 @@ const ColorSet = ({
 }: any) => {
   return (
     <div
-   
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}
