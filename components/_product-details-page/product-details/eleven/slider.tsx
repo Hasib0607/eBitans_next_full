@@ -15,14 +15,18 @@ import useTheme from "@/hooks/use-theme";
 import { productImg } from "@/site-settings/siteUrl";
 import ImageZoom from "../image-zoom";
 
-export const HSlider = ({ product }: any) => {
+import "node_modules/slick-carousel/slick/slick.css";
+import "node_modules/slick-carousel/slick/slick-theme.css";
+import ImageMagnifier from "../image-magnifier";
+
+export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
   const { design } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
   const [id, setId] = useState(0);
   const [active, setActive] = useState(0);
   const [activeMbl, setActiveMbl] = useState(0);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<any>([]);
 
   //creating the ref
   const customeSlider = createRef<any>();
@@ -56,8 +60,12 @@ export const HSlider = ({ product }: any) => {
   // for image
   useEffect(() => {
     const arr = product?.image;
+    let variantImages;
+    if (variant?.length > 0) {
+      variantImages = variant.map((v: any) => v.image);
+    }
     if (arr === undefined) return;
-    setImages(arr);
+    setImages([...arr, ...(variantImages || [])]);
   }, [product?.image]);
 
   // for modal open
@@ -126,12 +134,13 @@ export const HSlider = ({ product }: any) => {
             ref={customeSlider}
             className="relative group w-full flex flex-col justify-center items-center min-h-[300px] overflow-hidden"
           >
-            {images?.slice(0, 10).map((item, index) => (
+            {images?.slice(0, 10).map((item: any, index: any) => (
               <div key={index}>
                 <img
                   onClick={() => {
                     setActiveMbl(index);
                     setId(index);
+                    setActiveImg("");
                   }}
                   className={`${
                     activeMbl === index
@@ -165,12 +174,13 @@ export const HSlider = ({ product }: any) => {
             ref={customSlider}
             className="relative group h-full w-full "
           >
-            {images?.slice(0, 10).map((item, index) => (
+            {images?.slice(0, 10).map((item: any, index: any) => (
               <div key={index}>
                 <img
                   onClick={() => {
                     setActiveMbl(index);
                     setId(index);
+                    setActiveImg("");
                   }}
                   className={`${
                     activeMbl === index ? "active-img-mbl " : ""
@@ -199,13 +209,27 @@ export const HSlider = ({ product }: any) => {
         <div className="relative z-[1] col-span-4 overflow-hidden">
           <div className="sm:hidden h-full w-full">
             <img
-              src={productImg + images[id]}
+              src={
+                !activeImg ? productImg + images[id] : productImg + activeImg
+              }
               alt=""
               className="h-auto min-w-full"
             />
           </div>
           <div className="sm:block hidden sm:cursor-zoom-in relative">
-            <ImageZoom img={productImg + images[id]} />
+            {images && images?.[id] && (
+              <ImageMagnifier
+                src={
+                  !activeImg ? productImg + images[id] : productImg + activeImg
+                }
+                // width={300}
+                // height={200}
+                magnifierHeight={230}
+                magnifierWidth={230}
+                zoomLevel={2.2}
+                alt="Sample Image"
+              />
+            )}
             <div className="z-[2] search-color flex lg:cursor-pointer absolute top-3 right-3 bg-white h-8 w-8 rounded-full  items-center justify-center">
               <MdOutlineZoomOutMap onClick={openModal} className="text-lg" />
             </div>
@@ -241,7 +265,7 @@ export const HSlider = ({ product }: any) => {
                 <Dialog.Panel className="h-full w-max mx-10 z-50 transform bg-transparent container text-left align-middle transition-all">
                   <div className="flex items-center flex-col-reverse gap-y-10 h-[90vh]">
                     <div className="flex gap-4 justify-between">
-                      {images?.map((item, index) => (
+                      {images?.map((item: any, index: any) => (
                         <div key={index}>
                           <img
                             onClick={() => {

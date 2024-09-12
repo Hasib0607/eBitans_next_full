@@ -42,7 +42,8 @@ const Details = ({
   const [qty, setQty] = useState<any>(1);
   const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
-  //
+
+  // image selector
   const [activeImg, setActiveImg] = useState("");
 
   const [loading, setLoading] = useState(true);

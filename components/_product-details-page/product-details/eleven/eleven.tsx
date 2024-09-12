@@ -82,7 +82,7 @@ const Eleven = ({ data, updatedData }: any) => {
           <Tab.Panels className="mb-8">
             <Tab.Panel>
               <div className="p-5">
-                {productDetailsData?.product?.video_link && (
+                {/* {productDetailsData?.product?.video_link && (
                   <div className="mb-5">
                     <iframe
                       className="xl:h-[700px] h-[350px] md:h-[450px] lg:h-[600px] w-full video-border"
@@ -93,7 +93,7 @@ const Eleven = ({ data, updatedData }: any) => {
                       title="video"
                     />{" "}
                   </div>
-                )}
+                )} */}
                 <div
                   dangerouslySetInnerHTML={{
                     __html: productDetailsData?.product?.description,
