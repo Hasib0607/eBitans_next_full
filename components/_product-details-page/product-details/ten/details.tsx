@@ -69,9 +69,7 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
     };
 
     // call the function
-    fetchData()
-
-      .catch(console.error);
+    fetchData().catch(console.error);
   }, [data, store_id]);
 
   if (fetchStatus === "fetching") {
@@ -400,7 +398,6 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
     });
   };
   const customStyle = `
-
     .addBtmColor:hover { 
     background-color:${design?.header_color};
     color:${design?.text_color};

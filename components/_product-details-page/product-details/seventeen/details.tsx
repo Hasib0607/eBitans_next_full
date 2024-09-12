@@ -16,7 +16,8 @@ import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { toast } from "react-toastify";
-import { HSlider } from "./slider";
+import { HSlider } from "../ten/slider";
+// import { HSlider } from "./slider";
 
 const Details = ({
   fetchStatus,
@@ -37,6 +38,8 @@ const Details = ({
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -415,7 +418,12 @@ const Details = ({
       <div className=" bg-white">
         <div className="grid grid-cols-1 md:grid-cols-9 gap-x-6">
           <div className="md:col-span-5">
-            <HSlider product={product} />
+            <HSlider
+              product={product}
+              variant={variant}
+              activeImg={activeImg}
+              setActiveImg={setActiveImg}
+            />
           </div>
           <div className="md:col-span-4 space-y-6 mt-10 md:mt-0">
             <h2 className="md:text-4xl text-2xl text-gray-700 mb-3">
@@ -473,7 +481,12 @@ const Details = ({
               </>
             )}
             {filterV && filterV.length > 0 && filterV[0]?.size && vrcolor && (
-              <Sizes size={size} setSize={setSize} variant={filterV} />
+              <Sizes
+                size={size}
+                setSize={setSize}
+                variant={filterV}
+                setActiveImg={setActiveImg}
+              />
             )}
             {/* color only  */}
             {vrcolor && sizeV === undefined && (
@@ -483,12 +496,18 @@ const Details = ({
                   color={color}
                   setColor={setColor}
                   variant={variant}
+                  setActiveImg={setActiveImg}
                 />
               </>
             )}
             {/* size only  */}
             {!vrcolor?.length && sizeV !== undefined && (
-              <Sizes size={size} setSize={setSize} variant={filterV} />
+              <Sizes
+                size={size}
+                setSize={setSize}
+                variant={filterV}
+                setActiveImg={setActiveImg}
+              />
             )}
 
             <div className="flex items-center">
@@ -599,26 +618,39 @@ const Units = ({ unit, setUnit, variant }: any) => {
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="flex items-center">
       <h3 className="w-[120px] text-xl">Colors:</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="flex items-center">
       <h3 className="w-[120px] text-xl">Size:</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -657,10 +689,13 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border px-2 h-7 lg:cursor-pointer text-sm flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -686,10 +721,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border lg:cursor-pointer w-5 h-5 flex justify-center items-center font-sans font-medium rounded bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}
