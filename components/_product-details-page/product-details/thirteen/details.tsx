@@ -16,7 +16,7 @@ import {
 } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
-import { useEffect, useState } from "react";
+import { act, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import {
   FacebookIcon,
@@ -26,7 +26,9 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import "./five.css";
-import { HSlider } from "./slider";
+import { HSlider } from "../ten/slider";
+import { useQuery } from "@tanstack/react-query";
+// import { HSlider } from "./slider";
 
 const Details = ({
   data,
@@ -50,6 +52,8 @@ const Details = ({
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -58,37 +62,45 @@ const Details = ({
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
+
+  // useEffect(() => {
+  //   setLoad(true);
+  //   const fetchData = async () => {
+  //     const response = await getCampaignProduct(product, store_id);
+  //     console.log(response, "response");
+  //     if (!response?.error) {
+  //       setCamp(response);
+  //     } else {
+  //       setCamp(null);
+  //     }
+
+  //     setColor(null);
+  //     setUnit(null);
+  //     setSize(null);
+  //     setLoad(false);
+  //   };
+
+  //   fetchData().catch(console.error);
+  // }, [data, store_id]);
+
+  const {
+    data: campData,
+    status,
+    error: campErr,
+  } = useQuery({
+    queryKey: ["campProduct", { id: product?.id, store_id: store_id }],
+    queryFn: async () => await getCampaignProduct(product, store_id),
+  });
+
   useEffect(() => {
-    setLoad(true);
-    // declare the async data fetching function
-    const fetchData = async () => {
-      data["store_id"] = store_id;
-      // get the data from the api
-      const { product, variant, vrcolor } = await httpReq.post(
-        "product-details",
-        data
-      );
+    if (campData?.error) {
+      setCamp(null);
+    } else {
+      setCamp(campData);
+    }
+  }, [campData]);
 
-      const response = await getCampaignProduct(product, store_id);
-      if (!response?.error) {
-        setCamp(response);
-      } else {
-        setCamp(null);
-      }
-
-      setColor(null);
-      setUnit(null);
-      setSize(null);
-      setLoad(false);
-    };
-
-    // call the function
-    fetchData()
-      // make sure to catch any error
-      .catch(console.error);
-  }, [data, store_id]);
-
-  if (load) {
+  if (status === "pending") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <OvalLoader />
@@ -435,13 +447,13 @@ const Details = ({
   const buttonThirteen =
     "h-full px-2 grow flex items-center justify-center hover:bg-gray-100 bg-gray-200 w-60 py-2 transition-all duration-200 ease-linear";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <Skeleton />
-      </div>
-    );
-  }
+  // if (fetchStatus === "fetching") {
+  //   return (
+  //     <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+  //       <Skeleton />
+  //     </div>
+  //   );
+  // }
 
   const { button } = x?.data?.custom_design?.single_product_page?.[0] || {};
 
@@ -455,7 +467,13 @@ const Details = ({
         <style>{customStyle}</style>
 
         <div className="">
-          <HSlider product={product} />
+          {/* <HSlider product={product} /> */}
+          <HSlider
+            product={product}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
         </div>
 
         <div>
@@ -497,8 +515,14 @@ const Details = ({
                 />
               </>
             )}
-            {filterV?.size && vrcolor && (
-              <Sizes size={size} setSize={setSize} variant={filterV} />
+            {/* size with color */}
+            {filterV && filterV.length > 0 && filterV[0]?.size && vrcolor && (
+              <Sizes
+                size={size}
+                setSize={setSize}
+                variant={filterV}
+                setActiveImg={setActiveImg}
+              />
             )}
             {/* color only  */}
             {vrcolor && sizeV === undefined && (
@@ -508,12 +532,18 @@ const Details = ({
                   color={color}
                   setColor={setColor}
                   variant={variant}
+                  setActiveImg={setActiveImg}
                 />
               </>
             )}
             {/* size only  */}
             {!vrcolor?.length && sizeV !== undefined && (
-              <Sizes size={size} setSize={setSize} variant={filterV} />
+              <Sizes
+                size={size}
+                setSize={setSize}
+                variant={filterV}
+                setActiveImg={setActiveImg}
+              />
             )}
           </div>
 
@@ -621,26 +651,40 @@ const Units = ({ unit, setUnit, variant }: any) => {
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
+  console.log("here colos");
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Colors</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Size</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -679,10 +723,13 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-max px-2 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -708,10 +755,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}

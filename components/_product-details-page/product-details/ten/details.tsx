@@ -53,26 +53,15 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
 
   useEffect(() => {
     setLoad(true);
-    // declare the async data fetching function
     const fetchData = async () => {
-      data["store_id"] = store_id;
-      // get the data from the api
-      // const { product, variant, vrcolor } = await httpReq.post(
-      //   "product-details",
-      //   memoizedData
-      // );
-
       const response = await getCampaignProduct(product, store_id);
+
       if (!response?.error) {
         setCamp(response);
       } else {
         setCamp(null);
       }
 
-      // set state with the result
-      // setProduct(product);
-      // setVariant(variant);
-      // setVrcolor(vrcolor);
       setColor(null);
       setUnit(null);
       setSize(null);
@@ -81,7 +70,7 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
 
     // call the function
     fetchData()
-      // make sure to catch any error
+
       .catch(console.error);
   }, [data, store_id]);
 

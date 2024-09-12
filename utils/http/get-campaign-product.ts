@@ -1,7 +1,7 @@
 import httpReq from "./axios/http.service";
 
 export const getCampaignProduct = async (product: any, store_id: any) => {
-  if (product) {
+  if (product && store_id) {
     const offerData = {
       id: product?.id,
       store_id,
