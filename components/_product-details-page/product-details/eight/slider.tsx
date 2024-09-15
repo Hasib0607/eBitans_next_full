@@ -42,7 +42,9 @@ export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
 
     let variantImages;
     if (variant?.length > 0) {
-      variantImages = variant.map((v: any) => v.image);
+      variantImages = variant
+        .filter((v: any) => v.image !== null)
+        .map((v: any) => v.image);
     }
     if (arr === undefined) return;
     setImages([...arr, ...(variantImages || [])]);

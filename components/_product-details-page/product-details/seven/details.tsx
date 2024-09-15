@@ -22,7 +22,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { HSlider } from "../twenty-three/slider";
+import { HSlider } from "../eight/slider";
 
 export const fetchCampaignProduct = async (id: any, store_id: any) => {
   try {
@@ -46,7 +46,6 @@ const Details = ({
 }: any) => {
   // this is product
   console.log(product, "product form product details");
-
   const { makeid, store_id, headerSetting, bookingData } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
@@ -60,6 +59,9 @@ const Details = ({
   const [qty, setQty] = useState<any>(1);
   // const [camp, setCamp] = useState<any>(null);
   const [colorid, setColorid] = useState(null);
+
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   // Use TanStack Query to fetch campaign product data
   const { data: camp, isLoading } = useQuery({
@@ -446,110 +448,24 @@ const Details = ({
   return (
     <div className="pt-5 pb-20 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-9 gap-x-10 gap-y-5">
-        {store_id === 2433 ? (
-          <Swiper
-            autoplay={{ delay: 2500, disableOnInteraction: false }}
-            loop={product?.image?.length > 1 && true}
-            pagination={true}
-            modules={[Pagination, Autoplay]}
-            className="mySwiper md:col-span-4 grid grid-cols-2 gap-5 w-full"
-          >
-            {product?.image?.map((s: any) => (
-              <SwiperSlide key={s.id}>
-                <div className="">
-                  <img
-                    className="h-auto min-w-full"
-                    src={productImg + s}
-                    alt=""
-                  />
-                </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        ) : store_id === 6296 ? (
-          <div className="md:col-span-4 min-w-full">
-            <HSlider
-              product={product}
-              colorid={colorid}
-              setColorid={setColorid}
-              vrcolor={vrcolor}
-            />
-          </div>
-        ) : (
-          <div className="md:col-span-5">
-            {open && (
-              <div className="grid grid-cols-1 gap-2 ">
-                {product?.image &&
-                  product?.image?.slice(0, 1).map((data: any, idx: any) => (
-                    <div
-                      className={`w-full h-full flex justify-center`}
-                      key={idx}
-                    >
-                      {/* <SkeletonWrapper
-                        fetchStatus={fetchStatus}
-                        height={"600px"}
-                        width={"400px"}
-                      > */}
-                      <img
-                        className="w-auto max-h-[500px] border-2 border-gray-200"
-                        src={productImg + data}
-                        alt=""
-                      />
-                      {/* </SkeletonWrapper> */}
-                    </div>
-                  ))}
-              </div>
-            )}
-            {!open && (
-              <div className="grid grid-cols-2 gap-2 ">
-                {product?.image &&
-                  product?.image?.slice(0, 4).map((data: any, idx: any) => (
-                    <div
-                      key={idx}
-                      className={`${
-                        product?.image.length === 1 && "col-span-2"
-                      } w-full h-full flex justify-center`}
-                    >
-                      {/* <SkeletonWrapper
-                        fetchStatus={fetchStatus}
-                        height={"600px"}
-                        width={"400px"}
-                      > */}
-                      <img
-                        className="w-auto max-h-[500px] border-2 border-gray-200"
-                        src={productImg + data}
-                        alt=""
-                      />
-                      {/* </SkeletonWrapper> */}
-                    </div>
-                  ))}
-              </div>
-            )}
-          </div>
-        )}
-
+        <div className="md:col-span-5">
+          <HSlider
+            product={product}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
+        </div>
         <div className="md:col-span-4 space-y-8 font-seven">
-          {/* <SkeletonWrapper
-            fetchStatus={fetchStatus}
-            width={"200px"}
-            height={"30px"}
-            className="mb-5"
-          > */}
           <h2 className="text-2xl text-[#212121] font-bold mb-3">
             {product?.name}
           </h2>
-          {/* </SkeletonWrapper> */}
-          {/* <SkeletonWrapper fetchStatus={fetchStatus} count={3} className="mb-6"> */}
+
           <p className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
             {product?.description?.length > 250 && "..."}
           </p>
-          {/* </SkeletonWrapper> */}
-          {/* <SkeletonWrapper
-            fetchStatus={fetchStatus}
-            width={"200px"}
-            height={"30px"}
-          > */}
+
           <div className="flex justify-start items-center gap-x-4">
             <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
               <BDT />
@@ -573,72 +489,50 @@ const Details = ({
               </p>
             )}
           </div>
-          {/* </SkeletonWrapper> */}
 
           {product?.quantity !== "0" && (
             <div className="h-[1px] bg-gray-300 w-full"></div>
           )}
 
-          {/* unit  */}
-          {/* && variant[0]?.unit */}
           {!vrcolor && variant?.length !== 0 && (
-            // <SkeletonWrapper
-            //   fetchStatus={fetchStatus}
-            //   width={"200px"}
-            //   height={"30px"}
-            // >
             <Units unit={unit} setUnit={setUnit} variant={variant} />
-            // </SkeletonWrapper>
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
-            // <SkeletonWrapper
-            //   fetchStatus={fetchStatus}
-            //   width={"200px"}
-            //   height={"200px"}
-            // >
             <Colors
               color={color}
               setColor={setColor}
               vrcolor={vrcolor}
               setSize={setSize}
             />
-            // </SkeletonWrapper>
           )}
-          {/* filterV[0]?.size && */}
-          {filterV && filterV[0]?.size && vrcolor && (
-            // <SkeletonWrapper
-            //   fetchStatus={fetchStatus}
-            //   width={"200px"}
-            //   height={"30px"}
-            // >
-            <Sizes size={size} setSize={setSize} variant={filterV} />
-            // </SkeletonWrapper>
+
+          {filterV && filterV.length > 0 && filterV[0]?.size && vrcolor && (
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
-            // <SkeletonWrapper
-            //   fetchStatus={fetchStatus}
-            //   width="200px"
-            //   height="30px"
-            // >
             <ColorsOnly
               color={color}
               setColor={setColor}
               variant={variant}
               setColorid={setColorid}
+              setActiveImg={setActiveImg}
             />
-            // </SkeletonWrapper>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            // <SkeletonWrapper
-            //   fetchStatus={fetchStatus}
-            //   width="200px"
-            //   height="30px"
-            // >
-            <Sizes size={size} setSize={setSize} variant={filterV} />
-            // </SkeletonWrapper>
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
 
           <div className="mt-5">
@@ -777,7 +671,13 @@ const Units = ({ unit, setUnit, variant }: any) => {
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant, setColorid }: any) => {
+const ColorsOnly = ({
+  color,
+  setColor,
+  variant,
+  setColorid,
+  setActiveImg,
+}: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Colors</h3>
@@ -790,6 +690,8 @@ const ColorsOnly = ({ color, setColor, variant, setColorid }: any) => {
             select={color}
             setSelect={setColor}
             setColorid={setColorid}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
           />
         ))}
       </div>
@@ -797,13 +699,19 @@ const ColorsOnly = ({ color, setColor, variant, setColorid }: any) => {
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Size</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -842,10 +750,13 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-max px-2 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -871,12 +782,20 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect, id, setColorid }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  id,
+  setColorid,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
       onClick={() => {
         setSelect(text);
-        setColorid(id);
+        setActiveImg(itemImage);
       }}
       className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
