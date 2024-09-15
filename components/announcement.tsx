@@ -20,6 +20,7 @@ const Announcement = async ({ design, url }: any) => {
   for (let i = 0; i < anArray.length * 4; i++) {
     alternatedArray.push(anArray[i % anArray.length]);
   }
+
   return (
     <div id="annoucement" style={{ background: design?.header_color }}>
       <div className="relative flex overflow-x-hidden container">

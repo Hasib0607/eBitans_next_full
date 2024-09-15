@@ -494,7 +494,8 @@ const Details = ({
             <div className="h-[1px] bg-gray-300 w-full"></div>
           )}
 
-          {!vrcolor && variant?.length !== 0 && (
+          {/* Unit */}
+          {!vrcolor && variant && variant.length !== 0 && variant[0]?.unit && (
             <Units unit={unit} setUnit={setUnit} variant={variant} />
           )}
           {/* color and size  */}

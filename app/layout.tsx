@@ -20,7 +20,6 @@ export default async function RootLayout({
 }>) {
   const url = getUrl();
   const subDomain = await getSubdomainName(url, "design,headersetting");
-
   const headersetting = subDomain?.headersetting;
   const design = subDomain?.design;
   const fbPixel = headersetting?.facebook_pixel;

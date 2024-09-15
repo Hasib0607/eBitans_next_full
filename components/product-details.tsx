@@ -229,9 +229,10 @@ const ProductDetails = () => {
     setUpdatedData({ product_id, store_id, slug });
   }, [product_id, store_id, slug]);
 
-  // const RenderComponent = componentsMap["forty"] || null;
+  // const RenderComponent = componentsMap["eight"] || null;
   const RenderComponent = componentsMap[design?.single_product_page] || null;
 
+  console.log(design?.single_product_page, "single product page");
   return (
     <>
       {RenderComponent && (
