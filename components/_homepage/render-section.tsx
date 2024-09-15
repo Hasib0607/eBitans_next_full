@@ -64,12 +64,10 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
     if (component === "testimonial") {
       return (
         <>
-          {/* Render BlogSection before testimonials */}
           <Suspense fallback={<p>Loading...</p>}>
             <BlogSection />
           </Suspense>
 
-          {/* Testimonials section */}
           <Testimonial
             testimonials={testimonials}
             theme={design?.testimonial}
@@ -79,7 +77,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     }
     return (
-      <Suspense fallback={<p>Loading...</p>}>
+      <Suspense>
         <BlogSection />
       </Suspense>
     );

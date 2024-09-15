@@ -17,8 +17,8 @@ const BlogSection = async () => {
     console.log(error);
   }
 
-  if (!allBlogs) {
-    return <p>No blogs found</p>;
+  if (allBlogs.length <= 0) {
+    return null;
   }
 
   return (
