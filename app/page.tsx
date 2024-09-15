@@ -6,14 +6,21 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
 
 export async function generateMetadata() {
-  const url = getUrl();
-  const { headersetting } = await getSubdomainName(url, "headersetting");
-  const websiteName = capitalizeFirstLetter(headersetting?.website_name);
+  try {
+    const url = getUrl();
+    const { headersetting } = await getSubdomainName(url, "headersetting");
+    const websiteName = capitalizeFirstLetter(headersetting?.website_name);
 
-  return {
-    title: `${websiteName} | Home`,
-    icons: { icon: imgUrl + headersetting?.favicon },
-  };
+    return {
+      title: `${websiteName} | Home`,
+      icons: { icon: imgUrl + headersetting?.favicon },
+    };
+  } catch (error) {
+    console.error("Error generating metadata:", error);
+    return {
+      title: "Home",
+    };
+  }
 }
 
 export default async function Home() {
