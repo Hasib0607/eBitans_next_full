@@ -433,6 +433,11 @@ const Details = ({
   const buttonTwentySeven =
     "bg-black btn-hover text-white font-thin sm:py-[16px] py-2 px-5 sm:px-16 rounded-full w-max ";
 
+  const variantImage = variant?.map((v: any) => v.image) || []; // Ensure variantImage is an array
+  const productImages = Array.isArray(product?.image) ? product.image : []; // Ensure product?.image is an array
+  const allImages = [...productImages, ...variantImage]; // Spread both arrays safely
+  console.log(allImages, "allImages");
+
   return (
     <div className="bg-white">
       <style>{styleCss}</style>
@@ -441,32 +446,32 @@ const Details = ({
         <div className="lg:col-span-5 justify-self-center w-full">
           {product?.image && (
             <div className="grid grid-cols-2 gap-5 w-full h-full">
-              {product?.image[0] && (
+              {allImages[0] && (
                 <div
                   className={`col-span-2 w-full ${
                     product?.image.length === 1 ? "h-auto" : "h-auto"
                   }`}
                 >
                   <img
-                    src={productImg + product?.image[0]}
+                    src={productImg + allImages[0]}
                     alt=""
                     className="h-full w-full rounded-xl"
                   />
                 </div>
               )}
-              {product?.image[1] && (
+              {allImages[1] && (
                 <div className="w-full h-auto">
                   <img
-                    src={productImg + product?.image[1]}
+                    src={productImg + allImages[1]}
                     alt=""
                     className="h-full w-full rounded-xl"
                   />
                 </div>
               )}
-              {product?.image[2] && (
+              {allImages[2] && (
                 <div className="w-full h-auto">
                   <img
-                    src={productImg + product?.image[2]}
+                    src={productImg + allImages[2]}
                     alt=""
                     className="h-full w-full rounded-xl"
                   />

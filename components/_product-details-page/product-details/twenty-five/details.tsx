@@ -27,6 +27,7 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
+import ImageMagnifier from "../image-magnifier";
 
 const Details = ({
   fetchStatus,
@@ -437,11 +438,17 @@ const Details = ({
   return (
     <div className="grid md:grid-cols-8 grid-cols-1 mt-20 md:gap-4 ">
       <div className="md:col-span-4 h-full sm:cursor-zoom-in overflow-hidden ">
-        {product?.image
-          ?.slice(0, 1)
-          .map((item: any, id: any) => (
-            <ImageZoom key={id} img={productImg + item} />
-          ))}
+        {product?.image?.slice(0, 1).map((item: any, id: any) => (
+          <ImageMagnifier
+            src={productImg + item}
+            // width={300}
+            // height={200}
+            magnifierHeight={230}
+            magnifierWidth={230}
+            zoomLevel={2.2}
+            alt="Sample Image"
+          />
+        ))}
       </div>
 
       {/* additional price */}

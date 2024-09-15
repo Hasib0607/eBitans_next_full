@@ -21,7 +21,7 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { toast } from "react-toastify";
-import { HSlider } from "./slider";
+import { HSlider } from "../eight/slider";
 
 const Details = ({
   fetchStatus,
@@ -43,6 +43,8 @@ const Details = ({
   const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
   const [sizeId, setSizeId] = useState<any>(null);
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
   const sizeV = variant?.find((item: any) => item.size !== null);
 
   const vPrice = variant?.map((item: any) => item?.additional_price);
@@ -457,7 +459,12 @@ const Details = ({
 
       <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
         <div className="md:col-span-5">
-          <HSlider product={product} sizeId={sizeId} setSizeId={setSizeId} />
+          <HSlider
+            product={product}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
         </div>
         <div className="md:col-span-5 space-y-4 sticky top-28 h-max">
           <h2
@@ -566,14 +573,24 @@ const Details = ({
               />
             </>
           )}
-          {filterV?.size && vrcolor && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+          {filterV && filterV.length > 0 && filterV[0]?.size && vrcolor && (
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
             <>
               {" "}
-              <ColorsOnly color={color} setColor={setColor} variant={variant} />
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             </>
           )}
           {/* size only  */}
@@ -584,6 +601,7 @@ const Details = ({
               variant={filterV}
               setSizeId={setSizeId}
               store_id={store_id}
+              setActiveImg={setActiveImg}
             />
           )}
 
@@ -733,20 +751,34 @@ const Units = ({ unit, setUnit, variant }: any) => {
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-medium mb-2 text-base">Colors:</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant, setSizeId, store_id }: any) => {
+const Sizes = ({
+  size,
+  setSize,
+  variant,
+  setSizeId,
+  store_id,
+  setActiveImg,
+}: any) => {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-medium text-base mb-2">
@@ -761,6 +793,7 @@ const Sizes = ({ size, setSize, variant, setSizeId, store_id }: any) => {
             select={size}
             setSelect={setSize}
             setSizeId={setSizeId}
+            setActiveImg={setActiveImg}
           />
         ))}
       </div>
@@ -800,12 +833,19 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect, id, setSizeId }: any) => {
+const Size = ({
+  item,
+  select,
+  setSelect,
+  id,
+  setSizeId,
+  setActiveImg,
+}: any) => {
   return (
     <div
       onClick={() => {
         setSelect(item);
-        setSizeId(id);
+        setActiveImg(item?.image);
       }}
       className={`border lg:cursor-pointer w-max px-2 py-1 shadow-lg h-max flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "select-size" : "border-gray-300"
@@ -835,10 +875,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border lg:cursor-pointer w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
         text === select ? "select-color" : "border-gray-300"
       }`}

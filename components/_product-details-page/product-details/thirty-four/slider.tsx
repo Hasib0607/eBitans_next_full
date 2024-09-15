@@ -18,12 +18,15 @@ import {
 import useTheme from "@/hooks/use-theme";
 import { productImg } from "@/site-settings/siteUrl";
 
-export const HSlider = ({ product }: any) => {
+import "node_modules/slick-carousel/slick/slick.css";
+import "node_modules/slick-carousel/slick/slick-theme.css";
+
+export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
   const { design } = useTheme();
 
   const [id, setId] = useState<any>(null);
   const [activeMbl, setActiveMbl] = useState(0);
-  const [images, setImages] = useState([]);
+  const [images, setImages] = useState<any>([]);
 
   //creating the ref
   const customeSlider = createRef<any>();
@@ -57,8 +60,12 @@ export const HSlider = ({ product }: any) => {
   // for image
   useEffect(() => {
     const arr = product?.image;
+    let variantImages;
+    if (variant?.length > 0) {
+      variantImages = variant.map((v: any) => v.image);
+    }
     if (arr === undefined) return;
-    setImages(arr);
+    setImages([...arr, ...(variantImages || [])]);
   }, [product?.image]);
 
   // style css
@@ -122,7 +129,7 @@ export const HSlider = ({ product }: any) => {
             ref={customeSlider}
             className="relative group w-full flex flex-col justify-center items-center min-h-[300px] overflow-hidden"
           >
-            {images?.slice(0, 10).map((item, index) => (
+            {images?.map((item: any, index: any) => (
               <div key={index}>
                 <img
                   onClick={() => {
@@ -161,7 +168,7 @@ export const HSlider = ({ product }: any) => {
             ref={customSlider}
             className="relative group h-full w-full "
           >
-            {images?.slice(0, 10).map((item, index) => (
+            {images?.slice(0, 10).map((item: any, index: any) => (
               <div key={index}>
                 <img
                   onClick={() => {
@@ -191,19 +198,6 @@ export const HSlider = ({ product }: any) => {
           )}
         </div>
 
-        {/* selected image show  */}
-        {/* <div className='relative z-[1] col-span-4 overflow-hidden'>
-                    <div className='sm:hidden h-full w-full'>
-                        <img src={productImg + images[id]} alt="" className='h-auto min-w-full' />
-                    </div>
-                    <div className='sm:block hidden sm:cursor-zoom-in relative'>
-                        <ImageZoom img={productImg + images[id]} />
-                        <div className='z-[2] search-color flex lg:cursor-pointer absolute top-3 right-3 bg-white h-8 w-8 rounded-full  items-center justify-center'>
-                            <MdOutlineZoomOutMap onClick={openModal} className='text-lg' />
-                        </div>
-                    </div>
-
-                </div> */}
         <div className="relative z-[1] sm:col-span-4 col-span-5 overflow-hidden">
           <Swiper
             modules={[Autoplay, A11y, EffectFade, Navigation, Controller]}
@@ -216,12 +210,13 @@ export const HSlider = ({ product }: any) => {
               delay: id === null ? 3000 : 10000000,
             }}
             className="mySwiper relative"
+            onSlideChangeTransitionStart={() => setActiveImg("")}
           >
-            {product?.image?.map((item: any) => (
+            {images?.map((item: any) => (
               <SwiperSlide key={item?.id}>
                 <img
                   className="h-auto min-w-full"
-                  src={productImg + (id !== null ? images[id] : item)}
+                  src={activeImg ? productImg + activeImg : productImg + item}
                   alt=""
                 />
               </SwiperSlide>

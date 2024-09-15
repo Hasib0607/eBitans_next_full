@@ -49,6 +49,8 @@ const Details = ({
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -457,6 +459,11 @@ const Details = ({
   const buttonFourteen =
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 text-center w-60 lg:cursor-pointer my-2";
 
+  const productImages = product?.image || [];
+  const variantImages = variant?.map((v: any) => v.image) || [];
+
+  const allImages = [...productImages, ...variantImages];
+
   return (
     <div className="bg-white h-full mt-5">
       <style>{styleCss}</style>
@@ -469,12 +476,12 @@ const Details = ({
           modules={[Pagination, Autoplay]}
           className="mySwiper md:col-span-4 grid grid-cols-2 gap-5 w-full"
         >
-          {product?.image?.map((s: any, key: number) => (
+          {allImages?.map((s: any, key: number) => (
             <SwiperSlide key={key}>
               <div className="">
                 <img
                   className="h-auto min-w-full"
-                  src={productImg + s}
+                  src={activeImg ? productImg + activeImg : productImg + s}
                   alt=""
                 />
               </div>
@@ -519,19 +526,34 @@ const Details = ({
               />
             </>
           )}
-          {filterV && filterV[0]?.size && vrcolor && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+          {filterV && filterV.length > 0 && filterV[0]?.size && vrcolor && (
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
             <>
               {" "}
-              <ColorsOnly color={color} setColor={setColor} variant={variant} />
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             </>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
 
           <div className="">
@@ -703,7 +725,7 @@ const Units = ({ unit, setUnit, variant }: any) => {
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="flex items-center gap-2">
       <h3 className="font-medium font-sans mb-2 border-b border-black text-base">
@@ -711,33 +733,53 @@ const ColorsOnly = ({ color, setColor, variant }: any) => {
       </h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
-    <div className="mb-2">
-      <h3 className="font-medium font-sans border-b border-black text-base mb-2 w-max">
+    // <div className="mb-2">
+    //   <h3 className="font-medium font-sans border-b border-black text-base mb-2 w-max">
+    //     Sizes:
+    //   </h3>
+    //   <select
+    //     onChange={(e) => setSize(e.target.value)}
+    //     className="border-2 border-gray-300 min-w-[240px] max-w-full h-12 font-poster focus:outline-none focus:ring-0 focus:border-2 focus:border-gray-300"
+    //   >
+    //     <option value="">Select Size</option>
+    //     {variant?.map((item: any) => (
+    //       <option key={item.id} value={item} onClick={() => setActiveImg(item)}>
+    //         {item?.size}
+    //       </option>
+    //     ))}
+    //   </select>
+    // </div>
+    <div className="flex flex-wrap items-center gap-2">
+      <h3 className="font-medium font-sans border-b border-black text-base mb-2">
         Sizes:
       </h3>
-      <select
-        onChange={(e) => setSize(e.target.value)}
-        className="border-2 border-gray-300 min-w-[240px] max-w-full h-12 font-poster focus:outline-none focus:ring-0 focus:border-2 focus:border-gray-300"
-      >
-        <option value="">Select Size</option>
-        {variant?.map((item: any) => (
-          <option key={item.id} value={item}>
-            {item?.size}
-          </option>
+      <div className="flex flex-wrap gap-2">
+        {variant?.map((item: any, id: any) => (
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
-      </select>
-      {/* <div className="flex flex-wrap gap-2">
-                {variant?.map((item, id) => <Size key={id} item={item} select={size} setSelect={setSize} />)}
-            </div> */}
+      </div>
     </div>
   );
 };
@@ -776,11 +818,19 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-// const Size = ({ item, select, setSelect }) => {
-//     return (
-//         <div onClick={() => setSelect(item)} className={`border px-1 w-max h-10 flex justify-center items-center font-sans font-medium rounded ${item === select ? "border-gray-900" : "border-gray-300"}`}>{item?.size}</div>
-//     )
-// }
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
+  return (
+    <div
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
+      className={`border px-1 w-max h-10 flex justify-center items-center font-sans font-medium rounded ${item === select ? "border-gray-900" : "border-gray-300"}`}
+    >
+      {item?.size}
+    </div>
+  );
+};
 
 const Color = ({ text, select, setSelect, setSize }: any) => {
   return (
@@ -801,10 +851,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}

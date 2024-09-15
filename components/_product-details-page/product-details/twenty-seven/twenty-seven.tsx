@@ -44,9 +44,11 @@ const TwentySeven = ({ data, updatedData }: any) => {
         data={data}
       />
 
-      {product && product?.video_link && (
-        <VideoPlayer videoUrl={product?.video_link} />
-      )}
+      <div className="py-7">
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
+      </div>
 
       <Related product={relatedProducts} />
     </div>

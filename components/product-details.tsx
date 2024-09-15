@@ -177,6 +177,8 @@ const componentsMap: any = {
         "@/components/_product-details-page/product-details/thirty-four/thirty-four"
       )
   ),
+
+  // start from here image variant
   thirtyfive: lazy(
     () =>
       import(
@@ -227,8 +229,8 @@ const ProductDetails = () => {
     setUpdatedData({ product_id, store_id, slug });
   }, [product_id, store_id, slug]);
 
-  const RenderComponent = componentsMap["twentyfour"] || null;
-  // const RenderComponent = componentsMap[design?.single_product_page] || null;
+  // const RenderComponent = componentsMap["forty"] || null;
+  const RenderComponent = componentsMap[design?.single_product_page] || null;
 
   return (
     <>

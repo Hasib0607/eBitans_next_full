@@ -49,9 +49,11 @@ const ThirtySix = ({ data, updatedData }: any) => {
         {reviews && <According text={"Customer Reviews"} reviews={reviews} />}
       </Details>
 
-      {product && product?.video_link && (
-        <VideoPlayer videoUrl={product?.video_link} />
-      )}
+      <div className="py-7">
+        {product && product?.video_link && (
+          <VideoPlayer videoUrl={product?.video_link} />
+        )}
+      </div>
 
       <Related product={relatedProducts} />
     </div>
