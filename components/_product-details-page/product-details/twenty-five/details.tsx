@@ -440,6 +440,7 @@ const Details = ({
       <div className="md:col-span-4 h-full sm:cursor-zoom-in overflow-hidden ">
         {product?.image?.slice(0, 1).map((item: any, id: any) => (
           <ImageMagnifier
+            key={id}
             src={productImg + item}
             // width={300}
             // height={200}
