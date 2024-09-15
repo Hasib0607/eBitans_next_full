@@ -232,7 +232,6 @@ const ProductDetails = () => {
   // const RenderComponent = componentsMap["eight"] || null;
   const RenderComponent = componentsMap[design?.single_product_page] || null;
 
-  console.log(design?.single_product_page, "single product page");
   return (
     <>
       {RenderComponent && (

@@ -271,7 +271,6 @@ const YourOrders = ({
                 "Content-Type": "application/json",
               },
             });
-            console.log("response:", formData, apiOrder);
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
