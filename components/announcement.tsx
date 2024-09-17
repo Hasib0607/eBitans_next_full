@@ -44,7 +44,7 @@ const Announcement = async ({ design, url }: any) => {
             <span
               style={{ color: design?.text_color }}
               key={index}
-              className="text-xl mx-4"
+              className="text-sm md:text-xl mx-4"
             >
               {an.announcement}
             </span>
