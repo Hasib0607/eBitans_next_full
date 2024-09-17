@@ -241,16 +241,16 @@ const Product = ({ products, status, setPage, isInfinityScroll }: any) => {
 const Filter = ({ onChange }: any) => {
   return (
     <div>
-      <div className="md:flex md:flex-row border border-gray-400  py-0 px-0 rounded-xl lg:px-3 justify-between items-center gap-1">
+      <div className="md:flex md:flex-row   py-0 px-0 rounded-xl lg:px-3 justify-between items-center gap-1">
         <div className="md:block hidden">
           <p>Sort By:</p>
         </div>
         <div className="flex items-center gap-3 lg:-ml-28 xl:-ml-0 md:-ml-0 ml-2 justify-center">
           {/* Short by  */}
-          <div className="">
+          <div className="relative">
             <select
               onChange={onChange}
-              className="w-48 font-medium lg:cursor-pointer h-12 px-2 p-0 text-md border-gray-200 rounded-md  focus:border-gray-200 focus:ring-transparent outline-none focus:outline-none"
+              className="w-48 font-medium lg:cursor-pointer h-12 text-md  rounded-md  focus:ring-transparent outline-none focus:outline-none bg-transparent border border-gray-500 appearance-none pl-3"
               id="category"
               name="category"
             >
@@ -268,6 +268,10 @@ const Filter = ({ onChange }: any) => {
                 Price, High to Low
               </option>
             </select>
+            {/* Custom caret on the left */}
+            <span className="absolute right-2 top-1/2 transform -translate-y-1/2 pointer-events-none">
+              ▼
+            </span>
           </div>
 
           {/* <p onClick={() => setOpen(!open)} className={`px-10 py-1 md:hidden flex  text-sm font-semibold bg-black text-white ${open === true ? "filter border-transparent " : "bg-black border-black"} lg:cursor-pointer`}>FILTER</p> */}
