@@ -1,4 +1,4 @@
-export const imgUrl = "https://admin.ebitans.com/assets/images/setting/";
+export const imgUrl = process.env.NEXT_PUBLIC_BASE + "/assets/images/setting/";
 export const iconImg = "https://admin.ebitans.com/assets/images/icon/";
 export const catImg = "https://admin.ebitans.com/assets/images/category/";
 export const sliderImg = "https://admin.ebitans.com/assets/images/slider/";
