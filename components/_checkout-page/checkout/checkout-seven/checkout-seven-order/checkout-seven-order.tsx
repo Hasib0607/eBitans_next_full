@@ -381,7 +381,7 @@ const CheckOutSevenOrder = ({
             if (response?.data) {
               if (!response?.data?.url && !response?.data?.error) {
                 toast(
-                  `Your #${response?.data?.order?.reference_no} order complete successfully!`,
+                  `Your #${response?.data?.order?.reference_no} order received successfully!`,
                   {
                     type: "success",
                     autoClose: 1000,
@@ -440,7 +440,7 @@ const CheckOutSevenOrder = ({
             if (response) {
               if (!response?.url && !response?.error) {
                 toast(
-                  `Your #${response?.order?.reference_no} order complete successfully!`,
+                  `Your #${response?.order?.reference_no} order received successfully!`,
                   {
                     type: "success",
                     autoClose: 1000,

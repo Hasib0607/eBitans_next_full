@@ -390,7 +390,7 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
           <div className="">
             <select
               onChange={onChange}
-              className="xl:w-96 lg:w-80 md:w-52 w-40 lg:cursor-pointer h-8 px-2 p-0 text-sm border-gray-200 focus:border-gray-200 focus:ring-transparent outline-none focus:outline-none flex items-center"
+              className="border border-black xl:w-96 lg:w-80 md:w-52 w-40 lg:cursor-pointer h-8 px-2 p-0 text-sm focus:border-gray-200 focus:ring-transparent outline-none focus:outline-none flex items-center"
               id="category"
               name="category"
             >

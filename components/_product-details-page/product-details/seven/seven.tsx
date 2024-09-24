@@ -57,7 +57,7 @@ const Seven = ({ data, updatedData }: Props) => {
       <Details
         fetchStatus={fetchStatus}
         data={data}
-        product={product}
+        product={product}   
         vrcolor={vrcolor}
         variant={variant}
       >
@@ -210,14 +210,14 @@ const Related = ({ product }: any) => {
         <Arrow prevEl={prev} nextEl={next}></Arrow>
       </div>
       <div className="">
-        <SliderFive prevEl={prev} nextEl={next}>
+        {/* <SliderFive prevEl={prev} nextEl={next}>
           {product?.slice(0, 10).map((item: any) => (
             <SwiperSlide key={item?.id}>
-              {/* <ProductCardTwo item={item} /> */}
+              <ProductCardTwo item={item} /> it was commented out
               <Card12 item={item} />
             </SwiperSlide>
           ))}
-        </SliderFive>
+        </SliderFive> */}
       </div>
     </div>
   );

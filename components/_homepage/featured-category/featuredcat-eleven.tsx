@@ -148,66 +148,6 @@ const FeaturedEleven = ({ category, design, store_id }: any) => {
         ))}
       </Swiper>
 
-      <Swiper
-        autoplay={{
-          delay: 2000,
-        }}
-        // loop={true}
-        speed={1000}
-        modules={[Grid, Autoplay, A11y, EffectFade, Navigation, Controller]}
-        slidesPerView={2}
-        grid={{
-          rows: 2,
-        }}
-        spaceBetween={10}
-        navigation={{
-          prevEl: navigationPrevRef.current,
-          nextEl: navigationNextRef.current,
-        }}
-        onSwiper={(swiper) => {
-          // Delay execution for the refs to be defined
-          setTimeout(() => {
-            // Override prevEl & nextEl now that refs are defined
-            if (
-              swiper?.params?.navigation &&
-              typeof swiper?.params?.navigation !== "boolean"
-            ) {
-              swiper.params.navigation.prevEl = navigationPrevRef.current;
-              swiper.params.navigation.nextEl = navigationNextRef.current;
-            }
-            // Re-init navigation
-            swiper?.navigation?.destroy();
-            swiper?.navigation?.init();
-            swiper?.navigation?.update();
-          });
-        }}
-        className="h-[300px] sm:hidden"
-      >
-        {category?.map((item: any) => (
-          <SwiperSlide key={item?.id} className="swiperjs_grid_eleven">
-            <Link
-              href={"/category/" + item?.id}
-              onClick={() => router.push(`/category/${item?.id}`)}
-              className={`${
-                store_id === 2109 ? "bg-[#d5b5f8]" : "bg-gray-200"
-              } rounded-lg pointer-events-auto p-2 border text-center w-full`}
-            >
-              <div className="flex justify-center p-1">
-                <img
-                  className="w-16 h-auto"
-                  src={iconImg + item?.icon}
-                  alt="catImage"
-                />
-              </div>
-              <div className="flex justify-center mt-3">
-                <p className="whitespace-nowrap overflow-hidden text-ellipsis w-[100px]">
-                  {item?.name}
-                </p>
-              </div>
-            </Link>
-          </SwiperSlide>
-        ))}
-      </Swiper>
     </div>
   );
 };

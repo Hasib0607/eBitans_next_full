@@ -11,6 +11,7 @@ import {
 } from "react-icons/bs";
 import useTheme from "@/hooks/use-theme";
 import { productImg } from "@/site-settings/siteUrl";
+// the above one
 
 import "node_modules/slick-carousel/slick/slick.css";
 import "node_modules/slick-carousel/slick/slick-theme.css";

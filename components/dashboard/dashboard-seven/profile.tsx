@@ -69,7 +69,7 @@ const Profile = () => {
     } else {
       if (data?.image[0]) {
         if (data?.image[0].size > 2024000) {
-          toast("Your Image very large more then 2MB!", {
+          toast("Image larger than 2MB!", {
             type: "warning",
           });
           return;

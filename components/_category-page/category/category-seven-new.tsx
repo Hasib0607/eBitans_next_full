@@ -220,7 +220,7 @@ const Filter = ({ onChange }: any) => {
           <div className="">
             <select
               onChange={onChange}
-              className="w-48 font-medium lg:cursor-pointer h-12 px-2 p-0 text-md border-gray-200 rounded-md  focus:border-gray-200 focus:ring-transparent outline-none focus:outline-none"
+              className="border-2 w-48 font-medium lg:cursor-pointer h-12 px-2 p-0 text-md border-gray-200 rounded-md  focus:border-gray-200 focus:ring-transparent outline-none focus:outline-none"
               id="category"
               name="category"
             >

@@ -1,4 +1,5 @@
 import axios from "axios";
+import Marquee from "react-fast-marquee";
 
 const Announcement = async ({ design, url }: any) => {
   let anArray = [];
@@ -24,32 +25,35 @@ const Announcement = async ({ design, url }: any) => {
   return (
     <div id="annoucement" style={{ background: design?.header_color }}>
       <div className="relative flex overflow-x-hidden container">
-        <div className="py-2 animate-marquee whitespace-nowrap">
-          {alternatedArray.map((an: any, index: number) => (
-            <span
-              style={{ color: design?.text_color }}
-              key={index}
-              className="text-[10px] md:text-xl mx-4"
-            >
-              {an.announcement}
-            </span>
-          ))}
-        </div>
-
-        <div
-          style={{ background: design?.header_color }}
-          className="absolute top-0 py-2 animate-marquee2 whitespace-nowrap"
-        >
-          {alternatedArray.map((an: any, index: number) => (
-            <span
-              style={{ color: design?.text_color }}
-              key={index}
-              className="text-[10px] md:text-xl mx-4"
-            >
-              {an.announcement}
-            </span>
-          ))}
-        </div>
+        <Marquee speed={10} pauseOnHover={true}>
+          <div className="py-2  whitespace-nowrap">
+            {alternatedArray.map((an: any, index: number) => (
+              <span
+                style={{ color: design?.text_color }}
+                key={index}
+                className="text-[9px] md:text-xl mx-4"
+              >
+                {an.announcement}
+              </span>
+            ))}
+          </div>
+        </Marquee>
+        {/* <Marquee speed={10}>
+          <div
+            style={{ background: design?.header_color }}
+            className="absolute top-0 py-2  whitespace-nowrap"
+          >
+            {alternatedArray.map((an: any, index: number) => (
+              <span
+                style={{ color: design?.text_color }}
+                key={index}
+                className="text-[10px] md:text-xl mx-4"
+              >
+                {an.announcement}
+              </span>
+            ))}
+          </div>
+        </Marquee> */}
       </div>
     </div>
   );

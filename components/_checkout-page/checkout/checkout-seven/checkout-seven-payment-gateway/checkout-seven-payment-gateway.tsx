@@ -97,9 +97,9 @@ const CheckOutSevenPaymentGateway = ({
                     color:
                       selectPayment === "cod" ? design?.text_color : "#000",
                   }}
-                  className={`p-5 rounded space-y-2  w-max transition-colors duration-300 relative flex justify-between border border-gray-300`}
+                  className={`p-5 lg:cursor-pointer rounded space-y-2  w-max transition-colors duration-300 relative flex justify-between border border-gray-300`}
                 >
-                  <div className="flex justify-between lg:cursor-pointer">
+                  <div className="flex justify-between">
                     <h3 className="font-semibold tracking-wider">
                       {"Cash On Delivery"}
                     </h3>

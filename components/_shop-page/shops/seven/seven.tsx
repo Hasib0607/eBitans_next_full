@@ -250,7 +250,7 @@ const Filter = ({ onChange }: any) => {
           <div className="relative">
             <select
               onChange={onChange}
-              className="w-48 font-medium lg:cursor-pointer h-12 text-md  rounded-md  focus:ring-transparent outline-none focus:outline-none bg-transparent border border-gray-500 appearance-none pl-3"
+              className="selectdd w-48 font-medium lg:cursor-pointer h-12 text-md  rounded-md  focus:ring-transparent outline-none focus:outline-none bg-transparent border border-gray-500 appearance-none pl-3"
               id="category"
               name="category"
             >

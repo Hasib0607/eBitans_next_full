@@ -71,26 +71,30 @@ const FooterEleven = ({
             </p>
           </div>
           <br />
-          <div className="flex gap-4">
-            <BsHeadset
-              width={20}
-              height={20}
-              style={{ color: design?.header_color }}
-            />
-            <p className="text-sm pl-2 xl:pl-0 lg:pl-2 md:pl-2">
-              Phone : {headerSetting?.phone}
-            </p>
+          <div>
+            <a className="flex gap-4 menu-hover" href={"tel:+88" + headerSetting?.phone}>
+              <BsHeadset
+                width={20}
+                height={20}
+                style={{ color: design?.header_color }}
+              />
+              <p className="text-sm pl-2 xl:pl-0 lg:pl-2 md:pl-2">
+                Phone : {headerSetting?.phone}
+              </p>
+            </a>
           </div>
           <br />
-          <div className="flex gap-4">
-            <SiMinutemailer
-              width={20}
-              height={20}
-              style={{ color: design?.header_color }}
-            />
-            <p className="text-sm pl-2 xl:pl-0 lg:pl-2 md:pl-2">
-              Email : {headerSetting?.email}
-            </p>
+          <div>
+            <a className="flex gap-4 menu-hover" href={"mailto:" + headerSetting?.email}>
+              <SiMinutemailer
+                width={20}
+                height={20}
+                style={{ color: design?.header_color }}
+              />
+              <p className="text-sm pl-2 xl:pl-0 lg:pl-2 md:pl-2">
+                Email : {headerSetting?.email}
+              </p>
+            </a>
           </div>
         </div>
         <div className="col-span-2 hidden sm:hidden lg:block xl:col-span-2 md:col-span-1 lg:col-span-1">
@@ -100,12 +104,12 @@ const FooterEleven = ({
           </div>
         </div>
         <div className="col-span-2 xl:col-span-1 md:col-span-6 lg:col-span-1 lg:hidden">
-          <Accordion name={"Menu"} menu={menu} cls />
+          <Accordion name={"Menu"} menu={menu} cls={cls} />
         </div>
-        <div className="hidden lg:block col-span-2 xl:col-span-2 md:col-span-6 lg:col-span-1">
+        <div className="col-span-2 hidden sm:hidden lg:block xl:col-span-2 md:col-span-1 lg:col-span-1">
           <h2 className="font-bold">Categories</h2>
           <div className="mt-4">
-            <CategoryList cls={cls} />
+            <CategoryList cls={cls} category={category} />
           </div>
         </div>
 

@@ -25,7 +25,7 @@ const BlogPage = async () => {
   const blogTypeData = (await fetchBlogTypeData(url)) ?? [];
 
   return (
-    <div className="sm:pt-[85px] pt-[50px] relative z-[1]">
+    <div className="md:pt-[10px] pt-[5px] relative z-[1]">
       <div className="sm:h-[40vh] h-[15vh] bg-center bg-[length:100%_100%] flex flex-col gap-4 items-center justify-center bg-[url('https://ebitans.com/Image/cover/eBitans-Web-Bannar4.png')] bg-no-repeat">
         <h1 className="text-4xl font-bold my-1 text-center text-[#f1593a]">
           Blogs

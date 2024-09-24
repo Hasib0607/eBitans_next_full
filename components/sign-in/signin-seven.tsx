@@ -172,7 +172,7 @@ const LoginSeven = () => {
                   </Link>
                 </p>
                 <div className="flex justify-center w-full">
-                  {/* <LoginWith /> */}
+                  {/* <LoginWith /> it was commented out */}
                 </div>
               </div>
             </div>

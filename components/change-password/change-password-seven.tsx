@@ -26,7 +26,7 @@ const ChangePasswordSeven = () => {
           }
         });
     } else {
-      toast("Please enter correct Password!", {
+      toast("Please enter the same Password!", {
         type: "error",
       });
     }

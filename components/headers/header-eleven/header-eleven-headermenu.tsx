@@ -9,7 +9,7 @@ import { RiAccountPinCircleFill } from "react-icons/ri";
 import { BiLogOut } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
+import Link from "next/link"; 
 import Search from "../header-ten/search";
 import { imgUrl } from "@/site-settings/siteUrl";
 import { headerBg } from "@/site-settings/color";
@@ -36,6 +36,7 @@ const HeaderElevenHeaderMenu = () => {
       window.location.href = "/";
     }
   };
+  const cartList = useSelector((state: any) => state.cart.cartList);
   return (
     <div>
       {/* cart open  */}
@@ -62,7 +63,7 @@ const HeaderElevenHeaderMenu = () => {
                 value={searchTxt}
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
-                placeholder="Enter your search key ..."
+                placeholder=" Enter your search key ..."
                 className="bg-white h-11 w-full  outline-none focus:outline-none focus:border-gray-200 search-border focus:ring-0 z-50"
               />
             </div>
@@ -95,12 +96,12 @@ const HeaderElevenHeaderMenu = () => {
               <p className={`pr-1 lg:cursor-pointer`}>
                 <HiOutlineShoppingBag className="text-3xl font-thin" />{" "}
               </p>
-              {/* <p
+              <p
                 style={{ background: bgColor, color: design?.text_color }}
                 className="bg-[#c0b07d] text-sm text-white mb-5 -ml-5 rounded-full w-fit px-1.5 h-fit"
               >
                 {cartList.length}
-              </p> */}
+              </p>
             </div>
             <div>
               <p

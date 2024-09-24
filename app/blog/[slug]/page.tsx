@@ -43,7 +43,7 @@ const BlogDetails = async ({ params }: any) => {
   const markup = { __html: details?.description };
 
   return (
-    <div className="bg-[#f7f7f7] sm:pt-[85px] pt-[50px] container px-5 lg:px-10 relative z-[1]">
+    <div className="bg-[#f7f7f7] md:pt-[10px] pt-[5px] container px-5 lg:px-10 relative z-[1]">
       <div className="relative">
         <div>
           <Image

@@ -103,8 +103,8 @@ const CheckOutSeven = () => {
 
   return (
     <div className="bg-white container px-5">
-      <h1 className="text-center text-3xl font-bold">Checkout</h1>
-      <div className="md:grid lg:grid-cols-3 md:gap-2 xl:gap-6 mt-1 py-4 px-2">
+      <h1 className="text-center py-10 text-3xl font-bold">Checkout</h1>
+      <div className="md:grid lg:grid-cols-3 md:gap-10 xl:gap-16 mt-1 py-4 px-2">
         <div className=" mt-5 md:mt-0 lg:col-span-2">
           {bookingData?.status === 200 && (
             <Booking

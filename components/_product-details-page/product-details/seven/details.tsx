@@ -23,6 +23,7 @@ import { toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HSlider } from "../eight/slider";
+import Skeleton from "react-loading-skeleton";
 
 export const fetchCampaignProduct = async (id: any, store_id: any) => {
   try {
@@ -430,17 +431,21 @@ const Details = ({
 
   if (isLoading) {
     return (
-      <div className="h-[90vh] flex justify-center items-center">
-        <MagnifyingGlass
-          visible={true}
-          height="80"
-          width="80"
-          ariaLabel="magnifying-glass-loading"
-          wrapperStyle={{}}
-          wrapperClass="magnifying-glass-wrapper"
-          glassColor="#c0efff"
-          color="#e15b64"
-        />
+      <div className=" container h-[70vh] gap-2 md:gap-20 flex justify-center items-center">
+        <div className="md:w-[600px] md:min-h-[600px]">
+          <Skeleton height={"600px"} />
+        </div>
+        <div>
+          <div className="mb-5 md:w-[400px] md:min-h-[150px]">
+            <Skeleton height={"150px"} />
+          </div>
+          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
+            <Skeleton height={"50px"} />
+          </div>
+          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
+            <Skeleton height={"50px"} />
+          </div>
+        </div>
       </div>
     );
   }
@@ -758,7 +763,7 @@ const Size = ({ item, select, setSelect, setActiveImg }: any) => {
         setSelect(item);
         setActiveImg(item?.image);
       }}
-      className={`border w-max px-2 h-10 flex justify-center items-center font-sans font-medium rounded ${
+      className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >

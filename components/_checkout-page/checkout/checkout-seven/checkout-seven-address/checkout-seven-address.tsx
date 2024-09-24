@@ -97,7 +97,7 @@ const CheckOutSevenAddress = ({
               >
                 Addresses{" "}
                 {!selectAddress && (
-                  <span className="text-sm text-red-500">
+                  <span className="text-[12px] text-red-500">
                     ( Please Select Your Address ) *
                   </span>
                 )}
@@ -262,7 +262,7 @@ const Single = ({
           selectAddress?.id === item?.id ? design?.header_color : "#fff",
         color: selectAddress?.id === item?.id ? design?.text_color : "#000",
       }}
-      className={`border border-gray-300 p-5 rounded space-y-2 w-full transition-colors duration-300 relative`}
+      className={`cursor-pointer border border-gray-300 p-5 rounded space-y-2 w-full transition-colors duration-300 relative`}
     >
       <div className="flex justify-between lg:cursor-pointer">
         <h3 className="font-semibold tracking-wide capitalize">
