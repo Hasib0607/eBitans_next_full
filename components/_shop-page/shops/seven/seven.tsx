@@ -15,7 +15,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { HiOutlineAdjustments } from "react-icons/hi";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@/components/loader/skeleton";
 
 const fetchData = async (
   page: any,

@@ -9,7 +9,7 @@ import { RiAccountPinCircleFill } from "react-icons/ri";
 import { BiLogOut } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
-import Link from "next/link"; 
+import Link from "next/link";
 import Search from "../header-ten/search";
 import { imgUrl } from "@/site-settings/siteUrl";
 import { headerBg } from "@/site-settings/color";

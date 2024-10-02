@@ -321,6 +321,8 @@ const useData = () => {
   // };
 
   // main home page api
+
+  //check here
   const fetchHeader = useCallback(
     async (data: any) => {
       const res = await axios.post(

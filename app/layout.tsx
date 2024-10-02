@@ -1,3 +1,4 @@
+import dynamic from "next/dynamic";
 import Announcement from "@/components/announcement";
 import { getSubdomainName } from "@/lib";
 import getUrl from "@/utils/get-url";
@@ -10,6 +11,8 @@ import "react-toastify/dist/ReactToastify.css";
 import AppWrapper from "./app-wrapper";
 import "./globals.css";
 import WrongUrl from "@/components/wrongUrl";
+// import AllMobileBottomMenu from "./mobileBottomMenu";
+
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -38,7 +41,7 @@ export default async function RootLayout({
             <AppWrapper headerSetting={headersetting} design={design}>
               {children}
             </AppWrapper>
-
+            {/* <AllMobileBottomMenu/> */}
             {fbPixel && (
               <>
                 <Script id="facebook-pixel" strategy="afterInteractive">

@@ -6,11 +6,7 @@ import FilterByPrice from "@/components/filter-by-price";
 import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import {
-  MinusIcon,
-  PlusIcon,
-  TableCellsIcon,
-} from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -439,7 +435,7 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
             onClick={() => setGrid("H")}
             className="h-6 w-6 text-hover lg:cursor-pointer"
           />
-          <TableCellsIcon
+          <Bars3Icon
             onClick={() => setGrid("V")}
             className="h-6 w-6 text-hover lg:cursor-pointer"
           />

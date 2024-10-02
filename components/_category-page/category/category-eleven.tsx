@@ -10,7 +10,7 @@ import FilterByPrice from "@/components/filter-by-price";
 import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import { PlusIcon, TableCellsIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useParams } from "next/navigation";
 import InfiniteScroll from "react-infinite-scroll-component";
@@ -427,7 +427,7 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
             onClick={() => setGrid("H")}
             className="h-6 w-6 text-hover lg:cursor-pointer"
           />
-          <TableCellsIcon
+          <Bars3Icon
             onClick={() => setGrid("V")}
             className="h-6 w-6 text-hover lg:cursor-pointer"
           />
@@ -460,7 +460,7 @@ const SingleCat = ({ item }: any) => {
         {item?.cat ? (
           <div className="px-4 h-full">
             {show ? (
-              <TableCellsIcon
+              <Bars3Icon
                 onClick={() => setShow(!show)}
                 className="h-4 w-4 text-gray-800"
               />

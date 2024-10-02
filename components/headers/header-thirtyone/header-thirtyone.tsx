@@ -14,7 +14,7 @@ import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Search from "./search";
-import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
 const HeaderThirtyOne = ({ headerSetting }: any) => {
@@ -338,7 +338,7 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
           className="lg:cursor-pointer flex lg:hidden gap-x-1 justify-center items-center pb-5"
           onClick={() => setOpen(!open)}
         >
-          <TableCellsIcon className="h-6" />
+          <Bars3Icon className="h-6" />
           <p>Menu</p>
         </div>
 

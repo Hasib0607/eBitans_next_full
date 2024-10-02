@@ -111,25 +111,11 @@ const Details = ({
       .catch(console.error);
   }, [data, store_id]);
 
-  if (fetchStatus === "fetching") {
+  if (fetchStatus === "fecthing") {
     return (
-      <div className=" container h-[70vh] gap-2 md:gap-20 flex justify-center items-center">
-        <div className="md:w-[600px] md:min-h-[600px]">
-          <Skeleton height={"600px"} />
-        </div>
-        <div>
-          <div className="mb-5 md:w-[400px] md:min-h-[150px]">
-            <Skeleton height={"150px"} />
-          </div>
-          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
-            <Skeleton height={"50px"} />
-          </div>
-          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
-            <Skeleton height={"50px"} />
-          </div>
-        </div>
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
       </div>
-    
     );
   }
 

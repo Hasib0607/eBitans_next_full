@@ -147,7 +147,6 @@ const FeaturedEleven = ({ category, design, store_id }: any) => {
           </SwiperSlide>
         ))}
       </Swiper>
-
     </div>
   );
 };

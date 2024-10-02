@@ -72,7 +72,10 @@ const FooterEleven = ({
           </div>
           <br />
           <div>
-            <a className="flex gap-4 menu-hover" href={"tel:+88" + headerSetting?.phone}>
+            <a
+              className="flex gap-4 menu-hover"
+              href={"tel:+88" + headerSetting?.phone}
+            >
               <BsHeadset
                 width={20}
                 height={20}
@@ -85,7 +88,10 @@ const FooterEleven = ({
           </div>
           <br />
           <div>
-            <a className="flex gap-4 menu-hover" href={"mailto:" + headerSetting?.email}>
+            <a
+              className="flex gap-4 menu-hover"
+              href={"mailto:" + headerSetting?.email}
+            >
               <SiMinutemailer
                 width={20}
                 height={20}

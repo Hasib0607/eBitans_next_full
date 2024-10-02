@@ -7,7 +7,7 @@ import { ThreeDots } from "react-loader-spinner";
 import img from "@/assets/bg-image/twenty-four-shop.webp";
 import Pagination from "./pagination";
 import httpReq from "@/utils/http/axios/http.service";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@/components/loader/skeleton";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Card49 from "@/components/card/card49";
 import Link from "next/link";

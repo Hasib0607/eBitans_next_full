@@ -3,7 +3,7 @@ import useTheme from "@/hooks/use-theme";
 import { imgUrl } from "@/site-settings/siteUrl";
 import {
   PhoneIcon,
-  TableCellsIcon,
+  Bars3Icon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -173,7 +173,7 @@ const HeaderDown = ({ headerSetting }: any) => {
             className="border border-gray-300 p-1 lg:cursor-pointer"
             onClick={() => setOpen(!open)}
           >
-            <TableCellsIcon className="h-5 w-5" />
+            <Bars3Icon className="h-5 w-5" />
           </div>
           <div className="lg:block hidden">
             {headerSetting?.logo === null ? (
@@ -186,7 +186,7 @@ const HeaderDown = ({ headerSetting }: any) => {
               <Link href="/">
                 <img
                   className="h-10"
-                  src={imgUrl + headerSetting.logo}
+                  src={imgUrl + headerSetting?.logo}
                   alt="logo"
                 />
               </Link>
@@ -247,7 +247,7 @@ const HeaderDown = ({ headerSetting }: any) => {
             <Link href="/">
               <img
                 className="h-10"
-                src={imgUrl + headerSetting.logo}
+                src={imgUrl + headerSetting?.logo}
                 alt="logo"
               />
             </Link>
@@ -281,7 +281,7 @@ const HeaderDown = ({ headerSetting }: any) => {
                 <Link href="/">
                   <img
                     className="h-10"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

@@ -136,11 +136,11 @@ const Card21 = ({ item }: any) => {
 
   return (
     <>
-      <div className="group relative overflow-hidden rounded-[20px] border hover:shadow-lg">
+      <div className="group relative overflow-hidden rounded-[20px] h-fit border hover:shadow-lg ">
         {/* out of stock  */}
         {item?.quantity === "0" && (
           <Link href={"/product/" + item?.id + "/" + item?.slug}>
-            <div className="absolute top-0 right-0 w-full h-full bg-black bg-opacity-50 z-[1]">
+            <div className="absolute top-0 right-0 w-full h bg-black bg-opacity-50 z-[1]">
               <p className="bg-red-600 text-white px-2 py-1 w-max absolute right-0">
                 Sold Out
               </p>
@@ -154,7 +154,7 @@ const Card21 = ({ item }: any) => {
             <img
               src={productImg + item?.image[0]}
               alt="Mountain"
-              className=" p-2 h-auto min-w-[100%] group-hover:scale-105 transition-all duration-300 ease-linear"
+              className=" p-2  min-w-[100%] group-hover:scale-105 transition-all duration-300 ease-linear"
             />
           </Link>
           <div
