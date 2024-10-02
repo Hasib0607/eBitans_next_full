@@ -243,7 +243,7 @@ export const SingleCategory: FC<SingleCategoryProps> = ({
         <>
           <div className="ml-8">
             {item?.cat?.map((sub: any) => (
-              <div key={`${sub+1}`} className="py-2">
+              <div key={`${sub + 1}`} className="py-2">
                 <Link
                   onClick={() => setOpen(!open)}
                   href={"/category/" + sub?.id}

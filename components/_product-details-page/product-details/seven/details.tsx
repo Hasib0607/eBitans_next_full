@@ -452,13 +452,13 @@ const Details = ({
           >
             {/* {product.image.length+variant?.map((x:any)=>x.image)} */}
             {product?.image?.map((x: any) => (
-              <div key={`$${x+1}`} className="md:w-[48%] grow">
+              <div key={`$${x + 1}`} className="md:w-[48%] grow">
                 <img className="pb-1" src={`${productImg + x}`} alt="" />
               </div>
             ))}
             {variant &&
               variant?.map((x: any) => (
-                <div key={`${x+1}`} className="md:w-[48%] grow">
+                <div key={`${x + 1}`} className="md:w-[48%] grow">
                   <img src={`${productImg + x?.image}`} alt="" />
                 </div>
               ))}

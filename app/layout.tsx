@@ -58,7 +58,7 @@ export default async function RootLayout({
                 </Script>
                 <noscript>
                   <img
-                  alt="pixel"
+                    alt="pixel"
                     height="1"
                     width="1"
                     style={{ display: "none" }}
