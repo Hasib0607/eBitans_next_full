@@ -15,6 +15,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import { headerBg } from "@/site-settings/color";
 import useTheme from "@/hooks/use-theme";
 import { logout } from "@/redux/features/auth.slice";
+import GetLogo from "@/components/getLogo/getLogo";
 
 const HeaderElevenHeaderMenu = () => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
@@ -43,17 +44,7 @@ const HeaderElevenHeaderMenu = () => {
       <BottomCart open={cartOpen} setOpen={setCartOpen} />
       <div className=" flex justify-between items-center bg-white sm:container px-5 my-2">
         <div>
-          <Link href="/">
-            {!headerSetting?.logo ? (
-              <p>{headerSetting?.website_name}</p>
-            ) : (
-              <img
-                className="h-[45px] w-auto overflow-hidden"
-                src={imgUrl + headerSetting?.logo}
-                alt="logo"
-              />
-            )}
-          </Link>
+          <GetLogo/>
         </div>
 
         <div className="lg:basis-3/6 w-full h-12">

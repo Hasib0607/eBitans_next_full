@@ -1,10 +1,17 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import ReactSkeleton from "react-loading-skeleton";
 interface SkeletonProps {
   height?: string; // Make height optional
 }
 const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, []);
+  
   let page: any;
   const url: string = window.location.href;
   const checkPage = () => {
@@ -40,7 +47,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
   return (
     <div>
       <section className="bg-white ">
-        <div className="sm:container px-5 sm:py-10 py-5 mx-auto animate-pulse fixed md:static top-32 left-5 mb-96 md:mb-0">
+        <div className="sm:container px-5 sm:py-10 py-5 mx-auto animate-pulse fixed left-[50%] translate-x-[-50%] md:translate-x-0 md:static top-32 mb-96 md:mb-0">
           {/* <performance className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700" /> */}
           {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
         <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p> */}
