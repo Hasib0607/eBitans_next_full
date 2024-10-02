@@ -1,25 +1,28 @@
-'use client'
-import { HomeIcon, ShoppingCartIcon, UserIcon } from '@heroicons/react/24/solid';
-import React, { useState,FC } from 'react';
-import Link from 'next/link';
-import useTheme from '@/hooks/use-theme';
-import { BottomCart } from '@/components/headers/card-popup-three';
-import { motion, AnimatePresence } from 'framer-motion'
-import { MinusIcon, PlusIcon } from '@heroicons/react/24/outline';
-import { useSelector } from 'react-redux'
-import Search from '@/components/headers/header-four/search';
-import { iconImg } from '@/site-settings/siteUrl';
-
+"use client";
+import {
+  HomeIcon,
+  ShoppingCartIcon,
+  UserIcon,
+} from "@heroicons/react/24/solid";
+import React, { useState, FC } from "react";
+import Link from "next/link";
+import useTheme from "@/hooks/use-theme";
+import { BottomCart } from "@/components/headers/card-popup-three";
+import { motion, AnimatePresence } from "framer-motion";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { useSelector } from "react-redux";
+import Search from "@/components/headers/header-four/search";
+import { iconImg } from "@/site-settings/siteUrl";
 
 const MobileNavFive = () => {
-    const { design, category } = useTheme()
-    const [cart, setCart] = useState(false)
-    const [searchshow, setSearchshow] = useState(false)
-    const [open, setOpen] = useState(false)
+  const { design, category } = useTheme();
+  const [cart, setCart] = useState(false);
+  const [searchshow, setSearchshow] = useState(false);
+  const [open, setOpen] = useState(false);
 
-    const cartList = useSelector((state:any) => state.cart.cartList)
+  const cartList = useSelector((state: any) => state.cart.cartList);
 
-    const styleCss = `
+  const styleCss = `
   
   
     .cart-color {
@@ -28,58 +31,107 @@ const MobileNavFive = () => {
      }
 
  
-    `
+    `;
 
-    return (
-        <>
-            <style>{styleCss}</style>
-            {open && <div onClick={() => setOpen(false)} className='bottom-0 right-0 left-0 fixed top-0 z-[6] bg-black bg-opacity-40 lg:cursor-pointer'></div>}
-            <div className='lg:hidden h-[50px] bg-white shadow-lg drop-shadow-xl border border-t border-gray-100 flex justify-around items-center fixed bottom-0 left-0 right-0 z-10'>
-                <div onClick={() => { setOpen(!open); setSearchshow(false) }} className={'rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear'}>
-                    {gridIcon}
-                </div>
-                <div onClick={() => { setSearchshow(!searchshow); setOpen(false) }} className={'rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear'}>
-                    {searchIcon}
-                </div>
-                <Link onClick={() => setOpen(false)} href='/' style={{ backgroundColor: design?.header_color, }} className={'rounded-full p-5 -mt-10'}>
-
-                    <HomeIcon color={design?.text_color} width={25} />
-                </Link>
-                <div onClick={() => { setCart(!cart); setOpen(false) }} className={'rounded-full relative p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear'}>
-                    <ShoppingCartIcon width={25} />
-                    {cartList.length > 0 && <div className='absolute h-[15px] w-[15px] rounded-full cart-color flex items-center justify-center top-[3px] right-[4px]'>
-                        <p className='text-sm'>{cartList.length}</p>
-                    </div>}
-                    <BottomCart open={cart} setOpen={setCart} />
-                </div>
-                <Link onClick={() => setOpen(false)} href={'/profile'} className={'rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear '}>
-                    <UserIcon width={25} />
-                </Link>
+  return (
+    <>
+      <style>{styleCss}</style>
+      {open && (
+        <div
+          onClick={() => setOpen(false)}
+          className="bottom-0 right-0 left-0 fixed top-0 z-[6] bg-black bg-opacity-40 lg:cursor-pointer"
+        ></div>
+      )}
+      <div className="lg:hidden h-[50px] bg-white shadow-lg drop-shadow-xl border border-t border-gray-100 flex justify-around items-center fixed bottom-0 left-0 right-0 z-10">
+        <div
+          onClick={() => {
+            setOpen(!open);
+            setSearchshow(false);
+          }}
+          className={
+            "rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear"
+          }
+        >
+          {gridIcon}
+        </div>
+        <div
+          onClick={() => {
+            setSearchshow(!searchshow);
+            setOpen(false);
+          }}
+          className={
+            "rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear"
+          }
+        >
+          {searchIcon}
+        </div>
+        <Link
+          onClick={() => setOpen(false)}
+          href="/"
+          style={{ backgroundColor: design?.header_color }}
+          className={"rounded-full p-5 -mt-10"}
+        >
+          <HomeIcon color={design?.text_color} width={25} />
+        </Link>
+        <div
+          onClick={() => {
+            setCart(!cart);
+            setOpen(false);
+          }}
+          className={
+            "rounded-full relative p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear"
+          }
+        >
+          <ShoppingCartIcon width={25} />
+          {cartList.length > 0 && (
+            <div className="absolute h-[15px] w-[15px] rounded-full cart-color flex items-center justify-center top-[3px] right-[4px]">
+              <p className="text-sm">{cartList.length}</p>
             </div>
+          )}
+          <BottomCart open={cart} setOpen={setCart} />
+        </div>
+        <Link
+          onClick={() => setOpen(false)}
+          href={"/profile"}
+          className={
+            "rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear "
+          }
+        >
+          <UserIcon width={25} />
+        </Link>
+      </div>
 
-            {/* tablet and mobile view  */}
+      {/* tablet and mobile view  */}
 
-            <div className={`px-4 z-[7]`}>
-
-                <ul className={`pt-5 top-0 bg-white duration-500 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] lg:cursor-pointer ${open ? "left-0 " : "left-[-140%] "}`}>
-                    <div className='pb-7 pt-3 px-6'>
-                        <div className=' text-xl border-b-[2px] pb-5 text-center text-color flex justify-between items-center'>
-                            <p className=''>Category</p>
-                            <div onClick={() => setOpen(!open)} className='h-8' >{cancelIcon}</div>
-                        </div>
-                        <div className='flex flex-col gap-3 w-[90%]'>
-                            {category?.map((item:any) => (
-                                <SingleCategory key={item?.id} item={item} open={open} setOpen={setOpen} />
-                            ))}
-                        </div>
-                    </div>
-                </ul>
+      <div className={`px-4 z-[7]`}>
+        <ul
+          className={`pt-5 top-0 bg-white duration-500 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] lg:cursor-pointer ${open ? "left-0 " : "left-[-140%] "}`}
+        >
+          <div className="pb-7 pt-3 px-6">
+            <div className=" text-xl border-b-[2px] pb-5 text-center text-color flex justify-between items-center">
+              <p className="">Category</p>
+              <div onClick={() => setOpen(!open)} className="h-8">
+                {cancelIcon}
+              </div>
             </div>
-            <AnimatePresence>
-                {searchshow && <SearchDiv setSearchshow={setSearchshow} />}
-            </AnimatePresence>
-        </>
-    );
+            <div className="flex flex-col gap-3 w-[90%]">
+              {category?.map((item: any) => (
+                <SingleCategory
+                  key={item?.id}
+                  item={item}
+                  open={open}
+                  setOpen={setOpen}
+                />
+              ))}
+            </div>
+          </div>
+        </ul>
+      </div>
+      <AnimatePresence>
+        {searchshow && <SearchDiv setSearchshow={setSearchshow} />}
+      </AnimatePresence>
+    </>
+  );
 };
 
 export default MobileNavFive;
@@ -89,31 +141,49 @@ interface SearchDivProps {
 }
 
 export const SearchDiv: FC<SearchDivProps> = ({ setSearchshow }) => {
-    const [searchTxt, setSearchTxt] = useState('')
-    return (
-        <>
-            <div onClick={() => setSearchshow(false)} className="fixed top-0 bottom-0 left-0 right-0"></div>
-            <motion.nav
-                initial={{ y: -20, opacity: 0 }}
-                animate={{ y: 20, opacity: 1 }}
-                exit={{ y: 40, opacity: 0 }}
-                transition={{ ease: "easeOut", duration: 0.8 }}
-                 className="w-full h-8 fixed -top-2 px-2 left-0 right-0 z-[11]">
+  const [searchTxt, setSearchTxt] = useState("");
+  return (
+    <>
+      <div
+        onClick={() => setSearchshow(false)}
+        className="fixed top-0 bottom-0 left-0 right-0"
+      ></div>
+      <motion.nav
+        initial={{ y: -20, opacity: 0 }}
+        animate={{ y: 20, opacity: 1 }}
+        exit={{ y: 40, opacity: 0 }}
+        transition={{ ease: "easeOut", duration: 0.8 }}
+        className="w-full h-8 fixed -top-2 px-2 left-0 right-0 z-[11]"
+      >
+        <input
+          type="text"
+          value={searchTxt ? searchTxt : ""}
+          onChange={(e) => setSearchTxt(e.target.value)}
+          className="w-full py-3 rounded-md px-10 border outline-0 focus:outline-0 focus:border-0 z-10"
+          placeholder="Search"
+        />
+        <div
+          className={`h-5 w-5 absolute top-4 left-4 font-bold z-[4] text-gray-400`}
+        >
+          {searchIcon}
+        </div>
+        <div
+          onClick={() => {
+            setSearchTxt("");
+            setSearchshow(false);
+          }}
+          className="h-4 w-4 absolute top-4 right-4 font-bold z-[4]"
+        >
+          {cancelIcon}
+        </div>
 
-
-                <input type="text" value={searchTxt ? searchTxt : ''} onChange={(e) => setSearchTxt(e.target.value)} className='w-full py-3 rounded-md px-10 border outline-0 focus:outline-0 focus:border-0 z-10' placeholder='Search' />
-                <div  className={`h-5 w-5 absolute top-4 left-4 font-bold z-[4] text-gray-400`}>{searchIcon}</div>
-                <div  onClick={() => { setSearchTxt(''); setSearchshow(false) }} className='h-4 w-4 absolute top-4 right-4 font-bold z-[4]' >{cancelIcon}</div>
-                
-                <div className='mx-5'>
-                    {searchTxt && <Search search={searchTxt} setSearch={setSearchTxt} />}
-                </div>
-
-            </motion.nav>
-        </>
-    )
-}
-
+        <div className="mx-5">
+          {searchTxt && <Search search={searchTxt} setSearch={setSearchTxt} />}
+        </div>
+      </motion.nav>
+    </>
+  );
+};
 
 interface SubItem {
   id: number;
@@ -134,79 +204,65 @@ interface SingleCategoryProps {
   setOpen: (open: boolean) => void;
 }
 
-export const SingleCategory: FC<SingleCategoryProps> = ({ item, open, setOpen }) => {
-    const [show, setShow] = useState(false)
+export const SingleCategory: FC<SingleCategoryProps> = ({
+  item,
+  open,
+  setOpen,
+}) => {
+  const [show, setShow] = useState(false);
 
-    return (
+  return (
+    <>
+      <div className="w-full flex py-3 lg:cursor-pointer">
+        <Link
+          onClick={() => setOpen(!open)}
+          href={"/category/" + item.id}
+          className="flex-1 flex items-center gap-x-2 text-sm text-gray-900 font-medium w-max"
+        >
+          <img src={iconImg + item?.icon} alt="" className="h-5" />
+          <p>{item.name}</p>
+        </Link>
+        {item?.cat ? (
+          <div className="px-4 h-full">
+            {show ? (
+              <MinusIcon
+                onClick={() => setShow(!show)}
+                className="h-4 w-4 text-gray-800"
+              />
+            ) : (
+              <PlusIcon
+                onClick={() => setShow(!show)}
+                className="h-4 w-4 text-gray-800"
+              />
+            )}
+          </div>
+        ) : null}
+      </div>
+
+      {show && (
         <>
-            <div className="w-full flex py-3 lg:cursor-pointer">
-                <Link onClick={() => setOpen(!open)} href={'/category/' + item.id} className="flex-1 flex items-center gap-x-2 text-sm text-gray-900 font-medium w-max" >
-                    <img src={iconImg + item?.icon} alt="" className='h-5' />
-                    <p>{item.name}</p>
+          <div className="ml-8">
+            {item?.cat?.map((sub: any) => (
+              <div key={`${sub+1}`} className="py-2">
+                <Link
+                  onClick={() => setOpen(!open)}
+                  href={"/category/" + sub?.id}
+                  className="flex items-center gap-x-2 pb-2"
+                >
+                  <img src={iconImg + sub?.icon} alt="" className="h-5" />
+                  <p className="text-sm text-gray-500">{sub?.name}</p>
                 </Link>
-                {item?.cat ? <div className="px-4 h-full">
-                    {show ? <MinusIcon onClick={() => setShow(!show)} className='h-4 w-4 text-gray-800' /> :
-                        <PlusIcon onClick={() => setShow(!show)} className='h-4 w-4 text-gray-800' />}
-                </div> : null}
-            </div>
-
-            {show && <>
-                <div className="ml-8">
-                    {
-                        item?.cat?.map((sub:any) => <div className='py-2'>
-                            <Link onClick={() => setOpen(!open)} href={'/category/' + sub?.id} className='flex items-center gap-x-2 pb-2'>
-                                <img src={iconImg + sub?.icon} alt="" className='h-5' />
-                                <p className='text-sm text-gray-500'>{sub?.name}</p>
-                            </Link>
-                            <div className="pr-4">
-                                <div className="h-[1px] bg-gray-200 w-full"></div>
-                            </div>
-                        </div>)
-                    }
+                <div className="pr-4">
+                  <div className="h-[1px] bg-gray-200 w-full"></div>
                 </div>
-            </>}
+              </div>
+            ))}
+          </div>
         </>
-    )
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      )}
+    </>
+  );
+};
 
 const gridIcon = (
   <svg

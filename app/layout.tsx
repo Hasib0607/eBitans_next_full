@@ -13,7 +13,6 @@ import "./globals.css";
 import WrongUrl from "@/components/wrongUrl";
 // import AllMobileBottomMenu from "./mobileBottomMenu";
 
-
 const inter = Inter({ subsets: ["latin"] });
 
 export default async function RootLayout({
@@ -59,6 +58,7 @@ export default async function RootLayout({
                 </Script>
                 <noscript>
                   <img
+                  alt="pixel"
                     height="1"
                     width="1"
                     style={{ display: "none" }}

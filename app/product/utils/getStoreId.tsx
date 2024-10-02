@@ -1,7 +1,6 @@
 import axios from "axios";
 import { getClientUrl } from "./getClientUrl";
 
-
 const getStoreId = async () => {
   const res = await axios.post(
     process.env.NEXT_PUBLIC_API_URL +

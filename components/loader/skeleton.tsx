@@ -5,22 +5,19 @@ interface SkeletonProps {
   height?: string; // Make height optional
 }
 const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
-  let page:any;
-  const url:string=window.location.href;
-  const checkPage=()=>{
-    if(url.includes('product')){
-      page='product';
-    }
-    else if(url.includes('category')){
-      page='category'
-    }
-    else if(url.includes('shop')){
-      page='shop'
-    }
-    else page='other'
-  }
-  checkPage()
-  if(page=='product'){
+  let page: any;
+  const url: string = window.location.href;
+  const checkPage = () => {
+    if (url.includes("product")) {
+      page = "product";
+    } else if (url.includes("category")) {
+      page = "category";
+    } else if (url.includes("shop")) {
+      page = "shop";
+    } else page = "other";
+  };
+  checkPage();
+  if (page == "product") {
     return (
       <div className=" container md:h-[70vh] gap-5 md:gap-20 flex items-start md:justify-center md:items-center flex-col md:flex-row mt-10 md:mt-0 ">
         <div className="w-full h-[450px] md:w-[600px] md:min-h-[600px] px-3 md:px-0">
@@ -42,55 +39,55 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
   }
   return (
     <div>
-    <section className="bg-white ">
-      <div className="sm:container px-5 sm:py-10 py-5 mx-auto animate-pulse fixed md:static top-32 left-5 mb-96 md:mb-0">
-        {/* <performance className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700" /> */}
-        {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+      <section className="bg-white ">
+        <div className="sm:container px-5 sm:py-10 py-5 mx-auto animate-pulse fixed md:static top-32 left-5 mb-96 md:mb-0">
+          {/* <performance className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700" /> */}
+          {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
         <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p> */}
-        <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-          </div>
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-          </div>
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-          </div>
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-          </div>
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-          </div>
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-          </div>
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-          </div>
-          <div className="w-full ">
-            <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-            <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-            <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+          <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
+            <div className="w-full ">
+              <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+              <p className="w-56 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+              <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+            </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
     </div>
   );
 };

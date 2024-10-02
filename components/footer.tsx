@@ -496,7 +496,7 @@ const Footer = () => {
           page={page}
         />
       )}
-      <AllMobileBottomMenu/>
+      <AllMobileBottomMenu />
     </>
   );
 };

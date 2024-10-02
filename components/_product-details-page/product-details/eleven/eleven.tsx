@@ -45,7 +45,7 @@ const Eleven = ({ data, updatedData }: any) => {
     }
  
     `;
-if(fetchStatus=='fetching')return(<Skeleton/>)
+  if (fetchStatus == "fetching") return <Skeleton />;
   return (
     <div className="container px-5 bg-white pt-10">
       {/* <h1 className="text-[500px]">this is eleven</h1> */}

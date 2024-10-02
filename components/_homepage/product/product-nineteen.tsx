@@ -1,4 +1,4 @@
-'use client'
+"use client";
 // the hack was done above
 import Card39 from "@/components/card/card39";
 import SectionHeadingNineteen from "@/components/section-heading/section-heading-nineteen";

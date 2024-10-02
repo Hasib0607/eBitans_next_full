@@ -159,8 +159,6 @@
 
 // export default MobileNavFour;
 
-
-
 // // Define the props interface for SearchDiv
 // interface SearchDivProps {
 //   setSearchshow: (show: boolean) => void; // Function to set the visibility of the search
@@ -211,18 +209,18 @@
 //     icon: string;
 //     name: string;
 //   }
-  
+
 //   interface Category {
 //     id: number;
 //     icon: string;
 //     name: string;
 //     cat?: SubCategory[];
 //   }
-  
+
 //   interface SingleCatProps {
 //     item: Category;           // Use the defined Category type here
-//     open: boolean;           
-//     setOpen: (open: boolean) => void; 
+//     open: boolean;
+//     setOpen: (open: boolean) => void;
 //   }
 
 //   const SingleCat: React.FC<SingleCatProps> = ({ item, open, setOpen }) => { //gpt code end

@@ -1,11 +1,7 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
 import { imgUrl } from "@/site-settings/siteUrl";
-import {
-  PhoneIcon,
-  Bars3Icon,
-  XMarkIcon,
-} from "@heroicons/react/24/outline";
+import { PhoneIcon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useState } from "react";
 import {
