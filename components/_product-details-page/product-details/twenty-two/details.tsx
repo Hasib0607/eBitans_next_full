@@ -485,8 +485,13 @@ const Details = ({
           </p>
 
           {/* unit  */}
-          {!vrcolor && variant?.length !== 0 && variant?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
+          {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -649,13 +654,19 @@ const AddCart = ({ setQty, qty, onClick, buttonTwentyTwo }: any) => {
   );
 };
 
-const Units = ({ unit, setUnit, variant }: any) => {
+const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -720,10 +731,13 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect }: any) => {
+const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border lg:cursor-pointer w-max px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "select-unit" : "border-gray-300"
       }`}
@@ -740,7 +754,7 @@ const Size = ({ item, select, setSelect, setActiveImg }: any) => {
         setSelect(item);
         setActiveImg(item?.image);
       }}
-      className={`border lg:cursor-pointer w-max px-1 h-10 flex justify-center items-center font-sans font-medium rounded ${
+      className={`border lg:cursor-pointer w-max px-4 py-3 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "select-size" : "border-gray-300"
       }`}
     >

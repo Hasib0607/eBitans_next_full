@@ -8,6 +8,7 @@ import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import ImageModal from "@/utils/image-modal";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
@@ -17,11 +18,15 @@ import { HiMinus, HiPlus } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import {
   FacebookIcon,
+  FacebookMessengerIcon,
+  FacebookMessengerShareButton,
   FacebookShareButton,
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
 import { toast } from "react-toastify";
+import { ProductSlider } from "../twenty-eight/product-slider";
+import { HSlider } from "../eight/slider";
 
 const Details = ({
   data,
@@ -43,6 +48,10 @@ const Details = ({
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
+  const [open, setOpen] = useState<any>(false);
+
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
 
@@ -429,29 +438,27 @@ const Details = ({
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 w-60 text-center";
 
   return (
-    <div className="pb-20 bg-white h-full  ">
+    <div className="bg-white h-full ">
       <style>{styleCss}</style>
 
-      <div className="grid grid-cols-1 md:grid-cols-9 gap-5 ">
-        <div className="md:col-span-4">
-          {product?.image?.slice(0, 4).map((image: any, idx: any) => (
-            <div key={idx}>
-              <img
-                className="h-auto min-w-full mb-6"
-                src={productImg + image}
-                alt=""
-              />
-            </div>
-          ))}
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
+        <div className="md:col-span-5">
+          <HSlider
+            product={product}
+            setOpen={setOpen}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
         </div>
-        <div className="md:col-span-5 space-y-4 sticky top-28 h-max">
+        <div className="md:col-span-5 space-y-4 lg:sticky top-28 h-max">
           <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
             {product?.name}
           </h2>
           <div className="flex justify-start items-center gap-x-4">
             <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
               <BDT />
-              {camp?.status === "active" ? campPrice : price}
+              {camp?.status === "active" ? campPrice : price}{" "}
               {camp?.status !== "active" &&
               (product?.discount_type === "no_discount" ||
                 product?.discount_price === "0.00") ? (
@@ -464,27 +471,29 @@ const Details = ({
               )}
             </div>
             {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
-            {product?.discount_type === "percent" && (
-              <p className="text-md text-gray-400">
-                {" "}
-                {product?.discount_price}% Off
-              </p>
-            )}
+            {product?.discount_type === "percent" &&
+              product?.discount_price > 0 && (
+                <p className="text-md text-gray-400">
+                  {Math.trunc(product?.discount_price)}% Off
+                </p>
+              )}
           </div>
           <Rate rating={product?.rating} />
           <div className="h-[1px] bg-gray-300 w-full"></div>
-          <p className="text-sm text-[#5a5a5a] font-seven leading-6 apiHtml">
+          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
             {product?.description?.length > 250 && "..."}
           </p>
 
           {/* unit  */}
-          {!vrcolor &&
-            variant?.length !== 0 &&
-            variant?.length > 0 &&
-            variant[0]?.unit && (
-              <Units unit={unit} setUnit={setUnit} variant={variant} />
-            )}
+          {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
+          )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
             <>
@@ -498,21 +507,36 @@ const Details = ({
             </>
           )}
           {filterV && filterV[0]?.size && vrcolor && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
             <>
               {" "}
-              <ColorsOnly color={color} setColor={setColor} variant={variant} />
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             </>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
 
-          <div className="mt-5">
+          <div className="">
             <CallForPrice
               product={product}
               headerSetting={headerSetting}
@@ -521,46 +545,57 @@ const Details = ({
             />
           </div>
 
-          <div className="flex items-center gap-x-3 py-3">
-            <div className="">Availability:</div>
-            <div className="">
-              {productQuantity !== "0" ? (
-                <p>
-                  <span className="font-medium">{productQuantity}</span>{" "}
-                  <span className="text-green-500">In Stock!</span>
-                </p>
-              ) : (
-                <span className="text-red-600">Out of Stock!</span>
-              )}
-            </div>
-          </div>
-
           {productQuantity !== "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
                   qty={qty}
                   setQty={setQty}
+                  buyNowBtn={buttonSix}
                   onClick={() => add_to_cart()}
+                  variant={variant}
                   buttonSix={buttonSix}
                 />
               )}
             </div>
           )}
 
-          <div className="mt-5 flex items-center gap-4 space-x-4 xl:gap-4 lg:gap-5 md:gap-5 sm:gap-5   ">
-            <span>Share:</span>
-            <span className="flex py-2 space-x-2">
+          <div className="flex items-center gap-x-3">
+            <p className="font-medium">শেয়ার :</p>
+            <span className="flex space-x-2">
               <FacebookShareButton url={window.location.href}>
                 <FacebookIcon size={32} round={true} />
               </FacebookShareButton>
               <WhatsappShareButton url={window.location.href}>
                 <WhatsappIcon size={32} round={true} />
               </WhatsappShareButton>
+              <FacebookMessengerShareButton
+                appId="2"
+                url={window.location.href}
+              >
+                <FacebookMessengerIcon size={32} round={true} />
+              </FacebookMessengerShareButton>
             </span>
+          </div>
+
+          {children}
+
+          <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
+            <p>Category: {product?.category} </p>
+            <p>
+              Availability:{" "}
+              {productQuantity !== "0"
+                ? ` ${productQuantity} In Stock`
+                : "Out Of Stock"}{" "}
+            </p>
           </div>
         </div>
       </div>
+      {open && (
+        <ImageModal open={open} setOpen={setOpen}>
+          <ProductSlider product={product} open={open} />
+        </ImageModal>
+      )}
     </div>
   );
 };
@@ -626,20 +661,26 @@ const AddCart = ({ setQty, qty, onClick, buttonSix }: any) => {
   );
 };
 
-const Units = ({ unit, setUnit, variant }: any) => {
+const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="flex items-center gap-2">
       <h3 className="font-medium font-sans mb-2 border-b border-black text-base">
@@ -647,14 +688,21 @@ const ColorsOnly = ({ color, setColor, variant }: any) => {
       </h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="flex items-center gap-2">
       <h3 className="font-medium font-sans border-b border-black text-base mb-2">
@@ -662,7 +710,13 @@ const Sizes = ({ size, setSize, variant }: any) => {
       </h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -690,10 +744,13 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect }: any) => {
+const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-max px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -703,11 +760,14 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
-      className={`border w-max px-1 h-10 flex justify-center items-center font-sans font-medium rounded ${
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
+      className={`border w-max px-4 py-3 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
@@ -735,10 +795,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}

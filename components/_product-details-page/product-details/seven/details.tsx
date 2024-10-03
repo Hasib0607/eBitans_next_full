@@ -17,14 +17,13 @@ import parse from "html-react-parser";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { MagnifyingGlass } from "react-loader-spinner";
+import "react-loading-skeleton/dist/skeleton.css";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HSlider } from "../eight/slider";
-// import "react-loading-skeleton/dist/skeleton.css";
-// import Skeleton from "react-loading-skeleton";
-import Skeleton from "@/components/loader/skeleton";
+import Skeleton from "react-loading-skeleton";
 
 export const fetchCampaignProduct = async (id: any, store_id: any) => {
   try {
@@ -63,7 +62,7 @@ const Details = ({
   const [colorid, setColorid] = useState(null);
 
   // image selector
-  const [activeImg, setActiveImg] = useState("");
+  const [activeImg, setActiveImg] = useState(product?.defaultImage);
 
   // Use TanStack Query to fetch campaign product data
   const { data: camp, isLoading } = useQuery({
@@ -430,42 +429,37 @@ const Details = ({
   const buttonSeven =
     "font-bold text-white bg-gray-600 rounded-md w-60 text-center py-3 font-seven lg:cursor-pointer";
 
-  // const allImages=[...]
-
   if (isLoading) {
-    return <Skeleton />;
+    return (
+      <div className=" container h-[70vh] gap-2 md:gap-20 flex justify-center items-center">
+        <div className="md:w-[600px] md:min-h-[600px]">
+          <Skeleton height={"600px"} />
+        </div>
+        <div>
+          <div className="mb-5 md:w-[400px] md:min-h-[150px]">
+            <Skeleton height={"150px"} />
+          </div>
+          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
+            <Skeleton height={"50px"} />
+          </div>
+          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
+            <Skeleton height={"50px"} />
+          </div>
+        </div>
+      </div>
+    );
   }
 
   return (
     <div className="pt-5 pb-20 bg-white">
       <div className="grid grid-cols-1 md:grid-cols-9 gap-x-10 gap-y-5">
         <div className="md:col-span-5">
-          {/* <HSlider
+          <HSlider
             product={product}
             variant={variant}
             activeImg={activeImg}
             setActiveImg={setActiveImg}
-          /> */}
-          <div
-            onClick={() => console.log(variant)}
-            className="w-full  flex flex-wrap flex-row justify-center items-top gap-[1%]"
-          >
-            {/* {product.image.length+variant?.map((x:any)=>x.image)} */}
-            {product?.image?.map((x: any) => (
-              <div key={`$${x + 1}`} className="md:w-[48%] grow">
-                <img className="pb-1" src={`${productImg + x}`} alt="" />
-              </div>
-            ))}
-            {variant &&
-              variant?.map((x: any) => (
-                <div key={`${x + 1}`} className="md:w-[48%] grow">
-                  <img src={`${productImg + x?.image}`} alt="" />
-                </div>
-              ))}
-            {/* <div className="md:w-[24%] grow">
-              <img src={`${productImg + variant[0].image}`} alt="" />{" "}
-            </div> */}
-          </div>
+          />
         </div>
         <div className="md:col-span-4 space-y-8 font-seven">
           <h2 className="text-2xl text-[#212121] font-bold mb-3">
@@ -507,7 +501,12 @@ const Details = ({
 
           {/* Unit */}
           {!vrcolor && variant && variant.length !== 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -670,13 +669,19 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
   );
 };
 
-const Units = ({ unit, setUnit, variant }: any) => {
+const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -749,10 +754,13 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect }: any) => {
+const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-max px-2 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -769,7 +777,7 @@ const Size = ({ item, select, setSelect, setActiveImg }: any) => {
         setSelect(item);
         setActiveImg(item?.image);
       }}
-      className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded ${
+      className={`border px-4 py-3 w-10 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
@@ -817,15 +825,3 @@ const ColorSet = ({
     </div>
   );
 };
-
-// {
-//   product.image.map((x:any)=><img src={`${productImg+x}`} alt="" /> )
-//   }{
-//     product.image.map((x:any)=><img src={`${productImg+x}`} alt="" /> )
-//     }{
-//       product.image.map((x:any)=><img src={`${productImg+x}`} alt="" /> )
-//       }{
-//         product.image.map((x:any)=><img src={`${productImg+x}`} alt="" /> )
-//         }{
-//           product.image.map((x:any)=><img src={`${productImg+x}`} alt="" /> )
-//           }

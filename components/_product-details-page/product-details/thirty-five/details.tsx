@@ -11,10 +11,23 @@ import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
+import parse from "html-react-parser";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { HSlider } from "../eight/slider";
+import Rate from "@/utils/rate";
+import {
+  FacebookIcon,
+  FacebookMessengerIcon,
+  FacebookMessengerShareButton,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
+import ImageModal from "@/utils/image-modal";
+import { ProductSlider } from "../twenty-eight/product-slider";
 
 const Details = ({
   fetchStatus,
@@ -23,8 +36,6 @@ const Details = ({
   vrcolor,
   data,
   children,
-  open,
-  setOpen,
 }: any) => {
   const { makeid, store_id, headerSetting, design } = useTheme();
 
@@ -40,6 +51,10 @@ const Details = ({
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
+  const [open, setOpen] = useState<any>(false);
+
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -422,56 +437,25 @@ const Details = ({
     "text-lg relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black min-w-[220px] text-center button-single-product hover:shadow-none duration-500";
 
   return (
-    <div className="pt-5 pb-20 bg-white">
+    <div className="bg-white h-full ">
       <style>{styleCss}</style>
-      <div className="grid grid-cols-1 md:grid-cols-9 gap-x-10 gap-y-5">
+
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
         <div className="md:col-span-5">
-          {open && (
-            <div className="grid grid-cols-1 gap-2 ">
-              {product?.image &&
-                product?.image?.slice(0, 1).map((data: any) => (
-                  <div
-                    key={data?.id}
-                    className={`w-full h-full flex justify-center`}
-                  >
-                    <img
-                      className="w-auto max-h-[500px] border-2 border-gray-200"
-                      src={productImg + data}
-                      alt=""
-                    />
-                  </div>
-                ))}
-            </div>
-          )}
-          {!open && (
-            <div className="grid grid-cols-2 gap-10 ">
-              {product?.image &&
-                product?.image?.map((data: any) => (
-                  <div
-                    key={data.id}
-                    className={`${
-                      product?.image.length === 1 && "col-span-2"
-                    } relative`}
-                  >
-                    <div className="relative z-[1] overflow-hidden w-full h-full px-6 border border-black flex justify-center">
-                      <img
-                        className="min-w-full h-auto"
-                        src={productImg + data}
-                        alt=""
-                      />
-                    </div>
-                    <div className="absolute top-2 left-2 bg-transparent border border-black w-full h-full px-6">
-                      <div className="bg-black w-full h-full"></div>
-                    </div>
-                  </div>
-                ))}
-            </div>
-          )}
+          <HSlider
+            product={product}
+            setOpen={setOpen}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
         </div>
-        <div className="md:col-span-4 space-y-3">
-          <h2 className="text-2xl text-[#212121] font-bold">{product?.name}</h2>
+        <div className="md:col-span-5 space-y-4 lg:sticky top-28 h-max">
+          <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
+            {product?.name}
+          </h2>
           <div className="flex justify-start items-center gap-x-4">
-            <div className="text-[#212121] text-2xl font-bold flex justify-start items-center gap-4">
+            <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
               <BDT />
               {camp?.status === "active" ? campPrice : price}{" "}
               {camp?.status !== "active" &&
@@ -479,24 +463,35 @@ const Details = ({
                 product?.discount_price === "0.00") ? (
                 " "
               ) : (
-                <span className="text-gray-500 font-thin line-through text-xl">
+                <span className="text-gray-500 font-thin line-through text-xl font-seven">
                   <BDT />
                   {regularPrice}
                 </span>
               )}
             </div>
-            {product?.discount_type === "percent" && (
-              <p className="text-md text-gray-400">
-                {product?.discount_price}% Off
-              </p>
-            )}
+            {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
+            {product?.discount_type === "percent" &&
+              product?.discount_price > 0 && (
+                <p className="text-md text-gray-400">
+                  {Math.trunc(product?.discount_price)}% Off
+                </p>
+              )}
           </div>
-
-          {/* {product?.quantity !== '0' && <div className="h-[1px] bg-gray-300 w-full"></div>} */}
+          <Rate rating={product?.rating} />
+          <div className="h-[1px] bg-gray-300 w-full"></div>
+          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
+            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
+            {product?.description?.length > 250 && "..."}
+          </p>
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -511,21 +506,36 @@ const Details = ({
             </>
           )}
           {filterV && filterV[0]?.size && vrcolor && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
             <>
               {" "}
-              <ColorsOnly color={color} setColor={setColor} variant={variant} />
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             </>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
 
-          <div className="mt-5">
+          <div className="">
             <CallForPrice
               product={product}
               headerSetting={headerSetting}
@@ -539,42 +549,52 @@ const Details = ({
               {price !== 0 && (
                 <AddCart
                   qty={qty}
-                  variant={variant}
                   setQty={setQty}
+                  buyNowBtn={buttonSeven}
                   onClick={() => add_to_cart()}
-                  buttonSeven={buttonSeven}
+                  variant={variant}
+                  buttonTwentyNine={buttonSeven}
                 />
               )}
             </div>
           )}
 
-          <div className="flex items-center gap-x-3 py-3">
-            <div className="font-semibold text-[#212121] ">Availability:</div>
-            <div className="text-sm">
-              {productQuantity !== "0" ? (
-                <p>
-                  <span className="font-medium">{productQuantity}</span>{" "}
-                  <span className="text-green-500">In Stock!</span>
-                </p>
-              ) : (
-                <span className="text-red-600">Out of Stock!</span>
-              )}
-            </div>
+          <div className="flex items-center gap-x-3">
+            <p className="font-medium">শেয়ার :</p>
+            <span className="flex space-x-2">
+              <FacebookShareButton url={window.location.href}>
+                <FacebookIcon size={32} round={true} />
+              </FacebookShareButton>
+              <WhatsappShareButton url={window.location.href}>
+                <WhatsappIcon size={32} round={true} />
+              </WhatsappShareButton>
+              <FacebookMessengerShareButton
+                appId="2"
+                url={window.location.href}
+              >
+                <FacebookMessengerIcon size={32} round={true} />
+              </FacebookMessengerShareButton>
+            </span>
           </div>
 
           {children}
-          {open && (
-            <Link href={"/product/" + product?.id + "/" + product?.slug}>
-              <div
-                onClick={() => setOpen(false)}
-                className="font-bold text-white bg-gray-600 rounded-md w-48 sm:w-[416px] md:w-48 xl:w-[416px] py-3 text-center"
-              >
-                View Details
-              </div>
-            </Link>
-          )}
+
+          <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
+            <p>Category: {product?.category} </p>
+            <p>
+              Availability:{" "}
+              {productQuantity !== "0"
+                ? ` ${productQuantity} In Stock`
+                : "Out Of Stock"}{" "}
+            </p>
+          </div>
         </div>
       </div>
+      {open && (
+        <ImageModal open={open} setOpen={setOpen}>
+          <ProductSlider product={product} open={open} />
+        </ImageModal>
+      )}
     </div>
   );
 };
@@ -637,39 +657,58 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
   );
 };
 
-const Units = ({ unit, setUnit, variant }: any) => {
+const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium text-xl mb-2">Select Unit</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium text-xl mb-2">Select Color</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium text-xl mb-2">Select Size</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -695,10 +734,13 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect }: any) => {
+const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-max px-2 h-10 flex justify-center items-center text-sm rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -708,11 +750,14 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
-      className={`border w-max px-2 h-10 flex justify-center items-center font-medium rounded ${
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
+      className={`border w-max px-4 py-3 h-10 flex justify-center items-center font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
@@ -737,10 +782,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border w-10 h-10 flex justify-center items-center font-medium rounded bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}
