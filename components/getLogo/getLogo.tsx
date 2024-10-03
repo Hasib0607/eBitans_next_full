@@ -11,7 +11,7 @@ export default function GetLogo() {
         {!headerSetting?.logo ? (
           <p>{headerSetting?.website_name}</p>
         ) : (
-          <img
+          <img fetchPriority="high"
             className="h-[45px] w-auto overflow-hidden"
             src={imgUrl + headerSetting?.logo}
             alt="logo"

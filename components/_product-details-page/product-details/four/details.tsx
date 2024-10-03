@@ -27,6 +27,7 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
+import { HSlider } from "../eight/slider";
 
 const Details = ({
   data,
@@ -50,6 +51,9 @@ const Details = ({
   const [size, setSize] = useState<any>(null);
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
+
+  // image selector
+  const [activeImg, setActiveImg] = useState(""); 
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
 
@@ -77,6 +81,7 @@ const Details = ({
       setLoad(false);
       setColor(null);
       setSize(null);
+      setUnit(null);
     };
 
     // call the function
@@ -412,170 +417,168 @@ const Details = ({
     });
   };
 
+  const styleCss = `
+  .btn-hover:hover {
+      color:   ${design?.text_color};
+      background:${design?.header_color};
+  }
+  .select-color {
+      border: 1px solid ${design?.header_color};
+  }
+  .select-size {
+      color : ${design?.header_color};
+      border: 1px solid ${design?.header_color};
+  }
+  .select-unit {
+      color : ${design?.header_color};
+      border: 1px solid ${design?.header_color};
+  }
+  .text-color {
+      color:  ${design?.header_color};
+  }
+  .cart-color {
+      color:  ${design?.header_color};
+      border-bottom: 2px solid ${design?.header_color};
+  }
+  .border-hover:hover {
+      border: 1px solid ${design?.header_color};
+     
+  }
+
+`;
+
   const buttonOne =
     "font-bold text-white bg-gray-600 rounded-md w-60 py-3 text-center";
 
   return (
-    <div className="grid md:grid-cols-8 grid-cols-1 gap-4 w-full overflow-hidden">
-      <div className="md:col-span-4 lg2:col-span-3 col-span-1 h-full overflow-hidden">
-        <div className="h-full w-full object-cover">
-          {/* {product?.image?.slice(0, 1).map((item) => */}
-          {product?.image?.length > 0 && (
-            <ImageZoom
-              img={
-                productImg +
-                product?.image[product?.image?.length <= id ? 0 : id]
-              }
-            />
-          )}
-          {/* )} */}
-        </div>
-      </div>
+    <div className="bg-white h-full ">
+      <style>{styleCss}</style>
 
-      <div className="md:col-span-4 lg2:col-span-4 md:px-2">
-        <h2 className="text-xl sm:text-3xl font-semibold text-black">
-          {product?.name}
-        </h2>
-        <div className="flex flex-col gap-3 sm:mt-6 mt-1">
-          <div className="flex items-center gap-2">
-            <p className="capitalize">
-              <span className="text-black">Category: </span>{" "}
-            </p>
-            <Link
-              href={"/category/" + product?.category_id}
-              style={{ color: design?.header_color }}
-            >
-              {product?.category}
-            </Link>
-          </div>
-          <div className="flex justify-start items-center gap-2">
-            <p className="text-xl">
-              <Rate rating={product?.rating} />
-            </p>
-            <p>({product?.number_rating})</p>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-9 gap-5">
+        <div className="md:col-span-4">
+          <HSlider
+            product={product}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
         </div>
-        <div className="md:divider mt-2"></div>
-        <div className="flex justify-start items-center gap-x-4">
-          <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
-            <BDT />
-            {camp?.status === "active" ? campPrice : price}{" "}
-            {camp?.status !== "active" &&
-            (product?.discount_type === "no_discount" ||
-              product?.discount_price === "0.00") ? (
-              " "
-            ) : (
-              <span className="text-gray-500 font-thin line-through text-xl font-seven">
-                <BDT />
-                {regularPrice}
-              </span>
-            )}{" "}
+        <div className="md:col-span-5 space-y-4 sticky top-28 h-max">
+          <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
+            {product?.name}
+          </h2>
+          <div className="flex justify-start items-center gap-x-4">
+            <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
+              <BDT />
+              {camp?.status === "active" ? campPrice : price}{" "}
+              {camp?.status !== "active" &&
+              (product?.discount_type === "no_discount" ||
+                product?.discount_price === "0.00") ? (
+                " "
+              ) : (
+                <span className="text-gray-500 font-thin line-through text-xl font-seven">
+                  <BDT />
+                  {regularPrice}
+                </span>
+              )}
+            </div>
+            {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
+            {product?.discount_type === "percent" &&
+              product?.discount_price > 0 && (
+                <p className="text-md text-gray-400">
+                  {" "}
+                  {product?.discount_price}% Off
+                </p>
+              )}
           </div>
-          {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
-          {product?.discount_type === "percent" &&
-            product?.discount_price > 0 && (
-              <p className="text-md text-gray-400">
-                {" "}
-                {Math.trunc(product?.discount_price)}%
-              </p>
-            )}
-        </div>
-        <div className="md:divider mt-2"></div>
-        <div className="mb-5">
-          <p className="text-black apiHtml">
+          <Rate rating={product?.rating} />
+          <div className="h-[1px] bg-gray-300 w-full"></div>
+          <p className="text-[#3B3312] leading-6 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
             {product?.description?.length > 250 && "..."}
           </p>
-        </div>
-        <div className="text-black flex items-center gap-2 mb-5">
-          <VscCreditCard size={20} />
-          <p>Cash on Delivery available</p>
-        </div>
 
-        {/* unit */}
-        {!vrcolor &&
-          Array.isArray(variant) &&
-          variant.length > 0 &&
-          variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
+          {/* unit  */}
+          {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
+            <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
           )}
-        {/* color and size  */}
-        {vrcolor && sizeV !== undefined && (
-          <>
-            {" "}
-            <Colors
-              color={color}
-              setColor={setColor}
-              vrcolor={vrcolor}
-              setSize={setSize}
-            />
-          </>
-        )}
-        {/* size */}
-        {Array.isArray(filterV) &&
-          filterV.length > 0 &&
-          filterV[0]?.size &&
-          vrcolor && <Sizes size={size} setSize={setSize} variant={filterV} />}
-
-        {/* color only  */}
-        {vrcolor && sizeV === undefined && (
-          <>
-            {" "}
-            <ColorsOnly color={color} setColor={setColor} variant={variant} />
-          </>
-        )}
-        {/* size only  */}
-        {!vrcolor?.length && sizeV !== undefined && (
-          <Sizes size={size} setSize={setSize} variant={filterV} />
-        )}
-
-        <div className="mt-5">
-          <CallForPrice
-            product={product}
-            headerSetting={headerSetting}
-            cls={buttonOne}
-            price={price}
-          />
-        </div>
-
-        {productQuantity !== "0" && (
-          <div>
-            {price !== 0 && (
-              <AddCart
-                qty={qty}
-                product={product}
-                setQty={setQty}
-                onClick={() => add_to_cart()}
-                buttonOne={buttonOne}
+          {/* color and size  */}
+          {vrcolor && sizeV !== undefined && (
+            <>
+              {" "}
+              <Colors
+                color={color}
+                setColor={setColor}
+                vrcolor={vrcolor}
+                setSize={setSize}
               />
-            )}
-          </div>
-        )}
+            </>
+          )}
+          {filterV && filterV.length > 0 && filterV[0]?.size && vrcolor && (
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
+          )}
+          {/* color only  */}
+          {vrcolor && sizeV === undefined && (
+            <>
+              {" "}
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
+            </>
+          )}
+          {/* size only  */}
+          {!vrcolor?.length && sizeV !== undefined && (
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
+          )}
 
-        <div className="flex items-center gap-x-3">
-          <div className="">Availability:</div>
-          <div className="text-[#212121] ">
-            {productQuantity !== "0" ? (
-              <p>
-                <span className="font-medium">{productQuantity}</span>{" "}
-                <span className="text-green-500">In Stock!</span>
-              </p>
-            ) : (
-              <span className="text-red-600">Out of Stock!</span>
-            )}
+          <div className="">
+            <CallForPrice
+              product={product}
+              headerSetting={headerSetting}
+              cls={buttonOne}
+              price={price}
+            />
           </div>
-        </div>
 
-        <div className="flex items-center gap-x-3 mt-3">
-          <p className="font-medium">Share :</p>
-          <span className="flex space-x-2">
-            <FacebookShareButton url={window.location.href}>
-              <FacebookIcon size={32} round={true} />
-            </FacebookShareButton>
-            <WhatsappShareButton url={window.location.href}>
-              <WhatsappIcon size={32} round={true} />
-            </WhatsappShareButton>
-          </span>
+          {productQuantity !== "0" && (
+            <div>
+              {price !== 0 && (
+                <AddCart
+                  qty={qty}
+                  setQty={setQty}
+                  onClick={() => add_to_cart()}
+                  buttonTwentyTwo={buttonOne}
+                />
+              )}
+            </div>
+          )}
+
+          {children}
+
+          <div className="flex items-center gap-x-3">
+            <p className="font-medium">Share :</p>
+            <span className="flex space-x-2">
+              <FacebookShareButton url={window.location.href}>
+                <FacebookIcon size={32} round={true} />
+              </FacebookShareButton>
+              <WhatsappShareButton url={window.location.href}>
+                <WhatsappIcon size={32} round={true} />
+              </WhatsappShareButton>
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -631,7 +634,7 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   );
 };
 
-const Units = ({ unit, setUnit, variant, setId }: any) => {
+const Units = ({ unit, setUnit, variant, setId, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
@@ -644,6 +647,7 @@ const Units = ({ unit, setUnit, variant, setId }: any) => {
             select={unit}
             setSelect={setUnit}
             setId={setId}
+            setActiveImg={setActiveImg}
           />
         ))}
       </div>
@@ -651,26 +655,27 @@ const Units = ({ unit, setUnit, variant, setId }: any) => {
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Colors</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet key={id} text={item} select={color} setSelect={setColor} itemImage={item?.image}
+          setActiveImg={setActiveImg} />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Size</h3>
       <div className="flex gap-2 flex-wrap">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size key={id} item={item} select={size} setSelect={setSize} setActiveImg={setActiveImg} />
         ))}
       </div>
     </div>
@@ -696,12 +701,13 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect, setId, index }: any) => {
+const Unit = ({ item, select, setSelect, setId, index, setActiveImg }: any) => {
   return (
     <div
       onClick={() => {
         setSelect(item);
-        setId(index);
+        // setId(index);
+        setActiveImg(item?.image);
       }}
       className={`border px-2 w-auto h-10 flex flex-wrap justify-center items-center font-sans text-sm rounded lg:cursor-pointer ${
         item === select ? "border-gray-900" : "border-gray-300"
@@ -712,11 +718,14 @@ const Unit = ({ item, select, setSelect, setId, index }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
-      className={`border px-2 w-auto h-max flex justify-center items-center font-sans font-medium rounded ${
+    onClick={() => {
+      setSelect(item);
+      setActiveImg(item?.image);
+    }}
+      className={`border px-4 py-3 w-auto h-max flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
@@ -741,10 +750,13 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({ text, select, setSelect, itemImage, setActiveImg, }: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+    onClick={() => {
+      setSelect(text);
+      setActiveImg(itemImage);
+    }}
       className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}

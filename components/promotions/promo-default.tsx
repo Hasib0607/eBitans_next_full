@@ -30,7 +30,7 @@ const DefaultPromo = ({ banner }: Props) => {
               className="w-full sm:w-[45%] md:w-[30%] h-[200px] sm:h-[300px] md:h-[350px] overflow-hidden"
             >
               <a
-                href="https://admin.ebitans.com/design/homepage/banner"
+                href={`${process.env.NEXT_PUBLIC_BASE}/design/homepage/banner`}
                 target="_blank"
                 rel="noopener noreferrer"
               >

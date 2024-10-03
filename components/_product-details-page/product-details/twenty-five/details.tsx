@@ -21,6 +21,8 @@ import parse from "html-react-parser";
 import { useDispatch } from "react-redux";
 import {
   FacebookIcon,
+  FacebookMessengerIcon,
+  FacebookMessengerShareButton,
   FacebookShareButton,
   WhatsappIcon,
   WhatsappShareButton,
@@ -28,6 +30,15 @@ import {
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
 import ImageMagnifier from "../image-magnifier";
+import { useRouter } from "next/navigation";
+import { HSlider } from "../eight/slider";
+import Rate from "@/utils/rate";
+import CallForPrice from "@/utils/call-for-price";
+import { FaPhoneSquareAlt } from "react-icons/fa";
+import { buyNow } from "@/utils/buy-now";
+import ImageModal from "@/utils/image-modal";
+import { ProductSlider } from "../twenty-eight/product-slider";
+import { HiMinus, HiPlus } from "react-icons/hi";
 
 const Details = ({
   fetchStatus,
@@ -37,7 +48,8 @@ const Details = ({
   data,
   children,
 }: any) => {
-  const { makeid, store_id } = useTheme();
+  const router = useRouter();
+  const { makeid, store_id, design, headerSetting } = useTheme();
   const { data: x, error } = useHeaderSettings();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
@@ -49,10 +61,13 @@ const Details = ({
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
   const [camp, setCamp] = useState<any>(null);
+  const [open, setOpen] = useState<any>(false);
+
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-  //
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -95,6 +110,10 @@ const Details = ({
       // make sure to catch any error
       .catch(console.error);
   }, [data, store_id]);
+
+  const buyNowBtn = () => {
+    buyNow(variant, size, color, unit, filterV, add_to_cart, router);
+  };
 
   if (fetchStatus === "fetching") {
     return (
@@ -418,6 +437,47 @@ const Details = ({
     });
   };
 
+  const styleCss = `
+  .btn-hover:hover {
+      color:   ${design?.text_color};
+      background:${design?.header_color};
+  }
+  .select-color {
+      border: 1px solid ${design?.header_color};
+  }
+  .select-size {
+      color : ${design?.header_color};
+      border: 1px solid ${design?.header_color};
+  }
+  .select-unit {
+      color : ${design?.header_color};
+      border: 1px solid ${design?.header_color};
+  }
+  .text-color {
+      color:  ${design?.header_color};
+  }
+  .cart-color {
+      color:  ${design?.header_color};
+      border-bottom: 2px solid ${design?.header_color};
+  }
+  .border-hover:hover {
+      border: 1px solid ${design?.header_color};
+     
+  }
+  .cart-btn1 {
+      color:  ${design?.text_color};
+      background: ${design?.header_color};
+      border: 2px solid transparent;
+  }
+  .cart-btn1:hover {
+      color:  ${design?.header_color};
+      background: transparent;
+      border: 2px solid ${design?.header_color};
+  }
+`;
+
+const buttonTwentyNine = "cart-btn1 font-bold py-[10px] px-10 w-full w-max ";
+
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -436,66 +496,56 @@ const Details = ({
   }
 
   return (
-    <div className="grid md:grid-cols-8 grid-cols-1 mt-20 md:gap-4 ">
-      <div className="md:col-span-4 h-full sm:cursor-zoom-in overflow-hidden ">
-        {product?.image?.slice(0, 1).map((item: any, id: any) => (
-          <ImageMagnifier
-            key={id}
-            src={productImg + item}
-            // width={300}
-            // height={200}
-            magnifierHeight={230}
-            magnifierWidth={230}
-            zoomLevel={2.2}
-            alt="Sample Image"
+    <div className="bg-white h-full ">
+      <style>{styleCss}</style>
+
+      <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
+        <div className="md:col-span-5">
+          <HSlider
+            product={product}
+            setOpen={setOpen}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
           />
-        ))}
-      </div>
-
-      {/* additional price */}
-
-      <div className="md:col-span-4 md:px-2">
-        <h2 className="text-[25px] font-semibold text-[#1d1d1d] mb-2">
-          {product?.name}
-        </h2>
-        <p className="text-[18px] text-[#888]  font-normal mb-2">
-          {product?.per_unit ? "Per Unit:" : null}{" "}
-          <span className="font-bold text-[#777]">{product?.per_unit}</span>{" "}
-        </p>
-
-        <div className="flex justify-start items-center gap-x-4 mb-2">
-          <div className="text-color text-2xl font-seven font-medium flex justify-start items-center gap-4">
-            <BDT />
-            {camp?.status === "active" ? campPrice : price}{" "}
-            {camp?.status !== "active" &&
-            (product?.discount_type === "no_discount" ||
-              product?.discount_price === "0.00") ? (
-              " "
-            ) : (
-              <span className="text-gray-500 font-thin line-through text-xl font-seven">
-                <BDT />
-                {regularPrice}
-              </span>
-            )}
-          </div>
-          {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
-          {product?.discount_type === "percent" &&
-            product?.discount_price > 0 && (
-              <p className="text-md text-gray-400">
-                {" "}
-                {Math.trunc(product?.discount_price)}% Off
-              </p>
-            )}
         </div>
-        <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
-          {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-          {product?.description?.length > 250 && "..."}
-        </p>
+        <div className="md:col-span-5 space-y-4 lg:sticky top-28 h-max">
+          <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
+            {product?.name}
+          </h2>
+          <div className="flex justify-start items-center gap-x-4">
+            <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
+              <BDT />
+              {camp?.status === "active" ? campPrice : price}{" "}
+              {camp?.status !== "active" &&
+              (product?.discount_type === "no_discount" ||
+                product?.discount_price === "0.00") ? (
+                " "
+              ) : (
+                <span className="text-gray-500 font-thin line-through text-xl font-seven">
+                  <BDT />
+                  {regularPrice}
+                </span>
+              )}
+            </div>
+            {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
+            {product?.discount_type === "percent" &&
+              product?.discount_price > 0 && (
+                <p className="text-md text-gray-400">
+                  {Math.trunc(product?.discount_price)}% Off
+                </p>
+              )}
+          </div>
+          <Rate rating={product?.rating} />
+          <div className="h-[1px] bg-gray-300 w-full"></div>
+          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
+            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
+            {product?.description?.length > 250 && "..."}
+          </p>
 
-        <div className="mt-5">
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
+            <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -510,116 +560,238 @@ const Details = ({
             </>
           )}
           {filterV && filterV[0]?.size && vrcolor && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
             <>
               {" "}
-              <ColorsOnly color={color} setColor={setColor} variant={variant} />
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             </>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            <Sizes size={size} setSize={setSize} variant={filterV} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
-        </div>
 
-        <div className="flex flex-wrap gap-5 mb-4 mt-11">
-          {/* Quantity  */}
-
-          <div className="rounded-full flex items-center w-max border border-black  hover:stroke-white  divide-x divide-black h-[36px] overflow-hidden">
-            <div
-              onClick={() => decNum()}
-              className="h-full flex items-center hover:bg-[#000] px-2 hover:stroke-[#fff]  stroke-[#4c9a2a] text-[#4c9a2a] hover:text-white transition-all duration-300 ease-linear"
-            >
-              <MinusIcon className="h-4 w-4" />
-            </div>
-            <div className="flex items-center gap-2 h-full px-4">
-              <p>{qty}</p>
-            </div>
-            <div
-              onClick={() => incNum()}
-              className="hover:bg-[#000] px-2 hover:stroke-[#fff] stroke-[#4c9a2a] text-[#4c9a2a] hover:text-white h-full flex items-center transition-all duration-300 ease-linear"
-            >
-              <PlusIcon className="h-4 w-4" />
-            </div>
+          <div className="">
+            <CallForPrice
+              product={product}
+              headerSetting={headerSetting}
+              cls={buttonTwentyNine}
+              price={price}
+            />
           </div>
 
-          <div className="rounded-full flex items-center w-max border border-[#4c9a2a]  hover:stroke-white h-[36px] overflow-hidden ">
-            <div
-              onClick={() => add_to_cart()}
-              className="hover:bg-[#4c9a2a]  hover:stroke-[#fff] stroke-[#4c9a2a] text-[#4c9a2a] hover:text-white h-full flex items-center transition-all duration-300 ease-linear space-x-2 px-4 lg:cursor-pointer"
-            >
-              <ShoppingBagIcon className="h-5 w-5" />
-              <p className="font-bold text-[12px] md:text-[14px] ">
-                {button || "Add To Cart"}
-              </p>
+          {productQuantity !== "0" && (
+            <div>
+              {price !== 0 && (
+                <AddCart
+                  qty={qty}
+                  setQty={setQty}
+                  buyNowBtn={buyNowBtn}
+                  onClick={() => add_to_cart()}
+                  variant={variant}
+                  buttonTwentyNine={buttonTwentyNine}
+                />
+              )}
             </div>
-          </div>
-        </div>
-        {productQuantity === "0" ? (
-          <div className="flex items-start my-2">
-            <div className="">
-              <ExclamationCircleIcon className="text-red-500 h-5 w-6" />
-            </div>
-            <p>Out of Stock</p>
-          </div>
-        ) : null}
+          )}
 
-        <div className="flex items-center gap-x-3">
-          <p className="font-medium">Share :</p>
-          <span className="flex space-x-2">
-            <FacebookShareButton url={window.location.href}>
-              <FacebookIcon size={32} round={true} />
-            </FacebookShareButton>
-            <WhatsappShareButton url={window.location.href}>
-              <WhatsappIcon size={32} round={true} />
-            </WhatsappShareButton>
-          </span>
+          <div className="flex items-center gap-x-3">
+            <p className="font-medium">শেয়ার :</p>
+            <span className="flex space-x-2">
+              <FacebookShareButton url={window.location.href}>
+                <FacebookIcon size={32} round={true} />
+              </FacebookShareButton>
+              <WhatsappShareButton url={window.location.href}>
+                <WhatsappIcon size={32} round={true} />
+              </WhatsappShareButton>
+              <FacebookMessengerShareButton
+                appId="2"
+                url={window.location.href}
+              >
+                <FacebookMessengerIcon size={32} round={true} />
+              </FacebookMessengerShareButton>
+            </span>
+          </div>
+
+          {children}
+
+          <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
+            <p>Category: {product?.category} </p>
+            <p>
+              Availability:{" "}
+              {productQuantity !== "0"
+                ? ` ${productQuantity} In Stock`
+                : "Out Of Stock"}{" "}
+            </p>
+          </div>
         </div>
       </div>
-
-      {/* additional price end*/}
+      {open && (
+        <ImageModal open={open} setOpen={setOpen}>
+          <ProductSlider product={product} open={open} />
+        </ImageModal>
+      )}
     </div>
   );
 };
 
 export default Details;
 
-const Units = ({ unit, setUnit, variant }: any) => {
+const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
+  const { design, headerSetting } = useTheme();
+
+  const { data, error } = useHeaderSettings();
+
+  let incNum = () => {
+    setQty(qty + 1);
+  };
+  let decNum = () => {
+    if (qty <= 1) {
+      setQty(1);
+    } else {
+      setQty((prevCount: any) => prevCount - 1);
+    }
+  };
+  let handleChange = (e: any) => {
+    setQty(e.target.value);
+  };
+  const styleCss = `
+    .searchHover:hover {
+        color:   ${design?.text_color};
+        background: ${design?.header_color};
+    }
+
+  `;
+
+  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+
+  if (error) {
+    return <p>error from header settings</p>;
+  }
+  return (
+    <>
+      <style>{styleCss}</style>
+      <div className="flex flex-col gap-5">
+        <div className=" w-max flex items-center gap-x-3">
+          <p className="text-xl">পরিমান :</p>
+          <div className="w-max flex items-center">
+            <button
+              className="px-4 py-3 border-r-0 border-2 border-gray-100 text-xl  text-gray-500"
+              type="button"
+              onClick={decNum}
+            >
+              <HiMinus />
+            </button>
+
+            <input
+              type="text"
+              className="form-control w-10 text-gray-500 text-center border-r-0 border-l-0 border-2 border-gray-100 outline-none py-[8px] text-lg font-semibold"
+              value={qty}
+              onChange={handleChange}
+            />
+
+            <button
+              className="px-4 py-3 border-l-0 border-2 border-gray-100 text-xl text-gray-500"
+              type="button"
+              onClick={incNum}
+            >
+              <HiPlus />
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="grid sm:grid-cols-2 mt-3 items-center gap-3">
+        <button
+          onClick={onClick}
+          type="submit"
+          className=" cart-btn1 font-bold py-[10px] px-10 w-full "
+        >
+          কার্টে রাখুন
+        </button>
+        <button
+          onClick={() => buyNowBtn()}
+          type="submit"
+          className=" cart-btn1 font-bold py-[10px] px-10 w-full"
+        >
+          {button || "অর্ডার করুন"}
+        </button>
+      </div>
+      <div className="mt-3">
+        <a href={`tel:+88${headerSetting?.phone}`}>
+          <button className="cart-btn1 font-bold py-[10px] w-full">
+            <FaPhoneSquareAlt className="inline text-xl" />{" "}
+            {headerSetting?.phone}
+          </button>
+        </a>
+      </div>
+    </>
+  );
+};
+
+const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} />
+          <Unit key={id} item={item} select={unit} setSelect={setUnit} setActiveImg={setActiveImg} />
         ))}
       </div>
     </div>
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Colors</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet 
+            key={id} 
+            text={item} 
+            select={color} 
+            setSelect={setColor} 
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+            />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Size</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size 
+            key={id} 
+            item={item} 
+            select={size} 
+            setSelect={setSize} 
+            setActiveImg={setActiveImg}
+            />
         ))}
       </div>
     </div>
@@ -645,12 +817,15 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect }: any) => {
+const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
-      className={`border w-max px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
-        item === select ? "border-gray-900" : "border-gray-300"
+      onClick={() => {
+      setSelect(item);
+      setActiveImg(item?.image);
+      }}
+      className={`border lg:cursor-pointer w-max px-2 h-10 flex justify-center items-center font-sans text-sm rounded ${
+        item === select ? "select-unit" : "border-gray-300"
       }`}
     >
       {item?.volume + " " + item?.unit}
@@ -658,11 +833,14 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
-      className={`border w-max px-1 h-10 flex justify-center items-center font-sans font-medium rounded ${
+      onClick={() => {
+      setSelect(item);
+      setActiveImg(item?.image);
+      }}
+      className={`border w-max px-4 py-3 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
@@ -687,10 +865,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({ 
+    text, 
+    select, 
+    setSelect,
+    itemImage,
+    setActiveImg
+  }: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+      setSelect(text);
+      setActiveImg(itemImage);
+      }}
       className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}
