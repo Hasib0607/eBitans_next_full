@@ -26,7 +26,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
   checkPage();
   if (page == "product") {
     return (
-      <div className=" container md:h-[70vh] gap-5 md:gap-20 flex items-start md:justify-center md:items-center flex-col md:flex-row mt-10 md:mt-0 ">
+      <div className=" container md:h-[65vh] gap-5 md:gap-20 flex items-start md:justify-center md:items-end flex-col md:flex-row mt-10 md:mt-0">
         <div className="w-full h-[450px] md:w-[600px] md:min-h-[600px] px-3 md:px-0">
           <ReactSkeleton height={"100%"} />
         </div>
