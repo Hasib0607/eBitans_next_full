@@ -504,7 +504,12 @@ const Details = ({
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -690,7 +695,13 @@ const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} setActiveImg={setActiveImg} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -759,8 +770,8 @@ const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
       onClick={() => {
-      setSelect(item);
-      setActiveImg(item?.image);
+        setSelect(item);
+        setActiveImg(item?.image);
       }}
       className={`border lg:cursor-pointer w-max px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "select-unit" : "border-gray-300"

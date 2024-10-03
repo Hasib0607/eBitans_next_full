@@ -47,7 +47,7 @@ const Details = ({
 
   // image selector
   // const [activeImg, setActiveImg] = useState("");
-  const [activeImg, setActiveImg] = useState(product?.defaultImage); 
+  const [activeImg, setActiveImg] = useState(product?.defaultImage);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -479,12 +479,12 @@ const Details = ({
                 ))}
             </div> */}
             <HSlider
-            product={product}
-            setOpen={setOpen}
-            variant={variant}
-            activeImg={activeImg}
-            setActiveImg={setActiveImg}
-          />
+              product={product}
+              setOpen={setOpen}
+              variant={variant}
+              activeImg={activeImg}
+              setActiveImg={setActiveImg}
+            />
           </div>
         )}
         {store_id === 4849 && (
@@ -523,7 +523,12 @@ const Details = ({
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -538,18 +543,33 @@ const Details = ({
             </>
           )}
           {filterV && filterV[0]?.size && vrcolor && (
-            <Sizes size={size} setSize={setSize} variant={filterV} setActiveImg={setActiveImg} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
             <>
               {" "}
-              <ColorsOnly color={color} setColor={setColor} variant={variant} setActiveImg={setActiveImg} />
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             </>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            <Sizes size={size} setSize={setSize} variant={filterV} setActiveImg={setActiveImg} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
 
           <div className="mt-5">
@@ -679,7 +699,13 @@ const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap items-center gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} setActiveImg={setActiveImg} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -692,8 +718,14 @@ const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
       <h3 className="font-medium text-base">Colors:</h3>
       <div className="flex flex-wrap items-center gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} itemImage={item?.image}
-          setActiveImg={setActiveImg} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -706,7 +738,13 @@ const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
       <h3 className="font-medium text-base">Sizes:</h3>
       <div className="flex flex-wrap items-center gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} setActiveImg={setActiveImg} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -735,9 +773,9 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
 const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(item);
-      setActiveImg(item?.image);
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
       }}
       className={`border lg:cursor-pointer w-auto px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "select-unit" : "border-gray-300"
@@ -751,10 +789,10 @@ const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
 const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(item);
-      setActiveImg(item?.image);
-    }}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border border-gray-500 lg:cursor-pointer w-auto px-3 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "select-size" : "border-gray-300"
       }`}
@@ -790,14 +828,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect, itemImage,
-  setActiveImg, }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(text);
-      setActiveImg(itemImage);
-    }}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border lg:cursor-pointer w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
         text === select ? "select-color" : "border-gray-300"
       }`}
