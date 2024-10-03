@@ -79,16 +79,16 @@ const MobileNavThree = () => {
               )}
               {item === "home" && (
                 <Link href="/" passHref>
-                <div
-                  onClick={() => setActive("home")}
-                  className="rounded-full px-3 py-2 transition-all duration-300 ease-linear"
-                >
-                  <HomeIcon
-                    width={25}
-                    className={active === "home" ? "hoverIcon" : ""}
-                  />
-                </div>
-              </Link>
+                  <div
+                    onClick={() => setActive("home")}
+                    className="rounded-full px-3 py-2 transition-all duration-300 ease-linear"
+                  >
+                    <HomeIcon
+                      width={25}
+                      className={active === "home" ? "hoverIcon" : ""}
+                    />
+                  </div>
+                </Link>
               )}
               {item === "cart" && (
                 <div className="relative">
@@ -107,19 +107,19 @@ const MobileNavThree = () => {
               )}
               {item === "user" && (
                 <Link href="/profile" passHref>
-                <div
-                  onClick={() => {
-                    setActive("user");
-                    setOpen(false);
-                  }}
-                  className="rounded-full px-3 py-2 transition-all duration-300 ease-linear"
-                >
-                  <UserIcon
-                    width={25}
-                    className={active === "user" ? "hoverIcon" : ""}
-                  />
-                </div>
-              </Link>
+                  <div
+                    onClick={() => {
+                      setActive("user");
+                      setOpen(false);
+                    }}
+                    className="rounded-full px-3 py-2 transition-all duration-300 ease-linear"
+                  >
+                    <UserIcon
+                      width={25}
+                      className={active === "user" ? "hoverIcon" : ""}
+                    />
+                  </div>
+                </Link>
               )}
             </div>
             <div

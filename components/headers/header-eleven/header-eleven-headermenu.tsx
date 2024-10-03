@@ -44,7 +44,7 @@ const HeaderElevenHeaderMenu = () => {
       <BottomCart open={cartOpen} setOpen={setCartOpen} />
       <div className=" flex justify-between items-center bg-white sm:container px-5 my-2">
         <div>
-          <GetLogo/>
+          <GetLogo />
         </div>
 
         <div className="lg:basis-3/6 w-full h-12">

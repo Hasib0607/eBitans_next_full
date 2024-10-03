@@ -6,12 +6,12 @@ interface SkeletonProps {
 }
 const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
   useEffect(() => {
-    document.body.style.overflow = 'hidden';
+    document.body.style.overflow = "hidden";
     return () => {
-      document.body.style.overflow = '';
+      document.body.style.overflow = "";
     };
   }, []);
-  
+
   let page: any;
   const url: string = window.location.href;
   const checkPage = () => {
