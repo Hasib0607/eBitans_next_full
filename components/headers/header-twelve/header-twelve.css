@@ -1,0 +1,62 @@
+.navbarTwelve {
+  position: absolute;
+  transition: move all 2s;
+  top: 0;
+}
+
+.navbarTwelve.openMenu {
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: 15;
+  opacity: 0.8;
+  animation: fadeIn 0.6s ease-in both;
+}
+.navbarTwelve.openMenu:hover {
+  display: block;
+  position: fixed;
+  width: 100%;
+  z-index: 1000;
+  opacity: 1;
+}
+
+.menu-twelve {
+  /* transition: max-height 0.5s, width 0.5s; */
+  /* max-height: 0; */
+  transition: max-height 1s ease;
+  transition-delay: 0s, 0s;
+}
+
+/* @keyframes max-height {
+    from,
+    0% {
+      border: none;
+    }
+    100% {
+      border: none;
+    }
+  }
+   */
+@keyframes fadeIn {
+  from {
+    transform: translate3d(0, -20%, 0);
+  }
+
+  to {
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+/* MEDIA QUERY FOR SMALL DEVICE  */
+@media only screen and (max-width: 600px) {
+  .navbarTwelve.openMenu {
+    display: none;
+  }
+}
+
+/* MEDIA QUERY FOR MEDIUM DEVICE  */
+@media only screen and (max-width: 768px) {
+  .navbarTwelve.openMenu {
+    display: none;
+  }
+}

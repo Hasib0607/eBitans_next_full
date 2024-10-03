@@ -1,0 +1,43 @@
+.card9Container:hover {
+  background-color: rgb(0, 0, 0, 0.3);
+}
+.card9Image {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.Card9Middle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 1;
+  transition: 0.3s ease;
+  background-color: red;
+}
+
+.card9Text {
+  color: white;
+  font-size: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  text-align: center;
+}
+.card9Container:hover .Card9Middle {
+  opacity: 1;
+}
+
+.card9linkIcon {
+  color: #eee !important;
+}
+/* .card9Container:hover.Card9Middle {
+    opacity: 0.3;
+  }
+   */

@@ -1,0 +1,6 @@
+.nineteenBg {
+  background-image: url("./imageBg/shop-header.webp");
+  height: 300px;
+  object-fit: cover;
+  width: 100%;
+}

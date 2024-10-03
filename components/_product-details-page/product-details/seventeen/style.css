@@ -1,0 +1,13 @@
+.bg-image-details {
+  background-image: url("./17/iconbgtopimg.webp");
+  background-repeat: repeat-x;
+  height: 50px;
+  width: 100%;
+  transform: rotate(180deg);
+}
+.bg-image-details-top {
+  background-image: url("./17/iconbgtopimg.webp");
+  background-repeat: repeat-x;
+  height: 50px;
+  width: 100%;
+}

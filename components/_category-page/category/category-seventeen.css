@@ -1,0 +1,15 @@
+.categorySeventeenBackgroundColor {
+  background-color: #87ceeb;
+  height: 220px;
+}
+
+.categorySeventeenBottomBackGroundImage {
+  background-image: url("./categorySeventeenBackGroundImage/iconbgtopimg.webp");
+  /* The image used */
+  background-repeat: repeat-x;
+  /* Do not repeat the image */
+  height: 50px;
+  width: 100%;
+  transform: rotate(180deg);
+  z-index: 1;
+}

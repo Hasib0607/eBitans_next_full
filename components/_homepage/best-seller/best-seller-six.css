@@ -1,0 +1,22 @@
+.feature_product_prev {
+  opacity: 0;
+  visibility: hidden;
+  transition: 1s;
+}
+.feature_product_next {
+  opacity: 0;
+  visibility: hidden;
+  transition: 1s;
+}
+
+.bestSellerCustomHover:hover .feature_product_next {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(20px);
+}
+
+.bestSellerCustomHover:hover .feature_product_prev {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(20px);
+}
