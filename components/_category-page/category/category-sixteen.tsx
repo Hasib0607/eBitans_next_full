@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import FilterCat from "@/components/_shop-page/shops/sixteen/filter-cat";
 import Card26 from "@/components/card/card26";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import { useParams } from "next/navigation";

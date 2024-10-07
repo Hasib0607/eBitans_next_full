@@ -5,7 +5,7 @@ import Card18 from "@/components/card/card18";
 import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";

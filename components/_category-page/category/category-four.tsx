@@ -7,7 +7,7 @@ import { ThreeDots } from "react-loader-spinner";
 import useTheme from "@/hooks/use-theme";
 import { useParams } from "next/navigation";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import { catImg } from "@/site-settings/siteUrl";
 import Shop from "./shopx";
 import ProductCardTwo from "@/components/card/product-card/product-card-two";

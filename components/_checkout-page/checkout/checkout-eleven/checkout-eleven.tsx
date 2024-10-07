@@ -3,7 +3,7 @@ import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 
 import CheckOutElevenDiscount from "./checkout-eleven-discount/checkout-eleven-discount";
 import CheckOutElevenPaymentGateway from "./checkout-eleven-payment-gateway/checkout-eleven-payment-gateway";

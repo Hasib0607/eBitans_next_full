@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "next/navigation";
 import httpReq from "@/utils/http/axios/http.service";
 import ProductCardTwo from "@/components/card/product-card/product-card-two";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import Pagination from "../category/pagination";
 
 interface Product {

@@ -7,7 +7,7 @@ import CheckOutFiveDiscount from "./checkout-five-discount/checkout-five-discoun
 import CheckOutFiveOrder from "./checkout-five-order/checkout-five-order";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import CheckOutFivePaymentGateway from "./checkout-five-payment-gateway/checkout-five-payment-gateway";
 
 const CheckOutsFive = () => {

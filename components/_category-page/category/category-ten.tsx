@@ -7,7 +7,7 @@ import { CgMenuGridO } from "react-icons/cg";
 
 import Card15 from "@/components/card/card15";
 import Card6 from "@/components/card/card6";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import httpReq from "@/utils/http/axios/http.service";
 import { PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";

@@ -10,7 +10,7 @@ import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
 import Pagination from "./pagination";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import Card66 from "@/components/card/card66";
 import Link from "next/link";
 

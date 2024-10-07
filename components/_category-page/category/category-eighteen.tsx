@@ -11,7 +11,7 @@ import FilterByPrice from "@/components/filter-by-price";
 import Pagination from "./pagination";
 import { VscClose } from "react-icons/vsc";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import Card38 from "@/components/card/card38";
 import Card6 from "@/components/card/card6";
 import { BiFilter } from "react-icons/bi";
