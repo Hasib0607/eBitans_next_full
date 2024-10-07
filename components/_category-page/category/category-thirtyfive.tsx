@@ -13,7 +13,6 @@ import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
 import Card61 from "@/components/card/card61";
 import Link from "next/link";
-import Skeleton from "@/components/loader/skeleton";
 
 const CategoryThirtyFive = () => {
   const { id: data }: any = useParams<{ id: string }>();

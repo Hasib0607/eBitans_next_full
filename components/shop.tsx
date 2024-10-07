@@ -46,51 +46,48 @@ const ShopComponent = async () => {
   const shop_page = design?.shop_page;
 
   return (
-          <>
-          {shop_page === "default" && <One />}
-          {shop_page === "one" && <One />}
-          {shop_page === "two" && <Two />}
-          {shop_page === "three" && <Three />}
-          {shop_page === "four" && <Four />}
-          {shop_page === "five" && <Five />}
-          {shop_page === "six" && <Six />}
-          {shop_page === "seven" && <Seven/>}
-          {/* {shop_page === "seven" && <CategorySevenNew/>} */}
-          {shop_page === "eight" && <Eight />}
-          {shop_page === "nine" && <Nine />}
-          {shop_page === "ten" && <Ten />}
-          {shop_page === "eleven" && <Eight />}
-          {shop_page === "twelve" && <Twelve />}
-          {shop_page === "thirteen" && <Thirteen />}
-          {shop_page === "fourteen" && <Fourteen />}
-          {shop_page === "sixteen" && <Sixteen />}
-          {shop_page === "seventeen" && <Seventeen />}
-          {shop_page === "eighteen" && <Eighteen />}
-          {shop_page === "nineteen" && <Nineteen />}
-          {shop_page === "twenty" && <Twenty />}
-          {shop_page === "twentyone" && <TwentyOne />}
-          {shop_page === "twentytwo" && <Twentytwo />}
-          {shop_page === "twentythree" && <TwentyThree />}
-          {shop_page === "twentyfour" && <TwentyFour />}
-          {shop_page === "twentyfive" && <TwentyFive />}
-          {shop_page === "twentysix" && <TwentySix />}
-          {shop_page === "twentyseven" && <TwentySeven />}
-          {shop_page === "twentyeight" && <TwentyEight />}
-          {shop_page === "twentynine" && <TwentyNine />}
-          {shop_page === "thirty" && <Thirty />}
-          {shop_page === "thirtyone" && <Thirty />}
-          {shop_page === "thirtythree" && <ThirtyThree />}
-          {shop_page === "thirtyfour" && <ThirtyFour />}
-          {shop_page === "thirtyfive" && <ThirtyFive />}
-          {shop_page === "thirtysix" && <ThirtySix />}
-          {shop_page === "thirtyseven" && <ThirtySeven />}
-          {shop_page === "thirtyeight" && <ThirtyEight />}
-          {shop_page === "thirtynine" && <ThirtyNine />}
-          {shop_page === "forty" && <Forty />}
-        </>
-
-    
-    
+    <>
+      {shop_page === "default" && <One />}
+      {shop_page === "one" && <One />}
+      {shop_page === "two" && <Two />}
+      {shop_page === "three" && <Three />}
+      {shop_page === "four" && <Four />}
+      {shop_page === "five" && <Five />}
+      {shop_page === "six" && <Six />}
+      {shop_page === "seven" && <Seven />}
+      {/* {shop_page === "seven" && <CategorySevenNew/>} */}
+      {shop_page === "eight" && <Eight />}
+      {shop_page === "nine" && <Nine />}
+      {shop_page === "ten" && <Ten />}
+      {shop_page === "eleven" && <Eight />}
+      {shop_page === "twelve" && <Twelve />}
+      {shop_page === "thirteen" && <Thirteen />}
+      {shop_page === "fourteen" && <Fourteen />}
+      {shop_page === "sixteen" && <Sixteen />}
+      {shop_page === "seventeen" && <Seventeen />}
+      {shop_page === "eighteen" && <Eighteen />}
+      {shop_page === "nineteen" && <Nineteen />}
+      {shop_page === "twenty" && <Twenty />}
+      {shop_page === "twentyone" && <TwentyOne />}
+      {shop_page === "twentytwo" && <Twentytwo />}
+      {shop_page === "twentythree" && <TwentyThree />}
+      {shop_page === "twentyfour" && <TwentyFour />}
+      {shop_page === "twentyfive" && <TwentyFive />}
+      {shop_page === "twentysix" && <TwentySix />}
+      {shop_page === "twentyseven" && <TwentySeven />}
+      {shop_page === "twentyeight" && <TwentyEight />}
+      {shop_page === "twentynine" && <TwentyNine />}
+      {shop_page === "thirty" && <Thirty />}
+      {shop_page === "thirtyone" && <Thirty />}
+      {shop_page === "thirtythree" && <ThirtyThree />}
+      {shop_page === "thirtyfour" && <ThirtyFour />}
+      {shop_page === "thirtyfive" && <ThirtyFive />}
+      {shop_page === "thirtysix" && <ThirtySix />}
+      {shop_page === "thirtyseven" && <ThirtySeven />}
+      {shop_page === "thirtyeight" && <ThirtyEight />}
+      {shop_page === "thirtynine" && <ThirtyNine />}
+      {shop_page === "forty" && <Forty />}
+    </>
   );
 };
 

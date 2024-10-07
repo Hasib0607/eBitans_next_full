@@ -1,6 +1,5 @@
 "use client";
 import Skeleton from "@/components/loader/skeleton";
-import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";

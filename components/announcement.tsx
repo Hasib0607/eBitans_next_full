@@ -24,23 +24,27 @@ const Announcement = async ({ design, url }: any) => {
     alternatedArray.push(anArray[i % anArray.length]);
   }
 
-  return (<>
-  {(!alternatedArray||alternatedArray?.length==0)?<></>:<div id="annoucement" style={{ background: design?.header_color }}>
-      <div className="relative flex overflow-x-hidden container">
-        <Marquee speed={10} pauseOnHover={true}>
-          <div className="py-2  whitespace-nowrap">
-            {alternatedArray.map((an: any, index: number) => (
-              <span
-                style={{ color: design?.text_color }}
-                key={index}
-                className="text-[9px] md:text-xl mx-4"
-              >
-                {an.announcement}
-              </span>
-            ))}
-          </div>
-        </Marquee>
-        {/* <Marquee speed={10}>
+  return (
+    <>
+      {!alternatedArray || alternatedArray?.length == 0 ? (
+        <></>
+      ) : (
+        <div id="annoucement" style={{ background: design?.header_color }}>
+          <div className="relative flex overflow-x-hidden container">
+            <Marquee speed={10} pauseOnHover={true}>
+              <div className="py-2  whitespace-nowrap">
+                {alternatedArray.map((an: any, index: number) => (
+                  <span
+                    style={{ color: design?.text_color }}
+                    key={index}
+                    className="text-[9px] md:text-xl mx-4"
+                  >
+                    {an.announcement}
+                  </span>
+                ))}
+              </div>
+            </Marquee>
+            {/* <Marquee speed={10}>
           <div
             style={{ background: design?.header_color }}
             className="absolute top-0 py-2  whitespace-nowrap"
@@ -56,8 +60,9 @@ const Announcement = async ({ design, url }: any) => {
             ))}
           </div>
         </Marquee> */}
-      </div>
-    </div>}
+          </div>
+        </div>
+      )}
     </>
   );
 };

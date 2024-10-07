@@ -26,7 +26,12 @@ const AllMobileBottomMenu = () => {
   const theme = useTheme();
   const design = theme?.design;
 
-  const MobileNavComponent = mobileNavs[(design?.mobile_bottom_menu ||design?.mobile_bottom_menu=='default') || "four"];
+  const MobileNavComponent =
+    mobileNavs[
+      design?.mobile_bottom_menu ||
+        design?.mobile_bottom_menu == "default" ||
+        "four"
+    ];
 
   return <>{MobileNavComponent && <MobileNavComponent />}</>;
 };
