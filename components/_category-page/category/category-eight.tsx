@@ -30,7 +30,7 @@ const fetchData = async (
     );
     const { colors, data } = categoryResponse;
 
-    if (!data) {
+    if (data?.data?.length == 0) {
       try {
         // Encode activeColor using encodeURIComponent
         const encodedColor = encodeURIComponent(activeColor);

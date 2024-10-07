@@ -1,8 +1,7 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
-import { productImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
 import { buyNow } from "@/utils/buy-now";
 import CallForPrice from "@/utils/call-for-price";
@@ -14,21 +13,22 @@ import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { VscCreditCard } from "react-icons/vsc";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   FacebookIcon,
   FacebookShareButton,
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HSlider } from "../eight/slider";
+import getReferralCode from "@/components/_category-page/category/utils/getRefferalCode";
+import "react-toastify/dist/ReactToastify.css";
 
 const Details = ({
   data,
@@ -53,11 +53,53 @@ const Details = ({
   const [size, setSize] = useState<any>(null);
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
+  const [referralCode, setReferralCode] = useState("");
+  const [referralLink, setReferralLink] = useState("");
+  const [copied, setCopied] = useState(false);
 
   // image selector
   const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
+
+  useEffect(() => {
+    const fetchReferralCode = async () => {
+      try {
+        const code = await getReferralCode();
+        if (code) {
+          setReferralCode(code); // Set referral code in the state
+          // Generate the referral link based on the code
+          const link = `${window.location.href}`;
+          setReferralLink(link);
+        }
+      } catch (error) {
+        console.error("Error in useEffect:", error);
+      }
+    };
+
+    fetchReferralCode();
+  }, []);
+
+  // Copy the referral link to the clipboard
+  const handleCopyLink = () => {
+    navigator.clipboard
+      .writeText(referralLink)
+      .then(() => {
+        setCopied(true);
+        // Display the toast notification
+        toast.success("Link copied!", {
+          position: "top-right",
+          autoClose: 2000, // close after 2 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => setCopied(false), 2000); // Reset "copied" status after 2 seconds
+      })
+      .catch((err) => console.error("Failed to copy the link", err));
+  };
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -67,6 +109,8 @@ const Details = ({
     // declare the async data fetching function
     const fetchData = async () => {
       data["store_id"] = store_id;
+      // Log the user's information, data, and store_id
+      //  console.log("User Info:", { data, store_id, headerSetting, design });
       // get the data from the api
       const { product, variant, vrcolor } = await httpReq.post(
         "product-details",
@@ -99,7 +143,7 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -465,6 +509,8 @@ const Details = ({
   const buttonOne =
     "font-bold text-white bg-gray-600 rounded-md w-60 py-3 text-center";
 
+  const persistRoot = localStorage.getItem("persist:root");
+
   return (
     <div className="bg-white h-full ">
       <style>{styleCss}</style>
@@ -481,6 +527,7 @@ const Details = ({
         <div className="md:col-span-5 space-y-4 sticky top-28 h-max">
           <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
             {product?.name}
+            {/* {JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth).user.token} */}
           </h2>
           <div className="flex justify-start items-center gap-x-4">
             <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
@@ -599,6 +646,48 @@ const Details = ({
               </WhatsappShareButton>
             </span>
           </div>
+          {/* Display the referral link */}
+          <div>
+            {/* Display referral link and copy button */}
+            {referralLink && (
+              <div className="flex items-center gap-4">
+                {/* Underlined referral link */}
+                <p>
+                  Referral Link:{" "}
+                  <a
+                    href={referralLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-blue-600 hover:text-blue-800"
+                  >
+                    {referralLink}
+                  </a>
+                </p>
+
+                {/* Copy button */}
+                <button
+                  className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
+                  ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
+                  onClick={handleCopyLink}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-4 10h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>
@@ -619,6 +708,51 @@ const AddCart = ({
   const { data, error } = useHeaderSettings();
   const { design } = useTheme();
 
+  
+  const [referralCode, setReferralCode] = useState("");
+  const [referralLink, setReferralLink] = useState("");
+
+  // Function to extract the 'referral' parameter from the URL
+  const getReferralCodeFromURL = () => {
+    const params = new URLSearchParams(window.location.search); // Get all URL parameters
+    return params.get("referral"); // Get the 'referral' parameter from the URL
+  };
+
+  useEffect(() => {
+    const fetchReferralCode = async () => {
+      // 1. First, check if the referral code is in the URL (Browser B scenario)
+      const codeFromURL = getReferralCodeFromURL();
+
+      if (codeFromURL) {
+        // If the referral code is found in the URL (e.g., when opened in another browser)
+        setReferralCode(codeFromURL); // Set the referral code in the state
+        localStorage.setItem("referralCode", codeFromURL); // Optionally store in localStorage
+        console.log("Referral code from URL:", codeFromURL); // For debugging
+      } else {
+        // 2. If no referral code is in the URL, fetch it from the API (Browser A scenario)
+        try {
+          const code = await getReferralCode(); // Fetch referral code from API
+          if (code) {
+            setReferralCode(code); // Set referral code in state
+            localStorage.setItem("referralCode", code); // Optionally store in localStorage
+
+            // Generate the referral link with the referral code
+            const link = `?referral=${code}`;
+            setReferralLink(link); // Set the generated referral link in the state
+            console.log("Generated referral link:", link); // For debugging
+
+            // Update the URL in Browser A without reloading the page
+            window.history.replaceState(null, "", link);
+          }
+        } catch (error) {
+          console.error("Error fetching referral code:", error);
+        }
+      }
+    };
+
+    fetchReferralCode();
+  }, []);
+
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -629,6 +763,7 @@ const AddCart = ({
       setQty((prevCount: any) => prevCount - 1);
     }
   };
+
 
   const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
 
@@ -645,14 +780,15 @@ const AddCart = ({
         >
           <MinusIcon width={15} />
         </div>
-        <div className="h-12 w-24  flex justify-center items-center">{qty}</div>
+        <div className="h-12 w-24 flex justify-center items-center">{qty}</div>
         <div
-          className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
+          className="h-12 w-12 flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
           onClick={incNum}
         >
           <PlusIcon width={15} />
         </div>
       </div>
+      <p>Referral Code: {referralCode}</p>
       {store_id !== 3512 ? (
         <div className="flex flex-wrap items-center gap-3">
           <div className="">

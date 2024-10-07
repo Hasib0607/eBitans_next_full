@@ -138,7 +138,7 @@ const ShoppingCart = ({ setOpen }: any) => {
             color={"white"}
             className="h-6 w-6 lg:cursor-pointer"
             aria-hidden="true"
-          />
+            />
         </div>
 
         <div className="my-[80px] px-6">
@@ -176,7 +176,7 @@ const ShoppingCart = ({ setOpen }: any) => {
   );
 };
 
-const SingleCartProduct = ({ product, setOpen }: any) => {
+const SingleCartProduct = ({ product, setOpen, referralCode }: any) => {
   const dispatch = useDispatch();
 
   const { design } = useTheme();
@@ -247,6 +247,11 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
             <p className="sm:text-sm text-xs text-gray-600">
               <span>
                 Unit Price: <Taka tk={parseInt(product?.price)} />
+              </span>
+            </p>
+            <p className="sm:text-sm text-xs text-gray-600">
+              <span>
+                Referral Code: {localStorage.getItem('referralCode')}
               </span>
             </p>
           </div>

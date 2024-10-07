@@ -1,26 +1,22 @@
-"use client";
-import Card47 from "@/components/card/card47";
-import Card6 from "@/components/card/card6";
-import FilterByColor from "@/components/filter-by-color";
-import FilterByPrice from "@/components/filter-by-price";
-import useTheme from "@/hooks/use-theme";
-import httpReq from "@/utils/http/axios/http.service";
-import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { MenuIcon, MinusIcon, PlusIcon } from "@heroicons/react/outline";
+import React, { useEffect, useState } from "react";
+import useTheme from "../../../../hooks/useTheme";
+import httpReq from "../../../../services/http.service";
+import { Card45, Card6 } from "../../../components/card";
+import OvalLoader from "../../../components/Loader/OvalLoader";
 import { AnimatePresence, motion } from "framer-motion";
-import Link from "next/link";
-import { useParams } from "next/navigation";
-import { useEffect, useState } from "react";
+import { NavLink } from "react-router-dom";
 import { IoGridSharp } from "react-icons/io5";
+import Pagination from "../Pagination";
+import FilterByColor from "../../../components/filterByColor/FilterByColor";
+import FilterByPrice from "../../../components/filterByPrice/FilterByPrice";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import Skeleton from "@/components/loader/skeleton";
-import Pagination from "./pagination";
 
-const CategoryTwentyThree = () => {
-  const { id: data }: any = useParams<{ id: string }>();
+const CategoryTwentyOne = ({ data }) => {
   const { category, module, design } = useTheme();
 
-  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
+  const paginateModule = module.find((item) => item?.modulus_id === 105);
 
   const [grid, setGrid] = useState("H");
   const [sort, setSort] = useState("");
@@ -46,8 +42,8 @@ const CategoryTwentyThree = () => {
 
   const styleCss = `
     .grid-active {
-      color:  ${design?.header_color};
-      border: 1px solid ${design?.header_color};
+      color:  ${design.header_color};
+      border: 1px solid ${design.header_color};
   }
  `;
 
@@ -55,15 +51,15 @@ const CategoryTwentyThree = () => {
     <div>
       <Location category={shops} />
 
-      <div className="sm:container px-5">
+      <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
-          <div className="lg:col-span-3 h-max">
-            <div className="w-full hidden lg:block shadow-2xl p-4 rounded-xl bg-white">
-              <h3 className="font-medium text-[#252525] text-xl mb-4 ">
+          <div className=" hidden lg:block col-span-3 ">
+            <div className="w-full rounded-xl h-max p-4 shadow-2xl">
+              <h3 className="font-medium text-[#252525] text-xl px-4 mb-4 ">
                 Categories
               </h3>
-              {category?.map((item: any) => (
+              {category?.map((item) => (
                 <SingleCat
                   key={item?.id}
                   item={item}
@@ -72,8 +68,7 @@ const CategoryTwentyThree = () => {
                 />
               ))}
             </div>
-
-            <div className="lg:my-5 lg:shadow-2xl p-4 lg:rounded-xl lg:bg-white">
+            <div className="bg-white my-6 rounded-xl h-max p-4 shadow-2xl">
               <FilterByColor
                 id={data?.id}
                 setActiveColor={setActiveColor}
@@ -84,8 +79,7 @@ const CategoryTwentyThree = () => {
                 setHasMore={setHasMore}
               />
             </div>
-
-            <div className="lg:my-5 lg:shadow-2xl p-4 lg:rounded-xl lg:bg-white">
+            <div className="bg-white rounded-xl h-max p-4 shadow-2xl">
               <FilterByPrice
                 id={data?.id}
                 setVal={setVal}
@@ -97,7 +91,7 @@ const CategoryTwentyThree = () => {
           </div>
           <div className="col-span-1 lg:col-span-9 flex flex-col min-h-[100vh-200px] h-full ">
             <Filter
-              onChange={(e: any) => {
+              onChange={(e) => {
                 setSort(e.target.value);
                 setPage(1);
                 setHasMore(true);
@@ -108,7 +102,6 @@ const CategoryTwentyThree = () => {
             />
             <div className="flex-1">
               <Product
-                id={data}
                 dataId={dataId}
                 page={pageShop}
                 sort={sort}
@@ -117,9 +110,9 @@ const CategoryTwentyThree = () => {
                 setShops={setShops}
                 setProducts={setProducts}
                 setPaginate={setPaginate}
-                val={val}
                 setColors={setColors}
                 activeColor={activeColor}
+                val={val}
                 setPage={setPage}
                 shop_load={shop_load}
                 setHasMore={setHasMore}
@@ -138,7 +131,7 @@ const CategoryTwentyThree = () => {
   );
 };
 
-export default CategoryTwentyThree;
+export default CategoryTwentyOne;
 
 const Product = ({
   products,
@@ -149,15 +142,14 @@ const Product = ({
   setPaginate,
   setShops,
   dataId,
-  val,
   setColors,
   activeColor,
+  val,
   setPage,
   shop_load,
   setHasMore,
   hasMore,
-  id,
-}: any) => {
+}) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -181,62 +173,76 @@ const Product = ({
   ]);
 
   const fetchData = async () => {
-    try {
-      const pageQuery = page
-        ? shop_load === 1
-          ? page
-          : `?page=${page}`
-        : `?page=1`;
-      const colorFilter = activeColor ? encodeURIComponent(activeColor) : "";
-      const priceFilter = Number(val) !== 0 ? Number(val) : "";
-      const apiUrl = `getcatproducts${pageQuery}&filter=${sort}&priceFilter=${priceFilter}&colorFilter=${colorFilter}`;
-
-      // Get the data from the API
-      let response = await httpReq.post(apiUrl, { id });
-      let { colors, data, error } = response;
-
-      if (data?.data?.length == 0) {
-        // If error, try fetching subcategory products
-        response = await httpReq.post(
-          apiUrl.replace("getcatproducts", "getsubcatproduct"),
-          { id }
-        );
-        ({ colors, data, error } = response);
-      }
-
-      if (data?.data?.length > 0) {
-        setHasMore(true);
+    // get the data from the api
+    const { colors, data } = await httpReq.post(
+      `getcatproducts${page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`}&filter=${sort}&priceFilter=${Number(val) !== 0 ? Number(val) : ""}&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`,
+      { id: dataId?.id }
+    );
+    if (data?.data?.length == 0) {
+      const { colors, data, error } = await httpReq.post(
+        `getsubcatproduct${page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`}&filter=${sort}&priceFilter=${Number(val) !== 0 ? Number(val) : ""}&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`,
+        { id: dataId?.id }
+      );
+      if (error) {
+        // console.log("hdfshsd");
+        setHasMore(false);
+        setLoad(false);
+        setPaginate(null);
+        if (!shop_load && page !== 1) {
+          setProducts([...products, ...data?.data]);
+        } else {
+          setProducts([]);
+          setPaginate(null);
+        }
         setColors(colors);
+        return setError(error);
+      } else if (data?.data?.length > 0) {
+        setColors(colors);
+        setHasMore(true);
 
         if (!shop_load) {
-          if (data.current_page === 1) {
-            setProducts(data.data);
+          if (data?.current_page === 1) {
+            setProducts(data?.data);
           } else {
-            setProducts((prevProducts: any) => [...prevProducts, ...data.data]);
+            setProducts([...products, ...data?.data]);
           }
           setPage(page + 1);
         } else {
-          setProducts(data.data);
+          setProducts(data?.data);
         }
-
         setPaginate(data);
         setLoad(false);
         setError(null);
-      } else {
-        setHasMore(false);
-        setLoad(false);
+        setShops(
+          subcategory?.find((c) => parseInt(c?.id) === parseInt(dataId?.id))
+        );
       }
-    } catch (error: any) {
-      console.error("Unexpected error:", error);
-      setHasMore(false);
+    } else if (data?.data?.length > 0) {
+      setHasMore(true);
+      if (!shop_load) {
+        if (data?.current_page === 1) {
+          setProducts(data?.data);
+        } else {
+          setProducts([...products, ...data?.data]);
+        }
+        setPage(page + 1);
+      } else {
+        setProducts(data?.data);
+      }
+      setPaginate(data);
       setLoad(false);
-      setError(error);
+      setError(null);
+      setShops(category?.find((c) => parseInt(c?.id) === parseInt(dataId?.id)));
+      setColors(colors);
+    } else {
+      setHasMore(false);
     }
+    setLoad(false);
   };
 
   if (load) {
     return (
-      <div className="text-center text-4xl font-bold text-gray-400 flex justify-center items-center">
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
       </div>
     );
@@ -244,12 +250,11 @@ const Product = ({
 
   if (error) {
     return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-[50vh] flex justify-center items-center">
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         {error}
       </div>
     );
   }
-
   return (
     <>
       {!shop_load ? (
@@ -268,6 +273,7 @@ const Product = ({
                   color="#f1593a"
                   ariaLabel="three-dots-loading"
                   wrapperStyle={{}}
+                  wrapperClassName=""
                   visible={true}
                 />
               </div>
@@ -279,26 +285,24 @@ const Product = ({
             }
           >
             {grid === "H" && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-0">
-                {products?.map((item: any, key: number) => (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-1 sm:gap-4">
+                {products.map((item) => (
                   <motion.div
-                    key={key}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                     transition={{ duration: 0.5, ease: "linear" }}
                   >
-                    <Card47 item={item} />
+                    <Card45 item={item} />
                   </motion.div>
                 ))}
               </div>
             )}
             <AnimatePresence>
               {grid === "V" && (
-                <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                  {products?.map((item: any, key: number) => (
+                <div className="grid grid-cols-1 gap-1 sm:gap-4">
+                  {products.map((item) => (
                     <motion.div
-                      key={key}
                       initial={{ translateX: 200 }}
                       animate={{ translateX: 0 }}
                       transition={{
@@ -318,26 +322,24 @@ const Product = ({
       ) : (
         <div>
           {grid === "H" && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-2 sm:px-0">
-              {products?.map((item: any, key: number) => (
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-1 sm:gap-4">
+              {products.map((item) => (
                 <motion.div
-                  key={key}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
                   transition={{ duration: 0.5, ease: "linear" }}
                 >
-                  <Card47 item={item} />
+                  <Card45 item={item} />
                 </motion.div>
               ))}
             </div>
           )}
           <AnimatePresence>
             {grid === "V" && (
-              <div className="grid grid-cols-1 gap-4 px-2 sm:px-0">
-                {products?.map((item: any, key: number) => (
+              <div className="grid grid-cols-1 gap-1 sm:gap-4">
+                {products.map((item) => (
                   <motion.div
-                    key={key}
                     initial={{ translateX: 200 }}
                     animate={{ translateX: 0 }}
                     transition={{
@@ -358,7 +360,7 @@ const Product = ({
   );
 };
 
-const Location = ({ category }: any) => {
+const Location = ({ category }) => {
   return (
     <div className="w-full bg-[#f1f1f1] flex flex-col justify-center items-center py-5 mb-5">
       <h1 className="text-3xl font-medium ">Product</h1>
@@ -370,7 +372,7 @@ const Location = ({ category }: any) => {
   );
 };
 
-const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
+const Filter = ({ paginate, onChange, setGrid, grid }) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 mb-5 flex flex-wrap justify-between items-center px-2">
       <div className="text-gray-500 font-medium">
@@ -379,19 +381,15 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
       <div className="flex items-center gap-1 mb-3 md:mb-0">
         <div
           onClick={() => setGrid("H")}
-          className={` rounded-full p-2 ${
-            grid === "H" ? "grid-active" : "border"
-          }`}
+          className={` rounded-full p-2 ${grid === "H" ? "grid-active" : "border"}`}
         >
           <IoGridSharp className="h-4 w-4 " />
         </div>
         <div
           onClick={() => setGrid("V")}
-          className={`rounded-full p-2 ${
-            grid === "V" ? "grid-active" : "border"
-          }`}
+          className={`rounded-full p-2 ${grid === "V" ? "grid-active" : "border"}`}
         >
-          <Bars3Icon className="h-4 w-4" />
+          <MenuIcon className="h-4 w-4" />
         </div>
       </div>
       {/* Short by  */}
@@ -412,22 +410,20 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
   );
 };
 
-const SingleCat = ({ item, setSelect, select }: any) => {
+const SingleCat = ({ item, setSelect, select }) => {
   const [show, setShow] = useState(false);
   return (
     <div className="">
       <div className="w-full border mb-2">
         <div className="flex items-center px-4 py-3">
-          <Link
+          <NavLink
             onClick={() => setSelect(item.id)}
-            href={"/category/" + item.id}
-            className={`flex-1 text-lg font-medium ${
-              select === item.id ? "text-red-500" : "text-gray-800"
-            }`}
+            to={"/category/" + item?.id}
+            className={`flex-1 text-lg font-medium ${select === item.id ? "text-red-500" : "text-gray-800"}`}
           >
             {" "}
             <p>{item.name}</p>
-          </Link>
+          </NavLink>
           {item?.cat ? (
             <div className="px-4 h-full">
               {show ? (
@@ -447,21 +443,19 @@ const SingleCat = ({ item, setSelect, select }: any) => {
         {show && (
           <>
             <div className="">
-              {item?.cat?.map((sub: any, key: number) => (
-                <div className="border-t" key={key}>
-                  <Link
+              {item?.cat?.map((sub) => (
+                <div className="border-t">
+                  <NavLink
                     onClick={() => setSelect(sub.id)}
-                    href={"/category/" + sub?.id}
+                    to={"/category/" + sub?.id}
                   >
                     {" "}
                     <p
-                      className={`py-2 px-4 text-sm ${
-                        select === sub.id ? "text-red-500" : "text-gray-500"
-                      }`}
+                      className={`py-2 px-4 text-sm ${select === sub.id ? "text-red-500" : "text-gray-500"}`}
                     >
                       {sub?.name}
                     </p>
-                  </Link>
+                  </NavLink>
                 </div>
               ))}
             </div>

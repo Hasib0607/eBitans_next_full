@@ -167,7 +167,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),

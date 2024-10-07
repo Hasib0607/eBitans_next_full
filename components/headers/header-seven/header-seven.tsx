@@ -12,6 +12,7 @@ import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
 import CategorySeven from "./category-seven";
 import Search from "./search";
+import AllMobileBottomMenu from "@/app/mobileBottomMenu";
 
 const HeaderSeven = ({ headerSetting, design }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -329,6 +330,7 @@ const HeaderSeven = ({ headerSetting, design }: any) => {
           </div>
         </ul>
       </div>
+      <AllMobileBottomMenu/>
     </div>
   );
 };

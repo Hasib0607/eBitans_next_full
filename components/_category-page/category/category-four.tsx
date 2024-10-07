@@ -65,7 +65,7 @@ const CategoryFour = () => {
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -107,7 +107,7 @@ const CategoryFour = () => {
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

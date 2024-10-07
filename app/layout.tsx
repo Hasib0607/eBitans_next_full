@@ -39,8 +39,8 @@ export default async function RootLayout({
             <Announcement design={design} url={url} />
             <AppWrapper headerSetting={headersetting} design={design}>
               {children}
+              {/* <AllMobileBottomMenu /> */}
             </AppWrapper>
-            {/* <AllMobileBottomMenu/> */}
             {fbPixel && (
               <>
                 <Script id="facebook-pixel" strategy="afterInteractive">

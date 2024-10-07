@@ -26,7 +26,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
   checkPage();
   if (page == "product") {
     return (
-      <div className=" container md:h-[65vh] gap-5 md:gap-20 flex items-start md:justify-center md:items-end flex-col md:flex-row mt-10 md:mt-0">
+      <div className=" container md:h-[70vh] gap-5 md:gap-20 flex items-start md:justify-center md:items-center flex-col md:flex-row mt-10 md:mt-0 ">
         <div className="w-full h-[450px] md:w-[600px] md:min-h-[600px] px-3 md:px-0">
           <ReactSkeleton height={"100%"} />
         </div>
@@ -46,7 +46,7 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
   }
   return (
     <div>
-      <section className="bg-white ">
+      <section className="bg-white pb-96 min-h-[100vh] md:min-h-auto">
         <div className="sm:container px-5 sm:py-10 py-5 mx-auto animate-pulse fixed left-[50%] translate-x-[-50%] md:translate-x-0 md:static top-32 mb-96 md:mb-0">
           {/* <performance className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700" /> */}
           {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>

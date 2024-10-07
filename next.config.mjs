@@ -10,7 +10,7 @@ const nextConfig = {
       },
       {
         protocol: "https",
-        hostname: "admin.rongmoshal.store",
+        hostname: "testing.ebitans.com",
       },
     ],
   },

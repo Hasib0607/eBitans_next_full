@@ -3,16 +3,15 @@ import Marquee from "react-fast-marquee";
 
 const Announcement = async ({ design, url }: any) => {
   let anArray = [];
+  let res: any;
   try {
-    const res = await axios.post(
+    res = await axios.post(
       process.env.NEXT_PUBLIC_API_URL + "get-announcement",
       {
         name: url,
       }
     );
-    if (!res.data) {
-      return <></>;
-    }
+
     if (res.data && res.data.data) {
       anArray = res.data.data;
     }
@@ -25,8 +24,8 @@ const Announcement = async ({ design, url }: any) => {
     alternatedArray.push(anArray[i % anArray.length]);
   }
 
-  return (
-    <div id="annoucement" style={{ background: design?.header_color }}>
+  return (<>
+  {(!alternatedArray||alternatedArray?.length==0)?<></>:<div id="annoucement" style={{ background: design?.header_color }}>
       <div className="relative flex overflow-x-hidden container">
         <Marquee speed={10} pauseOnHover={true}>
           <div className="py-2  whitespace-nowrap">
@@ -58,7 +57,8 @@ const Announcement = async ({ design, url }: any) => {
           </div>
         </Marquee> */}
       </div>
-    </div>
+    </div>}
+    </>
   );
 };
 

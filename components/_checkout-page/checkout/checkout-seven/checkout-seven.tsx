@@ -94,7 +94,7 @@ const CheckOutSeven = () => {
           </div>
         ) : (
           <div className="h-screen w-full flex justify-center items-center relative">
-            <OvalLoader />
+            <Skeleton />
           </div>
         )}
       </>

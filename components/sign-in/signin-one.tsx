@@ -1,12 +1,15 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
 import { login } from "@/redux/features/auth.slice";
+import httpReq from "@/utils/http/axios/http.service";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
+
 const cls =
   "py-3 px-4 border border-gray-300 rounded-md placeholder:text-gray-500 text-sm focus:outline-0 w-full";
 
@@ -26,6 +29,7 @@ const LoginOne = () => {
   //   dispatch(clearMessage());
   // }, [dispatch]);
 
+
   const {
     register,
     handleSubmit,
@@ -38,23 +42,25 @@ const LoginOne = () => {
       .unwrap()
       .then(({ verify, error }: any) => {
         if (error) {
-          // toast(error, { type: "error" });
+          toast(error, { type: "error" });
         }
         if (verify) {
-          // toast(verify, { type: "success" });
+          toast(verify, { type: "success" });
           router.push("/profile");
-          // window.location.reload();
+          window.location.reload();
         }
         // else {
         //     navigate('/verify-otp')
         // }
       })
       .catch((error: any) => {
-        // toast("Credential Doesn't Match", { type: "error" });
+        toast("Credential Doesn't Match", { type: "error" });
 
         setLoading(false);
       });
   };
+
+
   return (
     <div className=" max-w-xl w-full mx-auto">
       <form
@@ -135,15 +141,17 @@ const LoginOne = () => {
           )}
         </div>
 
-        <p className="text-base font-medium text-[#5A5A5A]">
-          Don&apos;t have any account?
-          <Link
-            href="/sign-up"
-            className="text-primary underline font-sans font-bold text-black pl-1"
-          >
-            Register
-          </Link>
-        </p>
+        {store?.auth_type !== "EasyOrder" && (
+          <p className="text-base font-medium text-[#5A5A5A]">
+            Don&apos;t have any account?
+            <Link
+              href="/sign-up"
+              className="text-primary underline font-sans font-bold text-black pl-1"
+            >
+              Register
+            </Link>
+          </p>
+        )}
       </form>
       <div className="flex justify-center w-full">{/* <LoginWith /> */}</div>
     </div>

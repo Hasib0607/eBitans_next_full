@@ -199,7 +199,7 @@ const Product = ({
       { id }
     );
 
-    if (error) {
+    if (data?.data?.length == 0) {
       const { colors, data, error } = await httpReq.post(
         `getsubcatproduct${
           page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
@@ -262,7 +262,7 @@ const Product = ({
   if (load) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

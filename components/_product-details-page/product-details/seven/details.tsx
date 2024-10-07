@@ -23,7 +23,7 @@ import { toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HSlider } from "../eight/slider";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@/components/loader/skeleton";
 
 export const fetchCampaignProduct = async (id: any, store_id: any) => {
   try {
@@ -430,24 +430,7 @@ const Details = ({
     "font-bold text-white bg-gray-600 rounded-md w-60 text-center py-3 font-seven lg:cursor-pointer";
 
   if (isLoading) {
-    return (
-      <div className=" container h-[70vh] gap-2 md:gap-20 flex justify-center items-center">
-        <div className="md:w-[600px] md:min-h-[600px]">
-          <Skeleton height={"600px"} />
-        </div>
-        <div>
-          <div className="mb-5 md:w-[400px] md:min-h-[150px]">
-            <Skeleton height={"150px"} />
-          </div>
-          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
-            <Skeleton height={"50px"} />
-          </div>
-          <div className="mb-5 md:w-[200px] md:min-h-[50px]">
-            <Skeleton height={"50px"} />
-          </div>
-        </div>
-      </div>
-    );
+    return (<Skeleton/>);
   }
 
   return (

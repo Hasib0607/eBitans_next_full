@@ -35,7 +35,7 @@ const fetchData = async (
     );
     const { colors, data } = categoryResponse;
 
-    if (!data) {
+    if (data?.data?.length == 0) {
       try {
         // Encode activeColor using encodeURIComponent
         const encodedColor = encodeURIComponent(activeColor);
@@ -47,11 +47,13 @@ const fetchData = async (
 
         const { colors, data } = subcategoryResponse;
 
+        console.log(data)
         return { colors, data };
       } catch (err) {
         console.error(err);
       }
     }
+
 
     return { colors, data };
   } catch (error) {
@@ -174,7 +176,7 @@ const CategorySevenNew = () => {
               <h1 className="mb-10 text-2xl text-gray-700 font-medium">
                 Category
               </h1>
-
+            {/* starting to show categories */}
               {category?.map((item: any) => (
                 <div key={item.id} className="">
                   <SingleCat item={item} />

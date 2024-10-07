@@ -1,5 +1,5 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import { useEffect, useState } from "react";
@@ -77,7 +77,7 @@ const CheckOutFour = () => {
           </div>
         ) : (
           <div className="h-screen w-full flex justify-center items-center relative">
-            <OvalLoader />
+            <Skeleton />
           </div>
         )}
       </>
@@ -88,6 +88,7 @@ const CheckOutFour = () => {
     <>
       <div className="" style={{ backgroundColor: "#F3F4F6" }}>
         <h2 className="py-10 text-4xl font-semibold text-center">Checkout</h2>
+        <h1 className="py-2 text-xl font-semibold text-center">Referral Code: {localStorage.getItem('referralCode')}</h1>
         <div className="container">
           <div className="lg:grid lg:grid-cols-3 lg:gap-6 mt-1 py-4 px-2">
             <div className="mt-5 lg:mt-0 lg:col-span-2">
