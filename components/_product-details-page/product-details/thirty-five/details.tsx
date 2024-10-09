@@ -643,12 +643,12 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-5 mt-5">
-        <button className={buttonSeven} onClick={onClick}>
+        <button className={'border border-gray-200 px-[20px] py-[10px] rounded-md'} onClick={onClick}>
           Add to bag
         </button>
         <Link href="/checkout">
           {" "}
-          <button onClick={onClick} className={buttonSeven}>
+          <button onClick={onClick} className={'border border-gray-200 px-[20px] py-[10px] rounded-md'}>
             {button || "Buy now"}
           </button>
         </Link>

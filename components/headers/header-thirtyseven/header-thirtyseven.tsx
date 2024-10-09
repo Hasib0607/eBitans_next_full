@@ -48,14 +48,15 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-
+      
       window.location.href = "/";
     }
   };
-
+  //  was removed from line 82
+  
   const styleCss = `
     @font-face {
-        font-family: 'Trebuchet':
+      font-family: 'Trebuchet':
         src: local('Trebuchet'),
              url('../../../../fonts/trebuc.ttf') format('ttf'),
     }
@@ -67,19 +68,20 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
         display: block;
         position: fixed;
         background: white;
+        color:black;
         width: 100%;
         z-index: 5;
         top:0;
         opacity: 100 !important;
         animation: fadeIn 0.6s ease-in both;
-      }
+        }
         
-    h1, p, span, button, li, ul, a, div, h2, h3, h4, h5, h6  {
-        font-family: Trebuchet,sans-serif;;
-    }
-    .header-thirty-seven {
-        color:  ${design?.text_color};
-        background: ${design?.header_color};
+        h1, p, span, button, li, ul, a, div, h2, h3, h4, h5, h6  {
+          font-family: Trebuchet,sans-serif;;
+          }
+          .header-thirty-seven {
+            color:  ${design?.text_color};
+            background: ${innerWidth<768?design?.header_color:'white'};
     }
     ::-webkit-scrollbar-thumb {
         background-color: ${design?.header_color};
@@ -94,7 +96,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
 
   return (
     <>
-      <div className="header-thirty-seven h-20 flex items-center">
+      <div className= 'header-thirty-seven h-20 flex items-center'>
         <style>{styleCss}</style>
         {/* cart open  */}
         <BottomCart open={cartOpen} setOpen={setCartOpen} />
@@ -122,26 +124,38 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
           <div onClick={() => setOpen(!open)} className="lg:hidden block">
             <HiMenu className="text-3xl text-white" />
           </div>
-          <div className="w-full lg:flex items-center hidden relative">
-            <input
-              value={searchTxt}
-              onChange={(e) => setSearch(e.target.value)}
-              type="text"
-              placeholder="Search Products"
-              className="w-full border border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
-            />
-            <div
-              onClick={handleClose}
-              className="lg:cursor-pointer px-2 font-thin py-[12px] -ml-10"
-            >
-              {searchTxt.length === 0 ? (
-                <BsSearch className="text-xl" />
-              ) : (
-                <AiOutlineClose className="text-xl lg:cursor-pointer" />
-              )}
-            </div>
-            <div className={`absolute z-[15] top-14 left-0 w-full`}>
-              {searchTxt && <Search search={searchTxt} setSearch={setSearch} />}
+          <div className="lg:block hidden w-full rounded-md">
+            <div className="w-full relative">
+              <div className="relative overflow-hidden rounded-md">
+                <div>
+                  <input
+                    value={searchTxt}
+                    onChange={(e) => setSearch(e.target.value)}
+                    type="text"
+                    placeholder="Enter your search key ..."
+                    className="border  w-full py-2 pl-3 outline-none focus:outline-none rounded-md focus:border-gray-200 border-gray-200 focus:ring-0 text-black"
+                  />
+                </div>
+                <div
+                  onClick={handleClose}
+                  className="bg-color all-hover text-white lg:cursor-pointer absolute right-0 top-0 px-8 font-thin py-3"
+                >
+                  {searchTxt.length === 0 ? (
+                    <BsSearch className="text-xl" />
+                  ) : (
+                    <AiOutlineClose className="text-xl lg:cursor-pointer" />
+                  )}
+                </div>
+              </div>
+              <div
+                className={`absolute z-[15] top-14 left-0 w-full ${
+                  openMenu ? "hidden" : "block"
+                }`}
+              >
+                {searchTxt && (
+                  <Search search={searchTxt} setSearch={setSearch} />
+                )}
+              </div>
             </div>
           </div>
           <div className="hidden lg:flex gap-5 items-center w-max ml-28">
@@ -229,8 +243,9 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
                   </Transition>
                 </Menu>
               ) : (
-                <div className="flex items-center gap-3 text-white text-xs w-full">
+                <div className="flex items-center gap-3 text-color text-xs w-full">
                   <Link href="/login">
+                  {/* check here */}
                     <FaUser className="text-2xl" />
                   </Link>
                   <div className="w-full">
@@ -256,7 +271,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
       <div
         className={` ${
           openMenu ? "navbarThirtyEight openMenu" : "navbarThirtyEight"
-        } bg-white text-black lg:flex items-center hidden shadow-[0px_1px_10px_1px_rgba(0,0,0,0.1)] z-[1] relative`}
+        } bg-color text-white lg:flex items-center hidden shadow-[0px_1px_10px_1px_rgba(0,0,0,0.1)] z-[1] relative`}
       >
         <div className="sm:container px-5 flex justify-center gap-x-5">
           {category?.slice(0, 7).map((item: any) => (
@@ -312,7 +327,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
                 <Link href="/">
                   <img
                     className="h-10"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

@@ -677,7 +677,7 @@ const AddCart = ({
         onClick={buyNowBtn}
         className={`w-full ${variant?.length !== 0 && "col-span-3"}`}
       >
-        <button className={buttonTwenty}>{button || "Buy Now"}</button>
+        <button className={buttonTwenty}>{button || "Buy Noww"}</button>
       </div>
     </div>
   );

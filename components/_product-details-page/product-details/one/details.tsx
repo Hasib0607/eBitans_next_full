@@ -708,6 +708,7 @@ const AddCart = ({
   const { data, error } = useHeaderSettings();
   const { design } = useTheme();
 
+  
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
 
@@ -762,6 +763,7 @@ const AddCart = ({
       setQty((prevCount: any) => prevCount - 1);
     }
   };
+
 
   const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
 

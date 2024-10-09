@@ -173,7 +173,7 @@ const HeaderThirtyFour = ({ headerSetting }: any) => {
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
                     placeholder="Enter your search key ..."
-                    className="w-full py-2 outline-none focus:outline-none rounded-md focus:border-gray-200 border-gray-200 focus:ring-0"
+                    className="w-full pl-2 border py-2 outline-none focus:outline-none rounded-md focus:border-gray-200 border-gray-200 focus:ring-0"
                   />
                 </div>
                 <div

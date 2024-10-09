@@ -82,7 +82,6 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       </Suspense>
     );
   };
-
   switch (component) {
     case "hero_slider":
       return (

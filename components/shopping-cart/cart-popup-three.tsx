@@ -138,7 +138,7 @@ const ShoppingCart = ({ setOpen }: any) => {
             color={"white"}
             className="h-6 w-6 lg:cursor-pointer"
             aria-hidden="true"
-          />
+            />
         </div>
 
         <div className="my-[80px] px-6">
@@ -250,7 +250,9 @@ const SingleCartProduct = ({ product, setOpen, referralCode }: any) => {
               </span>
             </p>
             <p className="sm:text-sm text-xs text-gray-600">
-              <span>Referral Code: {localStorage.getItem("referralCode")}</span>
+              <span>
+                Referral Code: {localStorage.getItem('referralCode')}
+              </span>
             </p>
           </div>
           <div className="hidden sm:flex gap-3 items-center justify-between text-sm">
