@@ -330,7 +330,7 @@ const HeaderSeven = ({ headerSetting, design }: any) => {
           </div>
         </ul>
       </div>
-      <AllMobileBottomMenu/>
+      <AllMobileBottomMenu />
     </div>
   );
 };
