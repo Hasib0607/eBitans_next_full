@@ -48,12 +48,12 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
   const handleClick = () => {
     if (window !== undefined) {
       window.localStorage.removeItem("persist:root");
-
+      
       window.location.href = "/";
     }
   };
   //  was removed from line 82
-
+  
   const styleCss = `
     @font-face {
       font-family: 'Trebuchet':
@@ -81,7 +81,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
           }
           .header-thirty-seven {
             color:  ${design?.text_color};
-            background: ${innerWidth < 768 ? design?.header_color : "white"};
+            background: ${innerWidth<768?design?.header_color:'white'};
     }
     ::-webkit-scrollbar-thumb {
         background-color: ${design?.header_color};
@@ -96,7 +96,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
 
   return (
     <>
-      <div className="header-thirty-seven h-20 flex items-center">
+      <div className= 'header-thirty-seven h-20 flex items-center'>
         <style>{styleCss}</style>
         {/* cart open  */}
         <BottomCart open={cartOpen} setOpen={setCartOpen} />
@@ -245,7 +245,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
               ) : (
                 <div className="flex items-center gap-3 text-color text-xs w-full">
                   <Link href="/login">
-                    {/* check here */}
+                  {/* check here */}
                     <FaUser className="text-2xl" />
                   </Link>
                   <div className="w-full">
