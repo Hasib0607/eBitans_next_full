@@ -14,7 +14,10 @@ const NewArrivalProductFive = ({ product }: any) => {
 
   const cDesign = data?.data?.custom_design || {};
   const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
-  const { title = "Default Title aka New Arrival Products", title_color = "#000" } = newArrivalProduct;
+  const {
+    title = "Default Title aka New Arrival Products",
+    title_color = "#000",
+  } = newArrivalProduct;
 
   return (
     <div className="shadow-lg sm:container px-5 sm:py-10 py-5 rounded-md">

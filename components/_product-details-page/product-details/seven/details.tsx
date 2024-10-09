@@ -430,7 +430,7 @@ const Details = ({
     "font-bold text-white bg-gray-600 rounded-md w-60 text-center py-3 font-seven lg:cursor-pointer";
 
   if (isLoading) {
-    return (<Skeleton/>);
+    return <Skeleton />;
   }
 
   return (
