@@ -164,9 +164,8 @@ const Seven = () => {
 
       <div className="block py-6 lg:hidden">
         <ul
-          className={`lg:hidden bg-white fixed md:w-128 w-96 top-0  overflow-y-auto bottom-0 -ml-32 pb-5 duration-1000 z-10 lg:cursor-pointer ${
-            open ? "left-0" : "left-[-120%]"
-          }`}
+          className={`lg:hidden bg-white fixed md:w-128 w-96 top-0  overflow-y-auto bottom-0 -ml-32 pb-5 duration-1000 z-10 lg:cursor-pointer ${open ? "left-0" : "left-[-120%]"
+            }`}
         >
           <div className="flex py-4  items-center lg:hidden px-10 border-b-2 border-gray-100 pb-8 ml-20">
             <ArrowLeftIcon
@@ -209,8 +208,8 @@ const Product = ({ products, status, setPage, isInfinityScroll }: any) => {
     }
   }, [entry, isInfinityScroll]);
 
-  if(status=='pending'){
-    return <Skeleton/>
+  if (status == 'pending') {
+    return <Skeleton />
   }
   return (
     <div
@@ -219,7 +218,7 @@ const Product = ({ products, status, setPage, isInfinityScroll }: any) => {
     >
       {status === "pending" ? (
         Array.from({ length: 8 }).map((_, index) => (
-          <Skeleton/>
+         <div key={index}><Skeleton /></div> 
         ))
       ) : products?.length <= 0 ? (
         <p>No Products Found</p>
@@ -315,7 +314,7 @@ const SingleCat = ({ item }: any) => {
             {item?.cat?.map((sub: any) => (
               <div className="py-2" key={sub.id}>
                 <Link href={"/category/" + sub?.id}>
-                  <p className="pb-2 text-sm text-red-500">{sub?.name+1}</p>
+                  <p className="pb-2 text-sm text-red-500">{sub?.name + 1}</p>
                 </Link>
                 <div className="pr-4">
                   <div className="h-[1px] bg-gray-200 w-full"></div>

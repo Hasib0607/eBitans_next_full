@@ -134,7 +134,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -205,12 +205,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
   return (
     <>
-      {(load&&showSk) ? (
+      {load && showSk ? (
         <div>
           <Skeleton />
         </div>

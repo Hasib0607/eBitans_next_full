@@ -1,4 +1,4 @@
-import './slider.css'
+import "./slider.css";
 import React, { useCallback, useEffect, useState, useRef } from "react";
 import classnames from "classnames";
 import PropTypes from "prop-types";
@@ -9,7 +9,11 @@ interface MultiRangeSliderProps {
   onChange: (value: { min: number; max: number }) => void;
 }
 
-const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, onChange }) => {
+const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({
+  min,
+  max,
+  onChange,
+}) => {
   const [minVal, setMinVal] = useState<number>(min);
   const [maxVal, setMaxVal] = useState<number>(max);
   const minValRef = useRef<HTMLInputElement | null>(null);
@@ -66,7 +70,7 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, onChange 
           event.target.value = value.toString();
         }}
         className={classnames("thumb thumb--zindex-3", {
-          "thumb--zindex-5": minVal > max - 100
+          "thumb--zindex-5": minVal > max - 100,
         })}
       />
       <input
@@ -96,7 +100,7 @@ const MultiRangeSlider: React.FC<MultiRangeSliderProps> = ({ min, max, onChange 
 MultiRangeSlider.propTypes = {
   min: PropTypes.number.isRequired,
   max: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
 };
 
 export default MultiRangeSlider;

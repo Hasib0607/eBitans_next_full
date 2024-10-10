@@ -30,7 +30,6 @@ const RegisterOne = () => {
   //   dispatch(clearMessage());
   // }, [dispatch]);
 
-
   const {
     register,
     handleSubmit,

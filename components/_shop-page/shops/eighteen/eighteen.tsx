@@ -173,7 +173,7 @@ const Product = ({
 }: any) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
-  const [sk,setSk]=useState(true)
+  const [sk, setSk] = useState(true);
 
   useEffect(() => {
     setLoad(true);
@@ -229,7 +229,6 @@ const Product = ({
     }
     // ;
     setLoad(false);
-    
   };
 
   if (load) {

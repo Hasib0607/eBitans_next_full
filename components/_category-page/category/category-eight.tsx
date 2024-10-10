@@ -183,7 +183,7 @@ const CategoryEight = () => {
 export default CategoryEight;
 
 const Product = ({ products, grid, open, shop_load, hasMore }: any) => {
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const { category } = useTheme();
 
   return (
