@@ -30,15 +30,13 @@ const fetchData = async (
     `/shoppage/products?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&page=${page}&colorFilter=${encodedColor}&priceFilter=${priceValue}&filter=${sort}`
   );
   return { data, colors };
-
 };
-
 
 const Seven = () => {
   const { module, category } = useTheme();
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("az");
-  const [activeColor, setActiveColor] = useState(""); // setting the activecolor 
+  const [activeColor, setActiveColor] = useState(""); // setting the activecolor
   const [priceValue, setPriceValue] = useState(""); // setting the pricevalue
   const [page, setPage] = useState(1); // setting the initial page number
 
@@ -164,8 +162,9 @@ const Seven = () => {
 
       <div className="block py-6 lg:hidden">
         <ul
-          className={`lg:hidden bg-white fixed md:w-128 w-96 top-0  overflow-y-auto bottom-0 -ml-32 pb-5 duration-1000 z-10 lg:cursor-pointer ${open ? "left-0" : "left-[-120%]"
-            }`}
+          className={`lg:hidden bg-white fixed md:w-128 w-96 top-0  overflow-y-auto bottom-0 -ml-32 pb-5 duration-1000 z-10 lg:cursor-pointer ${
+            open ? "left-0" : "left-[-120%]"
+          }`}
         >
           <div className="flex py-4  items-center lg:hidden px-10 border-b-2 border-gray-100 pb-8 ml-20">
             <ArrowLeftIcon
@@ -208,8 +207,8 @@ const Product = ({ products, status, setPage, isInfinityScroll }: any) => {
     }
   }, [entry, isInfinityScroll]);
 
-  if (status == 'pending') {
-    return <Skeleton />
+  if (status == "pending") {
+    return <Skeleton />;
   }
   return (
     <div
@@ -218,7 +217,9 @@ const Product = ({ products, status, setPage, isInfinityScroll }: any) => {
     >
       {status === "pending" ? (
         Array.from({ length: 8 }).map((_, index) => (
-         <div key={index}><Skeleton /></div> 
+          <div key={index}>
+            <Skeleton />
+          </div>
         ))
       ) : products?.length <= 0 ? (
         <p>No Products Found</p>
