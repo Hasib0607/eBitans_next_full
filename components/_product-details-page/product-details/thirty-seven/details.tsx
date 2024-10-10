@@ -681,13 +681,11 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
         <p>{headerSetting?.phone}</p>
       </a>
       <a
-        href={
-          "https://api.whatsapp.com/send?phone=" + headerSetting?.whatsapp_phone
-        }
+        href={`https://api.whatsapp.com/send?phone=${headerSetting?.whatsapp_phone}`}
         className={`${buttonSeven} cart-btn-thirty-seven opacity-70 hover:opacity-100`}
       >
         <FaWhatsapp />
-        <span>{headerSetting?.whatsapp_phone}</span>
+        {headerSetting?.whatsapp_phone}
       </a>
     </div>
   );
