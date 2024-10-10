@@ -19,6 +19,7 @@ const CategoryOne = () => {
 
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
 
+  const [showSk,setShowSk]=useState(true);
   const [products, setProducts] = useState([]);
   const [load, setLoad] = useState(false);
   const [paginate, setPaginate] = useState<any>({});
@@ -106,6 +107,7 @@ const CategoryOne = () => {
       setLoad(false);
       //   setError(error);
     }
+    setShowSk(false)
   };
 
   return (
@@ -175,7 +177,7 @@ const CategoryOne = () => {
                             </div>
                         </div> */}
 
-            {load ? (
+            {(load&&showSk )? (
               <div className="col-span-12 lg:col-span-9">
                 <Skeleton />
               </div>

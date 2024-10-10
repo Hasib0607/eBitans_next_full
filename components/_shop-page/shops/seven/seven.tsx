@@ -30,13 +30,15 @@ const fetchData = async (
     `/shoppage/products?name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&page=${page}&colorFilter=${encodedColor}&priceFilter=${priceValue}&filter=${sort}`
   );
   return { data, colors };
+
 };
+
 
 const Seven = () => {
   const { module, category } = useTheme();
   const [open, setOpen] = useState(false);
   const [sort, setSort] = useState("az");
-  const [activeColor, setActiveColor] = useState(""); // setting the activecolor
+  const [activeColor, setActiveColor] = useState(""); // setting the activecolor 
   const [priceValue, setPriceValue] = useState(""); // setting the pricevalue
   const [page, setPage] = useState(1); // setting the initial page number
 
@@ -207,6 +209,9 @@ const Product = ({ products, status, setPage, isInfinityScroll }: any) => {
     }
   }, [entry, isInfinityScroll]);
 
+  if(status=='pending'){
+    return <Skeleton/>
+  }
   return (
     <div
       ref={containerRef}
@@ -214,7 +219,7 @@ const Product = ({ products, status, setPage, isInfinityScroll }: any) => {
     >
       {status === "pending" ? (
         Array.from({ length: 8 }).map((_, index) => (
-          <Skeleton key={index} height={"200px"} />
+          <Skeleton/>
         ))
       ) : products?.length <= 0 ? (
         <p>No Products Found</p>
@@ -310,7 +315,7 @@ const SingleCat = ({ item }: any) => {
             {item?.cat?.map((sub: any) => (
               <div className="py-2" key={sub.id}>
                 <Link href={"/category/" + sub?.id}>
-                  <p className="pb-2 text-sm text-red-500">{sub?.name + 1}</p>
+                  <p className="pb-2 text-sm text-red-500">{sub?.name+1}</p>
                 </Link>
                 <div className="pr-4">
                   <div className="h-[1px] bg-gray-200 w-full"></div>

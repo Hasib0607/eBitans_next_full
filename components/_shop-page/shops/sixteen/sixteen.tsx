@@ -51,9 +51,9 @@ const Sixteen = ({ data }: any) => {
       {/* main section  */}
 
       <div className="sm:container px-5 sm:py-10 py-5 flex flex-col gap-4 md:gap-0 md:flex-row justify-between md:items-center pb-3">
-        <div className="text-gray-500 font-thin order-3 md:order-2">
+        {/* <div className="text-gray-500 font-thin order-3 md:order-2">
           There are {paginate ? paginate?.total : 0} products{" "}
-        </div>
+        </div> */}
         <div className="md:order-last ">
           <Filter
             onChange={(e: any) => {

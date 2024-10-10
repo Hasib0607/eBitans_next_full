@@ -156,6 +156,7 @@ const Product = ({
   const { category } = useTheme();
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
+  const [sk,setSk]=useState(true)
 
   useEffect(() => {
     setLoad(true);
@@ -211,9 +212,10 @@ const Product = ({
     }
     // ;
     setLoad(false);
+    setSk(false)
   };
 
-  if (load) {
+  if (load&&sk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />

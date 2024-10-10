@@ -31,8 +31,8 @@ const FilterByPrice = ({ setVal, val, id, setPage, setHasMore }: any) => {
         </label>
       </div>
       <input
-        min="0"
-        max="10000"
+        min={0}
+        max={10000}
         defaultValue={0}
         onChange={handleInputChange}
         id="range"

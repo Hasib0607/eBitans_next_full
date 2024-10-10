@@ -159,6 +159,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -232,9 +233,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false)
   };
 
-  if (load) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 flex justify-center items-center">
         <Skeleton />

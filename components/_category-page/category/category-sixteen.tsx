@@ -61,9 +61,9 @@ const CategorySixteen = () => {
       {/* main section  */}
 
       <div className="sm:container px-5 sm:py-10 py-5 flex flex-col gap-4 md:gap-0 md:flex-row justify-between items-center">
-        <div className="text-gray-500 font-thin order-3 md:order-2">
+        {/* <div className="text-gray-500 font-thin order-3 md:order-2">
           There are {paginate ? paginate?.total : 0} products{" "}
-        </div>
+        </div> */}
         <div className="md:order-last ">
           <Filter
             onChange={(e: any) => {
@@ -138,6 +138,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
+  const [showSk,setShowSk]=useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -209,9 +210,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false)
   };
 
-  if (load) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />

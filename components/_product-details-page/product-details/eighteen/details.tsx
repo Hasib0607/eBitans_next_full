@@ -559,7 +559,7 @@ export default Details;
 const AddCart = ({ setQty, qty, onClick, buttonEighteen }: any) => {
   const { data, error } = useHeaderSettings();
   // console.log(data);
-
+  
   let incNum = () => {
     setQty((prevCount: any) => prevCount + 1);
   };

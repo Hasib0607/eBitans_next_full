@@ -115,8 +115,8 @@ const AllHeaders = ({ design, headerSetting }: any) => {
     <>
       {HeaderComponent ? (
         <>
-          <AllMobileBottomMenu />
-          <HeaderComponent design={design} headerSetting={headerSetting} />
+        <AllMobileBottomMenu/>
+        <HeaderComponent design={design} headerSetting={headerSetting} />
         </>
       ) : (
         <p>Header not found</p>

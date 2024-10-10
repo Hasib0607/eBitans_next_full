@@ -165,6 +165,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
+  const [showSk,setShowSk]=useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category } = useTheme();
@@ -236,9 +237,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false)
   };
 
-  if (load) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />

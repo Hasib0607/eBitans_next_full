@@ -173,6 +173,7 @@ const Product = ({
 }: any) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
+  const [sk,setSk]=useState(true)
 
   useEffect(() => {
     setLoad(true);
@@ -228,6 +229,7 @@ const Product = ({
     }
     // ;
     setLoad(false);
+    
   };
 
   if (load) {
@@ -366,9 +368,9 @@ const Location = ({ category }: any) => {
 const Filter = ({ paginate, onChange, setGrid, open, setOpen }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap justify-between items-center">
-      <div className="text-gray-500 font-thin md:block hidden">
+      {/* <div className="text-gray-500 font-thin md:block hidden">
         There are {paginate ? paginate?.total : 0} products{" "}
-      </div>
+      </div> */}
       <div
         onClick={() => setOpen(!open)}
         className="flex gap-3 items-center md:hidden lg:cursor-pointer"

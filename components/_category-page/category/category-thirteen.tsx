@@ -146,6 +146,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
+  const [showSk,setShowSk]=useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -220,9 +221,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false)
   };
 
-  if (load) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -357,9 +359,9 @@ const Location = ({ categoy }: any) => {
 const Filter = ({ paginate, onChange, setGrid }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap justify-between items-center px-2">
-      <div className="text-gray-500 font-thin">
+      {/* <div className="text-gray-500 font-thin">
         There are {paginate?.total} products{" "}
-      </div>
+      </div> */}
       <div className="flex items-center gap-1">
         <div onClick={() => setGrid("H")} className="border rounded-full p-2">
           <Bars3Icon className="h-4 w-4 text-[#928a8a]" />

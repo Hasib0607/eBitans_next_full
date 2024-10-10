@@ -90,9 +90,9 @@ const CategoryFourteen = () => {
                 <p className="text-lg uppercase ">Filter</p>
               </div>
 
-              <div className="text-gray-500 font-thin order-3 md:order-2">
+              {/* <div className="text-gray-500 font-thin order-3 md:order-2">
                 There are {paginate ? paginate?.total : 0} products{" "}
-              </div>
+              </div> */}
 
               {/* sorting product  */}
               <div className="md:order-last">
@@ -207,6 +207,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -280,9 +281,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false)
   };
 
-  if (load) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />

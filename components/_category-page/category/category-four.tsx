@@ -25,6 +25,7 @@ const CategoryFour = () => {
   const [paginate, setPaginate] = useState({});
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [dataId, setDataId] = useState(null);
 
   const shop_load = parseInt(paginateModule?.status);
@@ -102,9 +103,10 @@ const CategoryFour = () => {
       setLoad(false);
       setError(error);
     }
+    setShowSk(false)
   };
 
-  if (load) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
