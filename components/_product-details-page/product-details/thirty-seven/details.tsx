@@ -687,7 +687,7 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
         className={`${buttonSeven} cart-btn-thirty-seven opacity-70 hover:opacity-100`}
       >
         <FaWhatsapp />
-        <p>{headerSetting?.whatsapp_phone}</p>
+        <span>{headerSetting?.whatsapp_phone}</span>
       </a>
     </div>
   );
