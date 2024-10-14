@@ -1,16 +1,13 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
 import { TiTickOutline } from "react-icons/ti";
-
-const ThankYou = () => {
+const SuccessPage = () => {
   //   const router = useRouter();
   const { orderPlaced, design } = useTheme();
-
   const url = new URL(window.location.href);
   const msg = url.searchParams.get("msg");
   const error_msg = url.searchParams.get("error_msg");
   const tId = url.searchParams.get("transaction_id");
-
   const styleCss = `
   .order-info {
       background:  ${design?.header_color};
@@ -21,7 +18,6 @@ const ThankYou = () => {
   //     router.push("/profile/order");
   //     return null;
   //   }
-
   return (
     <div className="flex flex-col gap-3 justify-center items-center font-bold h-screen">
       <style>{styleCss}</style>
@@ -39,12 +35,11 @@ const ThankYou = () => {
         </button>
       </a>
       <a href="/shop">
-        <button className="text-base rounded-md underline text-[#f1593a]">
+        <button className="text-base rounded-md underline text-[#F1593A]">
           Continue Shopping
         </button>
       </a>
     </div>
   );
 };
-
-export default ThankYou;
+export default SuccessPage;
