@@ -87,9 +87,8 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
  
     `;
 
-
   return (
-    <div className="bg-black" >
+    <div className="bg-black">
       <style>{styleCss}</style>
       {/* cart open  */}
       <BottomCart open={cartOpen} setOpen={setCartOpen} />
@@ -187,7 +186,8 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
               onClick={() => setOpenCat(!openCat)}
               className="w-60 cat-hover-thirty text-center py-2.5 px-2 md:lg:cursor-pointer font-medium text-white"
             >
-              All Categories <MdKeyboardArrowDown className="text-xl inline text-white" />
+              All Categories{" "}
+              <MdKeyboardArrowDown className="text-xl inline text-white" />
             </p>
             <input
               type="text"

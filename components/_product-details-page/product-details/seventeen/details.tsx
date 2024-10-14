@@ -44,7 +44,7 @@ const Details = ({
   const [copied, setCopied] = useState(false);
   // image selector
   // const [activeImg, setActiveImg] = useState("");
-  const [activeImg, setActiveImg] = useState(product?.defaultImage); 
+  const [activeImg, setActiveImg] = useState(product?.defaultImage);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -541,7 +541,12 @@ const Details = ({
 
             {/* unit  */}
             {!vrcolor && variant && variant?.length > 0 && variant[0]?.unit && (
-              <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
+              <Units
+                unit={unit}
+                setUnit={setUnit}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             )}
             {/* color and size  */}
             {vrcolor && sizeV !== undefined && (
@@ -623,47 +628,47 @@ const Details = ({
 
             {children}
             {/* Display the referral link */}
-          <div>
-            {/* Display referral link and copy button */}
-            {referralLink && (
-              <div className="flex items-center gap-4">
-                {/* Underlined referral link */}
-                <p>
-                  Referral Link:{" "}
-                  <a
-                    href={referralLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
-                  >
-                    {referralLink}
-                  </a>
-                </p>
+            <div>
+              {/* Display referral link and copy button */}
+              {referralLink && (
+                <div className="flex items-center gap-4">
+                  {/* Underlined referral link */}
+                  <p>
+                    Referral Link:{" "}
+                    <a
+                      href={referralLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="underline text-blue-600 hover:text-blue-800"
+                    >
+                      {referralLink}
+                    </a>
+                  </p>
 
-                {/* Copy button */}
-                <button
-                  className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
+                  {/* Copy button */}
+                  <button
+                    className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
                   ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
-                  onClick={handleCopyLink}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
+                    onClick={handleCopyLink}
                   >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-4 10h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            )}
-          </div>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-6 w-6"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-4 10h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -760,7 +765,13 @@ const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
       <h3 className="w-[120px] text-xl">Units:</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} setActiveImg={setActiveImg} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -828,10 +839,10 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
 const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(item);
-      setActiveImg(item?.image);
-    }}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border px-2 lg:cursor-pointer h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}

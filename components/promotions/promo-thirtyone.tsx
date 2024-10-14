@@ -1,12 +1,11 @@
-
 import useTheme from "@/hooks/use-theme";
 import { bannerImg } from "@/site-settings/siteUrl";
 import React from "react";
 
 const PromoThirtyOne = ({ banner }: any) => {
-  const {design} = useTheme();
+  const { design } = useTheme();
   return (
-    <div style={{backgroundColor:`${design?.header_color}`}}>
+    <div style={{ backgroundColor: `${design?.header_color}` }}>
       <div className="sm:container px-5 sm:py-10 py-5">
         <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
           {banner.slice(0, 4).map((ban: any) => (

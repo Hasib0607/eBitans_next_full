@@ -23,7 +23,6 @@ import { toast } from "react-toastify";
 import { HSlider } from "./slider";
 import getReferralCode from "@/utils/getReferralCode";
 
-
 const Details = ({
   data,
   product,

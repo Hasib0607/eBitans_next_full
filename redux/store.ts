@@ -41,7 +41,7 @@ const store = configureStore({
         // Ignore redux-persist actions
         ignoredActions: ["persist/PERSIST", "persist/REHYDRATE"],
         // Ignore non-serializable values in the register and rehydrate paths
-        ignoredPaths: ['register', 'rehydrate'],
+        ignoredPaths: ["register", "rehydrate"],
         serializableCheck: false, // Disable serializable check
       },
     }),

@@ -19,7 +19,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { XIcon } from "react-share";
 import { toast } from "react-toastify";
 
-
 const CartPopUpThree = () => {
   const { design } = useTheme();
   const [open, setOpen] = useState(false);
@@ -140,7 +139,7 @@ const ShoppingCart = ({ setOpen }: any) => {
             color={"white"}
             className="h-6 w-6 lg:cursor-pointer"
             aria-hidden="true"
-            />
+          />
         </div>
 
         <div className="my-[80px] px-6">

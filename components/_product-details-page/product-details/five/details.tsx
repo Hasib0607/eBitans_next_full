@@ -53,11 +53,11 @@ const Details = ({
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
 
-  const [activeImg, setActiveImg] = useState(product?.defaultImage); 
+  const [activeImg, setActiveImg] = useState(product?.defaultImage);
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
 
-    useEffect(() => {
+  useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const referral = params.get("referral");
 
@@ -126,7 +126,6 @@ const Details = ({
       })
       .catch((err) => console.error("Failed to copy the link", err));
   };
-
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -518,11 +517,12 @@ const Details = ({
 
       <div className="grid grid-cols-1 lg2:grid-cols-9 gap-5">
         <div className="lg2:col-span-4 justify-self-center">
-          <HSlider 
+          <HSlider
             product={product}
             variant={variant}
             activeImg={activeImg}
-            setActiveImg={setActiveImg} />
+            setActiveImg={setActiveImg}
+          />
         </div>
 
         <div className="lg2:col-span-5 space-y-5 sticky top-28 h-max">
@@ -573,7 +573,12 @@ const Details = ({
             variant?.length !== 0 &&
             variant?.length > 0 &&
             variant[0]?.unit && (
-              <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
+              <Units
+                unit={unit}
+                setUnit={setUnit}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -588,18 +593,33 @@ const Details = ({
             </>
           )}
           {filterV && filterV[0]?.size && vrcolor && (
-            <Sizes size={size} setSize={setSize} variant={filterV} setActiveImg={setActiveImg} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color only  */}
           {vrcolor && sizeV === undefined && (
             <>
               {" "}
-              <ColorsOnly color={color} setColor={setColor} variant={variant} setActiveImg={setActiveImg} />
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
             </>
           )}
           {/* size only  */}
           {!vrcolor?.length && sizeV !== undefined && (
-            <Sizes size={size} setSize={setSize} variant={filterV} setActiveImg={setActiveImg} />
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
 
           <div className="flex items-center gap-x-3">
@@ -673,8 +693,8 @@ const Details = ({
           </div>
 
           {children}
-                    {/* Display the referral link */}
-                    <div>
+          {/* Display the referral link */}
+          <div>
             {/* Display referral link and copy button */}
             {referralLink && (
               <div className="flex items-center gap-4">
@@ -840,7 +860,13 @@ const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} setActiveImg={setActiveImg} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -855,8 +881,14 @@ const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
       </h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} itemImage={item?.image}
-          setActiveImg={setActiveImg} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -871,7 +903,13 @@ const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
       </h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} setActiveImg={setActiveImg} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -902,10 +940,10 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
 const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(item);
-      setActiveImg(item?.image);
-    }}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-auto px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -918,10 +956,10 @@ const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
 const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(item);
-      setActiveImg(item?.image);
-    }}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-auto px-4 py-3 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -950,19 +988,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ 
+const ColorSet = ({
   text,
   select,
   setSelect,
   itemImage,
   setActiveImg,
- }: any) => {
+}: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(text);
-      setActiveImg(itemImage);
-    }}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}

@@ -1,12 +1,12 @@
-"use client"
+"use client";
 import useTheme from "@/hooks/use-theme";
 import { bannerImg } from "@/site-settings/siteUrl";
 import React from "react";
 
 const PromoBottomThirtyOne = ({ banner }: any) => {
-  const {design} = useTheme();
+  const { design } = useTheme();
   return (
-    <div className="" style={{backgroundColor:`${design?.header_color}`}}>
+    <div className="" style={{ backgroundColor: `${design?.header_color}` }}>
       {banner[4] && (
         <div className="sm:container px-5 sm:py-10 py-5">
           <div className="relative group">

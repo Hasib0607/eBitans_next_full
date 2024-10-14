@@ -181,7 +181,7 @@ const CheckOutSevenOrder = ({
   const handleCheckout = async () => {
     setLoading(true);
     // Retrieve the referral code from localStorage
-    const referralCode = localStorage.getItem('referralCode');
+    const referralCode = localStorage.getItem("referralCode");
 
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
@@ -196,7 +196,7 @@ const CheckOutSevenOrder = ({
       unit: item.unit,
       volume: item.volume,
       items: item?.items,
-      referral_code:getReferral(item.id)
+      referral_code: getReferral(item.id),
     }));
 
     const formData = new FormData();
@@ -306,9 +306,9 @@ const CheckOutSevenOrder = ({
     // );
 
     // Append referral code if available
-    if(referralCode){
-      formData.append("referral_code", referralCode)
-    };
+    if (referralCode) {
+      formData.append("referral_code", referralCode);
+    }
 
     if (bookingRequire) {
       toast("Please Fill up Booking Information", {
@@ -385,7 +385,7 @@ const CheckOutSevenOrder = ({
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
-              localStorage.removeItem('referralObj');
+              localStorage.removeItem("referralObj");
               dispatch(clearCartList());
             }
 

@@ -120,7 +120,7 @@ const CheckOutElevenOrder = ({
   const handleCheckout = async () => {
     setLoading(true);
     // Retrieve the referral code from localStorage
-    const referralCode = localStorage.getItem('referralCode');
+    const referralCode = localStorage.getItem("referralCode");
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
@@ -134,7 +134,7 @@ const CheckOutElevenOrder = ({
       unit: item.unit,
       volume: item.volume,
       items: item?.items,
-      referral_code:getReferral(item.id)
+      referral_code: getReferral(item.id),
     }));
 
     const formData = new FormData();
@@ -218,8 +218,8 @@ const CheckOutElevenOrder = ({
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
     // Append referral code if available
-    if(referralCode){
-      formData.append("referral_code", referralCode)
+    if (referralCode) {
+      formData.append("referral_code", referralCode);
     }
 
     if (!userAddress && !data.address) {
@@ -282,7 +282,7 @@ const CheckOutElevenOrder = ({
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
-              localStorage.removeItem('referralObj')
+              localStorage.removeItem("referralObj");
               dispatch(clearCartList());
             }
 

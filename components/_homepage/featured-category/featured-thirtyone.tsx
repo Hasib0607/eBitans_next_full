@@ -33,7 +33,7 @@ const FeaturedThirtyOne = ({ category, design }: any) => {
   const { title, title_color } = featureCategory;
 
   return (
-    <div style={{backgroundColor:`${design?.header_color}`}}>
+    <div style={{ backgroundColor: `${design?.header_color}` }}>
       <div
         data-aos="fade-up"
         className="sm:container px-5 sm:py-10 py-5 relative"

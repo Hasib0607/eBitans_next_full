@@ -57,7 +57,7 @@ const Seven = ({ data, updatedData }: Props) => {
       <Details
         fetchStatus={fetchStatus}
         data={data}
-        product={product}   
+        product={product}
         vrcolor={vrcolor}
         variant={variant}
       >

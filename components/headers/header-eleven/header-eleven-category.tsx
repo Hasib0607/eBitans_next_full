@@ -114,7 +114,7 @@ const HeaderElevenCategory = () => {
               <Link
                 key={menuData?.id}
                 href={"/" + menuData?.url}
-                className={`font-bold text-sm ${activeMenuIndex === index ? 'active-menu' : ''}`}
+                className={`font-bold text-sm ${activeMenuIndex === index ? "active-menu" : ""}`}
                 onClick={() => setActiveMenuIndex(index)} // Update active menu index on click
               >
                 <h1 className="flex group justify-between items-center font-bold text-sm">

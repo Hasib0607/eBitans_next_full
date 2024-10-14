@@ -43,13 +43,13 @@ const Details = ({
   const [qty, setQty] = useState<any>(1);
   const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
-  const [sizeId, setSizeId] = useState<any>(null);  
+  const [sizeId, setSizeId] = useState<any>(null);
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
   // image selector
   // const [activeImg, setActiveImg] = useState("");
-  const [activeImg, setActiveImg] = useState(product?.defaultImage); 
+  const [activeImg, setActiveImg] = useState(product?.defaultImage);
   const sizeV = variant?.find((item: any) => item.size !== null);
 
   const vPrice = variant?.map((item: any) => item?.additional_price);
@@ -635,7 +635,12 @@ const Details = ({
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -895,7 +900,13 @@ const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} setActiveImg={setActiveImg} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -974,9 +985,9 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
 const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-    onClick={() => {
-      setSelect(item);
-      setActiveImg(item?.image);
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
       }}
       className={`border lg:cursor-pointer w-max px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "select-unit" : "border-gray-300"
