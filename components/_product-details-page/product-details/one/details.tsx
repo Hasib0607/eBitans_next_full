@@ -1,5 +1,5 @@
 "use client";
-import Skeleton from "@/components/loader/skeleton";
+import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";
@@ -27,8 +27,8 @@ import { ToastContainer, toast } from "react-toastify";
 import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HSlider } from "../eight/slider";
-import getReferralCode from "@/components/_category-page/category/utils/getRefferalCode";
 import "react-toastify/dist/ReactToastify.css";
+import getReferralCode from "@/components/_category-page/category/utils/getRefferalCode";
 
 const Details = ({
   data,
@@ -63,13 +63,44 @@ const Details = ({
   const sizeV = variant?.find((item: any) => item?.size !== null);
 
   useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const referral = params.get("referral");
+
+    // Get the referral object from localStorage
+    const checkStorage = localStorage.getItem("referralObj");
+    let referralObj;
+
+    try {
+      // Check if 'referralObj' exists and is valid JSON
+      if (checkStorage) {
+        referralObj = JSON.parse(checkStorage);
+      } else {
+        referralObj = {}; // Initialize an empty object if nothing exists in localStorage
+      }
+
+      const productID = product?.id;
+
+      // Only update the object if there's a valid referral and productID
+      if (referral && productID) {
+        referralObj[productID] = referral;
+        // Store the updated object back into localStorage
+        localStorage.setItem("referralObj", JSON.stringify(referralObj));
+      }
+    } catch (error) {
+      console.error("Error parsing referralObj from localStorage:", error);
+      // If parsing fails, re-initialize 'referralObj' as an empty object
+      referralObj = {};
+    }
+  }, [product]);
+
+  useEffect(() => {
     const fetchReferralCode = async () => {
       try {
         const code = await getReferralCode();
         if (code) {
-          setReferralCode(code); // Set referral code in the state
+          setReferralCode(code);
           // Generate the referral link based on the code
-          const link = `${window.location.href}`;
+          const link = `${window.location.href}?referral=${code}`;
           setReferralLink(link);
         }
       } catch (error) {
@@ -111,7 +142,6 @@ const Details = ({
       data["store_id"] = store_id;
       // Log the user's information, data, and store_id
       //  console.log("User Info:", { data, store_id, headerSetting, design });
-      // get the data from the api
       const { product, variant, vrcolor } = await httpReq.post(
         "product-details",
         data
@@ -143,7 +173,7 @@ const Details = ({
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <Skeleton />
+        <OvalLoader />
       </div>
     );
   }
@@ -527,7 +557,6 @@ const Details = ({
         <div className="md:col-span-5 space-y-4 sticky top-28 h-max">
           <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
             {product?.name}
-            {/* {JSON.parse(JSON.parse(localStorage.getItem('persist:root')).auth).user.token} */}
           </h2>
           <div className="flex justify-start items-center gap-x-4">
             <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
@@ -627,6 +656,7 @@ const Details = ({
                   qty={qty}
                   setQty={setQty}
                   onClick={() => add_to_cart()}
+                  product={product}
                   buttonTwentyTwo={buttonOne}
                 />
               )}
@@ -719,28 +749,18 @@ const AddCart = ({
 
   useEffect(() => {
     const fetchReferralCode = async () => {
-      // 1. First, check if the referral code is in the URL (Browser B scenario)
       const codeFromURL = getReferralCodeFromURL();
-
       if (codeFromURL) {
-        // If the referral code is found in the URL (e.g., when opened in another browser)
-        setReferralCode(codeFromURL); // Set the referral code in the state
-        localStorage.setItem("referralCode", codeFromURL); // Optionally store in localStorage
-        console.log("Referral code from URL:", codeFromURL); // For debugging
+        setReferralCode(codeFromURL);
       } else {
-        // 2. If no referral code is in the URL, fetch it from the API (Browser A scenario)
         try {
-          const code = await getReferralCode(); // Fetch referral code from API
+          const code = await getReferralCode();
           if (code) {
-            setReferralCode(code); // Set referral code in state
-            localStorage.setItem("referralCode", code); // Optionally store in localStorage
-
-            // Generate the referral link with the referral code
+            setReferralCode(code);
+            localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
-            setReferralLink(link); // Set the generated referral link in the state
-            console.log("Generated referral link:", link); // For debugging
-
-            // Update the URL in Browser A without reloading the page
+            setReferralLink(link);
+            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {
@@ -748,8 +768,7 @@ const AddCart = ({
         }
       }
     };
-
-    fetchReferralCode();
+    // fetchReferralCode();
   }, []);
 
   let incNum = () => {
@@ -786,7 +805,7 @@ const AddCart = ({
           <PlusIcon width={15} />
         </div>
       </div>
-      <p>Referral Code: {referralCode}</p>
+      {/* <p>Referral Code: {referralCode}</p> */}
       {store_id !== 3512 ? (
         <div className="flex flex-wrap items-center gap-3">
           <div className="">
