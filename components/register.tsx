@@ -6,8 +6,8 @@ import { useSelector } from "react-redux";
 import RegisterEleven from "./register/register-eleven";
 import RegisterFive from "./register/register-five";
 import RegisterFour from "./register/register-four";
-import RegisterOne from "./register/register-one";
 import RegisterSeven from "./register/register-seven";
+import RegisterOne from "./register/register-one";
 
 const componentMap: any = {
   one: RegisterOne,

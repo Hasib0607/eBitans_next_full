@@ -100,7 +100,6 @@ const Order = () => {
       setFilter(orders.filter((i: any) => i.status === "Cancelled"));
     }
   };
-
   const ar = [
     "All",
     "Pending",

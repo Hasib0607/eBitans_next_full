@@ -4,7 +4,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import {
   ChevronDownIcon,
-  Bars3Icon,
+  TableCellsIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import { motion } from "framer-motion";
@@ -253,7 +253,7 @@ export default function HeaderEight({ headerSetting }: any) {
                             aria-hidden="true"
                           />
                         ) : (
-                          <Bars3Icon
+                          <TableCellsIcon
                             className="block h-6 w-6"
                             aria-hidden="true"
                           />
@@ -380,7 +380,7 @@ const Sticky = ({ setSearchInput, searchInput, headerSetting }: any) => {
                             aria-hidden="true"
                           />
                         ) : (
-                          <Bars3Icon
+                          <TableCellsIcon
                             className="block h-6 w-6"
                             aria-hidden="true"
                           />

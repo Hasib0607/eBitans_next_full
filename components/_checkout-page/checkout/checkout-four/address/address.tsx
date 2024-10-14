@@ -83,8 +83,6 @@ const Address = ({
     }
   }, [store_id, call, setSelectAddress, token, store?.auth_type, user]);
 
-  console.log(typeof userPhone);
-
   return (
     <>
       <div className="shadow sm:rounded-md sm:overflow-hidden my-5">

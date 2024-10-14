@@ -1,4 +1,3 @@
-import AllMobileBottomMenu from "@/app/mobileBottomMenu";
 import dynamic from "next/dynamic";
 
 const headers: any = {
@@ -114,10 +113,7 @@ const AllHeaders = ({ design, headerSetting }: any) => {
   return (
     <>
       {HeaderComponent ? (
-        <>
-          <AllMobileBottomMenu />
-          <HeaderComponent design={design} headerSetting={headerSetting} />
-        </>
+        <HeaderComponent design={design} headerSetting={headerSetting} />
       ) : (
         <p>Header not found</p>
       )}

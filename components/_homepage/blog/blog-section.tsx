@@ -9,7 +9,6 @@ const BlogSection = async () => {
   let allBlogs;
   try {
     const data = await axios.get(
-      // we are getting the blogs from here
       process.env.NEXT_PUBLIC_API_URL_BLOG + `blog/get?page=${1}&name=${url}`
     );
 

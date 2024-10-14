@@ -4,6 +4,7 @@
 import useTheme from "@/hooks/use-theme";
 import { decrementQty, incrementQty } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import getReferral from "@/utils/getReferral";
 import Taka from "@/utils/taka";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -248,9 +249,6 @@ const SingleCartProduct = ({ product, setOpen, referralCode }: any) => {
               <span>
                 Unit Price: <Taka tk={parseInt(product?.price)} />
               </span>
-            </p>
-            <p className="sm:text-sm text-xs text-gray-600">
-              <span>Referral Code: {localStorage.getItem("referralCode")}</span>
             </p>
           </div>
           <div className="hidden sm:flex gap-3 items-center justify-between text-sm">

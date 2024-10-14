@@ -2,7 +2,7 @@
 import useTheme from "@/hooks/use-theme";
 import { imgUrl } from "@/site-settings/siteUrl";
 import { Menu, Transition } from "@headlessui/react";
-import { ArrowLeftIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { AiOutlineSetting } from "react-icons/ai";
@@ -80,7 +80,7 @@ const HeaderNine = ({ headerSetting }: any) => {
       <div className="block sm:container px-5 py-2 lg:hidden">
         <div className="flex justify-between items-center">
           <div className="lg:cursor-pointer" onClick={() => setOpen(!open)}>
-            <Bars3Icon className="h-6" />
+            <TableCellsIcon className="h-6" />
           </div>
           <div>
             <Link href="/">

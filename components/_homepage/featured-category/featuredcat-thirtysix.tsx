@@ -31,7 +31,6 @@ const FeaturedThirtySix = ({ category, design }: any) => {
   const cDesign = data?.data?.custom_design || {};
   const featureCategory = cDesign?.feature_category?.[0] || {};
   const { title, title_color } = featureCategory;
-  console.log("logging data from thirtysix", data);
 
   return (
     <div

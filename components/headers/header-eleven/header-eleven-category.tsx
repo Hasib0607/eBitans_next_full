@@ -10,6 +10,7 @@ import { FiHeadphones } from "react-icons/fi";
 const HeaderElevenCategory = () => {
   const { category, design, menu, headerSetting } = useTheme();
   const [visible, setVisible] = useState(false); // Initialize dropdown as hidden
+  const [activeMenuIndex, setActiveMenuIndex] = useState(0); // State to track active menu item
   const dropdownRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLDivElement>(null); // Add a ref for the button
 
@@ -20,7 +21,6 @@ const HeaderElevenCategory = () => {
 
   // Handle clicks outside the dropdown and button to close the dropdown
   const handleClickOutside = (event: MouseEvent) => {
-    // Check if the click is outside the dropdown and button
     if (
       dropdownRef.current &&
       !dropdownRef.current.contains(event.target as Node) &&
@@ -35,7 +35,6 @@ const HeaderElevenCategory = () => {
   useEffect(() => {
     document.addEventListener("mousedown", handleClickOutside);
     return () => {
-      // Clean up event listener on unmount
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
@@ -53,6 +52,9 @@ const HeaderElevenCategory = () => {
     .search-border:focus {
       border: 2px solid ${bgColor};
     }
+    .active-menu {
+      color: ${bgColor}; /* Active link color */
+    }
   `;
 
   return (
@@ -62,9 +64,9 @@ const HeaderElevenCategory = () => {
         <div className="flex items-center xl:gap-10 justify-between">
           {/* Dropdown button */}
           <div
-            ref={buttonRef} // Attach ref to the button
+            ref={buttonRef}
             className="relative group h-[50px] flex items-center py-4 px-8 lg:cursor-pointer justify-between rounded-lg"
-            onClick={visibleBtn} // Toggle visibility on click
+            onClick={visibleBtn}
             style={{
               background: design?.header_color,
               color: design?.text_color,
@@ -82,9 +84,9 @@ const HeaderElevenCategory = () => {
 
             {/* Dropdown menu */}
             <div
-              ref={dropdownRef} // Attach ref to the dropdown for click detection
+              ref={dropdownRef}
               className="absolute z-20 shadow-md rounded-lg bg-white w-[550px] top-[75px] left-0"
-              style={{ display: visible ? "block" : "none" }} // Toggle visibility based on state
+              style={{ display: visible ? "block" : "none" }}
             >
               <div className="relative z-50">
                 <div className="px-6 py-4 grid grid-cols-2 gap-4">
@@ -108,19 +110,18 @@ const HeaderElevenCategory = () => {
 
           {/* Menu links */}
           <div className="lg:flex lg:flex-row gap-5 xl:gap-10 lg:justify-center item-center">
-            {menu?.map((menuData: any) => {
-              return (
-                <Link
-                  key={menuData?.id}
-                  href={"/" + menuData?.url}
-                  className="font-bold text-sm "
-                >
-                  <h1 className="flex group justify-between items-center font-bold text-sm">
-                    {menuData?.name}
-                  </h1>
-                </Link>
-              );
-            })}
+            {menu?.map((menuData: any, index: number) => (
+              <Link
+                key={menuData?.id}
+                href={"/" + menuData?.url}
+                className={`font-bold text-sm ${activeMenuIndex === index ? "active-menu" : ""}`}
+                onClick={() => setActiveMenuIndex(index)} // Update active menu index on click
+              >
+                <h1 className="flex group justify-between items-center font-bold text-sm">
+                  {menuData?.name}
+                </h1>
+              </Link>
+            ))}
           </div>
 
           {/* Phone contact */}

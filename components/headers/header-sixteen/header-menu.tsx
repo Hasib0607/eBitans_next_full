@@ -2,7 +2,7 @@
 import useTheme from "@/hooks/use-theme";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Taka from "@/utils/taka";
-import { ArrowLeftIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { FaSearch, FaShoppingCart } from "react-icons/fa";
@@ -138,7 +138,7 @@ const HeaderMenu = () => {
             </div>
 
             <div className="flex lg:hidden" onClick={() => setView(!view)}>
-              <Bars3Icon className="h-8" />
+              <TableCellsIcon className="h-8" />
             </div>
           </div>
 

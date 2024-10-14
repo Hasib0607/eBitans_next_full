@@ -22,6 +22,7 @@ import { toast } from "react-toastify";
 
 import { getPrice } from "@/utils/get-price";
 import "./checkout-five-order.css";
+import getReferral from "@/utils/getReferral";
 
 const CheckOutFortyOrder = ({
   couponDis,
@@ -176,6 +177,8 @@ const CheckOutFortyOrder = ({
 
   const handleCheckout = async () => {
     setLoading(true);
+    // Retrieve the referral code from localStorage
+    const referralCode = localStorage.getItem("referralCode");
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
@@ -189,6 +192,7 @@ const CheckOutFortyOrder = ({
       unit: item.unit,
       volume: item.volume,
       items: item?.items,
+      referral_code: getReferral(item.id),
     }));
 
     const formData = new FormData();
@@ -237,6 +241,7 @@ const CheckOutFortyOrder = ({
       product: cart,
       tax: tax,
       coupon: coupon ? coupon : null,
+      referral_code: referralCode || "",
     };
     formData.append("store_id", store_id);
     formData.append(
@@ -294,6 +299,11 @@ const CheckOutFortyOrder = ({
     //     ? 0
     //     : 10
     // );
+
+    // Append referral code if available
+    if (referralCode) {
+      formData.append("referral_code", referralCode);
+    }
 
     if (bookingRequire) {
       toast("Please Fill up Booking Information", {
@@ -369,6 +379,7 @@ const CheckOutFortyOrder = ({
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
+              localStorage.removeItem("referralObj");
               dispatch(clearCartList());
             }
 

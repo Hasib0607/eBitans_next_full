@@ -7,7 +7,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import {
   Bars4Icon,
   PhoneIcon,
-  Bars3Icon,
+  TableCellsIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -44,7 +44,7 @@ export default function HeaderMid() {
                   "text-gray-900   rounded-md inline-flex items-center text-base font-medium group-hover:text-orange-400 gap-1"
                 }
               >
-                <Bars3Icon
+                <TableCellsIcon
                   className={
                     "text-gray-400 ml-2 h-5 w-5 group-hover:text-orange-400"
                   }

@@ -28,7 +28,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { HSlider } from "../eight/slider";
 import "react-toastify/dist/ReactToastify.css";
-import getReferralCode from "@/components/_category-page/category/utils/getRefferalCode";
+import getReferralCode from "@/utils/getReferralCode";
 
 const Details = ({
   data,
@@ -805,7 +805,6 @@ const AddCart = ({
           <PlusIcon width={15} />
         </div>
       </div>
-      {/* <p>Referral Code: {referralCode}</p> */}
       {store_id !== 3512 ? (
         <div className="flex flex-wrap items-center gap-3">
           <div className="">

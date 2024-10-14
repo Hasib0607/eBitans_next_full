@@ -5,7 +5,11 @@ import { Menu, Popover, Transition } from "@headlessui/react";
 import { useSelector, useDispatch } from "react-redux";
 import useTheme from "@/hooks/use-theme";
 import Right from "./right";
-import { Bars4Icon, Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import {
+  Bars4Icon,
+  TableCellsIcon,
+  XMarkIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { IoSearchCircleOutline } from "react-icons/io5";
@@ -136,7 +140,7 @@ export default function HeaderFour({ headerSetting }: any) {
                 "text-gray-100 group rounded-md  py-2 px-4 inline-flex items-center text-base font-medium hover:text-gray-300"
               }
             >
-              <Bars3Icon
+              <TableCellsIcon
                 className={
                   "text-gray-100 mr-2 h-5 w-5 group-hover:text-gray-200"
                 }

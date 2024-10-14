@@ -50,11 +50,10 @@ const Seven = ({ data, updatedData }: Props) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
-  console.log(productDetailsData, "pd data");
+  // console.log(productDetailsData, "pd data");
 
   return (
     <div className="container px-5">
-      {/* <h1 className="text-[500px]">this is SEVEN</h1> */}
       <Details
         fetchStatus={fetchStatus}
         data={data}

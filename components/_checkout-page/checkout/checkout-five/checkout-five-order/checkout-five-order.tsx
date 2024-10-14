@@ -28,6 +28,7 @@ import { toast } from "react-toastify";
 
 import { getPrice } from "@/utils/get-price";
 import "./checkoutfiveorder.css";
+import getReferral from "@/utils/getReferral";
 const CheckOutFiveOrder = ({
   couponDis,
   selectAddress,
@@ -126,6 +127,8 @@ const CheckOutFiveOrder = ({
 
   const handleCheckout = async () => {
     setLoading(true);
+    // Retrieve the referral code from localStorage
+    const referralCode = localStorage.getItem("referralCode");
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
@@ -139,6 +142,7 @@ const CheckOutFiveOrder = ({
       unit: item.unit,
       volume: item.volume,
       items: item?.items,
+      referral_code: getReferral(item.id),
     }));
     const formData = new FormData();
 
@@ -185,6 +189,7 @@ const CheckOutFiveOrder = ({
       product: cart,
       tax: tax,
       coupon: coupon ? coupon : null,
+      referral_code: referralCode || "",
     };
 
     formData.append("store_id", store_id);
@@ -219,6 +224,10 @@ const CheckOutFiveOrder = ({
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
+    // Append referral code if available
+    if (referralCode) {
+      formData.append("referral_code", referralCode);
+    }
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
@@ -280,6 +289,7 @@ const CheckOutFiveOrder = ({
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
+              localStorage.removeItem("referralObj");
               dispatch(clearCartList());
             }
 

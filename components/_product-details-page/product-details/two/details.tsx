@@ -25,6 +25,8 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import ImageZoom from "../image-zoom";
+import { HSlider } from "../eight/slider";
+import getReferralCode from "@/utils/getReferralCode";
 
 const Details = ({
   data,
@@ -47,8 +49,84 @@ const Details = ({
   const [size, setSize] = useState<any>(null);
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
+  const [referralCode, setReferralCode] = useState("");
+  const [referralLink, setReferralLink] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  // image selector
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const referral = params.get("referral");
+
+    // Get the referral object from localStorage
+    const checkStorage = localStorage.getItem("referralObj");
+    let referralObj;
+
+    try {
+      // Check if 'referralObj' exists and is valid JSON
+      if (checkStorage) {
+        referralObj = JSON.parse(checkStorage);
+      } else {
+        referralObj = {}; // Initialize an empty object if nothing exists in localStorage
+      }
+
+      const productID = product?.id;
+
+      // Only update the object if there's a valid referral and productID
+      if (referral && productID) {
+        referralObj[productID] = referral;
+        // Store the updated object back into localStorage
+        localStorage.setItem("referralObj", JSON.stringify(referralObj));
+      }
+    } catch (error) {
+      console.error("Error parsing referralObj from localStorage:", error);
+      // If parsing fails, re-initialize 'referralObj' as an empty object
+      referralObj = {};
+    }
+  }, [product]);
+
+  useEffect(() => {
+    const fetchReferralCode = async () => {
+      try {
+        const code = await getReferralCode();
+        if (code) {
+          setReferralCode(code);
+          // Generate the referral link based on the code
+          const link = `${window.location.href}?referral=${code}`;
+          setReferralLink(link);
+        }
+      } catch (error) {
+        console.error("Error in useEffect:", error);
+      }
+    };
+
+    fetchReferralCode();
+  }, []);
+
+  // Copy the referral link to the clipboard
+  const handleCopyLink = () => {
+    navigator.clipboard
+      .writeText(referralLink)
+      .then(() => {
+        setCopied(true);
+        // Display the toast notification
+        toast.success("Link copied!", {
+          position: "top-right",
+          autoClose: 2000, // close after 2 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => setCopied(false), 2000); // Reset "copied" status after 2 seconds
+      })
+      .catch((err) => console.error("Failed to copy the link", err));
+  };
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -82,6 +160,14 @@ const Details = ({
       // make sure to catch any error
       .catch(console.error);
   }, [data, store_id, fetchStatus]);
+
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
+  }
 
   const regularPrice =
     parseInt(product?.regular_price) +
@@ -411,173 +497,222 @@ const Details = ({
     });
   };
 
+  const styleCss = `
+  .btn-hover:hover {
+      color:   ${design?.text_color};
+      background:${design?.header_color};
+  }
+  .select-color {
+      border: 1px solid ${design?.header_color};
+  }
+  .select-size {
+      color : ${design?.header_color};
+      border: 1px solid ${design?.header_color};
+  }
+  .select-unit {
+      color : ${design?.header_color};
+      border: 1px solid ${design?.header_color};
+  }
+  .text-color {
+      color:  ${design?.header_color};
+  }
+  .cart-color {
+      color:  ${design?.header_color};
+      border-bottom: 2px solid ${design?.header_color};
+  }
+  .border-hover:hover {
+      border: 1px solid ${design?.header_color};
+     
+  }
+
+`;
+
   const buttonOne =
     "font-bold text-white bg-gray-600 rounded-md w-max px-10 py-3 text-center";
 
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <Skeleton />
-      </div>
-    );
-  }
+  // if (fetchStatus === "fetching") {
+  //   return (
+  //     <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+  //       <Skeleton />
+  //     </div>
+  //   );
+  // }
   return (
-    <div className="grid md:grid-cols-8 grid-cols-1 gap-4 w-full overflow-hidden">
-      <div className="md:col-span-4 lg2:col-span-3 col-span-1 h-full overflow-hidden">
-        <div className="h-full w-full object-cover">
-          {product?.image?.slice(0, 1).map((item: any, idx: any) => {
-            return <ImageZoom img={productImg + item} key={idx} />;
-          })}
-        </div>
-      </div>
+    <div className="bg-white h-full ">
+      <style>{styleCss}</style>
 
-      <div className="md:col-span-4 lg2:col-span-4 md:px-2">
-        <h2 className="text-xl sm:text-3xl font-semibold text-black">
-          {product?.name}
-        </h2>
-        <div className="flex flex-col gap-3 sm:mt-6 mt-1">
-          <div className="flex items-center gap-2">
-            <p className="capitalize">
-              <span className="text-black">Category: </span>{" "}
-            </p>
-            <Link
-              prefetch={false}
-              href={"/category/" + product?.category_id}
-              style={{ color: design?.header_color }}
-            >
-              {product?.category}
-            </Link>
-          </div>
-          <div className="flex justify-start items-center gap-2">
-            <p className="text-xl">
-              <Rate rating={product?.rating} />
-            </p>
-            <p>({product?.number_rating})</p>
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-9 gap-5">
+        <div className="md:col-span-4">
+          <HSlider
+            product={product}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
         </div>
-        <div className="md:divider mt-2"></div>
-        <div className="flex justify-start items-center gap-x-4">
-          <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
-            <BDT />
-            {camp?.status === "active" ? campPrice : price}{" "}
-            {camp?.status !== "active" &&
-            (product?.discount_type === "no_discount" ||
-              product?.discount_price === "0.00") ? (
-              " "
-            ) : (
-              <span className="text-gray-500 font-thin line-through text-xl font-seven">
-                <BDT />
-                {regularPrice}
-              </span>
-            )}{" "}
+        <div className="md:col-span-5 space-y-4 sticky top-28 h-max">
+          <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
+            {product?.name}
+          </h2>
+          <div className="flex justify-start items-center gap-x-4">
+            <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
+              <BDT />
+              {camp?.status === "active" ? campPrice : price}{" "}
+              {camp?.status !== "active" &&
+              (product?.discount_type === "no_discount" ||
+                product?.discount_price === "0.00") ? (
+                " "
+              ) : (
+                <span className="text-gray-500 font-thin line-through text-xl font-seven">
+                  <BDT />
+                  {regularPrice}
+                </span>
+              )}
+            </div>
+            {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
+            {product?.discount_type === "percent" &&
+              product?.discount_price > 0 && (
+                <p className="text-md text-gray-400">
+                  {" "}
+                  {product?.discount_price}% Off
+                </p>
+              )}
           </div>
-          {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
-          {product?.discount_type === "percent" &&
-            product?.discount_price > 0 && (
-              <p className="text-md text-gray-400">
-                {" "}
-                {Math.trunc(product?.discount_price)}% Off
-              </p>
-            )}
-        </div>
-        <div className="md:divider mt-2"></div>
-        <div className="mb-5">
-          <p className="text-black apiHtml">
+          <Rate rating={product?.rating} />
+          <div className="h-[1px] bg-gray-300 w-full"></div>
+          <p className="text-[#3B3312] leading-6 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
             {product?.description?.length > 250 && "..."}
           </p>
-        </div>
-        <div className="text-black flex items-center gap-2 mb-5">
-          <VscCreditCard size={20} />
-          <p>Cash on Delivery available</p>
-        </div>
 
-        {/* unit */}
-        {!vrcolor &&
-          Array.isArray(variant) &&
-          variant.length !== 0 &&
-          variant[0]?.unit && (
-            <Units unit={unit} setUnit={setUnit} variant={variant} />
+          {/* unit  */}
+          {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
+            <Units
+              unit={unit}
+              setUnit={setUnit}
+              variant={variant}
+              setActiveImg={setActiveImg}
+            />
+          )}
+          {/* color and size  */}
+          {vrcolor && sizeV !== undefined && (
+            <>
+              {" "}
+              <Colors
+                color={color}
+                setColor={setColor}
+                vrcolor={vrcolor}
+                setSize={setSize}
+              />
+            </>
+          )}
+          {filterV && filterV.length > 0 && filterV[0]?.size && vrcolor && (
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
+          )}
+          {/* color only  */}
+          {vrcolor && sizeV === undefined && (
+            <>
+              {" "}
+              <ColorsOnly
+                color={color}
+                setColor={setColor}
+                variant={variant}
+                setActiveImg={setActiveImg}
+              />
+            </>
+          )}
+          {/* size only  */}
+          {!vrcolor?.length && sizeV !== undefined && (
+            <Sizes
+              size={size}
+              setSize={setSize}
+              variant={filterV}
+              setActiveImg={setActiveImg}
+            />
           )}
 
-        {/* color and size  */}
-        {vrcolor && sizeV !== undefined && (
-          <>
-            {" "}
-            <Colors
-              color={color}
-              setColor={setColor}
-              vrcolor={vrcolor}
-              setSize={setSize}
+          <div className="">
+            <CallForPrice
+              product={product}
+              headerSetting={headerSetting}
+              cls={buttonOne}
+              price={price}
             />
-          </>
-        )}
-        {/* size */}
+          </div>
 
-        {Array.isArray(filterV) &&
-          filterV.length > 0 &&
-          filterV[0]?.size &&
-          vrcolor && <Sizes size={size} setSize={setSize} variant={filterV} />}
+          {productQuantity !== "0" && (
+            <div>
+              {price !== 0 && (
+                <AddCart
+                  qty={qty}
+                  setQty={setQty}
+                  onClick={() => add_to_cart()}
+                  buttonTwentyTwo={buttonOne}
+                />
+              )}
+            </div>
+          )}
 
-        {/* color only  */}
-        {vrcolor && sizeV === undefined && (
-          <>
-            {" "}
-            <ColorsOnly color={color} setColor={setColor} variant={variant} />
-          </>
-        )}
-        {/* size only  */}
-        {!vrcolor?.length && sizeV !== undefined && (
-          <Sizes size={size} setSize={setSize} variant={filterV} />
-        )}
+          {children}
 
-        <div className="my-5">
-          <CallForPrice
-            product={product}
-            headerSetting={headerSetting}
-            cls={buttonOne}
-            price={price}
-          />
-        </div>
-
-        {productQuantity !== "0" && (
+          <div className="flex items-center gap-x-3">
+            <p className="font-medium">Share :</p>
+            <span className="flex space-x-2">
+              <FacebookShareButton url={window.location.href}>
+                <FacebookIcon size={32} round={true} />
+              </FacebookShareButton>
+              <WhatsappShareButton url={window.location.href}>
+                <WhatsappIcon size={32} round={true} />
+              </WhatsappShareButton>
+            </span>
+          </div>
+          {/* Display the referral link */}
           <div>
-            {price !== 0 && (
-              <AddCart
-                qty={qty}
-                product={product}
-                setQty={setQty}
-                onClick={() => add_to_cart()}
-                buttonOne={buttonOne}
-              />
+            {/* Display referral link and copy button */}
+            {referralLink && (
+              <div className="flex items-center gap-4">
+                {/* Underlined referral link */}
+                <p>
+                  Referral Link:{" "}
+                  <a
+                    href={referralLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-blue-600 hover:text-blue-800"
+                  >
+                    {referralLink}
+                  </a>
+                </p>
+
+                {/* Copy button */}
+                <button
+                  className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
+                  ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
+                  onClick={handleCopyLink}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-4 10h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                </button>
+              </div>
             )}
           </div>
-        )}
-
-        <div className="flex items-center gap-x-3">
-          <div className="">Availability:</div>
-          <div className="text-[#212121] ">
-            {productQuantity !== "0" ? (
-              <p>
-                <span className="font-medium">{productQuantity}</span>{" "}
-                <span className="text-green-500">In Stock!</span>
-              </p>
-            ) : (
-              <span className="text-red-600">Out of Stock!</span>
-            )}
-          </div>
-        </div>
-
-        <div className="flex items-center gap-x-3 mt-3">
-          <p className="font-medium">Share :</p>
-          <span className="flex space-x-2">
-            <FacebookShareButton url={window.location.href}>
-              <FacebookIcon size={32} round={true} />
-            </FacebookShareButton>
-            <WhatsappShareButton url={window.location.href}>
-              <WhatsappIcon size={32} round={true} />
-            </WhatsappShareButton>
-          </span>
         </div>
       </div>
     </div>
@@ -588,6 +723,40 @@ export default Details;
 
 const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   const { data, error } = useHeaderSettings();
+  const { design } = useTheme();
+
+  const [referralCode, setReferralCode] = useState("");
+  const [referralLink, setReferralLink] = useState("");
+
+  // Function to extract the 'referral' parameter from the URL
+  const getReferralCodeFromURL = () => {
+    const params = new URLSearchParams(window.location.search); // Get all URL parameters
+    return params.get("referral"); // Get the 'referral' parameter from the URL
+  };
+
+  useEffect(() => {
+    const fetchReferralCode = async () => {
+      const codeFromURL = getReferralCodeFromURL();
+      if (codeFromURL) {
+        setReferralCode(codeFromURL);
+      } else {
+        try {
+          const code = await getReferralCode();
+          if (code) {
+            setReferralCode(code);
+            localStorage.setItem("referralCode", code);
+            const link = `?referral=${code}`;
+            setReferralLink(link);
+            console.log("Generated referral link:", link);
+            window.history.replaceState(null, "", link);
+          }
+        } catch (error) {
+          console.error("Error fetching referral code:", error);
+        }
+      }
+    };
+    // fetchReferralCode();
+  }, []);
 
   let incNum = () => {
     setQty(qty + 1);
@@ -634,39 +803,58 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   );
 };
 
-const Units = ({ unit, setUnit, variant }: any) => {
+const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex gap-2 flex-wrap">
         {variant?.map((item: any, id: any) => (
-          <Unit key={id} item={item} select={unit} setSelect={setUnit} />
+          <Unit
+            key={id}
+            item={item}
+            select={unit}
+            setSelect={setUnit}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const ColorsOnly = ({ color, setColor, variant }: any) => {
+const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Colors</h3>
       <div className="flex gap-2 flex-wrap">
         {variant?.map((item: any, id: any) => (
-          <ColorSet key={id} text={item} select={color} setSelect={setColor} />
+          <ColorSet
+            key={id}
+            text={item}
+            select={color}
+            setSelect={setColor}
+            itemImage={item?.image}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
   );
 };
 
-const Sizes = ({ size, setSize, variant }: any) => {
+const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Size</h3>
       <div className="flex gap-2 flex-wrap">
         {variant?.map((item: any, id: any) => (
-          <Size key={id} item={item} select={size} setSelect={setSize} />
+          <Size
+            key={id}
+            item={item}
+            select={size}
+            setSelect={setSize}
+            setActiveImg={setActiveImg}
+          />
         ))}
       </div>
     </div>
@@ -692,10 +880,13 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect }: any) => {
+const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
       className={`border w-max px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
@@ -705,11 +896,14 @@ const Unit = ({ item, select, setSelect }: any) => {
   );
 };
 
-const Size = ({ item, select, setSelect }: any) => {
+const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => setSelect(item)}
-      className={`border w-max px-1 h-10 flex justify-center items-center font-sans font-medium rounded ${
+      onClick={() => {
+        setSelect(item);
+        setActiveImg(item?.image);
+      }}
+      className={`border w-max px-4 py-3 h-10 flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
@@ -734,10 +928,19 @@ const Color = ({ text, select, setSelect, setSize }: any) => {
   );
 };
 
-const ColorSet = ({ text, select, setSelect }: any) => {
+const ColorSet = ({
+  text,
+  select,
+  setSelect,
+  itemImage,
+  setActiveImg,
+}: any) => {
   return (
     <div
-      onClick={() => setSelect(text)}
+      onClick={() => {
+        setSelect(text);
+        setActiveImg(itemImage);
+      }}
       className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
         text === select ? "border-gray-900" : "border-gray-300"
       }`}

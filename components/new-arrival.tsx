@@ -21,7 +21,6 @@ import {
   THIRTY_SEVEN,
   THIRTY_SIX,
   TWELVE,
-  THIRTEEN,
   TWENTY_NINE,
   TWENTY_SEVEN,
   TWENTY_THREE,
@@ -52,7 +51,6 @@ const NewArrival = ({ product, theme, design, store_id, category }: any) => {
   return (
     <>
       {theme === "default" && <NewArrivalProductFive product={product} />}
-      {theme === "one" && <NewArrivalProductFive product={product} />}
       {theme === "two" && <NewArrivalProductFive product={product} />}
       {theme === "three" && <NewArrivalProductFive product={product} />}
       {theme === "four" && <NewArrivalProductFive product={product} />}
@@ -87,7 +85,7 @@ const NewArrival = ({ product, theme, design, store_id, category }: any) => {
           store_id={store_id}
         />
       )}
-      {theme === THIRTEEN && (
+      {theme === "thirteen" && (
         <NewArrivalProductThirteeen
           product={product}
           design={design}

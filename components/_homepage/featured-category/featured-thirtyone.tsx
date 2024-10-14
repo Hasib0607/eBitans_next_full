@@ -33,7 +33,7 @@ const FeaturedThirtyOne = ({ category, design }: any) => {
   const { title, title_color } = featureCategory;
 
   return (
-    <div className="">
+    <div style={{ backgroundColor: `${design?.header_color}` }}>
       <div
         data-aos="fade-up"
         className="sm:container px-5 sm:py-10 py-5 relative"
@@ -43,7 +43,7 @@ const FeaturedThirtyOne = ({ category, design }: any) => {
           <p className="border-b-[3px] border-dashed sm:w-full w-10"></p>
           <p
             style={{ color: title_color }}
-            className="min-w-max px-2 w-full text-3xl xl:text-4xl font-bold"
+            className="min-w-max px-2 w-full text-3xl xl:text-4xl font-bold text-white"
           >
             {title || "Category"}
           </p>
