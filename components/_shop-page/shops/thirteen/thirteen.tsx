@@ -8,11 +8,7 @@ import FilterByPrice from "@/components/filter-by-price";
 import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import {
-  MinusIcon,
-  PlusIcon,
-  TableCellsIcon,
-} from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -330,15 +326,15 @@ const Location = ({ category }: any) => {
 const Filter = ({ paginate, onChange, setGrid }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap justify-between items-center px-2">
-      <div className="text-gray-500 font-thin">
+      {/* <div className="text-gray-500 font-thin">
         There are {paginate?.total} products{" "}
-      </div>
+      </div> */}
       <div className="flex items-center gap-1">
         <div onClick={() => setGrid("H")} className="border rounded-full p-2">
           <CgViewGrid className="h-4 w-4 text-[#928a8a]" />
         </div>
         <div onClick={() => setGrid("V")} className="border rounded-full p-2">
-          <TableCellsIcon className="h-4 w-4 text-[#928a8a]" />
+          <Bars3Icon className="h-4 w-4 text-[#928a8a]" />
         </div>
       </div>
       {/* Short by  */}

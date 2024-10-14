@@ -7,18 +7,15 @@ import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Pagination from "./pagination";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
 import Card64 from "@/components/card/card64";
 import Link from "next/link";
-
 const CategoryThirtySeven = () => {
   const { id: data }: any = useParams<{ id: string }>();
   const { category, module, design, subcategory } = useTheme();
-
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
-
   const [grid, setGrid] = useState("H");
   const [sort, setSort] = useState("");
   const [paginate, setPaginate] = useState({});
@@ -32,16 +29,13 @@ const CategoryThirtySeven = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
-
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
-
   useEffect(() => {
     setPage(1);
     setHasMore(true);
     setDataId(data);
   }, [data]);
-
   const styleCss = `
     .btn-card:hover {
         background:${design?.header_color};
@@ -49,7 +43,7 @@ const CategoryThirtySeven = () => {
         }
     .text-hover:hover {
         color:  ${design?.header_color};
-        } 
+        }
 `;
   const temp = subcategory?.find(
     (c: any) => parseInt(c?.id) === parseInt(data?.id)
@@ -57,7 +51,6 @@ const CategoryThirtySeven = () => {
   const subCat = subcategory?.filter(
     (c: any) => parseInt(c?.parent) === parseInt(temp ? temp?.parent : data?.id)
   );
-
   return (
     <div className="bg-[#F1F9DD]">
       <style>{styleCss}</style>
@@ -152,9 +145,7 @@ const CategoryThirtySeven = () => {
     </div>
   );
 };
-
 export default CategoryThirtySeven;
-
 const Product = ({
   products,
   sort,
@@ -175,10 +166,10 @@ const Product = ({
   paginate,
   id,
 }: any) => {
+  const [showSk, setShowSk] = useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
-
   useEffect(() => {
     setLoad(true);
     fetchData();
@@ -196,7 +187,6 @@ const Product = ({
     activeColor,
     val,
   ]);
-
   const fetchData = async () => {
     try {
       const pageQuery = page
@@ -207,12 +197,10 @@ const Product = ({
       const colorFilter = activeColor ? encodeURIComponent(activeColor) : "";
       const priceFilter = Number(val) !== 0 ? Number(val) : "";
       const apiUrl = `getcatproducts${pageQuery}&filter=${sort}&priceFilter=${priceFilter}&colorFilter=${colorFilter}`;
-
       // Get the data from the API
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
-
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -220,11 +208,9 @@ const Product = ({
         );
         ({ colors, data, error } = response);
       }
-
       if (data?.data?.length > 0) {
         setHasMore(true);
         setColors(colors);
-
         if (!shop_load) {
           if (data.current_page === 1) {
             setProducts(data.data);
@@ -235,7 +221,6 @@ const Product = ({
         } else {
           setProducts(data.data);
         }
-
         setPaginate(data);
         setLoad(false);
         setError(null);
@@ -249,16 +234,15 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
-
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
-
   if (error) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
@@ -281,7 +265,7 @@ const Product = ({
                   height="80"
                   width="80"
                   radius="9"
-                  color="#f1593a"
+                  color="#F1593A"
                   ariaLabel="three-dots-loading"
                   wrapperStyle={{}}
                   visible={true}
@@ -327,7 +311,6 @@ const Product = ({
     </>
   );
 };
-
 const Location = ({ shops, cat }: any) => {
   return (
     <div className="w-full text-[#414141] bg-white flex gap-1 items-center justify-start py-2 text-sm px-4">
@@ -336,14 +319,10 @@ const Location = ({ shops, cat }: any) => {
     </div>
   );
 };
-
 const Filter = ({ paginate, onChange, shops, cat }: any) => {
   return (
-    <div className="flex flex-wrap justify-between items-center mb-8">
-      <div className=" md:block hidden bg-white px-4 py-2">
-        <span>{shops?.name || cat?.name}</span>{" "}
-        <span>({paginate ? paginate?.total : 0}) </span>
-      </div>
+    <div className="flex flex-wrap justify-between items-center mb-8 ml-auto">
+      <div className=" md:block hidden bg-transparent px-4 py-2"></div>
       {/* Short by  */}
       <div className="">
         <select
@@ -360,7 +339,6 @@ const Filter = ({ paginate, onChange, shops, cat }: any) => {
     </div>
   );
 };
-
 const SubCat = ({ item }: any) => {
   return (
     <>

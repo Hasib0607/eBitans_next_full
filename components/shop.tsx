@@ -37,6 +37,7 @@ import TwentyThree from "./_shop-page/shops/twenty-three/twenty-three";
 import Twenty from "./_shop-page/shops/twenty/twenty";
 import Twentytwo from "./_shop-page/shops/twentytwo/twenty-two";
 import Two from "./_shop-page/shops/two/two";
+import CategorySevenNew from "./_category-page/category/category-seven-new";
 
 const ShopComponent = async () => {
   const url = getUrl();
@@ -54,6 +55,7 @@ const ShopComponent = async () => {
       {shop_page === "five" && <Five />}
       {shop_page === "six" && <Six />}
       {shop_page === "seven" && <Seven />}
+      {/* {shop_page === "seven" && <CategorySevenNew/>} */}
       {shop_page === "eight" && <Eight />}
       {shop_page === "nine" && <Nine />}
       {shop_page === "ten" && <Ten />}

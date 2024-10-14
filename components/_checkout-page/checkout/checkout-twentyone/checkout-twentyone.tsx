@@ -1,5 +1,5 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import { useEffect, useState } from "react";
@@ -78,7 +78,7 @@ const CheckOutTwentyOne = () => {
           </div>
         ) : (
           <div className="h-screen w-full flex justify-center items-center relative">
-            <OvalLoader />
+            <Skeleton />
           </div>
         )}
       </>

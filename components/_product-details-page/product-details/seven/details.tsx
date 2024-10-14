@@ -659,7 +659,6 @@ const Details = ({
               )}
             </div>
           )}
-
           {/* booking  */}
           {bookingData?.status === 200 && productQuantity !== "0" && (
             <div className={buttonSeven} onClick={bookNowBtn}>

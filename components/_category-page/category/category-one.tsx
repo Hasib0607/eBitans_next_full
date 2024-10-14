@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@/components/loader/skeleton";
 import Pagination from "./pagination";
 
 const CategoryOne = () => {
@@ -19,6 +19,7 @@ const CategoryOne = () => {
 
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
 
+  const [showSk, setShowSk] = useState(true);
   const [products, setProducts] = useState([]);
   const [load, setLoad] = useState(false);
   const [paginate, setPaginate] = useState<any>({});
@@ -69,7 +70,7 @@ const CategoryOne = () => {
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -106,6 +107,7 @@ const CategoryOne = () => {
       setLoad(false);
       //   setError(error);
     }
+    setShowSk(false);
   };
 
   return (
@@ -175,7 +177,7 @@ const CategoryOne = () => {
                             </div>
                         </div> */}
 
-            {load ? (
+            {load && showSk ? (
               <div className="col-span-12 lg:col-span-9">
                 <Skeleton />
               </div>

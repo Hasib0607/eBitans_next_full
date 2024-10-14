@@ -49,7 +49,7 @@ const HeroDefault = ({ slider }: any) => {
               <div className="pr-[50%] absolute xl:top-48 lg:top-24 md:top-20 top-12 text-black font-thin lg:left-32 md:left-[120px] left-[60px]"></div>
             </div>
             <a
-              href="https://admin.ebitans.com/design/homepage/slider"
+              href={`${process.env.NEXT_PUBLIC_BASE}/design/homepage/slider`}
               target="_blank"
               rel="noopener noreferrer"
             >

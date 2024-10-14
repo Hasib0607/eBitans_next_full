@@ -3,7 +3,7 @@ import Card21 from "@/components/card/card21";
 import Card6 from "@/components/card/card6";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import { PlusIcon, TableCellsIcon } from "@heroicons/react/24/outline";
+import { PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -30,7 +30,7 @@ const fetchData = async (
     );
     const { colors, data } = categoryResponse;
 
-    if (!data) {
+    if (data?.data?.length == 0) {
       try {
         // Encode activeColor using encodeURIComponent
         const encodedColor = encodeURIComponent(activeColor);
@@ -183,6 +183,7 @@ const CategoryEight = () => {
 export default CategoryEight;
 
 const Product = ({ products, grid, open, shop_load, hasMore }: any) => {
+  const [showSk, setShowSk] = useState(true);
   const { category } = useTheme();
 
   return (
@@ -324,7 +325,7 @@ const SingleCat = ({ item }: any) => {
         {item?.cat ? (
           <div className="px-4 h-full">
             {show ? (
-              <TableCellsIcon
+              <Bars3Icon
                 onClick={() => setShow(!show)}
                 className="h-4 w-4 text-gray-800"
               />

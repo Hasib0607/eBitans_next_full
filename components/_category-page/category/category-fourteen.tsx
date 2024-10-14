@@ -2,7 +2,7 @@
 import Card32 from "@/components/card/card32";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
@@ -90,9 +90,9 @@ const CategoryFourteen = () => {
                 <p className="text-lg uppercase ">Filter</p>
               </div>
 
-              <div className="text-gray-500 font-thin order-3 md:order-2">
+              {/* <div className="text-gray-500 font-thin order-3 md:order-2">
                 There are {paginate ? paginate?.total : 0} products{" "}
-              </div>
+              </div> */}
 
               {/* sorting product  */}
               <div className="md:order-last">
@@ -207,6 +207,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -243,7 +244,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -280,12 +281,13 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

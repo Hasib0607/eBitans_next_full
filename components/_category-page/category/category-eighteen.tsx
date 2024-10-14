@@ -11,15 +11,11 @@ import FilterByPrice from "@/components/filter-by-price";
 import Pagination from "./pagination";
 import { VscClose } from "react-icons/vsc";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import Card38 from "@/components/card/card38";
 import Card6 from "@/components/card/card6";
 import { BiFilter } from "react-icons/bi";
-import {
-  MinusIcon,
-  PlusIcon,
-  TableCellsIcon,
-} from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const CategoryEighteen = () => {
@@ -204,6 +200,7 @@ const Product = ({
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
+  const [showSk, setShowSk] = useState(true);
 
   useEffect(() => {
     setLoad(true);
@@ -238,7 +235,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -275,12 +272,13 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -450,13 +448,13 @@ const Filter = ({
             onClick={() => setGrid("H")}
             className="border btn-card text-[#928a8a] rounded-full p-2 lg:cursor-pointer"
           >
-            <TableCellsIcon className="h-4 w-4" />
+            <Bars3Icon className="h-4 w-4" />
           </div>
           <div
             onClick={() => setGrid("V")}
             className="border btn-card text-[#928a8a] rounded-full p-2 lg:cursor-pointer"
           >
-            <TableCellsIcon className="h-4 w-4 " />
+            <Bars3Icon className="h-4 w-4 " />
           </div>
         </div>
       </div>

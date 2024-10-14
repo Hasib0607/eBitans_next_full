@@ -296,11 +296,11 @@ const Location = ({ category }: any) => {
 const Filter = ({ paginate, onChange }: any) => {
   return (
     <div className="flex flex-wrap gap-3 justify-between items-center mb-8">
-      <div className="bg-white px-4 py-2">
+      {/* <div className="bg-white px-4 py-2">
         There are{" "}
         <span className="font-bold">({paginate ? paginate?.total : 0})</span>{" "}
         products{" "}
-      </div>
+      </div> */}
       {/* Short by  */}
       <div className="">
         <select

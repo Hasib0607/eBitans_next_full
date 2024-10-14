@@ -5,14 +5,10 @@ import Card18 from "@/components/card/card18";
 import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import {
-  MinusIcon,
-  PlusIcon,
-  TableCellsIcon,
-} from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -150,6 +146,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
+  const [showSk, setShowSk] = useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -187,7 +184,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -224,12 +221,13 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -361,15 +359,15 @@ const Location = ({ categoy }: any) => {
 const Filter = ({ paginate, onChange, setGrid }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap justify-between items-center px-2">
-      <div className="text-gray-500 font-thin">
+      {/* <div className="text-gray-500 font-thin">
         There are {paginate?.total} products{" "}
-      </div>
+      </div> */}
       <div className="flex items-center gap-1">
         <div onClick={() => setGrid("H")} className="border rounded-full p-2">
-          <TableCellsIcon className="h-4 w-4 text-[#928a8a]" />
+          <Bars3Icon className="h-4 w-4 text-[#928a8a]" />
         </div>
         <div onClick={() => setGrid("V")} className="border rounded-full p-2">
-          <TableCellsIcon className="h-4 w-4 text-[#928a8a]" />
+          <Bars3Icon className="h-4 w-4 text-[#928a8a]" />
         </div>
       </div>
       {/* Short by  */}

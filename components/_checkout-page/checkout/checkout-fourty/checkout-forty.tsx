@@ -3,7 +3,7 @@ import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import Booking from "@/components/booking";
 import CheckOutFortyAddress from "./address/checkout-forty-address";
 import CheckOutFortyDiscount from "./discount/checkout-forty-discount";
@@ -91,7 +91,7 @@ const CheckOutForty = () => {
           </div>
         ) : (
           <div className="h-screen w-full flex justify-center items-center relative">
-            <OvalLoader />
+            <Skeleton />
           </div>
         )}
       </>

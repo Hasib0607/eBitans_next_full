@@ -7,7 +7,7 @@ import CopyrightAll from "./components/copyrightall";
 const FooterDefault = ({ headerSetting, category }: any) => {
   return (
     <a
-      href="https://admin.ebitans.com/design/homepage/footer"
+      href={`${process.env.NEXT_PUBLIC_BASE}/design/homepage/footer`}
       target="_blank"
       rel="noopener noreferrer"
     >

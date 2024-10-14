@@ -8,11 +8,7 @@ import FilterByPrice from "@/components/filter-by-price";
 import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import {
-  MinusIcon,
-  PlusIcon,
-  TableCellsIcon,
-} from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -177,6 +173,7 @@ const Product = ({
 }: any) => {
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
+  const [sk, setSk] = useState(true);
 
   useEffect(() => {
     setLoad(true);
@@ -370,9 +367,9 @@ const Location = ({ category }: any) => {
 const Filter = ({ paginate, onChange, setGrid, open, setOpen }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap justify-between items-center">
-      <div className="text-gray-500 font-thin md:block hidden">
+      {/* <div className="text-gray-500 font-thin md:block hidden">
         There are {paginate ? paginate?.total : 0} products{" "}
-      </div>
+      </div> */}
       <div
         onClick={() => setOpen(!open)}
         className="flex gap-3 items-center md:hidden lg:cursor-pointer"
@@ -399,13 +396,13 @@ const Filter = ({ paginate, onChange, setGrid, open, setOpen }: any) => {
             onClick={() => setGrid("H")}
             className="border rounded-full p-2 lg:cursor-pointer bg-hover text-[#928a8a]"
           >
-            <TableCellsIcon className="h-4 w-4" />
+            <Bars3Icon className="h-4 w-4" />
           </div>
           <div
             onClick={() => setGrid("V")}
             className="border rounded-full p-2 lg:cursor-pointer bg-hover text-[#928a8a]"
           >
-            <TableCellsIcon className="h-4 w-4" />
+            <Bars3Icon className="h-4 w-4" />
           </div>
         </div>
       </div>

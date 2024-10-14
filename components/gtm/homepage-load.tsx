@@ -13,5 +13,4 @@ const HomepageLoad = () => {
   }, []);
   return <div></div>;
 };
-
 export default HomepageLoad;

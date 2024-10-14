@@ -3,14 +3,10 @@ import Card42 from "@/components/card/card42";
 import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import {
-  MinusIcon,
-  PlusIcon,
-  TableCellsIcon,
-} from "@heroicons/react/24/outline";
+import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -169,6 +165,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
+  const [showSk, setShowSk] = useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category } = useTheme();
@@ -203,7 +200,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -240,12 +237,13 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -428,7 +426,7 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
             onClick={() => setGrid("H")}
             className="h-6 w-6 text-hover lg:cursor-pointer"
           />
-          <TableCellsIcon
+          <Bars3Icon
             onClick={() => setGrid("V")}
             className="h-6 w-6 text-hover lg:cursor-pointer"
           />

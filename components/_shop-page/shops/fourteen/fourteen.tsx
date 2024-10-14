@@ -80,9 +80,9 @@ const Fourteen = ({ data }: any) => {
                 <p className="text-lg uppercase ">Filter</p>
               </div>
 
-              <div className="text-gray-500 font-thin order-3 md:order-2">
+              {/* <div className="text-gray-500 font-thin order-3 md:order-2">
                 There are {paginate?.total} products{" "}
-              </div>
+              </div> */}
 
               <div className="md:order-last ">
                 <Filter

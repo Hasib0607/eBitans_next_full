@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@/components/loader/skeleton";
 import Pagination from "./pagination";
 
 const CategoryForty = () => {
@@ -106,6 +106,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
+  const [showSk, setShowSk] = useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -140,7 +141,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -177,11 +178,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
   return (
     <>
-      {load ? (
+      {load && showSk ? (
         <div>
           <Skeleton />
         </div>

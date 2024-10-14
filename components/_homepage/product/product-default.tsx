@@ -24,7 +24,7 @@ const DefaultProduct = ({ product }: any) => {
           {product?.slice(0, 8).map((item: any, id: any) => (
             <a
               key={id}
-              href="https://admin.ebitans.com/design/homepage/product"
+              href={`${process.env.NEXT_PUBLIC_BASE}/design/homepage/product`}
               target="_blank"
               rel="noopener noreferrer"
             >

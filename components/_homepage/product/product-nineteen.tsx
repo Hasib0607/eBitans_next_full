@@ -1,5 +1,8 @@
+"use client";
+// the hack was done above
 import Card39 from "@/components/card/card39";
 import SectionHeadingNineteen from "@/components/section-heading/section-heading-nineteen";
+// hack for this
 import useHeaderSettings from "@/utils/query/use-header-settings";
 
 const ProductNineteen = ({ product, store_id }: any) => {

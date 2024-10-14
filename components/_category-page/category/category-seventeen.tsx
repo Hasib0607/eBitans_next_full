@@ -9,7 +9,7 @@ import FilterByColor from "../../filter-by-color";
 import FilterByPrice from "../../filter-by-price";
 import Pagination from "./pagination";
 import httpReq from "@/utils/http/axios/http.service";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@/components/loader/skeleton";
 import Card31 from "@/components/card/card31";
 import Link from "next/link";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
@@ -162,6 +162,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -198,7 +199,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -235,11 +236,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
   return (
     <>
-      {load ? (
+      {load && showSk ? (
         <div>
           <Skeleton />
         </div>
@@ -304,9 +306,9 @@ const Product = ({
 const Filter = ({ paginate, onChange, setGrid }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap gap-y-2 justify-between items-center">
-      <div className="text-gray-500 font-thin">
+      {/* <div className="text-gray-500 font-thin">
         There are {paginate?.total} products{" "}
-      </div>
+      </div> */}
       {/* Short by  */}
       <div className="flex items-center gap-2 text-sm max-w-md w-full">
         <label className="max-w-fit"> Sort by:</label>

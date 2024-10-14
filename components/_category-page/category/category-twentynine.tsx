@@ -3,10 +3,10 @@ import Card53 from "@/components/card/card53";
 import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import { TableCellsIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -164,6 +164,7 @@ const Product = ({
   hasMore,
 }: any) => {
   const [load, setLoad] = useState(false);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -200,7 +201,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -237,12 +238,13 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
@@ -395,7 +397,7 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
             grid === "V" ? "grid-active" : "border"
           }`}
         >
-          <TableCellsIcon className="h-4 w-4" />
+          <Bars3Icon className="h-4 w-4" />
         </div>
       </div>
       {/* Short by  */}

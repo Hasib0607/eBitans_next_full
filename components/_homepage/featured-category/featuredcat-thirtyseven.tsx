@@ -5,7 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Controller, EffectFade, Navigation } from "swiper/modules";
 
 // Import Swiper styles
-import { catImg } from "@/site-settings/siteUrl";
+import { catImg, iconImg } from "@/site-settings/siteUrl";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
@@ -115,7 +115,8 @@ const FeaturedThirtySeven = ({ category, design }: any) => {
                 <div className="px-2 flex flex-col gap-y-1 justify-center items-center group">
                   <div className="w-20 h-20 overflow-hidden flex flex-col justify-center items-center rounded-full">
                     <img
-                      src={catImg + item?.banner}
+                      // src={catImg + item?.banner} siam code
+                      src={iconImg + item?.icon}
                       className="h-auto min-w-full"
                       alt="cat"
                     />

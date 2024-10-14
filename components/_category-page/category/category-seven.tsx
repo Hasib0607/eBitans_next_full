@@ -219,7 +219,7 @@ const Product = ({
       { id: dataId }
     );
 
-    if (error) {
+    if (data?.data?.length == 0) {
       const res = await httpReq.post(
         `getsubcatproduct${
           page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`

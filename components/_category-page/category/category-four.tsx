@@ -7,7 +7,7 @@ import { ThreeDots } from "react-loader-spinner";
 import useTheme from "@/hooks/use-theme";
 import { useParams } from "next/navigation";
 import httpReq from "@/utils/http/axios/http.service";
-import OvalLoader from "@/components/loader/oval-loader";
+import Skeleton from "@/components/loader/skeleton";
 import { catImg } from "@/site-settings/siteUrl";
 import Shop from "./shopx";
 import ProductCardTwo from "@/components/card/product-card/product-card-two";
@@ -25,6 +25,7 @@ const CategoryFour = () => {
   const [paginate, setPaginate] = useState({});
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [dataId, setDataId] = useState(null);
 
   const shop_load = parseInt(paginateModule?.status);
@@ -65,7 +66,7 @@ const CategoryFour = () => {
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -102,12 +103,13 @@ const CategoryFour = () => {
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }

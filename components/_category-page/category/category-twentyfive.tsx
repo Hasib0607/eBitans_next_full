@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
 import Pagination from "./pagination";
 import httpReq from "@/utils/http/axios/http.service";
-import Skeleton from "react-loading-skeleton";
+import Skeleton from "@/components/loader/skeleton";
 import Card50 from "@/components/card/card50";
 import Link from "next/link";
 import "./category-twentyfive.css";
@@ -99,6 +99,7 @@ const Product = ({
 }: any) => {
   const { category, subcategory } = useTheme();
   const [load, setLoad] = useState(false);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
@@ -132,7 +133,7 @@ const Product = ({
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
 
-      if (error) {
+      if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
           apiUrl.replace("getcatproducts", "getsubcatproduct"),
@@ -169,11 +170,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    setShowSk(false);
   };
 
   return (
     <>
-      {load ? (
+      {load && showSk ? (
         <div>
           <Skeleton />
         </div>

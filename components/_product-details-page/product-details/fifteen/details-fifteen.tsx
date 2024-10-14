@@ -1,9 +1,14 @@
 "use client";
-import OvalLoader from "@/components/loader/oval-loader";
+import { useEffect, useState } from "react";
+import { VscCreditCard } from "react-icons/vsc";
+import { useDispatch } from "react-redux";
+// import ImageSection from './ImageSection';
+// import Zoom from '../Zoom';
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
-import { buyNow } from "@/utils/buy-now";
 import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
@@ -13,124 +18,44 @@ import Rate from "@/utils/rate";
 import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import { VscCreditCard } from "react-icons/vsc";
-import { useDispatch, useSelector } from "react-redux";
+import Link from "next/link";
 import {
   FacebookIcon,
   FacebookShareButton,
   WhatsappIcon,
   WhatsappShareButton,
 } from "react-share";
-import { ToastContainer, toast } from "react-toastify";
-import { Autoplay, Pagination } from "swiper/modules";
-import { Swiper, SwiperSlide } from "swiper/react";
+import { toast } from "react-toastify";
+import ImageZoom from "../image-zoom";
 import { HSlider } from "../eight/slider";
-import "react-toastify/dist/ReactToastify.css";
-import getReferralCode from "@/utils/getReferralCode";
 
 const Details = ({
   data,
-  children,
-  open,
-  setOpen,
+  product,
   variant,
   vrcolor,
-  product,
   fetchStatus,
+  children,
 }: any) => {
-  const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
+
   const dispatch = useDispatch();
 
   const [filterV, setFilterV] = useState<any>([]);
   const [load, setLoad] = useState(false);
   const [camp, setCamp] = useState<any>(null);
+  const [id, setId] = useState<any>(0);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
   const [size, setSize] = useState<any>(null);
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
-  const [referralCode, setReferralCode] = useState("");
-  const [referralLink, setReferralLink] = useState("");
-  const [copied, setCopied] = useState(false);
 
   // image selector
   const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
-
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const referral = params.get("referral");
-
-    // Get the referral object from localStorage
-    const checkStorage = localStorage.getItem("referralObj");
-    let referralObj;
-
-    try {
-      // Check if 'referralObj' exists and is valid JSON
-      if (checkStorage) {
-        referralObj = JSON.parse(checkStorage);
-      } else {
-        referralObj = {}; // Initialize an empty object if nothing exists in localStorage
-      }
-
-      const productID = product?.id;
-
-      // Only update the object if there's a valid referral and productID
-      if (referral && productID) {
-        referralObj[productID] = referral;
-        // Store the updated object back into localStorage
-        localStorage.setItem("referralObj", JSON.stringify(referralObj));
-      }
-    } catch (error) {
-      console.error("Error parsing referralObj from localStorage:", error);
-      // If parsing fails, re-initialize 'referralObj' as an empty object
-      referralObj = {};
-    }
-  }, [product]);
-
-  useEffect(() => {
-    const fetchReferralCode = async () => {
-      try {
-        const code = await getReferralCode();
-        if (code) {
-          setReferralCode(code);
-          // Generate the referral link based on the code
-          const link = `${window.location.href}?referral=${code}`;
-          setReferralLink(link);
-        }
-      } catch (error) {
-        console.error("Error in useEffect:", error);
-      }
-    };
-
-    fetchReferralCode();
-  }, []);
-
-  // Copy the referral link to the clipboard
-  const handleCopyLink = () => {
-    navigator.clipboard
-      .writeText(referralLink)
-      .then(() => {
-        setCopied(true);
-        // Display the toast notification
-        toast.success("Link copied!", {
-          position: "top-right",
-          autoClose: 2000, // close after 2 seconds
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-        });
-        setTimeout(() => setCopied(false), 2000); // Reset "copied" status after 2 seconds
-      })
-      .catch((err) => console.error("Failed to copy the link", err));
-  };
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -140,8 +65,7 @@ const Details = ({
     // declare the async data fetching function
     const fetchData = async () => {
       data["store_id"] = store_id;
-      // Log the user's information, data, and store_id
-      //  console.log("User Info:", { data, store_id, headerSetting, design });
+      // get the data from the api
       const { product, variant, vrcolor } = await httpReq.post(
         "product-details",
         data
@@ -166,17 +90,14 @@ const Details = ({
       .catch(console.error);
   }, [data, store_id, fetchStatus]);
 
-  const buyNowBtn = () => {
-    buyNow(variant, size, color, unit, filterV, add_to_cart, router);
-  };
-
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <OvalLoader />
+        <Skeleton />
       </div>
     );
   }
+
   const regularPrice =
     parseInt(product?.regular_price) +
     (size?.additional_price ? parseInt(size?.additional_price) : 0) +
@@ -210,13 +131,15 @@ const Details = ({
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
+        let campaignPrice = campPrice;
+
         if (variant?.length) {
           // unit with offer
           if (unit) {
             dispatch(
               addToCartList({
                 cartId: makeid(100),
-                price: campPrice,
+                price: campaignPrice,
                 qty: parseInt(qty),
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
@@ -229,7 +152,7 @@ const Details = ({
               event: "add_to_cart",
               value: {
                 cartId: makeid(100),
-                price: campPrice,
+                price: campaignPrice,
                 qty: parseInt(qty),
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
@@ -249,7 +172,7 @@ const Details = ({
             dispatch(
               addToCartList({
                 cartId: makeid(100),
-                price: campPrice,
+                price: campaignPrice,
                 qty: parseInt(qty),
                 variant_quantity: size?.quantity,
                 variantId: size.id,
@@ -262,7 +185,7 @@ const Details = ({
               event: "add_to_cart",
               value: {
                 cartId: makeid(100),
-                price: campPrice,
+                price: campaignPrice,
                 qty: parseInt(qty),
                 variant_quantity: size?.quantity,
                 variantId: size.id,
@@ -270,7 +193,6 @@ const Details = ({
                 ...product,
               },
             });
-
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -282,7 +204,7 @@ const Details = ({
             dispatch(
               addToCartList({
                 cartId: makeid(100),
-                price: campPrice,
+                price: campaignPrice,
                 qty: parseInt(qty),
                 variant_quantity: color?.quantity,
                 variantId: color.id,
@@ -290,12 +212,11 @@ const Details = ({
                 ...product,
               })
             );
-
             sendGTMEvent({
               event: "add_to_cart",
               value: {
                 cartId: makeid(100),
-                price: campPrice,
+                price: campaignPrice,
                 qty: parseInt(qty),
                 variant_quantity: color?.quantity,
                 variantId: color.id,
@@ -325,7 +246,7 @@ const Details = ({
           dispatch(
             addToCartList({
               cartId: makeid(100),
-              price: campPrice,
+              price: campaignPrice,
               qty: parseInt(qty),
               color: null,
               size: null,
@@ -335,12 +256,11 @@ const Details = ({
               ...product,
             })
           );
-
           sendGTMEvent({
             event: "add_to_cart",
             value: {
               cartId: makeid(100),
-              price: campPrice,
+              price: campaignPrice,
               qty: parseInt(qty),
               color: null,
               size: null,
@@ -350,7 +270,6 @@ const Details = ({
               ...product,
             },
           });
-
           toast("Successfully you added to cart", {
             type: "success",
             autoClose: 1000,
@@ -371,7 +290,6 @@ const Details = ({
                 ...product,
               })
             );
-
             sendGTMEvent({
               event: "add_to_cart",
               value: {
@@ -384,7 +302,6 @@ const Details = ({
                 ...product,
               },
             });
-
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -403,7 +320,6 @@ const Details = ({
                 ...product,
               })
             );
-
             sendGTMEvent({
               event: "add_to_cart",
               value: {
@@ -416,7 +332,6 @@ const Details = ({
                 ...product,
               },
             });
-
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -435,7 +350,6 @@ const Details = ({
                 ...product,
               })
             );
-
             sendGTMEvent({
               event: "add_to_cart",
               value: {
@@ -448,7 +362,6 @@ const Details = ({
                 ...product,
               },
             });
-
             toast("Successfully you added to cart", {
               type: "success",
               autoClose: 1000,
@@ -481,7 +394,6 @@ const Details = ({
               ...product,
             })
           );
-
           sendGTMEvent({
             event: "add_to_cart",
             value: {
@@ -496,7 +408,6 @@ const Details = ({
               ...product,
             },
           });
-
           toast("Successfully you added to cart", {
             type: "success",
             autoClose: 1000,
@@ -538,8 +449,6 @@ const Details = ({
 
   const buttonOne =
     "font-bold text-white bg-gray-600 rounded-md w-60 py-3 text-center";
-
-  const persistRoot = localStorage.getItem("persist:root");
 
   return (
     <div className="bg-white h-full ">
@@ -656,7 +565,6 @@ const Details = ({
                   qty={qty}
                   setQty={setQty}
                   onClick={() => add_to_cart()}
-                  product={product}
                   buttonTwentyTwo={buttonOne}
                 />
               )}
@@ -676,48 +584,6 @@ const Details = ({
               </WhatsappShareButton>
             </span>
           </div>
-          {/* Display the referral link */}
-          <div>
-            {/* Display referral link and copy button */}
-            {referralLink && (
-              <div className="flex items-center gap-4">
-                {/* Underlined referral link */}
-                <p>
-                  Referral Link:{" "}
-                  <a
-                    href={referralLink}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="underline text-blue-600 hover:text-blue-800"
-                  >
-                    {referralLink}
-                  </a>
-                </p>
-
-                {/* Copy button */}
-                <button
-                  className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
-                  ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
-                  onClick={handleCopyLink}
-                >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-4 10h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z"
-                    />
-                  </svg>
-                </button>
-              </div>
-            )}
-          </div>
         </div>
       </div>
     </div>
@@ -726,51 +592,8 @@ const Details = ({
 
 export default Details;
 
-const AddCart = ({
-  setQty,
-  qty,
-  onClick,
-  buttonOne,
-  product,
-  buyNowBtn,
-  store_id,
-}: any) => {
+const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   const { data, error } = useHeaderSettings();
-  const { design } = useTheme();
-
-  const [referralCode, setReferralCode] = useState("");
-  const [referralLink, setReferralLink] = useState("");
-
-  // Function to extract the 'referral' parameter from the URL
-  const getReferralCodeFromURL = () => {
-    const params = new URLSearchParams(window.location.search); // Get all URL parameters
-    return params.get("referral"); // Get the 'referral' parameter from the URL
-  };
-
-  useEffect(() => {
-    const fetchReferralCode = async () => {
-      const codeFromURL = getReferralCodeFromURL();
-      if (codeFromURL) {
-        setReferralCode(codeFromURL);
-      } else {
-        try {
-          const code = await getReferralCode();
-          if (code) {
-            setReferralCode(code);
-            localStorage.setItem("referralCode", code);
-            const link = `?referral=${code}`;
-            setReferralLink(link);
-            console.log("Generated referral link:", link);
-            window.history.replaceState(null, "", link);
-          }
-        } catch (error) {
-          console.error("Error fetching referral code:", error);
-        }
-      }
-    };
-    // fetchReferralCode();
-  }, []);
-
   let incNum = () => {
     setQty(qty + 1);
   };
@@ -784,12 +607,10 @@ const AddCart = ({
 
   const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
 
-  if (error) {
-    return <p>error from header settings</p>;
-  }
+  if (error) return <p>error from header setting</p>;
 
   return (
-    <div className="flex flex-wrap lg2:flex-row flex-col justify-start lg2:items-center gap-x-8 gap-y-3 py-10">
+    <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
       <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
         <div
           className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-l-md hover:text-white font-semibold transition-all duration-300 ease-linear"
@@ -797,45 +618,28 @@ const AddCart = ({
         >
           <MinusIcon width={15} />
         </div>
-        <div className="h-12 w-24 flex justify-center items-center">{qty}</div>
+        <div className="h-12 w-24  flex justify-center items-center">{qty}</div>
         <div
-          className="h-12 w-12 flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
+          className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
           onClick={incNum}
         >
           <PlusIcon width={15} />
         </div>
       </div>
-      {store_id !== 3512 ? (
-        <div className="flex flex-wrap items-center gap-3">
-          <div className="">
-            <button
-              className="font-bold text-white bg-gray-600 rounded-md w-max px-10 py-3 text-center"
-              onClick={onClick}
-            >
-              Add to cart
-            </button>
-          </div>
-          <div className="">
-            <button
-              className="font-bold text-white bg-gray-600 rounded-md w-max px-10 py-3 text-center"
-              onClick={onClick}
-            >
-              {button || "Buy Now"}
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div>
-          <button className={buttonOne} onClick={() => buyNowBtn()}>
-            "অর্ডার করতে চাই"
+      <div className="">
+        {product?.quantity === "0" ? (
+          <button className={buttonOne}>Out of Stock</button>
+        ) : (
+          <button className={buttonOne} onClick={onClick}>
+            {button || "Add to cart"}
           </button>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 };
 
-const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
+const Units = ({ unit, setUnit, variant, setId, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
@@ -844,8 +648,10 @@ const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
           <Unit
             key={id}
             item={item}
+            index={id}
             select={unit}
             setSelect={setUnit}
+            setId={setId}
             setActiveImg={setActiveImg}
           />
         ))}
@@ -878,7 +684,7 @@ const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Size</h3>
-      <div className="flex flex-wrap gap-2">
+      <div className="flex gap-2 flex-wrap">
         {variant?.map((item: any, id: any) => (
           <Size
             key={id}
@@ -912,14 +718,15 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
   );
 };
 
-const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
+const Unit = ({ item, select, setSelect, setId, index, setActiveImg }: any) => {
   return (
     <div
       onClick={() => {
         setSelect(item);
+        // setId(index);
         setActiveImg(item?.image);
       }}
-      className={`border px-1 w-auto h-10 flex justify-center items-center font-sans text-sm rounded ${
+      className={`border px-2 w-auto h-10 flex flex-wrap justify-center items-center font-sans text-sm rounded lg:cursor-pointer ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
@@ -935,7 +742,7 @@ const Size = ({ item, select, setSelect, setActiveImg }: any) => {
         setSelect(item);
         setActiveImg(item?.image);
       }}
-      className={`border px-4 py-3 w-auto h-10 flex justify-center items-center font-sans font-medium rounded ${
+      className={`border px-4 py-3 w-auto h-max flex justify-center items-center font-sans font-medium rounded ${
         item === select ? "border-gray-900" : "border-gray-300"
       }`}
     >
