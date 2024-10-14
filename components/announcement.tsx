@@ -10,9 +10,6 @@ const Announcement = async ({ design, url }: any) => {
         name: url,
       }
     );
-    if (!res.data) {
-      return <></>;
-    }
     if (res.data && res.data.data) {
       anArray = res.data.data;
     }

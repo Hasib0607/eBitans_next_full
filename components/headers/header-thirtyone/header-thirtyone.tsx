@@ -14,7 +14,7 @@ import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { MdKeyboardArrowDown } from "react-icons/md";
 import Search from "./search";
-import { ArrowLeftIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
 const HeaderThirtyOne = ({ headerSetting }: any) => {
@@ -68,6 +68,9 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
         animation: fadeIn 0.2s ease-in both;
 
       }
+    .navbarTwentyOne.openMenu ul li {
+        color: white;
+      }
     .cat-hover-thirty:hover {
         color:  ${design?.text_color};
         background: ${design?.header_color};
@@ -84,8 +87,9 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
  
     `;
 
+
   return (
-    <div className="">
+    <div className="bg-black" >
       <style>{styleCss}</style>
       {/* cart open  */}
       <BottomCart open={cartOpen} setOpen={setCartOpen} />
@@ -181,20 +185,20 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
           <div className="lg:flex hidden items-center justify-between w-full border lg:mx-20 md:mx-3 relative">
             <p
               onClick={() => setOpenCat(!openCat)}
-              className="w-60 cat-hover-thirty text-center py-2.5 px-2 md:lg:cursor-pointer font-medium"
+              className="w-60 cat-hover-thirty text-center py-2.5 px-2 md:lg:cursor-pointer font-medium text-white"
             >
-              All Categories <MdKeyboardArrowDown className="text-xl inline " />
+              All Categories <MdKeyboardArrowDown className="text-xl inline text-white" />
             </p>
             <input
               type="text"
               value={searchTxt}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search"
-              className="w-full text-black border-0 focus:outline-none focus:border-0 focus:ring-0"
+              className="w-full h-10 text-black pl-2 border-0 focus:outline-none focus:border-0 focus:ring-0"
             />
             <div
               onClick={handleClose}
-              className="w-40 cat-hover-thirty flex justify-center py-3 md:lg:cursor-pointer"
+              className="w-40 cat-hover-thirty flex justify-center py-3 md:lg:cursor-pointer text-white"
             >
               {searchTxt.length === 0 ? (
                 <IoSearchOutline className="text-xl" />
@@ -338,13 +342,13 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
           className="lg:cursor-pointer flex lg:hidden gap-x-1 justify-center items-center pb-5"
           onClick={() => setOpen(!open)}
         >
-          <Bars3Icon className="h-6" />
+          <TableCellsIcon className="h-6" />
           <p>Menu</p>
         </div>
 
         <div className={`${openMenu && "navbarTwentyOne openMenu"}`}>
           <div
-            className={`lg:flex hidden justify-center sm:container px-5 py-2 gap-4 w-full`}
+            className={`lg:flex hidden justify-center sm:container px-5 py-2 gap-4 w-full text-white`}
           >
             {menu?.slice(0, 5).map((menuItem: any) => (
               <ul className="group relative px-5" key={menuItem?.id}>

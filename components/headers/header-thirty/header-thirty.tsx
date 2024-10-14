@@ -14,7 +14,7 @@ import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import Search from "./search";
 import { Menu, Transition } from "@headlessui/react";
-import { ArrowLeftIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
 const HeaderThirty = ({ headerSetting }: any) => {
@@ -190,7 +190,7 @@ const HeaderThirty = ({ headerSetting }: any) => {
               value={searchTxt}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Search"
-              className="w-full border-0 focus:outline-none focus:border-0 focus:ring-0"
+              className="w-full border-0 pl-3 focus:outline-none focus:border-0 focus:ring-0"
             />
             <div
               onClick={handleClose}
@@ -334,7 +334,7 @@ const HeaderThirty = ({ headerSetting }: any) => {
               className="lg:cursor-pointer flex lg:hidden gap-x-1 justify-center items-center"
               onClick={() => setOpen(!open)}
             >
-              <Bars3Icon className="h-6" />
+              <TableCellsIcon className="h-6" />
               <p>Menu</p>
             </div>
           </div>

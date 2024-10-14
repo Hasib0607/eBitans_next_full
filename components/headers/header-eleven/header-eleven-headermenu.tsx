@@ -9,13 +9,12 @@ import { RiAccountPinCircleFill } from "react-icons/ri";
 import { BiLogOut } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
-import Link from "next/link";
+import Link from "next/link"; 
 import Search from "../header-ten/search";
 import { imgUrl } from "@/site-settings/siteUrl";
 import { headerBg } from "@/site-settings/color";
 import useTheme from "@/hooks/use-theme";
 import { logout } from "@/redux/features/auth.slice";
-import GetLogo from "@/components/getLogo/getLogo";
 
 const HeaderElevenHeaderMenu = () => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
@@ -44,7 +43,17 @@ const HeaderElevenHeaderMenu = () => {
       <BottomCart open={cartOpen} setOpen={setCartOpen} />
       <div className=" flex justify-between items-center bg-white sm:container px-5 my-2">
         <div>
-          <GetLogo />
+          <Link href="/">
+            {!headerSetting?.logo ? (
+              <p>{headerSetting?.website_name}</p>
+            ) : (
+              <img
+                className="h-[45px] w-auto overflow-hidden"
+                src={imgUrl + headerSetting?.logo}
+                alt="logo"
+              />
+            )}
+          </Link>
         </div>
 
         <div className="lg:basis-3/6 w-full h-12">
@@ -72,7 +81,6 @@ const HeaderElevenHeaderMenu = () => {
               )}
             </div>
           </div>
-
           <div className="relative">
             {searchTxt && <Search search={searchTxt} setSearch={setSearch} />}
           </div>

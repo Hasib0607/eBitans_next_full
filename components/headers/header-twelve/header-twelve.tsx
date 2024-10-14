@@ -8,7 +8,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import {
   ArrowLeftIcon,
   ChevronDownIcon,
-  Bars3Icon,
+  TableCellsIcon,
   UserCircleIcon,
 } from "@heroicons/react/24/outline";
 import { location } from "assets/svg";
@@ -321,7 +321,7 @@ const HeaderTwelve = ({ headerSetting }: any) => {
       <div className="block px-4 py-4 lg:hidden">
         <div className="flex justify-between mb-6 py">
           <div className="lg:cursor-pointer" onClick={() => setOpen(!open)}>
-            <Bars3Icon className="h-6" />
+            <TableCellsIcon className="h-6" />
           </div>
           <div>
             <Link href="/">

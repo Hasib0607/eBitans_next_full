@@ -23,6 +23,7 @@ import {
 } from "react-share";
 import { toast } from "react-toastify";
 import { HSlider } from "../eight/slider";
+import getReferralCode from "@/utils/getReferralCode";
 
 const Details = ({
   fetchStatus,
@@ -47,6 +48,9 @@ const Details = ({
   const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
   const [imageSrc, setImageSrc] = useState<any>(null);
+  const [referralCode, setReferralCode] = useState("");
+  const [referralLink, setReferralLink] = useState("");
+  const [copied, setCopied] = useState(false);
   // image selector
   const [activeImg, setActiveImg] = useState("");
 
@@ -65,6 +69,76 @@ const Details = ({
   }, [product?.description]);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const referral = params.get("referral");
+
+    // Get the referral object from localStorage
+    const checkStorage = localStorage.getItem("referralObj");
+    let referralObj;
+
+    try {
+      // Check if 'referralObj' exists and is valid JSON
+      if (checkStorage) {
+        referralObj = JSON.parse(checkStorage);
+      } else {
+        referralObj = {}; // Initialize an empty object if nothing exists in localStorage
+      }
+
+      const productID = product?.id;
+
+      // Only update the object if there's a valid referral and productID
+      if (referral && productID) {
+        referralObj[productID] = referral;
+        // Store the updated object back into localStorage
+        localStorage.setItem("referralObj", JSON.stringify(referralObj));
+      }
+    } catch (error) {
+      console.error("Error parsing referralObj from localStorage:", error);
+      // If parsing fails, re-initialize 'referralObj' as an empty object
+      referralObj = {};
+    }
+  }, [product]);
+
+  useEffect(() => {
+    const fetchReferralCode = async () => {
+      try {
+        const code = await getReferralCode();
+        if (code) {
+          setReferralCode(code);
+          // Generate the referral link based on the code
+          const link = `${window.location.href}?referral=${code}`;
+          setReferralLink(link);
+        }
+      } catch (error) {
+        console.error("Error in useEffect:", error);
+      }
+    };
+
+    fetchReferralCode();
+  }, []);
+
+  // Copy the referral link to the clipboard
+  const handleCopyLink = () => {
+    navigator.clipboard
+      .writeText(referralLink)
+      .then(() => {
+        setCopied(true);
+        // Display the toast notification
+        toast.success("Link copied!", {
+          position: "top-right",
+          autoClose: 2000, // close after 2 seconds
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+        setTimeout(() => setCopied(false), 2000); // Reset "copied" status after 2 seconds
+      })
+      .catch((err) => console.error("Failed to copy the link", err));
+  };
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -518,12 +592,7 @@ const Details = ({
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
-            <Units
-              unit={unit}
-              setUnit={setUnit}
-              variant={variant}
-              setActiveImg={setActiveImg}
-            />
+            <Units unit={unit} setUnit={setUnit} variant={variant} setActiveImg={setActiveImg} />
           )}
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
@@ -600,6 +669,49 @@ const Details = ({
               </WhatsappShareButton>
             </span>
           </div>
+
+          {/* Display the referral link */}
+          <div>
+            {/* Display referral link and copy button */}
+            {referralLink && (
+              <div className="flex items-center gap-4">
+                {/* Underlined referral link */}
+                <p>
+                  Referral Link:{" "}
+                  <a
+                    href={referralLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="underline text-blue-600 hover:text-blue-800"
+                  >
+                    {referralLink}
+                  </a>
+                </p>
+
+                {/* Copy button */}
+                <button
+                  className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
+                  ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
+                  onClick={handleCopyLink}
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-6 w-6"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
+                      d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-4 10h6a2 2 0 002-2v-8a2 2 0 00-2-2h-6a2 2 0 00-2 2v8a2 2 0 002 2z"
+                    />
+                  </svg>
+                </button>
+              </div>
+            )}
+          </div>
           {children}
         </div>
         {open && (
@@ -618,6 +730,39 @@ const AddCart = ({ setQty, qty, onClick, variant }: any) => {
   const { design } = useTheme();
 
   const { data, error } = useHeaderSettings();
+
+  const [referralCode, setReferralCode] = useState("");
+  const [referralLink, setReferralLink] = useState("");
+
+  // Function to extract the 'referral' parameter from the URL
+  const getReferralCodeFromURL = () => {
+    const params = new URLSearchParams(window.location.search); // Get all URL parameters
+    return params.get("referral"); // Get the 'referral' parameter from the URL
+  };
+
+  useEffect(() => {
+    const fetchReferralCode = async () => {
+      const codeFromURL = getReferralCodeFromURL();
+      if (codeFromURL) {
+        setReferralCode(codeFromURL);
+      } else {
+        try {
+          const code = await getReferralCode();
+          if (code) {
+            setReferralCode(code);
+            localStorage.setItem("referralCode", code);
+            const link = `?referral=${code}`;
+            setReferralLink(link);
+            console.log("Generated referral link:", link);
+            window.history.replaceState(null, "", link);
+          }
+        } catch (error) {
+          console.error("Error fetching referral code:", error);
+        }
+      }
+    };
+    // fetchReferralCode();
+  }, []);
 
   let incNum = () => {
     setQty(qty + 1);
@@ -692,13 +837,7 @@ const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
-          <Unit
-            key={id}
-            item={item}
-            select={unit}
-            setSelect={setUnit}
-            setActiveImg={setActiveImg}
-          />
+          <Unit key={id} item={item} select={unit} setSelect={setUnit} setActiveImg={setActiveImg} />
         ))}
       </div>
     </div>
@@ -766,9 +905,9 @@ const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
 const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
-      onClick={() => {
-        setSelect(item);
-        setActiveImg(item?.image);
+     onClick={() => {
+      setSelect(item);
+      setActiveImg(item?.image);
       }}
       className={`border lg:cursor-pointer w-max px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
         item === select ? "select-unit" : "border-gray-300"

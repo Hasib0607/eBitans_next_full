@@ -14,7 +14,6 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
 import "./five.css";
-import Skeleton from "@/components/loader/skeleton";
 
 const Eleven = ({ data, updatedData }: any) => {
   const { design } = useTheme();
@@ -45,10 +44,9 @@ const Eleven = ({ data, updatedData }: any) => {
     }
  
     `;
-  if (fetchStatus == "fetching") return <Skeleton />;
+
   return (
     <div className="container px-5 bg-white pt-10">
-      {/* <h1 className="text-[500px]">this is eleven</h1> */}
       <style>{styleCss}</style>
       <Details
         fetchStatus={fetchStatus}

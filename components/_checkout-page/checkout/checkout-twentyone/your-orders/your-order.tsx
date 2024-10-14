@@ -19,6 +19,7 @@ import { MdDelete } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import PaymentGateway from "../payment-gateway/payment-gateway";
+import getReferral from "@/utils/getReferral";
 
 const YourOrders = ({
   couponDis,
@@ -120,6 +121,8 @@ const YourOrders = ({
 
   const handleCheckout = async () => {
     setLoading(true);
+    // Retrieve the referral code from localStorage
+    const referralCode = localStorage.getItem('referralCode');
 
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
@@ -134,6 +137,7 @@ const YourOrders = ({
       unit: item.unit,
       volume: item.volume,
       items: item?.items,
+      referral_code:getReferral(item.id)
     }));
 
     const formData = new FormData();
@@ -182,6 +186,7 @@ const YourOrders = ({
       product: cart,
       tax: tax,
       coupon: coupon ? coupon : null,
+      referral_code: referralCode || "",
     };
 
     formData.append("store_id", store_id);
@@ -211,6 +216,10 @@ const YourOrders = ({
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
+    // Append referral code if available
+    if(referralCode){
+      formData.append("referral_code", referralCode)
+    };
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
@@ -274,6 +283,7 @@ const YourOrders = ({
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
+              localStorage.removeItem('referralObj');
               dispatch(clearCartList());
             }
 

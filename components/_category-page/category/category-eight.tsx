@@ -3,7 +3,7 @@ import Card21 from "@/components/card/card21";
 import Card6 from "@/components/card/card6";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import { PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { PlusIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
@@ -324,7 +324,7 @@ const SingleCat = ({ item }: any) => {
         {item?.cat ? (
           <div className="px-4 h-full">
             {show ? (
-              <Bars3Icon
+              <TableCellsIcon
                 onClick={() => setShow(!show)}
                 className="h-4 w-4 text-gray-800"
               />

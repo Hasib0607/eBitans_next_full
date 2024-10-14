@@ -6,6 +6,7 @@ import { clearCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
 import { btnhover } from "@/site-settings/style";
 import { getPrice } from "@/utils/get-price";
+import getReferral from "@/utils/getReferral";
 import httpReq from "@/utils/http/axios/http.service";
 import Taka from "@/utils/taka";
 import axios from "axios";
@@ -118,6 +119,8 @@ const CheckOutElevenOrder = ({
 
   const handleCheckout = async () => {
     setLoading(true);
+    // Retrieve the referral code from localStorage
+    const referralCode = localStorage.getItem('referralCode');
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
       quantity: item.qty,
@@ -131,6 +134,7 @@ const CheckOutElevenOrder = ({
       unit: item.unit,
       volume: item.volume,
       items: item?.items,
+      referral_code:getReferral(item.id)
     }));
 
     const formData = new FormData();
@@ -178,6 +182,7 @@ const CheckOutElevenOrder = ({
       product: cart,
       tax: tax,
       coupon: coupon ? coupon : null,
+      referral_code: referralCode || "",
     };
 
     formData.append("store_id", store_id);
@@ -212,6 +217,10 @@ const CheckOutElevenOrder = ({
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
+    // Append referral code if available
+    if(referralCode){
+      formData.append("referral_code", referralCode)
+    }
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
@@ -273,6 +282,7 @@ const CheckOutElevenOrder = ({
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
+              localStorage.removeItem('referralObj')
               dispatch(clearCartList());
             }
 

@@ -8,7 +8,11 @@ import FilterByPrice from "@/components/filter-by-price";
 import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
-import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import {
+  MinusIcon,
+  PlusIcon,
+  TableCellsIcon,
+} from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
 import { useParams } from "next/navigation";
@@ -402,7 +406,7 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
             grid === "V" ? "grid-active" : "border"
           }`}
         >
-          <Bars3Icon className="h-4 w-4" />
+          <TableCellsIcon className="h-4 w-4" />
         </div>
       </div>
       {/* Short by  */}

@@ -18,15 +18,17 @@ const mobileNavs: { [key: string]: ComponentType<{}> } = {
   }),
 };
 
-interface Design {
-  mobile_bottom_menu?: "one" | "two" | "three" | "four" | "five";
-}
+// interface Design {
+//   mobile_bottom_menu?: "one" | "two" | "three" | "four" | "five";
+// }
 
 const AllMobileBottomMenu = () => {
   const theme = useTheme();
   const design = theme?.design;
+  console.log(design);
+  
 
-  const MobileNavComponent = mobileNavs[design?.mobile_bottom_menu || "four"];
+  const MobileNavComponent = mobileNavs[design?.mobile_bottom_menu=='default'? "four":design?.mobile_bottom_menu];
 
   return <>{MobileNavComponent && <MobileNavComponent />}</>;
 };

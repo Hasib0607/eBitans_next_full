@@ -10,7 +10,7 @@ import { useParams } from "next/navigation";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import Skeleton from "@/components/loader/skeleton";
+import Skeleton from "react-loading-skeleton";
 import Pagination from "./pagination";
 
 const CategoryNineteen = () => {

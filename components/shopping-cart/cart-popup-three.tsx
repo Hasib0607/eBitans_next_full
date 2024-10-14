@@ -4,6 +4,7 @@
 import useTheme from "@/hooks/use-theme";
 import { decrementQty, incrementQty } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import getReferral from "@/utils/getReferral";
 import Taka from "@/utils/taka";
 import { Dialog, Transition } from "@headlessui/react";
 import {
@@ -17,6 +18,7 @@ import { Fragment, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { XIcon } from "react-share";
 import { toast } from "react-toastify";
+
 
 const CartPopUpThree = () => {
   const { design } = useTheme();
@@ -138,7 +140,7 @@ const ShoppingCart = ({ setOpen }: any) => {
             color={"white"}
             className="h-6 w-6 lg:cursor-pointer"
             aria-hidden="true"
-          />
+            />
         </div>
 
         <div className="my-[80px] px-6">
@@ -176,7 +178,7 @@ const ShoppingCart = ({ setOpen }: any) => {
   );
 };
 
-const SingleCartProduct = ({ product, setOpen }: any) => {
+const SingleCartProduct = ({ product, setOpen, referralCode }: any) => {
   const dispatch = useDispatch();
 
   const { design } = useTheme();

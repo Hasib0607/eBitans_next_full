@@ -9,6 +9,7 @@ import {
 import { productImg } from "@/site-settings/siteUrl";
 import { btnhover } from "@/site-settings/style";
 import { getPrice } from "@/utils/get-price";
+import getReferral from "@/utils/getReferral";
 import httpReq from "@/utils/http/axios/http.service";
 import Taka from "@/utils/taka";
 import axios from "axios";
@@ -110,6 +111,7 @@ const YourOrders = ({
   });
 
   useEffect(() => {
+    
     if (headerSetting?.tax) {
       const tax = (parseInt(headerSetting?.tax) / 100) * total;
       setTax(tax);
@@ -120,6 +122,8 @@ const YourOrders = ({
 
   const handleCheckout = async () => {
     setLoading(true);
+    // Retrieve the referral code from localStorage
+    const referralCode = localStorage.getItem('referralCode');
 
     const cart = updatedCartList.map((item: any) => ({
       id: item.id,
@@ -134,7 +138,9 @@ const YourOrders = ({
       unit: item.unit,
       volume: item.volume,
       items: item?.items,
+      referral_code:getReferral(item.id)
     }));
+
 
     const formData = new FormData();
 
@@ -181,7 +187,9 @@ const YourOrders = ({
       product: cart,
       tax: tax,
       coupon: coupon ? coupon : null,
+      referral_code: referralCode || "",
     };
+
 
     formData.append("store_id", store_id);
     formData.append(
@@ -215,6 +223,15 @@ const YourOrders = ({
     formData.append("discount", couponDis);
     formData.append("tax", tax);
     formData.append("coupon", coupon ? coupon : "");
+    // Append referral code if available
+    if(referralCode){
+      formData.append("referral_code", referralCode)
+    }
+
+  // Convert FormData to an array and log each key-value pair
+  Array.from(formData.entries()).forEach(([key, value]) => {
+    console.log(`${key}: ${value}`);
+  });
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
@@ -267,6 +284,8 @@ const YourOrders = ({
         );
         const placeOrder = async () => {
           try {
+            console.log(formData);
+            
             const response = await axios.post(apiOrder, formData, {
               headers: {
                 Authorization: `Bearer ${responseInfo?.data?.token?.token}`,
@@ -276,6 +295,7 @@ const YourOrders = ({
 
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
+              localStorage.removeItem('referralObj');
               dispatch(clearCartList());
             }
 
@@ -367,8 +387,8 @@ const YourOrders = ({
           })
           .catch((error) => {
             const { errors, message } = error.response.data;
-            console.log(errors);
-            console.log(message);
+            // console.log(errors);
+            // console.log(message);
             // error.response.data?.errors.map(i => alert.show(i.message, { type: 'error' }))
           });
       }
@@ -566,3 +586,6 @@ const Single = ({ item, setIsOpen, files, index }: any) => {
     </div>
   );
 };
+
+
+

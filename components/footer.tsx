@@ -55,7 +55,6 @@ import FooterTwentySix from "./footers/footer-twentysix";
 import FooterTwentyThree from "./footers/footer-twentythree";
 import FooterTwentyTwo from "./footers/footer-twentytwo";
 import FooterTwo from "./footers/footer-two";
-import AllMobileBottomMenu from "@/app/mobileBottomMenu";
 const DynamicFooterDefault = dynamic(
   () => import("@/components/footers/footer-default"),
   {
@@ -496,7 +495,6 @@ const Footer = () => {
           page={page}
         />
       )}
-      <AllMobileBottomMenu />
     </>
   );
 };

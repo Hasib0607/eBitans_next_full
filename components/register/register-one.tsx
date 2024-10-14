@@ -4,10 +4,10 @@ import httpReq from "@/utils/http/axios/http.service";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { useRouter } from "next/navigation";
+import { toast } from "react-toastify";
 const cls =
   "py-3 px-4 border border-gray-300 rounded-md placeholder:text-gray-500 text-sm focus:outline-0 w-full";
 
@@ -20,6 +20,7 @@ const RegisterOne = () => {
   const [loading, setLoading] = useState(false);
   const [userOne, setUserOne] = useState("");
   const [show, setShow] = useState(false);
+  const [userType, setUserType] = useState("customer"); // Default user type is 'customer'
 
   // // console.log(userOne, "userOne");
 
@@ -28,6 +29,7 @@ const RegisterOne = () => {
   // useEffect(() => {
   //   dispatch(clearMessage());
   // }, [dispatch]);
+
 
   const {
     register,
@@ -41,22 +43,26 @@ const RegisterOne = () => {
     e.preventDefault();
     window.localStorage.setItem("authType", data?.email || data?.phone);
     setLoading(true);
+
+    // Add userType to the data being submitted
+    const registrationData = { ...data, store_id, type: userType };
+
     if (store?.auth_type === "phone" || store?.auth_type === "EasyOrder") {
       httpReq
-        .post("/userinfo", { ...data, store_id })
+        .post("/userinfo", registrationData)
         .then((res) => {
           setUserOne(res.token);
-          // if (res.message) {
-          //   window.location.replace("/verify-otp");
-          // }
+          if (res.message) {
+            window.location.replace("/verify-otp");
+          }
         })
         .catch((error) => {
-          // toast(error.response.data.message, { type: "error" });
+          toast(error.response.data.message, { type: "error" });
           setLoading(false);
         });
     } else {
       httpReq
-        .post("/user-registration-email", { ...data, store_id })
+        .post("/user-registration-email", registrationData)
         .then((res) => {
           // console.log(res,"res")
           setUserOne(res.token);
@@ -66,7 +72,7 @@ const RegisterOne = () => {
         })
         .catch((error) => {
           // console.log(error,"error");
-          // toast(error.response.data.message, { type: "error" });
+          toast(error.response.data.message, { type: "error" });
           setLoading(false);
         });
     }
@@ -133,6 +139,23 @@ const RegisterOne = () => {
           {errors.phone?.type === "required" && "phone Number is required"}
         </p>
 
+        {/* User Type Selection Dropdown */}
+        <div className="mb-6">
+          <label className="block mb-2 text-sm text-gray-500">
+            Select User Type
+          </label>
+          <select
+            value={userType}
+            onChange={(e) => setUserType(e.target.value)} // Update the userType state based on selection
+            className={cls}
+          >
+            <option value="customer">Customer</option> {/* Default option */}
+            <option value="customerAffiliate">Affiliator</option>{" "}
+            {/* Affiliator option */}
+          </select>
+        </div>
+
+        {/* Submit button */}
         <div className="">
           {loading ? (
             <p

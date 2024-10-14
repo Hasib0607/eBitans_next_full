@@ -9,6 +9,7 @@ import Header from "@/components/header";
 import ThemeProvider from "@/hooks/theme-provider";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ToastContainer } from "react-toastify";
+import AllMobileBottomMenu from "./mobileBottomMenu";
 const queryClient = new QueryClient();
 
 const AppWrapper = ({ children, design, headerSetting }: any) => {
@@ -19,6 +20,7 @@ const AppWrapper = ({ children, design, headerSetting }: any) => {
           <PersistGate loading={null} persistor={persistor}>
             <Header design={design} headerSetting={headerSetting} />
             {children}
+            {/* <AllMobileBottomMenu/> */}
             <Footer />
             <CartPopUp />
             <ToastContainer position="top-right" newestOnTop />

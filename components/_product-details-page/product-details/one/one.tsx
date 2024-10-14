@@ -30,7 +30,6 @@ const One = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  console.log(productDetailsData, "pd");
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5">
       <div className="mx-auto">

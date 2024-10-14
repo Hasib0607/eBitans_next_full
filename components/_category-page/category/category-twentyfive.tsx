@@ -7,7 +7,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
 import Pagination from "./pagination";
 import httpReq from "@/utils/http/axios/http.service";
-import Skeleton from "@/components/loader/skeleton";
+import Skeleton from "react-loading-skeleton";
 import Card50 from "@/components/card/card50";
 import Link from "next/link";
 import "./category-twentyfive.css";

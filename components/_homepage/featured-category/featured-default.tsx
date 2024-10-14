@@ -23,7 +23,7 @@ const DefaultFeaturedCategory = ({ category }: any) => {
             <div key={cat.id} className="rounded-lg bg-white w-32 h-32">
               <div className="flex justify-center items-center">
                 <a
-                  href={`${process.env.NEXT_PUBLIC_BASE}/design/homepage/featurecategory`}
+                  href="https://admin.ebitans.com/design/homepage/featurecategory"
                   target="_blank"
                   rel="noopener noreferrer"
                 >

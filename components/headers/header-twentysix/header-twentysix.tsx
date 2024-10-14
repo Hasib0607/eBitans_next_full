@@ -11,7 +11,7 @@ import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import Link from "next/link";
 import LoginTwentyOne from "../../sign-in/signin-twentyone";
 import Search from "./search";
-import { ArrowLeftIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 
 const HeaderTwentySix = ({ headerSetting }: any) => {
@@ -271,7 +271,7 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
             className="lg:cursor-pointer flex lg:hidden gap-x-1 justify-center items-center pb-5"
             onClick={() => setOpen(!open)}
           >
-            <Bars3Icon className="h-10" />
+            <TableCellsIcon className="h-10" />
           </div>
         </div>
         {/* mobile search  */}

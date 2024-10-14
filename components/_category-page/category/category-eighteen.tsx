@@ -15,7 +15,11 @@ import OvalLoader from "@/components/loader/oval-loader";
 import Card38 from "@/components/card/card38";
 import Card6 from "@/components/card/card6";
 import { BiFilter } from "react-icons/bi";
-import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
+import {
+  MinusIcon,
+  PlusIcon,
+  TableCellsIcon,
+} from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const CategoryEighteen = () => {
@@ -446,13 +450,13 @@ const Filter = ({
             onClick={() => setGrid("H")}
             className="border btn-card text-[#928a8a] rounded-full p-2 lg:cursor-pointer"
           >
-            <Bars3Icon className="h-4 w-4" />
+            <TableCellsIcon className="h-4 w-4" />
           </div>
           <div
             onClick={() => setGrid("V")}
             className="border btn-card text-[#928a8a] rounded-full p-2 lg:cursor-pointer"
           >
-            <Bars3Icon className="h-4 w-4 " />
+            <TableCellsIcon className="h-4 w-4 " />
           </div>
         </div>
       </div>

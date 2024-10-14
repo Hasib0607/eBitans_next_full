@@ -5,6 +5,7 @@ import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
 import { getSubdomainName } from "@/lib";
 import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
+import AllMobileBottomMenu from "./mobileBottomMenu";
 // import MobileNavThree from "./mobileNavs/three/mobileNavThree";
 
 export async function generateMetadata() {
@@ -28,6 +29,7 @@ export default async function Home() {
   return (
     <>
       <HomePage />
+      {/* <AllMobileBottomMenu/> */}
       <HomepageLoad />
       {/* <MobileNavThree/> */}
     </>

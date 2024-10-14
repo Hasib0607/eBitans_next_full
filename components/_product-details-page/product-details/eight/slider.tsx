@@ -92,7 +92,6 @@ export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
     },
   };
 
-  console.log(images, "images");
   return (
     <div>
       <style>{styleCss}</style>
