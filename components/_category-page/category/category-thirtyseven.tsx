@@ -164,9 +164,9 @@ const Product = ({
   setHasMore,
   hasMore,
   paginate,
-  id
+  id,
 }: any) => {
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -234,9 +234,9 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
-  if (load&&showSk) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -322,8 +322,7 @@ const Location = ({ shops, cat }: any) => {
 const Filter = ({ paginate, onChange, shops, cat }: any) => {
   return (
     <div className="flex flex-wrap justify-between items-center mb-8 ml-auto">
-      <div className=" md:block hidden bg-transparent px-4 py-2">
-      </div>
+      <div className=" md:block hidden bg-transparent px-4 py-2"></div>
       {/* Short by  */}
       <div className="">
         <select

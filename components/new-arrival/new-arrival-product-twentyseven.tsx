@@ -15,6 +15,7 @@ const NewArrivalProductTwentySeven = ({ product, design, store_id }: any) => {
     return <p>error from new arrival product</p>;
   }
 
+  
   return (
     <div className="bg-white sm:container px-5 sm:py-10 py-5 ">
       <div className="">

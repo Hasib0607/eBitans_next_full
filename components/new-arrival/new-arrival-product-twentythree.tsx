@@ -1,3 +1,4 @@
+"use client";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import Card47 from "../card/card47";
 import SectionHeadingTwentyThree from "../section-heading/section-heading-twentythree";
