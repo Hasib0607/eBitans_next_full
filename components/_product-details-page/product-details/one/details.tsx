@@ -805,7 +805,7 @@ const AddCart = ({
           <PlusIcon width={15} />
         </div>
       </div>
-      {/* <p>Referral Code: {referralCode}</p> */}
+
       {store_id !== 3512 ? (
         <div className="flex flex-wrap items-center gap-3">
           <div className="">

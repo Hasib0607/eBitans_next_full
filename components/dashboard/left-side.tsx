@@ -6,7 +6,6 @@ import "./dashboard.css";
 import { usePathname, useRouter } from "next/navigation";
 import getReferralCode from "@/utils/getReferralCode";
 
-
 const LeftSide = () => {
   const { userData } = useTheme();
   const pathname = usePathname();
