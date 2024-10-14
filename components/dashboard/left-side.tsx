@@ -4,7 +4,7 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import "./dashboard.css";
 import { usePathname, useRouter } from "next/navigation";
-import getReferralCode from "@/utils/getReferralCode";
+import getReferralCode from "@/utils/getRefferalCode";
 
 const LeftSide = () => {
   const { userData } = useTheme();
