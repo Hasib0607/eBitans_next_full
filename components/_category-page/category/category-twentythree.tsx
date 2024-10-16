@@ -360,13 +360,30 @@ const Product = ({
   );
 };
 
-const Location = ({ category }: any) => {
+const Location = ({  }: any) => {
+  const [activecat,setActivecat]=useState(false)
+  const { id: data }: any = useParams<{ id: string }>();
+  const {category}=useTheme();
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+        if(category[i]?.cat){
+          for(let j=0;j<category[i].cat.length;j++){
+            if(category[i]?.cat[j]?.id==data){
+              setActivecat(category[i]?.cat[j]?.name)
+            }
+          }
+        }
+        if(category[i]?.id==data){
+          setActivecat(category[i].name)
+        }
+      }
+  },[category])
   return (
     <div className="w-full bg-[#f1f1f1] flex flex-col justify-center items-center py-5 mb-5">
       <h1 className="text-3xl font-medium ">Product</h1>
       <div className="flex items-center gap-1">
         <p>Home</p>
-        <p>/ {category?.name}</p>
+        <p>/ {activecat}</p>
       </div>
     </div>
   );
@@ -417,6 +434,14 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
 const SingleCat = ({ item, setSelect, select }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] flex-1 text-lg font-medium`
   const inactiveColor= "text-gray-500 flex-1 text-lg font-medium"

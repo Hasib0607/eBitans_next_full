@@ -251,6 +251,14 @@ const Product = ({
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }]  w-max pb-3`
   const inactiveColor= "text-gray-500 w-max pb-3"

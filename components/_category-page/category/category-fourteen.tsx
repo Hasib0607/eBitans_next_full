@@ -281,6 +281,18 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
+    for(let i=0;i<category.length;i++){
+      if(category[i]?.cat){
+        for(let j=0;j<category[i].cat.length;j++){
+          if(category[i]?.cat[j]?.id==id){
+            setShops(category[i]?.cat[j])
+          }
+        }
+      }
+      if(category[i]?.id==id){
+        setShops(category[i])
+      }
+    }
     setShowSk(false)
   };
 
@@ -382,9 +394,19 @@ const Filter = ({ onChange }: any) => {
 };
 
 const SingleCat = ({ item }: any) => {
-  const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  const [show, setShow] = useState(false);
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
+
+  
   const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-medium text-hover`
   const inactiveColor= 'flex-1 text-sm font-medium text-hover text-gray-900'
   const activesub=`text-[${design?.header_color }] pb-2 text-sm text-hover`

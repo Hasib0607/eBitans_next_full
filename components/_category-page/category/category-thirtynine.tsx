@@ -261,9 +261,6 @@ const Filter = ({ paginate, onChange }: any) => {
           <option value="hl">High - Low</option>
         </select>
       </div>
-      <div className="px-4 py-2 text-sm w-full">
-        <p className="w-max">{paginate ? paginate?.total : 0} products </p>
-      </div>
     </div>
   );
 };
@@ -271,6 +268,14 @@ const Filter = ({ paginate, onChange }: any) => {
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] w-max text-sm`
   const inactiveColor= "text-gray-500 w-max text-sm"

@@ -26,6 +26,21 @@ const CategoryTwentyFour = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
+  const [activecat,setActivecat]=useState(false)
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+        if(category[i]?.cat){
+          for(let j=0;j<category[i].cat.length;j++){
+            if(category[i]?.cat[j]?.id==data){
+              setActivecat(category[i]?.cat[j]?.name)
+            }
+          }
+        }
+        if(category[i]?.id==data){
+          setActivecat(category[i].name)
+        }
+      }
+  },[category])
 
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
@@ -56,7 +71,8 @@ const CategoryTwentyFour = () => {
             <h1 className="text-5xl text-white font-medium ">Products</h1>
             <div className="flex items-center gap-1 text-white font-bold">
               <p>Home</p>
-              <p>/ Shop</p>
+              <p>/ categories</p>
+              <p>/ {activecat}</p>
             </div>
           </div>
         </div>
@@ -300,6 +316,14 @@ const Filter = ({ paginate, onChange }: any) => {
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] w-max`
   const inactiveColor= "text-gray-500 w-max"

@@ -35,6 +35,7 @@ const CategorySeventeen = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
+  const [activecat,setActivecat]=useState(null)
 
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
@@ -44,6 +45,23 @@ const CategorySeventeen = () => {
     setHasMore(true);
     setDataId(data);
   }, [data]);
+
+
+useEffect(()=>{
+  for(let i=0;i<category.length;i++){
+    if(category[i]?.cat){
+      for(let j=0;j<category[i].cat.length;j++){
+        if(category[i]?.cat[j]?.id==data){
+          setActivecat(category[i]?.cat[j]?.name)
+        }
+      }
+    }
+    if(category[i]?.id==data){
+      setActivecat(category[i].name)
+    }
+  }
+},[category])
+
 
   return (
     <>
@@ -55,7 +73,7 @@ const CategorySeventeen = () => {
           <div className="flex gap-1 items-center">
             <p className="text-white">Home</p>
             <IoIosArrowForward className="text-xs mt-1 text-white" />
-            <p className="font-medium text-white">{shops?.name || cat?.name}</p>
+            <p className="font-medium text-white">{activecat}</p>
           </div>
         </div>
       </div>
@@ -335,6 +353,14 @@ const Filter = ({ paginate, onChange, setGrid }: any) => {
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] flex-1`
   const inactiveColor= `flex-1 text-gray-900`

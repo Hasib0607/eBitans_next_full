@@ -277,12 +277,20 @@ export default CategoryOne;
 
 const SingleCat = ({ item, select, setSelect, setPage, setHasMore }: any) => {
   const [show, setShow] = useState(false);
+  const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] flex-1 hover:ml-4 duration-300 text-lg font-medium`
   const inactiveColor= 'flex-1 hover:ml-4 duration-300 text-lg font-medium text-gray-900'
   const activeSub= `text-[${design?.header_color}] py-2 hover:ml-4 duration-300 px-4 text-sm`
   const inactivesub='py-2 hover:ml-4 duration-300 px-4 text-sm text-gray-600'
-  const { id }: any = useParams<{ id: string }>()
   
   return (
     <div className="">

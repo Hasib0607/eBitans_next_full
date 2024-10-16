@@ -449,7 +449,15 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
 
 const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>();
+  const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const { design } = useTheme();
   const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-medium`;
   const inactiveColor = "text-gray-500 flex-1 text-sm font-medium";
@@ -506,7 +514,7 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
                     setPage(1);
                     setHasMore(true);
                   }}
-                  href={sub?.id}
+                  href={"/category/" + sub?.id}
                 >
                   {" "}
                   <p  

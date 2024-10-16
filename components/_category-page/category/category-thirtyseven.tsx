@@ -331,10 +331,28 @@ const Product = ({
 };
 
 const Location = ({ shops, cat }: any) => {
+  const [activecat,setActivecat]=useState(null)
+  const { id: data }: any = useParams<{ id: string }>();
+  const {category}= useTheme();
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+        if(category[i]?.cat){
+          for(let j=0;j<category[i].cat.length;j++){
+            if(category[i]?.cat[j]?.id==data){
+              setActivecat(category[i]?.cat[j]?.name)
+            }
+          }
+        }
+        if(category[i]?.id==data){
+          setActivecat(category[i].name)
+        }
+      }
+  },[category])
+  
   return (
     <div className="w-full text-[#414141] bg-white flex gap-1 items-center justify-start py-2 text-sm px-4">
       <p>Home </p>
-      <p> / Shop / {shops?.name || cat?.name}</p>
+      <p> / Shop / {activecat}</p>
     </div>
   );
 };

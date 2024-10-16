@@ -347,11 +347,35 @@ const Product = ({
   );
 };
 
-const Location = ({ categoy }: any) => {
+const Location = ({  }: any) => {
+ const [activecat,setActivecat]=useState(null)
+ const {category}=useTheme();
+
+ const { id }: any = useParams<{ id: string }>();
+  
+
+
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+      if(category[i]?.cat){
+        for(let j=0;j<category[i].cat.length;j++){
+          if(category[i]?.cat[j]?.id==id){
+            setActivecat(category[i]?.cat[j]?.name)
+          }
+        }
+      }
+      if(category[i]?.id==id){
+        setActivecat(category[i].name)
+      }
+    }
+  },[category])
+
+
+
   return (
     <div className="w-full text-[#414141] bg-[#f1f1f1] flex items-center justify-start py-2 text-[24px] font-thin px-2">
       <p>Home</p>
-      <p>/ {categoy?.name}</p>
+      <p>/ {activecat}</p>
     </div>
   );
 };
@@ -391,6 +415,14 @@ const Filter = ({ paginate, onChange, setGrid }: any) => {
 const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-thin`
   const inactiveColor= `text-gray-900 flex-1 text-sm font-thin`

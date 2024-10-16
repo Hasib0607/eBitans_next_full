@@ -66,9 +66,9 @@ const HeroSeventeen = ({ slider, design }: any) => {
         background: ${bgColor};
 
     }
-    
-
     `;
+
+
   return (
     <div className=" mt-0 xl:mt-0 bg-white relative z-[2]">
       <style>{styleCss}</style>
@@ -123,7 +123,7 @@ const HeroSeventeen = ({ slider, design }: any) => {
                 <a href={s?.link}>
                   <img
                     className="min-w-full h-auto"
-                    src={sliderImg + s.image.src}
+                    src={sliderImg + s.image}
                     alt=""
                   />
                 </a>

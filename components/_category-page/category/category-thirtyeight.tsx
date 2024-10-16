@@ -335,23 +335,37 @@ const Product = ({
 };
 
 const Location = ({ shops, cat }: any) => {
+  const [activecat,setActivecat]=useState(null)
+   const { id }: any = useParams<{ id: string }>();
+   const { category} = useTheme();
+ 
+   useEffect(()=>{
+     for(let i=0;i<category.length;i++){
+       if(category[i]?.cat){
+         for(let j=0;j<category[i].cat.length;j++){
+           if(category[i]?.cat[j]?.id==id){
+             setActivecat(category[i]?.cat[j]?.name)
+           }
+         }
+       }
+       if(category[i]?.id==id){
+         setActivecat(category[i].name)
+       }
+     }
+   },[category])
   return (
     <div className="w-full text-[#414141] sm:container flex gap-1 items-center justify-start py-3 text-sm px-5">
       <Link href="/">
         <TiHome className="text-lg" />
       </Link>
-      <p> / Shop / {shops?.name || cat?.name}</p>
+      <p> / Shop / {activecat}</p>
     </div>
   );
 };
 
 const Filter = ({ paginate, onChange, shops, cat }: any) => {
   return (
-    <div className="flex flex-wrap gap-3 justify-between items-center mb-8">
-      <div className="bg-white px-4 py-2">
-        <span>{shops?.name || cat?.name}</span>{" "}
-        <span>({paginate ? paginate?.total : 0}) </span>
-      </div>
+    <div className="flex flex-wrap gap-3 justify-between items-center mb-8 ml-auto">
       {/* Short by  */}
       <div className="">
         <select

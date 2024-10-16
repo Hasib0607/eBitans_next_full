@@ -9,7 +9,6 @@ import {
   EffectCreative,
   EffectFade,
 } from "swiper/modules";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";
@@ -50,9 +49,9 @@ const HeroSixteen = ({ slider, design }: any) => {
         border:transparent;
         transform: scale(1.05);
     }
-
-
       `;
+
+      
   return (
     <div className="group z-0 relative">
       <style>{styleCss}</style>

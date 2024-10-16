@@ -331,21 +331,34 @@ const Product = ({
 };
 
 const Location = ({ shops, cat }: any) => {
+  const [activecat,setActivecat]=useState(null)
+  const { id: data }: any = useParams<{ id: string }>();
+  const {category}= useTheme();
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+        if(category[i]?.cat){
+          for(let j=0;j<category[i].cat.length;j++){
+            if(category[i]?.cat[j]?.id==data){
+              setActivecat(category[i]?.cat[j]?.name)
+            }
+          }
+        }
+        if(category[i]?.id==data){
+          setActivecat(category[i].name)
+        }
+      }
+  },[category])
   return (
     <div className="w-full sm:container px-5 text-[#414141] flex gap-1 items-center justify-start py-2 text-sm">
       <p>Home </p>
-      <p> / Shop / {shops?.name || cat?.name}</p>
+      <p> / Shop / {activecat}</p>
     </div>
   );
 };
 
 const Filter = ({ paginate, onChange, shops, cat }: any) => {
   return (
-    <div className="flex flex-wrap justify-between items-center mb-8">
-      <div className=" md:block hidden text-2xl">
-        <span>{shops?.name || cat?.name}</span>{" "}
-        <span>({paginate ? paginate?.total : 0}) </span>
-      </div>
+    <div className="flex flex-wrap justify-between items-center mb-8 ml-auto">
       {/* Short by  */}
       <div className="flex items-center gap-6 text-sm max-w-sm">
         <p>Sort By:</p>

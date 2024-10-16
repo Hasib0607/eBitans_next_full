@@ -305,10 +305,27 @@ const Product = ({
   );
 };
 
-const Location = ({ category }: any) => {
+const Location = ({  }: any) => {
+  const [activecat,setActivecat]=useState(false)
+  const { id: data }: any = useParams<{ id: string }>();
+  const {category}=useTheme();
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+        if(category[i]?.cat){
+          for(let j=0;j<category[i].cat.length;j++){
+            if(category[i]?.cat[j]?.id==data){
+              setActivecat(category[i]?.cat[j]?.name)
+            }
+          }
+        }
+        if(category[i]?.id==data){
+          setActivecat(category[i].name)
+        }
+      }
+  },[category])
   return (
     <div className="lg:w-1/2 flex flex-col gap-y-5 py-5 mb-5">
-      <h1 className="text-3xl font-bold ">{category?.name} collection</h1>
+      <h1 className="text-3xl font-bold ">{activecat} collection</h1>
       <div className="">
         <p className="text-sm text-gray-500">
           We not only help you design exceptional products, but also make it
@@ -342,6 +359,14 @@ const Filter = ({ onChange }: any) => {
 const SingleCat = ({ item, setOpen, setSelect, select }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] flex-1 text-lg font-medium`
   const inactiveColor= "text-gray-500 flex-1 text-lg font-medium"

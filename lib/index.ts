@@ -11,7 +11,7 @@ const getSubdomainName = async (url: string, head: string = "") => {
     );
     return res?.data;
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
 };
 
@@ -30,5 +30,5 @@ const getProductDetails = async ({
   return productDetails;
 };
 
-const getSiteInfo = async () => {};
+// const getSiteInfo = async () => {};
 export { getProductDetails, getSubdomainName };

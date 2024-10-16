@@ -366,7 +366,26 @@ const Product = ({
   );
 };
 
-const Location = ({ category, cat }: any) => {
+const Location = ({  }: any) => {
+
+  const [activecat,setActivecat]=useState(null)
+   const { id }: any = useParams<{ id: string }>();
+   const { category} = useTheme();
+ 
+   useEffect(()=>{
+     for(let i=0;i<category.length;i++){
+       if(category[i]?.cat){
+         for(let j=0;j<category[i].cat.length;j++){
+           if(category[i]?.cat[j]?.id==id){
+             setActivecat(category[i]?.cat[j]?.name)
+           }
+         }
+       }
+       if(category[i]?.id==id){
+         setActivecat(category[i].name)
+       }
+     }
+   },[category])
   return (
     <div className="w-full bg-white text-[#252525]">
       <div className="flex flex-col justify-center sm:container px-5 py-2">
@@ -374,7 +393,8 @@ const Location = ({ category, cat }: any) => {
           <Link href="/">
             <AiOutlineHome className="" />
           </Link>
-          <p>/ {category?.name || cat?.name}</p>
+          <p>/ Categories</p>
+          <p>/ {activecat}</p>
         </div>
       </div>
     </div>
@@ -430,6 +450,14 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
 const SingleCat = ({ item, setSelect, select }: any) => {
   const [show, setShow] = useState(false);
   const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
   const {design}=useTheme()
   const activeColor= `text-[${design?.header_color }] flex-1 text-lg font-medium`
   const inactiveColor= `text-gray-900 flex-1 text-lg font-medium`
