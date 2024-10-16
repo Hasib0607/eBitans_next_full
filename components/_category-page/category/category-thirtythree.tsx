@@ -162,7 +162,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -236,10 +236,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -358,16 +358,22 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
 
 const SingleCat = ({ item, setSelect, select }: any) => {
   const [show, setShow] = useState(false);
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-lg font-medium`
+  const inactiveColor= "text-gray-500 flex-1 text-lg font-medium"
+  const activesub=`text-[${design?.header_color }] py-2 px-8 text-sm`
+  const inactivesub=`text-gray-600 py-2 px-8 text-sm`
   return (
     <div className="">
       <div className="w-full mb-2">
         <div className="flex items-center px-4 py-3">
           <Link
+          style={parseInt(id)===item?.id?{color:`${design.header_color}`}:{}}
+            
             onClick={() => setSelect(item.id)}
             href={"/category/" + item.id}
-            className={`flex-1 text-lg font-medium ${
-              select === item.id ? "text-red-500" : "text-gray-800"
-            }`}
+            className={id==item?.id?activeColor:inactiveColor}
           >
             {" "}
             <li>
@@ -406,11 +412,11 @@ const SingleCat = ({ item, setSelect, select }: any) => {
                 >
                   {" "}
                   <li
-                    className={`py-2 px-8  text-sm ${
-                      select === sub.id ? "text-red-500" : "text-gray-500"
-                    }`}
+                    className={id==sub?.id?activesub:inactivesub}
                   >
-                    <span className="text-gray-600">{sub?.name}</span>
+                    <span 
+          style={parseInt(id)===parseInt(sub?.id)?{color:`${design.header_color}`}:{}}
+            >{sub?.name}</span>
                   </li>
                 </Link>
               </div>

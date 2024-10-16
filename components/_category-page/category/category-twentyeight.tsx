@@ -164,7 +164,7 @@ const Product = ({
   hasMore,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -238,10 +238,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -419,6 +419,12 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
 };
 
 const SingleCat = ({ item, setSelect, select }: any) => {
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex items-center gap-x-2 font-medium`
+  const inactiveColor= "text-gray-500 flex items-center gap-x-2 font-medium"
+  const activesub=`text-[${design?.header_color }] text-sm w-max`
+  const inactivesub=`text-gray-600 text-sm w-max`
   return (
     <div className="">
       <div className="w-full mb-2">
@@ -426,9 +432,7 @@ const SingleCat = ({ item, setSelect, select }: any) => {
           <Link
             onClick={() => setSelect(item.id)}
             href={"/category/" + item.id}
-            className={`text-gray-600 flex items-center gap-x-2 font-medium ${
-              select === item.id ? "text-red-500" : ""
-            }`}
+            className={id==item?.id?activeColor:inactiveColor}
           >
             <div
               className={`${
@@ -439,7 +443,9 @@ const SingleCat = ({ item, setSelect, select }: any) => {
                 <TiTick className="text-white absolute left-0 -top-[1px]" />
               )}
             </div>
-            <p>{item.name}</p>
+            <p 
+          style={parseInt(id)===parseInt(item?.id)?{color:`${design.header_color}`}:{}}
+             >{item.name}</p>
           </Link>
         </div>
       </div>

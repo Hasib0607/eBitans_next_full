@@ -235,8 +235,6 @@ const BookingForm = ({
         })
         .catch((error) => {
           const { errors, message } = error.response.data;
-          console.log(errors);
-          console.log(message);
           // error.response.data?.errors.map(i => alert.show(i.message, { type: 'error' }))
         });
     }

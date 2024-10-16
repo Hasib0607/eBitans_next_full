@@ -78,7 +78,6 @@ export const HSlider = ({ product, colorid, setColorid, vrcolor }: any) => {
       console.log("before change", currentSlide, nextSlide);
     },
     afterChange: function (currentSlide: any) {
-      console.log("after change", currentSlide);
     },
   };
 

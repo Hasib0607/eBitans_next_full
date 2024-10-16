@@ -25,7 +25,6 @@ const mobileNavs: { [key: string]: ComponentType<{}> } = {
 const AllMobileBottomMenu = () => {
   const theme = useTheme();
   const design = theme?.design;
-  console.log(design);
 
   const MobileNavComponent =
     mobileNavs[

@@ -110,7 +110,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -181,12 +181,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
   return (
     <>
-      {load && showSk ? (
+      {(load&&showSk )? (
         <div>
           <Skeleton />
         </div>
@@ -250,6 +250,12 @@ const Product = ({
 
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(false);
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }]  w-max pb-3`
+  const inactiveColor= "text-gray-500 w-max pb-3"
+  const activesub=`text-[${design?.header_color }] text-sm`
+  const inactivesub="text-sm text-gray-500"
 
   const styleCss = `
     .category-page .active{
@@ -266,8 +272,9 @@ const SingleCat = ({ item }: any) => {
         className="w-full flex items-center gap-x-2 relative category-page"
       >
         <Link
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
           href={"/category/" + item.id}
-          className="text-gray-500 w-max pb-3"
+          className={id==item?.id?activeColor:inactiveColor}
         >
           <p>{item.name}</p>
         </Link>
@@ -291,8 +298,9 @@ const SingleCat = ({ item }: any) => {
             {item?.cat?.map((sub: any, key: number) => (
               <div key={key} className="category-page">
                 <Link
+          style={id==sub?.id?{color:`${design.header_color}`}:{}}
                   href={"/category/" + sub?.id}
-                  className="text-sm text-gray-500"
+                  className={id==sub?.id?activesub:inactivesub}
                 >
                   <li className="w-max">{sub?.name}</li>
                 </Link>

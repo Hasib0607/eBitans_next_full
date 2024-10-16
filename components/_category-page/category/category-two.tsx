@@ -177,7 +177,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -251,10 +251,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -452,6 +452,12 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
 
 const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
   const [show, setShow] = useState(false);
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-medium`
+  const inactiveColor= "text-gray-500 flex-1 text-sm font-medium"
+  const activesub=`text-[${design?.header_color }] pb-2 text-sm`
+  const inactivesub=`text-gray-600 pb-2 text-sm`
   return (
     <>
       <div className="w-full flex py-3 lg:cursor-pointer">
@@ -462,12 +468,12 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
             setHasMore(true);
           }}
           href={"/category/" + item.id}
-          className={`flex-1 text-sm text-gray-900 font-medium ${
-            select === item.id ? "text-red-500" : "text-gray-800"
-          }`}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           {" "}
-          <p>{item.name}</p>
+          <p 
+          style={parseInt(id)===parseInt(item?.id)?{color:`${design.header_color}`}:{}}
+             >{item.name}</p>
         </Link>
         {item?.cat ? (
           <div className="px-4 h-full">
@@ -490,7 +496,7 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
         <>
           <div className="ml-8">
             {item?.cat?.map((sub: any, key: number) => (
-              <div className="py-2" key={key}>
+              <div  className="py-2" key={key}>
                 <Link
                   onClick={() => {
                     setSelect(sub.id);
@@ -499,10 +505,10 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
                   }}
                   href={"/category/" + sub?.id}
                 >
-                  <p
-                    className={`pb-2 text-sm ${
-                      select === sub.id ? "text-red-500" : "text-gray-500"
-                    }`}
+                  <p 
+          style={parseInt(id)===parseInt(sub?.id)?{color:`${design.header_color}`}:{}}
+             
+                    className={id==sub?.id?activesub:inactivesub}
                   >
                     {sub?.name}
                   </p>

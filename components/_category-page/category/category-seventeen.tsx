@@ -162,7 +162,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -236,12 +236,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
   return (
     <>
-      {load && showSk ? (
+      {(load&&showSk )? (
         <div>
           <Skeleton />
         </div>
@@ -327,17 +327,27 @@ const Filter = ({ paginate, onChange, setGrid }: any) => {
   );
 };
 
+
+
+
+
+
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1`
+  const inactiveColor= `flex-1 text-gray-900`
+  const activesub=`text-[${design?.header_color }] flex-1`
+  const inactivesub=`flex-1 text-gray-900`
   return (
     <>
       <div className="w-full flex px-4 py-1">
         <Link
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
           onClick={() => setSelect(item.id)}
           href={"/category/" + item.id}
-          className={`flex-1 ${
-            select === item.id ? "text-red-500" : "text-gray-900"
-          }`}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           {" "}
           <p>{item.name}</p>
@@ -370,9 +380,8 @@ const SingleCat = ({ item, select, setSelect }: any) => {
                 >
                   {" "}
                   <li
-                    className={`text-sm ${
-                      select === sub.id ? "text-red-500" : "text-gray-500"
-                    }`}
+          style={id==sub?.id?{color:`${design.header_color}`}:{}}
+                    className={id==sub?.id?activesub:inactivesub}
                   >
                     {sub?.name}
                   </li>

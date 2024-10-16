@@ -227,7 +227,6 @@ const YourOrders = ({
 
     // Convert FormData to an array and log each key-value pair
     Array.from(formData.entries()).forEach(([key, value]) => {
-      console.log(`${key}: ${value}`);
     });
 
     if (!userAddress && !data.address) {

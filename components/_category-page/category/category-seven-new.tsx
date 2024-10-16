@@ -47,12 +47,13 @@ const fetchData = async (
 
         const { colors, data } = subcategoryResponse;
 
-        console.log(data);
+        console.log(data)
         return { colors, data };
       } catch (err) {
         console.error(err);
       }
     }
+
 
     return { colors, data };
   } catch (error) {
@@ -175,7 +176,7 @@ const CategorySevenNew = () => {
               <h1 className="mb-10 text-2xl text-gray-700 font-medium">
                 Category
               </h1>
-              {/* starting to show categories */}
+            {/* starting to show categories */}
               {category?.map((item: any) => (
                 <div key={item.id} className="">
                   <SingleCat item={item} />
@@ -248,6 +249,12 @@ const Filter = ({ onChange }: any) => {
 
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(true);
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-medium`
+  const inactiveColor= "text-gray-500 flex-1 text-sm font-medium"
+  const activesub=`text-[${design?.header_color }] pb-2 text-sm`
+  const inactivesub="pb-2 text-sm text-gray-500"
 
   const styleCss = `
     .category-page .active{
@@ -261,9 +268,10 @@ const SingleCat = ({ item }: any) => {
       <div className="w-full flex py-3 lg:cursor-pointer category-page">
         <style>{styleCss}</style>
         <Link
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
           onClick={() => setShow(!show)}
           href={"/category/" + item.id}
-          className={`flex-1 text-sm font-medium `}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           <p>{item.name}</p>
         </Link>
@@ -290,7 +298,8 @@ const SingleCat = ({ item }: any) => {
             {item?.cat?.map((sub: any) => (
               <div key={sub.id} className="py-2 category-page">
                 <Link href={"/category/" + sub?.id}>
-                  <p className={`pb-2 text-sm `}>{sub?.name}</p>
+                  <p 
+          style={id==sub?.id?{color:`${design.header_color}`}:{}} className={id==sub?.id?activesub:inactivesub}>{sub?.name}</p>
                 </Link>
                 <div className="pr-4">
                   <div className="h-[1px] bg-gray-200 w-full"></div>

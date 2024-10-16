@@ -449,18 +449,30 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
 
 const SingleCat = ({ item, setSelect, select }: any) => {
   const [show, setShow] = useState(false);
+  const { id }: any = useParams<{ id: string }>();
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-medium`;
+  const inactiveColor = "text-gray-500 flex-1 text-sm font-medium";
+  const activesub = `text-[${design?.header_color}] pb-2 text-sm`;
+  const inactivesub = `text-gray-600 pb-2 text-sm`;
   return (
     <>
       <div className="w-full flex py-3 lg:cursor-pointer">
         <Link
           onClick={() => setSelect(item.id)}
           href={"/category/" + item.id}
-          className={`flex-1 text-sm font-medium ${
-            select === item.id ? "text-red-500" : "text-gray-800"
-          }`}
+          className={id == item?.id ? activeColor : inactiveColor}
         >
           {" "}
-          <p>{item.name}</p>
+          <p
+            style={
+              parseInt(id) === parseInt(item?.id)
+                ? { color: `${design.header_color}` }
+                : {}
+            }
+          >
+            {item.name}
+          </p>
         </Link>
         {item?.cat ? (
           <div className="px-4 h-full">
@@ -489,11 +501,9 @@ const SingleCat = ({ item, setSelect, select }: any) => {
                   href={"/category/" + sub?.id}
                 >
                   {" "}
-                  <p
-                    className={`pb-2 text-sm ${
-                      select === sub.id ? "text-red-500" : "text-gray-500"
-                    }`}
-                  >
+                  <p 
+          style={parseInt(id)===parseInt(sub?.id)?{color:`${design.header_color}`}:{}}
+              className={id == sub?.id ? activesub : inactivesub}>
                     {sub?.name}
                   </p>
                 </Link>

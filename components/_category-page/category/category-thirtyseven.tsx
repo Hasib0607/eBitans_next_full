@@ -12,9 +12,12 @@ import { ThreeDots } from "react-loader-spinner";
 import { motion } from "framer-motion";
 import Card64 from "@/components/card/card64";
 import Link from "next/link";
+
 const CategoryThirtySeven = () => {
   const { id: data }: any = useParams<{ id: string }>();
   const { category, module, design, subcategory } = useTheme();
+
+
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
   const [grid, setGrid] = useState("H");
   const [sort, setSort] = useState("");
@@ -29,13 +32,16 @@ const CategoryThirtySeven = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
+
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
+
   useEffect(() => {
     setPage(1);
     setHasMore(true);
     setDataId(data);
   }, [data]);
+
   const styleCss = `
     .btn-card:hover {
         background:${design?.header_color};
@@ -43,7 +49,7 @@ const CategoryThirtySeven = () => {
         }
     .text-hover:hover {
         color:  ${design?.header_color};
-        }
+        } 
 `;
   const temp = subcategory?.find(
     (c: any) => parseInt(c?.id) === parseInt(data?.id)
@@ -51,6 +57,7 @@ const CategoryThirtySeven = () => {
   const subCat = subcategory?.filter(
     (c: any) => parseInt(c?.parent) === parseInt(temp ? temp?.parent : data?.id)
   );
+
   return (
     <div className="bg-[#F1F9DD]">
       <style>{styleCss}</style>
@@ -145,7 +152,9 @@ const CategoryThirtySeven = () => {
     </div>
   );
 };
+
 export default CategoryThirtySeven;
+
 const Product = ({
   products,
   sort,
@@ -164,12 +173,13 @@ const Product = ({
   setHasMore,
   hasMore,
   paginate,
-  id,
+  id
 }: any) => {
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
+
   useEffect(() => {
     setLoad(true);
     fetchData();
@@ -187,6 +197,7 @@ const Product = ({
     activeColor,
     val,
   ]);
+
   const fetchData = async () => {
     try {
       const pageQuery = page
@@ -197,9 +208,11 @@ const Product = ({
       const colorFilter = activeColor ? encodeURIComponent(activeColor) : "";
       const priceFilter = Number(val) !== 0 ? Number(val) : "";
       const apiUrl = `getcatproducts${pageQuery}&filter=${sort}&priceFilter=${priceFilter}&colorFilter=${colorFilter}`;
+
       // Get the data from the API
       let response = await httpReq.post(apiUrl, { id });
       let { colors, data, error } = response;
+
       if (data?.data?.length == 0) {
         // If error, try fetching subcategory products
         response = await httpReq.post(
@@ -208,9 +221,11 @@ const Product = ({
         );
         ({ colors, data, error } = response);
       }
+
       if (data?.data?.length > 0) {
         setHasMore(true);
         setColors(colors);
+
         if (!shop_load) {
           if (data.current_page === 1) {
             setProducts(data.data);
@@ -221,6 +236,7 @@ const Product = ({
         } else {
           setProducts(data.data);
         }
+
         setPaginate(data);
         setLoad(false);
         setError(null);
@@ -234,15 +250,17 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
-  if (load && showSk) {
+
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
       </div>
     );
   }
+
   if (error) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
@@ -265,7 +283,7 @@ const Product = ({
                   height="80"
                   width="80"
                   radius="9"
-                  color="#F1593A"
+                  color="#f1593a"
                   ariaLabel="three-dots-loading"
                   wrapperStyle={{}}
                   visible={true}
@@ -311,6 +329,7 @@ const Product = ({
     </>
   );
 };
+
 const Location = ({ shops, cat }: any) => {
   return (
     <div className="w-full text-[#414141] bg-white flex gap-1 items-center justify-start py-2 text-sm px-4">
@@ -319,10 +338,12 @@ const Location = ({ shops, cat }: any) => {
     </div>
   );
 };
+
 const Filter = ({ paginate, onChange, shops, cat }: any) => {
   return (
     <div className="flex flex-wrap justify-between items-center mb-8 ml-auto">
-      <div className=" md:block hidden bg-transparent px-4 py-2"></div>
+      <div className=" md:block hidden bg-transparent px-4 py-2">
+      </div>
       {/* Short by  */}
       <div className="">
         <select
@@ -339,18 +360,27 @@ const Filter = ({ paginate, onChange, shops, cat }: any) => {
     </div>
   );
 };
+
 const SubCat = ({ item }: any) => {
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] text-sm`
+  const inactiveColor= "text-gray-500 text-sm"
   return (
     <>
       <Link href={"/category/" + item?.id}>
         <div className="py-2 px-5 text-center min-w-[250px] bg-white">
-          <p className={`text-sm text-gray-600`}>{item?.name}</p>
+          <p className={id==item?.id?activeColor:inactiveColor}>{item?.name}</p>
         </div>
       </Link>
     </>
   );
 };
 const SingleCat = ({ item }: any) => {
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activesub=`text-[${design?.header_color }] flex-1 text-sm text-hover`
+  const inactivesub=`text-gray-600 flex-1 text-sm text-hover`
   const styleCss = `
     .category-page .active{
         color:#f1593a;
@@ -367,9 +397,11 @@ const SingleCat = ({ item }: any) => {
         <style>{styleCss}</style>
         <Link
           href={"/category/" + item?.id}
-          className={`flex-1 text-sm text-hover text-gray-900`}
+          className={id==item?.id?activesub:inactivesub}
         >
-          <p>{item.name}</p>
+          <p 
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
+            >{item.name}</p>
         </Link>
       </div>
     </>

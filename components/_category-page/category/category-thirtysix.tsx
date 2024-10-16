@@ -176,7 +176,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -250,10 +250,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -365,6 +365,12 @@ const Filter = ({ paginate, onChange, shops, cat }: any) => {
 };
 
 const SingleCat = ({ item }: any) => {
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm text-hover`
+  const inactiveColor= "text-gray-500 flex-1 text-sm text-hover"
+  const activesub=`text-[${design?.header_color }] text-sm`
+  const inactivesub=`text-gray-600 text-sm`
   const styleCss = `
     .category-page .active{
         color:#f1593a;
@@ -381,16 +387,18 @@ const SingleCat = ({ item }: any) => {
         <style>{styleCss}</style>
         <Link
           href={"/category/" + item?.id}
-          className={`flex-1 text-sm text-hover text-gray-900`}
+          className={id==item?.id?activeColor:inactiveColor}
         >
-          <p>{item.name}</p>
+          <p
+          style={parseInt(id)===item?.id?{color:`${design.header_color}`}:{}}
+            >{item.name}</p>
         </Link>
       </div>
       <div className="ml-4">
         {item?.cat?.map((sub: any, key: number) => (
           <div className="category-page-two" key={key}>
             <Link href={"/category/" + sub?.id}>
-              <p className={`text-sm text-gray-600`}>{sub?.name}</p>
+              <p className={id==sub?.id?activesub:inactivesub}>{sub?.name}</p>
             </Link>
           </div>
         ))}

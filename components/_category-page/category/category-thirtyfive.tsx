@@ -173,7 +173,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -248,10 +248,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -363,6 +363,12 @@ const Filter = ({ paginate, onChange, shops, cat }: any) => {
 };
 
 const SingleCat = ({ item }: any) => {
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm text-hover`
+  const inactiveColor= `flex-1 text-sm text-hover text-gray-900`
+  const activesub=`text-[${design?.header_color }] text-sm`
+  const inactivesub=`text-sm text-gray-600`
   const styleCss = `
     .category-page .active{
         color:#f1593a;
@@ -378,8 +384,9 @@ const SingleCat = ({ item }: any) => {
       <div className="w-full flex py-2 category-page">
         <style>{styleCss}</style>
         <Link
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
           href={"/category/" + item?.id}
-          className={`flex-1 text-sm text-hover text-gray-900`}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           <p>{item.name}</p>
         </Link>
@@ -388,7 +395,8 @@ const SingleCat = ({ item }: any) => {
         {item?.cat?.map((sub: any, key: number) => (
           <div className="category-page-two" key={key}>
             <Link href={"/category/" + sub?.id}>
-              <p className={`text-sm text-gray-600`}>{sub?.name}</p>
+              <p
+          style={id==sub?.id?{color:`${design.header_color}`}:{}} className={id==sub?.id?activesub:inactivesub}>{sub?.name}</p>
             </Link>
           </div>
         ))}

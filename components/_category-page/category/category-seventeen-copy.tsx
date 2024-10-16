@@ -1,26 +1,37 @@
 "use client";
-import useTheme from "@/hooks/use-theme";
-import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
-
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { IoIosArrowForward } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
+import { useParams } from "next/navigation";
+import useTheme from "@/hooks/use-theme";
+import FilterByColor from "../../filter-by-color";
+import FilterByPrice from "../../filter-by-price";
 import Pagination from "./pagination";
-import Skeleton from "@/components/loader/skeleton";
 import httpReq from "@/utils/http/axios/http.service";
-import Card44 from "@/components/card/card44";
+import Skeleton from "@/components/loader/skeleton";
+import Card31 from "@/components/card/card31";
 import Link from "next/link";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import "./category-seventeen.css";
 
-const CategoryTwenty = () => {
+const CategorySeventeen = () => {
   const { id: data }: any = useParams<{ id: string }>();
+
   const { category, module } = useTheme();
 
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
 
+  const [grid, setGrid] = useState("H");
+  const [sort, setSort] = useState("");
   const [paginate, setPaginate] = useState({});
   const [products, setProducts] = useState([]);
+  const [shops, setShops] = useState<any>({});
+  const [cat, setCat] = useState<any>({});
   const [select, setSelect] = useState(parseInt(data?.id));
+  const [val, setVal] = useState(0);
+  const [colors, setColors] = useState(null);
+  const [activeColor, setActiveColor] = useState(null);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
@@ -35,30 +46,82 @@ const CategoryTwenty = () => {
   }, [data]);
 
   return (
-    <div>
-      <div className="sm:container px-5 sm:py-10 py-5 ">
-        <div className="">
-          <div className="mt-8 hidden md:flex border-b-2">
-            <div className="flex gap-x-10 flex-wrap gap-y-2">
+    <>
+      <div className="categorySeventeenBackgroundColor">
+        <div className="pt-16 w-full flex flex-col gap-3 justify-center items-center">
+          <div>
+            <h1 className="text-5xl font-medium text-white">Products</h1>
+          </div>
+          <div className="flex gap-1 items-center">
+            <p className="text-white">Home</p>
+            <IoIosArrowForward className="text-xs mt-1 text-white" />
+            <p className="font-medium text-white">{shops?.name || cat?.name}</p>
+          </div>
+        </div>
+      </div>
+      <div className="container px-5 xl:px-80 mt-8">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          <div className="hidden md:block col-span-3">
+            <div className="w-full">
+              <h3 className="font-semibold text-[#252525] text-lg mx-4 border-b-2 border-[#206469] pb-2 mb-3">
+                Categories
+              </h3>
               {category?.map((item: any) => (
                 <SingleCat
-                  item={item}
                   key={item?.id}
+                  item={item}
                   setSelect={setSelect}
                   select={select}
                 />
               ))}
             </div>
+            <div className="my-6 p-4">
+              <FilterByColor
+                id={data?.id}
+                setActiveColor={setActiveColor}
+                colors={colors}
+                activeColor={activeColor}
+                shop_load={shop_load}
+                setPage={setPage}
+                setHasMore={setHasMore}
+              />
+            </div>
+            <div className="p-4">
+              <FilterByPrice
+                id={data?.id}
+                setVal={setVal}
+                val={val}
+                setPage={setPage}
+                setHasMore={setHasMore}
+              />
+            </div>
           </div>
-          <div className="mt-10">
+          <div className="col-span-1 lg:col-span-9 flex flex-col min-h-[100vh-200px] h-full">
+            {/* <Location category={shops} cat={cat} /> */}
+            <Filter
+              onChange={(e: any) => {
+                setSort(e.target.value);
+                setPage(1);
+                setHasMore(true);
+              }}
+              setGrid={setGrid}
+              paginate={paginate}
+            />
             <div className="flex-1">
               <Product
                 id={data}
                 dataId={dataId}
                 page={pageShop}
+                sort={sort}
+                grid={grid}
+                setCat={setCat}
                 products={products}
+                setShops={setShops}
                 setProducts={setProducts}
                 setPaginate={setPaginate}
+                setColors={setColors}
+                activeColor={activeColor}
+                val={val}
                 setPage={setPage}
                 shop_load={shop_load}
                 setHasMore={setHasMore}
@@ -73,11 +136,12 @@ const CategoryTwenty = () => {
           </div>
         </div>
       </div>
-    </div>
+      <div className="categorySeventeenBottomBackGroundImage absolute top-44"></div>
+    </>
   );
 };
 
-export default CategoryTwenty;
+export default CategorySeventeen;
 
 const Product = ({
   products,
@@ -88,6 +152,9 @@ const Product = ({
   setShops,
   dataId,
   setCat,
+  setColors,
+  activeColor,
+  val,
   setPage,
   shop_load,
   setHasMore,
@@ -112,6 +179,9 @@ const Product = ({
     setShops,
     sort,
     subcategory,
+    setColors,
+    activeColor,
+    val,
   ]);
 
   const fetchData = async () => {
@@ -121,9 +191,9 @@ const Product = ({
           ? page
           : `?page=${page}`
         : `?page=1`;
-      // const colorFilter = activeColor ? encodeURIComponent(activeColor) : "";
-      // const priceFilter = Number(val) !== 0 ? Number(val) : "";
-      const apiUrl = `getcatproducts${pageQuery}&filter=${sort}`;
+      const colorFilter = activeColor ? encodeURIComponent(activeColor) : "";
+      const priceFilter = Number(val) !== 0 ? Number(val) : "";
+      const apiUrl = `getcatproducts${pageQuery}&filter=${sort}&priceFilter=${priceFilter}&colorFilter=${colorFilter}`;
 
       // Get the data from the API
       let response = await httpReq.post(apiUrl, { id });
@@ -140,6 +210,7 @@ const Product = ({
 
       if (data?.data?.length > 0) {
         setHasMore(true);
+        setColors(colors);
 
         if (!shop_load) {
           if (data.current_page === 1) {
@@ -202,9 +273,9 @@ const Product = ({
                   </p>
                 }
               >
-                <div className="grid sm:grid-cols-2 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-8">
+                <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-3 md:gap-3 xl:grid-cols-3 grid-cols-2 gap-2">
                   {products?.map((product: any) => (
-                    <Card44 key={product.id} item={product} />
+                    <Card31 key={product.id} item={product} />
                   ))}
                   {error && (
                     <div className="text-center text-4xl font-bold text-gray-400 flex justify-center items-center col-span-4 mt-10">
@@ -215,9 +286,9 @@ const Product = ({
               </InfiniteScroll>
             </div>
           ) : (
-            <div className="grid sm:grid-cols-2 xl:grid-cols-3 lg:grid-cols-3 md:grid-cols-2 gap-8">
+            <div className="grid lg:grid-cols-3 lg:gap-5 md:grid-cols-3 md:gap-3 xl:grid-cols-3 grid-cols-2 gap-2">
               {products?.map((product: any) => (
-                <Card44 key={product.id} item={product} />
+                <Card31 key={product.id} item={product} />
               ))}
               {error && (
                 <div className="text-center text-4xl font-bold text-gray-400 flex justify-center items-center col-span-4 mt-10">
@@ -232,71 +303,85 @@ const Product = ({
   );
 };
 
+const Filter = ({ paginate, onChange, setGrid }: any) => {
+  return (
+    <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap gap-y-2 justify-between items-center">
+      {/* <div className="text-gray-500 font-thin">
+        There are {paginate?.total} products{" "}
+      </div> */}
+      {/* Short by  */}
+      <div className="flex items-center gap-2 text-sm max-w-md w-full">
+        <label className="max-w-fit"> Sort by:</label>
+        <select
+          onChange={onChange}
+          className="h-9 border border-gray-200 rounded  outline-0 ring-0 focus:ring-0 text-xs flex-1 bg-white"
+        >
+          <option>Select One</option>
+          <option value="az">A - Z</option>
+          <option value="za">Z - A</option>
+          <option value="lh">Low - High</option>
+          <option value="hl">High - Low</option>
+        </select>
+      </div>
+    </div>
+  );
+};
+
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>();
   const { design } = useTheme();
-  const activeColor = `text-[${design?.header_color}] w-max`;
-  const inactiveColor = "text-gray-500 w-max";
-  const activesub = `text-[${design?.header_color}] text-sm w-max`;
-  const inactivesub = `text-gray-600 text-sm w-max`;
+  const categoryFromParam = useParams<{ id: string }>();
+
+  const activeColor = `text-[${design.header_color}]`;
+
   return (
-    <div onMouseLeave={() => setShow(false)} className="relative">
-      <div
-        onMouseEnter={() => setShow(true)}
-        className="w-full flex items-center gap-x-2 relative pb-3"
-      >
+    <>
+      <div className="w-full flex px-4 py-1">
         <Link
           onClick={() => setSelect(item.id)}
           href={"/category/" + item.id}
-          className={id == item?.id ? activeColor : inactiveColor}
+          className={`flex-1 ${
+            categoryFromParam?.id === item?.id
+              ? "text-red-500"
+              : "text-gray-900"
+          }`}
         >
           {" "}
-          <p
-            style={
-              parseInt(id) === parseInt(item?.id)
-                ? { color: `${design.header_color}` }
-                : {}
-            }
-          >
-            {item.name}
-          </p>{" "}
-          <p
-            className={`${
-              select === item.id ? "block" : "hidden"
-            } h-[2px] w-full bg-black absolute bottom-0 left-0`}
-          ></p>
+          <p>{item.name}</p>
         </Link>
         {item?.cat ? (
-          <div className="lg:cursor-pointer">
+          <div className="px-4 h-full">
             {show ? (
-              <MdKeyboardArrowUp className="text-xl text-gray-800" />
+              <MinusIcon
+                onClick={() => setShow(!show)}
+                className="h-4 w-4 text-gray-800"
+              />
             ) : (
-              <MdKeyboardArrowDown className="text-xl text-gray-800" />
+              <PlusIcon
+                onClick={() => setShow(!show)}
+                className="h-4 w-4 text-gray-800"
+              />
             )}
           </div>
         ) : null}
       </div>
 
-      {show && item?.cat && (
+      {show && (
         <>
-          <div
-            onMouseLeave={() => setShow(false)}
-            className="absolute top-8 left-0 z-[8] bg-white px-5 py-2"
-          >
-            {item?.cat?.map((sub: any, key: number) => (
+          <div className="ml-8">
+            {item?.cat?.map((sub: any, key: any) => (
               <div className="" key={key}>
                 <Link
-                  onClick={() => setSelect(item.id)}
+                  onClick={() => setSelect(sub.id)}
                   href={"/category/" + sub?.id}
                 >
+                  {" "}
                   <li
-                    style={
-                      parseInt(id) === parseInt(sub?.id)
-                        ? { color: `${design.header_color}` }
-                        : {}
-                    }
-                    className={id == sub?.id ? activesub : inactivesub}
+                    className={`text-sm ${
+                      categoryFromParam?.id === sub?.id
+                        ? "text-red-500"
+                        : "text-gray-500"
+                    }`}
                   >
                     {sub?.name}
                   </li>
@@ -306,6 +391,6 @@ const SingleCat = ({ item, select, setSelect }: any) => {
           </div>
         </>
       )}
-    </div>
+    </>
   );
 };

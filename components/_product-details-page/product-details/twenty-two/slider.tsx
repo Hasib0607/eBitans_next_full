@@ -74,10 +74,8 @@ export const HSlider = ({ product }: any) => {
     // vertical: false,
     // verticalSwiping: true,
     beforeChange: function (currentSlide: any, nextSlide: any) {
-      console.log("before change", currentSlide, nextSlide);
     },
     afterChange: function (currentSlide: any) {
-      console.log("after change", currentSlide);
     },
   };
 
