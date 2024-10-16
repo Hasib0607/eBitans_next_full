@@ -138,6 +138,10 @@ const heroComponents: any = {
 
 const Hero = ({ theme, slider, design }: any) => {
   const SelectedHeroComponent = heroComponents[theme];
-  return <SelectedHeroComponent slider={slider} design={design} />;
+  return SelectedHeroComponent ? (
+    <SelectedHeroComponent slider={slider} design={design} />
+  ) : (
+    <div className="mt-10 font-bold">Component not found</div>
+  );
 };
 export default Hero;

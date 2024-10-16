@@ -1,4 +1,4 @@
-"úse client";
+"use client";
 import Slider1 from "@/components/slider/slider-one";
 import { iconImg } from "@/site-settings/siteUrl";
 import useHeaderSettings from "@/utils/query/use-header-settings";

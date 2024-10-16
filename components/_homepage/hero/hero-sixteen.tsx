@@ -1,5 +1,4 @@
 "use client";
-
 import { Swiper, SwiperSlide } from "swiper/react";
 import {
   Pagination,
@@ -9,7 +8,6 @@ import {
   EffectCreative,
   EffectFade,
 } from "swiper/modules";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/pagination";

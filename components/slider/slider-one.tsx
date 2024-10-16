@@ -37,6 +37,7 @@ const Slider1 = ({
 }: any) => {
   return (
     <Swiper
+      loop={true}
       autoplay={{
         delay: 3000,
       }}
