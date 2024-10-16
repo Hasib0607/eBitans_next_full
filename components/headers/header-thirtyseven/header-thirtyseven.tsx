@@ -271,7 +271,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
       <div
         className={` ${
           openMenu ? "navbarThirtyEight openMenu" : "navbarThirtyEight"
-        } bg-color text-white lg:flex items-center hidden shadow-[0px_1px_10px_1px_rgba(0,0,0,0.1)] z-[1] relative`}
+        } bg-color lg:flex items-center hidden shadow-[0px_1px_10px_1px_rgba(0,0,0,0.1)] z-[1] relative`}
       >
         <div className="sm:container px-5 flex justify-center gap-x-5">
           {category?.slice(0, 7).map((item: any) => (

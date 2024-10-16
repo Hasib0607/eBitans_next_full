@@ -1,3 +1,4 @@
+
 import dynamic from "next/dynamic";
 
 const heroComponents: any = {
@@ -137,6 +138,9 @@ const heroComponents: any = {
 
 const Hero = ({ theme, slider, design }: any) => {
   const SelectedHeroComponent = heroComponents[theme];
+  if (!SelectedHeroComponent) {
+    return "";
+  }
   return <SelectedHeroComponent slider={slider} design={design} />;
 };
 export default Hero;

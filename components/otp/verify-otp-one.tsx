@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
+import { toast } from "react-toastify";
 // import useTheme from '../../../@/hooks/useTheme';
 // import { token } from '../../../../services/AxiosInstance';
 
@@ -97,8 +98,8 @@ const VerifyOtpOne = () => {
           setLoading(false);
         }
         if (verify) {
-          // toast(verify, { type: "success" });
-          window.location.replace("/profile");
+          toast(verify, { type: "success" });
+          router.push("/profile");
           localStorage.removeItem("authType");
           // window.location.reload()
         } else {
@@ -108,8 +109,8 @@ const VerifyOtpOne = () => {
         }
       })
       .catch((error: any) => {
-        // console.log(error,"error");
-        // toast("Credential Doesn't Match", { type: "error" });
+        console.log(error,"error");
+        toast("Credential Doesn't Match", { type: "error" });
         setLoading(false);
       });
   };
