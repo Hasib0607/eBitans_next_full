@@ -1,6 +1,7 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
 import { login } from "@/redux/features/auth.slice";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 import httpReq from "@/utils/http/axios/http.service";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -19,15 +20,18 @@ const LoginOne = () => {
 
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const [activeModule, setActiveModule] = useState(false);
 
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
   const { user } = useSelector((state: any) => state.auth);
 
-  // useEffect(() => {
-  //   dispatch(clearMessage());
-  // }, [dispatch]);
+  useEffect(() => {
+    axiosInstance.get("/get-module/120?name="+ store.url).then((response) => {
+      setActiveModule(response?.data?.status || false);
+    });
+  }, [store]);
 
   const {
     register,
@@ -139,7 +143,7 @@ const LoginOne = () => {
           )}
         </div>
 
-        {store?.auth_type !== "EasyOrder" && (
+        {(store?.auth_type !== "EasyOrder" || activeModule) && (
           <p className="text-base font-medium text-[#5A5A5A]">
             Don&apos;t have any account?
             <Link

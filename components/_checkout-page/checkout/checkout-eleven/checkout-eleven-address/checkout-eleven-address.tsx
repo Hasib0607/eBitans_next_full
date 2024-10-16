@@ -115,14 +115,14 @@ const CheckOutElevenAddress = ({
                   onChange={(e) => setUserName(e.target.value)}
                   type="text"
                   placeholder="Name"
-                  className="border p-2 border-gray-400 focus:outline-none focus:border-blue-500 required rounded-lg focus:ring-0 p-2 text-lg shadow-sm"
+                  className="border border-gray-400 focus:outline-none focus:border-blue-500 required rounded-lg focus:ring-0 p-2 text-lg shadow-sm"
                 />
 
                 <input
                   onChange={handleChange}
                   type="number"
                   placeholder="Phone"
-                  className="border p-2 border-gray-400 focus:outline-none focus:border p-2  required: focus:border-gray-400 rounded focus:ring-0"
+                  className="border border-gray-400 focus:outline-none focus:border p-2  required: focus:border-gray-400 rounded focus:ring-0"
                 />
                 {/* for easy order if user provide a wrong number or wrong credential then show error  */}
                 <p className="text-sm text-rose-500">{userPhoneError}</p>
@@ -130,7 +130,7 @@ const CheckOutElevenAddress = ({
                   rows={6}
                   onChange={(e) => setUserAddress(e.target.value)}
                   placeholder="Address....."
-                  className="border p-2 border-gray-400 p-1 focus:outline-none focus:border required focus:border-gray-400 rounded focus:ring-0"
+                  className="border p-2 border-gray-400 focus:outline-none focus:border required focus:border-gray-400 rounded focus:ring-0"
                 />
               </div>
             ) : (
