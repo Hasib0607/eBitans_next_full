@@ -107,7 +107,7 @@ const Product = ({
   hasMore,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -178,12 +178,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
   return (
     <>
-      {load && showSk ? (
+      {(load&&showSk )? (
         <div>
           <Skeleton />
         </div>
@@ -261,21 +261,26 @@ const Filter = ({ paginate, onChange }: any) => {
           <option value="hl">High - Low</option>
         </select>
       </div>
-      <div className="px-4 py-2 text-sm w-full">
-        <p className="w-max">{paginate ? paginate?.total : 0} products </p>
-      </div>
     </div>
   );
 };
 
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>();
-  const { design } = useTheme();
-  const activeColor = `text-[${design?.header_color}] w-max text-sm`;
-  const inactiveColor = "text-gray-500 w-max text-sm";
-  const activesub = `text-[${design?.header_color}] text-xs`;
-  const inactivesub = `text-gray-600 text-xs`;
+  const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] w-max text-sm`
+  const inactiveColor= "text-gray-500 w-max text-sm"
+  const activesub=`text-[${design?.header_color }] text-xs`
+  const inactivesub=`text-gray-600 text-xs`
 
   const styleCss = `
     .category-page .active{
@@ -292,9 +297,10 @@ const SingleCat = ({ item }: any) => {
         className="w-full flex items-center gap-x-2 relative category-page"
       >
         <Link
-          style={id == item?.id ? { color: `${design.header_color}` } : {}}
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
+            
           href={"/category/" + item.id}
-          className={id == item?.id ? activeColor : inactiveColor}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           <p>{item.name}</p>
         </Link>
@@ -319,16 +325,11 @@ const SingleCat = ({ item }: any) => {
               <div className="category-page" key={key}>
                 <Link
                   href={"/category/" + sub?.id}
-                  className={id == sub?.id ? activesub : inactivesub}
+                  className={id==sub?.id?activesub:inactivesub}
                 >
-                  <li
-                    style={
-                      id == sub?.id ? { color: `${design.header_color}` } : {}
-                    }
-                    className="w-max"
-                  >
-                    {sub?.name}
-                  </li>
+                  <li 
+          style={id==sub?.id?{color:`${design.header_color}`}:{}}
+            className="w-max">{sub?.name}</li>
                 </Link>
               </div>
             ))}

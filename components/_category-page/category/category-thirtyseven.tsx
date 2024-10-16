@@ -17,6 +17,7 @@ const CategoryThirtySeven = () => {
   const { id: data }: any = useParams<{ id: string }>();
   const { category, module, design, subcategory } = useTheme();
 
+
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
   const [grid, setGrid] = useState("H");
   const [sort, setSort] = useState("");
@@ -172,9 +173,9 @@ const Product = ({
   setHasMore,
   hasMore,
   paginate,
-  id,
+  id
 }: any) => {
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -249,10 +250,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -330,10 +331,28 @@ const Product = ({
 };
 
 const Location = ({ shops, cat }: any) => {
+  const [activecat,setActivecat]=useState(null)
+  const { id: data }: any = useParams<{ id: string }>();
+  const {category}= useTheme();
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+        if(category[i]?.cat){
+          for(let j=0;j<category[i].cat.length;j++){
+            if(category[i]?.cat[j]?.id==data){
+              setActivecat(category[i]?.cat[j]?.name)
+            }
+          }
+        }
+        if(category[i]?.id==data){
+          setActivecat(category[i].name)
+        }
+      }
+  },[category])
+  
   return (
     <div className="w-full text-[#414141] bg-white flex gap-1 items-center justify-start py-2 text-sm px-4">
       <p>Home </p>
-      <p> / Shop / {shops?.name || cat?.name}</p>
+      <p> / Shop / {activecat}</p>
     </div>
   );
 };
@@ -341,7 +360,8 @@ const Location = ({ shops, cat }: any) => {
 const Filter = ({ paginate, onChange, shops, cat }: any) => {
   return (
     <div className="flex flex-wrap justify-between items-center mb-8 ml-auto">
-      <div className=" md:block hidden bg-transparent px-4 py-2"></div>
+      <div className=" md:block hidden bg-transparent px-4 py-2">
+      </div>
       {/* Short by  */}
       <div className="">
         <select
@@ -360,27 +380,25 @@ const Filter = ({ paginate, onChange, shops, cat }: any) => {
 };
 
 const SubCat = ({ item }: any) => {
-  const { id }: any = useParams<{ id: string }>();
-  const { design } = useTheme();
-  const activeColor = `text-[${design?.header_color}] text-sm`;
-  const inactiveColor = "text-gray-500 text-sm";
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] text-sm`
+  const inactiveColor= "text-gray-500 text-sm"
   return (
     <>
       <Link href={"/category/" + item?.id}>
         <div className="py-2 px-5 text-center min-w-[250px] bg-white">
-          <p className={id == item?.id ? activeColor : inactiveColor}>
-            {item?.name}
-          </p>
+          <p className={id==item?.id?activeColor:inactiveColor}>{item?.name}</p>
         </div>
       </Link>
     </>
   );
 };
 const SingleCat = ({ item }: any) => {
-  const { id }: any = useParams<{ id: string }>();
-  const { design } = useTheme();
-  const activesub = `text-[${design?.header_color}] flex-1 text-sm text-hover`;
-  const inactivesub = `text-gray-600 flex-1 text-sm text-hover`;
+  const { id }: any = useParams<{ id: string }>()
+  const {design}=useTheme()
+  const activesub=`text-[${design?.header_color }] flex-1 text-sm text-hover`
+  const inactivesub=`text-gray-600 flex-1 text-sm text-hover`
   const styleCss = `
     .category-page .active{
         color:#f1593a;
@@ -397,11 +415,11 @@ const SingleCat = ({ item }: any) => {
         <style>{styleCss}</style>
         <Link
           href={"/category/" + item?.id}
-          className={id == item?.id ? activesub : inactivesub}
+          className={id==item?.id?activesub:inactivesub}
         >
-          <p style={id == item?.id ? { color: `${design.header_color}` } : {}}>
-            {item.name}
-          </p>
+          <p 
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
+            >{item.name}</p>
         </Link>
       </div>
     </>

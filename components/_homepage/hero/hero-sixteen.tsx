@@ -48,9 +48,9 @@ const HeroSixteen = ({ slider, design }: any) => {
         border:transparent;
         transform: scale(1.05);
     }
-
-
       `;
+
+      
   return (
     <div className="group z-0 relative">
       <style>{styleCss}</style>

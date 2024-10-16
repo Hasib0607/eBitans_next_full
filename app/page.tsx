@@ -1,11 +1,11 @@
 import HomepageLoad from "@/components/gtm/homepage-load";
-import { Search } from "@/components/headers/header-one/header-down";
+// import { Search } from "@/components/headers/header-one/header-down";
 import HomePage from "@/components/home";
 import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
 import { getSubdomainName } from "@/lib";
 import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
-import AllMobileBottomMenu from "./mobileBottomMenu";
+// import AllMobileBottomMenu from "./mobileBottomMenu";
 // import MobileNavThree from "./mobileNavs/three/mobileNavThree";
 
 export async function generateMetadata() {
@@ -18,7 +18,7 @@ export async function generateMetadata() {
       icons: { icon: imgUrl + headersetting?.favicon },
     };
   } catch (error) {
-    console.error("Error generating metadata:", error);
+    // console.error("Error generating metadata:", error);
     return {
       title: "Home",
     };

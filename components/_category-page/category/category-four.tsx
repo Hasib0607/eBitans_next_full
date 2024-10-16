@@ -25,8 +25,9 @@ const CategoryFour = () => {
   const [paginate, setPaginate] = useState({});
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [dataId, setDataId] = useState(null);
+  const [activecat,setActivecat]=useState(null)
 
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
@@ -103,10 +104,22 @@ const CategoryFour = () => {
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    for(let i=0;i<category.length;i++){
+      if(category[i]?.cat){
+        for(let j=0;j<category[i].cat.length;j++){
+          if(category[i]?.cat[j]?.id==data){
+            setActivecat(category[i]?.cat[j]?.name)
+          }
+        }
+      }
+      if(category[i]?.id==data){
+        setActivecat(category[i].name)
+      }
+    }
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -132,9 +145,11 @@ const CategoryFour = () => {
           <div className="sm:container px-5 sm:py-10 py-5">
             <div className="text-sm breadcrumbs">
               <ul>
-                <li>
+              <li>
                   <a href="/">Categories</a>
                 </li>
+                {activecat&&<li>{activecat}
+                </li>}
 
                 <li className="font-bold tracking-wider ">{shops?.name}</li>
               </ul>

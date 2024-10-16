@@ -46,10 +46,9 @@ const heroComponents: any = {
   sixteen: dynamic(() => import("@/components/_homepage/hero/hero-sixteen"), {
     ssr: false,
   }),
-  seventeen: dynamic(
-    () => import("@/components/_homepage/hero/hero-seventeen"),
-    { ssr: false }
-  ),
+  seventeen: dynamic(() => import("@/components/_homepage/hero/hero-seventeen"), {
+    ssr: false,
+  }),
   eighteen: dynamic(() => import("@/components/_homepage/hero/hero-eighteen"), {
     ssr: false,
   }),

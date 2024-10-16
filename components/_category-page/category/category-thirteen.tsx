@@ -146,7 +146,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -221,10 +221,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -347,11 +347,35 @@ const Product = ({
   );
 };
 
-const Location = ({ categoy }: any) => {
+const Location = ({  }: any) => {
+ const [activecat,setActivecat]=useState(null)
+ const {category}=useTheme();
+
+ const { id }: any = useParams<{ id: string }>();
+  
+
+
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+      if(category[i]?.cat){
+        for(let j=0;j<category[i].cat.length;j++){
+          if(category[i]?.cat[j]?.id==id){
+            setActivecat(category[i]?.cat[j]?.name)
+          }
+        }
+      }
+      if(category[i]?.id==id){
+        setActivecat(category[i].name)
+      }
+    }
+  },[category])
+
+
+
   return (
     <div className="w-full text-[#414141] bg-[#f1f1f1] flex items-center justify-start py-2 text-[24px] font-thin px-2">
       <p>Home</p>
-      <p>/ {categoy?.name}</p>
+      <p>/ {activecat}</p>
     </div>
   );
 };
@@ -390,24 +414,32 @@ const Filter = ({ paginate, onChange, setGrid }: any) => {
 
 const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>();
-  const { design } = useTheme();
-  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-thin`;
-  const inactiveColor = `text-gray-900 flex-1 text-sm font-thin`;
-  const activesub = `text-[${design?.header_color}] pb-2 text-sm font-thin`;
-  const inactivesub = `pb-2 text-sm font-thin`;
+  const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-thin`
+  const inactiveColor= `text-gray-900 flex-1 text-sm font-thin`
+  const activesub=`text-[${design?.header_color }] pb-2 text-sm font-thin`
+  const inactivesub=`pb-2 text-sm font-thin`
   return (
     <>
       <div className="w-full flex px-4 py-3">
         <Link
-          style={id == item?.id ? { color: `${design.header_color}` } : {}}
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
           onClick={() => {
             setSelect(item.id);
             setPage(1);
             setHasMore(true);
           }}
           href={"/category/" + item.id}
-          className={id == item?.id ? activeColor : inactiveColor}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           {" "}
           <p>{item.name}</p>
@@ -445,10 +477,8 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
                   href={"/category/" + sub?.id}
                 >
                   <p
-                    style={
-                      id == sub?.id ? { color: `${design.header_color}` } : {}
-                    }
-                    className={id == sub?.id ? activesub : inactivesub}
+          style={id==sub?.id?{color:`${design.header_color}`}:{}}
+                    className={id==sub?.id?activesub:inactivesub}
                   >
                     {sub?.name}
                   </p>

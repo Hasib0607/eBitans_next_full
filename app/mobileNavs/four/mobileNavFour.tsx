@@ -47,7 +47,7 @@ const MobileNavFour = () => {
           className="rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear flex flex-col justify-center items-center py-2"
         >
           <div className="sm:h-5 h-4">{gridIcon}</div>
-          <h3 className="font-semibold sm:text-base text-xs">Category</h3>
+          <h3 className="font-semibold sm:text-base text-xs mt-2">Category</h3>
         </div>
         <div
           onClick={() => {
@@ -57,14 +57,14 @@ const MobileNavFour = () => {
           className="rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear flex flex-col justify-center items-center py-2"
         >
           <div className="sm:h-5 h-4">{searchIcon}</div>
-          <h3 className="font-semibold sm:text-base text-xs">Search</h3>
+          <h3 className="font-semibold sm:text-base text-xs mt-2">Search</h3>
         </div>
         <Link href="/" passHref>
           <div
             onClick={() => setOpen(false)}
             className="rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear flex flex-col justify-center items-center py-2"
           >
-            <HomeIcon className="sm:h-5 h-4" />
+            <HomeIcon className="sm:h-5 h-6" />
             <h3 className="font-semibold sm:text-base text-xs">Home</h3>
           </div>
         </Link>
@@ -76,7 +76,7 @@ const MobileNavFour = () => {
           className="rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear flex flex-col justify-center items-center py-2"
         >
           <div className="relative">
-            <ShoppingCartIcon className="sm:h-5 h-4" />
+            <ShoppingCartIcon className="sm:h-5 h-6" />
             <h3 className="font-semibold sm:text-base text-xs">Cart</h3>
             {cartList.length > 0 && (
               <div className="sm:h-6 h-4 w-4 sm:w-6 absolute top-0 -right-2 rounded-full cart-color flex items-center justify-center">
@@ -91,7 +91,7 @@ const MobileNavFour = () => {
             onClick={() => setOpen(false)}
             className="rounded-full p-3 text-gray-400 hover:text-gray-900 transition-all duration-300 ease-linear flex flex-col justify-center items-center py-2"
           >
-            <UserIcon className="sm:h-5 h-4" />
+            <UserIcon className="sm:h-5 h-6" />
             <h3 className="font-semibold sm:text-base text-xs">User</h3>
           </div>
         </Link>
@@ -99,7 +99,7 @@ const MobileNavFour = () => {
 
       <div className={`px-4 z-[7]`}>
         <ul
-          className={`pt-5 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] bg-white duration-500 ${
+          className={`pt-5 fixed md:w-96 w-64 sm:w-80 overflow-y-auto top-0 min-h-[100vh] pb-5 z-[7] bg-white duration-500 ${
             open ? "left-0 " : "left-[-140%] "
           }`}
         >

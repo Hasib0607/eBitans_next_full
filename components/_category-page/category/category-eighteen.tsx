@@ -200,7 +200,8 @@ const Product = ({
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
+
 
   useEffect(() => {
     setLoad(true);
@@ -272,10 +273,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -399,10 +400,30 @@ const Product = ({
 };
 
 const Location = ({ shops, cat }: any) => {
+  const [activecat,setActivecat]=useState(false)
+  const { id: data }: any = useParams<{ id: string }>();
+  const {category}=useTheme();
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+        if(category[i]?.cat){
+          for(let j=0;j<category[i].cat.length;j++){
+            if(category[i]?.cat[j]?.id==data){
+              setActivecat(category[i]?.cat[j]?.name)
+            }
+          }
+        }
+        if(category[i]?.id==data){
+          setActivecat(category[i].name)
+        }
+      }
+  },[category])
+  
+  
   return (
     <div className="w-full sm:container px-5 text-[#414141] flex gap-1 items-center justify-start py-2 text-sm">
-      <p>Home </p>
-      <p> / {shops?.name || cat?.name}</p>
+      <p>Home /</p>
+      <p>Catagories</p>
+      <p> / {activecat}</p>
     </div>
   );
 };
@@ -418,10 +439,6 @@ const Filter = ({
 }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 my-5 flex flex-wrap justify-between items-center">
-      <div className=" md:block hidden text-2xl">
-        <span>{shops?.name || cat?.name}</span>{" "}
-        <span>({paginate ? paginate?.total : 0}) </span>
-      </div>
       <div
         onClick={() => setOpen(!open)}
         className="flex gap-3 items-center md:hidden lg:cursor-pointer"
@@ -431,7 +448,7 @@ const Filter = ({
       </div>
 
       {/* Short by  */}
-      <div className="flex items-center gap-6 text-sm max-w-sm">
+      <div className="flex items-center gap-6 text-sm max-w-sm ml-auto">
         <select
           onChange={onChange}
           className="h-9 border-0 rounded lg:cursor-pointer outline-0 ring-0 focus:ring-0 text-xs flex-1 bg-white"
@@ -463,13 +480,21 @@ const Filter = ({
 };
 
 const SingleCat = ({ item }: any) => {
-  const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>();
-  const { design } = useTheme();
-  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-thin text-hover`;
-  const inactiveColor = `flex-1 text-sm font-thin text-hover text-gray-900`;
-  const activesub = `text-[${design?.header_color}] pb-2 text-sm font-thin text-hover`;
-  const inactivesub = "pb-2 text-sm font-thin text-hover text-gray-600";
+  const [show, setShow] = useState(false);  
+  const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-thin text-hover`
+  const inactiveColor= `flex-1 text-sm font-thin text-hover text-gray-900`
+  const activesub=`text-[${design?.header_color }] pb-2 text-sm font-thin text-hover`
+  const inactivesub='pb-2 text-sm font-thin text-hover text-gray-600'
 
   const styleCss = `
     .category-page .active{
@@ -483,8 +508,8 @@ const SingleCat = ({ item }: any) => {
         <style>{styleCss}</style>
         <Link
           href={"/category/" + item?.id}
-          style={id == item?.id ? { color: `${design.header_color}` } : {}}
-          className={id == item.id ? activeColor : inactiveColor}
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
+          className={id==item.id?activeColor:inactiveColor}
         >
           <p>{item.name}</p>
         </Link>
@@ -512,10 +537,8 @@ const SingleCat = ({ item }: any) => {
               <div className="py-2 category-page" key={idx}>
                 <Link href={"/category/" + sub?.id}>
                   <p
-                    style={
-                      id == sub?.id ? { color: `${design.header_color}` } : {}
-                    }
-                    className={id == sub.id ? activesub : inactivesub}
+          style={id==sub?.id?{color:`${design.header_color}`}:{}}
+                    className={id==sub.id?activesub:inactivesub}
                   >
                     {sub?.name}
                   </p>

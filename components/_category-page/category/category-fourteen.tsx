@@ -207,7 +207,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk, setShowSk] = useState(true);
+  const [showSk,setShowSk]=useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -281,10 +281,22 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false);
+    for(let i=0;i<category.length;i++){
+      if(category[i]?.cat){
+        for(let j=0;j<category[i].cat.length;j++){
+          if(category[i]?.cat[j]?.id==id){
+            setShops(category[i]?.cat[j])
+          }
+        }
+      }
+      if(category[i]?.id==id){
+        setShops(category[i])
+      }
+    }
+    setShowSk(false)
   };
 
-  if (load && showSk) {
+  if (load&&showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -382,13 +394,23 @@ const Filter = ({ onChange }: any) => {
 };
 
 const SingleCat = ({ item }: any) => {
+  const { id }: any = useParams<{ id: string }>()
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>();
-  const { design } = useTheme();
-  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-medium text-hover`;
-  const inactiveColor = "flex-1 text-sm font-medium text-hover text-gray-900";
-  const activesub = `text-[${design?.header_color}] pb-2 text-sm text-hover`;
-  const inactivesub = "pb-2 text-sm text-hover text-gray-500";
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
+  const {design}=useTheme()
+
+  
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-medium text-hover`
+  const inactiveColor= 'flex-1 text-sm font-medium text-hover text-gray-900'
+  const activesub=`text-[${design?.header_color }] pb-2 text-sm text-hover`
+  const inactivesub='pb-2 text-sm text-hover text-gray-500'
 
   const styleCss = `
     .category-page .active{
@@ -401,9 +423,9 @@ const SingleCat = ({ item }: any) => {
       <style>{styleCss}</style>
       <div className="w-full flex px-4 py-3 lg:cursor-pointer category-page">
         <Link
-          style={id == item?.id ? { color: `${design.header_color}` } : {}}
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
           href={"/category/" + item?.id}
-          className={id == item?.id ? activeColor : inactiveColor}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           {" "}
           <p>{item.name}</p>
@@ -434,11 +456,7 @@ const SingleCat = ({ item }: any) => {
               <div className="py-2 category-page" key={key}>
                 <Link href={"/category/" + sub?.id}>
                   <p
-                    style={
-                      id == sub?.id ? { color: `${design.header_color}` } : {}
-                    }
-                    className={id == sub?.id ? activesub : inactivesub}
-                  >
+          style={id==sub?.id?{color:`${design.header_color}`}:{}} className={id==sub?.id?activesub:inactivesub}>
                     {sub?.name}
                   </p>
                 </Link>

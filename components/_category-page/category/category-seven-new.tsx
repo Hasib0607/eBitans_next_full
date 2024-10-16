@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import {
   ArrowLeftIcon,
@@ -47,12 +47,13 @@ const fetchData = async (
 
         const { colors, data } = subcategoryResponse;
 
-        console.log(data);
+        console.log(data)
         return { colors, data };
       } catch (err) {
         console.error(err);
       }
     }
+
 
     return { colors, data };
   } catch (error) {
@@ -62,15 +63,33 @@ const fetchData = async (
 
 const CategorySevenNew = () => {
   const [open, setOpen] = useState(false);
-
+const [activecat,setActivecat]=useState(null)
   const { category } = useTheme();
   const { id } = useParams<{ id: string }>();
 
+  
   // filtering state
   const [sort, setSort] = useState("za");
   const [page, setPage] = useState(1);
   const [activeColor, setActiveColor] = useState("");
   const [priceValue, setPriceValue] = useState("");
+  useEffect(()=>{
+    for(let i=0;i<category.length;i++){
+      console.log('from outercat',category[0].id)
+      if(category[i]?.cat){
+        for(let j=0;j<category[i].cat.length;j++){
+          console.log('from subcat',category[i].cat[j].id)
+          if(category[i]?.cat[j]?.id==id){
+            setActivecat(category[i]?.cat[j]?.name)
+          }
+        }
+      }
+      if(category[i]?.id==id){
+        setActivecat(category[i].name)
+      }
+    }
+  },[category])
+
   const { data, status } = useQuery({
     queryKey: ["category-products", id, sort, page, activeColor, priceValue],
     queryFn: () => fetchData(id, sort, page, activeColor, priceValue),
@@ -86,7 +105,9 @@ const CategorySevenNew = () => {
               <span className="text-base text-gray-500">Home</span>
             </Link>
             <span className="text-base font-medium text-gray-500">/</span>
-            <span className="text-base text-gray-600 font-bold">Search</span>
+            <span className="text-base text-gray-600 font-medium">Catagories</span>
+            <span className="text-base font-medium text-gray-500">/</span>
+            <span className="text-base text-gray-600 font-medium">{activecat}</span>
           </div>
 
           <div className="mt-10 ">
@@ -117,9 +138,7 @@ const CategorySevenNew = () => {
         <div className="col-span-5 lg:col-span-4 w-full">
           <div className="flex justify-between py-10">
             <div>
-              <h1 className="text-3xl lg:block hidden font-semibold">
-                Products
-              </h1>
+              
               <div
                 onClick={() => setOpen(!open)}
                 className="lg:cursor-pointer border-2 border-gray-100 rounded-lg justify-between px-3 w-32 py-2 lg:hidden items-center flex gap-3"
@@ -175,7 +194,7 @@ const CategorySevenNew = () => {
               <h1 className="mb-10 text-2xl text-gray-700 font-medium">
                 Category
               </h1>
-              {/* starting to show categories */}
+            {/* starting to show categories */}
               {category?.map((item: any) => (
                 <div key={item.id} className="">
                   <SingleCat item={item} />
@@ -212,16 +231,16 @@ const Product = ({ products, status, sort, color }: any) => {
 const Filter = ({ onChange }: any) => {
   return (
     <div>
-      <div className="md:flex  md:flex-row border border-gray-400 py-0 px-0 rounded-xl lg:px-3            justify-between items-center gap-1">
+      <div style={{border:'none'}} className="md:flex  md:flex-row border border-gray-400 py-0 px-0 rounded-xl lg:px-3 justify-between items-center gap-1">
         <div className="md:block hidden">
           <p>Sort By:</p>
         </div>
         <div className="flex items-center gap-1 lg:-ml-28 xl:-ml-0 md:-ml-0 ml-2 justify-center">
           {/* Short by  */}
           <div className="">
-            <select
+            <select style={{border:'none'}}
               onChange={onChange}
-              className="border-2 w-48 font-medium lg:cursor-pointer h-12 px-2 p-0 text-md border-gray-200 rounded-md  focus:border-gray-200 focus:ring-transparent outline-none focus:outline-none"
+              className="border-2 w-48 font-medium lg:cursor-pointer h-12 px-2 p-0 text-md border-gray-200 rounded-md  focus:border-gray-200 focus:ring-transparent outline-none focus:outline-none bg-none"
               id="category"
               name="category"
             >
@@ -248,12 +267,20 @@ const Filter = ({ onChange }: any) => {
 
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(true);
-  const { id }: any = useParams<{ id: string }>();
-  const { design } = useTheme();
-  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-medium`;
-  const inactiveColor = "text-gray-500 flex-1 text-sm font-medium";
-  const activesub = `text-[${design?.header_color}] pb-2 text-sm`;
-  const inactivesub = "pb-2 text-sm text-gray-500";
+  const { id }: any = useParams<{ id: string }>()
+  useEffect(()=>{
+    if(item.cat){
+
+    for(let i=0;i<item.cat.length;i++){
+      item.cat[i].id==id&&setShow(true)
+    }
+  }
+  },[item?.cat])
+  const {design}=useTheme()
+  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-medium`
+  const inactiveColor= "text-gray-500 flex-1 text-sm font-medium"
+  const activesub=`text-[${design?.header_color }] pb-2 text-sm`
+  const inactivesub="pb-2 text-sm text-gray-500"
 
   const styleCss = `
     .category-page .active{
@@ -267,10 +294,10 @@ const SingleCat = ({ item }: any) => {
       <div className="w-full flex py-3 lg:cursor-pointer category-page">
         <style>{styleCss}</style>
         <Link
-          style={id == item?.id ? { color: `${design.header_color}` } : {}}
+          style={id==item?.id?{color:`${design.header_color}`}:{}}
           onClick={() => setShow(!show)}
           href={"/category/" + item.id}
-          className={id == item?.id ? activeColor : inactiveColor}
+          className={id==item?.id?activeColor:inactiveColor}
         >
           <p>{item.name}</p>
         </Link>
@@ -297,14 +324,8 @@ const SingleCat = ({ item }: any) => {
             {item?.cat?.map((sub: any) => (
               <div key={sub.id} className="py-2 category-page">
                 <Link href={"/category/" + sub?.id}>
-                  <p
-                    style={
-                      id == sub?.id ? { color: `${design.header_color}` } : {}
-                    }
-                    className={id == sub?.id ? activesub : inactivesub}
-                  >
-                    {sub?.name}
-                  </p>
+                  <p 
+          style={id==sub?.id?{color:`${design.header_color}`}:{}} className={id==sub?.id?activesub:inactivesub}>{sub?.name}</p>
                 </Link>
                 <div className="pr-4">
                   <div className="h-[1px] bg-gray-200 w-full"></div>
