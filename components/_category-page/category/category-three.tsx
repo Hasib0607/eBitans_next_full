@@ -509,9 +509,14 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
                   href={sub?.id}
                 >
                   {" "}
-                  <p  
-          style={parseInt(id)===parseInt(sub?.id)?{color:`${design.header_color}`}:{}}
-             className={id == sub?.id ? activesub : inactivesub}>
+                  <p
+                    style={
+                      parseInt(id) === parseInt(sub?.id)
+                        ? { color: `${design.header_color}` }
+                        : {}
+                    }
+                    className={id == sub?.id ? activesub : inactivesub}
+                  >
                     {sub?.name}
                   </p>
                 </Link>

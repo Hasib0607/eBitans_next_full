@@ -226,8 +226,7 @@ const YourOrders = ({
     }
 
     // Convert FormData to an array and log each key-value pair
-    Array.from(formData.entries()).forEach(([key, value]) => {
-    });
+    Array.from(formData.entries()).forEach(([key, value]) => {});
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {

@@ -19,7 +19,7 @@ const CategoryOne = () => {
 
   const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
 
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [products, setProducts] = useState([]);
   const [load, setLoad] = useState(false);
   const [paginate, setPaginate] = useState<any>({});
@@ -30,7 +30,7 @@ const CategoryOne = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
-  const [activecat,setActivecat]=useState(null)
+  const [activecat, setActivecat] = useState(null);
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
 
@@ -107,17 +107,17 @@ const CategoryOne = () => {
       setLoad(false);
       //   setError(error);
     }
-    setShowSk(false)
-    for(let i=0;i<category.length;i++){
-      if(category[i]?.cat){
-        for(let j=0;j<category[i].cat.length;j++){
-          if(category[i]?.cat[j]?.id==data){
-            setActivecat(category[i]?.cat[j]?.name)
+    setShowSk(false);
+    for (let i = 0; i < category.length; i++) {
+      if (category[i]?.cat) {
+        for (let j = 0; j < category[i].cat.length; j++) {
+          if (category[i]?.cat[j]?.id == data) {
+            setActivecat(category[i]?.cat[j]?.name);
           }
         }
       }
-      if(category[i]?.id==data){
-        setActivecat(category[i].name)
+      if (category[i]?.id == data) {
+        setActivecat(category[i].name);
       }
     }
   };
@@ -132,7 +132,7 @@ const CategoryOne = () => {
                 <Link href="/">Home</Link>
               </li>
               <li>Categorys</li>
-              {activecat&&<li>{activecat}</li>}
+              {activecat && <li>{activecat}</li>}
             </ul>
           </div>
         </div>
@@ -190,7 +190,7 @@ const CategoryOne = () => {
                             </div>
                         </div> */}
 
-            {(load&&showSk )? (
+            {load && showSk ? (
               <div className="col-span-12 lg:col-span-9">
                 <Skeleton />
               </div>
@@ -277,19 +277,20 @@ export default CategoryOne;
 
 const SingleCat = ({ item, select, setSelect, setPage, setHasMore }: any) => {
   const [show, setShow] = useState(false);
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] flex-1 hover:ml-4 duration-300 text-lg font-medium`
-  const inactiveColor= 'flex-1 hover:ml-4 duration-300 text-lg font-medium text-gray-900'
-  const activeSub= `text-[${design?.header_color}] py-2 hover:ml-4 duration-300 px-4 text-sm`
-  const inactivesub='py-2 hover:ml-4 duration-300 px-4 text-sm text-gray-600'
-  const { id }: any = useParams<{ id: string }>()
-  
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 hover:ml-4 duration-300 text-lg font-medium`;
+  const inactiveColor =
+    "flex-1 hover:ml-4 duration-300 text-lg font-medium text-gray-900";
+  const activeSub = `text-[${design?.header_color}] py-2 hover:ml-4 duration-300 px-4 text-sm`;
+  const inactivesub = "py-2 hover:ml-4 duration-300 px-4 text-sm text-gray-600";
+  const { id }: any = useParams<{ id: string }>();
+
   return (
     <div className="">
       <div className="w-full border mb-2">
         <div className="flex items-center px-4 py-3">
           <Link
-          style={id==item?.id?{color:`${design.header_color}`}:{}}
+            style={id == item?.id ? { color: `${design.header_color}` } : {}}
             onClick={() => {
               setSelect(item.id);
               setPage(1);
@@ -297,9 +298,7 @@ const SingleCat = ({ item, select, setSelect, setPage, setHasMore }: any) => {
             }}
             href={"/category/" + item.id}
             // change here
-            className={
-              id == item.id ? activeColor : inactiveColor
-            }
+            className={id == item.id ? activeColor : inactiveColor}
           >
             {" "}
             <p>{item.name}</p>
@@ -335,10 +334,12 @@ const SingleCat = ({ item, select, setSelect, setPage, setHasMore }: any) => {
                   >
                     {" "}
                     <p
-          style={id==sub?.id?{color:`${design?.header_color}`}:{}} 
-                      className={
-                        id == sub.id ? activeSub : inactivesub
+                      style={
+                        id == sub?.id
+                          ? { color: `${design?.header_color}` }
+                          : {}
                       }
+                      className={id == sub.id ? activeSub : inactivesub}
                     >
                       {sub?.name}
                     </p>

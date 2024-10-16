@@ -183,7 +183,7 @@ const CategoryEight = () => {
 export default CategoryEight;
 
 const Product = ({ products, grid, open, shop_load, hasMore }: any) => {
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const { category } = useTheme();
 
   return (
@@ -304,12 +304,12 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
 
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>()
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-medium`
-  const inactiveColor= `flex-1 text-sm font-medium text-gray-900`
-  const activesub=`text-[${design?.header_color }] pb-2 text-sm`
-  const inactivesub='pb-2 text-sm text-gray-600'
+  const { id }: any = useParams<{ id: string }>();
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-medium`;
+  const inactiveColor = `flex-1 text-sm font-medium text-gray-900`;
+  const activesub = `text-[${design?.header_color}] pb-2 text-sm`;
+  const inactivesub = "pb-2 text-sm text-gray-600";
 
   const styleCss = `
     .category-page .active{
@@ -322,9 +322,9 @@ const SingleCat = ({ item }: any) => {
       <style>{styleCss}</style>
       <div className="w-full flex py-3 lg:cursor-pointer category-page">
         <Link
-          style={id==item?.id?{color:`${design.header_color}`}:{}}
+          style={id == item?.id ? { color: `${design.header_color}` } : {}}
           href={"/category/" + item?.id}
-          className={id==item?.id?activeColor:inactiveColor}
+          className={id == item?.id ? activeColor : inactiveColor}
         >
           {" "}
           <p>{item.name}</p>
@@ -351,8 +351,14 @@ const SingleCat = ({ item }: any) => {
             {item?.cat?.map((sub: any, idx: number) => (
               <div className="py-2 category-page" key={idx}>
                 <Link href={"/category/" + sub?.id}>
-                  <p 
-          style={id==sub?.id?{color:`${design.header_color}`}:{}} className={id==sub.id?activesub:inactivesub}>{sub?.name}</p>
+                  <p
+                    style={
+                      id == sub?.id ? { color: `${design.header_color}` } : {}
+                    }
+                    className={id == sub.id ? activesub : inactivesub}
+                  >
+                    {sub?.name}
+                  </p>
                 </Link>
                 <div className="pr-4">
                   <div className="h-[1px] bg-gray-200 w-full"></div>

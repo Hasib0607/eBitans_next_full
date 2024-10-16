@@ -29,7 +29,7 @@ const RegisterOne = () => {
   window.localStorage.setItem("MY_USER_ONE", userOne);
 
   useEffect(() => {
-    axiosInstance.get("/get-module/120?name="+ store.url).then((response) => {
+    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
       setActiveModule(response?.data?.status || false);
     });
   }, [store]);
@@ -149,7 +149,9 @@ const RegisterOne = () => {
         {/* User Type Selection Dropdown */}
         {activeModule && (
           <div className="mb-6">
-            <label className="block mb-2 text-sm text-gray-500">Select User Type</label>
+            <label className="block mb-2 text-sm text-gray-500">
+              Select User Type
+            </label>
             <select
               value={userType}
               onChange={(e) => setUserType(e.target.value)} // Update the userType state based on selection

@@ -146,7 +146,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -221,10 +221,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
-  if (load&&showSk) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -390,24 +390,24 @@ const Filter = ({ paginate, onChange, setGrid }: any) => {
 
 const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>()
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-thin`
-  const inactiveColor= `text-gray-900 flex-1 text-sm font-thin`
-  const activesub=`text-[${design?.header_color }] pb-2 text-sm font-thin`
-  const inactivesub=`pb-2 text-sm font-thin`
+  const { id }: any = useParams<{ id: string }>();
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-thin`;
+  const inactiveColor = `text-gray-900 flex-1 text-sm font-thin`;
+  const activesub = `text-[${design?.header_color}] pb-2 text-sm font-thin`;
+  const inactivesub = `pb-2 text-sm font-thin`;
   return (
     <>
       <div className="w-full flex px-4 py-3">
         <Link
-          style={id==item?.id?{color:`${design.header_color}`}:{}}
+          style={id == item?.id ? { color: `${design.header_color}` } : {}}
           onClick={() => {
             setSelect(item.id);
             setPage(1);
             setHasMore(true);
           }}
           href={"/category/" + item.id}
-          className={id==item?.id?activeColor:inactiveColor}
+          className={id == item?.id ? activeColor : inactiveColor}
         >
           {" "}
           <p>{item.name}</p>
@@ -445,8 +445,10 @@ const SingleCat = ({ item, setSelect, select, setPage, setHasMore }: any) => {
                   href={"/category/" + sub?.id}
                 >
                   <p
-          style={id==sub?.id?{color:`${design.header_color}`}:{}}
-                    className={id==sub?.id?activesub:inactivesub}
+                    style={
+                      id == sub?.id ? { color: `${design.header_color}` } : {}
+                    }
+                    className={id == sub?.id ? activesub : inactivesub}
                   >
                     {sub?.name}
                   </p>

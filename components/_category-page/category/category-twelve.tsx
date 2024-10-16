@@ -501,9 +501,14 @@ const SingleCat = ({ item, setSelect, select }: any) => {
                   href={"/category/" + sub?.id}
                 >
                   {" "}
-                  <p 
-          style={parseInt(id)===parseInt(sub?.id)?{color:`${design.header_color}`}:{}}
-              className={id == sub?.id ? activesub : inactivesub}>
+                  <p
+                    style={
+                      parseInt(id) === parseInt(sub?.id)
+                        ? { color: `${design.header_color}` }
+                        : {}
+                    }
+                    className={id == sub?.id ? activesub : inactivesub}
+                  >
                     {sub?.name}
                   </p>
                 </Link>
