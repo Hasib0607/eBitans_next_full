@@ -1,7 +1,7 @@
 // components/WhatsAppIcon.js
 import React from 'react';
 import Image from 'next/image';
-import whatsapp2 from './../../../../assets/img/icons/whatsApp_icon.webp';
+import whatsapp2 from './../../../assets/img/icons/whatsApp_icon.webp';
 import useTheme from '@/hooks/use-theme';
 
 const WhatsApp = () => {
