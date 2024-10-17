@@ -1,6 +1,6 @@
 import React from "react";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterTwentySeven = ({ headerSetting }: any) => {
   return (

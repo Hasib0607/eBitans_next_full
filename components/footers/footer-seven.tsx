@@ -6,7 +6,7 @@ import {
 } from "react-icons/ai";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 import Newsletter from "./components/newsletter";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterSeven = ({
   headerSetting,

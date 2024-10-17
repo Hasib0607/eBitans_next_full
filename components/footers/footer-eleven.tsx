@@ -22,7 +22,7 @@ import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import Link from "next/link";
 import CategoryList from "./components/category-list";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterEleven = ({
   design,

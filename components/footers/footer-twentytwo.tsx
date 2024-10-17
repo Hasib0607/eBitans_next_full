@@ -8,7 +8,7 @@ import { IoLogoWhatsapp } from "react-icons/io5";
 import MyAccount from "./components/myaccount";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterTwentyTwo = ({ headerSetting, store_id, page, menu }: any) => {
   return (

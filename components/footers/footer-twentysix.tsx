@@ -9,7 +9,7 @@ import Newsletter from "./components/newsletter";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterTwentySix = ({
   category,

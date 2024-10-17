@@ -20,7 +20,6 @@ const Discount = ({
   } = useForm();
   const { store_id, design, headerSetting, userData } = useTheme();
   const cartList = useSelector((state: any) => state.cart.cartList);
-  //     const coupon = 'wavestar'
 
   const get_discount = (res: any) => {
     setCoupon(res?.code);

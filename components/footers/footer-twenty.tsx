@@ -5,7 +5,7 @@ import MenuList from "./components/menu-list";
 import MyAccount from "./components/myaccount";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterTwenty = ({ headerSetting, page, menu, store_id, design }: any) => {
   // console.log(headerSetting);

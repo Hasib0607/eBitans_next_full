@@ -180,7 +180,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -254,10 +254,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
-  if (load&&showSk) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -335,24 +335,24 @@ const Product = ({
 };
 
 const Location = ({ shops, cat }: any) => {
-  const [activecat,setActivecat]=useState(null)
-   const { id }: any = useParams<{ id: string }>();
-   const { category} = useTheme();
- 
-   useEffect(()=>{
-     for(let i=0;i<category.length;i++){
-       if(category[i]?.cat){
-         for(let j=0;j<category[i].cat.length;j++){
-           if(category[i]?.cat[j]?.id==id){
-             setActivecat(category[i]?.cat[j]?.name)
-           }
-         }
-       }
-       if(category[i]?.id==id){
-         setActivecat(category[i].name)
-       }
-     }
-   },[category])
+  const [activecat, setActivecat] = useState(null);
+  const { id }: any = useParams<{ id: string }>();
+  const { category } = useTheme();
+
+  useEffect(() => {
+    for (let i = 0; i < category.length; i++) {
+      if (category[i]?.cat) {
+        for (let j = 0; j < category[i].cat.length; j++) {
+          if (category[i]?.cat[j]?.id == id) {
+            setActivecat(category[i]?.cat[j]?.name);
+          }
+        }
+      }
+      if (category[i]?.id == id) {
+        setActivecat(category[i].name);
+      }
+    }
+  }, [category]);
   return (
     <div className="w-full text-[#414141] sm:container flex gap-1 items-center justify-start py-3 text-sm px-5">
       <Link href="/">
@@ -384,28 +384,30 @@ const Filter = ({ paginate, onChange, shops, cat }: any) => {
 };
 
 const SubCat = ({ item }: any) => {
-
-  const { id }: any = useParams<{ id: string }>()
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] text-sm`
-  const inactiveColor= `text-sm text-gray-600`
+  const { id }: any = useParams<{ id: string }>();
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] text-sm`;
+  const inactiveColor = `text-sm text-gray-600`;
   return (
     <>
       <Link href={"/category/" + item?.id}>
         <div className="py-2 px-5 text-center w-max border rounded-full bg-white">
-          <p 
-          style={id==item?.id?{color:`${design.header_color}`}:{}} className={id==item?.id?activeColor:inactiveColor}>{item?.name}</p>
+          <p
+            style={id == item?.id ? { color: `${design.header_color}` } : {}}
+            className={id == item?.id ? activeColor : inactiveColor}
+          >
+            {item?.name}
+          </p>
         </div>
       </Link>
     </>
   );
 };
 const SingleCat = ({ item }: any) => {
-
-  const { id }: any = useParams<{ id: string }>()
-  const {design}=useTheme()
-  const activesub=`text-[${design?.header_color }] flex-1 text-sm text-hover`
-  const inactivesub=`flex-1 text-sm text-hover text-gray-900`
+  const { id }: any = useParams<{ id: string }>();
+  const { design } = useTheme();
+  const activesub = `text-[${design?.header_color}] flex-1 text-sm text-hover`;
+  const inactivesub = `flex-1 text-sm text-hover text-gray-900`;
   const styleCss = `
     .category-page .active{
         color:#f1593a;
@@ -416,10 +418,10 @@ const SingleCat = ({ item }: any) => {
     <>
       <div className="w-full flex py-2 category-page">
         <style>{styleCss}</style>
-        <Link 
-          style={id==item?.id?{color:`${design.header_color}`}:{}}
+        <Link
+          style={id == item?.id ? { color: `${design.header_color}` } : {}}
           href={"/category/" + item?.id}
-          className={id==item?.id?activesub:inactivesub}
+          className={id == item?.id ? activesub : inactivesub}
         >
           <p>{item.name}</p>
         </Link>

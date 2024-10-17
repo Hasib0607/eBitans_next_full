@@ -13,7 +13,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterThirtyFive = ({
   headerSetting,

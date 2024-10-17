@@ -5,7 +5,7 @@ import { GoLocation } from "react-icons/go";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
   const result = page.filter(

@@ -8,7 +8,7 @@ import {
 import { FaFacebookF } from "react-icons/fa";
 import { RiInstagramLine } from "react-icons/ri";
 import Newsletter from "./components/newsletter";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
   const date = new Date().getFullYear();

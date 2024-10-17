@@ -26,21 +26,21 @@ const CategoryTwentyFour = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
-  const [activecat,setActivecat]=useState(false)
-  useEffect(()=>{
-    for(let i=0;i<category.length;i++){
-        if(category[i]?.cat){
-          for(let j=0;j<category[i].cat.length;j++){
-            if(category[i]?.cat[j]?.id==data){
-              setActivecat(category[i]?.cat[j]?.name)
-            }
+  const [activecat, setActivecat] = useState(false);
+  useEffect(() => {
+    for (let i = 0; i < category.length; i++) {
+      if (category[i]?.cat) {
+        for (let j = 0; j < category[i].cat.length; j++) {
+          if (category[i]?.cat[j]?.id == data) {
+            setActivecat(category[i]?.cat[j]?.name);
           }
         }
-        if(category[i]?.id==data){
-          setActivecat(category[i].name)
-        }
       }
-  },[category])
+      if (category[i]?.id == data) {
+        setActivecat(category[i].name);
+      }
+    }
+  }, [category]);
 
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
@@ -150,7 +150,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -221,12 +221,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
   return (
     <>
-      {(load&&showSk) ? (
+      {load && showSk ? (
         <div>
           <Skeleton />
         </div>
@@ -315,20 +315,19 @@ const Filter = ({ paginate, onChange }: any) => {
 
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>()
-  useEffect(()=>{
-    if(item.cat){
-
-    for(let i=0;i<item.cat.length;i++){
-      item.cat[i].id==id&&setShow(true)
+  const { id }: any = useParams<{ id: string }>();
+  useEffect(() => {
+    if (item.cat) {
+      for (let i = 0; i < item.cat.length; i++) {
+        item.cat[i].id == id && setShow(true);
+      }
     }
-  }
-  },[item?.cat])
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] w-max`
-  const inactiveColor= "text-gray-500 w-max"
-  const activesub=`text-[${design?.header_color }] text-sm w-max`
-  const inactivesub=`text-gray-600 text-sm w-max`
+  }, [item?.cat]);
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] w-max`;
+  const inactiveColor = "text-gray-500 w-max";
+  const activesub = `text-[${design?.header_color}] text-sm w-max`;
+  const inactivesub = `text-gray-600 text-sm w-max`;
   return (
     <div onMouseLeave={() => setShow(false)} className="relative">
       <div
@@ -338,12 +337,18 @@ const SingleCat = ({ item, select, setSelect }: any) => {
         <Link
           onClick={() => setSelect(item.id)}
           href={"/category/" + item.id}
-          className={id==item?.id?activeColor:inactiveColor}
+          className={id == item?.id ? activeColor : inactiveColor}
         >
           {" "}
-          <p 
-          style={parseInt(id)===parseInt(item?.id)?{color:`${design.header_color}`}:{}}
-             >{item.name}</p>{" "}
+          <p
+            style={
+              parseInt(id) === parseInt(item?.id)
+                ? { color: `${design.header_color}` }
+                : {}
+            }
+          >
+            {item.name}
+          </p>{" "}
           <p
             className={`${
               select === item.id ? "block" : "hidden"
@@ -374,9 +379,16 @@ const SingleCat = ({ item, select, setSelect }: any) => {
                   href={"/category/" + sub?.id}
                 >
                   {" "}
-                  <li 
-          style={parseInt(id)===parseInt(sub?.id)?{color:`${design.header_color}`}:{}}
-              className={id==sub?.id?activesub:inactivesub}>{sub?.name}</li>
+                  <li
+                    style={
+                      parseInt(id) === parseInt(sub?.id)
+                        ? { color: `${design.header_color}` }
+                        : {}
+                    }
+                    className={id == sub?.id ? activesub : inactivesub}
+                  >
+                    {sub?.name}
+                  </li>
                 </Link>
               </div>
             ))}

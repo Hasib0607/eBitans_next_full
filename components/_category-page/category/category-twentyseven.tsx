@@ -152,7 +152,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -223,10 +223,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
-  if (load&&showSk) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -305,24 +305,24 @@ const Product = ({
   );
 };
 
-const Location = ({  }: any) => {
-  const [activecat,setActivecat]=useState(false)
+const Location = ({}: any) => {
+  const [activecat, setActivecat] = useState(false);
   const { id: data }: any = useParams<{ id: string }>();
-  const {category}=useTheme();
-  useEffect(()=>{
-    for(let i=0;i<category.length;i++){
-        if(category[i]?.cat){
-          for(let j=0;j<category[i].cat.length;j++){
-            if(category[i]?.cat[j]?.id==data){
-              setActivecat(category[i]?.cat[j]?.name)
-            }
+  const { category } = useTheme();
+  useEffect(() => {
+    for (let i = 0; i < category.length; i++) {
+      if (category[i]?.cat) {
+        for (let j = 0; j < category[i].cat.length; j++) {
+          if (category[i]?.cat[j]?.id == data) {
+            setActivecat(category[i]?.cat[j]?.name);
           }
         }
-        if(category[i]?.id==data){
-          setActivecat(category[i].name)
-        }
       }
-  },[category])
+      if (category[i]?.id == data) {
+        setActivecat(category[i].name);
+      }
+    }
+  }, [category]);
   return (
     <div className="lg:w-1/2 flex flex-col gap-y-5 py-5 mb-5">
       <h1 className="text-3xl font-bold ">{activecat} collection</h1>
@@ -358,30 +358,32 @@ const Filter = ({ onChange }: any) => {
 
 const SingleCat = ({ item, setOpen, setSelect, select }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>()
-  useEffect(()=>{
-    if(item.cat){
-
-    for(let i=0;i<item.cat.length;i++){
-      item.cat[i].id==id&&setShow(true)
+  const { id }: any = useParams<{ id: string }>();
+  useEffect(() => {
+    if (item.cat) {
+      for (let i = 0; i < item.cat.length; i++) {
+        item.cat[i].id == id && setShow(true);
+      }
     }
-  }
-  },[item?.cat])
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] flex-1 text-lg font-medium`
-  const inactiveColor= "text-gray-500 flex-1 text-lg font-medium"
-  const activesub=`text-[${design?.header_color }] py-2 px-4 text-sm`
-  const inactivesub=`text-gray-600 py-2 px-4 text-sm`
+  }, [item?.cat]);
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 text-lg font-medium`;
+  const inactiveColor = "text-gray-500 flex-1 text-lg font-medium";
+  const activesub = `text-[${design?.header_color}] py-2 px-4 text-sm`;
+  const inactivesub = `text-gray-600 py-2 px-4 text-sm`;
   return (
     <div className="">
       <div className="w-full border rounded-xl mb-2">
         <div className="flex items-center px-4 py-3">
-          <Link 
-          style={parseInt(id)===parseInt(item?.id)?{color:`${design.header_color}`}:{}}
-             
+          <Link
+            style={
+              parseInt(id) === parseInt(item?.id)
+                ? { color: `${design.header_color}` }
+                : {}
+            }
             onClick={() => setSelect(item.id)}
             href={"/category/" + item.id}
-            className={id==item?.id?activeColor:inactiveColor}
+            className={id == item?.id ? activeColor : inactiveColor}
           >
             {" "}
             <p onClick={() => setOpen(false)}>{item.name}</p>
@@ -412,11 +414,14 @@ const SingleCat = ({ item, setOpen, setSelect, select }: any) => {
                     href={"/category/" + sub?.id}
                   >
                     {" "}
-                    <p 
-          style={parseInt(id)===parseInt(sub?.id)?{color:`${design.header_color}`}:{}}
-             
+                    <p
+                      style={
+                        parseInt(id) === parseInt(sub?.id)
+                          ? { color: `${design.header_color}` }
+                          : {}
+                      }
                       onClick={() => setOpen(false)}
-                      className={id==sub?.id?activesub:inactivesub}
+                      className={id == sub?.id ? activesub : inactivesub}
                     >
                       {sub?.name}
                     </p>

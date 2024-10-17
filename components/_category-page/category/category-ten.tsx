@@ -172,7 +172,7 @@ const Product = ({
   hasMore,
   id,
 }: any) => {
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [load, setLoad] = useState(false);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
@@ -246,10 +246,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
-  if (load&&showSk) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -447,28 +447,27 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
 
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>()
-  useEffect(()=>{
-    if(item.cat){
-
-    for(let i=0;i<item.cat.length;i++){
-      item.cat[i].id==id&&setShow(true)
+  const { id }: any = useParams<{ id: string }>();
+  useEffect(() => {
+    if (item.cat) {
+      for (let i = 0; i < item.cat.length; i++) {
+        item.cat[i].id == id && setShow(true);
+      }
     }
-  }
-  },[item?.cat])
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] flex-1 text-sm font-medium`
-  const inactiveColor= `text-gray-900 flex-1 text-sm font-medium`
-  const activesub=`text-[${design?.header_color }] pb-2 text-sm`
-  const inactivesub=`pb-2 text-sm`
+  }, [item?.cat]);
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 text-sm font-medium`;
+  const inactiveColor = `text-gray-900 flex-1 text-sm font-medium`;
+  const activesub = `text-[${design?.header_color}] pb-2 text-sm`;
+  const inactivesub = `pb-2 text-sm`;
   return (
     <>
       <div className="w-full flex py-3 lg:cursor-pointer">
         <Link
-          style={id==item?.id?{color:`${design.header_color}`}:{}}
+          style={id == item?.id ? { color: `${design.header_color}` } : {}}
           onClick={() => setSelect(item.id)}
           href={"/category/" + item.id}
-          className={id==item?.id?activeColor:inactiveColor}
+          className={id == item?.id ? activeColor : inactiveColor}
         >
           {" "}
           <p>{item.name}</p>
@@ -501,8 +500,10 @@ const SingleCat = ({ item, select, setSelect }: any) => {
                 >
                   {" "}
                   <p
-          style={id==sub?.id?{color:`${design.header_color}`}:{}}
-                    className={id==sub?.id?activesub:inactivesub}
+                    style={
+                      id == sub?.id ? { color: `${design.header_color}` } : {}
+                    }
+                    className={id == sub?.id ? activesub : inactivesub}
                   >
                     {sub?.name}
                   </p>

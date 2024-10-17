@@ -10,7 +10,7 @@ import { RiInstagramLine } from "react-icons/ri";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 // import { imgUrl } from '../../../siteSettings/siteUrl'
 
 const FooterTwentyNine = ({

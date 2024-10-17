@@ -28,7 +28,7 @@ const LoginOne = () => {
   const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    axiosInstance.get("/get-module/120?name="+ store.url).then((response) => {
+    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
       setActiveModule(response?.data?.status || false);
     });
   }, [store]);
@@ -52,9 +52,6 @@ const LoginOne = () => {
           router.push("/profile");
           window.location.reload();
         }
-        // else {
-        //     navigate('/verify-otp')
-        // }
       })
       .catch((error: any) => {
         toast("Credential Doesn't Match", { type: "error" });

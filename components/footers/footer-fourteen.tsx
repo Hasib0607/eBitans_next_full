@@ -3,7 +3,7 @@ import Newsletter from "./components/newsletter";
 import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
 import FollowUs from "./components/follow-us";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterFourteen = ({
   design,

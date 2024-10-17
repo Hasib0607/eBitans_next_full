@@ -3,7 +3,7 @@ import { AiOutlineInstagram, AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsTelephone, BsYoutube } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterDefault = ({ headerSetting, category }: any) => {
   return (

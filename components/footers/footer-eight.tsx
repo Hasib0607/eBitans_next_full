@@ -15,7 +15,7 @@ import {
 } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterEight = ({
   headerSetting,

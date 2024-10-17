@@ -3,7 +3,7 @@ import Link from "next/link";
 import React from "react";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterThirtySeven = ({
   headerSetting,

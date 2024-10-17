@@ -15,7 +15,7 @@ import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterSeventeen = ({
   headerSetting,

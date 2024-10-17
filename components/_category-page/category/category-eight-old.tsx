@@ -495,6 +495,3 @@ const SingleCat = ({ item }: any) => {
     </>
   );
 };
-
-
-

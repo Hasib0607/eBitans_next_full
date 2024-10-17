@@ -1,7 +1,7 @@
 import React from "react";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
   const date = new Date().getFullYear();

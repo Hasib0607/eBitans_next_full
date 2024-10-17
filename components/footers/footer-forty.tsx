@@ -3,7 +3,7 @@ import FollowUs from "./components/follow-us";
 import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsapp';
+import WhatsApp from './components/whatsApp';
 
 const FooterForty = ({
   category,
