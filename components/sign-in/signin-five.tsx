@@ -3,11 +3,12 @@ import useTheme from "@/hooks/use-theme";
 import { login } from "@/redux/features/auth.slice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import Loading from "../register/loading";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 
 export const cls =
   "w-full rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary ";
@@ -15,6 +16,7 @@ export const cls =
 const LoginFive = () => {
   const { store_id, store } = useTheme();
   const [loading, setLoading] = useState(false);
+  const [activeModule, setActiveModule] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -22,6 +24,12 @@ const LoginFive = () => {
   // useEffect(() => {
   //   dispatch(clearMessage());
   // }, [dispatch]);
+
+  useEffect(() => {
+    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
+      setActiveModule(response?.data?.status || false);
+    });
+  }, [store]);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: any) => {
@@ -118,12 +126,16 @@ const LoginFive = () => {
                   </div>
                 </form>
                 <div className="h-[1px] w-full bg-gray-300 mb-2"></div>
+                
+                {(store?.auth_type !== "EasyOrder" || activeModule) && (
                 <p className="text-base text-[#423b3b]">
                   <Link href="/sign-up" className="hover:underline">
                     No account?{" "}
                     <span className="font-bold">Create one here</span>
                   </Link>
                 </p>
+                )}
+                
                 <div className="flex justify-center w-full">
                   {/* <LoginWith /> */}
                 </div>

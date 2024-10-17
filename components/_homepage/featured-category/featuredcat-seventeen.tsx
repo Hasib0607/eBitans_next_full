@@ -72,7 +72,11 @@ const FeaturedSeventeen = ({ category }: any) => {
           <SectionHeadingSeventeen text={title} title_color={title_color} />
         </div>
         <div className="flex justify-center pt-2">
-          <Image src={image.src} fill alt="" />
+          <div
+            style={{ position: "relative", width: "120px", height: "80px" }}
+          >
+            <Image src={image.src} fill alt="Description of the image" />
+          </div>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg2:grid-cols-4 gap-y-10 md:gap-x-10 mt-14 z-10 sm:container px-5 xl:px-80 mx-auto pb-10 xl:pb-32">
           <Link href={`/category/${cat[0]?.cat[0]?.id}`}>

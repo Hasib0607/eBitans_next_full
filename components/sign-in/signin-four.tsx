@@ -10,6 +10,7 @@ import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Loading from "../register/loading";
 import { btnhover } from "@/site-settings/style";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 
 export const cls =
   "w-full rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary ";
@@ -19,11 +20,18 @@ const LoginFour = () => {
   const { headerSetting, store_id, store } = useTheme();
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const [activeModule, setActiveModule] = useState(false);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
   // useEffect(() => {
   //   dispatch(clearMessage());
   // }, [dispatch]);
+
+  useEffect(() => {
+    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
+      setActiveModule(response?.data?.status || false);
+    });
+  }, [store]);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: any) => {
@@ -133,6 +141,7 @@ const LoginFour = () => {
                 >
                   Forgot Password?
                 </Link>
+                {(store?.auth_type !== "EasyOrder" || activeModule) && (
                 <p className="text-base text-[#adadad]">
                   Not a member yet?
                   <Link
@@ -142,6 +151,7 @@ const LoginFour = () => {
                     Sign Up
                   </Link>
                 </p>
+                )}
                 <div className="flex justify-center w-full">
                   {/* <LoginWith /> */}
                 </div>

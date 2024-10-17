@@ -83,7 +83,6 @@ const RegisterOne = () => {
           setLoading(false);
         });
     }
-    // console.log(data, "data");
   };
 
   return (

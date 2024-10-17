@@ -68,7 +68,6 @@ const HeroSeventeen = ({ slider, design }: any) => {
     }
     `;
 
-
   return (
     <div className=" mt-0 xl:mt-0 bg-white relative z-[2]">
       <style>{styleCss}</style>
