@@ -35,7 +35,7 @@ const CategorySeventeen = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   const [dataId, setDataId] = useState(null);
-  const [activecat,setActivecat]=useState(null)
+  const [activecat, setActivecat] = useState(null);
 
   const shop_load = parseInt(paginateModule?.status);
   const pageShop = shop_load === 1 ? data?.page : page;
@@ -46,22 +46,20 @@ const CategorySeventeen = () => {
     setDataId(data);
   }, [data]);
 
-
-useEffect(()=>{
-  for(let i=0;i<category.length;i++){
-    if(category[i]?.cat){
-      for(let j=0;j<category[i].cat.length;j++){
-        if(category[i]?.cat[j]?.id==data){
-          setActivecat(category[i]?.cat[j]?.name)
+  useEffect(() => {
+    for (let i = 0; i < category.length; i++) {
+      if (category[i]?.cat) {
+        for (let j = 0; j < category[i].cat.length; j++) {
+          if (category[i]?.cat[j]?.id == data) {
+            setActivecat(category[i]?.cat[j]?.name);
+          }
         }
       }
+      if (category[i]?.id == data) {
+        setActivecat(category[i].name);
+      }
     }
-    if(category[i]?.id==data){
-      setActivecat(category[i].name)
-    }
-  }
-},[category])
-
+  }, [category]);
 
   return (
     <>
@@ -180,7 +178,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -254,12 +252,12 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
   return (
     <>
-      {(load&&showSk )? (
+      {load && showSk ? (
         <div>
           <Skeleton />
         </div>
@@ -345,35 +343,29 @@ const Filter = ({ paginate, onChange, setGrid }: any) => {
   );
 };
 
-
-
-
-
-
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
-  const { id }: any = useParams<{ id: string }>()
-  useEffect(()=>{
-    if(item.cat){
-
-    for(let i=0;i<item.cat.length;i++){
-      item.cat[i].id==id&&setShow(true)
+  const { id }: any = useParams<{ id: string }>();
+  useEffect(() => {
+    if (item.cat) {
+      for (let i = 0; i < item.cat.length; i++) {
+        item.cat[i].id == id && setShow(true);
+      }
     }
-  }
-  },[item?.cat])
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] flex-1`
-  const inactiveColor= `flex-1 text-gray-900`
-  const activesub=`text-[${design?.header_color }] flex-1`
-  const inactivesub=`flex-1 text-gray-900`
+  }, [item?.cat]);
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1`;
+  const inactiveColor = `flex-1 text-gray-900`;
+  const activesub = `text-[${design?.header_color}] flex-1`;
+  const inactivesub = `flex-1 text-gray-900`;
   return (
     <>
       <div className="w-full flex px-4 py-1">
         <Link
-          style={id==item?.id?{color:`${design.header_color}`}:{}}
+          style={id == item?.id ? { color: `${design.header_color}` } : {}}
           onClick={() => setSelect(item.id)}
           href={"/category/" + item.id}
-          className={id==item?.id?activeColor:inactiveColor}
+          className={id == item?.id ? activeColor : inactiveColor}
         >
           {" "}
           <p>{item.name}</p>
@@ -406,8 +398,10 @@ const SingleCat = ({ item, select, setSelect }: any) => {
                 >
                   {" "}
                   <li
-          style={id==sub?.id?{color:`${design.header_color}`}:{}}
-                    className={id==sub?.id?activesub:inactivesub}
+                    style={
+                      id == sub?.id ? { color: `${design.header_color}` } : {}
+                    }
+                    className={id == sub?.id ? activesub : inactivesub}
                   >
                     {sub?.name}
                   </li>

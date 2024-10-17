@@ -50,7 +50,6 @@ const HeroSixteen = ({ slider, design }: any) => {
     }
       `;
 
-      
   return (
     <div className="group z-0 relative">
       <style>{styleCss}</style>

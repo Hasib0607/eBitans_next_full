@@ -10,6 +10,7 @@ import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Loading from "../register/loading";
 import { btnhover } from "@/site-settings/style";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 // import Loading from './loading';
 export const cls =
   "w-full rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary ";
@@ -19,6 +20,7 @@ const LoginTwentyOne = () => {
 
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const [activeModule, setActiveModule] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -26,6 +28,12 @@ const LoginTwentyOne = () => {
   //   useEffect(() => {
   //     dispatch(clearMessage());
   //   }, [dispatch]);
+
+  useEffect(() => {
+    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
+      setActiveModule(response?.data?.status || false);
+    });
+  }, [store]);
 
   const { register, handleSubmit } = useForm();
 
@@ -162,6 +170,7 @@ const LoginTwentyOne = () => {
                   >
                     Forgot Password?
                   </Link>
+                  {(store?.auth_type !== "EasyOrder" || activeModule) && (
                   <p className="text-base text-[#adadad]">
                     Don&apos;t Have an Account?
                     <a
@@ -171,6 +180,7 @@ const LoginTwentyOne = () => {
                       Sign Up
                     </a>
                   </p>
+                  )}
                   <div></div>
                 </div>
               </div>

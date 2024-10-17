@@ -17,7 +17,6 @@ const getReferralCode = async () => {
     // Access the referral code from the response data
     const referralCode = response.data.affiliate_info?.referral_code;
     return referralCode;
-    console.log(referralCode);
   } catch (error) {
     console.error(error, "inside getUser.js");
   }

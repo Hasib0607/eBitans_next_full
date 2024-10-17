@@ -176,7 +176,7 @@ const Product = ({
   id,
 }: any) => {
   const [load, setLoad] = useState(false);
-  const [showSk,setShowSk]=useState(true);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
   const { category, subcategory } = useTheme();
 
@@ -250,10 +250,10 @@ const Product = ({
       setLoad(false);
       setError(error);
     }
-    setShowSk(false)
+    setShowSk(false);
   };
 
-  if (load&&showSk) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -331,23 +331,23 @@ const Product = ({
 };
 
 const Location = ({ shops, cat }: any) => {
-  const [activecat,setActivecat]=useState(null)
+  const [activecat, setActivecat] = useState(null);
   const { id: data }: any = useParams<{ id: string }>();
-  const {category}= useTheme();
-  useEffect(()=>{
-    for(let i=0;i<category.length;i++){
-        if(category[i]?.cat){
-          for(let j=0;j<category[i].cat.length;j++){
-            if(category[i]?.cat[j]?.id==data){
-              setActivecat(category[i]?.cat[j]?.name)
-            }
+  const { category } = useTheme();
+  useEffect(() => {
+    for (let i = 0; i < category.length; i++) {
+      if (category[i]?.cat) {
+        for (let j = 0; j < category[i].cat.length; j++) {
+          if (category[i]?.cat[j]?.id == data) {
+            setActivecat(category[i]?.cat[j]?.name);
           }
         }
-        if(category[i]?.id==data){
-          setActivecat(category[i].name)
-        }
       }
-  },[category])
+      if (category[i]?.id == data) {
+        setActivecat(category[i].name);
+      }
+    }
+  }, [category]);
   return (
     <div className="w-full sm:container px-5 text-[#414141] flex gap-1 items-center justify-start py-2 text-sm">
       <p>Home </p>
@@ -378,12 +378,12 @@ const Filter = ({ paginate, onChange, shops, cat }: any) => {
 };
 
 const SingleCat = ({ item }: any) => {
-  const { id }: any = useParams<{ id: string }>()
-  const {design}=useTheme()
-  const activeColor= `text-[${design?.header_color }] flex-1 text-sm text-hover`
-  const inactiveColor= "text-gray-500 flex-1 text-sm text-hover"
-  const activesub=`text-[${design?.header_color }] text-sm`
-  const inactivesub=`text-gray-600 text-sm`
+  const { id }: any = useParams<{ id: string }>();
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 text-sm text-hover`;
+  const inactiveColor = "text-gray-500 flex-1 text-sm text-hover";
+  const activesub = `text-[${design?.header_color}] text-sm`;
+  const inactivesub = `text-gray-600 text-sm`;
   const styleCss = `
     .category-page .active{
         color:#f1593a;
@@ -400,18 +400,26 @@ const SingleCat = ({ item }: any) => {
         <style>{styleCss}</style>
         <Link
           href={"/category/" + item?.id}
-          className={id==item?.id?activeColor:inactiveColor}
+          className={id == item?.id ? activeColor : inactiveColor}
         >
           <p
-          style={parseInt(id)===item?.id?{color:`${design.header_color}`}:{}}
-            >{item.name}</p>
+            style={
+              parseInt(id) === item?.id
+                ? { color: `${design.header_color}` }
+                : {}
+            }
+          >
+            {item.name}
+          </p>
         </Link>
       </div>
       <div className="ml-4">
         {item?.cat?.map((sub: any, key: number) => (
           <div className="category-page-two" key={key}>
             <Link href={"/category/" + sub?.id}>
-              <p className={id==sub?.id?activesub:inactivesub}>{sub?.name}</p>
+              <p className={id == sub?.id ? activesub : inactivesub}>
+                {sub?.name}
+              </p>
             </Link>
           </div>
         ))}

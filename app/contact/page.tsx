@@ -13,6 +13,7 @@ const ContactPage = async () => {
   const url = getUrl();
   const data = await getSubdomainName(url, "headersetting");
   const headerSetting = data.headersetting;
+
   const {
     facebook_link,
     phone,
@@ -87,7 +88,7 @@ const ContactPage = async () => {
           <div className="grid grid-cols-1 gap-12 mt-10 lg:grid-cols-3">
             <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-1">
               <div className="flex divide-x-2">
-                <div>
+                <div className="mr-2">
                   <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-200">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -113,7 +114,7 @@ const ContactPage = async () => {
                   </p>
                 </div>
 
-                <div>
+                <div className="pl-2">
                   <span className="inline-block p-3 text-blue-500 rounded-full bg-blue-200">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"

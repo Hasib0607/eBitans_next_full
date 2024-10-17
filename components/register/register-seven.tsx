@@ -10,6 +10,8 @@ import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import { btnhover } from "@/site-settings/style";
 import Loading from "./loading";
+import axiosInstance from "@/utils/http/axios/axios-instance";
+import { toast } from "react-toastify";
 
 export const cls =
   "py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12";
@@ -20,6 +22,8 @@ const RegisterSeven = () => {
   const [loading, setLoading] = useState(false);
   const [userOne, setUserOne] = useState<any>(null);
   const [show, setShow] = useState(false);
+  const [userType, setUserType] = useState("customer");
+  const [activeModule, setActiveModule] = useState(false);
 
   window.localStorage.setItem("MY_USER_ONE", userOne);
 
@@ -29,6 +33,12 @@ const RegisterSeven = () => {
   // useEffect(() => {
   //   dispatch(clearMessage());
   // }, [dispatch]);
+
+  useEffect(() => {
+    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
+      setActiveModule(response?.data?.status || false);
+    });
+  }, [store]);
 
   const { register, handleSubmit } = useForm();
 
@@ -45,7 +55,7 @@ const RegisterSeven = () => {
           }
         })
         .catch((error) => {
-          // toast(error.response.data.message, { type: "error" });
+          toast(error.response.data.message, { type: "error" });
           setLoading(false);
         });
     } else {
@@ -60,7 +70,7 @@ const RegisterSeven = () => {
         })
         .catch((error) => {
           // console.log(error,"error");
-          // toast(error.response.data.message, { type: "error" });
+          toast(error.response.data.message, { type: "error" });
           setLoading(false);
         });
     }
@@ -159,6 +169,23 @@ const RegisterSeven = () => {
                           <BsEyeSlash onClick={() => setShow(!show)} />
                         )}
                       </div>
+                    </div>
+                  )}
+
+                  {/* User Type Selection Dropdown */}
+                  {activeModule && (
+                    <div className="mb-6">
+                      <label className="block mb-2 text-sm text-gray-500">
+                        Select User Type
+                      </label>
+                      <select
+                        value={userType}
+                        onChange={(e) => setUserType(e.target.value)} // Update the userType state based on selection
+                        className={cls}
+                      >
+                        <option value="customer">Customer</option>
+                        <option value="customerAffiliate">Affiliator</option>
+                      </select>
                     </div>
                   )}
 

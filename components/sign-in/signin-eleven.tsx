@@ -12,6 +12,7 @@ import Loading from "../register/loading";
 import { btnhover } from "@/site-settings/style";
 import { clearMessage } from "@/redux/features/message.slice";
 import { toast } from "react-toastify";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 
 export const cls =
   "py-2 px-4 md:px-5 w-full appearance-none transition duration-150 ease-in-out border text-input text-xs lg:text-sm font-body rounded-md placeholder-body min-h-12 bg-white border-gray-300 focus:outline-none focus:border-heading h-11 md:h-12";
@@ -20,6 +21,7 @@ const LoginEleven = () => {
   const { headerSetting, store_id, store } = useTheme();
   const [loading, setLoading] = useState(false);
   const [show, setShow] = useState(false);
+  const [activeModule, setActiveModule] = useState(false);
 
   const dispatch = useDispatch();
   const router = useRouter();
@@ -27,6 +29,12 @@ const LoginEleven = () => {
   useEffect(() => {
     dispatch(clearMessage());
   }, [dispatch]);
+
+  useEffect(() => {
+    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
+      setActiveModule(response?.data?.status || false);
+    });
+  }, [store]);
 
   const { register, handleSubmit } = useForm();
   const onSubmit = (data: any) => {
@@ -163,6 +171,7 @@ const LoginEleven = () => {
                   </div>
                 </form>
 
+                {(store?.auth_type !== "EasyOrder" || activeModule) && (
                 <p className="text-base font-medium text-[#5A5A5A]">
                   Don&apos;t have any account?
                   <Link
@@ -172,6 +181,7 @@ const LoginEleven = () => {
                     Register
                   </Link>
                 </p>
+                )}
                 <div className="flex justify-center w-full">
                   {/* <LoginWith /> */}
                 </div>
