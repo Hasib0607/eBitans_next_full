@@ -5,6 +5,7 @@ import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
 import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
+import WhatsApp from './components/whatsapp';
 
 const FooterFive = ({
   headerSetting,
@@ -150,6 +151,7 @@ const FooterFive = ({
           </div>
         </div>
         {/* <Messenger /> */}
+        <WhatsApp/>
       </footer>
     </div>
   );

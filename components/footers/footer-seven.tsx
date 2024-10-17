@@ -6,6 +6,7 @@ import {
 } from "react-icons/ai";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 import Newsletter from "./components/newsletter";
+import WhatsApp from './components/whatsapp';
 
 const FooterSeven = ({
   headerSetting,
@@ -168,6 +169,7 @@ const FooterSeven = ({
         </a>
       </p>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </div>
   );
 };

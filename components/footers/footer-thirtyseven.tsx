@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
+import WhatsApp from './components/whatsapp';
 
 const FooterThirtySeven = ({
   headerSetting,
@@ -121,6 +122,7 @@ const FooterThirtySeven = ({
           </div>
         </div>
         {/* <Messenger /> */}
+        <WhatsApp/>
       </footer>
       <p className="pb-20 lg:pb-5 sm:container px-5 ">
         <CopyrightAll headerSetting={headerSetting} />

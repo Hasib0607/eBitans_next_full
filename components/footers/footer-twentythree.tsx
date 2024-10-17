@@ -11,6 +11,7 @@ import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import MyAccount from "./components/myaccount";
 import Newsletter from "./components/newsletter";
+import WhatsApp from './components/whatsapp';
 
 const FooterTwentyThree = ({
   headerSetting,
@@ -218,6 +219,7 @@ const FooterTwentyThree = ({
         </div>
       </div>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </div>
   );
 };

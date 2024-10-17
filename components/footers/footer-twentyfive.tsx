@@ -6,6 +6,7 @@ import Newsletter from "./components/newsletter";
 import MyAccount from "./components/myaccount";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
+import WhatsApp from './components/whatsapp';
 
 const FooterTwentyFive = ({
   headerSetting,
@@ -77,6 +78,7 @@ const FooterTwentyFive = ({
         <CopyrightAll headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </footer>
   );
 };

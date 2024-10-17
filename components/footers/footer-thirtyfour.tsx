@@ -12,6 +12,7 @@ import Newsletter from "./components/newsletter";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
+import WhatsApp from './components/whatsapp';
 
 const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
   const styleCss = `
@@ -143,6 +144,7 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
           <CopyrightAll headerSetting={headerSetting} />
         </div>
         {/* <Messenger /> */}
+        <WhatsApp/>
       </div>
     </div>
   );

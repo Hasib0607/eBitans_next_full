@@ -1,6 +1,7 @@
 import React from "react";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
+import WhatsApp from './components/whatsapp';
 
 const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
   const date = new Date().getFullYear();
@@ -47,6 +48,7 @@ const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
       </div>
 
       {/* <Messenger /> */}
+      <WhatsApp/>
     </div>
   );
 };

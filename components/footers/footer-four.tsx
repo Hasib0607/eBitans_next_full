@@ -5,6 +5,7 @@ import { GoLocation } from "react-icons/go";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
+import WhatsApp from './components/whatsapp';
 
 const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
   const result = page.filter(
@@ -120,6 +121,7 @@ const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
         </div>
       </div>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </footer>
   );
 };

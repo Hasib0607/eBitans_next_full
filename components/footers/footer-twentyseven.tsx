@@ -1,5 +1,6 @@
 import React from "react";
 import CopyrightAll from "./components/copyrightall";
+import WhatsApp from './components/whatsapp';
 
 const FooterTwentySeven = ({ headerSetting }: any) => {
   return (
@@ -8,6 +9,7 @@ const FooterTwentySeven = ({ headerSetting }: any) => {
         <CopyrightAll headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </div>
   );
 };

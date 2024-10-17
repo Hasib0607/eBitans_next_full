@@ -3,6 +3,7 @@ import { AiOutlineInstagram, AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsTelephone, BsYoutube } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import CopyrightAll from "./components/copyrightall";
+import WhatsApp from './components/whatsapp';
 
 const FooterDefault = ({ headerSetting, category }: any) => {
   return (
@@ -117,6 +118,8 @@ const FooterDefault = ({ headerSetting, category }: any) => {
           <CopyrightAll headerSetting={headerSetting} />
         </p>
         {/* <Messenger /> */}
+        <WhatsApp/>
+
       </div>
     </a>
   );
