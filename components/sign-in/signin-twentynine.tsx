@@ -210,16 +210,16 @@ const LoginTwentyNine = () => {
                           Forgot Password?
                         </Link>
                         {(store?.auth_type !== "EasyOrder" || activeModule) && (
-                        <p className="text-base text-[#adadad]">
-                          Don&apos;t Have an Account?
-                          <Link
-                            onClick={() => setSelect("signup")}
-                            href="/login"
-                            className="text-primary hover:underline text-color"
-                          >
-                            Sign Up
-                          </Link>
-                        </p>
+                          <p className="text-base text-[#adadad]">
+                            Don&apos;t Have an Account?
+                            <Link
+                              onClick={() => setSelect("signup")}
+                              href="/login"
+                              className="text-primary hover:underline text-color"
+                            >
+                              Sign Up
+                            </Link>
+                          </p>
                         )}
                         <div></div>
                       </div>
