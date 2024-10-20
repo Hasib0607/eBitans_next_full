@@ -32,7 +32,7 @@ const ReturnPolicyPage = () => {
       httpReq
         .post(`page`, { store_id, slug: result?.slug })
         .then((res) => {
-          setData(res); 
+          setData(res);
           setLoad(false);
         })
         .catch(() => setLoad(false))

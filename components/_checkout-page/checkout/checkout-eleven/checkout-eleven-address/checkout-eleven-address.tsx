@@ -430,7 +430,7 @@ export function SaveAddress({
   } = useForm();
   const { user } = useSelector((state: any) => state.auth);
 
-  console.log("open", open, "save address");
+  // console.log("open", open, "save address");
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;

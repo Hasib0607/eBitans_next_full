@@ -2,7 +2,9 @@
 import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 import httpReq from "@/utils/http/axios/http.service";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -22,6 +24,15 @@ const CheckOutSevenDiscount = ({
   } = useForm();
   const { store_id, design, headerSetting, userData } = useTheme();
   const cartList = useSelector((state: any) => state.cart.cartList);
+  const [couponAvailable, setCouponAvailable] = useState(false);
+
+  useEffect(() => {
+    axiosInstance
+      .post("/check/coupon-is-available", { store_id })
+      .then((response) => {
+        setCouponAvailable(response?.data?.status || false);
+      });
+  }, [store_id]);
   const get_discount = (res: any) => {
     setCoupon(res?.code);
     const priceList = cartList?.map((p: any) => p.qty * p?.price);
@@ -151,6 +162,7 @@ const CheckOutSevenDiscount = ({
                 </div>
               </div>
             )}
+            {couponAvailable && (
             <div className="col-span-6 sm:col-span-3">
               <div className="sm:flex gap-x-3 sm:items-center pb-3 items-start ">
                 <label
@@ -185,6 +197,7 @@ const CheckOutSevenDiscount = ({
                 </form>
               </div>
             </div>
+            )}
           </div>
         </div>
       </div>
