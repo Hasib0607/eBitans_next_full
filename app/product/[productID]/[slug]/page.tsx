@@ -5,7 +5,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
 import { Metadata, ResolvingMetadata } from "next";
 import ViewContentGtm from "./ViewContentGtm";
-import { redirect } from 'next/navigation';
+import { redirect } from "next/navigation";
 
 type Props = {
   params: { productID: string; slug: string };
@@ -24,8 +24,8 @@ export async function generateMetadata(
     product_id: params.productID,
   });
 
-  if(product == undefined || product == null){
-    redirect('/');
+  if (product == undefined || product == null) {
+    redirect("/");
   }
   const { name } = product;
   const websiteName = capitalizeFirstLetter(headersetting?.website_name);
@@ -44,8 +44,8 @@ const SingleProductDetails = async ({ params }: Props) => {
     product_id: params.productID,
   });
 
-  if(product == undefined || product == null){
-    redirect('/');
+  if (product == undefined || product == null) {
+    redirect("/");
   }
 
   return (
