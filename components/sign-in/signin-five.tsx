@@ -126,16 +126,16 @@ const LoginFive = () => {
                   </div>
                 </form>
                 <div className="h-[1px] w-full bg-gray-300 mb-2"></div>
-                
+
                 {(store?.auth_type !== "EasyOrder" || activeModule) && (
-                <p className="text-base text-[#423b3b]">
-                  <Link href="/sign-up" className="hover:underline">
-                    No account?{" "}
-                    <span className="font-bold">Create one here</span>
-                  </Link>
-                </p>
+                  <p className="text-base text-[#423b3b]">
+                    <Link href="/sign-up" className="hover:underline">
+                      No account?{" "}
+                      <span className="font-bold">Create one here</span>
+                    </Link>
+                  </p>
                 )}
-                
+
                 <div className="flex justify-center w-full">
                   {/* <LoginWith /> */}
                 </div>

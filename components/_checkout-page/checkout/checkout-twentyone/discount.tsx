@@ -2,6 +2,7 @@
 import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 import httpReq from "@/utils/http/axios/http.service";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,6 +26,16 @@ const Discount = ({
   const cartList = useSelector((state: any) => state.cart.cartList);
 
   const [loading, setLoading] = useState(false);
+
+  const [couponAvailable, setCouponAvailable] = useState(false);
+
+  useEffect(() => {
+    axiosInstance
+      .post("/check/coupon-is-available", { store_id })
+      .then((response) => {
+        setCouponAvailable(response?.data?.status || false);
+      });
+  }, [store_id]);
 
   const get_discount = (res: any) => {
     setCoupon(res?.code);
@@ -182,11 +193,11 @@ const Discount = ({
                 </div>
               </div>
             </div>
-            {store_id !== 3601 &&
+            {(store_id !== 3601 &&
               store_id !== 3904 &&
               store_id !== 4633 &&
               store_id !== 5519 &&
-              store_id !== 6357 && (
+              store_id !== 6357 ) && couponAvailable && (
                 <div className="">
                   <div className="flex sm:flex-row flex-col gap-4 items-start sm:items-center pb-3 ">
                     <label

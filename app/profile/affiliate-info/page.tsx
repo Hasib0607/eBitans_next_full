@@ -136,4 +136,3 @@ const AffiliateInfo = () => {
 };
 
 export default AffiliateInfo;
-
