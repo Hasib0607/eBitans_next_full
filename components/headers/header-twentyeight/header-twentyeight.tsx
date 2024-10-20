@@ -192,7 +192,7 @@ const HeaderTwentyEight = ({ headerSetting }: any) => {
                 value={searchTxt}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder="সার্চ করুন"
-                className="w-full rounded-full text-black border-0 focus:outline-none focus:border-0 focus:ring-0"
+                className="w-full pl-3 rounded-full text-black border-0 focus:outline-none focus:border-0 focus:ring-0"
               />
               <div onClick={handleClose} className="absolute top-2 right-2">
                 {searchTxt.length !== 0 && (
@@ -218,11 +218,11 @@ const HeaderTwentyEight = ({ headerSetting }: any) => {
             </div>
             <div className="flex items-center gap-x-5">
               <div className="flex items-center gap-2">
-                <div className="flex items-center gap-1">
+                {/* <div className="flex items-center gap-1">
                   <a href={`tel:+88${headerSetting?.phone}`}>
                     <span>{headerSetting?.phone}</span>
                   </a>
-                </div>
+                </div> */}
                 <div
                   onClick={() => setCartOpen(!cartOpen)}
                   className="flex flex-col justify-center items-center relative lg:cursor-pointer"
