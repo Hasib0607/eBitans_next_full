@@ -109,7 +109,6 @@ const Discount = ({
       <div className="shadow sm:rounded-md sm:overflow-hidden my-5">
         <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
           <div className="grid sm:flex flex-wrap justify-between items-center grid-cols-6 gap-6">
-            
             <div className="col-span-6 sm:col-span-3">
               <div className="flex justify-between gap-4 items-center pb-3">
                 <label
@@ -153,7 +152,7 @@ const Discount = ({
               </div>
             </div>
 
-            {(store_id !== 3601 || store_id !== 3904) && couponAvailable &&(
+            {(store_id !== 3601 || store_id !== 3904) && couponAvailable && (
               <div className="col-span-6 sm:col-span-3">
                 <div className="sm:flex gap-x-3 sm:items-center pb-3 items-start ">
                   <label

@@ -171,38 +171,38 @@ const CheckOutFortyDiscount = ({
             )}
 
             {couponAvailable && (
-            <div className="pb-3">
-              <label
-                htmlFor="name"
-                className="block sm:text-xl font-semibold text-gray-700 pb-2"
-              >
-                Discount
-              </label>
-              <form
-                onSubmit={handleSubmit(onSubmit)}
-                className="flex items-start gap-y-2"
-              >
-                <div className="flex flex-col justify-center">
+              <div className="pb-3">
+                <label
+                  htmlFor="name"
+                  className="block sm:text-xl font-semibold text-gray-700 pb-2"
+                >
+                  Discount
+                </label>
+                <form
+                  onSubmit={handleSubmit(onSubmit)}
+                  className="flex items-start gap-y-2"
+                >
+                  <div className="flex flex-col justify-center">
+                    <input
+                      {...register("code", { required: true })}
+                      type={"text"}
+                      className="border border-gray-400 py-1 px-2 rounded-sm w-full"
+                    />
+                    {errors.code && (
+                      <span className="text-red-500">Field is empty</span>
+                    )}
+                  </div>
                   <input
-                    {...register("code", { required: true })}
-                    type={"text"}
-                    className="border border-gray-400 py-1 px-2 rounded-sm w-full"
+                    type={"submit"}
+                    value={"Apply"}
+                    style={{
+                      backgroundColor: design?.header_color,
+                      color: design?.text_color,
+                    }}
+                    className={`px-4 py-0.5 ml-2 font-semibold rounded-sm lg:cursor-pointer text-lg ${btnhover}`}
                   />
-                  {errors.code && (
-                    <span className="text-red-500">Field is empty</span>
-                  )}
-                </div>
-                <input
-                  type={"submit"}
-                  value={"Apply"}
-                  style={{
-                    backgroundColor: design?.header_color,
-                    color: design?.text_color,
-                  }}
-                  className={`px-4 py-0.5 ml-2 font-semibold rounded-sm lg:cursor-pointer text-lg ${btnhover}`}
-                />
-              </form>
-            </div>
+                </form>
+              </div>
             )}
           </div>
         </div>
