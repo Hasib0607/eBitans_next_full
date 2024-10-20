@@ -142,7 +142,7 @@ const Discount = ({
         <div className={`px-4 py-5  space-y-6 sm:p-6`}>
           <div className="grid grid-cols-1 gap-6">
             <div className="">
-              <div className="flex sm:flex-row flex-col justify-start gap-4 sm:items-center pb-3">
+              <div className="flex flex-col justify-start gap-4 items-start pb-3">
                 <label
                   htmlFor="name"
                   className="block text-xl font-semibold text-gray-700"
