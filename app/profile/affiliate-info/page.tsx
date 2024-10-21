@@ -36,7 +36,7 @@ const AffiliateInfo = () => {
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedOrder(null);
-  }
+  };
 
   useEffect(() => {
     if (user_id) {
@@ -133,7 +133,9 @@ const AffiliateInfo = () => {
                 <th className="py-2 px-4 border-b text-left">Price</th>
                 <th className="py-2 px-4 border-b text-left">Quantity</th>
                 <th className="py-2 px-4 border-b text-left">Commision Rate</th>
-                <th className="py-2 px-4 border-b text-left">Commision Ammount</th>
+                <th className="py-2 px-4 border-b text-left">
+                  Commision Ammount
+                </th>
                 <th className="py-2 px-4 border-b text-left">Action</th>
               </tr>
             </thead>
@@ -153,11 +155,12 @@ const AffiliateInfo = () => {
                   <td className="py-2 px-4 border-b">
                     {productData?.commission_percent}
                   </td>
+                  <td className="py-2 px-4 border-b">{productData?.amount}</td>
                   <td className="py-2 px-4 border-b">
-                    {productData?.amount}
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    <button onClick={() => openModal(productData)} className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out">
+                    <button
+                      onClick={() => openModal(productData)}
+                      className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out"
+                    >
                       View
                     </button>
                   </td>
@@ -178,13 +181,17 @@ const AffiliateInfo = () => {
                 <strong>Name:</strong> {selectedOrder?.order?.name}
               </p>
               <p>
-                <strong>Contact:</strong> {(selectedOrder?.order?.phone) ? selectedOrder?.order?.phone : selectedOrder?.order?.email}
+                <strong>Contact:</strong>{" "}
+                {selectedOrder?.order?.phone
+                  ? selectedOrder?.order?.phone
+                  : selectedOrder?.order?.email}
               </p>
               <p>
                 <strong>Address:</strong> {selectedOrder?.order?.address}
               </p>
               <p>
-                <strong>Amount:</strong> {selectedOrder?.order?.total} {selectedOrder?.currency}
+                <strong>Amount:</strong> {selectedOrder?.order?.total}{" "}
+                {selectedOrder?.currency}
               </p>
               <button
                 onClick={closeModal}

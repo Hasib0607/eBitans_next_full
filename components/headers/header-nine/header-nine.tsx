@@ -12,6 +12,7 @@ import Category from "./category";
 import HeaderMenu from "./header-menu";
 import "./header-nine.css";
 import StickyNav from "./sticky-nav";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const HeaderNine = ({ headerSetting }: any) => {
   const { design } = useTheme();
@@ -80,7 +81,7 @@ const HeaderNine = ({ headerSetting }: any) => {
       <div className="block sm:container px-5 py-2 lg:hidden">
         <div className="flex justify-between items-center">
           <div className="lg:cursor-pointer" onClick={() => setOpen(!open)}>
-            <TableCellsIcon className="h-6" />
+            <GiHamburgerMenu className="h-6" />
           </div>
           <div>
             <Link href="/">

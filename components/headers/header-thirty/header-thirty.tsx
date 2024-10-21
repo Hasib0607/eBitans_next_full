@@ -16,6 +16,7 @@ import Search from "./search";
 import { Menu, Transition } from "@headlessui/react";
 import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const HeaderThirty = ({ headerSetting }: any) => {
   const { design, category, userData } = useTheme();
@@ -334,7 +335,7 @@ const HeaderThirty = ({ headerSetting }: any) => {
               className="lg:cursor-pointer flex lg:hidden gap-x-1 justify-center items-center"
               onClick={() => setOpen(!open)}
             >
-              <TableCellsIcon className="h-6" />
+              <GiHamburgerMenu className="h-6" />
               <p>Menu</p>
             </div>
           </div>

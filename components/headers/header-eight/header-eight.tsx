@@ -14,6 +14,7 @@ import { IoIosClose, IoIosSearch } from "react-icons/io";
 import { IoSearchCircleOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import Search from "./search";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -253,7 +254,7 @@ export default function HeaderEight({ headerSetting }: any) {
                             aria-hidden="true"
                           />
                         ) : (
-                          <TableCellsIcon
+                          <GiHamburgerMenu
                             className="block h-6 w-6"
                             aria-hidden="true"
                           />
@@ -380,7 +381,7 @@ const Sticky = ({ setSearchInput, searchInput, headerSetting }: any) => {
                             aria-hidden="true"
                           />
                         ) : (
-                          <TableCellsIcon
+                          <GiHamburgerMenu
                             className="block h-6 w-6"
                             aria-hidden="true"
                           />
