@@ -1,4 +1,5 @@
 "use client";
+import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import axiosInstance from "@/utils/http/axios/axios-instance";
 import { useEffect, useState } from "react";
@@ -11,6 +12,8 @@ interface AffiliateInfoType {
   totalEarning?: string;
   totalBalance?: string;
   withdrawPending?: any;
+  productList?: any;
+  minWithdrawAmount?: any;
 }
 
 const AffiliateInfo = () => {
@@ -18,8 +21,22 @@ const AffiliateInfo = () => {
   const user_id = userData?.affiliate_info?.user_id || null;
   const [loading, setLoading] = useState(true);
   const [affiliateInfo, setAffiliateInfo] = useState<AffiliateInfoType>({});
-  console.log(affiliateInfo);
-  console.log(affiliateInfo.withdrawPending);
+  const [selectedOrder, setSelectedOrder] = useState<any>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  // console.log(affiliateInfo);
+  // console.log(affiliateInfo.productList.data);
+  const productListData = affiliateInfo?.productList?.data;
+  // console.log(productListData);
+
+  const openModal = (order: any) => {
+    setSelectedOrder(order);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedOrder(null);
+  }
 
   useEffect(() => {
     if (user_id) {
@@ -33,7 +50,11 @@ const AffiliateInfo = () => {
   }, [user_id, userData]);
 
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
   }
 
   return (
@@ -98,7 +119,7 @@ const AffiliateInfo = () => {
         {/* Text below the red box */}
         <div className="text-right mt-4">
           <p className="text-xs text-red-500">
-            Minimum 500 TK balance to Withdraw!
+            Minimum {affiliateInfo?.minWithdrawAmount} TK balance to Withdraw!
           </p>
         </div>
         {/* Table */}
@@ -108,82 +129,72 @@ const AffiliateInfo = () => {
             <thead className="bg-gray-100">
               <tr>
                 <th className="py-2 px-4 border-b text-left">#</th>
-                <th className="py-2 px-4 border-b text-left">Name</th>
-                <th className="py-2 px-4 border-b text-left">Job</th>
-                <th className="py-2 px-4 border-b text-left">Favorite Color</th>
-                <th className="py-2 px-4 border-b text-left">Action</th>{" "}
-                {/* Added Action Column */}
+                <th className="py-2 px-4 border-b text-left">Product Name</th>
+                <th className="py-2 px-4 border-b text-left">Price</th>
+                <th className="py-2 px-4 border-b text-left">Quantity</th>
+                <th className="py-2 px-4 border-b text-left">Commision Rate</th>
+                <th className="py-2 px-4 border-b text-left">Commision Ammount</th>
+                <th className="py-2 px-4 border-b text-left">Action</th>
               </tr>
             </thead>
             <tbody>
-              {/* Row 1 */}
-              <tr className="hover:bg-gray-50">
-                <th className="py-2 px-4 border-b">1</th>
-                <td className="py-2 px-4 border-b">Cy Ganderton</td>
-                <td className="py-2 px-4 border-b">
-                  Quality Control Specialist
-                </td>
-                <td className="py-2 px-4 border-b">Blue</td>
-                <td className="py-2 px-4 border-b">
-                  <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out">
-                    View
-                  </button>
-                </td>
-              </tr>
-              {/* Row 2 */}
-              <tr className="hover:bg-gray-50">
-                <th className="py-2 px-4 border-b">2</th>
-                <td className="py-2 px-4 border-b">Hart Hagerty</td>
-                <td className="py-2 px-4 border-b">
-                  Desktop Support Technician
-                </td>
-                <td className="py-2 px-4 border-b">Purple</td>
-                <td className="py-2 px-4 border-b">
-                  <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out">
-                    View
-                  </button>
-                </td>
-              </tr>
-              {/* Row 3 */}
-              <tr className="hover:bg-gray-50">
-                <th className="py-2 px-4 border-b">3</th>
-                <td className="py-2 px-4 border-b">Brice Swyre</td>
-                <td className="py-2 px-4 border-b">Tax Accountant</td>
-                <td className="py-2 px-4 border-b">Red</td>
-                <td className="py-2 px-4 border-b">
-                  <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out">
-                    View
-                  </button>
-                </td>
-              </tr>
-              {/* Additional Rows */}
-              {/* Row 4 */}
-              <tr className="hover:bg-gray-50">
-                <th className="py-2 px-4 border-b">4</th>
-                <td className="py-2 px-4 border-b">Althea E. Morrison</td>
-                <td className="py-2 px-4 border-b">Web Developer</td>
-                <td className="py-2 px-4 border-b">Green</td>
-                <td className="py-2 px-4 border-b">
-                  <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out">
-                    View
-                  </button>
-                </td>
-              </tr>
-              {/* Row 5 */}
-              <tr className="hover:bg-gray-50">
-                <th className="py-2 px-4 border-b">5</th>
-                <td className="py-2 px-4 border-b">Thomas Al Carter</td>
-                <td className="py-2 px-4 border-b">Graphic Designer</td>
-                <td className="py-2 px-4 border-b">Yellow</td>
-                <td className="py-2 px-4 border-b">
-                  <button className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out">
-                    View
-                  </button>
-                </td>
-              </tr>
+              {productListData.map((productData: any, index: any) => (
+                <tr key={productData.id} className="hover:bg-gray-50">
+                  <th className="py-2 px-4 border-b">{index + 1}</th>
+                  <td className="py-2 px-4 border-b">
+                    {productData?.product?.name}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {productData?.product?.regular_price}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {productData?.product?.quantity}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {productData?.commission_percent}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    {productData?.amount}
+                  </td>
+                  <td className="py-2 px-4 border-b">
+                    <button onClick={() => openModal(productData)} className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out">
+                      View
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
+        {/* Modal */}
+        {isModalOpen && selectedOrder && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+            <div className="bg-white rounded-lg p-8 w-96 shadow-lg">
+              <h2 className="text-xl font-bold mb-4">Order Information</h2>
+              <p>
+                <strong>Order ID:</strong> {selectedOrder?.order?.id}
+              </p>
+              <p>
+                <strong>Name:</strong> {selectedOrder?.order?.name}
+              </p>
+              <p>
+                <strong>Contact:</strong> {(selectedOrder?.order?.phone) ? selectedOrder?.order?.phone : selectedOrder?.order?.email}
+              </p>
+              <p>
+                <strong>Address:</strong> {selectedOrder?.order?.address}
+              </p>
+              <p>
+                <strong>Amount:</strong> {selectedOrder?.order?.total} {selectedOrder?.currency}
+              </p>
+              <button
+                onClick={closeModal}
+                className="mt-4 bg-red-500 text-white py-2 px-4 rounded-lg hover:bg-red-600 transition duration-300"
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
