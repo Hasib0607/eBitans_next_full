@@ -12,6 +12,7 @@ import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
 import Search from "./search";
 import SideCategory from "./side-category";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const HeaderMenu = () => {
   const { headerSetting, menu, design } = useTheme();
@@ -138,7 +139,7 @@ const HeaderMenu = () => {
             </div>
 
             <div className="flex lg:hidden" onClick={() => setView(!view)}>
-              <TableCellsIcon className="h-8" />
+              <GiHamburgerMenu className="h-8" />
             </div>
           </div>
 

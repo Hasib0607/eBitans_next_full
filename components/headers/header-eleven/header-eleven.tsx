@@ -7,6 +7,7 @@ import SideMenu from "../header-three/side-menu";
 import HeaderElevenCategory from "./header-eleven-category";
 import HeaderElevenHeaderMenu from "./header-eleven-headermenu";
 import "./header-eleven.css";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const HeaderEleven = ({ headerSetting }: any) => {
   const [open, setOpen] = useState(false);
@@ -52,7 +53,7 @@ const HeaderEleven = ({ headerSetting }: any) => {
       >
         <div className="flex justify-between items-center mb-1 lg:hidden">
           <div onClick={() => setOpen(!open)}>
-            <TableCellsIcon className="h-6" />
+            <GiHamburgerMenu className="h-6" />
           </div>
 
           <div className="">

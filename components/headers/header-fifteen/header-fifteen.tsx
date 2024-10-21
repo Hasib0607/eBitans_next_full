@@ -14,6 +14,7 @@ import {
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderFifteenRight from "./header-fifteen-right";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -64,7 +65,7 @@ const HeaderFifteen = ({ headerSetting }: any) => {
                 onClick={() => setOpen(!open)}
                 className={"hidden sm:flex items-center h-full"}
               >
-                <TableCellsIcon
+                <GiHamburgerMenu
                   className={"mr-2 h-8 w-8 group-hover:text-gray-700"}
                   style={{
                     color:
@@ -97,7 +98,7 @@ const HeaderFifteen = ({ headerSetting }: any) => {
             <div className="-mr-2 -my-2 md:hidden">
               <Popover.Button className=" rounded-md p-2 inline-flex items-center justify-center text-gray-900 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500">
                 <span className="sr-only">Open menu</span>
-                <TableCellsIcon className="h-6 w-6" aria-hidden="true" />
+                <GiHamburgerMenu className="h-6 w-6" aria-hidden="true" />
               </Popover.Button>
             </div>
 

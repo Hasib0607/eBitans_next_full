@@ -20,6 +20,7 @@ import { IoSearchCircleOutline } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import Search from "../header-seven/search";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const handleClick = () => {
   if (window !== undefined) {
@@ -173,7 +174,7 @@ const HeaderDown = ({ headerSetting }: any) => {
             className="border border-gray-300 p-1 lg:cursor-pointer"
             onClick={() => setOpen(!open)}
           >
-            <TableCellsIcon className="h-5 w-5" />
+            <GiHamburgerMenu className="h-5 w-5" />
           </div>
           <div className="lg:block hidden">
             {headerSetting?.logo === null ? (

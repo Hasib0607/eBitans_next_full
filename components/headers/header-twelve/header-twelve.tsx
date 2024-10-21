@@ -33,6 +33,7 @@ import "./header-twelve.css";
 import Search from "./search";
 import SideCategory from "./side-category";
 import StickyNav from "./sticky-nav";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -321,7 +322,7 @@ const HeaderTwelve = ({ headerSetting }: any) => {
       <div className="block px-4 py-4 lg:hidden">
         <div className="flex justify-between mb-6 py">
           <div className="lg:cursor-pointer" onClick={() => setOpen(!open)}>
-            <TableCellsIcon className="h-6" />
+            <GiHamburgerMenu className="h-6" />
           </div>
           <div>
             <Link href="/">
