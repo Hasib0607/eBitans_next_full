@@ -25,7 +25,7 @@ const CheckOutSevenDiscount = ({
   const { store_id, design, headerSetting, userData } = useTheme();
   const cartList = useSelector((state: any) => state.cart.cartList);
   const [couponAvailable, setCouponAvailable] = useState(false);
-
+  // console.log(userData);
   useEffect(() => {
     axiosInstance
       .post("/check/coupon-is-available", { store_id })

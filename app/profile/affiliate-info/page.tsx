@@ -1,4 +1,41 @@
+"use client";
+import useTheme from "@/hooks/use-theme";
+import axiosInstance from "@/utils/http/axios/axios-instance";
+import { useEffect, useState } from "react";
+
+// Define the structure of affiliateInfo
+interface AffiliateInfoType {
+  totalCustomer?: number;
+  monthlyCustomer?: number;
+  monthlyEarning?: string;
+  totalEarning?: string;
+  totalBalance?: string;
+  withdrawPending?: any;
+}
+
 const AffiliateInfo = () => {
+  const { store_id, store, headerSetting, userData } = useTheme();
+  const user_id = userData?.affiliate_info?.user_id || null;
+  const [loading, setLoading] = useState(true);
+  const [affiliateInfo, setAffiliateInfo] = useState<AffiliateInfoType>({});
+  console.log(affiliateInfo);
+  console.log(affiliateInfo.withdrawPending);
+
+  useEffect(() => {
+    if (user_id) {
+      axiosInstance
+        .post("/customer-affiliate/order-list", { user_id })
+        .then((response) => {
+          setAffiliateInfo(response?.data?.data || {});
+          setLoading(false);
+        });
+    }
+  }, [user_id, userData]);
+
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
   return (
     <div>
       <div className="p-8 bg-gray-100 min-h-screen">
@@ -6,39 +43,56 @@ const AffiliateInfo = () => {
           {/* Card 1: Total Customer */}
           <div className="bg-white shadow-lg rounded-lg p-6 text-center">
             <h3 className="text-gray-700 font-semibold">Total Customer</h3>
-            <p className="text-2xl font-bold mt-2">0</p>
+            <p className="text-2xl font-bold mt-2">
+              {affiliateInfo?.totalCustomer}
+            </p>
           </div>
 
           {/* Card 2: Monthly Customer */}
           <div className="bg-white shadow-lg rounded-lg p-6 text-center">
             <h3 className="text-gray-700 font-semibold">Monthly Customer</h3>
-            <p className="text-2xl font-bold mt-2">0</p>
+            <p className="text-2xl font-bold mt-2">
+              {affiliateInfo?.monthlyCustomer}
+            </p>
           </div>
 
           {/* Card 3: Monthly Earning */}
           <div className="bg-white shadow-lg rounded-lg p-6 text-center">
             <h3 className="text-gray-700 font-semibold">Monthly Earning</h3>
-            <p className="text-2xl font-bold mt-2">0 TK</p>
+            <p className="text-2xl font-bold mt-2">
+              {affiliateInfo?.monthlyEarning} TK
+            </p>
           </div>
 
           {/* Card 4: Total Earning */}
           <div className="bg-white shadow-lg rounded-lg p-6 text-center">
             <h3 className="text-gray-700 font-semibold">Total Earning</h3>
-            <p className="text-2xl font-bold mt-2">0 TK</p>
+            <p className="text-2xl font-bold mt-2">
+              {affiliateInfo?.totalEarning} TK
+            </p>
           </div>
 
           {/* Card 5: Your Balance (Red card) */}
           <div className="bg-red-500 shadow-lg rounded-lg px-5 py-3 text-center text-white relative col-span-1 sm:col-span-2 md:col-span-3 lg:col-span-1">
             <h3 className="font-semibold">Your Balance</h3>
-            <p className="text-2xl font-bold mt-2">0 TK</p>
-
-            {/* Withdrawal button */}
-            <button
-              className="mt-4 px-4 py-2 bg-yellow-400 text-red-500 font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-300"
-              disabled // Disable the button if balance is less than 500 TK
-            >
-              Withdraw
-            </button>
+            <p className="text-2xl font-bold mt-2">
+              {affiliateInfo.totalBalance} TK
+            </p>
+            {/* Conditional rendering based on withdrawPending */}
+            {affiliateInfo.withdrawPending == false ? (
+              // Button shown when withdrawPending is true
+              <button className="mt-4 px-4 py-2 bg-yellow-400 text-red-500 font-semibold rounded-lg hover:bg-yellow-500 transition-colors duration-300">
+                Withdraw
+              </button>
+            ) : (
+              // Button shown when withdrawPending is false
+              <button
+                className="mt-4 px-4 py-2 bg-gray-300 text-gray-600 font-semibold rounded-lg cursor-not-allowed"
+                disabled
+              >
+                Withdraw Processing ({affiliateInfo?.withdrawPending?.amount})
+              </button>
+            )}
           </div>
         </div>
         {/* Text below the red box */}
