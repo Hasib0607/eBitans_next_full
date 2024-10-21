@@ -30,7 +30,6 @@ const CheckoutComponent = () => {
     router.push("/login"); // Redirect to login if the redirect condition is true
   }
 
-
   return (
     <>
       <CheckoutGtm />

@@ -164,11 +164,11 @@ const Discount = ({
                         name="shippingArea"
                         value={parseInt(headerSetting?.shipping_area_1_cost)}
                         onChange={shippingPrice}
-                        checked={
-                          store_id === 3601 ||
-                          store_id === 3904 ||
-                          store_id === 5519
-                        }
+                        // checked={
+                        //   store_id === 3601 ||
+                        //   store_id === 3904 ||
+                        //   store_id === 5519
+                        // }
                         className="mr-2"
                       />
                       <label

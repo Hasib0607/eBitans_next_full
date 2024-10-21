@@ -56,7 +56,7 @@ const CheckOutSevenOrder = ({
     bookingData,
   } = useTheme();
 
-  console.log(selectAddress?.phone, "this is user address");
+  // console.log(selectAddress?.phone, "this is user address");
 
   const cartList = useSelector((state: any) => state.cart.cartList);
   const { user } = useSelector((state: any) => state.auth);
