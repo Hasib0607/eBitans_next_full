@@ -109,7 +109,7 @@ const Card = ({ item }: any) => {
       <div className="category-hover">
         <div className=" h-full overflow-hidden ">
           <img
-            src={catImg + item.banner}
+            src={catImg + item?.banner}
             alt="Mountain"
             className="h-auto w-full duration-500 "
           />
