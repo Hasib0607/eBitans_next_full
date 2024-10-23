@@ -18,7 +18,7 @@ const MenuList = ({ cls, menu, page }: any) => {
       )}
       {result?.map((m: any) => (
         <p key={m?.id}>
-          <Link href={"/" + m?.link} className={cls}>
+          <Link href={ m?.link} className={cls}>
             {m?.name}
           </Link>
         </p>
