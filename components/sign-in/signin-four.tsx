@@ -142,15 +142,15 @@ const LoginFour = () => {
                   Forgot Password?
                 </Link>
                 {(store?.auth_type !== "EasyOrder" || activeModule) && (
-                <p className="text-base text-[#adadad]">
-                  Not a member yet?
-                  <Link
-                    href="/sign-up"
-                    className="text-primary hover:underline text-blue-600"
-                  >
-                    Sign Up
-                  </Link>
-                </p>
+                  <p className="text-base text-[#adadad]">
+                    Not a member yet?
+                    <Link
+                      href="/sign-up"
+                      className="text-primary hover:underline text-blue-600"
+                    >
+                      Sign Up
+                    </Link>
+                  </p>
                 )}
                 <div className="flex justify-center w-full">
                   {/* <LoginWith /> */}

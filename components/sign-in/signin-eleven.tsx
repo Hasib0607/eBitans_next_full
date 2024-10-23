@@ -172,15 +172,15 @@ const LoginEleven = () => {
                 </form>
 
                 {(store?.auth_type !== "EasyOrder" || activeModule) && (
-                <p className="text-base font-medium text-[#5A5A5A]">
-                  Don&apos;t have any account?
-                  <Link
-                    href="/sign-up"
-                    className="text-primary underline font-sans font-bold text-black pl-1"
-                  >
-                    Register
-                  </Link>
-                </p>
+                  <p className="text-base font-medium text-[#5A5A5A]">
+                    Don&apos;t have any account?
+                    <Link
+                      href="/sign-up"
+                      className="text-primary underline font-sans font-bold text-black pl-1"
+                    >
+                      Register
+                    </Link>
+                  </p>
                 )}
                 <div className="flex justify-center w-full">
                   {/* <LoginWith /> */}

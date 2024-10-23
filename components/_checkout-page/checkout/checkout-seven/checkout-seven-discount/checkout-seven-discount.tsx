@@ -2,7 +2,9 @@
 import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 import httpReq from "@/utils/http/axios/http.service";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
@@ -22,6 +24,15 @@ const CheckOutSevenDiscount = ({
   } = useForm();
   const { store_id, design, headerSetting, userData } = useTheme();
   const cartList = useSelector((state: any) => state.cart.cartList);
+  const [couponAvailable, setCouponAvailable] = useState(false);
+  // console.log(userData);
+  useEffect(() => {
+    axiosInstance
+      .post("/check/coupon-is-available", { store_id })
+      .then((response) => {
+        setCouponAvailable(response?.data?.status || false);
+      });
+  }, [store_id]);
   const get_discount = (res: any) => {
     setCoupon(res?.code);
     const priceList = cartList?.map((p: any) => p.qty * p?.price);
@@ -151,40 +162,42 @@ const CheckOutSevenDiscount = ({
                 </div>
               </div>
             )}
-            <div className="col-span-6 sm:col-span-3">
-              <div className="sm:flex gap-x-3 sm:items-center pb-3 items-start ">
-                <label
-                  htmlFor="name"
-                  className="block sm:text-xl font-semibold text-gray-700 pb-2 sm:pb-0 "
-                >
-                  Discount
-                </label>
-                <form
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="flex items-start gap-y-2"
-                >
-                  <div className="flex flex-col justify-center">
+            {couponAvailable && (
+              <div className="col-span-6 sm:col-span-3">
+                <div className="sm:flex gap-x-3 sm:items-center pb-3 items-start ">
+                  <label
+                    htmlFor="name"
+                    className="block sm:text-xl font-semibold text-gray-700 pb-2 sm:pb-0 "
+                  >
+                    Discount
+                  </label>
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex items-start gap-y-2"
+                  >
+                    <div className="flex flex-col justify-center">
+                      <input
+                        {...register("code", { required: true })}
+                        type={"text"}
+                        className="border border-gray-400 py-2 px-2 rounded-sm w-full"
+                      />
+                      {errors.code && (
+                        <span className="text-red-500">Field is empty</span>
+                      )}
+                    </div>
                     <input
-                      {...register("code", { required: true })}
-                      type={"text"}
-                      className="border border-gray-400 py-2 px-2 rounded-sm w-full"
+                      type={"submit"}
+                      value={"Apply"}
+                      style={{
+                        backgroundColor: design?.header_color,
+                        color: design?.text_color,
+                      }}
+                      className={`px-4 py-2 ml-2 font-semibold rounded-sm lg:cursor-pointer text-lg ${btnhover}`}
                     />
-                    {errors.code && (
-                      <span className="text-red-500">Field is empty</span>
-                    )}
-                  </div>
-                  <input
-                    type={"submit"}
-                    value={"Apply"}
-                    style={{
-                      backgroundColor: design?.header_color,
-                      color: design?.text_color,
-                    }}
-                    className={`px-4 py-2 ml-2 font-semibold rounded-sm lg:cursor-pointer text-lg ${btnhover}`}
-                  />
-                </form>
+                  </form>
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

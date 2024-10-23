@@ -72,9 +72,7 @@ const FeaturedSeventeen = ({ category }: any) => {
           <SectionHeadingSeventeen text={title} title_color={title_color} />
         </div>
         <div className="flex justify-center pt-2">
-          <div
-            style={{ position: "relative", width: "120px", height: "80px" }}
-          >
+          <div style={{ position: "relative", width: "120px", height: "80px" }}>
             <Image src={image.src} fill alt="Description of the image" />
           </div>
         </div>

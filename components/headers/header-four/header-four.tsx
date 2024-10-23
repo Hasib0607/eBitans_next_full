@@ -16,6 +16,7 @@ import { IoSearchCircleOutline } from "react-icons/io5";
 import Search from "./search";
 import { red } from "@/site-settings/color";
 import { btnhover } from "@/site-settings/style";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -140,7 +141,7 @@ export default function HeaderFour({ headerSetting }: any) {
                 "text-gray-100 group rounded-md  py-2 px-4 inline-flex items-center text-base font-medium hover:text-gray-300"
               }
             >
-              <TableCellsIcon
+              <GiHamburgerMenu
                 className={
                   "text-gray-100 mr-2 h-5 w-5 group-hover:text-gray-200"
                 }

@@ -13,6 +13,7 @@ import LoginTwentyOne from "../../sign-in/signin-twentyone";
 import Search from "./search";
 import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 const HeaderTwentySix = ({ headerSetting }: any) => {
   const { design, category, userData, menu } = useTheme();
@@ -271,7 +272,7 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
             className="lg:cursor-pointer flex lg:hidden gap-x-1 justify-center items-center pb-5"
             onClick={() => setOpen(!open)}
           >
-            <TableCellsIcon className="h-10" />
+            <GiHamburgerMenu className="h-10" />
           </div>
         </div>
         {/* mobile search  */}

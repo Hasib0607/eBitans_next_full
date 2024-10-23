@@ -7,7 +7,7 @@ import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
 import { AiOutlineClose } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
-import { FaHeadphonesAlt } from "react-icons/fa";
+import { BsTelephone } from "react-icons/bs";
 import { FiUser } from "react-icons/fi";
 import { HiMenu } from "react-icons/hi";
 import { IoIosArrowForward } from "react-icons/io";
@@ -438,7 +438,7 @@ const HeaderThirtyThree = ({ headerSetting }: any) => {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            <FaHeadphonesAlt className="text-3xl" />
+            <BsTelephone className="text-3xl" />
             <p className="text-2xl">{headerSetting?.phone}</p>
           </div>
         </div>

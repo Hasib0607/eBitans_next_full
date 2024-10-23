@@ -13,6 +13,7 @@ import {
 import Link from "next/link";
 import { useSelector } from "react-redux";
 import MultiStep from "./multistep";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function HeaderMid() {
   const { menu, headerSetting, category, design } = useTheme();
@@ -44,7 +45,7 @@ export default function HeaderMid() {
                   "text-gray-900   rounded-md inline-flex items-center text-base font-medium group-hover:text-orange-400 gap-1"
                 }
               >
-                <TableCellsIcon
+                <GiHamburgerMenu
                   className={
                     "text-gray-400 ml-2 h-5 w-5 group-hover:text-orange-400"
                   }

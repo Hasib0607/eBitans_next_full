@@ -15,7 +15,7 @@ interface PageData {
   slug: string;
 }
 
-const AboutPage = () => {
+const ReturnPolicyPage = () => {
   const [data, setData] = useState<PageData | null>(null);
   const { store_id, page, design, menu } = useTheme();
   const [load, setLoad] = useState(false);
@@ -32,7 +32,7 @@ const AboutPage = () => {
       httpReq
         .post(`page`, { store_id, slug: result?.slug })
         .then((res) => {
-          setData(res); // Adjust based on your API response structure
+          setData(res);
           setLoad(false);
         })
         .catch(() => setLoad(false))
@@ -125,7 +125,7 @@ const AboutPage = () => {
           )}
         </div>
       ) : (
-        <NotFoundPage /> // Render NotFoundPage if no data
+        <NotFoundPage />
       )}
       {contact && store_id === 3685 && (
         <div className="relative w-full mt-[100px]">
@@ -147,4 +147,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default ReturnPolicyPage;

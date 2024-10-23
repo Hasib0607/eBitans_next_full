@@ -2,6 +2,7 @@
 import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
 import { getDiscount } from "@/utils/get-discount";
+import axiosInstance from "@/utils/http/axios/axios-instance";
 import httpReq from "@/utils/http/axios/http.service";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -25,6 +26,16 @@ const Discount = ({
   const cartList = useSelector((state: any) => state.cart.cartList);
 
   const [loading, setLoading] = useState(false);
+
+  const [couponAvailable, setCouponAvailable] = useState(false);
+
+  useEffect(() => {
+    axiosInstance
+      .post("/check/coupon-is-available", { store_id })
+      .then((response) => {
+        setCouponAvailable(response?.data?.status || false);
+      });
+  }, [store_id]);
 
   const get_discount = (res: any) => {
     setCoupon(res?.code);
@@ -131,7 +142,7 @@ const Discount = ({
         <div className={`px-4 py-5  space-y-6 sm:p-6`}>
           <div className="grid grid-cols-1 gap-6">
             <div className="">
-              <div className="flex sm:flex-row flex-col justify-start gap-4 sm:items-center pb-3">
+              <div className="flex flex-col justify-start gap-4 items-start pb-3">
                 <label
                   htmlFor="name"
                   className="block text-xl font-semibold text-gray-700"
@@ -143,50 +154,81 @@ const Discount = ({
                     ? "শিপিং এরিয়া"
                     : "Shipping Area"}
                 </label>
-                <div>
-                  <select
-                    onChange={shippingPrice}
-                    id="country"
-                    name="country"
-                    autoComplete="country-name"
-                    className="mt-1 text-black block w-full py-2 text-lg font-semibold border capitalize border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  >
-                    <option value={""}>--Select Area--</option>
-                    {headerSetting?.shipping_area_1 && (
-                      <option
-                        selected={
-                          store_id === 3601 ||
-                          store_id === 3904 ||
-                          store_id === 5519
-                        }
+                <div className="flex flex-col gap-2">
+                  {/* Radio button for Shipping Area 1 */}
+                  {headerSetting?.shipping_area_1 && (
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        id="shippingArea1"
+                        name="shippingArea"
                         value={parseInt(headerSetting?.shipping_area_1_cost)}
+                        onChange={shippingPrice}
+                        // checked={
+                        //   store_id === 3601 ||
+                        //   store_id === 3904 ||
+                        //   store_id === 5519
+                        // }
+                        className="mr-2"
+                      />
+                      <label
+                        htmlFor="shippingArea1"
+                        className="text-lg font-semibold"
                       >
                         {headerSetting?.shipping_area_1}
-                      </option>
-                    )}
-                    {headerSetting?.shipping_area_2 && (
-                      <option
+                      </label>
+                    </div>
+                  )}
+
+                  {/* Radio button for Shipping Area 2 */}
+                  {headerSetting?.shipping_area_2 && (
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        id="shippingArea2"
+                        name="shippingArea"
                         value={parseInt(headerSetting?.shipping_area_2_cost)}
+                        onChange={shippingPrice}
+                        className="mr-2"
+                      />
+                      <label
+                        htmlFor="shippingArea2"
+                        className="text-lg font-semibold"
                       >
                         {headerSetting?.shipping_area_2}
-                      </option>
-                    )}
-                    {headerSetting?.shipping_area_3 && (
-                      <option
+                      </label>
+                    </div>
+                  )}
+
+                  {/* Radio button for Shipping Area 3 */}
+                  {headerSetting?.shipping_area_3 && (
+                    <div className="flex items-center">
+                      <input
+                        type="radio"
+                        id="shippingArea3"
+                        name="shippingArea"
                         value={parseInt(headerSetting?.shipping_area_3_cost)}
+                        onChange={shippingPrice}
+                        className="mr-2"
+                      />
+                      <label
+                        htmlFor="shippingArea3"
+                        className="text-lg font-semibold"
                       >
                         {headerSetting?.shipping_area_3}
-                      </option>
-                    )}
-                  </select>
+                      </label>
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
+
             {store_id !== 3601 &&
               store_id !== 3904 &&
               store_id !== 4633 &&
               store_id !== 5519 &&
-              store_id !== 6357 && (
+              store_id !== 6357 &&
+              couponAvailable && (
                 <div className="">
                   <div className="flex sm:flex-row flex-col gap-4 items-start sm:items-center pb-3 ">
                     <label

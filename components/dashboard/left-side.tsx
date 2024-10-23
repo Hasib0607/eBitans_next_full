@@ -82,6 +82,18 @@ const LeftSide = () => {
                 Affiliate Info
               </Link>
             )}
+            {referralLink && (
+              <Link
+                href="/profile/withdraw-history"
+                className={`${
+                  pathname === "/profile/withdraw-history"
+                    ? " active_color"
+                    : "border-white "
+                }  border-l-4 text-md font-semibold pl-5 py-1 tracking-wider`}
+              >
+                Withdraw History
+              </Link>
+            )}
           </div>
         </div>
       </div>

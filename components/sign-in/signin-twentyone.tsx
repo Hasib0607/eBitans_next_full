@@ -171,15 +171,15 @@ const LoginTwentyOne = () => {
                     Forgot Password?
                   </Link>
                   {(store?.auth_type !== "EasyOrder" || activeModule) && (
-                  <p className="text-base text-[#adadad]">
-                    Don&apos;t Have an Account?
-                    <a
-                      href="/sign-up"
-                      className="text-primary hover:underline text-color"
-                    >
-                      Sign Up
-                    </a>
-                  </p>
+                    <p className="text-base text-[#adadad]">
+                      Don&apos;t Have an Account?
+                      <a
+                        href="/sign-up"
+                        className="text-primary hover:underline text-color"
+                      >
+                        Sign Up
+                      </a>
+                    </p>
                   )}
                   <div></div>
                 </div>

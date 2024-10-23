@@ -15,7 +15,7 @@ interface PageData {
   slug: string;
 }
 
-const AboutPage = () => {
+const TermsAndConditionPage = () => {
   const [data, setData] = useState<PageData | null>(null);
   const { store_id, page, design, menu } = useTheme();
   const [load, setLoad] = useState(false);
@@ -147,4 +147,4 @@ const AboutPage = () => {
   );
 };
 
-export default AboutPage;
+export default TermsAndConditionPage;
