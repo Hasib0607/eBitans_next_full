@@ -50,7 +50,7 @@ const NewsletterTwo = ({ store_id }: any) => {
               <input
                 ref={emailRef}
                 type="email"
-                className="w-full rounded-full border-gray-200 opacity-100 outline-none focus:outline-none focus:border-none focus:ring-1 focus:ring-black text-black"
+                className="w-full h-[41px] pl-4 text-xs lg:text-[15px] rounded-full border-gray-200 opacity-100 outline-none focus:outline-none focus:border-none focus:ring-1 focus:ring-black text-black"
                 placeholder="Write your email here"
                 required
               />

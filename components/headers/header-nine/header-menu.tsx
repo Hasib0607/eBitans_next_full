@@ -72,7 +72,7 @@ function HeaderMenu() {
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
                 placeholder="Enter your search key ..."
-                className="bg-gray-100 w-full py-3 outline-none focus:outline-none focus:border-gray-200 border-gray-200 focus:ring-0 z-50"
+                className="bg-gray-100 pl-3 w-full py-3 outline-none focus:outline-none focus:border-gray-200 border-gray-200 focus:ring-0 z-50"
                 style={{ height: "50px" }}
               />
             </div>

@@ -20,18 +20,21 @@ const Nine = ({ data, updatedData }: any) => {
     queryKey: ["pd-9"],
     queryFn: () => getProductDetails(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
+    staleTime: 1000 * 60 * 5,
   });
 
   const { data: relatedProducts } = useQuery({
     queryKey: ["rp-9"],
     queryFn: () => getRelatedProducts(updatedData?.product_id),
     enabled: !!updatedData.slug && !!updatedData.store_id,
+    staleTime: 1000 * 60 * 5,
   });
 
   const { data: reviews } = useQuery({
     queryKey: ["rv-9"],
     queryFn: () => getReviews(updatedData),
     enabled: !!updatedData.slug && !!updatedData.store_id,
+    staleTime: 1000 * 60 * 5,
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
