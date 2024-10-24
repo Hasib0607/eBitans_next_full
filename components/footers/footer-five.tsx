@@ -21,6 +21,7 @@ const FooterFive = ({
     (item: any) => !menu.find((menuItem: any) => menuItem.url === item.link)
   );
 
+
   // const footerData = customizeFooter.find(item => item.id == storeID);
 
   const customDesign = `

@@ -108,7 +108,7 @@ const FooterSeven = ({
               </a>
               <a href={"tel:+88" + headerSetting?.phone}>
                 <p className="menu-hover">{footerData?.support ? footerData?.support : 'Call Us:'} {headerSetting?.phone}</p>
-                <p className="menu-hover">{footerData?.help_line}</p>
+                {footerData?.help_line && <p className="menu-hover ">{footerData?.help_line}</p>}
               </a>
               <p className="menu-hover">Address: {headerSetting?.address}</p>
             </div>
