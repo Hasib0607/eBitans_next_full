@@ -56,7 +56,7 @@ const FeatureCatSix = ({ item, setText, text }: any) => {
     );
     setResult(data?.data?.data?.total);
   };
-  
+
   useEffect(() => {
     fetchData();
   }, [item?.id]);

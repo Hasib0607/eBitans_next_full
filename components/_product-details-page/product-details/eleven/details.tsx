@@ -896,4 +896,3 @@ const AddCart = ({ setQty, qty, onClick, product, store_id, buyNow }: any) => {
     </>
   );
 };
-

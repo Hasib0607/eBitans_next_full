@@ -768,4 +768,3 @@ const AddCart = ({ setQty, qty, onClick, buttonEighteen }: any) => {
     </div>
   );
 };
-

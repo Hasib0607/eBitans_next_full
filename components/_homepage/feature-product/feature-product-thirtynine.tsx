@@ -85,47 +85,47 @@ const FeatureProductThirtyNine = ({
         </div> */}
 
         {/* <ScrollTrigger onEnter={() => setAnimate(true)}> */}
-          <DefaultSlider
-            prevEl={prevEl}
-            nextEl={nextEl}
-            loop={true}
-            modules={[Pagination]}
-            paginationType={"fraction"}
-            breakpoints={{
-              320: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              480: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 20,
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 20,
-              },
-              1440: {
-                slidesPerView: 5.35,
-                spaceBetween: 20,
-              },
-            }}
-          >
-            {feature_product?.slice(0, 10).map((item: any) => (
-              <SwiperSlide key={item?.id}>
-                <div
-                  className={`${
-                    animate ? "translate-y-0" : "translate-y-[25px]"
-                  } duration-1000`}
-                >
-                  <Card67 item={item} design={design} store_id={store_id} />
-                </div>
-              </SwiperSlide>
-            ))}
-          </DefaultSlider>
+        <DefaultSlider
+          prevEl={prevEl}
+          nextEl={nextEl}
+          loop={true}
+          modules={[Pagination]}
+          paginationType={"fraction"}
+          breakpoints={{
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            480: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
+            1024: {
+              slidesPerView: 3,
+              spaceBetween: 20,
+            },
+            1440: {
+              slidesPerView: 5.35,
+              spaceBetween: 20,
+            },
+          }}
+        >
+          {feature_product?.slice(0, 10).map((item: any) => (
+            <SwiperSlide key={item?.id}>
+              <div
+                className={`${
+                  animate ? "translate-y-0" : "translate-y-[25px]"
+                } duration-1000`}
+              >
+                <Card67 item={item} design={design} store_id={store_id} />
+              </div>
+            </SwiperSlide>
+          ))}
+        </DefaultSlider>
         {/* </ScrollTrigger> */}
       </div>
     </div>

@@ -1,8 +1,7 @@
-
 "use client";
 import { useState } from "react";
 import { SwiperSlide } from "swiper/react";
-import ScrollTrigger from 'react-scroll-trigger';
+import ScrollTrigger from "react-scroll-trigger";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Card67 from "../card/card67";
@@ -51,7 +50,7 @@ const NewArrivalProductThirtyNine = ({ product, design, store_id }: any) => {
             <ChevronRightIcon className="h-4 font-serif font-bold" />
           </div>
         </div> */}
-        
+
         {/* <ScrollTrigger onEnter={() => setAnimate(true)}> */}
         <DefaultSlider
           prevEl={prevEl}
