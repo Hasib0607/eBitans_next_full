@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { FaUser, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 
 const Address = ({
   selectAddress,
@@ -377,87 +378,87 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
     <div>
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="shadow overflow-hidden sm:rounded-md w-full">
-          <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "নাম"
-                  : "Name"}
-              </label>
-              <input
-                {...register("name", { required: true })}
-                type="text"
-                name="name"
-                id="name"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-              {errors.name && (
-                <span className="text-red-500">Phone name is required</span>
-              )}
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ফোন"
-                  : "Phone"}
-              </label>
-              <input
-                {...register("phone", {
-                  required: true,
-                  minLength: 11,
-                  maxLength: 11,
-                })}
-                type="number"
-                name="phone"
-                id="phone"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
 
-              {errors.phone?.type === "required" && (
-                <span className="text-red-500">Phone number is required</span>
-              )}
-              {errors.phone?.type === "minLength" && (
-                <span className="text-red-500">
-                  Please enter correct phone number
-                </span>
-              )}
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ঠিকানা"
-                  : "Address"}
-              </label>
-              <textarea
-                {...register("address", { required: true })}
-                rows={6}
-                name="address"
-                id="address"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-              {errors.address && (
-                <span className="text-red-500">Phone address is required</span>
-              )}
-            </div>
-          </div>
+        <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
+  <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+    <label htmlFor="name" className="block text-sm font-medium text-gray-700">
+      {design?.template_id === "29" || store_id === 3601 || store_id === 3904
+        ? "নাম"
+        : "Name"}
+    </label>
+    <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+        <FaUser className="text-black" />
+      </div>
+      <input
+        {...register("name", { required: true })}
+        type="text"
+        name="name"
+        id="name"
+        autoComplete="address-level1"
+        className="flex-grow ml-2 outline-none"
+      />
+    </div>
+    {errors.name && (
+      <span className="text-red-500">Name is required</span>
+    )}
+  </div>
+
+  <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+    <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+      {design?.template_id === "29" || store_id === 3601 || store_id === 3904
+        ? "ফোন"
+        : "Phone"}
+    </label>
+    <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+        <FaPhoneAlt className="text-black" />
+      </div>
+      <input
+        {...register("phone", { required: true, minLength: 11, maxLength: 11 })}
+        type="number"
+        name="phone"
+        id="phone"
+        autoComplete="address-level1"
+        className="flex-grow ml-2 outline-none"
+      />
+    </div>
+    {errors.phone?.type === "required" && (
+      <span className="text-red-500">Phone number is required</span>
+    )}
+    {errors.phone?.type === "minLength" && (
+      <span className="text-red-500">
+        Please enter a valid phone number
+      </span>
+    )}
+  </div>
+
+  <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+    <label htmlFor="address" className="block text-sm font-medium text-gray-700">
+      {design?.template_id === "29" || store_id === 3601 || store_id === 3904
+        ? "ঠিকানা"
+        : "Address"}
+    </label>
+    <div className="flex items-start mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+        <FaMapMarkerAlt className="text-black" />
+      </div>
+      <textarea
+        {...register("address", { required: true })}
+        rows={6}
+        name="address"
+        id="address"
+        autoComplete="address-level1"
+        className="flex-grow ml-2 outline-none"
+      />
+    </div>
+    {errors.address && (
+      <span className="text-red-500">Address is required</span>
+    )}
+  </div>
+</div>
+
+
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
               type="submit"
@@ -775,7 +776,7 @@ export function UpdateAddress({
 
 // modal for address update
 export function Modal({ open, setOpen, children, design }: any) {
-  console.log(open, "open fron dia");
+  // console.log(open, "open fron dia");
   const cancelButtonRef = useRef(null);
 
   return (
