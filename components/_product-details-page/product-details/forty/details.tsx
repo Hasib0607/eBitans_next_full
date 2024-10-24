@@ -28,6 +28,7 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import getReferralCode from "@/utils/getReferralCode";
+import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 
 const Details = ({
   data,
@@ -564,9 +565,9 @@ const Details = ({
           ))}
         </Swiper>
         <div className="md:col-span-4 sticky top-28 h-max">
-          <h2 className="text-2xl text-[#212121] mb-3 capitalize">
+          <h1 className="text-2xl text-[#212121] mb-3 capitalize">
             {product?.name}
-          </h2>
+          </h1>
           <div className="text-[#212121] flex justify-start items-center gap-4 mb-3">
             <BDT />
             {camp?.status === "active" ? campPrice : price}{" "}
@@ -867,175 +868,3 @@ const AddCart = ({
   );
 };
 
-const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
-  return (
-    <div className="">
-      <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
-      <div className="flex flex-wrap gap-2">
-        {variant?.map((item: any, id: any) => (
-          <Unit
-            key={id}
-            item={item}
-            select={unit}
-            setSelect={setUnit}
-            setActiveImg={setActiveImg}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
-  return (
-    <div className="flex items-center gap-2">
-      <h3 className="font-medium font-sans mb-2 border-b border-black text-base">
-        Colors:
-      </h3>
-      <div className="flex flex-wrap gap-2">
-        {variant?.map((item: any, id: any) => (
-          <ColorSet
-            key={id}
-            text={item}
-            select={color}
-            setSelect={setColor}
-            itemImage={item?.image}
-            setActiveImg={setActiveImg}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
-  return (
-    // <div className="mb-2">
-    //   <h3 className="font-medium font-sans border-b border-black text-base mb-2 w-max">
-    //     Sizes:
-    //   </h3>
-    //   <select
-    //     onChange={(e) => setSize(e.target.value)}
-    //     className="border-2 border-gray-300 min-w-[240px] max-w-full h-12 font-poster focus:outline-none focus:ring-0 focus:border-2 focus:border-gray-300"
-    //   >
-    //     <option value="">Select Size</option>
-    //     {variant?.map((item: any) => (
-    //       <option key={item.id} value={item} onClick={() => setActiveImg(item)}>
-    //         {item?.size}
-    //       </option>
-    //     ))}
-    //   </select>
-    // </div>
-    <div className="flex flex-wrap items-center gap-2">
-      <h3 className="font-medium font-sans border-b border-black text-base mb-2">
-        Sizes:
-      </h3>
-      <div className="flex flex-wrap gap-2">
-        {variant?.map((item: any, id: any) => (
-          <Size
-            key={id}
-            item={item}
-            select={size}
-            setSelect={setSize}
-            setActiveImg={setActiveImg}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
-  return (
-    <div className="flex items-center gap-2">
-      <h3 className="font-medium font-sans mb-2 border-b border-black text-base">
-        Colors:
-      </h3>
-      <div className="flex flex-wrap gap-2">
-        {vrcolor?.map((item: any, id: any) => (
-          <Color
-            key={id}
-            text={item}
-            select={color}
-            setSelect={setColor}
-            setSize={setSize}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
-  return (
-    <div
-      onClick={() => {
-        setSelect(item);
-        setActiveImg(item?.image);
-      }}
-      className={`border px-1 w-max h-10 flex justify-center items-center font-sans text-sm rounded ${
-        item === select ? "border-gray-900" : "border-gray-300"
-      }`}
-    >
-      {item?.volume + " " + item?.unit}
-    </div>
-  );
-};
-
-const Size = ({ item, select, setSelect, setActiveImg }: any) => {
-  return (
-    <div
-      onClick={() => {
-        setSelect(item);
-        setActiveImg(item?.image);
-      }}
-      className={`border px-4 py-3 w-max h-10 flex justify-center items-center font-sans font-medium rounded ${item === select ? "border-gray-900" : "border-gray-300"}`}
-    >
-      {item?.size}
-    </div>
-  );
-};
-
-const Color = ({ text, select, setSelect, setSize }: any) => {
-  return (
-    <div
-      onClick={() => {
-        setSelect(text);
-        setSize(null);
-      }}
-      className={`border w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
-        text === select ? "border-gray-900" : "border-gray-300"
-      }`}
-    >
-      <div
-        style={{ backgroundColor: text }}
-        className="w-5 h-5 rounded-full"
-      ></div>
-    </div>
-  );
-};
-
-const ColorSet = ({
-  text,
-  select,
-  setSelect,
-  itemImage,
-  setActiveImg,
-}: any) => {
-  return (
-    <div
-      onClick={() => {
-        setSelect(text);
-        setActiveImg(itemImage);
-      }}
-      className={`border w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
-        text === select ? "border-gray-900" : "border-gray-300"
-      }`}
-    >
-      <div
-        style={{ backgroundColor: text?.color }}
-        className="w-5 h-5 rounded-full"
-      ></div>
-    </div>
-  );
-};

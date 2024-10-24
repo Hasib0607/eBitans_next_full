@@ -31,7 +31,7 @@ const FeaturedThirtyNine = ({ category, design }: any) => {
 
         <div
           className={`${
-            animate ? "translate-y-0" : "translate-y-[200px]"
+            animate ? "translate-y-0" : "translate-y-[25px]"
           } duration-1000 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-5 gap-y-5 justify-center rounded-md`}
         >
           {category?.map((item: any, id: number) => (

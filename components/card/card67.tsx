@@ -69,7 +69,7 @@ const Card67 = ({ item, design, store_id }: any) => {
   `;
 
   return (
-    <div className="bg-white h-[700px] relative group">
+    <div className="bg-white h-[400px] lg:h-[650px] relative group">
       <div className="">
         <style>{styleCss}</style>
         <Link href={"/product/" + item?.id + "/" + item?.slug}>

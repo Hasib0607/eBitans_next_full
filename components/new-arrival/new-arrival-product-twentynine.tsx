@@ -55,7 +55,7 @@ const NewArrivalProductTwentyNine = ({ product, design, store_id }: any) => {
             title_color={title_color || "#000"}
           />
         </div>
-        <div className="">
+        {/* <div className="">
           <div className="arrow gap-2 lg:cursor-pointer opacity-0">
             <div
               className={`${prevEl} bg-white h-8 w-8 rounded-full flex justify-center items-center transition-all duration-500  ease-linear absolute left-0  top-1/2 -translate-y-1/2 z-[5] `}
@@ -68,7 +68,7 @@ const NewArrivalProductTwentyNine = ({ product, design, store_id }: any) => {
               <ChevronRightIcon className="h-6 text-2xl font-serif font-bold" />
             </div>
           </div>
-        </div>
+        </div> */}
         <DefaultSlider
           prevEl={prevEl}
           nextEl={nextEl}

@@ -53,13 +53,13 @@ const NewsletterThree = ({ store_id }: any) => {
             <input
               ref={emailRef}
               type="email"
-              className="w-full bg-gray-800 placeholder-gray-400 text-gray-400 border-0 outline-none focus:outline-none focus:border-none focus:ring-0"
+              className="w-full bg-gray-800 pl-3 placeholder-gray-400 text-gray-400 border-0 outline-none focus:outline-none focus:border-none focus:ring-0"
               placeholder="Enter your email"
               required
             />
             <button
               type="submit"
-              className="px-5 md:py-2 py-1 mt-1 sm:mt-0 w-60 bg-red-800 hover:opacity-80  text-white uppercase"
+              className="px-5 md:py-2 py-1 mt-1 sm:mt-0 w-60 bg-red-800 hover:opacity-80 text-white uppercase"
             >
               Subscribe Now
             </button>

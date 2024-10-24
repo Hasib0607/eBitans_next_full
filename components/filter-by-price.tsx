@@ -21,7 +21,9 @@ const FilterByPrice = ({ setVal, val, id, setPage, setHasMore }: any) => {
 
   return (
     <>
-      <h1 className="font-medium text-[#252525] text-xl pb-3">Filter by Price</h1>
+      <h1 className="font-medium text-[#252525] text-xl pb-3">
+        Filter by Price
+      </h1>
       <div className="flex justify-between items-center">
         <label htmlFor="range" className=" mb-2 text-sm font-semibold">
           <Taka tk={0} />
