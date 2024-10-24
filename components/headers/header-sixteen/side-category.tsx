@@ -32,7 +32,7 @@ const SideCategory = () => {
                     <ChevronDownIcon
                       className={`${
                         heading === item.name ? "rotate-180" : "rotate-0"
-                      } h-4 absolute transition-all duration-500  ease-linear lg:cursor-pointer right-4 top-1 `}
+                      } h-4 absolute transition-all duration-500 ease-linear lg:cursor-pointer right-4 top-1 `}
                     />
                   )}
                 </div>

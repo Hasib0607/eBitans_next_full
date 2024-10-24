@@ -64,7 +64,7 @@ const HeaderElevenHeaderMenu = () => {
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
                 placeholder=" Enter your search key ..."
-                className="bg-white h-11 w-full  outline-none focus:outline-none focus:border-gray-200 search-border focus:ring-0 z-50"
+                className="bg-white pl-3 h-11 w-full  outline-none focus:outline-none focus:border-gray-200 search-border focus:ring-0 z-50"
               />
             </div>
             <div

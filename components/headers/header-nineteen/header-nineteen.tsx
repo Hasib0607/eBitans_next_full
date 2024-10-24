@@ -325,7 +325,7 @@ const HeaderNineteen = ({ headerSetting }: any) => {
                   onChange={(e) => setSearch(e.target.value)}
                   type="text"
                   placeholder="Enter your search key ..."
-                  className="bg-white text-black h-11 w-full  outline-none focus:outline-none focus:border-gray-200 border-gray-200 focus:ring-0 "
+                  className="bg-white pl-3 text-black h-11 w-full  outline-none focus:outline-none focus:border-gray-200 border-gray-200 focus:ring-0 "
                 />
               </div>
               <div

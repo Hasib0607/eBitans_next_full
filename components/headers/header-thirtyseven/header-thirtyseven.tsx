@@ -133,7 +133,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
                     placeholder="Enter your search key ..."
-                    className="border  w-full py-2 pl-3 outline-none focus:outline-none rounded-md focus:border-gray-200 border-gray-200 focus:ring-0 text-black"
+                    className="border w-full py-2 pl-3 outline-none focus:outline-none rounded-md focus:border-gray-200 border-gray-200 focus:ring-0 text-black"
                   />
                 </div>
                 <div

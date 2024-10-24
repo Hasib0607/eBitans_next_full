@@ -262,17 +262,17 @@ const AffiliateInfo = () => {
             </tbody>
           </table>
           {/* Pagination */}
-      <div className="flex flex-wrap justify-center">
-        {Array.from({ length: pagination }).map((_, i: any) => (
-          <span
-            key={i}
-            onClick={() => setPage(i)}
-            className="px-3 py-2 bg-black w-5 h-6 mx-1.5 mt-3 rounded-full text-white cursor-pointer flex items-center justify-center"
-          >
-            {++i}
-          </span>
-        ))}
-      </div>
+          <div className="flex flex-wrap justify-center">
+            {Array.from({ length: pagination }).map((_, i: any) => (
+              <span
+                key={i}
+                onClick={() => setPage(i)}
+                className="px-3 py-2 bg-black w-5 h-6 mx-1.5 mt-3 rounded-full text-white cursor-pointer flex items-center justify-center"
+              >
+                {++i}
+              </span>
+            ))}
+          </div>
         </div>
         {/* Modal */}
         {isModalOpen && selectedOrder && (

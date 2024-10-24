@@ -172,7 +172,7 @@ const HeaderMenu = () => {
         <ul
           className={`${
             openMenu === true ? "top-[30px] pt-24" : "md:top-[10px] pt-48 top-0"
-          } bg-white duration-500 fixed sm:w-96 w-52 overflow-y-auto bottom-0 pb-5 z-[4] lg:cursor-pointer ${
+          } bg-white duration-500 fixed sm:w-96 w-52 overflow-y-auto bottom-0 pb-5 z-[4] lg:cursor-pointer mt-[46px] ${
             open ? "left-0 " : "left-[-160%]"
           }`}
         >
