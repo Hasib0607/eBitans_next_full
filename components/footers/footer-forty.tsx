@@ -3,6 +3,7 @@ import FollowUs from "./components/follow-us";
 import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
 import CopyrightAll from "./components/copyrightall";
+import WhatsApp from './components/whatsApp';
 
 const FooterForty = ({
   category,
@@ -112,6 +113,7 @@ const FooterForty = ({
           </div>
         </div>
         {/* <Messenger /> */}
+        <WhatsApp/>
       </footer>
       <div className="pb-20 lg:pb-5 sm:container px-5 text-[#666666]">
         <CopyrightAll headerSetting={headerSetting} />

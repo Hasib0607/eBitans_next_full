@@ -3,6 +3,7 @@ import Newsletter from "./components/newsletter";
 import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
 import FollowUs from "./components/follow-us";
+import WhatsApp from './components/whatsApp';
 
 const FooterFourteen = ({
   design,
@@ -38,6 +39,7 @@ const FooterFourteen = ({
         </div>
       </div>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </div>
   );
 };

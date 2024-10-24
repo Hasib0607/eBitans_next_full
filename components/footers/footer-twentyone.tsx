@@ -16,6 +16,7 @@ import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
 import MyAccount from "./components/myaccount";
 import NewsletterThree from "./components/newsletter-three";
+import WhatsApp from './components/whatsApp';
 
 const FooterTwentyOne = ({
   headerSetting,
@@ -299,6 +300,7 @@ const FooterTwentyOne = ({
           </div>
         </div>
         {/* <Messenger /> */}
+        <WhatsApp/>
       </div>
     </>
   );

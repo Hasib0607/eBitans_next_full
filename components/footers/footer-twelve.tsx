@@ -11,6 +11,7 @@ import Newsletter from "./components/newsletter";
 import MenuList from "./components/menu-list";
 import CategoryList from "./components/category-list";
 import CopyrightAll from "./components/copyrightall";
+import WhatsApp from './components/whatsApp';
 
 const FooterTwelve = ({
   headerSetting,
@@ -158,6 +159,7 @@ const FooterTwelve = ({
         <CopyrightAll headerSetting={headerSetting} />
       </p>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
+import WhatsApp from './components/whatsApp';
 
 const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
   // const { user } = useSelector((state) => state.auth);
@@ -80,6 +81,7 @@ const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
         </div>
       </div>
       {/* <Messenger /> */}
+      <WhatsApp/>
     </div>
   );
 };
