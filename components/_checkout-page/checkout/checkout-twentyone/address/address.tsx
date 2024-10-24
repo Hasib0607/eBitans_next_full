@@ -382,7 +382,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
         <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
   <div className="col-span-6 sm:col-span-3 lg:col-span-2">
     <label htmlFor="name" className="block text-sm font-medium text-gray-700">
-      {design?.template_id === "29" || store_id === 3601 || store_id === 3904
+      {design?.template_id === "29" || store_id === 3601
         ? "নাম"
         : "Name"}
     </label>
