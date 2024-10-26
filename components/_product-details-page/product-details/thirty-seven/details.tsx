@@ -842,4 +842,3 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
     </div>
   );
 };
-

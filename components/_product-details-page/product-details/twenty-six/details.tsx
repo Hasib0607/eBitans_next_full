@@ -836,4 +836,3 @@ const AddCart = ({ setQty, qty, onClick, variant }: any) => {
     </>
   );
 };
-

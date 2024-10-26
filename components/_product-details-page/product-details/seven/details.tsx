@@ -833,4 +833,3 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
     </>
   );
 };
-

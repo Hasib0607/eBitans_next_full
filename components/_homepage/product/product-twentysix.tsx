@@ -2,12 +2,15 @@
 import Card56 from "@/components/card/card56";
 import httpReq from "@/utils/http/axios/http.service";
 import useHeaderSettings from "@/utils/query/use-header-settings";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const ProductTwentySix = ({ category, design, store_id }: any) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState([]);
   const [id, setId] = useState(0);
+
+  const router = useRouter();
 
   const { data, error } = useHeaderSettings();
 
@@ -68,13 +71,28 @@ const ProductTwentySix = ({ category, design, store_id }: any) => {
         </div>
       </div>
       {products?.length > 0 ? (
-        <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 xl3:grid-cols-6 gap-2 sm:gap-5">
-          {products?.slice(0, 8).map((productData: any) => (
-            <div key={productData.id}>
-              <Card56 item={productData} design={design} store_id={store_id} />
-            </div>
-          ))}
-        </div>
+        <>
+          <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 xl3:grid-cols-6 gap-2 sm:gap-5">
+            {products?.slice(0, 8).map((productData: any) => (
+              <div key={productData.id}>
+                <Card56
+                  item={productData}
+                  design={design}
+                  store_id={store_id}
+                />
+              </div>
+            ))}
+          </div>
+          {/* Load More Button */}
+          <div className="flex justify-center mt-8">
+            <button
+              onClick={() => router.push("/category")}
+              className="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700"
+            >
+              Load More
+            </button>
+          </div>
+        </>
       ) : (
         <div className="text-red-500 text-center py-10 text-4xl">
           No Products Available

@@ -858,4 +858,3 @@ const According = ({ text, reviews }: any) => {
     </AnimatePresence>
   );
 };
-

@@ -900,4 +900,3 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
     </>
   );
 };
-
