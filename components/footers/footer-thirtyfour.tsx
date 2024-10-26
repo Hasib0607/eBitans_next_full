@@ -12,7 +12,8 @@ import Newsletter from "./components/newsletter";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsApp';
+import WhatsApp from "./components/whatsApp";
+import { customizeFooter } from "@/utils/customizeDesign";
 
 const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
   const styleCss = `
@@ -28,6 +29,10 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
     `;
 
   const cls = "text-2xl text-white";
+
+  const storeID = headerSetting?.store_id || null;
+
+  const footerData = customizeFooter.find((item) => item.id == storeID);
 
   return (
     <div className="bg-[#022F4D] text-white">
@@ -102,6 +107,7 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
               {headerSetting?.short_description}
             </p>
             <p className="text-base text-left">{headerSetting?.address}</p>
+            {`${(footerData?.googleMaps) ? (footerData?.googleMaps) : ""}`}
           </div>
           <div className="justify-self-center ">
             <h1 className="text-xl font-medium">Categories</h1>
@@ -144,7 +150,7 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
           <CopyrightAll headerSetting={headerSetting} />
         </div>
         {/* <Messenger /> */}
-        <WhatsApp/>
+        <WhatsApp />
       </div>
     </div>
   );

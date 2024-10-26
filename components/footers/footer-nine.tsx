@@ -6,7 +6,7 @@ import CopyrightAll from "./components/copyrightall";
 import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import FollowUs from "./components/follow-us";
-import WhatsApp from './components/whatsApp';
+import WhatsApp from "./components/whatsApp";
 
 const FooterNine = ({
   headerSetting,
@@ -110,7 +110,7 @@ const FooterNine = ({
             </div>
           </div>
           {/* <Messenger /> */}
-          <WhatsApp/>
+          <WhatsApp />
         </footer>
       </div>
     </div>

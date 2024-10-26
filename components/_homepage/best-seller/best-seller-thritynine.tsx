@@ -21,7 +21,7 @@ const BestSellerThirtyNine = ({ best_sell_product, design, store_id }: any) => {
 
   return (
     <div className="pl-5 sm:py-10 py-5">
-      <div className="py-5 relative">
+      <div className=" relative">
         <div className="text-center pb-10">
           <p
             style={{ color: title_color }}
@@ -31,7 +31,7 @@ const BestSellerThirtyNine = ({ best_sell_product, design, store_id }: any) => {
           </p>
         </div>
 
-        <div className="gap-10 flex lg:cursor-pointer absolute bottom-8 left-1/2 -translate-x-1/2 z-[2]">
+        {/* <div className="gap-10 flex lg:cursor-pointer absolute bottom-16 left-1/2 -translate-x-1/2 z-[2]">
           <div className={`${prevEl} lg:cursor-pointer `}>
             <ChevronLeftIcon className="h-4 font-serif font-bold" />
           </div>
@@ -39,7 +39,7 @@ const BestSellerThirtyNine = ({ best_sell_product, design, store_id }: any) => {
           <div className={`${nextEl} lg:cursor-pointer`}>
             <ChevronRightIcon className="h-4 font-serif font-bold" />
           </div>
-        </div>
+        </div> */}
 
         <DefaultSlider
           prevEl={prevEl}
@@ -73,8 +73,8 @@ const BestSellerThirtyNine = ({ best_sell_product, design, store_id }: any) => {
             <SwiperSlide key={item?.id}>
               <div
                 className={`${
-                  animate ? "translate-y-0" : "translate-y-[200px]"
-                } duration-1000 pb-10 `}
+                  animate ? "translate-y-0" : "translate-y-[25px]"
+                } duration-1000 `}
               >
                 <Card67 item={item} design={design} store_id={store_id} />
               </div>

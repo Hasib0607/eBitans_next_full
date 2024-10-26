@@ -85,7 +85,7 @@ const ProductThirtyNine = ({ category, design, store_id }: any) => {
         {products?.length > 0 ? (
           <div
             className={`${
-              animate ? "translate-y-0" : "translate-y-[200px]"
+              animate ? "translate-y-0" : "translate-y-[25px]"
             } duration-1000 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-4 justify-center`}
           >
             {products?.slice(0, 12).map((productData: any) => (

@@ -1,8 +1,8 @@
 // components/WhatsAppIcon.js
-import React from 'react';
-import Image from 'next/image';
-import whatsapp2 from './../../../assets/img/icons/whatsApp_icon.webp';
-import useTheme from '@/hooks/use-theme';
+import React from "react";
+import Image from "next/image";
+import whatsapp2 from "./../../../assets/img/icons/whatsApp_icon.webp";
+import useTheme from "@/hooks/use-theme";
 
 const WhatsApp = () => {
   const { headerSetting } = useTheme();
@@ -18,7 +18,7 @@ const WhatsApp = () => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <Image 
+        <Image
           src={whatsapp2}
           alt="WhatsApp Chat"
           className="w-16 h-16 animate-pulse"

@@ -11,7 +11,7 @@ import { BsFacebook, BsYoutube } from "react-icons/bs";
 import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from './components/whatsApp';
+import WhatsApp from "./components/whatsApp";
 
 const FooterThirtySix = ({
   headerSetting,
@@ -121,7 +121,7 @@ const FooterThirtySix = ({
         </div>
       </div>
       {/* <Messenger /> */}
-      <WhatsApp/>
+      <WhatsApp />
     </div>
   );
 };

@@ -61,7 +61,7 @@ const ProductTwentyOne = ({ design, category }: any) => {
               <h1
                 className={`${
                   active === index ? "active-cat" : ""
-                } px-2 py-1 rounded`}
+                } px-2 py-2 rounded`}
                 onClick={() => {
                   setActive(index);
                   setId(index);

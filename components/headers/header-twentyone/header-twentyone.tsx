@@ -296,7 +296,7 @@ const HeaderTwentyOne = ({ headerSetting }: any) => {
                     onChange={(e) => setSearch(e.target.value)}
                     type="text"
                     placeholder="Enter your search key ..."
-                    className="w-full pl-3 py-3 outline-none focus:outline-none focus:border-gray-200 border-gray-200 focus:ring-0"
+                    className="w-full pl-3 py-3 border outline-none focus:outline-none focus:border-gray-200 border-gray-200 focus:ring-0"
                   />
                 </div>
                 <div className="bg-black all-hover text-white lg:cursor-pointer absolute right-0 top-0 px-4 font-thin py-4">
