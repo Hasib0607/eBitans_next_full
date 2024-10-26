@@ -835,4 +835,3 @@ const AddCart = ({
     </div>
   );
 };
-
