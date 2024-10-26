@@ -8,7 +8,7 @@ import {
 import { BsFacebook, BsTelephone, BsYoutube } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import Newsletter from "./components/newsletter";
-import WhatsApp from './components/whatsApp';
+import WhatsApp from "./components/whatsApp";
 
 const FooterSix = ({
   headerSetting,
@@ -199,7 +199,7 @@ const FooterSix = ({
         </a>
       </p>
       {/* <Messenger /> */}
-      <WhatsApp/>
+      <WhatsApp />
     </div>
   );
 };

@@ -11,7 +11,7 @@ import Newsletter from "./components/newsletter";
 import Link1 from "../link1";
 import Link from "next/link";
 import MenuList from "./components/menu-list";
-import WhatsApp from './components/whatsApp';
+import WhatsApp from "./components/whatsApp";
 
 const FooterOne = ({
   category,
@@ -213,7 +213,7 @@ const FooterOne = ({
         </div>
       </div>
       {/* <Messenger /> */}
-      <WhatsApp/>
+      <WhatsApp />
     </footer>
   );
 };
