@@ -5,7 +5,6 @@ import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
 import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
-import { customizeFooter } from "@/utils/customizeDesign";
 import WhatsApp from "./components/whatsApp";
 
 
@@ -21,7 +20,6 @@ const FooterFive = ({
     (item: any) => !menu.find((menuItem: any) => menuItem.url === item.link)
   );
 
-  const footerData = customizeFooter.find((item) => item.id == storeID);
 
 
   const customDesign = `
