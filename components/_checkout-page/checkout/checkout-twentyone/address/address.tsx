@@ -131,71 +131,65 @@ const Address = ({
             </div>
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
-                {/* Name Input with Icon */}
-                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaUser className="text-black" />
-                  </div>
-                  <input
-                    onChange={(e) => setUserName(e.target.value)}
-                    type="text"
-                    placeholder={
-                      design?.template_id === "29" ||
-                      store_id === 3601 ||
-                      store_id === 3904
-                        ? "নাম"
-                        : "Name"
-                    }
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                  />
+              {/* Name Input with Icon */}
+              <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
+                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                  <FaUser className="text-black" />
                 </div>
-
-                {/* Phone Input with Icon */}
-                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaPhoneAlt className="text-black" />
-                  </div>
-                  <input
-                    value={userPhone}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    type="number"
-                    maxLength={11}
-                    minLength={11}
-                    placeholder={
-                      design?.template_id === "29" ||
-                      store_id === 3601 ||
-                      store_id === 3904
-                        ? "ফোন"
-                        : "Phone"
-                    }
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                  />
-                </div>
-
-                {/* Phone Validation Error */}
-                {!isPhoneValid && (
-                  <small className="text-rose-500">Need 11 digits</small>
-                )}
-
-                {/* Address Input with Icon */}
-                <div className="flex items-start border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaMapMarkerAlt className="text-black" />
-                  </div>
-                  <textarea
-                    onChange={(e) => setUserAddress(e.target.value)}
-                    placeholder={
-                      design?.template_id === "29" ||
-                      store_id === 3601 ||
-                      store_id === 3904
-                        ? "ঠিকানা"
-                        : "Address"
-                    }
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                  />
-                </div>
+                <input
+                  onChange={(e) => setUserName(e.target.value)}
+                  type="text"
+                  placeholder={
+                    design?.template_id === "29" || store_id === 3601 || store_id === 3904
+                      ? "নাম"
+                      : "Name"
+                  }
+                  className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                />
               </div>
+            
+              {/* Phone Input with Icon */}
+              <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
+                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                  <FaPhoneAlt className="text-black" />
+                </div>
+                <input
+                  value={userPhone}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  type="number"
+                  maxLength={11}
+                  minLength={11}
+                  placeholder={
+                    design?.template_id === "29" || store_id === 3601 || store_id === 3904
+                      ? "ফোন"
+                      : "Phone"
+                  }
+                  className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                />
+              </div>
+            
+              {/* Phone Validation Error */}
+              {!isPhoneValid && (
+                <small className="text-rose-500">Need 11 digits</small>
+              )}
+            
+              {/* Address Input with Icon */}
+              <div className="flex items-start border border-gray-400 rounded focus-within:border-gray-400">
+                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                  <FaMapMarkerAlt className="text-black" />
+                </div>
+                <textarea
+                  onChange={(e) => setUserAddress(e.target.value)}
+                  placeholder={
+                    design?.template_id === "29" || store_id === 3601 || store_id === 3904
+                      ? "ঠিকানা"
+                      : "Address"
+                  }
+                  className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                />
+              </div>
+            </div>
             ) : (
               <div>
                 {(!address || address.length === 0) && (

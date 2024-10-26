@@ -554,9 +554,9 @@ const Details = ({
           />
         </div>
         <div className="md:col-span-4 space-y-8 font-seven">
-          <h2 className="text-2xl text-[#212121] font-bold mb-3">
+          <h1 className="text-2xl text-[#212121] font-bold mb-3">
             {product?.name}
-          </h2>
+          </h1>
 
           <p className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
