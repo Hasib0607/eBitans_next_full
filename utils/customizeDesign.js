@@ -1,7 +1,7 @@
 import googleMap from "@/components/customizeComponents/googleMap";
 
 export const customizeFooter = [
-
+//fiha mart footer google map add start
   {
     id: 8591,
     textBold: "light",
@@ -10,7 +10,7 @@ export const customizeFooter = [
     id: 6747,
     googleMaps: googleMap,
   },
-];
+//fiha mart footer google map add end
 
     { 
         // Fashion mart customization start
