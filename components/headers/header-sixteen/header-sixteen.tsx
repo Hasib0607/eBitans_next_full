@@ -9,12 +9,16 @@ import { IoLocationOutline } from "react-icons/io5";
 import { MdLocalPhone } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import HeaderMenu from "./header-menu";
+import {customizeHeader} from '@/utils/customizeDesign'
 
 const HeaderSixteen = ({ headerSetting }: any) => {
   const { userData, design } = useTheme();
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
+
+  const storeID = headerSetting?.store_id || null;
+  const headerData = customizeHeader.find(item => item.id == storeID);
 
   function classNames(...classes: any) {
     return classes.filter(Boolean).join(" ");
@@ -75,7 +79,7 @@ const HeaderSixteen = ({ headerSetting }: any) => {
 
             <div className="flex gap-3 items-center">
               <MdLocalPhone className="sm:text-lg text-xs" />
-              <p className="sm:text-lg text-xs">{headerSetting.phone}</p>
+              <p className={headerData?.mobile_font_big ? headerData?.mobile_font_big : "sm:text-lg text-xs"}>{headerSetting.phone}</p>
             </div>
           </div>
 

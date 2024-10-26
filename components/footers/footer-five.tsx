@@ -8,6 +8,7 @@ import NewsletterTwo from "./components/newsletter-two";
 import { customizeFooter } from "@/utils/customizeDesign";
 import WhatsApp from "./components/whatsApp";
 
+
 const FooterFive = ({
   headerSetting,
   category,
@@ -19,9 +20,9 @@ const FooterFive = ({
   const result = page.filter(
     (item: any) => !menu.find((menuItem: any) => menuItem.url === item.link)
   );
-  const storeID = headerSetting?.store_id || null;
 
   const footerData = customizeFooter.find((item) => item.id == storeID);
+
 
   const customDesign = `
     .footerColor:hover{
@@ -77,11 +78,9 @@ const FooterFive = ({
                   </div>
                   <div className="lg:px-4 md:px-4 ">
                     <h5>NEED HELP ?</h5>
-                    <h1
-                      className={`${footerData?.textBold ? footerData?.textBold : "font-semibold"} `}
-                    >
-                      {headerSetting?.phone}
-                    </h1>
+
+                    <h1 className={`font-semibold`}>{headerSetting?.phone}</h1>
+
                   </div>
                 </div>
                 <div className="flex gap-x-3 mt-3 text-3xl">
