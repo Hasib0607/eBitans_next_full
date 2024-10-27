@@ -1,17 +1,16 @@
-import googleMap from "@/components/customizeComponents/googleMap";
+
 
 export const customizeFooter = [
   {
     // Fihamart
     id: 6747,
-    googleMaps: googleMap,
+    googleMaps: true,
   },
   {
     // Fashion mart customization start
     id: 8203,
     support: "Customer Support: ",
     help_line: "Help Line: +880 1894-560311",
-
     // Fashion mart customization end
   },
 ];
