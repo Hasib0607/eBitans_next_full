@@ -11,6 +11,7 @@ import "react-toastify/dist/ReactToastify.css";
 import AppWrapper from "./app-wrapper";
 import "./globals.css";
 import WrongUrl from "@/components/wrongUrl";
+import Heading from "@/utils/heading";
 // import AllMobileBottomMenu from "./mobileBottomMenu";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -26,6 +27,13 @@ export default async function RootLayout({
   const design = subDomain?.design;
   const fbPixel = headersetting?.facebook_pixel;
   const error = subDomain?.error;
+  // Prepare meta information
+  const websiteName = headersetting?.website_name;
+  const title = `${websiteName}`;
+  const description = headersetting?.short_description || "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
+  const keywords = "eBitans, eCommerce builder platform";
+  const favicon = headersetting.favicon || null;
+  const logo = headersetting.logo || null;
 
   return (
     <html lang="en">
@@ -34,6 +42,7 @@ export default async function RootLayout({
           <WrongUrl />
         ) : (
           <>
+            <Heading title={title} description={description} keywords={keywords} favicon={favicon} logo={logo}/>
             <GoogleTagManager gtmId={headersetting?.gtm} />
             <NextTopLoader />
             <Announcement design={design} url={url} />

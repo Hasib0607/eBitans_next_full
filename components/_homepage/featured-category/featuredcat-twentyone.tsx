@@ -48,13 +48,24 @@ export default FeaturedTwentyOne;
 
 const FeatureCatSix = ({ item, setText, text }: any) => {
   const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   // console.log('result', result)
   const fetchData = async () => {
-    const data = await axios.post(
-      process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
-      { id: item?.id }
-    );
-    setResult(data?.data?.data?.total);
+    try{
+      setLoading(true);
+      const data = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
+        { id: item?.id }
+      );
+      setResult(data?.data?.data?.total);
+    } catch(error){
+      setError("Failed to load items. Please try again later.");
+      console.error("Error fetching data:", error);
+    }finally {
+      setLoading(false);
+    }
+
   };
 
   useEffect(() => {

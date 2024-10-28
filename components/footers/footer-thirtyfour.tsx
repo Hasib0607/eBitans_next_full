@@ -16,6 +16,9 @@ import WhatsApp from "./components/whatsApp";
 import { customizeFooter } from "@/utils/customizeDesign";
 
 const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
+  const srcMatch = headerSetting.map_address.match(/src="([^"]+)"/);
+  const iframeSrc = srcMatch ? srcMatch[1] : null;
+
   const styleCss = `
 
     .menu-hover:hover {
@@ -107,7 +110,26 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
               {headerSetting?.short_description}
             </p>
             <p className="text-base text-left">{headerSetting?.address}</p>
-            {`${(footerData?.googleMaps) ? (footerData?.googleMaps) : ""}`}
+
+            {footerData?.googleMaps && footerData?.googleMaps == true ? (
+              <div className="relative w-full mt-[20px]">
+                <div style={{ width: "100%" }}>
+                  <iframe
+                    title="map"
+                    width={"80%"}
+                    height={"300"}
+                    frameBorder="0"
+                    scrolling="no"
+                    src={iframeSrc}
+                  >
+                    <a href="https://www.gps.ie/farm-gps/">farm gps</a>
+                  </iframe>
+                </div>
+              </div>
+            ) : (
+              <></>
+            )}
+
           </div>
           <div className="justify-self-center ">
             <h1 className="text-xl font-medium">Categories</h1>

@@ -6,8 +6,8 @@ import {
 } from "react-icons/ai";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 import Newsletter from "./components/newsletter";
-import WhatsApp from './components/whatsApp';
-import {customizeFooter} from '@/utils/customizeDesign'
+import WhatsApp from "./components/whatsApp";
+import { customizeFooter } from "@/utils/customizeDesign";
 
 
 const FooterSeven = ({
@@ -23,7 +23,7 @@ const FooterSeven = ({
     (item: any) => !menu.find((menuItem: any) => menuItem.url === item.link)
   );
 
-  const footerData = customizeFooter.find(item => item.id == store_id);
+  const footerData = customizeFooter.find((item) => item.id == store_id);
 
   const styleCss = `
 
@@ -108,8 +108,13 @@ const FooterSeven = ({
                 <p className="menu-hover">{headerSetting?.email}</p>
               </a>
               <a href={"tel:+88" + headerSetting?.phone}>
-                <p className="menu-hover">{footerData?.support ? footerData?.support : 'Call Us:'} {headerSetting?.phone}</p>
-                {footerData?.help_line && <p className="menu-hover ">{footerData?.help_line}</p>}
+                <p className="menu-hover">
+                  {footerData?.support ? footerData?.support : "Call Us:"}{" "}
+                  {headerSetting?.phone}
+                </p>
+                {footerData?.help_line && (
+                  <p className="menu-hover ">{footerData?.help_line}</p>
+                )}
               </a>
               <p className="menu-hover">Address: {headerSetting?.address}</p>
             </div>
