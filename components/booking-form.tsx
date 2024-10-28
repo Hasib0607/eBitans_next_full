@@ -82,18 +82,17 @@ const BookingForm = ({
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     setLoading(true);
-
+  
     const formData = new FormData();
-
+  
     for (let i = 0; i < cart.length; i++) {
-      // Append all non-image properties of the cart item
       for (let key in cart[i]) {
         if (key !== "items") {
           formData.append(`product[${i}][${key}]`, cart[i][key]);
         }
       }
     }
-
+  
     formData.append("store_id", store_id);
     formData.append("name", formBookData?.name);
     formData.append("phone", formBookData?.phone);
@@ -105,140 +104,150 @@ const BookingForm = ({
     formData.append("drop_location", formBookData?.dropLocation);
     formData.append("comment", formBookData?.comment);
     formData.append("time", formBookData?.time);
-
+  
     formData.append("subtotal", price);
     formData.append("shipping", "0");
     formData.append("total", price);
     formData.append("discount", "0");
     formData.append("tax", "0");
-
+  
     if (store?.auth_type === "EasyOrder" && !user) {
       const dataInfo = {
         name: formBookData?.name,
         phone: formBookData?.phone,
         store_id: store_id,
       };
-      const responseInfo = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
-        dataInfo
-      );
-      const placeOrder = async () => {
-        try {
-          const response = await axios.post(apiOrder, formData, {
-            headers: {
-              Authorization: `Bearer ${responseInfo?.data?.token?.token}`,
-              "Content-Type": "application/json", // Adjust the content type according to your API requirements
-            },
-          });
-
-          if (response?.data) {
-            if (!response?.data?.url && !response?.data?.error) {
-              toast(
-                `Your #${response?.data?.order?.reference_no} order complete successfully!`,
-                {
-                  type: "success",
-                  autoClose: 1000,
-                }
-              );
-              setOpen(!open);
-              setFormBookData({
-                name: "",
-                email: "",
-                phone: "",
-                specificDate: "",
-                startDate: "",
-                endDate: "",
-                time: "",
-                comment: "",
-                pickupLocation: "",
-                dropLocation: "",
-              });
-              setLoading(false);
-              dispatch(login({ tokenData: responseInfo?.data?.token }) as any)
-                .unwrap()
-                .then(({ verify, error }: any) => {
-                  if (error) {
-                    toast(error, { type: "error" });
-                    router.push("/login");
+  
+      try {
+        const responseInfo = await axios.post(
+          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
+          dataInfo
+        );
+  
+        const placeOrder = async () => {
+          try {
+            const response = await axios.post(apiOrder, formData, {
+              headers: {
+                Authorization: `Bearer ${responseInfo?.data?.token?.token}`,
+                "Content-Type": "application/json",
+              },
+            });
+  
+            if (response?.data) {
+              if (!response?.data?.url && !response?.data?.error) {
+                toast(
+                  `Your #${response?.data?.order?.reference_no} order complete successfully!`,
+                  {
+                    type: "success",
+                    autoClose: 1000,
                   }
-                  if (verify) {
-                    toast(verify, { type: "success" });
-                    // window.location.replace("/profile");
-                    setOrderPlaced(true);
-                    router.push("/thank-you");
-                  }
-                })
-                .catch((er: any) => {
-                  toast("Credential Doesn't Match", { type: "error" });
+                );
+                setOpen(!open);
+                setFormBookData({
+                  name: "",
+                  email: "",
+                  phone: "",
+                  specificDate: "",
+                  startDate: "",
+                  endDate: "",
+                  time: "",
+                  comment: "",
+                  pickupLocation: "",
+                  dropLocation: "",
                 });
-            }
-            if (response?.data?.error) {
-              toast(response?.data?.error, {
-                type: "error",
-                autoClose: 1000,
-              });
-              setLoading(false);
-            }
-          }
-          if (response?.data?.user) {
-            // localStorage.setItem("user", JSON.stringify(response.user));
-          }
-        } catch (error) {
-          // console.error('Error posting data:', error);
-          // Handle any errors here
-        }
-      };
-
-      // Call the function whenever you want to post data with the token
-      placeOrder();
-    } else {
-      httpReq
-        .post(`placeorder`, formData)
-        .then((response: any) => {
-          if (response) {
-            if (!response?.url && !response?.error) {
-              toast(
-                `Your #${response?.order?.reference_no} order complete successfully!`,
-                {
-                  type: "success",
+                setLoading(false);
+                dispatch(login({ tokenData: responseInfo?.data?.token }) as any)
+                  .unwrap()
+                  .then(({ verify, error }: any) => {
+                    if (error) {
+                      toast(error, { type: "error" });
+                      router.push("/login");
+                    }
+                    if (verify) {
+                      toast(verify, { type: "success" });
+                      setOrderPlaced(true);
+                      router.push("/thank-you");
+                    }
+                  })
+                  .catch((er: any) => {
+                    toast("Credential Doesn't Match", { type: "error" });
+                  });
+              }
+              if (response?.data?.error) {
+                toast(response?.data?.error, {
+                  type: "error",
                   autoClose: 1000,
-                }
-              );
-              setOpen(!open);
-              setFormBookData({
-                name: "",
-                email: "",
-                phone: "",
-                specificDate: "",
-                startDate: "",
-                endDate: "",
-                time: "",
-                comment: "",
-                pickupLocation: "",
-                dropLocation: "",
-              });
-              setLoading(false);
-              setOrderPlaced(true);
-              router.push("/thank-you");
+                });
+                setLoading(false);
+              }
             }
-            if (response?.error) {
-              toast(response?.error, {
-                type: "error",
+            if (response?.data?.user) {
+              // localStorage.setItem("user", JSON.stringify(response.user));
+            }
+          } catch (error) {
+            console.error("Error placing order:", error);
+            toast("Error placing the order.", { type: "error" });
+            setLoading(false);
+          }
+        };
+  
+        // Call the function to place the order
+        placeOrder();
+      } catch (error) {
+        console.error("Error saving order info:", error);
+        toast("Error saving order information.", { type: "error" });
+        setLoading(false);
+      }
+    } else {
+      try {
+        const response = await httpReq.post("placeorder", formData);
+  
+        if (response) {
+          if (!response?.url && !response?.error) {
+            toast(
+              `Your #${response?.order?.reference_no} order complete successfully!`,
+              {
+                type: "success",
                 autoClose: 1000,
-              });
-              setLoading(false);
-            }
+              }
+            );
+            setOpen(!open);
+            setFormBookData({
+              name: "",
+              email: "",
+              phone: "",
+              specificDate: "",
+              startDate: "",
+              endDate: "",
+              time: "",
+              comment: "",
+              pickupLocation: "",
+              dropLocation: "",
+            });
+            setLoading(false);
+            setOrderPlaced(true);
+            router.push("/thank-you");
           }
-          if (response?.user) {
-            // localStorage.setItem("user", JSON.stringify(response.user));
+          if (response?.error) {
+            toast(response?.error, {
+              type: "error",
+              autoClose: 1000,
+            });
+            setLoading(false);
           }
-        })
-        .catch((error) => {
-          const { errors, message } = error.response.data;
-          // error.response.data?.errors.map(i => alert.show(i.message, { type: 'error' }))
-        });
+        }
+        if (response?.user) {
+          // localStorage.setItem("user", JSON.stringify(response.user));
+        }
+      } catch (error: any) {
+        const { errors, message } = error.response?.data || {};
+        // console.error("Error placing order:", message || error);
+        toast("Error placing the order.", { type: "error" });
+        setLoading(false);
+      }
     }
   };
+  
 
   return (
     <form

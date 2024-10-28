@@ -237,7 +237,7 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
               value={searchTxt}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Enter your keyword..."
-              className="w-full ring-0 outline-none border-0 rounded-md focus:outline-none focus:border-0 focus:ring-0"
+              className="w-full pl-2 ring-0 outline-none border-0 rounded-md focus:outline-none focus:border-0 focus:ring-0"
             />
             <div className="w-max flex justify-center  md:lg:cursor-pointer absolute right-3">
               {searchTxt.length === 0 ? (
@@ -283,7 +283,7 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
               value={searchTxt}
               onChange={(e) => setSearch(e.target.value)}
               placeholder="Enter your keyword..."
-              className="w-full ring-0 outline-none border-0 rounded-md focus:outline-none focus:border-0 focus:ring-0"
+              className="w-full pl-2 ring-0 outline-none border-0 rounded-md focus:outline-none focus:border-0 focus:ring-0"
             />
             <div className="w-max flex justify-center  md:lg:cursor-pointer absolute right-3">
               {searchTxt.length === 0 ? (

@@ -22,12 +22,17 @@ const getProductDetails = async ({
   store_id: number;
   product_id: string;
 }) => {
-  const { data } = await axios.post(
-    process.env.NEXT_PUBLIC_API_URL + "product-details",
-    { store_id, product_id }
-  );
-  const { product: productDetails } = data;
-  return productDetails;
+  try{
+    const { data } = await axios.post(
+      process.env.NEXT_PUBLIC_API_URL + "product-details",
+      { store_id, product_id }
+    );
+    const { product: productDetails } = data;
+    return productDetails;
+  } catch(error){
+    console.error("Error fetching product details:", error);
+    throw error; 
+  }
 };
 
 // const getSiteInfo = async () => {};

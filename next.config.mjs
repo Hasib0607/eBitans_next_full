@@ -2,6 +2,8 @@ import withBundleAnalyzer from "@next/bundle-analyzer";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true, // Enables React Strict Mode for highlighting potential problems
+  productionBrowserSourceMaps: true, // Enables source maps for production builds
   images: {
     remotePatterns: [
       {

@@ -1,39 +1,31 @@
 import googleMap from "@/components/customizeComponents/googleMap";
 
 export const customizeFooter = [
-//fiha mart footer google map add start
+
   {
-    id: 8591,
-    textBold: "light",
-  },
-  {
+    // Fihamart
     id: 6747,
-    googleMaps: googleMap,
+    googleMaps: true,
   },
-//fiha mart footer google map add end
+  {
+    // Fashion mart customization start
+    id: 8203,
+    support: "Customer Support: ",
+    help_line: "Help Line: +880 1894-560311",
+    // Fashion mart customization end
+  },
 
-    { 
-        // Fashion mart customization start
-        id: 8203, 
-        support: 'Customer Support: ',
-        help_line: 'Help Line: +880 1894-560311',
-        
-        // Fashion mart customization end
-
-    },
 ];
-
 
 export const customizeHeader = [
-    { 
-         // Fashion mart customization start
-         id: 8203, 
-         mobile_font_big: 'sm:text-xl text-sm',
-         
-         // Fashion mart customization end
-        
-    },
+  {
+    // Fashion mart customization start
+    id: 8203,
+    mobile_font_big: "sm:text-xl text-sm",
+    // Fashion mart customization end
+  },
 ];
+<<<<<<< HEAD
 
 
 export const customizeCheckout = [
@@ -48,3 +40,5 @@ export const customizeCheckout = [
 ];
 
 
+=======
+>>>>>>> 5db3d570d3e579de020905b9ab13fb73ec71b90c

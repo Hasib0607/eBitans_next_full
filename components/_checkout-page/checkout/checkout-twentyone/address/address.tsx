@@ -132,54 +132,70 @@ const Address = ({
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
 
-              {/* Name Input with Icon */}
-              <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                  <FaUser className="text-black" />
+                {/* Name Input with Icon */}
+                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
+                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                    <FaUser className="text-black" />
+                  </div>
+                  <input
+                    onChange={(e) => setUserName(e.target.value)}
+                    type="text"
+                    placeholder={
+                      design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "নাম"
+                        : "Name"
+                    }
+                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                  />
+
+                {/* Phone Input with Icon */}
+                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
+                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                    <FaPhoneAlt className="text-black" />
+                  </div>
+                  <input
+                    value={userPhone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    type="number"
+                    maxLength={11}
+                    minLength={11}
+                    placeholder={
+                      design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "ফোন"
+                        : "Phone"
+                    }
+                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                  />
                 </div>
-                <input
-                  onChange={(e) => setUserName(e.target.value)}
-                  type="text"
-                  placeholder={
-                    design?.template_id === "29" || store_id === 3601 || store_id === 3904
-                      ? "নাম"
-                      : "Name"
-                  }
-                  className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                />
-              </div>
-            
-              {/* Phone Input with Icon */}
-              <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                  <FaPhoneAlt className="text-black" />
+
+                {/* Phone Validation Error */}
+                {!isPhoneValid && (
+                  <small className="text-rose-500">Need 11 digits</small>
+                )}
+
+                {/* Address Input with Icon */}
+                <div className="flex items-start border border-gray-400 rounded focus-within:border-gray-400">
+                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                    <FaMapMarkerAlt className="text-black" />
+                  </div>
+                  <textarea
+                    onChange={(e) => setUserAddress(e.target.value)}
+                    placeholder={
+                      design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "ঠিকানা"
+                        : "Address"
+                    }
+                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                  />
                 </div>
-                <input
-                  value={userPhone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="number"
-                  maxLength={11}
-                  minLength={11}
-                  placeholder={
-                    design?.template_id === "29" || store_id === 3601 || store_id === 3904
-                      ? "ফোন"
-                      : "Phone"
-                  }
-                  className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                />
-              </div>
-            
-              {/* Phone Validation Error */}
-              {!isPhoneValid && (
-                <small className="text-rose-500">Need 11 digits</small>
-              )}
-            
-              {/* Address Input with Icon */}
-              <div className="flex items-start border border-gray-400 rounded focus-within:border-gray-400">
-                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                  <FaMapMarkerAlt className="text-black" />
-                </div>
+
                 <textarea
                   onChange={(e) => setUserAddress(e.target.value)}
                   placeholder={
@@ -191,7 +207,6 @@ const Address = ({
                 />
 
               </div>
-            </div>
             ) : (
               <div>
                 {(!address || address.length === 0) && (
@@ -368,25 +383,30 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
 
-    if (store?.auth_type === "EasyOrder" && !user) {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
-        data
-      );
-      reset();
-      setToken(response?.data?.token);
-      setCall(Math.random() * 100);
-      toast(response?.data?.success, { type: "success" });
-    } else {
-      httpReq
-        .post("address/save", data)
-        .then(({ success, token }) => {
-          reset();
-          setToken(token);
-          setCall(Math.random() * 100);
-          toast(success, { type: "success" });
-        })
-        .catch((err) => console.log(err));
+    try {
+      if (store?.auth_type === "EasyOrder" && !user) {
+        const response = await axios.post(
+          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
+          data
+        );
+        reset();
+        setToken(response?.data?.token);
+        setCall(Math.random() * 100);
+        toast(response?.data?.success, { type: "success" });
+      } else {
+        httpReq
+          .post("address/save", data)
+          .then(({ success, token }) => {
+            reset();
+            setToken(token);
+            setCall(Math.random() * 100);
+            toast(success, { type: "success" });
+          })
+          .catch((err) => console.log(err));
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast("An error occurred. Please try again.", { type: "error" });
     }
   };
 
@@ -527,43 +547,48 @@ export function SaveAddress({
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
-    if (store?.auth_type === "EasyOrder" && !user && !token) {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
-        data
-      );
-      reset();
-      setToken(response?.data?.token);
-      setCall(Math.random() * 100);
-      toast(response?.data?.success, { type: "success" });
-      setOpen(!open);
-    } else if (store?.auth_type === "EasyOrder" && !user && token) {
-      const response = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "address/save",
-        data,
-        {
-          headers: {
-            Authorization: `Bearer ${token?.token}`,
-            "Content-Type": "application/json", // Adjust the content type according to your API requirements
-          },
-        }
-      );
-      reset();
-      setToken(response?.data?.token);
-      setCall(Math.random() * 100);
-      toast(response?.data?.success, { type: "success" });
-      setOpen(!open);
-    } else {
-      httpReq
-        .post("address/save", data)
-        .then(({ success, token }) => {
-          reset();
-          setToken(token);
-          setCall(Math.random() * 100);
-          toast(success, { type: "success" });
-          setOpen(!open);
-        })
-        .catch((err) => console.log(err));
+    try {
+      if (store?.auth_type === "EasyOrder" && !user && !token) {
+        const response = await axios.post(
+          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
+          data
+        );
+        reset();
+        setToken(response?.data?.token);
+        setCall(Math.random() * 100);
+        toast(response?.data?.success, { type: "success" });
+        setOpen(!open);
+      } else if (store?.auth_type === "EasyOrder" && !user && token) {
+        const response = await axios.post(
+          process.env.NEXT_PUBLIC_API_URL + "address/save",
+          data,
+          {
+            headers: {
+              Authorization: `Bearer ${token?.token}`,
+              "Content-Type": "application/json", // Adjust the content type according to your API requirements
+            },
+          }
+        );
+        reset();
+        setToken(response?.data?.token);
+        setCall(Math.random() * 100);
+        toast(response?.data?.success, { type: "success" });
+        setOpen(!open);
+      } else {
+        httpReq
+          .post("address/save", data)
+          .then(({ success, token }) => {
+            reset();
+            setToken(token);
+            setCall(Math.random() * 100);
+            toast(success, { type: "success" });
+            setOpen(!open);
+          })
+          .catch((err) => console.log(err));
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast("An error occurred. Please try again.", { type: "error" });
     }
   };
 
