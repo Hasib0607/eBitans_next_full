@@ -110,7 +110,7 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
               {headerSetting?.short_description}
             </p>
             <p className="text-base text-left">{headerSetting?.address}</p>
-            {/* {`${footerData?.googleMaps ? footerData?.googleMaps : ""}`} */}
+
             {footerData?.googleMaps && footerData?.googleMaps == true ? (
               <div className="relative w-full mt-[20px]">
                 <div style={{ width: "100%" }}>
@@ -129,6 +129,7 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
             ) : (
               <></>
             )}
+
           </div>
           <div className="justify-self-center ">
             <h1 className="text-xl font-medium">Categories</h1>

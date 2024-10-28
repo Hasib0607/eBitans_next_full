@@ -7,6 +7,7 @@ import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
 import WhatsApp from "./components/whatsApp";
 
+
 const FooterFive = ({
   headerSetting,
   category,
@@ -73,7 +74,9 @@ const FooterFive = ({
                   </div>
                   <div className="lg:px-4 md:px-4 ">
                     <h5>NEED HELP ?</h5>
+
                     <h1 className={`font-semibold`}>{headerSetting?.phone}</h1>
+
                   </div>
                 </div>
                 <div className="flex gap-x-3 mt-3 text-3xl">

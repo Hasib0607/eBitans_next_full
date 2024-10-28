@@ -9,6 +9,7 @@ import Newsletter from "./components/newsletter";
 import WhatsApp from "./components/whatsApp";
 import { customizeFooter } from "@/utils/customizeDesign";
 
+
 const FooterSeven = ({
   headerSetting,
   category,

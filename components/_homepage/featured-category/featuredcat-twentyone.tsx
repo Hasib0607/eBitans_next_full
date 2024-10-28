@@ -65,6 +65,7 @@ const FeatureCatSix = ({ item, setText, text }: any) => {
     }finally {
       setLoading(false);
     }
+
   };
 
   useEffect(() => {
