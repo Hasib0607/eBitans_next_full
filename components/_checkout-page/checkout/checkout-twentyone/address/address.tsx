@@ -131,7 +131,6 @@ const Address = ({
             </div>
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
-
                 {/* Name Input with Icon */}
                 <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
                   <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
@@ -149,6 +148,7 @@ const Address = ({
                     }
                     className="flex-grow ml-2 focus:outline-none focus:ring-0"
                   />
+                </div>
 
                 {/* Phone Input with Icon */}
                 <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
@@ -195,17 +195,6 @@ const Address = ({
                     className="flex-grow ml-2 focus:outline-none focus:ring-0"
                   />
                 </div>
-
-                <textarea
-                  onChange={(e) => setUserAddress(e.target.value)}
-                  placeholder={
-                    design?.template_id === "29" || store_id === 3601 || store_id === 3904
-                      ? "ঠিকানা"
-                      : "Address"
-                  }
-                  className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                />
-
               </div>
             ) : (
               <div>

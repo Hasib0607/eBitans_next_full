@@ -25,7 +25,6 @@ export const customizeHeader = [
     // Fashion mart customization end
   },
 ];
-<<<<<<< HEAD
 
 
 export const customizeCheckout = [
@@ -40,5 +39,3 @@ export const customizeCheckout = [
 ];
 
 
-=======
->>>>>>> 5db3d570d3e579de020905b9ab13fb73ec71b90c
