@@ -36,3 +36,15 @@ export const customizeHeader = [
 ];
 
 
+export const customizeCheckout = [
+  { 
+
+       // Custimizebd customization start
+       id: 533,
+       payment_name_change: "Full Payment /Prebooking amount"
+
+      
+  },
+];
+
+

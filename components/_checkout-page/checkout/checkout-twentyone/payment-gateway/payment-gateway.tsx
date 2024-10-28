@@ -2,10 +2,14 @@
 import React from "react";
 import bkashLogo from "@/assets/paymentMethodLogo/bkashLogo.png";
 import useTheme from "@/hooks/use-theme";
+import { customizeCheckout } from "@/utils/customizeDesign";
 
 const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
   const { design, headerSetting, module, store_id } = useTheme();
   const advancePay = module?.find((item: any) => item?.modulus_id === 106);
+  
+  const storeID = headerSetting?.store_id || null;
+  const payment = customizeCheckout.find((item) => item.id == storeID);
 
   return (
     <>
