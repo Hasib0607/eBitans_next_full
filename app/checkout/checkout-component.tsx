@@ -5,30 +5,43 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CheckoutGtm from "./CheckoutGtm";
+import Skeleton from "@/components/loader/skeleton";
 
 const CheckoutComponent = () => {
-  const [redirect, setRedirect] = useState(false);
+  const [initialized, setInitialized] = useState(false);
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { user } = useSelector((state: any) => state.auth);
   const { design, store } = useTheme();
 
   useEffect(() => {
-    const isEmpty = (store: any) => Object.keys(store).length === 0;
-    if (!isEmpty) {
-      if (!user?.verify && store?.auth_type !== "EasyOrder") {
-        setRedirect(true); // Set redirect to true if user is not verified and store is not "EasyOrder"
-      } else if (user?.verify || store?.auth_type === "EasyOrder") {
-        setRedirect(false); // Otherwise, no redirect
+    const checkAuthorization = () => {
+      // Check if the store object is empty
+      if (Object.keys(store).length === 0) {
+        setLoading(false);
+        return;
       }
 
-      setLoading(false); // Stop loading after the conditions are evaluated
-    }
+      // Redirect to login if user is not verified and auth_type is not "EasyOrder"
+      if (!user?.verify && store?.auth_type !== "EasyOrder") {
+        router.push("/login");
+      } else {
+        setLoading(false); // Stop loading when authorized or store conditions are met
+      }
+    };
+
+    checkAuthorization();
   }, [user, store, router]);
 
-  if (!loading && redirect) {
-    router.push("/login"); // Redirect to login if the redirect condition is true
+  // Display loading indicator until the authorization check completes
+  if (loading) {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    ); 
   }
+
 
   return (
     <>

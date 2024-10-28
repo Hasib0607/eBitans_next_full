@@ -8,19 +8,23 @@ const axiosInstance = axios.create({
 if (typeof window !== "undefined") {
   let token = JSON.parse(localStorage.getItem("persist:root")!)?.auth
     ? JSON.parse(JSON.parse(localStorage.getItem("persist:root")!)?.auth)?.user
-        ?.token
+      ?.token
     : null;
 
   // Add a request interceptor
-  const persistRoot = localStorage.getItem("persist:root");
-  if (persistRoot) {
-    const auth = JSON.parse(persistRoot)?.auth;
-    if (auth) {
-      const user = JSON.parse(auth)?.user;
-      if (user) {
-        token = user.token;
+  try {
+    const persistRoot = localStorage.getItem("persist:root");
+    if (persistRoot) {
+      const auth = JSON.parse(persistRoot)?.auth;
+      if (auth) {
+        const user = JSON.parse(auth)?.user;
+        if (user) {
+          token = user.token;
+        }
       }
     }
+  } catch (error) {
+    console.error("Failed to retrieve token from local storage:", error);
   }
 
   axiosInstance.interceptors.request.use((config) => {
@@ -32,7 +36,23 @@ if (typeof window !== "undefined") {
     config.headers["Authorization"] = token ? "Bearer " + token : null;
     // config.headers['Content-Type'] = token ? 'multipart/form-data' : 'application/json'
     return config;
-  });
+  },
+    (error) => {
+      // Handle any request errors here
+      console.error("Request error:", error);
+      return Promise.reject(error);
+    }
+  );
+
+   // Optional: Add a response interceptor to handle errors globally
+   axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      // Handle errors globally
+      console.error("API call error:", error);
+      return Promise.reject(error);
+    }
+  );
 }
 
 export default axiosInstance;
