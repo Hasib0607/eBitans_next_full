@@ -26,7 +26,7 @@ export const customizeCheckout = [
   {
     id: 5033,
     bkash_logo: "Full Payment",
-    advanced_payment: "Partial Payment"
+    advanced_payment: "Advanced Payment"
   },
   {
     id: 3020,
