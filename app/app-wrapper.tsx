@@ -27,7 +27,7 @@ const AppWrapper = ({ children, design, headerSetting }: any) => {
           </PersistGate>
         </Provider>
       </QueryClientProvider>
-     </ThemeProvider>
+    </ThemeProvider>
   );
 };
 

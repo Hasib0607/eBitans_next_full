@@ -296,30 +296,25 @@ const AddressView = ({ store, setCall, store_id, setToken }: any) => {
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
 
-    try{
-      if (store?.auth_type === "EasyOrder" && !user) {
-        const response = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
-          data
-        );
-        reset();
-        setToken(response?.data?.token);
-        setCall(Math.random() * 100);
-        toast(response?.data?.success, { type: "success" });
-      } else {
-        httpReq
-          .post("address/save", data)
-          .then(({ success, token }) => {
-            reset();
-            setToken(token);
-            setCall(Math.random() * 100);
-            toast(success, { type: "success" });
-          })
-          .catch((err) => console.log(err));
-      }
-    } catch(error){
-      console.error("Error submitting form:", error);
-      toast("An error occurred. Please try again.", { type: "error" });
+    if (store?.auth_type === "EasyOrder" && !user) {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
+        data
+      );
+      reset();
+      setToken(response?.data?.token);
+      setCall(Math.random() * 100);
+      toast(response?.data?.success, { type: "success" });
+    } else {
+      httpReq
+        .post("address/save", data)
+        .then(({ success, token }) => {
+          reset();
+          setToken(token);
+          setCall(Math.random() * 100);
+          toast(success, { type: "success" });
+        })
+        .catch((err) => console.log(err));
     }
   };
 
@@ -430,48 +425,43 @@ export function SaveAddress({
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
-    try{
-      if (store?.auth_type === "EasyOrder" && !user && !token) {
-        const response = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
-          data
-        );
-        reset();
-        setToken(response?.data?.token);
-        setCall(Math.random() * 100);
-        toast(response?.data?.success, { type: "success" });
-        setOpen(!open);
-      } else if (store?.auth_type === "EasyOrder" && !user && token) {
-        const response = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL + "address/save",
-          data,
-          {
-            headers: {
-              Authorization: `Bearer ${token?.token}`,
-              "Content-Type": "application/json", // Adjust the content type according to your API requirements
-            },
-          }
-        );
-        reset();
-        setToken(response?.data?.token);
-        setCall(Math.random() * 100);
-        toast(response?.data?.success, { type: "success" });
-        setOpen(!open);
-      } else {
-        httpReq
-          .post("address/save", data)
-          .then(({ success, token }) => {
-            reset();
-            setToken(token);
-            setCall(Math.random() * 100);
-            toast(success, { type: "success" });
-            setOpen(!open);
-          })
-          .catch((err) => console.log(err));
-      }
-    } catch(error){
-      console.error("Error submitting form:", error);
-      toast("An error occurred. Please try again.", { type: "error" });
+    if (store?.auth_type === "EasyOrder" && !user && !token) {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
+        data
+      );
+      reset();
+      setToken(response?.data?.token);
+      setCall(Math.random() * 100);
+      toast(response?.data?.success, { type: "success" });
+      setOpen(!open);
+    } else if (store?.auth_type === "EasyOrder" && !user && token) {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "address/save",
+        data,
+        {
+          headers: {
+            Authorization: `Bearer ${token?.token}`,
+            "Content-Type": "application/json", // Adjust the content type according to your API requirements
+          },
+        }
+      );
+      reset();
+      setToken(response?.data?.token);
+      setCall(Math.random() * 100);
+      toast(response?.data?.success, { type: "success" });
+      setOpen(!open);
+    } else {
+      httpReq
+        .post("address/save", data)
+        .then(({ success, token }) => {
+          reset();
+          setToken(token);
+          setCall(Math.random() * 100);
+          toast(success, { type: "success" });
+          setOpen(!open);
+        })
+        .catch((err) => console.log(err));
     }
   };
 

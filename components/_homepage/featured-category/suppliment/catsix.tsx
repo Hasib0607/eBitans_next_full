@@ -9,15 +9,11 @@ const FeatureCatSix = ({ item }: any) => {
 
   useEffect(() => {
     const fetchData = async () => {
-      try{
-        const data = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
-          { id: item?.id }
-        );
-        setResult(data?.data?.total);
-      } catch(error){
-        console.error("Error fetching category products:", error);
-      }
+      const data = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
+        { id: item?.id }
+      );
+      setResult(data?.data?.total);
     };
     fetchData();
   }, [item?.id]);

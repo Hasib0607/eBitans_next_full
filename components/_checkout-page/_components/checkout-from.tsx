@@ -42,26 +42,25 @@ const CheckoutFrom = ({ store, setCall, store_id, setToken, user }: any) => {
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
 
-    try {
-      if (store?.auth_type === "EasyOrder" && !user) {
-        const response = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
-          data
-        );
-        reset();
-        setToken(response?.data?.token);
-        setCall(Math.random() * 100);
-        toast(response?.data?.success, { type: "success" });
-      } else {
-        const { success, token } = await httpReq.post("address/save", data);
-        reset();
-        setToken(token);
-        setCall(Math.random() * 100);
-        toast(success, { type: "success" });
-      }
-    } catch (error) {
-      // console.error("Error submitting data:", error);
-      toast("Error submitting data. Please try again.", { type: "error" });
+    if (store?.auth_type === "EasyOrder" && !user) {
+      const response = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
+        data
+      );
+      reset();
+      setToken(response?.data?.token);
+      setCall(Math.random() * 100);
+      toast(response?.data?.success, { type: "success" });
+    } else {
+      httpReq
+        .post("address/save", data)
+        .then(({ success, token }) => {
+          reset();
+          setToken(token);
+          setCall(Math.random() * 100);
+          toast(success, { type: "success" });
+        })
+        .catch((err) => console.log(err));
     }
   };
 

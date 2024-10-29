@@ -154,24 +154,14 @@ export default FeaturedTwentySeven;
 
 const ProductsCount = ({ subId }: any) => {
   const [result, setResult] = useState(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
-      try{
-        setLoading(true);
-        const data = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL + `getsubcatproduct`,
-          { id: subId }
-        );
-        setResult(data?.data?.total);
-      } catch(error){
-        setError("Failed to load products. Please try again later.");
-        console.error("Error fetching data:", error);
-      }finally {
-        setLoading(false);
-      }
+      const data = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + `getsubcatproduct`,
+        { id: subId }
+      );
+      setResult(data?.data?.total);
     };
     fetchData();
   }, [subId]);

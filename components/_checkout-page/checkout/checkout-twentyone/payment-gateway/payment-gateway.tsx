@@ -7,9 +7,8 @@ import { customizeCheckout } from "@/utils/customizeDesign";
 const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
   const { design, headerSetting, module, store_id } = useTheme();
   const advancePay = module?.find((item: any) => item?.modulus_id === 106);
-  
-  const storeID = headerSetting?.store_id || null;
-  const payment = customizeCheckout.find((item) => item.id == storeID);
+
+  const checkoutData = customizeCheckout.find((item) => item.id == store_id);
 
   return (
     <>
@@ -75,6 +74,8 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                   className={`py-2 px-5 sm:w-40 w-full rounded-full transition-colors duration-300 relative flex justify-center border border-gray-300 lg:cursor-pointer`}
                 >
                   <div className="flex justify-center ">
+                    {checkoutData?.bkash_logo ? 
+                    checkoutData?.bkash_logo : 
                     <div className="flex gap-2">
                       <img
                         src={bkashLogo.src}
@@ -83,6 +84,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                       />
                       {/* <h3 className='font-semibold tracking-wider'>{"Bkash Payment"}</h3> */}
                     </div>
+                    }
                   </div>
                   <input
                     className="
@@ -113,10 +115,11 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                       {design?.template_id === "29"
                         ? "ক্যাশ অন ডেলিভারি"
                         : `${
-                            store_id === 3020
-                              ? "Advanced Personal"
+                            checkoutData?.advanced_personal
+                              ? checkoutData?.advanced_personal
                               : "Cash On Delivery"
                           }`}
+                      {checkoutData?.advanced_payment ? checkoutData?.advanced_payment : ""}
                     </h3>
                   </div>
 

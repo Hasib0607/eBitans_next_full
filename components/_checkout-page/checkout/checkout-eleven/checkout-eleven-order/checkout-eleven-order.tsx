@@ -267,81 +267,74 @@ const CheckOutElevenOrder = ({
           address: userAddress,
           store_id: store_id,
         };
-        try {
-          const responseInfo = await axios.post(
-            process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
-            dataInfo
-          );
-          const placeOrder = async () => {
-            try {
-              const response = await axios.post(apiOrder, formData, {
-                headers: {
-                  Authorization: `Bearer ${responseInfo?.data?.token?.token}`,
-                  "Content-Type": "application/json", // Adjust the content type according to your API requirements
-                },
-              });
+        const responseInfo = await axios.post(
+          process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
+          dataInfo
+        );
+        const placeOrder = async () => {
+          try {
+            const response = await axios.post(apiOrder, formData, {
+              headers: {
+                Authorization: `Bearer ${responseInfo?.data?.token?.token}`,
+                "Content-Type": "application/json", // Adjust the content type according to your API requirements
+              },
+            });
 
-              if (response?.data?.url) {
-                window.location.replace(response?.data.url);
-                localStorage.removeItem("referralObj");
-                dispatch(clearCartList());
-              }
-
-              if (response?.data) {
-                if (!response?.data?.url && !response?.data?.error) {
-                  toast(
-                    `Your #${response?.data?.order?.reference_no} order complete successfully!`,
-                    {
-                      type: "success",
-                      autoClose: 1000,
-                    }
-                  );
-                  dispatch(clearCartList());
-                  dispatch(
-                    login({ tokenData: responseInfo?.data?.token }) as any
-                  )
-                    .unwrap()
-                    .then(({ verify, error }: any) => {
-                      if (error) {
-                        toast(error, { type: "error" });
-                        router.push("/login");
-                      }
-                      if (verify) {
-                        // toast(verify, { type: 'success' })
-                        // window.location.replace("/profile");
-                        setOrderPlaced(true);
-                        router.push("/thank-you");
-                        dispatch(clearCartList());
-                      }
-                    })
-                    .catch((er: any) => {
-                      toast("Credential Doesn't Match", { type: "error" });
-                    });
-                  // navigate("/profile/order")
-                }
-                if (response?.data?.error) {
-                  toast(response?.data?.error, {
-                    type: "error",
-                    autoClose: 1000,
-                  });
-                  setLoading(false);
-                }
-              }
-              if (response?.data?.user) {
-                // localStorage.setItem("user", JSON.stringify(response.user));
-              }
-            } catch (error) {
-              // console.error('Error posting data:', error);
-              // Handle any errors here
+            if (response?.data?.url) {
+              window.location.replace(response?.data.url);
+              localStorage.removeItem("referralObj");
+              dispatch(clearCartList());
             }
-          };
 
-          // Call the function whenever you want to post data with the token
-          placeOrder();
-        } catch (error) {
-          console.error("Error saving data:", error);
-          toast("Error saving data. Please try again.", { type: "error" });
-        }
+            if (response?.data) {
+              if (!response?.data?.url && !response?.data?.error) {
+                toast(
+                  `Your #${response?.data?.order?.reference_no} order complete successfully!`,
+                  {
+                    type: "success",
+                    autoClose: 1000,
+                  }
+                );
+                dispatch(clearCartList());
+                dispatch(login({ tokenData: responseInfo?.data?.token }) as any)
+                  .unwrap()
+                  .then(({ verify, error }: any) => {
+                    if (error) {
+                      toast(error, { type: "error" });
+                      router.push("/login");
+                    }
+                    if (verify) {
+                      // toast(verify, { type: 'success' })
+                      // window.location.replace("/profile");
+                      setOrderPlaced(true);
+                      router.push("/thank-you");
+                      dispatch(clearCartList());
+                    }
+                  })
+                  .catch((er: any) => {
+                    toast("Credential Doesn't Match", { type: "error" });
+                  });
+                // navigate("/profile/order")
+              }
+              if (response?.data?.error) {
+                toast(response?.data?.error, {
+                  type: "error",
+                  autoClose: 1000,
+                });
+                setLoading(false);
+              }
+            }
+            if (response?.data?.user) {
+              // localStorage.setItem("user", JSON.stringify(response.user));
+            }
+          } catch (error) {
+            // console.error('Error posting data:', error);
+            // Handle any errors here
+          }
+        };
+
+        // Call the function whenever you want to post data with the token
+        placeOrder();
       } else {
         httpReq
           .post(`placeorder`, formData)

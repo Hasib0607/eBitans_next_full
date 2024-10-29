@@ -1,7 +1,4 @@
-import googleMap from "@/components/customizeComponents/googleMap";
-
 export const customizeFooter = [
-
   {
     // Fihamart
     id: 6747,
@@ -14,7 +11,6 @@ export const customizeFooter = [
     help_line: "Help Line: +880 1894-560311",
     // Fashion mart customization end
   },
-
 ];
 
 export const customizeHeader = [
@@ -26,16 +22,14 @@ export const customizeHeader = [
   },
 ];
 
-
 export const customizeCheckout = [
-  { 
-
-       // Custimizebd customization start
-       id: 533,
-       payment_name_change: "Full Payment /Prebooking amount"
-
-      
+  {
+    id: 5033,
+    bkash_logo: "Full Payment",
+    advanced_payment: "Partial Payment"
   },
+  {
+    id: 3020,
+    advanced_personal: "Advanced Personal",
+  }
 ];
-
-

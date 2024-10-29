@@ -139,7 +139,7 @@ const useData = () => {
         );
         setBookingData(data?.data);
       } catch (error) {
-        // console.log(error, "error");
+        console.log(error, "error");
       }
     }
     if (store_id) {
@@ -325,67 +325,63 @@ const useData = () => {
   //check here
   const fetchHeader = useCallback(
     async (data: any) => {
-      try{
-        const res = await axios.post(
-          process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
-          {
-            name: window.location.host.startsWith("www.")
-              ? window.location.host.slice(4)
-              : window.location.host,
-          }
-        );
-  
-        const {
-          store,
-          store_id,
-          menu,
-          headersetting,
-          // category,
-          // subcategory,
-          // slider,
-          // product,
-          // feature_product,
-          // best_sell_product,
-          // banner,
-          // testimonials,
-          design,
-          // layout,
-          // page,
-          // offer,
-          // campaign,
-          // brand,
-          // productByFirstCategory,
-        } = res?.data;
-  
-        if (token && v) {
-          const user = await httpReq.get("getuser");
-  
-          setUser(user);
+      const res = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
+        {
+          name: window.location.host.startsWith("www.")
+            ? window.location.host.slice(4)
+            : window.location.host,
         }
-  
-        // set state with the result
-        setHeaderSetting(headersetting);
-        setMenu(menu);
-        setPage(page);
-        setCategory(category);
-        setSubcategory(subcategory);
-        setSlider(slider);
-        setProduct(product);
-        set_feature_product(feature_product);
-        set_best_sell_product(best_sell_product);
-        setBanner(banner);
-        setTestimonials(testimonials);
-        setStore_id(store_id);
-        setDesign(design);
-        setLayout(layout);
-        setOffer(offer);
-        setCampaign(campaign);
-        setStore(store);
-        setBrand(brand);
-        setProductByFirstCategory(productByFirstCategory);
-      } catch(error){
-        console.error("Error fetching header data:", error);
+      );
+
+      const {
+        store,
+        store_id,
+        menu,
+        headersetting,
+        category,
+        subcategory,
+        slider,
+        product,
+        feature_product,
+        best_sell_product,
+        banner,
+        testimonials,
+        design,
+        layout,
+        page,
+        offer,
+        campaign,
+        brand,
+        productByFirstCategory,
+      } = res?.data;
+
+      if (token && v) {
+        const user = await httpReq.get("getuser");
+
+        setUser(user);
       }
+
+      // set state with the result
+      setHeaderSetting(headersetting);
+      setMenu(menu);
+      setPage(page);
+      setCategory(category);
+      setSubcategory(subcategory);
+      setSlider(slider);
+      setProduct(product);
+      set_feature_product(feature_product);
+      set_best_sell_product(best_sell_product);
+      setBanner(banner);
+      setTestimonials(testimonials);
+      setStore_id(store_id);
+      setDesign(design);
+      setLayout(layout);
+      setOffer(offer);
+      setCampaign(campaign);
+      setStore(store);
+      setBrand(brand);
+      setProductByFirstCategory(productByFirstCategory);
     },
     [token, v]
   );
