@@ -370,9 +370,9 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
   } = useForm();
 
   const onSubmit = async (data: any) => {
+  try {
     data["store_id"] = store_id;
-
-    if (store?.auth_type === "EasyOrder" && !user) {
+    if (store?.auth_type == "EasyOrder" && !user) {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
         data
@@ -390,9 +390,17 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
           setCall(Math.random() * 100);
           toast(success, { type: "success" });
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          // console.log("Error during HTTP request:", err);
+          toast("Error saving address", { type: "error" });
+        });
     }
-  };
+  } catch (error) {
+    console.error("Error in onSubmit:", error);
+    toast("Error saving address", { type: "error" });
+  }
+};
+
 
   return (
     <div>
@@ -674,7 +682,6 @@ export function UpdateAddress({
   design,
   token,
 }: any) {
-  console.log(open, "open from x");
   const { store } = useTheme();
 
   const { user } = useSelector((state: any) => state.auth);
