@@ -225,7 +225,7 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
               <Link href="/">
                 <img
                   className="h-16"
-                  src={imgUrl + headerSetting.logo}
+                  src={imgUrl + headerSetting?.logo}
                   alt="logo"
                 />
               </Link>

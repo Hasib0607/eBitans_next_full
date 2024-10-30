@@ -146,7 +146,7 @@ const HeaderFourteen = ({ headerSetting }: any) => {
                   <Link href="/">
                     <img
                       className="h-10"
-                      src={imgUrl + headerSetting.logo}
+                      src={imgUrl + headerSetting?.logo}
                       alt="logo"
                     />
                   </Link>

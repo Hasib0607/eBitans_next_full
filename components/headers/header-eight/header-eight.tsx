@@ -91,7 +91,7 @@ export default function HeaderEight({ headerSetting }: any) {
               <Link href="/">
                 <img
                   className="h-[45px] w-auto overflow-hidden"
-                  src={imgUrl + headerSetting.logo}
+                  src={imgUrl + headerSetting?.logo}
                   alt="logo"
                 />
               </Link>
@@ -337,7 +337,7 @@ const Sticky = ({ setSearchInput, searchInput, headerSetting }: any) => {
                         <Link href="/">
                           <img
                             className="h-12 w-auto overflow-hidden"
-                            src={imgUrl + headerSetting.logo}
+                            src={imgUrl + headerSetting?.logo}
                             alt="logo"
                           />
                         </Link>

@@ -31,11 +31,13 @@ const LoginTwentyNine = () => {
   // }, [dispatch]);
 
   useEffect(() => {
-    try{
-      axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
-        setActiveModule(response?.data?.status || false);
-      });
-    } catch(error){
+    try {
+      axiosInstance
+        .get("/get-module/120?name=" + store.url)
+        .then((response) => {
+          setActiveModule(response?.data?.status || false);
+        });
+    } catch (error) {
       console.error("Error fetching module:", error);
       toast.error("Failed to fetch module data. Please try again.");
     }
@@ -94,7 +96,7 @@ const LoginTwentyNine = () => {
           <Link href="/">
             <img
               className="h-auto max-w-[160px] overflow-hidden mx-auto"
-              src={imgUrl + headerSetting.logo}
+              src={imgUrl + headerSetting?.logo}
               alt="logo"
             />
           </Link>
