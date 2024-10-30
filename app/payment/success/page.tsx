@@ -3,7 +3,7 @@ import useTheme from "@/hooks/use-theme";
 import { useRouter } from "next/navigation";
 import { TiTickOutline } from "react-icons/ti";
 const SuccessPage = () => {
-    const router = useRouter();
+  const router = useRouter();
   const { orderPlaced, design } = useTheme();
   const url = new URL(window.location.href);
   const msg = url.searchParams.get("msg");
@@ -15,10 +15,10 @@ const SuccessPage = () => {
       color:  ${design?.text_color};
   }
 `;
-    if (!orderPlaced) {
-      router.push("/profile/order");
-      return null;
-    }
+  if (!orderPlaced) {
+    router.push("/profile/order");
+    return null;
+  }
   return (
     <div className="flex flex-col gap-3 justify-center items-center font-bold h-screen">
       <style>{styleCss}</style>

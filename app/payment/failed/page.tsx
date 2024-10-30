@@ -10,10 +10,9 @@ const FailedPage = () => {
     const url = new URL(window.location.href);
     const errorMessage = url?.searchParams?.get("error_msg");
 
-    toast.error(errorMessage)
-    
+    toast.error(errorMessage);
+
     router.replace("/profile/order");
-    
   }, [router, searchParams]);
 
   return null;

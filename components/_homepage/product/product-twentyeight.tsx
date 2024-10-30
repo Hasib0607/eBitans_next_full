@@ -5,6 +5,7 @@ import Card58 from "@/components/card/card58";
 import useTheme from "@/hooks/use-theme";
 import httpReq from "@/utils/http/axios/http.service";
 import useHeaderSettings from "@/utils/query/use-header-settings";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Product {
@@ -22,21 +23,36 @@ interface CategoryProducts {
   [key: string]: Product[]; // The key is the category name, and the value is an array of products
 }
 
-const ProductTwentyEight = ({ category, design, store_id }: { category: any; design: any; store_id: any; }) => {
+const ProductTwentyEight = ({
+  category,
+  design,
+  store_id,
+  product
+}: {
+  category: any;
+  design: any;
+  store_id: any;
+  product: any;
+}) => {
   const [active, setActive] = useState(0);
   const [products, setProducts] = useState<Product[]>([]);
   const [id, setId] = useState(0);
 
   const { data, error } = useHeaderSettings();
   const { category: categories }: { category: Category[] } = useTheme();
-  const [categoryProducts, setCategoryProducts] = useState<CategoryProducts>({}); // Type defined here
+  const [categoryProducts, setCategoryProducts] = useState<CategoryProducts>(
+    {}
+  ); // Type defined here
+
+  const router = useRouter();
 
   useEffect(() => {
     async function handleCategory() {
       try {
         const productsData: CategoryProducts = {}; // Type defined here
 
-        const promises = categories.map(async (c: Category) => { // Using Category type
+        const promises = categories.map(async (c: Category) => {
+          // Using Category type
           const response = await httpReq.post(`getcatproducts?page=1`, {
             id: c.id,
           });
@@ -64,7 +80,7 @@ const ProductTwentyEight = ({ category, design, store_id }: { category: any; des
     }
   `;
 
-  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  const { title, title_color, button_color } = data?.data?.custom_design?.product?.[0] || {};
   if (error) {
     return <p> error from headersettings</p>;
   }
@@ -84,18 +100,34 @@ const ProductTwentyEight = ({ category, design, store_id }: { category: any; des
         </div> */}
         <div className=" flex flex-wrap gap-5 lg:cursor-pointer uppercase text-sm font-medium text-gray-600 justify-center pt-10">
           {categories
-            .filter((category: Category) => categoryProducts[category?.name]?.length > 0)
+            .filter(
+              (category: Category) =>
+                categoryProducts[category?.name]?.length > 0
+            )
             .map((category: Category) => (
               <div key={category.id} className="mb-8">
-                <h2 className="text-center py-5 md:py-10 font-semibold text-lg">
+                <div className="flex justify-between items-center">
+                <h2 className="py-5 md:py-10 font-semibold text-lg">
                   {category.name}
                 </h2>
+                <div>
+                <button
+                style={{backgroundColor: button_color}}
+                    className=" text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300" // Example styling
+                    onClick={() => router.push(`/category/${category?.id}`)}
+                  >
+                    Load More
+                  </button>
+                </div>
+                </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 xl3:grid-cols-6 gap-2 sm:gap-5">
-                  {categoryProducts[category?.name]?.slice(0, 8)?.map((productData: Product) => (
-                    <div key={productData.name}>
-                      <Card56 item={productData} />
-                    </div>
-                  ))}
+                  {categoryProducts[category?.name]
+                    ?.slice(0, 8)
+                    ?.map((productData: Product) => (
+                      <div key={productData.name}>
+                        <Card56 item={productData} />
+                      </div>
+                    ))}
                 </div>
               </div>
             ))}
