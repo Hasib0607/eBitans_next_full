@@ -6,6 +6,7 @@ import Card58 from "@/components/card/card58";
 import DefaultSlider from "@/components/slider/default-slider";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { IoIosArrowForward } from "react-icons/io";
+import Link from "next/link";
 
 const FeatureProductTwentyEight = ({
   feature_product,
@@ -51,10 +52,15 @@ const FeatureProductTwentyEight = ({
       <div className="sm:container py-5 px-5 relative arrow-hov bg-[#FFEFCF]">
         <div className="mb-5 flex justify-between items-center">
           <img src={hot.src} alt="" className="h-10" />
-          <p style={{ color: title_color }} className="text-xl text-orange-600">
-            {title}
-            <IoIosArrowForward className="inline" />
-          </p>
+          <Link href="/shop">
+            <p
+              style={{ color: title_color }}
+              className="text-xl text-orange-600 cursor-pointer flex items-center"
+            >
+              {title}
+              <IoIosArrowForward className="inline" />
+            </p>
+          </Link>
         </div>
 
         <DefaultSlider
@@ -62,6 +68,10 @@ const FeatureProductTwentyEight = ({
           nextEl={nextEl}
           loop={true}
           breakpoints={{
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 20,
+            },
             375: {
               slidesPerView: 2,
               spaceBetween: 20,

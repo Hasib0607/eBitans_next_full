@@ -28,9 +28,14 @@ const LoginOne = () => {
   const { user } = useSelector((state: any) => state.auth);
 
   useEffect(() => {
-    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
-      setActiveModule(response?.data?.status || false);
-    });
+    try{
+      axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
+        setActiveModule(response?.data?.status || false);
+      });
+    } catch(error){
+      console.error("Error fetching module:", error);
+      toast.error("Failed to fetch module data. Please try again.");
+    }
   }, [store]);
 
   const {
