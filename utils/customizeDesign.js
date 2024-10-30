@@ -31,6 +31,6 @@ export const customizeCheckout = [
   },
   {
     id: 3020,
-    Bkash_Payment: "Bkash Advance Payment"
-  }
+    Bkash_Payment: "Bkash Advance Payment",
+  },
 ];

@@ -280,7 +280,7 @@ const YourOrders = ({
                 "Content-Type": "application/json",
               },
             });
-            
+
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
               localStorage.removeItem("referralObj");
