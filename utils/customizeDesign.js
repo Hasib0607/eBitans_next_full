@@ -24,7 +24,7 @@ export const customizeHeader = [
 
 export const customizeCheckout = [
   {
-    id: 5033,
+    id: 533,
     bkash_logo: "Full Payment",
     advanced_payment: "Advanced Payment"
   },
