@@ -115,11 +115,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                     <h3 className="font-semibold tracking-wider">
                       {design?.template_id === "29"
                         ? "ক্যাশ অন ডেলিভারি"
-                        : `${
-                            checkoutData?.advanced_payment
-                              ? checkoutData?.advanced_payment
-                              : "Cash On Delivery"
-                          }`}
+                        : "Cash On Delivery"}
                     </h3>
                   </div>
 

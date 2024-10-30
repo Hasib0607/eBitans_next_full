@@ -134,7 +134,11 @@ const Order = () => {
             <div className="sm:flex items-center justify-between">
               <div className="flex flex-wrap items-center gap-2">
                 {ar.map((i, id) => (
-                  <div key={id} onClick={() => get_filter(i)}>
+                  <div
+                    key={id}
+                    onClick={() => get_filter(i)}
+                    className="cursor-pointer"
+                  >
                     <div
                       className={`${
                         btn === i ? "bg-indigo-100 text-indigo-700" : null

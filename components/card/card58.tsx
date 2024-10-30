@@ -254,13 +254,15 @@ const Card58 = ({ item }: any) => {
       </div>
       <div
         onClick={buy_now}
-        className="bg-black text-white flex px-2 py-2 justify-center gap-1 items-center lg:cursor-pointer"
+        style={{ backgroundColor: bgColor || "black" }}
+        className="text-white flex px-2 py-2 justify-center gap-1 items-center lg:cursor-pointer"
       >
         <p className="">অর্ডার করুন</p>
       </div>
       <div
         onClick={add_cart_item}
-        className="bg-black text-white flex px-2 py-2 justify-center gap-1 items-center lg:cursor-pointer mt-1"
+        style={{ backgroundColor: bgColor || "black" }}
+        className="text-white flex px-2 py-2 justify-center gap-1 items-center lg:cursor-pointer mt-1"
       >
         <p className="">কার্টে যোগ করুন</p>
       </div>

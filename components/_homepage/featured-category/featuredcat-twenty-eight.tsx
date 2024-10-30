@@ -36,10 +36,7 @@ const FeaturedTwentyEight = ({ category, design }: any) => {
   const { title, title_color } = featureCategory;
 
   return (
-    <div
-      data-aos="fade-up"
-      className="sm:container px-5 sm:py-10 py-5 relative"
-    >
+    <div data-aos="fade-up" className="sm:container px-5 relative">
       <style>{styleCss}</style>
       <div className="text-center py-10 flex items-center justify-center">
         <p className="border-b-[3px] border-dashed sm:w-full w-10"></p>
@@ -67,6 +64,10 @@ const FeaturedTwentyEight = ({ category, design }: any) => {
         nextEl={nextEl}
         loop={true}
         breakpoints={{
+          320: {
+            slidesPerView: 2,
+            spaceBetween: 10,
+          },
           375: {
             slidesPerView: 2,
             spaceBetween: 10,
@@ -92,14 +93,14 @@ const FeaturedTwentyEight = ({ category, design }: any) => {
         ))}
       </DefaultSlider>
 
-      <div className="flex lg:hidden justify-center gap-2 lg:cursor-pointer">
+      {/* <div className="flex lg:hidden justify-center gap-2 lg:cursor-pointer">
         <div className={`${prevEl}  `}>
           <ChevronLeftIcon className="h-6 text-2xl font-serif font-bold" />
         </div>
         <div className={`${nextEl}  `}>
           <ChevronRightIcon className="h-6 text-2xl font-serif font-bold" />
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };
