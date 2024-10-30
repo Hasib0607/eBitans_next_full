@@ -74,17 +74,18 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                   className={`py-2 px-5 sm:w-40 w-full rounded-full transition-colors duration-300 relative flex justify-center border border-gray-300 lg:cursor-pointer`}
                 >
                   <div className="flex justify-center ">
-                    {checkoutData?.full_payment ? 
-                    checkoutData?.full_payment : 
-                    <div className="flex gap-2">
-                      <img
-                        src={bkashLogo.src}
-                        className=" h-8 "
-                        alt="bkashLogo"
-                      />
-                      {/* <h3 className='font-semibold tracking-wider'>{"Bkash Payment"}</h3> */}
-                    </div>
-                    }
+                    {checkoutData?.full_payment ? (
+                      checkoutData?.full_payment
+                    ) : (
+                      <div className="flex gap-2">
+                        <img
+                          src={bkashLogo.src}
+                          className=" h-8 "
+                          alt="bkashLogo"
+                        />
+                        {/* <h3 className='font-semibold tracking-wider'>{"Bkash Payment"}</h3> */}
+                      </div>
+                    )}
                   </div>
                   <input
                     className="
