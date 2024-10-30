@@ -10,6 +10,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import Loading from "../register/loading";
 import { btnhover } from "@/site-settings/style";
 import axiosInstance from "@/utils/http/axios/axios-instance";
+import { toast } from "react-toastify";
 // import Loading from './loading';
 export const cls =
   "w-full text-black rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary ";
@@ -30,9 +31,16 @@ const LoginTwentyNine = () => {
   // }, [dispatch]);
 
   useEffect(() => {
-    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
-      setActiveModule(response?.data?.status || false);
-    });
+    try {
+      axiosInstance
+        .get("/get-module/120?name=" + store.url)
+        .then((response) => {
+          setActiveModule(response?.data?.status || false);
+        });
+    } catch (error) {
+      console.error("Error fetching module:", error);
+      toast.error("Failed to fetch module data. Please try again.");
+    }
   }, [store]);
 
   const { register, handleSubmit } = useForm();
@@ -88,7 +96,7 @@ const LoginTwentyNine = () => {
           <Link href="/">
             <img
               className="h-auto max-w-[160px] overflow-hidden mx-auto"
-              src={imgUrl + headerSetting.logo}
+              src={imgUrl + headerSetting?.logo}
               alt="logo"
             />
           </Link>

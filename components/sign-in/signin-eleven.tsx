@@ -89,7 +89,7 @@ const LoginEleven = () => {
                       <Link href="/">
                         <img
                           className="h-auto min-w-full overflow-hidden"
-                          src={imgUrl + headerSetting.logo}
+                          src={imgUrl + headerSetting?.logo}
                           alt="logo"
                         />
                       </Link>

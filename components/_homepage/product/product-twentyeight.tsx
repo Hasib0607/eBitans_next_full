@@ -27,7 +27,7 @@ const ProductTwentyEight = ({
   category,
   design,
   store_id,
-  product
+  product,
 }: {
   category: any;
   design: any;
@@ -80,7 +80,8 @@ const ProductTwentyEight = ({
     }
   `;
 
-  const { title, title_color, button_color } = data?.data?.custom_design?.product?.[0] || {};
+  const { title, title_color, button_color } =
+    data?.data?.custom_design?.product?.[0] || {};
   if (error) {
     return <p> error from headersettings</p>;
   }
@@ -107,18 +108,18 @@ const ProductTwentyEight = ({
             .map((category: Category) => (
               <div key={category.id} className="mb-8">
                 <div className="flex justify-between items-center">
-                <h2 className="py-5 md:py-10 font-semibold text-lg">
-                  {category.name}
-                </h2>
-                <div>
-                <button
-                style={{backgroundColor: button_color}}
-                    className=" text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300" // Example styling
-                    onClick={() => router.push(`/category/${category?.id}`)}
-                  >
-                    Load More
-                  </button>
-                </div>
+                  <h2 className="py-5 md:py-10 font-semibold text-lg">
+                    {category.name}
+                  </h2>
+                  <div>
+                    <button
+                      style={{ backgroundColor: button_color }}
+                      className=" text-white px-4 py-2 rounded hover:bg-blue-600 transition duration-300" // Example styling
+                      onClick={() => router.push(`/category/${category?.id}`)}
+                    >
+                      Load More
+                    </button>
+                  </div>
                 </div>
                 <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 xl3:grid-cols-6 gap-2 sm:gap-5">
                   {categoryProducts[category?.name]

@@ -102,7 +102,7 @@ const HeaderTwentySeven = ({ headerSetting }: any) => {
             <Link href="/">
               <img
                 className="h-full w-full"
-                src={imgUrl + headerSetting.logo}
+                src={imgUrl + headerSetting?.logo}
                 alt="logo"
               />
             </Link>
@@ -288,7 +288,7 @@ const HeaderTwentySeven = ({ headerSetting }: any) => {
                 <Link href="/">
                   <img
                     className="h-10"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

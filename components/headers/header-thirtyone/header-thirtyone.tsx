@@ -176,7 +176,7 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
               <Link href="/">
                 <img
                   className="h-auto w-40"
-                  src={imgUrl + headerSetting.logo}
+                  src={imgUrl + headerSetting?.logo}
                   alt="logo"
                 />
               </Link>

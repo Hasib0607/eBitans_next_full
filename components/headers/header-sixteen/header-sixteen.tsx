@@ -74,7 +74,7 @@ const HeaderSixteen = ({ headerSetting }: any) => {
           <div className="flex sm:gap-10 gap-2">
             <div className="lg:flex gap-1 hidden items-center">
               <IoLocationOutline />
-              <p className="text-lg">{headerSetting.address}</p>
+              <p className="text-lg">{headerSetting?.address}</p>
             </div>
 
             <div className="flex gap-3 items-center">
@@ -86,7 +86,7 @@ const HeaderSixteen = ({ headerSetting }: any) => {
                     : "sm:text-lg text-xs"
                 }
               >
-                {headerSetting.phone}
+                {headerSetting?.phone}
               </p>
             </div>
           </div>

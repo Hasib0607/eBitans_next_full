@@ -138,7 +138,7 @@ const HeaderThirtyFive = ({ headerSetting }: any) => {
                 <Link href="/">
                   <img
                     className="h-[45px] w-auto overflow-hidden lg:mr-20"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

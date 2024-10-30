@@ -244,7 +244,7 @@ const HeaderFifteen = ({ headerSetting }: any) => {
                   <div>
                     <img
                       className="h-8 w-auto"
-                      src={imgUrl + headerSetting.logo}
+                      src={imgUrl + headerSetting?.logo}
                       alt=""
                     />
                   </div>

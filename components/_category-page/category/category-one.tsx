@@ -229,7 +229,7 @@ const CategoryOne = () => {
                         </div>
                       }
                       endMessage={
-                        <p className="text-center mt-5 text-xl font-bold pb-3">
+                        <p className="text-center mt-10 pb-10 text-xl font-bold mb-3">
                           No More Products
                         </p>
                       }
