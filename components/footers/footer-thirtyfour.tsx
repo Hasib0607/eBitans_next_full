@@ -16,7 +16,7 @@ import WhatsApp from "./components/whatsApp";
 import { customizeFooter } from "@/utils/customizeDesign";
 
 const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
-  const srcMatch = headerSetting.map_address.match(/src="([^"]+)"/);
+  const srcMatch = headerSetting?.map_address?.match(/src="([^"]+)"/);
   const iframeSrc = srcMatch ? srcMatch[1] : null;
 
   const styleCss = `

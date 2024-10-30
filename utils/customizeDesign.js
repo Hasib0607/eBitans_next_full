@@ -27,7 +27,7 @@ export const customizeCheckout = [
 
     id: 533,
     full_payment: "Full Payment",
-    partial_payment: "Partial Payment",
+    partial_payment: "Advanced Payment",
     advanced_payment: "Advanced Payment",
 
   },
