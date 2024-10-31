@@ -238,7 +238,9 @@ const FooterTwentyOne = ({
                 </div>
                 <div>
                   <h1 className="font-medium text-lg">
-                    {headerSetting?.whatsapp_phone ? "Whatsapp" : "Support 24/7"}
+                    {headerSetting?.whatsapp_phone
+                      ? "Whatsapp"
+                      : "Support 24/7"}
                   </h1>
                   <p className="text-gray-400 text-sm">
                     {headerSetting?.whatsapp_phone
