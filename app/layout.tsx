@@ -33,7 +33,9 @@ export default async function RootLayout({
   // Prepare meta information
   const websiteName = headersetting?.website_name;
   const title = `${websiteName}`;
-  const description = headersetting?.short_description || "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
+  const description =
+    headersetting?.short_description ||
+    "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
   const keywords = "eBitans, eCommerce builder platform";
 
   return (
@@ -43,8 +45,8 @@ export default async function RootLayout({
           <WrongUrl />
         ) : (
           <>
-          <SetFavicon faviconUrl={favicon} />
-          {/* <Heading title={title} description={description} keywords={keywords} favicon={favicon} /> */}
+            <SetFavicon faviconUrl={favicon} />
+            {/* <Heading title={title} description={description} keywords={keywords} favicon={favicon} /> */}
             <GoogleTagManager gtmId={headersetting?.gtm} />
             <NextTopLoader />
             <Announcement design={design} url={url} />

@@ -6,6 +6,7 @@ import CheckOutForty from "./_checkout-page/checkout/checkout-fourty/checkout-fo
 import CheckOutSeven from "./_checkout-page/checkout/checkout-seven/checkout-seven";
 import CheckOutTwentyOne from "./_checkout-page/checkout/checkout-twentyone/checkout-twentyone";
 import getReferralCode from "@/utils/getReferralCode";
+import CheckOutOne from "./_checkout-page/checkout/checkout-one/checkout-one";
 
 const Checkout = ({ theme }: any) => {
   const [referralCode, setReferralCode] = useState<string>("");
@@ -30,7 +31,7 @@ const Checkout = ({ theme }: any) => {
 
   return (
     <div>
-      {theme === "one" && <CheckOutFour />}
+      {theme === "one" && <CheckOutOne />}
       {theme === "two" && <CheckOutFour />}
       {theme === "three" && <CheckOutSeven />}
       {theme === "four" && <CheckOutFour />}

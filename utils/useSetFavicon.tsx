@@ -8,7 +8,9 @@ interface SetFaviconProps {
 
 function updateFavicon(newFaviconUrl: string): void {
   if (typeof window !== "undefined" && typeof document !== "undefined") {
-    let link = document.querySelector("link[rel='icon']") as HTMLLinkElement | null;
+    let link = document.querySelector(
+      "link[rel='icon']"
+    ) as HTMLLinkElement | null;
 
     if (!link) {
       link = document.createElement("link");
@@ -21,7 +23,6 @@ function updateFavicon(newFaviconUrl: string): void {
 }
 
 const SetFavicon: React.FC<SetFaviconProps> = ({ faviconUrl }) => {
-
   useEffect(() => {
     updateFavicon(faviconUrl);
   }, []);
