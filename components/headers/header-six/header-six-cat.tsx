@@ -124,7 +124,7 @@ const HeaderSixCat = () => {
               onChange={(e) => setSearch(e.target.value)}
               type="text"
               placeholder="Enter your search key ..."
-              className="w-full py-3 pl-3 outline-none focus:outline-none focus:border-gray-200 border-gray-200 focus:ring-0"
+              className="w-full py-3 pl-3 outline-none focus:outline-none border focus:border-gray-200 border-gray-200 focus:ring-0"
             />
           </div>
           <div

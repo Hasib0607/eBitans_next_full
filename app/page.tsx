@@ -34,15 +34,17 @@ export default async function Home() {
   // Check if subdomainData and headersetting exist
   const headersetting = subdomainData?.headersetting || {};
 
-  const favicon = imgUrl + headersetting?.favicon ;
+  const favicon = imgUrl + headersetting?.favicon;
   // Extract the relevant fields from headersetting
   const title = `${capitalizeFirstLetter(headersetting?.website_name)}`;
-  const description = headersetting?.short_description || "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
+  const description =
+    headersetting?.short_description ||
+    "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
   const keywords = "eBitans, eCommerce builder platform";
-  const logo = headersetting?.logo || null;
+
   return (
     <>
-    <Heading
+      <Heading
         title={title}
         description={description}
         keywords={keywords}
