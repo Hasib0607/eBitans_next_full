@@ -346,10 +346,10 @@ const HeaderThree = ({ headerSetting }: any) => {
             `}
       >
         <div className="sm:px-10 text-center cursor-auto mt-6 text-xs sm:text-sm">
-          <p>Welcome you to {headerSetting.website_name}</p>
+          <p>Welcome you to {headerSetting?.website_name}</p>
           <div className="flex items-center justify-center gap-2 pb-8">
             <span>{location}</span>
-            <p className=""> {headerSetting.address}</p>
+            <p className=""> {headerSetting?.address}</p>
           </div>
         </div>
         <div className="flex justify-between px-6 py-4 text-white bg-black lg:hidden ">

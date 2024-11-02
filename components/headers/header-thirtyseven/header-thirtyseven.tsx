@@ -114,7 +114,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
                 <Link href="/">
                   <img
                     className="lg:h-[45px] h-8 w-auto overflow-hidden"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

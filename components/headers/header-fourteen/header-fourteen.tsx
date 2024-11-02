@@ -146,7 +146,7 @@ const HeaderFourteen = ({ headerSetting }: any) => {
                   <Link href="/">
                     <img
                       className="h-10"
-                      src={imgUrl + headerSetting.logo}
+                      src={imgUrl + headerSetting?.logo}
                       alt="logo"
                     />
                   </Link>
@@ -312,14 +312,14 @@ const HeaderFourteen = ({ headerSetting }: any) => {
                          `}
         >
           <div className="px-10 text-center cursor-auto pt-3">
-            <p>Welcome you to {headerSetting.website_name}</p>
+            <p>Welcome you to {headerSetting?.website_name}</p>
             <div className="flex items-center justify-center gap-2 pb-8 pt-2">
               <p className="">
                 {" "}
                 <span className="inline-block">
                   <GoLocation />
                 </span>{" "}
-                {headerSetting.address}
+                {headerSetting?.address}
               </p>
             </div>
           </div>

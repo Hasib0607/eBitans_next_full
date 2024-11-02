@@ -80,7 +80,7 @@ const FooterTwentyFour = ({
         <div className="grid lg:grid-cols-4 grid-cols-2 py-6 gap-5 sm:container px-5">
           <div className="col-span-2 md:col-span-1">
             <Link href="/">
-              <img className="h-14" src={imgUrl + headerSetting.logo} alt="" />
+              <img className="h-14" src={imgUrl + headerSetting?.logo} alt="" />
             </Link>
             <p className="text-gray-400 text-sm pt-4">
               {headerSetting?.short_description}

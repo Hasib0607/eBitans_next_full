@@ -244,13 +244,13 @@ const Product = ({
               </div>
             }
             endMessage={
-              <p className="text-center mt-5 text-xl font-bold mb-3">
+              <p className="text-center mt-10 pb-10 text-xl font-bold mb-3">
                 No More Products
               </p>
             }
           >
             {grid === "H" && (
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 gap-4 px-2 sm:px-0">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 gap-4 px-2 sm:px-0">
                 {products?.map((item: any) => (
                   <motion.div
                     key={item?.id}

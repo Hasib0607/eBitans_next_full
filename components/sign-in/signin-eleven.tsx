@@ -31,9 +31,16 @@ const LoginEleven = () => {
   }, [dispatch]);
 
   useEffect(() => {
-    axiosInstance.get("/get-module/120?name=" + store.url).then((response) => {
-      setActiveModule(response?.data?.status || false);
-    });
+    try {
+      axiosInstance
+        .get("/get-module/120?name=" + store.url)
+        .then((response) => {
+          setActiveModule(response?.data?.status || false);
+        });
+    } catch (error) {
+      console.error("Error fetching module:", error);
+      toast.error("Failed to fetch module data. Please try again.");
+    }
   }, [store]);
 
   const { register, handleSubmit } = useForm();
@@ -82,7 +89,7 @@ const LoginEleven = () => {
                       <Link href="/">
                         <img
                           className="h-auto min-w-full overflow-hidden"
-                          src={imgUrl + headerSetting.logo}
+                          src={imgUrl + headerSetting?.logo}
                           alt="logo"
                         />
                       </Link>

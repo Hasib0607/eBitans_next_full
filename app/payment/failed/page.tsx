@@ -1,25 +1,20 @@
 "use client";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/router";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
+import { toast } from "react-toastify";
 const FailedPage = () => {
   const router = useRouter();
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    const errorMessage = searchParams.get("error_msg");
-    
-    if (errorMessage == "Transaction Cancel!") {
-      setTimeout(() => {
-        router.push("/profile/order");
-      }, 1000); // Redirect after 1 second
-    }
+    const url = new URL(window.location.href);
+    const errorMessage = url?.searchParams?.get("error_msg");
+
+    toast.error(errorMessage);
+
+    router.replace("/profile/order");
   }, [router, searchParams]);
 
-  return (
-    <>
-      <div>You will be redirected to your order page</div>
-    </>
-  );
+  return null;
 };
 export default FailedPage;

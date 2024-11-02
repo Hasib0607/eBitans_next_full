@@ -32,7 +32,7 @@ const FooterThirtySix = ({
       <div className="sm:container px-5 grid grid-cols-1 lg:grid-cols-5 gap-5 sm:gap-6">
         <div className="lg:col-span-2">
           <Link href="/">
-            <img className="h-14" src={imgUrl + headerSetting.logo} alt="" />
+            <img className="h-14" src={imgUrl + headerSetting?.logo} alt="" />
           </Link>
           <p className="py-5 text-lg font-bold">For queries and help</p>
           <div className="flex items-center gap-1 text-gray-400">

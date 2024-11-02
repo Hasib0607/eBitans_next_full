@@ -174,7 +174,7 @@ const HeaderTwentyEight = ({ headerSetting }: any) => {
                 <Link href="/">
                   <img
                     className="h-auto w-40 overflow-hidden"
-                    src={imgUrl + headerSetting.logo}
+                    src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
                 </Link>

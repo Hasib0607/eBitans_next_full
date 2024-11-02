@@ -32,7 +32,7 @@ const HeaderDefault = ({ headerSetting, menu, navigation }: any) => {
                 </div>
 
                 <div className="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
-                  {menu.length
+                  {menu?.length
                     ? menu?.map((item: any) => (
                         <Link
                           key={item.id}
@@ -102,7 +102,7 @@ const HeaderDefault = ({ headerSetting, menu, navigation }: any) => {
                     </div>
                   </div>
                   <div className="px-2 pt-2 pb-3 space-y-1">
-                    {navigation.map((item: any) => (
+                    {navigation?.map((item: any) => (
                       <a
                         key={item.name}
                         href={item.href}

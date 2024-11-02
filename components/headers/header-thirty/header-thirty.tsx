@@ -173,7 +173,7 @@ const HeaderThirty = ({ headerSetting }: any) => {
               <Link href="/">
                 <img
                   className="h-auto w-14 md:w-40 overflow-hidden"
-                  src={imgUrl + headerSetting.logo}
+                  src={imgUrl + headerSetting?.logo}
                   alt="logo"
                 />
               </Link>

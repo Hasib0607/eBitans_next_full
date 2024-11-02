@@ -136,7 +136,7 @@ const Details = ({
 
   const buyNowBtn = () => {
     if (store_id === 6227) {
-      window.location.href = `https://wa.me/${headerSetting.whatsapp_phone}`;
+      window.location.href = `https://wa.me/${headerSetting?.whatsapp_phone}`;
     } else {
       buyNow(variant, size, color, unit, filterV, add_to_cart, router);
     }

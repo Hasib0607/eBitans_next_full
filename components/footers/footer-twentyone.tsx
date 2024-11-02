@@ -230,7 +230,7 @@ const FooterTwentyOne = ({
               <div
                 className="flex items-center gap-2 w-full justify-center hover:bg-gray-900 p-5 relative hover:cursor-pointer"
                 onClick={() =>
-                  (window.location.href = `https://wa.me/${headerSetting.whatsapp_phone}`)
+                  (window.location.href = `https://wa.me/${headerSetting?.whatsapp_phone}`)
                 }
               >
                 <div>
@@ -238,11 +238,13 @@ const FooterTwentyOne = ({
                 </div>
                 <div>
                   <h1 className="font-medium text-lg">
-                    {headerSetting.whatsapp_phone ? "Whatsapp" : "Support 24/7"}
+                    {headerSetting?.whatsapp_phone
+                      ? "Whatsapp"
+                      : "Support 24/7"}
                   </h1>
                   <p className="text-gray-400 text-sm">
-                    {headerSetting.whatsapp_phone
-                      ? headerSetting.whatsapp_phone
+                    {headerSetting?.whatsapp_phone
+                      ? headerSetting?.whatsapp_phone
                       : "Contact us 24 hours a day"}
                   </p>
                 </div>
