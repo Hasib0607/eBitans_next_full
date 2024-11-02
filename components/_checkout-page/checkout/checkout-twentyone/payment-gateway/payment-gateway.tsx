@@ -74,17 +74,18 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                   className={`py-2 px-5 sm:w-40 w-full rounded-full transition-colors duration-300 relative flex justify-center border border-gray-300 lg:cursor-pointer`}
                 >
                   <div className="flex justify-center ">
-                    {checkoutData?.bkash_logo ? 
-                    checkoutData?.bkash_logo : 
-                    <div className="flex gap-2">
-                      <img
-                        src={bkashLogo.src}
-                        className=" h-8 "
-                        alt="bkashLogo"
-                      />
-                      {/* <h3 className='font-semibold tracking-wider'>{"Bkash Payment"}</h3> */}
-                    </div>
-                    }
+                    {checkoutData?.full_payment ? (
+                      checkoutData?.full_payment
+                    ) : (
+                      <div className="flex gap-2">
+                        <img
+                          src={bkashLogo.src}
+                          className=" h-8 "
+                          alt="bkashLogo"
+                        />
+                        {/* <h3 className='font-semibold tracking-wider'>{"Bkash Payment"}</h3> */}
+                      </div>
+                    )}
                   </div>
                   <input
                     className="
@@ -115,11 +116,10 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                       {design?.template_id === "29"
                         ? "ক্যাশ অন ডেলিভারি"
                         : `${
-                            checkoutData?.advanced_personal
-                              ? checkoutData?.advanced_personal
+                            checkoutData?.advanced_payment
+                              ? checkoutData?.advanced_payment
                               : "Cash On Delivery"
                           }`}
-                      {checkoutData?.advanced_payment ? checkoutData?.advanced_payment : ""}
                     </h3>
                   </div>
 
@@ -150,8 +150,8 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                       {design?.template_id === "29"
                         ? "অ্যাডভান্স পেমেন্ট"
                         : `${
-                            store_id === 3020
-                              ? "Bkash Advance Payment"
+                            checkoutData?.partial_payment
+                              ? checkoutData?.partial_payment
                               : "Advance Payment"
                           }`}
                     </h3>
