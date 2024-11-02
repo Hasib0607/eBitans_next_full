@@ -305,8 +305,9 @@ const YourOrders = ({
                       // toast(verify, { type: 'success' })
                       // window.location.replace("/profile");
                       setOrderPlaced(true);
-                      router.push("/thank-you");
+                      window.location.replace("/thank-you");
                       dispatch(clearCartList());
+                     
                     }
                     if (error) {
                       toast(error, { type: "error" });

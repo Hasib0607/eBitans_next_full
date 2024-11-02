@@ -88,9 +88,7 @@ const CheckOutOne = () => {
   }
 
   return (
-    <div
-      className="bg-[#F3F4F6] h-auto sm:h-[100vh]"
-    >
+    <div className="bg-[#F3F4F6] h-auto sm:h-[100vh]">
       <div className="sm:container px-5 xl:px-24">
         <div className="pt-10 font-semibold text-center">
           <div className="p-4 mb-4 text-center">
