@@ -16,9 +16,19 @@ const HeaderDown = () => {
   const { user } = useSelector((state: any) => state.auth);
 
   const dispatch = useDispatch();
+
   // const logOut = () => {
   //   dispatch(logout());
   // };
+
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   return (
     <div>
       <div className=" sm:container px-5 mx-auto my-1">
@@ -101,7 +111,7 @@ const HeaderDown = () => {
                     <Menu.Item>
                       {({ active }) => (
                         <p
-                          // onClick={() => logOut()}
+                          onClick={handleClick}
                           className={
                             "hover:bg-gray-100 block px-4 py-2 text-sm text-gray-700"
                           }

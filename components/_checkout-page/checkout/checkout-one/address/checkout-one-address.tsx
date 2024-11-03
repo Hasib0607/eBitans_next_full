@@ -23,7 +23,7 @@ const Address = ({
   setUserPhone,
   setUserName,
   setShipping_area,
-  setUserNote
+  setUserNote,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -62,6 +62,7 @@ const Address = ({
   const apiUrl = process.env.NEXT_PUBLIC_API_URL + "address";
 
   useEffect(() => {
+    console.log(store);
     if (store?.auth_type === "EasyOrder" && !user) {
       const postToServer = async () => {
         const store = {
@@ -117,131 +118,116 @@ const Address = ({
             </div>
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
-              {/* Name Input */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  আপনার নাম লিখুন <span className="text-red-500">*</span>
-                </label>
-                <input
-                  onChange={(e) => setUserName(e.target.value)}
-                  type="text"
-                  placeholder="সম্পূর্ণ নামটি লিখুন"
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                />
-              </div>
-            
-              {/* Phone Input */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  আপনার মোবাইল নাম্বার লিখুন <span className="text-red-500">*</span>
-                </label>
-                <input
-                  value={userPhone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="number"
-                  placeholder="১১ ডিজিটের মোবাইল নাম্বারটি লিখুন"
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                  maxLength={11}
-                  minLength={11}
-                />
-                {/* Phone Validation Error */}
-                {!isPhoneValid && (
-                  <small className="text-rose-500">Need 11 digits</small>
-                )}  
-              </div>
-            
-              {/* District Dropdown */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  জেলা সিলেক্ট করুন <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={selectedDistrict}
-                  onChange={(e) => setSelectedDistrict(e.target.value)}
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                >
-                  <option value="" disabled>
-                    জেলা সিলেক্ট করুন
-                  </option>
-                  {districtData.districts.map((district) => (
-                    <option key={district.id} value={district.name}>
-                      {district.name}
+                {/* Name Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    আপনার নাম লিখুন <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    onChange={(e) => setUserName(e.target.value)}
+                    type="text"
+                    placeholder="সম্পূর্ণ নামটি লিখুন"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  />
+                </div>
+
+                {/* Phone Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    আপনার মোবাইল নাম্বার লিখুন{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    value={userPhone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    type="number"
+                    placeholder="১১ ডিজিটের মোবাইল নাম্বারটি লিখুন"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                    maxLength={11}
+                    minLength={11}
+                  />
+                  {/* Phone Validation Error */}
+                  {!isPhoneValid && (
+                    <small className="text-rose-500">Need 11 digits</small>
+                  )}
+                </div>
+
+                {/* District Dropdown */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    জেলা সিলেক্ট করুন <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={selectedDistrict}
+                    onChange={(e) => setSelectedDistrict(e.target.value)}
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  >
+                    <option value="" disabled>
+                      জেলা সিলেক্ট করুন
                     </option>
-                  ))}
-                </select>
+                    {districtData.districts.map((district) => (
+                      <option key={district.id} value={district.name}>
+                        {district.name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Address Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    সম্পূর্ণ ঠিকানা <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    onChange={(e) => setUserAddress(e.target.value)}
+                    placeholder="হাউজ নাম্বার, রোড, ইউনিয়ন, উপজেলা, জেলা"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  ></textarea>
+                </div>
+
+                {/* Note (Optional) */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">নোট (অপশনাল)</label>
+                  <textarea
+                    onChange={(e) => setUserNote(e.target.value)}
+                    placeholder="আপনার স্পেশাল কোন রিকোয়ারমেন্ট থাকলে এখানে লিখুন"
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  ></textarea>
+                </div>
               </div>
-            
-              {/* Address Input */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  সম্পূর্ণ ঠিকানা <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  onChange={(e) => setUserAddress(e.target.value)}
-                  placeholder="হাউজ নাম্বার, রোড, ইউনিয়ন, উপজেলা, জেলা"
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                ></textarea>
-              </div>
-            
-              {/* Note (Optional) */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  নোট (অপশনাল)
-                </label>
-                <textarea
-                onChange={(e) => setUserNote(e.target.value)}
-                  placeholder="আপনার স্পেশাল কোন রিকোয়ারমেন্ট থাকলে এখানে লিখুন"
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                ></textarea>
-              </div>
-            </div>
-            
-            ) : (
+            ) : !address || address.length === 0 ? (
               <div>
-                {(!address || address.length === 0) && (
-                  <div>
-                    <AddressView
-                      design={design}
-                      store={store}
+                <AddressView
+                  design={design}
+                  store={store}
+                  setSelectAddress={setSelectAddress}
+                  setCall={setCall}
+                  address={address}
+                  store_id={store_id}
+                  setToken={setToken}
+                  setShipping_area={setShipping_area}
+                />
+              </div>
+            ) : (
+              <div className="grid xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
+                {address
+                  ?.slice(0, 4)
+                  .map((item: any) => (
+                    <Single
+                      token={token}
+                      item={item}
+                      key={item?.id}
+                      selectAddress={selectAddress}
                       setSelectAddress={setSelectAddress}
                       setCall={setCall}
-                      address={address}
-                      store_id={store_id}
-                      setToken={setToken}
+                      setShipping_area={setShipping_area}
                     />
-                  </div>
-                )}
-                {loading ? (
-                  <div className="flex items-center">
-                    {" "}
-                    <RotatingLines
-                      width="25"
-                      strokeColor="#6495ED"
-                      strokeWidth="6"
-                    />
-                    <p>Loading...</p>
-                  </div>
-                ) : (
-                  <div className="grid xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
-                    {address
-                      ?.slice(0, 4)
-                      .map((item: any) => (
-                        <Single
-                          token={token}
-                          item={item}
-                          key={item?.id}
-                          selectAddress={selectAddress}
-                          setSelectAddress={setSelectAddress}
-                          setCall={setCall}
-                        />
-                      ))}
-                  </div>
-                )}
+                  ))}
               </div>
             )}
           </div>
@@ -257,6 +243,7 @@ const Address = ({
         setOpen={setOpen}
         setCall={setCall}
         design={design}
+        setShipping_area={setShipping_area}
       />
     </>
   );
@@ -270,6 +257,7 @@ const Single = ({
   setSelectAddress,
   setCall,
   token,
+  setShipping_area
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -345,6 +333,7 @@ const Single = ({
             setCall={setCall}
             setSelectAddress={setSelectAddress}
             design={design}
+            setShipping_area={setShipping_area}
           />
         </div>
       </div>
@@ -365,7 +354,7 @@ const Single = ({
   );
 };
 
-const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
+const AddressView = ({ setCall, store_id, setToken, store, design, setShipping_area }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
   const [selectedDistrict, setSelectedDistrict] = useState("");
@@ -375,6 +364,17 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
     formState: { errors },
     reset,
   } = useForm();
+
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setShipping_area(0);
+    } else if (selectedDistrict === "Dhaka") {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [selectedDistrict, headerSetting, setShipping_area]);
 
   const onSubmit = async (data: any) => {
     try {
@@ -482,6 +482,36 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
 
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <label
+                htmlFor="district"
+                className="block text-sm font-medium text-gray-700"
+              >
+                District
+              </label>
+              <select
+                {...register("district", { required: true })}
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                required
+                id="district"
+                name="district"
+                className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
+              >
+                <option value="" disabled>
+                  Select District
+                </option>
+                {districtData.districts.map((district) => (
+                  <option key={district.id} value={district.name}>
+                    {district.name}
+                  </option>
+                ))}
+              </select>
+              {errors.district && (
+                <span className="text-red-500">District is required</span>
+              )}
+            </div>
+
+            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+              <label
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
@@ -534,14 +564,29 @@ export function SaveAddress({
   setToken,
   store_id,
   design,
+  setShipping_area,
 }: any) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm();
   const { user } = useSelector((state: any) => state.auth);
+  const { headerSetting } = useTheme();
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setShipping_area(0);
+    } else if (selectedDistrict === "Dhaka") {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [selectedDistrict, headerSetting, setShipping_area]);
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
@@ -645,6 +690,35 @@ export function SaveAddress({
               </div>
               <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                 <label
+                  htmlFor="district"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  District
+                </label>
+                <select
+                  {...register("district", { required: true })}
+                  value={selectedDistrict}
+                  onChange={(e) => setSelectedDistrict(e.target.value)}
+                  required
+                  id="district"
+                  name="district"
+                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
+                >
+                  <option value="" disabled>
+                    Select District
+                  </option>
+                  {districtData.districts.map((district) => (
+                    <option key={district.id} value={district.name}>
+                      {district.name}
+                    </option>
+                  ))}
+                </select>
+                {errors.district && (
+                  <span className="text-red-500">District is required</span>
+                )}
+              </div>
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
                   htmlFor="address"
                   className="block text-sm font-medium text-gray-700"
                 >
@@ -687,10 +761,12 @@ export function UpdateAddress({
   setSelectAddress,
   design,
   token,
+  setShipping_area
 }: any) {
   const { store } = useTheme();
 
   const { user } = useSelector((state: any) => state.auth);
+  const [selectedDistrict, setSelectedDistrict] = useState("");
 
   const apiEdit = process.env.NEXT_PUBLIC_API_URL + "address/edit";
 
@@ -704,6 +780,18 @@ export function UpdateAddress({
       ...item,
     },
   });
+
+  const {headerSetting} = useTheme();
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setShipping_area(0);
+    } else if (selectedDistrict === "Dhaka") {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [selectedDistrict, headerSetting, setShipping_area]);
 
   const onSubmit = (data: any) => {
     data["id"] = item?.id;
@@ -792,6 +880,35 @@ export function UpdateAddress({
               />
               {errors.phone && (
                 <span className="text-red-500">Phone number is required</span>
+              )}
+            </div>
+            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+              <label
+                htmlFor="district"
+                className="block text-sm font-medium text-gray-700"
+              >
+                District
+              </label>
+              <select
+                {...register("district", { required: true })}
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                required
+                id="district"
+                name="district"
+                className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
+              >
+                <option value="" disabled>
+                  Select District
+                </option>
+                {districtData.districts.map((district) => (
+                  <option key={district.id} value={district.name}>
+                    {district.name}
+                  </option>
+                ))}
+              </select>
+              {errors.district && (
+                <span className="text-red-500">District is required</span>
               )}
             </div>
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
