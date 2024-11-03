@@ -137,9 +137,10 @@ const ProductTwentyEight = ({
           ))}
         </div>
       ) : (
-        <div className="text-red-500 text-center py-10 text-4xl">
-          No Products Available
-        </div>
+        // <div className="text-red-500 text-center py-10 text-4xl">
+        //   No Products Available
+        // </div>
+        null
       )}
     </div>
   );

@@ -153,7 +153,7 @@ const Discount = ({
                       htmlFor="name"
                       className="block text-xl font-semibold text-gray-700"
                     >
-                      {design?.template_id === "29" ? "ডিসকাউন্ট" : "Discount"}
+                      কুপন কোড
                     </label>
                     <form
                       onSubmit={handleSubmit(onSubmit)}

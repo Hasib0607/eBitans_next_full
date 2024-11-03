@@ -257,7 +257,7 @@ const Single = ({
   setSelectAddress,
   setCall,
   token,
-  setShipping_area
+  setShipping_area,
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -354,7 +354,14 @@ const Single = ({
   );
 };
 
-const AddressView = ({ setCall, store_id, setToken, store, design, setShipping_area }: any) => {
+const AddressView = ({
+  setCall,
+  store_id,
+  setToken,
+  store,
+  design,
+  setShipping_area,
+}: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
   const [selectedDistrict, setSelectedDistrict] = useState("");
@@ -418,11 +425,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design, setShipping_a
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "নাম"
-                  : "Name"}
+                নাম
               </label>
               <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
@@ -447,11 +450,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design, setShipping_a
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ফোন"
-                  : "Phone"}
+                ফোন
               </label>
               <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
@@ -485,7 +484,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design, setShipping_a
                 htmlFor="district"
                 className="block text-sm font-medium text-gray-700"
               >
-                District
+                জেলা
               </label>
               <select
                 {...register("district", { required: true })}
@@ -497,7 +496,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design, setShipping_a
                 className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
               >
                 <option value="" disabled>
-                  Select District
+                  জেলা নির্বাচন করুন
                 </option>
                 {districtData.districts.map((district) => (
                   <option key={district.id} value={district.name}>
@@ -515,11 +514,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design, setShipping_a
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ঠিকানা"
-                  : "Address"}
+                ঠিকানা
               </label>
               <div className="flex items-start mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
@@ -645,7 +640,7 @@ export function SaveAddress({
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Name
+                  নাম
                 </label>
                 <input
                   {...register("name", { required: true })}
@@ -664,7 +659,7 @@ export function SaveAddress({
                   htmlFor="phone"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Phone
+                  ফোন
                 </label>
                 <input
                   {...register("phone", {
@@ -693,7 +688,7 @@ export function SaveAddress({
                   htmlFor="district"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  District
+                  জেলা
                 </label>
                 <select
                   {...register("district", { required: true })}
@@ -705,7 +700,7 @@ export function SaveAddress({
                   className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
                 >
                   <option value="" disabled>
-                    Select District
+                  জেলা নির্বাচন করুন
                   </option>
                   {districtData.districts.map((district) => (
                     <option key={district.id} value={district.name}>
@@ -722,7 +717,7 @@ export function SaveAddress({
                   htmlFor="address"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Address
+                  ঠিকানা
                 </label>
                 <textarea
                   {...register("address", { required: true })}
@@ -761,7 +756,7 @@ export function UpdateAddress({
   setSelectAddress,
   design,
   token,
-  setShipping_area
+  setShipping_area,
 }: any) {
   const { store } = useTheme();
 
@@ -781,7 +776,7 @@ export function UpdateAddress({
     },
   });
 
-  const {headerSetting} = useTheme();
+  const { headerSetting } = useTheme();
   // Update the shipping area based on the selected district
   useEffect(() => {
     if (!selectedDistrict) {
@@ -848,7 +843,7 @@ export function UpdateAddress({
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                Name
+                নাম
               </label>
               <input
                 {...register("name")}
@@ -864,7 +859,7 @@ export function UpdateAddress({
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                Phone
+                ফোন
               </label>
               <input
                 {...register("phone", {
@@ -887,7 +882,7 @@ export function UpdateAddress({
                 htmlFor="district"
                 className="block text-sm font-medium text-gray-700"
               >
-                District
+                জেলা
               </label>
               <select
                 {...register("district", { required: true })}
@@ -899,7 +894,7 @@ export function UpdateAddress({
                 className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
               >
                 <option value="" disabled>
-                  Select District
+                জেলা নির্বাচন করুন
                 </option>
                 {districtData.districts.map((district) => (
                   <option key={district.id} value={district.name}>
@@ -916,7 +911,7 @@ export function UpdateAddress({
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
-                Address
+                ঠিকানা
               </label>
               <textarea
                 {...register("address")}
