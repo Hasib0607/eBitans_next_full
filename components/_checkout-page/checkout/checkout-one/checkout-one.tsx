@@ -150,6 +150,7 @@ const CheckOutOne = () => {
                 userAddress={userAddress}
                 userPhone={userPhone}
                 userName={userName}
+                setShipping_area={setShipping_area}
               />
             </div>
           </div>

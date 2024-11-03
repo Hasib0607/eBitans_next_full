@@ -17,6 +17,7 @@ import MenuList from "./components/menu-list";
 import MyAccount from "./components/myaccount";
 import NewsletterThree from "./components/newsletter-three";
 import WhatsApp from "./components/whatsApp";
+import { customizeFooter } from "@/utils/customizeDesign";
 
 const FooterTwentyOne = ({
   headerSetting,
@@ -30,6 +31,10 @@ const FooterTwentyOne = ({
   const [heading, setHeading] = useState(null);
 
   const cls = "text-gray-400 hover:text-white";
+
+  const storeID = headerSetting?.store_id || null;
+
+  const footerData = customizeFooter.find((item) => item.id == storeID);
 
   // const location = useLocation();
 
@@ -208,11 +213,9 @@ const FooterTwentyOne = ({
           {/* footer middle section  */}
           <div className="border border-gray-600 mt-5">
             <div
-              className={`${
-                store_id === 6227 ? "lg2:grid-cols-1" : "lg2:grid-cols-4"
-              } text-white grid grid-cols-1 md:grid-cols-2 justify-items-center`}
+              className={`text-white flex flex-col md:flex-row justify-between justify-items-center`}
             >
-              {store_id !== 6227 && (
+              {footerData?.free_shipping == false && (
                 <div className="flex items-center gap-2 w-full justify-center hover:bg-gray-900 p-5 relative">
                   <div>
                     <AiFillGift className="text-5xl" />
