@@ -55,9 +55,7 @@ const Seven = ({ data, updatedData }: Props) => {
 
   return (
     <div className="container px-5">
-      <Heading
-        title={product?.name}
-      />
+      <Heading title={product?.name} />
       <Details
         fetchStatus={fetchStatus}
         data={data}
