@@ -30,7 +30,7 @@ const BestSellerTwentyFour = ({ best_sell_product, design, store_id }: any) => {
   if (!best_sell_product || best_sell_product.length === 0) {
     return null;
   }
-  
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>

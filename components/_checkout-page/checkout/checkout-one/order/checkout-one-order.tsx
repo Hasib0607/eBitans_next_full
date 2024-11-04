@@ -539,7 +539,8 @@ const YourOrders = ({
           // disabled={userPhone?.length !== 11}
           className={`font-semibold tracking-wider my-1 rounded-full border cart-btn border-gray-300 w-full py-3 ${btnhover}`}
           onClick={() => handleCheckout()}
-        >অর্ডার কনফার্ম করুন
+        >
+          অর্ডার কনফার্ম করুন
         </button>
       )}
 
@@ -671,7 +672,9 @@ const Single = ({ item, setIsOpen, files, index }: any) => {
       <div>
         <p className="text-sm justify-self-end flex items-center gap-x-2">
           <BDT />
-          <span className="font-bold text-xl text-gray-500">{item?.price * item?.qty}</span>
+          <span className="font-bold text-xl text-gray-500">
+            {item?.price * item?.qty}
+          </span>
         </p>
         <div className="justify-self-end flex items-center gap-x-2">
           <span

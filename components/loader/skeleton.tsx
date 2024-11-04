@@ -11,7 +11,6 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
       document.body.style.overflow = "";
     };
   }, []);
-
   let page: any;
   const url: string = window.location.href;
   const checkPage = () => {
@@ -44,58 +43,22 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
       </div>
     );
   }
-  if (page == "shop" || page == "category") {
+  if (page === "shop" || page === "category") {
     return (
-      <div>
-        <section className="">
-          <div className="px-5 mx-auto animate-pulse fixed left-[50%] translate-x-[-50%] md:translate-x-0 md:static top-44 md:mb-0 md:mt-[450px] mb-68">
-            {/* <performance className="w-48 h-2 mx-auto bg-gray-200 rounded-lg dark:bg-gray-700" /> */}
-            {/* <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-      <p className="w-64 h-2 mx-auto mt-4 bg-gray-200 rounded-lg sm:w-80 dark:bg-gray-700"></p> */}
-            <div className="grid grid-cols-1 gap-8 mt-8 xl:mt-12 xl:gap-12 sm:grid-cols-2 xl:grid-cols-4 lg:grid-cols-3">
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
-              <div className="w-full ">
-                <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                <p className="w-48 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                <p className="w-24 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-              </div>
+      <div className="bg-[#F9F8FF] w-full">
+        <div className="w-full">
+          <section className="animate-pulse translate-y-[38%] md:translate-y-[25%] lg:translate-y-[18%] xl:-translate-y-[10%]">
+            <div className="grid grid-cols-1 gap-8 mt-8 xl:grid-cols-4 xl:mt-2 xl:gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div key={index} className="w-full h-96">
+                  <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
+                  <p className="w-60 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                  <p className="w-32 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
+                </div>
+              ))}
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
       </div>
     );
   }
