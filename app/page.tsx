@@ -37,8 +37,7 @@ export default async function Home() {
   const favicon = imgUrl + headersetting?.favicon;
   // Extract the relevant fields from headersetting
   const title = `${capitalizeFirstLetter(headersetting?.website_name)}`;
-  const description =
-    headersetting?.short_description;
+  const description = headersetting?.short_description;
   const keywords = "eBitans, eCommerce builder platform";
 
   return (
