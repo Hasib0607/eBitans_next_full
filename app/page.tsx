@@ -45,7 +45,6 @@ export async function generateMetadata(
   const description =
     headersetting?.short_description ||
     "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
- 
 
   return {
     title: `${title} `,
@@ -54,7 +53,7 @@ export async function generateMetadata(
     keywords: ` ${title}, `,
     openGraph: {
       title: `${title} `,
-      description: `description`,
+      description: `${description}`,
       url,
     },
     // twitter: {
@@ -67,7 +66,6 @@ export async function generateMetadata(
 }
 
 export default async function Home() {
-
   return (
     <>
       <HomePage />

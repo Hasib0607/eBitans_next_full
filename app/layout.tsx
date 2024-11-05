@@ -33,10 +33,8 @@ export default async function RootLayout({
   // Prepare meta information
   const websiteName = headersetting?.website_name;
   const title = `${websiteName}`;
-  const description =
-    headersetting?.short_description;
+  const description = headersetting?.short_description;
   const keywords = "eBitans, eCommerce builder platform";
-
 
   return (
     <html lang="en">

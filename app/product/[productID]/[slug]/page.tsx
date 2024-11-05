@@ -39,8 +39,8 @@ export async function generateMetadata(
   const websiteName = capitalizeFirstLetter(headersetting?.website_name);
   // Ensure image is a string and not an array
   const imageURL = Array.isArray(image) ? image[0] : image;
-  const productImageUrl = `${productImg+imageURL}`;
-  
+  const productImageUrl = `${productImg + imageURL}`;
+
   const fallbackImage = imgUrl + "default-product-image.jpg";
   return {
     title: `${websiteName} | ${name}`,
