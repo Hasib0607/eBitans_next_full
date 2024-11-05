@@ -46,7 +46,7 @@ const FeatureProductTwentyEight = ({
   const featuredProduct = cDesign?.feature_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = featuredProduct;
 
-  if(!featuredProduct || featuredProduct.length === 0){
+  if (!featuredProduct || featuredProduct.length === 0) {
     return null;
   }
 

@@ -40,7 +40,7 @@ const BestSellerThirtyFour = ({ best_sell_product, design, store_id }: any) => {
   // Check if there are any best selling products
   if (!best_sell_product || best_sell_product.length === 0) {
     return null;
-  };
+  }
 
   return (
     <div className="bg-[#F9F8FF]">

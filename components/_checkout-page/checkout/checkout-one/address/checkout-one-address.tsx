@@ -700,7 +700,7 @@ export function SaveAddress({
                   className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
                 >
                   <option value="" disabled>
-                  জেলা নির্বাচন করুন
+                    জেলা নির্বাচন করুন
                   </option>
                   {districtData.districts.map((district) => (
                     <option key={district.id} value={district.name}>
@@ -894,7 +894,7 @@ export function UpdateAddress({
                 className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
               >
                 <option value="" disabled>
-                জেলা নির্বাচন করুন
+                  জেলা নির্বাচন করুন
                 </option>
                 {districtData.districts.map((district) => (
                   <option key={district.id} value={district.name}>

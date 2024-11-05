@@ -5,7 +5,7 @@ import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
 import { getSubdomainName } from "@/lib";
 import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
-import Heading from "@/utils/heading";
+import { Metadata } from "next";
 // import AllMobileBottomMenu from "./mobileBottomMenu";
 // import MobileNavThree from "./mobileNavs/three/mobileNavThree";
 
@@ -26,13 +26,14 @@ import Heading from "@/utils/heading";
 //   }
 // }
 
-export default async function Home() {
+export async function generateMetadata(): Promise<Metadata> {
   const url = getUrl();
-  // const { headersetting } = await getSubdomainName(url, "headersetting");
-  const subdomainData = await getSubdomainName(url, "headersetting");
-
+  const subDomainData = await getSubdomainName(url, "headersetting");
+  if (!subDomainData) {
+    throw new Error("Subdomain data not found");
+  }
   // Check if subdomainData and headersetting exist
-  const headersetting = subdomainData?.headersetting || {};
+  const headersetting = subDomainData?.headersetting || {};
 
   const favicon = imgUrl + headersetting?.favicon;
   // Extract the relevant fields from headersetting
@@ -40,16 +41,23 @@ export default async function Home() {
   const description =
     headersetting?.short_description ||
     "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
-  const keywords = "eBitans, eCommerce builder platform";
 
+  return {
+    title: `${title} `,
+    description: `${description}`,
+    icons: { icon: imgUrl + headersetting?.favicon },
+    keywords: ` ${title}, `,
+    openGraph: {
+      title: `${title} `,
+      description: `${description}`,
+      url,
+    },
+  };
+}
+
+export default async function Home() {
   return (
     <>
-      <Heading
-        title={title}
-        description={description}
-        keywords={keywords}
-        favicon={favicon}
-      />
       <HomePage />
       {/* <AllMobileBottomMenu/> */}
       <HomepageLoad />
