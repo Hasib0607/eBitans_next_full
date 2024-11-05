@@ -23,10 +23,7 @@ const Heading: FC<HeadProps> = ({
       <title>{title}</title>
       <meta
         name="description"
-        content={
-          description ||
-          "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks."
-        }
+        content={ description }
       />
       <meta
         name="keywords"

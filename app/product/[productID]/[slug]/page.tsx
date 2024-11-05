@@ -44,7 +44,7 @@ export async function generateMetadata(
   const fallbackImage = imgUrl + "default-product-image.jpg";
   return {
     title: `${websiteName} | ${name}`,
-    description: description || `Buy ${name} at ${websiteName}`,
+    description: stripHtmlTags(description) || `Buy ${name} at ${websiteName}`,
     icons: { icon: imgUrl + headersetting?.favicon },
     keywords: seo_keywords || `${name}, ${websiteName}, `,
     openGraph: {
@@ -60,14 +60,13 @@ export async function generateMetadata(
         },
       ],
     },
-    // twitter: {
-    //   card: "summary_large_image",
-    //   title: `${websiteName} | ${name}`,
-    //   description: description || `Buy ${name} at ${websiteName}`,
-    //   image: productImageUrl || fallbackImage, // Use product image or fallback
-    // },
   };
 }
+
+function stripHtmlTags(htmlString:any) {
+  return htmlString.replace(/<[^>]*>/g, '') || "";
+}
+
 const SingleProductDetails = async ({ params }: Props) => {
   const url = getUrl();
   const subDomainData = await getSubdomainName(url, "headersetting");
