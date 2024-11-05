@@ -14,9 +14,27 @@ import WrongUrl from "@/components/wrongUrl";
 import Heading from "@/utils/heading";
 import { imgUrl } from "@/site-settings/siteUrl";
 import SetFavicon from "@/utils/useSetFavicon";
+import { Metadata } from "next";
 // import AllMobileBottomMenu from "./mobileBottomMenu";
 
 const inter = Inter({ subsets: ["latin"] });
+
+export async function generateMetadata(): Promise<Metadata> {
+  const url = getUrl();
+  const subDomain = await getSubdomainName(url, "headersetting");
+  const headersetting = subDomain?.headersetting;
+  const websiteName = headersetting?.website_name;
+  const title = `${websiteName}`;
+  const description = headersetting?.short_description;
+  const keywords = "eBitans, eCommerce builder platform";
+
+  return {
+    title: `${title}`,
+    description: description,
+    icons: { icon: imgUrl + headersetting?.favicon },
+    keywords: keywords,
+  };
+}
 
 export default async function RootLayout({
   children,
@@ -44,14 +62,6 @@ export default async function RootLayout({
         ) : (
           <>
             <SetFavicon faviconUrl={favicon} />
-            {true && (
-              <Heading
-                title={title}
-                description={description}
-                keywords={keywords}
-                favicon={favicon}
-              />
-            )}
             <GoogleTagManager gtmId={headersetting?.gtm} />
             <NextTopLoader />
             <Announcement design={design} url={url} />
