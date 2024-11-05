@@ -5,9 +5,7 @@ import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
 import { getSubdomainName } from "@/lib";
 import { imgUrl } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
-import Heading from "@/utils/heading";
-import { redirect } from "next/navigation";
-import { Metadata, ResolvingMetadata } from "next";
+import { Metadata } from "next";
 // import AllMobileBottomMenu from "./mobileBottomMenu";
 // import MobileNavThree from "./mobileNavs/three/mobileNavThree";
 
@@ -28,9 +26,7 @@ import { Metadata, ResolvingMetadata } from "next";
 //   }
 // }
 
-export async function generateMetadata(
-  parent: ResolvingMetadata
-): Promise<Metadata> {
+export async function generateMetadata(): Promise<Metadata> {
   const url = getUrl();
   const subDomainData = await getSubdomainName(url, "headersetting");
   if (!subDomainData) {
@@ -56,12 +52,6 @@ export async function generateMetadata(
       description: `${description}`,
       url,
     },
-    // twitter: {
-    //   card: "summary_large_image",
-    //   title: `${websiteName} | ${name}`,
-    //   description: description || `Buy ${name} at ${websiteName}`,
-    //   image: productImageUrl || fallbackImage, // Use product image or fallback
-    // },
   };
 }
 
