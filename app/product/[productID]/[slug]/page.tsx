@@ -63,8 +63,8 @@ export async function generateMetadata(
   };
 }
 
-function stripHtmlTags(htmlString:any) {
-  return htmlString.replace(/<[^>]*>/g, '') || "";
+function stripHtmlTags(htmlString: any) {
+  return htmlString.replace(/<[^>]*>/g, "") || "";
 }
 
 const SingleProductDetails = async ({ params }: Props) => {

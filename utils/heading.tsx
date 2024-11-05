@@ -21,10 +21,7 @@ const Heading: FC<HeadProps> = ({
     <>
       <link rel="favicon" href={favicon} />
       <title>{title}</title>
-      <meta
-        name="description"
-        content={ description }
-      />
+      <meta name="description" content={description} />
       <meta
         name="keywords"
         content={keywords || "eBitans, eCommerce builder platform"}

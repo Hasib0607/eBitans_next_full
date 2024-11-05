@@ -3,10 +3,12 @@ import getUrl from "@/utils/get-url";
 import { Suspense } from "react";
 import RenderSection from "./_homepage/render-section";
 
+
 const HomePage = async () => {
   const url = getUrl();
   const data = await getSubdomainName(url);
   const layout = data?.layout;
+  
 
   return (
     <>
