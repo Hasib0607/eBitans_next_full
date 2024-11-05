@@ -20,7 +20,7 @@ const Heading: FC<HeadProps> = ({
   return (
     <>
       <link rel="favicon" href={favicon} />
-      <title>{title ? `${title}` : "EBitans | Power Up Your Business"}</title>
+      <title>{title}</title>
       <meta
         name="description"
         content={

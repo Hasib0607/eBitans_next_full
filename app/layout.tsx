@@ -34,9 +34,9 @@ export default async function RootLayout({
   const websiteName = headersetting?.website_name;
   const title = `${websiteName}`;
   const description =
-    headersetting?.short_description ||
-    "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks.";
+    headersetting?.short_description;
   const keywords = "eBitans, eCommerce builder platform";
+
 
   return (
     <html lang="en">
@@ -46,12 +46,14 @@ export default async function RootLayout({
         ) : (
           <>
             <SetFavicon faviconUrl={favicon} />
-            <Heading
-              title={title}
-              description={description}
-              keywords={keywords}
-              favicon={favicon}
-            />
+            {true && (
+              <Heading
+                title={title}
+                description={description}
+                keywords={keywords}
+                favicon={favicon}
+              />
+            )}
             <GoogleTagManager gtmId={headersetting?.gtm} />
             <NextTopLoader />
             <Announcement design={design} url={url} />
