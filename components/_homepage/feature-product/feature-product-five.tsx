@@ -14,9 +14,16 @@ const FeatureProductFive = ({ feature_product }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
-  const featuredProduct = cDesign?.feature_product?.[0] || {};
-  const { title = "Default Title", title_color = "#000" } = featuredProduct;
+  let featuredProduct = cDesign?.feature_product?.featuredProduct?.[0] || null;
 
+  if(!featuredProduct){
+    return null;
+  }
+
+  // featuredProduct = featuredProduct?.[0] || {};
+  const title = featuredProduct?.title || "Default Title";
+  const title_color = featuredProduct?.title_color || "#000";
+  
   return (
     <div
       style={{
@@ -40,7 +47,7 @@ const FeatureProductFive = ({ feature_product }: any) => {
               </div>
             </div>
             <GridSliderTwo loop={true} prevEl={prev1} nextEl={next1}>
-              {feature_product?.slice(0, 10).map((item: any) => (
+              {feature_product && feature_product?.slice(0, 10).map((item: any) => (
                 <SwiperSlide className="swiperjs-slide" key={item?.id}>
                   <Card57 item={item} />
                 </SwiperSlide>
