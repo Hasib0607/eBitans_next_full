@@ -99,7 +99,7 @@ export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
         {/* for small images */}
         <div className="relative h-full w-full  order-last group ">
           <Slider {...settings} ref={customeSlider} className="relative ">
-            {images?.slice(0, 10).map((item: any, index: any) => (
+            {images.length > 0 && images?.slice(0, 10).map((item: any, index: any) => (
               <div key={index} className="focus:outline-none px-2 ">
                 <img
                   onClick={() => {

@@ -9,7 +9,9 @@ const HomePage = async () => {
   const layout = data?.layout;
   const layoutposition = data?.layoutposition;
 
-  const sortedLayout = layout.sort((a:any, b:any) => layoutposition[a] - layoutposition[b]);
+  const sortedLayout = layout.sort(
+    (a: any, b: any) => layoutposition[a] - layoutposition[b]
+  );
 
   return (
     <>

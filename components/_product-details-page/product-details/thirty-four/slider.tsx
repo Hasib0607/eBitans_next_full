@@ -62,7 +62,9 @@ export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
     const arr = product?.image;
     let variantImages;
     if (variant?.length > 0) {
-      variantImages = variant.map((v: any) => v.image);
+      variantImages = variant
+        .filter((v: any) => v.image != null)
+        .map((v: any) => v.image);
     }
     if (arr === undefined) return;
     setImages([...arr, ...(variantImages || [])]);
@@ -98,10 +100,10 @@ export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
     vertical: true,
     verticalSwiping: true,
     beforeChange: function (currentSlide: any, nextSlide: any) {
-      console.log("before change", currentSlide, nextSlide);
+      // console.log("before change", currentSlide, nextSlide);
     },
     afterChange: function (currentSlide: any) {
-      console.log("after change", currentSlide);
+      // console.log("after change", currentSlide);
     },
   };
   const settingsSmall = {
@@ -129,23 +131,24 @@ export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
             ref={customeSlider}
             className="relative group w-full flex flex-col justify-center items-center min-h-[300px] overflow-hidden"
           >
-            {images?.map((item: any, index: any) => (
-              <div key={index}>
-                <img
-                  onClick={() => {
-                    setActiveMbl(index);
-                    setId(index);
-                  }}
-                  className={`${
-                    activeMbl === index
-                      ? "active-img-mbl opacity-100"
-                      : "opacity-50"
-                  } min-h-full min-w-full bg-gray-100 border border-transparent  overflow-hidden`}
-                  src={productImg + item}
-                  alt=""
-                />
-              </div>
-            ))}
+            {images.length > 0 &&
+              images?.map((item: any, index: any) => (
+                <div key={index}>
+                  <img
+                    onClick={() => {
+                      setActiveMbl(index);
+                      setId(index);
+                    }}
+                    className={`${
+                      activeMbl === index
+                        ? "active-img-mbl opacity-100"
+                        : "opacity-50"
+                    } min-h-full min-w-full bg-gray-100 border border-transparent  overflow-hidden`}
+                    src={productImg + item}
+                    alt=""
+                  />
+                </div>
+              ))}
           </Slider>
           {images.length > 4 && (
             <div>
