@@ -99,22 +99,23 @@ export const HSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
         {/* for small images */}
         <div className="relative h-full w-full  order-last group ">
           <Slider {...settings} ref={customeSlider} className="relative ">
-            {images?.slice(0, 10).map((item: any, index: any) => (
-              <div key={index} className="focus:outline-none px-2 ">
-                <img
-                  onClick={() => {
-                    setActiveMbl(index);
-                    setId(index);
-                    setActiveImg("");
-                  }}
-                  className={`${
-                    activeMbl === index ? "active-img " : ""
-                  } xl:h-24 h-auto w-full xl:w-[98px] object-cover object-center bg-gray-100 border border-gray-400 `}
-                  src={productImg + item}
-                  alt=""
-                />
-              </div>
-            ))}
+            {images.length > 0 &&
+              images?.slice(0, 10).map((item: any, index: any) => (
+                <div key={index} className="focus:outline-none px-2 ">
+                  <img
+                    onClick={() => {
+                      setActiveMbl(index);
+                      setId(index);
+                      setActiveImg("");
+                    }}
+                    className={`${
+                      activeMbl === index ? "active-img " : ""
+                    } xl:h-24 h-auto w-full xl:w-[98px] object-cover object-center bg-gray-100 border border-gray-400 `}
+                    src={productImg + item}
+                    alt=""
+                  />
+                </div>
+              ))}
           </Slider>
           {images.length > 4 && (
             <div className="lg:opacity-0 group-hover:opacity-100 duration-500">

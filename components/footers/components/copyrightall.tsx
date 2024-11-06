@@ -15,7 +15,7 @@ const CopyrightAll = ({ headerSetting }: any) => {
         <a
           href="https://ebitans.com/"
           target="_blank"
-          rel="noopener noreferrer"
+          // rel="noopener noreferrer"
           className="font-semibold text-red-700"
         >
           eBitans
