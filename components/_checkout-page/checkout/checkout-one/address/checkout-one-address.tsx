@@ -23,7 +23,8 @@ const Address = ({
   setUserPhone,
   setUserName,
   setShipping_area,
-  setUserNote,
+  setNote,
+  item
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -51,40 +52,37 @@ const Address = ({
   };
 
   useEffect(() => {
-    const getDistrict = async() =>{
+    const getDistrict = async () => {
       try {
         const response = await axios.get(baseUrl + "get/district");
-       
-        if(response?.data?.status){
+
+        if (response?.data?.status) {
           const allDistrict = response?.data?.data || [];
           setDistrict(allDistrict);
-        }else{
+        } else {
           setDistrict([]);
         }
       } catch (error) {
         // console.error('Error posting data:', error);
         setDistrict([]);
       }
-    }
+    };
 
     getDistrict();
-  },[]);
+  }, []);
 
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (!selectedDistrict) {
-      setShipping_area(0);
-    } else if (selectedDistrict === "Dhaka") {
+    if (item?.districtData?.id == 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else {
+    } else if(!(item?.districtData?.id == 1)) {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    } else{
+      setShipping_area(0);
     }
-  }, [selectedDistrict, headerSetting, setShipping_area]);
-
-  
+  }, [headerSetting, setShipping_area]);
 
   useEffect(() => {
-    console.log(store);
     if (store?.auth_type === "EasyOrder" && !user) {
       const postToServer = async () => {
         const store = {
@@ -216,7 +214,7 @@ const Address = ({
                 <div className="flex flex-col">
                   <label className="font-semibold">নোট (অপশনাল)</label>
                   <textarea
-                    onChange={(e) => setUserNote(e.target.value)}
+                    onChange={(e) => setNote(e.target.value)}
                     placeholder="আপনার স্পেশাল কোন রিকোয়ারমেন্ট থাকলে এখানে লিখুন"
                     className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
                   ></textarea>
@@ -234,6 +232,7 @@ const Address = ({
                   setToken={setToken}
                   setShipping_area={setShipping_area}
                   district={district}
+                  item={item}
                 />
               </div>
             ) : (
@@ -268,6 +267,7 @@ const Address = ({
         setCall={setCall}
         design={design}
         setShipping_area={setShipping_area}
+        item={item}
       />
     </>
   );
@@ -282,7 +282,6 @@ const Single = ({
   setCall,
   token,
   setShipping_area,
-
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -327,36 +326,39 @@ const Single = ({
     }
   };
 
+
   useEffect(() => {
-    const getDistrict = async() =>{
+    const getDistrict = async () => {
       try {
         const response = await axios.get(baseUrl + "get/district");
-       
-        if(response?.data?.status){
+
+        if (response?.data?.status) {
           const allDistrict = response?.data?.data || [];
           setDistrict(allDistrict);
-        }else{
+        } else {
           setDistrict([]);
         }
       } catch (error) {
         // console.error('Error posting data:', error);
         setDistrict([]);
       }
-    }
+    };
 
     getDistrict();
-  },[]);
+  }, []);
 
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (!selectedDistrict) {
-      setShipping_area(0);
-    } else if (selectedDistrict === "Dhaka") {
+    if (item?.districtData?.id == 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else {
+    } else if(!(item?.districtData?.id == 1)) {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    } else{
+      setShipping_area(0);
     }
-  }, [selectedDistrict, headerSetting, setShipping_area]);
+  }, [headerSetting, setShipping_area]);
+
+  console.log("ddjfh",item?.districtData?.id);
 
   return (
     <label
@@ -404,7 +406,7 @@ const Single = ({
       </p>
       <p className="font-normal text-sm tracking-wider">
         <span className="text-base font-medium">District: </span>
-        {item?.district?.bn_name}
+        {item?.districtData?.bn_name}
       </p>
       <input
         className="absolute bottom-5 right-5"
@@ -423,6 +425,7 @@ const AddressView = ({
   store,
   design,
   setShipping_area,
+  item
 }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
@@ -438,39 +441,39 @@ const AddressView = ({
 
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (!selectedDistrict) {
-      setShipping_area(0);
-    } else if (selectedDistrict === "Dhaka") {
+    if (item?.districtData?.id == 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else {
+    } else if(!(item?.districtData?.id == 1)) {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    } else{
+      setShipping_area(0);
     }
-  }, [selectedDistrict, headerSetting, setShipping_area]);
+  }, [headerSetting, setShipping_area]);
 
   useEffect(() => {
-    const getDistrict = async() =>{
+    const getDistrict = async () => {
       try {
         const response = await axios.get(baseUrl + "get/district");
-       
-        if(response?.data?.status){
+
+        if (response?.data?.status) {
           const allDistrict = response?.data?.data || [];
           setDistrict(allDistrict);
-        }else{
+        } else {
           setDistrict([]);
         }
       } catch (error) {
         // console.error('Error posting data:', error);
         setDistrict([]);
       }
-    }
+    };
 
     getDistrict();
-  },[]);
+  }, []);
 
   const onSubmit = async (data: any) => {
     try {
       data["store_id"] = store_id;
-    
+
       if (store?.auth_type == "EasyOrder" && !user) {
         const response = await axios.post(
           process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
@@ -666,13 +669,13 @@ export function SaveAddress({
   store_id,
   design,
   setShipping_area,
+  item
 }: any) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
-    watch,
   } = useForm();
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
@@ -682,34 +685,34 @@ export function SaveAddress({
 
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (!selectedDistrict) {
-      setShipping_area(0);
-    } else if (selectedDistrict === "Dhaka") {
+    if (item?.districtData?.id == 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else {
+    } else if(!(item?.districtData?.id == 1)) {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    } else{
+      setShipping_area(0);
     }
-  }, [selectedDistrict, headerSetting, setShipping_area]);
+  }, [headerSetting, setShipping_area]);
 
   useEffect(() => {
-    const getDistrict = async() =>{
+    const getDistrict = async () => {
       try {
         const response = await axios.get(baseUrl + "get/district");
-       
-        if(response?.data?.status){
+
+        if (response?.data?.status) {
           const allDistrict = response?.data?.data || [];
           setDistrict(allDistrict);
-        }else{
+        } else {
           setDistrict([]);
         }
       } catch (error) {
         // console.error('Error posting data:', error);
         setDistrict([]);
       }
-    }
+    };
 
     getDistrict();
-  },[]);
+  }, []);
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
@@ -831,7 +834,7 @@ export function SaveAddress({
                   <option value="" disabled>
                     জেলা নির্বাচন করুন
                   </option>
-                  {district?.map((district:any) => (
+                  {district?.map((district: any) => (
                     <option key={district.id} value={district.id}>
                       {district.bn_name}
                     </option>
@@ -919,40 +922,45 @@ export function UpdateAddress({
   } = useForm({
     defaultValues: {
       ...item,
-      district: item?.district?.id
     },
   });
-  const { headerSetting } = useTheme();
-  // Update the shipping area based on the selected district
-  useEffect(() => {
-    if (!selectedDistrict) {
-      setShipping_area(0);
-    } else if (selectedDistrict === "Dhaka") {
-      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else {
-      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
-    }
-  }, [selectedDistrict, headerSetting, setShipping_area]);
 
   useEffect(() => {
-    const getDistrict = async() =>{
+    const getDistrict = async () => {
       try {
         const response = await axios.get(baseUrl + "get/district");
-       
-        if(response?.data?.status){
+
+        if (response?.data?.status) {
           const allDistrict = response?.data?.data || [];
           setDistrict(allDistrict);
-        }else{
+        } else {
           setDistrict([]);
         }
       } catch (error) {
         // console.error('Error posting data:', error);
         setDistrict([]);
       }
-    }
+    };
 
     getDistrict();
-  },[]);
+  }, []);
+
+  const { headerSetting } = useTheme();
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (item?.districtData?.id == 1) {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else if(!(item?.districtData?.id == 1)) {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    } else{
+      setShipping_area(0);
+    }
+  }, [headerSetting, setShipping_area]);
+
+
+  useEffect(() => {
+    reset(item);
+  }, [item, reset]);
 
   const onSubmit = (data: any) => {
     data["id"] = item?.id;
@@ -1053,7 +1061,6 @@ export function UpdateAddress({
               <select
                 {...register("district", { required: true })}
                 // value={selectedDistrict}
-                defaultValue={item?.district?.id}
                 onChange={(e) => setSelectedDistrict(e.target.value)}
                 required
                 id="district"
@@ -1063,7 +1070,7 @@ export function UpdateAddress({
                 <option value="" disabled>
                   জেলা নির্বাচন করুন
                 </option>
-                {district?.map((district:any) => (
+                {district?.map((district: any) => (
                   <option key={district.id} value={district.id}>
                     {district.bn_name}
                   </option>

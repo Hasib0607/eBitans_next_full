@@ -40,7 +40,7 @@ const YourOrders = ({
   userPhone,
   userAddress,
   note,
-  setShipping_area
+  setShipping_area,
 }: any) => {
   const [loading, setLoading] = useState(false);
   const [tax, setTax] = useState<any>(0);

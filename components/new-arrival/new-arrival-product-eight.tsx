@@ -50,7 +50,7 @@ const NewArrivalProductsEight = ({ product, design }: any) => {
   const cDesign = data?.data?.custom_design || {};
   let newArrivalProduct = cDesign?.new_arrival_product?.[0] || null;
 
-  if(!newArrivalProduct){
+  if (!newArrivalProduct) {
     return null;
   }
 
