@@ -10,7 +10,7 @@ import { RotatingLines } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { FaUser, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
-import districtData from "../../../../../utils/districts.json";
+import { FaNoteSticky } from "react-icons/fa6";
 
 const Address = ({
   selectAddress,
@@ -23,7 +23,7 @@ const Address = ({
   setUserPhone,
   setUserName,
   setShipping_area,
-  setUserNote
+  setUserNote,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -32,7 +32,9 @@ const Address = ({
   const [loading, setLoading] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(true);
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [district, setDistrict] = useState([]);
 
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const { user } = useSelector((state: any) => state.auth);
 
   const handleChange = (e: any) => {
@@ -48,6 +50,26 @@ const Address = ({
     setIsPhoneValid(userPhone?.length === 11);
   };
 
+  useEffect(() => {
+    const getDistrict = async() =>{
+      try {
+        const response = await axios.get(baseUrl + "get/district");
+       
+        if(response?.data?.status){
+          const allDistrict = response?.data?.data || [];
+          setDistrict(allDistrict);
+        }else{
+          setDistrict([]);
+        }
+      } catch (error) {
+        // console.error('Error posting data:', error);
+        setDistrict([]);
+      }
+    }
+
+    getDistrict();
+  },[]);
+
   // Update the shipping area based on the selected district
   useEffect(() => {
     if (!selectedDistrict) {
@@ -59,9 +81,10 @@ const Address = ({
     }
   }, [selectedDistrict, headerSetting, setShipping_area]);
 
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL + "address";
+  
 
   useEffect(() => {
+    console.log(store);
     if (store?.auth_type === "EasyOrder" && !user) {
       const postToServer = async () => {
         const store = {
@@ -69,7 +92,7 @@ const Address = ({
         };
 
         try {
-          const response = await axios.post(apiUrl, store, {
+          const response = await axios.post(baseUrl + "address", store, {
             headers: {
               Authorization: `Bearer ${token?.token}`,
               "Content-Type": "application/json", // Adjust the content type according to your API requirements
@@ -117,131 +140,118 @@ const Address = ({
             </div>
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
-              {/* Name Input */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  আপনার নাম লিখুন <span className="text-red-500">*</span>
-                </label>
-                <input
-                  onChange={(e) => setUserName(e.target.value)}
-                  type="text"
-                  placeholder="সম্পূর্ণ নামটি লিখুন"
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                />
-              </div>
-            
-              {/* Phone Input */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  আপনার মোবাইল নাম্বার লিখুন <span className="text-red-500">*</span>
-                </label>
-                <input
-                  value={userPhone}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  type="number"
-                  placeholder="১১ ডিজিটের মোবাইল নাম্বারটি লিখুন"
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                  maxLength={11}
-                  minLength={11}
-                />
-                {/* Phone Validation Error */}
-                {!isPhoneValid && (
-                  <small className="text-rose-500">Need 11 digits</small>
-                )}  
-              </div>
-            
-              {/* District Dropdown */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  জেলা সিলেক্ট করুন <span className="text-red-500">*</span>
-                </label>
-                <select
-                  value={selectedDistrict}
-                  onChange={(e) => setSelectedDistrict(e.target.value)}
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                >
-                  <option value="" disabled>
-                    জেলা সিলেক্ট করুন
-                  </option>
-                  {districtData.districts.map((district) => (
-                    <option key={district.id} value={district.name}>
-                      {district.name}
+                {/* Name Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    আপনার নাম লিখুন <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    onChange={(e) => setUserName(e.target.value)}
+                    type="text"
+                    placeholder="সম্পূর্ণ নামটি লিখুন"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  />
+                </div>
+
+                {/* Phone Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    আপনার মোবাইল নাম্বার লিখুন{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
+                  <input
+                    value={userPhone}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    type="number"
+                    placeholder="১১ ডিজিটের মোবাইল নাম্বারটি লিখুন"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                    maxLength={11}
+                    minLength={11}
+                  />
+                  {/* Phone Validation Error */}
+                  {!isPhoneValid && (
+                    <small className="text-rose-500">Need 11 digits</small>
+                  )}
+                </div>
+
+                {/* District Dropdown */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    জেলা সিলেক্ট করুন <span className="text-red-500">*</span>
+                  </label>
+                  <select
+                    value={selectedDistrict}
+                    onChange={(e) => setSelectedDistrict(e.target.value)}
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  >
+                    <option value="" disabled>
+                      জেলা সিলেক্ট করুন
                     </option>
-                  ))}
-                </select>
+                    {district?.map((district: any) => (
+                      <option key={district.id} value={district.id}>
+                        {district.bn_name}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                {/* Address Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    সম্পূর্ণ ঠিকানা <span className="text-red-500">*</span>
+                  </label>
+                  <textarea
+                    onChange={(e) => setUserAddress(e.target.value)}
+                    placeholder="হাউজ নাম্বার, রোড, ইউনিয়ন, উপজেলা, জেলা"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  ></textarea>
+                </div>
+
+                {/* Note (Optional) */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">নোট (অপশনাল)</label>
+                  <textarea
+                    onChange={(e) => setUserNote(e.target.value)}
+                    placeholder="আপনার স্পেশাল কোন রিকোয়ারমেন্ট থাকলে এখানে লিখুন"
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  ></textarea>
+                </div>
               </div>
-            
-              {/* Address Input */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  সম্পূর্ণ ঠিকানা <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  onChange={(e) => setUserAddress(e.target.value)}
-                  placeholder="হাউজ নাম্বার, রোড, ইউনিয়ন, উপজেলা, জেলা"
-                  required
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                ></textarea>
-              </div>
-            
-              {/* Note (Optional) */}
-              <div className="flex flex-col">
-                <label className="font-semibold">
-                  নোট (অপশনাল)
-                </label>
-                <textarea
-                onChange={(e) => setUserNote(e.target.value)}
-                  placeholder="আপনার স্পেশাল কোন রিকোয়ারমেন্ট থাকলে এখানে লিখুন"
-                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
-                ></textarea>
-              </div>
-            </div>
-            
-            ) : (
+            ) : !address || address.length === 0 ? (
               <div>
-                {(!address || address.length === 0) && (
-                  <div>
-                    <AddressView
-                      design={design}
-                      store={store}
+                <AddressView
+                  design={design}
+                  store={store}
+                  setSelectAddress={setSelectAddress}
+                  setCall={setCall}
+                  address={address}
+                  store_id={store_id}
+                  setToken={setToken}
+                  setShipping_area={setShipping_area}
+                  district={district}
+                />
+              </div>
+            ) : (
+              <div className="grid xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
+                {address
+                  ?.slice(0, 4)
+                  .map((item: any) => (
+                    <Single
+                      token={token}
+                      item={item}
+                      key={item?.id}
+                      selectAddress={selectAddress}
                       setSelectAddress={setSelectAddress}
                       setCall={setCall}
-                      address={address}
-                      store_id={store_id}
-                      setToken={setToken}
+                      setShipping_area={setShipping_area}
+                      district={district}
                     />
-                  </div>
-                )}
-                {loading ? (
-                  <div className="flex items-center">
-                    {" "}
-                    <RotatingLines
-                      width="25"
-                      strokeColor="#6495ED"
-                      strokeWidth="6"
-                    />
-                    <p>Loading...</p>
-                  </div>
-                ) : (
-                  <div className="grid xl:grid-cols-2 md:grid-cols-2 lg:grid-cols-1 grid-cols-1 gap-4">
-                    {address
-                      ?.slice(0, 4)
-                      .map((item: any) => (
-                        <Single
-                          token={token}
-                          item={item}
-                          key={item?.id}
-                          selectAddress={selectAddress}
-                          setSelectAddress={setSelectAddress}
-                          setCall={setCall}
-                        />
-                      ))}
-                  </div>
-                )}
+                  ))}
               </div>
             )}
           </div>
@@ -257,6 +267,7 @@ const Address = ({
         setOpen={setOpen}
         setCall={setCall}
         design={design}
+        setShipping_area={setShipping_area}
       />
     </>
   );
@@ -270,12 +281,16 @@ const Single = ({
   setSelectAddress,
   setCall,
   token,
+  setShipping_area,
+
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
-
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const { user } = useSelector((state: any) => state.auth);
-
+  const { headerSetting } = useTheme();
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [district, setDistrict] = useState([]);
   const apiDelete = process.env.NEXT_PUBLIC_API_URL + "address/delete";
 
   const delete_address = (id: any) => {
@@ -312,6 +327,37 @@ const Single = ({
     }
   };
 
+  useEffect(() => {
+    const getDistrict = async() =>{
+      try {
+        const response = await axios.get(baseUrl + "get/district");
+       
+        if(response?.data?.status){
+          const allDistrict = response?.data?.data || [];
+          setDistrict(allDistrict);
+        }else{
+          setDistrict([]);
+        }
+      } catch (error) {
+        // console.error('Error posting data:', error);
+        setDistrict([]);
+      }
+    }
+
+    getDistrict();
+  },[]);
+
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setShipping_area(0);
+    } else if (selectedDistrict === "Dhaka") {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [selectedDistrict, headerSetting, setShipping_area]);
+
   return (
     <label
       style={{
@@ -345,6 +391,7 @@ const Single = ({
             setCall={setCall}
             setSelectAddress={setSelectAddress}
             design={design}
+            setShipping_area={setShipping_area}
           />
         </div>
       </div>
@@ -354,6 +401,10 @@ const Single = ({
       <p className="font-normal text-sm tracking-wider">
         <span className="text-base font-medium">Address: </span>
         {item?.address}
+      </p>
+      <p className="font-normal text-sm tracking-wider">
+        <span className="text-base font-medium">District: </span>
+        {item?.district?.bn_name}
       </p>
       <input
         className="absolute bottom-5 right-5"
@@ -365,10 +416,19 @@ const Single = ({
   );
 };
 
-const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
+const AddressView = ({
+  setCall,
+  store_id,
+  setToken,
+  store,
+  design,
+  setShipping_area,
+}: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [district, setDistrict] = useState([]);
   const {
     register,
     handleSubmit,
@@ -376,9 +436,41 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
     reset,
   } = useForm();
 
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setShipping_area(0);
+    } else if (selectedDistrict === "Dhaka") {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [selectedDistrict, headerSetting, setShipping_area]);
+
+  useEffect(() => {
+    const getDistrict = async() =>{
+      try {
+        const response = await axios.get(baseUrl + "get/district");
+       
+        if(response?.data?.status){
+          const allDistrict = response?.data?.data || [];
+          setDistrict(allDistrict);
+        }else{
+          setDistrict([]);
+        }
+      } catch (error) {
+        // console.error('Error posting data:', error);
+        setDistrict([]);
+      }
+    }
+
+    getDistrict();
+  },[]);
+
   const onSubmit = async (data: any) => {
     try {
       data["store_id"] = store_id;
+    
       if (store?.auth_type == "EasyOrder" && !user) {
         const response = await axios.post(
           process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
@@ -418,11 +510,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "নাম"
-                  : "Name"}
+                নাম
               </label>
               <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
@@ -447,11 +535,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ফোন"
-                  : "Phone"}
+                ফোন
               </label>
               <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
@@ -482,14 +566,40 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
 
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <label
+                htmlFor="district"
+                className="block text-sm font-medium text-gray-700"
+              >
+                জেলা
+              </label>
+              <select
+                {...register("district", { required: true })}
+                value={selectedDistrict}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                required
+                id="district"
+                name="district"
+                className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
+              >
+                <option value="" disabled>
+                  জেলা নির্বাচন করুন
+                </option>
+                {district?.map((district: any) => (
+                  <option key={district.id} value={district.id}>
+                    {district.bn_name}
+                  </option>
+                ))}
+              </select>
+              {errors.district && (
+                <span className="text-red-500">District is required</span>
+              )}
+            </div>
+
+            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+              <label
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ঠিকানা"
-                  : "Address"}
+                ঠিকানা
               </label>
               <div className="flex items-start mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
                 <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
@@ -497,7 +607,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
                 </div>
                 <textarea
                   {...register("address", { required: true })}
-                  rows={6}
+                  rows={4}
                   name="address"
                   id="address"
                   autoComplete="address-level1"
@@ -507,6 +617,27 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
               {errors.address && (
                 <span className="text-red-500">Address is required</span>
               )}
+            </div>
+            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+              <label
+                htmlFor="note"
+                className="block text-sm font-medium text-gray-700"
+              >
+                নোট (অপশনাল)
+              </label>
+              <div className="flex items-start mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                  <FaNoteSticky className="text-black" />
+                </div>
+                <textarea
+                  {...register("note", { required: true })}
+                  rows={3}
+                  name="note"
+                  id="note"
+                  autoComplete="address-level1"
+                  className="flex-grow ml-2 outline-none"
+                />
+              </div>
             </div>
           </div>
 
@@ -534,17 +665,55 @@ export function SaveAddress({
   setToken,
   store_id,
   design,
+  setShipping_area,
 }: any) {
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm();
   const { user } = useSelector((state: any) => state.auth);
+  const { headerSetting } = useTheme();
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [district, setDistrict] = useState([]);
+
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setShipping_area(0);
+    } else if (selectedDistrict === "Dhaka") {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [selectedDistrict, headerSetting, setShipping_area]);
+
+  useEffect(() => {
+    const getDistrict = async() =>{
+      try {
+        const response = await axios.get(baseUrl + "get/district");
+       
+        if(response?.data?.status){
+          const allDistrict = response?.data?.data || [];
+          setDistrict(allDistrict);
+        }else{
+          setDistrict([]);
+        }
+      } catch (error) {
+        // console.error('Error posting data:', error);
+        setDistrict([]);
+      }
+    }
+
+    getDistrict();
+  },[]);
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
+
     if (store?.auth_type === "EasyOrder" && !user && !token) {
       const response = await axios.post(
         process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
@@ -600,7 +769,7 @@ export function SaveAddress({
                   htmlFor="name"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Name
+                  নাম
                 </label>
                 <input
                   {...register("name", { required: true })}
@@ -619,7 +788,7 @@ export function SaveAddress({
                   htmlFor="phone"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Phone
+                  ফোন
                 </label>
                 <input
                   {...register("phone", {
@@ -645,14 +814,43 @@ export function SaveAddress({
               </div>
               <div className="col-span-6 sm:col-span-3 lg:col-span-2">
                 <label
+                  htmlFor="district"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  জেলা
+                </label>
+                <select
+                  {...register("district", { required: true })}
+                  value={selectedDistrict}
+                  onChange={(e) => setSelectedDistrict(e.target.value)}
+                  required
+                  id="district"
+                  name="district"
+                  className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
+                >
+                  <option value="" disabled>
+                    জেলা নির্বাচন করুন
+                  </option>
+                  {district?.map((district:any) => (
+                    <option key={district.id} value={district.id}>
+                      {district.bn_name}
+                    </option>
+                  ))}
+                </select>
+                {errors.district && (
+                  <span className="text-red-500">District is required</span>
+                )}
+              </div>
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
                   htmlFor="address"
                   className="block text-sm font-medium text-gray-700"
                 >
-                  Address
+                  ঠিকানা
                 </label>
                 <textarea
                   {...register("address", { required: true })}
-                  rows={6}
+                  rows={4}
                   name="address"
                   id="address"
                   autoComplete="address-level1"
@@ -661,6 +859,22 @@ export function SaveAddress({
                 {errors.address && (
                   <span className="text-red-500">Address is required</span>
                 )}
+              </div>
+              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+                <label
+                  htmlFor="note"
+                  className="block text-sm font-medium text-gray-700"
+                >
+                  নোট (অপশনাল)
+                </label>
+                <textarea
+                  {...register("note", { required: true })}
+                  rows={3}
+                  name="note"
+                  id="note"
+                  autoComplete="address-level1"
+                  className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                />
               </div>
             </div>
             <div className="px-4 py-3 text-right sm:px-6">
@@ -687,10 +901,13 @@ export function UpdateAddress({
   setSelectAddress,
   design,
   token,
+  setShipping_area,
 }: any) {
   const { store } = useTheme();
-
+  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const { user } = useSelector((state: any) => state.auth);
+  const [selectedDistrict, setSelectedDistrict] = useState("");
+  const [district, setDistrict] = useState([]);
 
   const apiEdit = process.env.NEXT_PUBLIC_API_URL + "address/edit";
 
@@ -702,8 +919,40 @@ export function UpdateAddress({
   } = useForm({
     defaultValues: {
       ...item,
+      district: item?.district?.id
     },
   });
+  const { headerSetting } = useTheme();
+  // Update the shipping area based on the selected district
+  useEffect(() => {
+    if (!selectedDistrict) {
+      setShipping_area(0);
+    } else if (selectedDistrict === "Dhaka") {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [selectedDistrict, headerSetting, setShipping_area]);
+
+  useEffect(() => {
+    const getDistrict = async() =>{
+      try {
+        const response = await axios.get(baseUrl + "get/district");
+       
+        if(response?.data?.status){
+          const allDistrict = response?.data?.data || [];
+          setDistrict(allDistrict);
+        }else{
+          setDistrict([]);
+        }
+      } catch (error) {
+        // console.error('Error posting data:', error);
+        setDistrict([]);
+      }
+    }
+
+    getDistrict();
+  },[]);
 
   const onSubmit = (data: any) => {
     data["id"] = item?.id;
@@ -760,7 +1009,7 @@ export function UpdateAddress({
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                Name
+                নাম
               </label>
               <input
                 {...register("name")}
@@ -776,7 +1025,7 @@ export function UpdateAddress({
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                Phone
+                ফোন
               </label>
               <input
                 {...register("phone", {
@@ -796,10 +1045,37 @@ export function UpdateAddress({
             </div>
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <label
+                htmlFor="district"
+                className="block text-sm font-medium text-gray-700"
+              >
+                জেলা
+              </label>
+              <select
+                {...register("district", { required: true })}
+                // value={selectedDistrict}
+                defaultValue={item?.district?.id}
+                onChange={(e) => setSelectedDistrict(e.target.value)}
+                required
+                id="district"
+                name="district"
+                className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
+              >
+                <option value="" disabled>
+                  জেলা নির্বাচন করুন
+                </option>
+                {district?.map((district:any) => (
+                  <option key={district.id} value={district.id}>
+                    {district.bn_name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
+              <label
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
-                Address
+                ঠিকানা
               </label>
               <textarea
                 {...register("address")}

@@ -4,6 +4,7 @@
 import useTheme from "@/hooks/use-theme";
 import { decrementQty, incrementQty } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
+import BDT from "@/utils/bdt";
 import getReferral from "@/utils/getReferral";
 import Taka from "@/utils/taka";
 import { Dialog, Transition } from "@headlessui/react";
@@ -170,7 +171,7 @@ const ShoppingCart = ({ setOpen }: any) => {
           <p className="sm:text-base text-sm font-bold ">
             {design?.template_id === "29" ? "অর্ডার করুন" : "Checkout"}
           </p>{" "}
-          <p className="pl-4 sm:text-base text-sm">{total} BDT</p>
+          <p className="pl-4 sm:text-base text-sm">{total} <BDT /></p>
         </Link>
       </div>
     </div>

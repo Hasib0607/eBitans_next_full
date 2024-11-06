@@ -1,7 +1,7 @@
 import ProductDetails from "@/components/product-details";
 import capitalizeFirstLetter from "@/helper/capitalize-first-letter";
 import { getProductDetails, getSubdomainName } from "@/lib";
-import { imgUrl } from "@/site-settings/siteUrl";
+import { imgUrl, productImg } from "@/site-settings/siteUrl";
 import getUrl from "@/utils/get-url";
 import { Metadata, ResolvingMetadata } from "next";
 import ViewContentGtm from "./ViewContentGtm";
@@ -35,13 +35,16 @@ export async function generateMetadata(
     redirect("/");
   }
   const { name, description, seo_keywords, image } = product;
+  // console.log(product);
   const websiteName = capitalizeFirstLetter(headersetting?.website_name);
   // Ensure image is a string and not an array
-  const productImageUrl = Array.isArray(image) ? image[0] : image;
+  const imageURL = Array.isArray(image) ? image[0] : image;
+  const productImageUrl = `${productImg + imageURL}`;
+
   const fallbackImage = imgUrl + "default-product-image.jpg";
   return {
     title: `${websiteName} | ${name}`,
-    description: description || `Buy ${name} at ${websiteName}`,
+    description: stripHtmlTags(description) || `Buy ${name} at ${websiteName}`,
     icons: { icon: imgUrl + headersetting?.favicon },
     keywords: seo_keywords || `${name}, ${websiteName}, `,
     openGraph: {
@@ -57,14 +60,13 @@ export async function generateMetadata(
         },
       ],
     },
-    // twitter: {
-    //   card: "summary_large_image",
-    //   title: `${websiteName} | ${name}`,
-    //   description: description || `Buy ${name} at ${websiteName}`,
-    //   image: productImageUrl || fallbackImage, // Use product image or fallback
-    // },
   };
 }
+
+function stripHtmlTags(htmlString: any) {
+  return htmlString.replace(/<[^>]*>/g, "") || "";
+}
+
 const SingleProductDetails = async ({ params }: Props) => {
   const url = getUrl();
   const subDomainData = await getSubdomainName(url, "headersetting");

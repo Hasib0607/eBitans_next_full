@@ -141,7 +141,6 @@ const Discount = ({
       >
         <div className={`px-4 py-5  space-y-6 sm:p-6`}>
           <div className="grid grid-cols-1 gap-6">
-
             {store_id !== 3601 &&
               store_id !== 3904 &&
               store_id !== 4633 &&
@@ -154,7 +153,7 @@ const Discount = ({
                       htmlFor="name"
                       className="block text-xl font-semibold text-gray-700"
                     >
-                      {design?.template_id === "29" ? "ডিসকাউন্ট" : "Discount"}
+                      কুপন কোড
                     </label>
                     <form
                       onSubmit={handleSubmit(onSubmit)}

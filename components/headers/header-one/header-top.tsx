@@ -13,6 +13,14 @@ const HeaderTop = ({ headerSetting }: any) => {
   //   dispatch(logout());
   // };
 
+  const handleClick = () => {
+    if (window !== undefined) {
+      window.localStorage.removeItem("persist:root");
+
+      window.location.href = "/";
+    }
+  };
+
   const { design } = useTheme();
   const { phone, address } = headerSetting;
 
@@ -32,7 +40,7 @@ const HeaderTop = ({ headerSetting }: any) => {
 
         <div className="flex items-center gap-x-4">
           {isLoggedIn ? (
-            <div className="lg:cursor-pointer" onClick={() => logout()}>
+            <div className="lg:cursor-pointer" onClick={handleClick}>
               <HeaderTopMenu icon={logoutIcon} doc={"Logout"} />
             </div>
           ) : (

@@ -11,6 +11,16 @@ export const customizeFooter = [
     help_line: "Help Line: +880 1894-560311",
     // Fashion mart customization end
   },
+  {
+    // footer twenty-one
+    id: 6227,
+    free_shipping: true,
+  },
+  {
+    // footer twenty-one
+    id: 8727,
+    free_shipping: true,
+  },
 ];
 
 export const customizeHeader = [

@@ -26,6 +26,11 @@ const BestSellerTwentyFour = ({ best_sell_product, design, store_id }: any) => {
   const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
+  // Check if there are any best selling products
+  if (!best_sell_product || best_sell_product.length === 0) {
+    return null;
+  }
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>

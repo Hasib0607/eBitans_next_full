@@ -12,7 +12,8 @@ const BestSellerFive = ({ best_sell_product, design, store_id }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
-  const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
+  const bestSellProduct = cDesign?.best_sell_product?.[0] || null;
+  if (!bestSellProduct) return null;
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
   return (

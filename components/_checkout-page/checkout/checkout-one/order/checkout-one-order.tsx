@@ -20,6 +20,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import getReferral from "@/utils/getReferral";
 import PaymentGateway from "../payment/checkout-one-payment-gateway";
+import { FaEdit } from "react-icons/fa";
+import { AiOutlineUpload } from "react-icons/ai";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
+import { decrementQty, incrementQty } from "@/redux/features/product.slice";
+import { IoIosLock } from "react-icons/io";
 
 const YourOrders = ({
   couponDis,
@@ -34,6 +39,8 @@ const YourOrders = ({
   userName,
   userPhone,
   userAddress,
+  note,
+  setShipping_area
 }: any) => {
   const [loading, setLoading] = useState(false);
   const [tax, setTax] = useState<any>(0);
@@ -178,6 +185,7 @@ const YourOrders = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
+      district: selectAddress?.district,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -187,6 +195,7 @@ const YourOrders = ({
       tax: tax,
       coupon: coupon ? coupon : null,
       referral_code: referralCode || "",
+      note: note || "",
     };
 
     formData.append("store_id", store_id);
@@ -207,6 +216,12 @@ const YourOrders = ({
         ? userAddress
         : selectAddress?.address
     );
+    formData.append(
+      "district",
+      store?.auth_type === "EasyOrder" && !user
+        ? userAddress
+        : selectAddress?.district
+    );
     formData.append("subtotal", total);
     formData.append("shipping", shipping_area);
     formData.append(
@@ -220,6 +235,7 @@ const YourOrders = ({
     if (referralCode) {
       formData.append("referral_code", referralCode);
     }
+    formData.append("note", note);
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
@@ -399,29 +415,28 @@ const YourOrders = ({
   // }, [total, tax]);
 
   return (
-    <div
-      className={`${
-        design?.template_id === "34"
-          ? "bg-thirty-one border border-white"
-          : "bg-gray-200 "
-      } p-5 sm:rounded-md`}
-    >
+    <div className="border p-5 sm:rounded-md shadow">
       <style>{styleCss}</style>
       {/* {error && <SnackBar open={true} msg={error} />} */}
-      <h3 className="text-center font-semibold text-lg ">
-        {design?.template_id === "29" || store_id === 3601 || store_id === 3904
-          ? "আপনার অর্ডার সমূহ"
-          : "Your Order Summary"}
-      </h3>
-      {store_id === 3020 && (
-        <p className="mt-3 bg-black text-white px-2 py-1">
-          অর্ডার টি কর্নফার্ম করতে ১৫০/- পেমেন্ট করুন
-        </p>
-      )}
+      <div className="mb-12">
+        <h3 className="text-center font-semibold text-xl">প্রোডাক্ট ডিটেইল</h3>
+        <hr
+          className="border-dashed border-gray-300 my-2 w-36 mx-auto"
+          style={{ borderWidth: "1.5px", borderStyle: "dashed" }}
+        />
+      </div>
+      <div className="flex justify-between items-center">
+        <p className="font-semibold">প্রোডাক্টের নাম</p>
+        <p className="font-semibold">বিক্রয় মূল্য</p>
+      </div>
+      <hr
+        className="border-dashed border-gray-300 my-2 w-full mx-auto"
+        style={{ borderWidth: "1px", borderStyle: "dashed" }}
+      />
       {cartList ? (
         <>
-          <div className="my-16">
-            <div className=" flex flex-col justify-between mt-16 pt-5">
+          <div className="">
+            <div className=" flex flex-col justify-between">
               {/* Replace with your content */}
               <div className="px-2 h-2/3 overflow-y-auto">
                 {cartList?.map((item: any, index: any) => (
@@ -436,12 +451,18 @@ const YourOrders = ({
                       setIsOpen={setIsOpen}
                       setFiles={setFiles}
                       handleFile={handleFile}
+                      setShipping_area={setShipping_area}
+                      shipping_area={shipping_area}
                     />
                   </div>
                 ))}
               </div>
             </div>
           </div>
+          <hr
+            className="border-dashed border-gray-300 w-full mx-auto"
+            style={{ borderWidth: "1.px", borderStyle: "dashed" }}
+          />
         </>
       ) : (
         <div className="">
@@ -453,25 +474,25 @@ const YourOrders = ({
 
       <div className="my-5 text-gray-500 px-2" style={{ fontWeight: 500 }}>
         <div className="flex justify-between items-center">
-          <p>{design?.template_id === "29" ? "সাব টোটাল" : "Sub Total"}</p>
+          <p>সাব টোটাল</p>
           <p>
             <BDT price={parseInt(total)} />
           </p>
         </div>
-        <div className="flex justify-between items-center">
-          <p>{design?.template_id === "29" ? "ডিসকাউন্ট" : "Discount"}</p>
-          <p>{<BDT price={couponDis} />}</p>
-        </div>
-        <div className="flex justify-between items-center">
-          <p>{design?.template_id === "29" ? "ট্যাক্স" : "Tax"}</p>
-          <p>{<BDT price={parseInt(tax)} />}</p>
-        </div>
-        <div className="flex justify-between items-center">
-          <p>
-            {design?.template_id === "29"
-              ? "এস্টিমেটেড শিপিং"
-              : "Estimated Shipping"}
-          </p>
+        {couponDis ? (
+          <div className="flex justify-between items-center">
+            <p>ডিসকাউন্ট</p>
+            <p>{<BDT price={couponDis} />}</p>
+          </div>
+        ) : null}
+        {tax ? (
+          <div className="flex justify-between items-center">
+            <p>ট্যাক্স</p>
+            <p>{<BDT price={parseInt(tax)} />}</p>
+          </div>
+        ) : null}
+        <div className="flex justify-between items-center pb-1">
+          <p>এস্টিমেটেড শিপিং</p>
           {shipping_area === "--Select Area--" ? (
             <p>
               <BDT /> 0
@@ -482,13 +503,16 @@ const YourOrders = ({
             </p>
           )}
         </div>
-        <div className="h-[2px] w-full bg-gray-300 mt-4 mb-2"></div>
-        <div className="flex justify-between items-center  font-semibold">
-          <p>{design?.template_id === "29" ? "মোট" : "Total"}</p>
+        <hr
+          className="border-dashed border-gray-300 w-full mx-auto"
+          style={{ borderWidth: "1px", borderStyle: "dashed" }}
+        />
+        <div className="flex justify-between items-center mt-1 font-semibold">
+          <p>টোটাল</p>
           {shipping_area === "--Select Area--" || shipping_area === null ? (
             <p>{<BDT price={parseInt(total + tax) - couponDis} />}</p>
           ) : (
-            <p>
+            <p className="font-bold text-xl">
               {
                 <BDT
                   price={
@@ -526,14 +550,10 @@ const YourOrders = ({
       ) : (
         <button
           // disabled={userPhone?.length !== 11}
-          className={`font-semibold tracking-wider my-1 rounded-full border cart-btn border-gray-300 w-full py-3   ${btnhover}`}
+          className={`font-semibold tracking-wider my-1 rounded-full border cart-btn border-gray-300 w-full py-3 ${btnhover}`}
           onClick={() => handleCheckout()}
         >
-          {design?.template_id === "29" ||
-          store_id === 3601 ||
-          store_id === 3904
-            ? "অর্ডার কনফার্ম করুন"
-            : "Place Order"}
+          অর্ডার কনফার্ম করুন
         </button>
       )}
 
@@ -562,49 +582,63 @@ const Single = ({ item, setIsOpen, files, index }: any) => {
     setIsOpen(true);
   }
 
+  const deleteBtn = () => {
+    toast("Remove from cart this item", {
+      type: "warning",
+      autoClose: 1000,
+    });
+  };
+
+  const addCartBtn = () => {
+    toast("Successfully you have to added cart", {
+      type: "success",
+      autoClose: 1000,
+    });
+  };
+
   const dispatch = useDispatch();
+  const { design } = useTheme();
 
   const file = files.some((i: any) => i.cartId === index);
-
-  // const price = getPrice(item.regular_price, item.discount_price, item.discount_type)
 
   return (
     <div
       key={item.id}
-      className="flex flex-col sm:flex-row justify-start sm:justify-between space-y-2 space-x-1 sm:items-center border-b-2 border-gray-300 py-2 "
+      className="flex justify-between space-x-1 last:border-0 border-b border-gray-400 py-2"
     >
-      <div className="flex items-center gap-2">
-        <div className="w-14 relative">
-          <img className="w-14 h-14" src={productImg + item.image[0]} alt="" />
-          <div className="absolute -top-1 -right-1 w-5 h-5 bg-gray-500 text-white text-xs rounded-full flex justify-center items-center">
-            <p>{item?.qty}</p>
-          </div>
-        </div>
-        <div className="flex flex-col gap-x-2 gap-y-1 pl-2 justify-start">
-          <h3 className=" text-md  font-normal">
-            <Link href={"/product/" + item?.id + "/" + item?.slug}>
-              {item?.name.slice(0, 15)}
-              {item?.name?.length > 15 && "..."}
-            </Link>
-          </h3>
+      <div className="w-24">
+        <img
+          className="w-full h-auto "
+          src={productImg + item.image[0]}
+          alt=""
+        />
+      </div>
+      <div className="flex flex-col gap-x-2 gap-y-1 pl-2 w-full">
+        <h3 className="text-black text-md whitespace-nowrap overflow-hidden text-ellipsis sm:max-w-[170px] max-w-[150px] font-normal">
+          <Link href={"/product/" + item?.id + "/" + item?.slug}>
+            {item.name}
+          </Link>
+        </h3>
+
+        <div className="flex flex-col gap-x-2 gap-y-1 justify-start">
           {/* <p className='text-sm'>&#2547; {parseInt(item?.price)} * {item?.qty} </p> */}
-          <div className="flex items-center mt-1">
+          <div className="flex items-center">
             {item?.color ? (
-              <div className="flex items-center gap-2 pr-2">
-                <p className="font-semibold text-sm">Color: </p>
+              <div className="flex items-center gap-2">
+                <p className="text-sm">Color: </p>
                 <p
                   style={{ backgroundColor: item?.color }}
-                  className="w-4 h-4 rounded-full ring-1 ring-offset-2 ring-gray-600"
+                  className="w-2 h-2 rounded-full ring-1 ring-offset-2 ring-gray-600"
                 ></p>
               </div>
             ) : null}
             {item?.size ? (
-              <p className="font-semibold text-sm">
+              <p className="text-sm">
                 Size: <span className="font-normal text-sm">{item?.size}</span>
               </p>
             ) : null}
             {item?.unit ? (
-              <p className="font-semibold text-sm">
+              <p className="text-sm">
                 Unit:{" "}
                 <span className="font-normal text-sm">
                   {item?.volume + " " + item?.unit}
@@ -612,27 +646,65 @@ const Single = ({ item, setIsOpen, files, index }: any) => {
               </p>
             ) : null}
           </div>
+
+          <div
+            className="flex h-9 w-24 justify-between items-center rounded-md font-semibold"
+            style={{
+              backgroundColor: design?.header_color,
+              color: design?.text_color,
+            }}
+          >
+            <div
+              onClick={() => {
+                dispatch(decrementQty(item?.cartId));
+                deleteBtn();
+              }}
+              className="hover:bg-gray-800 hover:rounded-md lg:cursor-pointer py-2 h-full w-8 flex justify-center items-center"
+            >
+              <MinusIcon color={design?.text_color} width={15} />
+            </div>
+            <div
+              style={{ color: design?.text_color }}
+              className={"text-gray-700"}
+            >
+              {item?.qty}
+            </div>
+            <div
+              onClick={() => {
+                dispatch(incrementQty(item?.cartId));
+                addCartBtn();
+              }}
+              className="hover:bg-gray-800 hover:rounded-md lg:cursor-pointer py-2 h-full w-8 flex justify-center items-center"
+            >
+              <PlusIcon color={`${design?.text_color}`} width={15} />
+            </div>
+          </div>
         </div>
       </div>
 
-      <div className="flex items-center gap-x-5 justify-end">
-        <div className="text-md font-semibold">
-          <BDT price={item?.price * item?.qty} />
-        </div>
-        <div className="">
-          <MdDelete
-            onClick={() => dispatch(removeToCartList(item?.cartId))}
-            className="text-2xl lg:cursor-pointer"
-          />
-        </div>
-        {uploadFile?.status === "1" && (
-          <button
-            onClick={() => openModal()}
-            className="px-4 py-1 bg-green-500 rounded-md"
+      <div>
+        <p className="text-sm justify-self-end flex items-center gap-x-2">
+          <BDT />
+          <span className="font-bold text-xl text-gray-500">
+            {item?.price * item?.qty}
+          </span>
+        </p>
+        <div className="justify-self-end flex items-center gap-x-2">
+          <span
+            onClick={() => dispatch(removeToCartList(item.cartId))}
+            className="lg:cursor-pointer underline text-sm"
           >
-            {file ? "Edit" : "Upload"}
-          </button>
-        )}
+            Remove
+          </span>
+          {/* {uploadFile?.status === "1" && (
+            <button
+              onClick={() => openModal()}
+              className="text-2xl lg:cursor-pointer"
+            >
+              {file ? <FaEdit /> : <AiOutlineUpload />}
+            </button>
+          )} */}
+        </div>
       </div>
     </div>
   );

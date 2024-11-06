@@ -20,14 +20,8 @@ const Heading: FC<HeadProps> = ({
   return (
     <>
       <link rel="favicon" href={favicon} />
-      <title>{title ? `${title}` : "EBitans | Power Up Your Business"}</title>
-      <meta
-        name="description"
-        content={
-          description ||
-          "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks."
-        }
-      />
+      <title>{title}</title>
+      <meta name="description" content={description} />
       <meta
         name="keywords"
         content={keywords || "eBitans, eCommerce builder platform"}
@@ -38,36 +32,6 @@ const Heading: FC<HeadProps> = ({
       <meta name="coverage" content="Worldwide" />
       <meta name="rating" content="General" />
       <meta name="owner" content="eBitans" />
-      <meta property="og:title" content={title} />
-      <meta
-        property="og:description"
-        content={
-          description ||
-          "eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks."
-        }
-      />
-      <meta
-        property="og:image"
-        content={
-          logo || "https://ebitans.com/Image/cover/eBitans-logo-mockup4.jpg"
-        }
-      />
-      <meta property="twitter:card" content="summary_large_image" />
-      <meta property="twitter:url" content="https://ebitans.com/" />
-      <meta
-        property="twitter:title"
-        content="EBitans | Power Up Your Business"
-      />
-      <meta
-        property="twitter:description"
-        content="eBbitans is a platform where you can create an E-commerce website for your business with just a few clicks."
-      />
-      <meta
-        property="twitter:image"
-        content={
-          logo || "https://ebitans.com/Image/cover/eBitans-logo-mockup4.jpg"
-        }
-      />
     </>
   );
 };

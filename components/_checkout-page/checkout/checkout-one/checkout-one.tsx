@@ -25,7 +25,7 @@ const CheckOutOne = () => {
   const [userName, setUserName] = useState(null);
   const [userPhone, setUserPhone] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
-  const [userNote, setUserNote] = useState(null);
+  const [note, setNote] = useState(null);
   const [campaign, setCampaign] = useState([]);
 
   const cartList = useSelector((state: any) => state.cart.cartList);
@@ -88,9 +88,7 @@ const CheckOutOne = () => {
   }
 
   return (
-    <div
-      className="bg-[#F3F4F6] h-auto sm:h-[100vh]"
-    >
+    <div className="bg-[#F3F4F6] h-auto sm:h-[100vh]">
       <div className="sm:container px-5 xl:px-24">
         <div className="pt-10 font-semibold text-center">
           <div className="p-4 mb-4 text-center">
@@ -127,7 +125,7 @@ const CheckOutOne = () => {
                 setUserPhone={setUserPhone}
                 setUserName={setUserName}
                 setShipping_area={setShipping_area}
-                setUserNote={setUserNote}
+                setNote={setNote}
               />
               <Discount
                 setCouponDis={setCouponDis}
@@ -152,6 +150,8 @@ const CheckOutOne = () => {
                 userAddress={userAddress}
                 userPhone={userPhone}
                 userName={userName}
+                setShipping_area={setShipping_area}
+                setNote={setNote}
               />
             </div>
           </div>

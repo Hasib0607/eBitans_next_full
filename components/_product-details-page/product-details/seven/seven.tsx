@@ -16,6 +16,7 @@ import { SwiperSlide } from "swiper/react";
 import VideoPlayer from "../video-player";
 import { getProductDetails, getRelatedProducts, getReviews } from "./apis";
 import Details from "./details";
+import Heading from "@/utils/heading";
 
 interface Props {
   data: any;
@@ -54,6 +55,7 @@ const Seven = ({ data, updatedData }: Props) => {
 
   return (
     <div className="container px-5">
+      <Heading title={product?.name} />
       <Details
         fetchStatus={fetchStatus}
         data={data}
