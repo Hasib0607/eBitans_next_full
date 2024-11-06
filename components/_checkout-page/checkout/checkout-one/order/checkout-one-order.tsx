@@ -39,6 +39,8 @@ const YourOrders = ({
   userName,
   userPhone,
   userAddress,
+  note,
+  setShipping_area
 }: any) => {
   const [loading, setLoading] = useState(false);
   const [tax, setTax] = useState<any>(0);
@@ -183,6 +185,7 @@ const YourOrders = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
+      district: selectAddress?.district,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -192,6 +195,7 @@ const YourOrders = ({
       tax: tax,
       coupon: coupon ? coupon : null,
       referral_code: referralCode || "",
+      note: note || "",
     };
 
     formData.append("store_id", store_id);
@@ -212,6 +216,12 @@ const YourOrders = ({
         ? userAddress
         : selectAddress?.address
     );
+    formData.append(
+      "district",
+      store?.auth_type === "EasyOrder" && !user
+        ? userAddress
+        : selectAddress?.district
+    );
     formData.append("subtotal", total);
     formData.append("shipping", shipping_area);
     formData.append(
@@ -225,6 +235,7 @@ const YourOrders = ({
     if (referralCode) {
       formData.append("referral_code", referralCode);
     }
+    formData.append("note", note);
 
     if (!userAddress && !data.address) {
       toast("Please Select The Address", {
@@ -440,6 +451,8 @@ const YourOrders = ({
                       setIsOpen={setIsOpen}
                       setFiles={setFiles}
                       handleFile={handleFile}
+                      setShipping_area={setShipping_area}
+                      shipping_area={shipping_area}
                     />
                   </div>
                 ))}

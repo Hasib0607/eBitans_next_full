@@ -46,10 +46,16 @@ const NewArrivalProductsEight = ({ product, design }: any) => {
     `;
 
   const { data, error } = useHeaderSettings();
+  if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
-  const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
-  const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
+  let newArrivalProduct = cDesign?.new_arrival_product?.[0] || null;
 
+  if(!newArrivalProduct){
+    return null;
+  }
+
+  const title = newArrivalProduct.title || "Default Title";
+  const title_color = newArrivalProduct.title_color || "#000";
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white">
       <div className="py-5">
