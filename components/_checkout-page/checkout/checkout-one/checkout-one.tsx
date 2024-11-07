@@ -59,10 +59,8 @@ const CheckOutOne = () => {
   const freeDelivery = cartId?.every((item: any) => freeId?.includes(item));
 
   useEffect(() => {
-    if (freeDelivery && shipping_area) {
-      setShipping_area("0");
-    }
-  }, [freeDelivery, campaign, cartId, shipping_area]);
+    setShipping_area("0");
+  }, [freeDelivery]);
 
   if (cartList.length === 0) {
     return (
@@ -128,6 +126,7 @@ const CheckOutOne = () => {
                 setNote={setNote}
               />
               <Discount
+                selectAddress={selectAddress}
                 setCouponDis={setCouponDis}
                 setShipping_area={setShipping_area}
                 setCoupon={setCoupon}
