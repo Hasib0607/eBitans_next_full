@@ -7,7 +7,7 @@ import CheckoutComponent from "./checkout-component";
 export async function generateMetadata() {
   const url = getUrl();
   const subDomainData = await getSubdomainName(url, "headersetting");
-  const  headersetting  = subDomainData?.headersetting || {};
+  const headersetting = subDomainData?.headersetting || {};
   const websiteName = capitalizeFirstLetter(headersetting?.website_name);
 
   return {
