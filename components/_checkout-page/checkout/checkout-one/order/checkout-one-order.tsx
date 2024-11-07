@@ -493,11 +493,7 @@ const YourOrders = ({
         ) : null}
         <div className="flex justify-between items-center pb-1">
           <p>এস্টিমেটেড শিপিং</p>
-          {shipping_area === "--Select Area--" ? (
-            <p>
-              <BDT /> 0
-            </p>
-          ) : (
+          {shipping_area && (
             <p>
               <BDT price={shipping_area ? shipping_area : 0} />
             </p>

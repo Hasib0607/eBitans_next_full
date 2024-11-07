@@ -5,12 +5,13 @@ import { Dialog, Transition } from "@headlessui/react";
 import { PencilIcon, TrashIcon } from "@heroicons/react/24/outline";
 import axios from "axios";
 import { Fragment, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { FaUser, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
 import { FaNoteSticky } from "react-icons/fa6";
+import Select from "react-select";
 
 const Address = ({
   selectAddress,
@@ -24,7 +25,7 @@ const Address = ({
   setUserName,
   setShipping_area,
   setNote,
-  item
+  item,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -73,14 +74,15 @@ const Address = ({
 
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (item?.districtData?.id == 1) {
+    setShipping_area(headerSetting?.shipping_area_3_cost);
+
+    if (selectedDistrict == "1") {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else if(!(item?.districtData?.id == 1)) {
+    } else if (selectedDistrict != "1") {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
-    } else{
-      setShipping_area(0);
     }
-  }, [headerSetting, setShipping_area]);
+  }, [headerSetting, setShipping_area, selectedDistrict]);
+
 
   useEffect(() => {
     if (store?.auth_type === "EasyOrder" && !user) {
@@ -101,7 +103,6 @@ const Address = ({
           setLoading(false);
         } catch (error) {
           // console.error('Error posting data:', error);
-          // Handle any errors here
         }
       };
 
@@ -186,7 +187,7 @@ const Address = ({
                     required
                     className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
                   >
-                    <option value="" disabled>
+                    <option value="">
                       জেলা সিলেক্ট করুন
                     </option>
                     {district?.map((district: any) => (
@@ -196,7 +197,6 @@ const Address = ({
                     ))}
                   </select>
                 </div>
-
                 {/* Address Input */}
                 <div className="flex flex-col">
                   <label className="font-semibold">
@@ -267,6 +267,7 @@ const Address = ({
         setCall={setCall}
         design={design}
         setShipping_area={setShipping_area}
+        district={district}
         item={item}
       />
     </>
@@ -282,6 +283,7 @@ const Single = ({
   setCall,
   token,
   setShipping_area,
+  district
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -289,7 +291,6 @@ const Single = ({
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [district, setDistrict] = useState([]);
   const apiDelete = process.env.NEXT_PUBLIC_API_URL + "address/delete";
 
   const delete_address = (id: any) => {
@@ -326,39 +327,17 @@ const Single = ({
     }
   };
 
-
-  useEffect(() => {
-    const getDistrict = async () => {
-      try {
-        const response = await axios.get(baseUrl + "get/district");
-
-        if (response?.data?.status) {
-          const allDistrict = response?.data?.data || [];
-          setDistrict(allDistrict);
-        } else {
-          setDistrict([]);
-        }
-      } catch (error) {
-        // console.error('Error posting data:', error);
-        setDistrict([]);
-      }
-    };
-
-    getDistrict();
-  }, []);
-
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (item?.districtData?.id == 1) {
-      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else if(!(item?.districtData?.id == 1)) {
-      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
-    } else{
-      setShipping_area(0);
-    }
-  }, [headerSetting, setShipping_area]);
+    setShipping_area(headerSetting?.shipping_area_3_cost);
 
-  console.log("ddjfh",item?.districtData?.id);
+    if (selectAddress?.district == 1) {
+      setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
+    } else if (selectAddress?.district != 1) {
+      setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
+    }
+  }, [headerSetting, setShipping_area, selectAddress]);
+
 
   return (
     <label
@@ -394,6 +373,8 @@ const Single = ({
             setSelectAddress={setSelectAddress}
             design={design}
             setShipping_area={setShipping_area}
+            district={district}
+            districtId={item?.districtData?.id || ""}
           />
         </div>
       </div>
@@ -425,50 +406,32 @@ const AddressView = ({
   store,
   design,
   setShipping_area,
-  item
+  district,
+  item,
+  selectAddress
 }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [district, setDistrict] = useState([]);
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
+    control,
   } = useForm();
 
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (item?.districtData?.id == 1) {
+    setShipping_area(headerSetting?.shipping_area_3_cost);
+
+    if (selectAddress?.district == 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else if(!(item?.districtData?.id == 1)) {
+    } else if (selectAddress?.district != 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
-    } else{
-      setShipping_area(0);
     }
-  }, [headerSetting, setShipping_area]);
-
-  useEffect(() => {
-    const getDistrict = async () => {
-      try {
-        const response = await axios.get(baseUrl + "get/district");
-
-        if (response?.data?.status) {
-          const allDistrict = response?.data?.data || [];
-          setDistrict(allDistrict);
-        } else {
-          setDistrict([]);
-        }
-      } catch (error) {
-        // console.error('Error posting data:', error);
-        setDistrict([]);
-      }
-    };
-
-    getDistrict();
-  }, []);
+  }, [headerSetting, setShipping_area, selectAddress]);
 
   const onSubmit = async (data: any) => {
     try {
@@ -597,6 +560,20 @@ const AddressView = ({
               )}
             </div>
 
+            {/* <Controller
+              name="district"
+              control={control}
+              render={({ onChange, id, ref }) => (
+                <Select
+                  options={district}
+                  value={district.find((c: any) => c.id === id)}
+                  onChange={(val) => onChange(val.id)}
+                  defaultValue={district.find((c: any) => c.id === id)}
+                />
+              )}
+              rules={{ required: true }}
+            /> */}
+
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <label
                 htmlFor="address"
@@ -633,7 +610,7 @@ const AddressView = ({
                   <FaNoteSticky className="text-black" />
                 </div>
                 <textarea
-                  {...register("note", { required: true })}
+                  {...register("note")}
                   rows={3}
                   name="note"
                   id="note"
@@ -669,7 +646,9 @@ export function SaveAddress({
   store_id,
   design,
   setShipping_area,
-  item
+  item,
+  district,
+  selectAddress
 }: any) {
   const {
     register,
@@ -681,38 +660,18 @@ export function SaveAddress({
   const { headerSetting } = useTheme();
   const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [district, setDistrict] = useState([]);
 
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (item?.districtData?.id == 1) {
+    setShipping_area(headerSetting?.shipping_area_3_cost);
+
+    if (selectAddress?.district == 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else if(!(item?.districtData?.id == 1)) {
+    } else if (selectAddress?.district != 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
-    } else{
-      setShipping_area(0);
     }
-  }, [headerSetting, setShipping_area]);
+  }, [headerSetting, setShipping_area, selectAddress]);
 
-  useEffect(() => {
-    const getDistrict = async () => {
-      try {
-        const response = await axios.get(baseUrl + "get/district");
-
-        if (response?.data?.status) {
-          const allDistrict = response?.data?.data || [];
-          setDistrict(allDistrict);
-        } else {
-          setDistrict([]);
-        }
-      } catch (error) {
-        // console.error('Error posting data:', error);
-        setDistrict([]);
-      }
-    };
-
-    getDistrict();
-  }, []);
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
@@ -824,14 +783,13 @@ export function SaveAddress({
                 </label>
                 <select
                   {...register("district", { required: true })}
-                  value={selectedDistrict}
                   onChange={(e) => setSelectedDistrict(e.target.value)}
                   required
                   id="district"
                   name="district"
                   className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
                 >
-                  <option value="" disabled>
+                  <option value="">
                     জেলা নির্বাচন করুন
                   </option>
                   {district?.map((district: any) => (
@@ -863,22 +821,6 @@ export function SaveAddress({
                   <span className="text-red-500">Address is required</span>
                 )}
               </div>
-              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label
-                  htmlFor="note"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  নোট (অপশনাল)
-                </label>
-                <textarea
-                  {...register("note", { required: true })}
-                  rows={3}
-                  name="note"
-                  id="note"
-                  autoComplete="address-level1"
-                  className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                />
-              </div>
             </div>
             <div className="px-4 py-3 text-right sm:px-6">
               <button
@@ -905,12 +847,13 @@ export function UpdateAddress({
   design,
   token,
   setShipping_area,
+  selectAddress,
+  district,
+  districtId
 }: any) {
   const { store } = useTheme();
-  const baseUrl = process.env.NEXT_PUBLIC_API_URL;
   const { user } = useSelector((state: any) => state.auth);
-  const [selectedDistrict, setSelectedDistrict] = useState("");
-  const [district, setDistrict] = useState([]);
+  const [selectedDistrict, setSelectedDistrict] = useState(districtId);
 
   const apiEdit = process.env.NEXT_PUBLIC_API_URL + "address/edit";
 
@@ -925,46 +868,29 @@ export function UpdateAddress({
     },
   });
 
-  useEffect(() => {
-    const getDistrict = async () => {
-      try {
-        const response = await axios.get(baseUrl + "get/district");
-
-        if (response?.data?.status) {
-          const allDistrict = response?.data?.data || [];
-          setDistrict(allDistrict);
-        } else {
-          setDistrict([]);
-        }
-      } catch (error) {
-        // console.error('Error posting data:', error);
-        setDistrict([]);
-      }
-    };
-
-    getDistrict();
-  }, []);
-
   const { headerSetting } = useTheme();
   // Update the shipping area based on the selected district
   useEffect(() => {
-    if (item?.districtData?.id == 1) {
+    setShipping_area(headerSetting?.shipping_area_3_cost);
+
+    if (selectAddress?.district == 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
-    } else if(!(item?.districtData?.id == 1)) {
+    } else if (selectAddress?.district != 1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
-    } else{
-      setShipping_area(0);
     }
-  }, [headerSetting, setShipping_area]);
+  }, [headerSetting, setShipping_area, selectAddress]);
 
-
-  useEffect(() => {
-    reset(item);
-  }, [item, reset]);
+  const updateAddressFormData = (data:any) =>{
+    reset({
+      name: data?.name,
+      phone: data?.phone,
+      district: data?.district,
+      address: data?.address,
+    });
+  }
 
   const onSubmit = (data: any) => {
     data["id"] = item?.id;
-
     if (store?.auth_type === "EasyOrder" && !user) {
       const editAddress = async () => {
         try {
@@ -977,10 +903,10 @@ export function UpdateAddress({
           setCall(Math.random() * 100);
           toast(response?.data?.success, { type: "success" });
           setOpen(false);
-          reset();
+          updateAddressFormData(data);
           setSelectAddress(null);
         } catch (error) {
-          console.error("Error posting data:", error);
+          // console.error("Error posting data:", error);
           // Handle any errors here
         }
       };
@@ -993,6 +919,7 @@ export function UpdateAddress({
         .then(({ success }) => {
           setCall(Math.random() * 100);
           toast(success, { type: "success" });
+          updateAddressFormData(data);
           setOpen(false);
         })
         .catch((err) => console.log(err));
@@ -1060,7 +987,6 @@ export function UpdateAddress({
               </label>
               <select
                 {...register("district", { required: true })}
-                // value={selectedDistrict}
                 onChange={(e) => setSelectedDistrict(e.target.value)}
                 required
                 id="district"
