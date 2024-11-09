@@ -83,7 +83,6 @@ const Address = ({
     }
   }, [headerSetting, setShipping_area, selectedDistrict]);
 
-
   useEffect(() => {
     if (store?.auth_type === "EasyOrder" && !user) {
       const postToServer = async () => {
@@ -187,9 +186,7 @@ const Address = ({
                     required
                     className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
                   >
-                    <option value="">
-                      জেলা সিলেক্ট করুন
-                    </option>
+                    <option value="">জেলা সিলেক্ট করুন</option>
                     {district?.map((district: any) => (
                       <option key={district.id} value={district.id}>
                         {district.bn_name}
@@ -283,7 +280,7 @@ const Single = ({
   setCall,
   token,
   setShipping_area,
-  district
+  district,
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -337,7 +334,6 @@ const Single = ({
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
     }
   }, [headerSetting, setShipping_area, selectAddress]);
-
 
   return (
     <label
@@ -408,7 +404,7 @@ const AddressView = ({
   setShipping_area,
   district,
   item,
-  selectAddress
+  selectAddress,
 }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const { headerSetting } = useTheme();
@@ -648,7 +644,7 @@ export function SaveAddress({
   setShipping_area,
   item,
   district,
-  selectAddress
+  selectAddress,
 }: any) {
   const {
     register,
@@ -671,7 +667,6 @@ export function SaveAddress({
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
     }
   }, [headerSetting, setShipping_area, selectAddress]);
-
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
@@ -789,9 +784,7 @@ export function SaveAddress({
                   name="district"
                   className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400 block w-full"
                 >
-                  <option value="">
-                    জেলা নির্বাচন করুন
-                  </option>
+                  <option value="">জেলা নির্বাচন করুন</option>
                   {district?.map((district: any) => (
                     <option key={district.id} value={district.id}>
                       {district.bn_name}
@@ -849,7 +842,7 @@ export function UpdateAddress({
   setShipping_area,
   selectAddress,
   district,
-  districtId
+  districtId,
 }: any) {
   const { store } = useTheme();
   const { user } = useSelector((state: any) => state.auth);
@@ -880,14 +873,14 @@ export function UpdateAddress({
     }
   }, [headerSetting, setShipping_area, selectAddress]);
 
-  const updateAddressFormData = (data:any) =>{
+  const updateAddressFormData = (data: any) => {
     reset({
       name: data?.name,
       phone: data?.phone,
       district: data?.district,
       address: data?.address,
     });
-  }
+  };
 
   const onSubmit = (data: any) => {
     data["id"] = item?.id;
