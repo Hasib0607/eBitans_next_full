@@ -130,6 +130,7 @@ const MobileNavThree = () => {
         ))}
       </div>
 
+{/* this to show */}
       <div className={`px-4 z-[7]`}>
         <ul
           className={`pt-5 top-0 bg-white duration-500 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] lg:cursor-pointer ${open ? "left-0" : "left-[-140%]"}`}
@@ -227,7 +228,7 @@ interface SingleCatProps {
   setOpen: (open: boolean) => void;
 }
 
-const SingleCat: React.FC<SingleCatProps> = ({ item, open, setOpen }) => {
+export const SingleCat: React.FC<SingleCatProps> = ({ item, open, setOpen }) => {
   const [show, setShow] = useState(false);
   return (
     <>
@@ -319,7 +320,7 @@ const searchIcon = (
   </svg>
 );
 
-const cancelIcon = (
+export const cancelIcon = (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
@@ -333,6 +334,7 @@ const cancelIcon = (
     />
   </svg>
 );
+
 const cancelIcon2 = (
   <svg
     xmlns="http://www.w3.org/2000/svg"

@@ -22,6 +22,10 @@ import { toast } from "react-toastify";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+// customize design
+import { customizeFooter, customizeHeader } from "@/utils/customizeDesign";
+
+
 
 const Details = ({
   data,
@@ -52,6 +56,11 @@ const Details = ({
   const [activeImg, setActiveImg] = useState(product?.defaultImage);
 
   const sizeV = variant?.find((item: any) => item.size !== null);
+
+    // custom
+    const storeID = headerSetting?.store_id || null;
+
+    const productData = customizeHeader.find((item) => item.id == storeID);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -633,7 +642,8 @@ const Details = ({
             <div className="text-gray-800 ">
               {productQuantity !== "0" ? (
                 <p>
-                  <span className="font-medium">{productQuantity}</span>{" "}
+                  {/* need to set option */}
+                  <span className="font-medium">{ productData?.id ? null : productQuantity}</span>{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (
