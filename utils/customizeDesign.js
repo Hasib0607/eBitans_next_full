@@ -30,6 +30,12 @@ export const customizeHeader = [
     mobile_font_big: "sm:text-xl text-sm",
     // Fashion mart customization end
   },
+  // cloudhouse start
+  {
+    id: 8621,
+    sidebar_cat_menu_design: ""
+  }
+  // cloudhouse end
 ];
 
 export const customizeCheckout = [
