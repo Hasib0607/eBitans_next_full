@@ -130,7 +130,7 @@ const MobileNavThree = () => {
         ))}
       </div>
 
-{/* this to show */}
+      {/* this to show */}
       <div className={`px-4 z-[7]`}>
         <ul
           className={`pt-5 top-0 bg-white duration-500 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] lg:cursor-pointer ${open ? "left-0" : "left-[-140%]"}`}
@@ -228,7 +228,11 @@ interface SingleCatProps {
   setOpen: (open: boolean) => void;
 }
 
-export const SingleCat: React.FC<SingleCatProps> = ({ item, open, setOpen }) => {
+export const SingleCat: React.FC<SingleCatProps> = ({
+  item,
+  open,
+  setOpen,
+}) => {
   const [show, setShow] = useState(false);
   return (
     <>

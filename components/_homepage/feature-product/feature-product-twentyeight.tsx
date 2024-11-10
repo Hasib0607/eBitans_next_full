@@ -44,11 +44,13 @@ const FeatureProductTwentyEight = ({
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
-  const { title = "Default Title", title_color = "#000" } = featuredProduct;
-
-  if (!featuredProduct || featuredProduct.length === 0) {
+console.log("featuredProduct", featuredProduct);
+  if (!featuredProduct) {
     return null;
-  }
+  };
+
+  const title = featuredProduct?.title || "Default Title";
+  const title_color = featuredProduct?.title_color || "#000";
 
   return (
     <div className="sm:py-10 py-5">

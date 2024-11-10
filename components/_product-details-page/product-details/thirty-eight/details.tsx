@@ -25,8 +25,6 @@ import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 // customize design
 import { customizeFooter, customizeHeader } from "@/utils/customizeDesign";
 
-
-
 const Details = ({
   data,
   product,
@@ -57,10 +55,10 @@ const Details = ({
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-    // custom
-    const storeID = headerSetting?.store_id || null;
+  // custom
+  const storeID = headerSetting?.store_id || null;
 
-    const productData = customizeHeader.find((item) => item.id == storeID);
+  const productData = customizeHeader.find((item) => item.id == storeID);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -643,7 +641,9 @@ const Details = ({
               {productQuantity !== "0" ? (
                 <p>
                   {/* need to set option */}
-                  <span className="font-medium">{ productData?.id ? null : productQuantity}</span>{" "}
+                  <span className="font-medium">
+                    {productData?.id ? null : productQuantity}
+                  </span>{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (

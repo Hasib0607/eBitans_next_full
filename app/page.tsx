@@ -34,7 +34,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
   // Check if subdomainData and headersetting exist
   const headersetting = subDomainData?.headersetting || {};
-  console.log(headersetting);
   const favicon = imgUrl + headersetting?.favicon;
   const logo = imgUrl + headersetting?.logo;
   // Extract the relevant fields from headersetting
