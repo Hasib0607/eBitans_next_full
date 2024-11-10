@@ -657,6 +657,7 @@ const Details = ({
                   qty={qty}
                   setQty={setQty}
                   onClick={() => add_to_cart()}
+                  buyNowBtn={buyNowBtn}
                   product={product}
                   buttonTwentyTwo={buttonOne}
                 />
@@ -789,6 +790,7 @@ const AddCart = ({
     return <p>error from header settings</p>;
   }
 
+
   return (
     <div className="flex flex-wrap lg2:flex-row flex-col justify-start lg2:items-center gap-x-8 gap-y-3 py-10">
       <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
@@ -819,7 +821,7 @@ const AddCart = ({
           <div className="">
             <button
               className="font-bold text-white bg-gray-600 rounded-md w-max px-10 py-3 text-center"
-              onClick={onClick}
+              onClick={() => buyNowBtn()}
             >
               {button || "Buy Now"}
             </button>
