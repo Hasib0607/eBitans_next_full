@@ -32,7 +32,9 @@ const ProductTwentyEight = ({
   store_id: any;
   product: any;
 }) => {
-  const [categoryProducts, setCategoryProducts] = useState<CategoryProducts>({});
+  const [categoryProducts, setCategoryProducts] = useState<CategoryProducts>(
+    {}
+  );
   const { data, error, isLoading } = useHeaderSettings(); // Hook managing header settings
   const { category: categories, themeLoading } = useTheme(); // Hook managing theme with loading state
   const [loadingProducts, setLoadingProducts] = useState(true); // Separate loading state for products
@@ -89,7 +91,9 @@ const ProductTwentyEight = ({
 
   // Show error message if data fetch fails
   if (error) {
-    return <p className="text-center text-red-500">Error loading header settings.</p>;
+    return (
+      <p className="text-center text-red-500">Error loading header settings.</p>
+    );
   }
 
   return (
@@ -99,7 +103,10 @@ const ProductTwentyEight = ({
       <div className="my-5 w-full relative flex flex-col lg2:flex-row justify-between lg2:items-center">
         <div className="flex flex-wrap gap-5 lg:cursor-pointer uppercase text-sm font-medium text-gray-600 justify-center pt-10">
           {categories
-            .filter((category: Category) => categoryProducts[category?.name]?.length > 0)
+            .filter(
+              (category: Category) =>
+                categoryProducts[category?.name]?.length > 0
+            )
             .map((category: Category) => (
               <div key={category.id} className="mb-8">
                 <div className="flex justify-between items-center">

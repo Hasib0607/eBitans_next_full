@@ -495,7 +495,6 @@ const Details = ({
     });
   };
 
-
   const styleCss = `
     .btn-hover:hover {
         color:   ${design?.text_color};

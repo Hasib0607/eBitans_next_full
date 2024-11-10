@@ -28,13 +28,27 @@ import { Metadata } from "next";
 
 export async function generateMetadata(): Promise<Metadata> {
   const url = getUrl();
+
+  //old data with out proper velidation... if got error with new one active this one
+  // const subDomainData = await getSubdomainName(url, "headersetting");
+  // if (!subDomainData) {
+  //   throw new Error("Subdomain data not found");
+  // }
+
+  //new one start
   const subDomainData = await getSubdomainName(url, "headersetting");
   if (!subDomainData) {
-    throw new Error("Subdomain data not found");
+    console.warn("Subdomain data not found, using default settings.");
+    // Provide default settings or skip the metadata generation
+    return { title: "Default Title", description: "Default Description" };
   }
+  //new condition end
+
+
   // Check if subdomainData and headersetting exist
   const headersetting = subDomainData?.headersetting || {};
-  const favicon = imgUrl + headersetting?.favicon;
+  // console.log(headersetting);
+  // const favicon = imgUrl + headersetting?.favicon;
   const logo = imgUrl + headersetting?.logo;
   // Extract the relevant fields from headersetting
   const title = `${capitalizeFirstLetter(headersetting?.website_name)}`;
