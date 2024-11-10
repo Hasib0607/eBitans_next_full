@@ -33,8 +33,8 @@ export const customizeHeader = [
   // cloudhouse start
   {
     id: 8621,
-    sidebar_cat_menu_design: ""
-  }
+    sidebar_cat_menu_design: "",
+  },
   // cloudhouse end
 ];
 

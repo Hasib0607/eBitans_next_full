@@ -20,7 +20,7 @@ import SideMenu from "../header-three/side-menu";
 import Search from "./search";
 // customize design
 import { customizeHeader } from "@/utils/customizeDesign";
-import {cancelIcon, SingleCat} from '@/app/mobileNavs/three/mobileNavThree'
+import { cancelIcon, SingleCat } from "@/app/mobileNavs/three/mobileNavThree";
 
 const HeaderThirtyFour = ({ headerSetting }: any) => {
   const { category, design, subcategory, menu, userData } = useTheme();
@@ -41,7 +41,6 @@ const HeaderThirtyFour = ({ headerSetting }: any) => {
   const storeID = headerSetting?.store_id || null;
 
   const headerData = customizeHeader.find((item) => item.id == storeID);
-  
 
   const cartList = useSelector((state: any) => state.cart.cartList);
   const priceList = cartList?.map((p: any) => p.qty * p.price);
@@ -491,65 +490,65 @@ const HeaderThirtyFour = ({ headerSetting }: any) => {
 
       {headerData?.id ? (
         // show category
-         <div className={`px-4 z-[7] block lg:hidden`}>
-         <ul
-           className={`pt-5 top-0 bg-white duration-500 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] lg:cursor-pointer ${open ? "left-0" : "left-[-140%]"}`}
-         >
-           <div className="pb-7 pt-3 px-6">
-             <div className="text-xl border-b-[2px] pb-5 text-center text-color flex justify-between items-center">
-               <p>Category</p>
-               <div onClick={() => setOpen(!open)} className="h-8">
-                 {cancelIcon}
-               </div>
-             </div>
-             <div className="flex flex-col gap-3">
-               {category?.map((item: any) => (
-                 <SingleCat
-                   key={item?.id}
-                   item={item}
-                   open={open}
-                   setOpen={setOpen}
-                 />
-               ))}
-             </div>
-           </div>
-         </ul>
-       </div>
-      ):(
+        <div className={`px-4 z-[7] block lg:hidden`}>
+          <ul
+            className={`pt-5 top-0 bg-white duration-500 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] lg:cursor-pointer ${open ? "left-0" : "left-[-140%]"}`}
+          >
+            <div className="pb-7 pt-3 px-6">
+              <div className="text-xl border-b-[2px] pb-5 text-center text-color flex justify-between items-center">
+                <p>Category</p>
+                <div onClick={() => setOpen(!open)} className="h-8">
+                  {cancelIcon}
+                </div>
+              </div>
+              <div className="flex flex-col gap-3">
+                {category?.map((item: any) => (
+                  <SingleCat
+                    key={item?.id}
+                    item={item}
+                    open={open}
+                    setOpen={setOpen}
+                  />
+                ))}
+              </div>
+            </div>
+          </ul>
+        </div>
+      ) : (
         // show menu
         <div className="block lg:hidden">
-        {/* menu */}
-        <ul
-          className={`lg:hidden bg-white fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-10 lg:cursor-pointer ${
-            open ? "left-0" : "left-[-160%]"
-          } `}
-        >
-          <div className="flex justify-between px-6 py-4 lg:hidden">
-            <div>
-              {headerSetting?.logo === null ? (
-                <Link href="/">
-                  <p className="text-xl uppercase">
-                    {headerSetting?.website_name}
-                  </p>
-                </Link>
-              ) : (
-                <Link href="/">
-                  <img
-                    className="h-10"
-                    src={imgUrl + headerSetting?.logo}
-                    alt="logo"
-                  />
-                </Link>
-              )}
+          {/* menu */}
+          <ul
+            className={`lg:hidden bg-white fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-10 lg:cursor-pointer ${
+              open ? "left-0" : "left-[-160%]"
+            } `}
+          >
+            <div className="flex justify-between px-6 py-4 lg:hidden">
+              <div>
+                {headerSetting?.logo === null ? (
+                  <Link href="/">
+                    <p className="text-xl uppercase">
+                      {headerSetting?.website_name}
+                    </p>
+                  </Link>
+                ) : (
+                  <Link href="/">
+                    <img
+                      className="h-10"
+                      src={imgUrl + headerSetting?.logo}
+                      alt="logo"
+                    />
+                  </Link>
+                )}
+              </div>
+              <XMarkIcon onClick={() => setOpen(!open)} className="h-7" />
             </div>
-            <XMarkIcon onClick={() => setOpen(!open)} className="h-7" />
-          </div>
 
-          <div className="px-6">
-            <SideMenu setOpen={setOpen} />
-          </div>
-        </ul>
-      </div>
+            <div className="px-6">
+              <SideMenu setOpen={setOpen} />
+            </div>
+          </ul>
+        </div>
       )}
     </div>
   );
