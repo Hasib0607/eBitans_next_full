@@ -15,7 +15,7 @@ const FeatureProductFive = ({ feature_product }: any) => {
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
-  console.log("featuredProduct", featuredProduct);
+
   if (!featuredProduct) {
     return null;
   }
