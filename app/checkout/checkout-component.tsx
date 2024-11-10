@@ -14,14 +14,13 @@ const CheckoutComponent = () => {
   const { design, store } = useTheme();
 
   useEffect(() => {
-    const isEmpty = (store: any) => Object.keys(store).length === 0;
-    if (!isEmpty) {
+    const isEmpty = Object.keys(store).length === 0 ? 0 : 1;
+    if (isEmpty) {
       if (!user?.verify && store?.auth_type !== "EasyOrder") {
         setRedirect(true); // Set redirect to true if user is not verified and store is not "EasyOrder"
       } else if (user?.verify || store?.auth_type === "EasyOrder") {
         setRedirect(false); // Otherwise, no redirect
       }
-
       setLoading(false); // Stop loading after the conditions are evaluated
     }
   }, [user, store, router]);
