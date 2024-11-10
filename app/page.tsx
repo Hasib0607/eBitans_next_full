@@ -44,7 +44,6 @@ export async function generateMetadata(): Promise<Metadata> {
   }
   //new condition end
 
-
   // Check if subdomainData and headersetting exist
   const headersetting = subDomainData?.headersetting || {};
   // console.log(headersetting);
