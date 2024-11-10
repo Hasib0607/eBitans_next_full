@@ -9,13 +9,16 @@ import CheckoutGtm from "./CheckoutGtm";
 const CheckoutComponent = () => {
   const [redirect, setRedirect] = useState(false);
   const [loading, setLoading] = useState(true);
+  // const [isEmpty, setIsEmpty] = useState(false);
   const router = useRouter();
   const { user } = useSelector((state: any) => state.auth);
   const { design, store } = useTheme();
 
   useEffect(() => {
-    const isEmpty = Object.keys(store).length === 0 ? 0 : 1;
-    if (isEmpty) {
+    const isStore = Object.keys(store).length;
+    const isEmpty = isStore === 0; // store check
+
+    if (!isEmpty) {
       if (!user?.verify && store?.auth_type !== "EasyOrder") {
         setRedirect(true); // Set redirect to true if user is not verified and store is not "EasyOrder"
       } else if (user?.verify || store?.auth_type === "EasyOrder") {

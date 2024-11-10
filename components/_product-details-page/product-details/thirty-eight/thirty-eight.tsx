@@ -16,7 +16,7 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
 
-const ThirtyEight = ({ data, updatedData }: any) => {
+const ThirtyEight = ({ data, updatedData, headerSetting }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-38"],
     queryFn: () => getProductDetails(updatedData),
@@ -70,7 +70,7 @@ const ThirtyEight = ({ data, updatedData }: any) => {
           </div>
         </div>
       </div>
-      <div className="">
+      <div>
         <section>
           <Details
             fetchStatus={fetchStatus}
@@ -78,6 +78,7 @@ const ThirtyEight = ({ data, updatedData }: any) => {
             product={product}
             vrcolor={vrcolor}
             variant={variant}
+            headerSetting={headerSetting}
           />
         </section>
 

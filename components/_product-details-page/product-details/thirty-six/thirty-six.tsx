@@ -35,7 +35,6 @@ const ThirtySix = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  console.log(reviews, "reviews");
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <Details
