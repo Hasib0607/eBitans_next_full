@@ -15,7 +15,6 @@ import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { VscCreditCard } from "react-icons/vsc";
 import { useDispatch, useSelector } from "react-redux";
 import {
   FacebookIcon,
@@ -789,7 +788,6 @@ const AddCart = ({
   if (error) {
     return <p>error from header settings</p>;
   }
-
 
   return (
     <div className="flex flex-wrap lg2:flex-row flex-col justify-start lg2:items-center gap-x-8 gap-y-3 py-10">

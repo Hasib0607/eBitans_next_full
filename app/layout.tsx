@@ -27,6 +27,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const description = headersetting?.short_description;
   const keywords = "eBitans, eCommerce builder platform";
 
+
   return {
     title: `${title}`,
     description: description,

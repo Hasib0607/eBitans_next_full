@@ -80,7 +80,7 @@ const ProductThirtyEight = ({ category, design, store_id }: any) => {
 
         {products?.length > 0 ? (
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-1 sm:gap-3 justify-center">
-            {products?.slice(0, 12).map((productData: any) => (
+            {products?.slice(0, 5).map((productData: any) => (
               <div key={productData.id}>
                 <Card65
                   item={productData}
