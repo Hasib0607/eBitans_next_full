@@ -1,4 +1,3 @@
-import BDT from "@/utils/bdt";
 
 export const PageView = () => {
   if (typeof window !== "undefined" && window.fbq) {
@@ -24,9 +23,9 @@ export const AddToCart = (item: any, content_ids: any, content_type: any) => {
   }
 };
 
-export const Checkout = (items: any) => {
+export const Checkout = (items: any, price: any, sku: any, currency: any) => {
   if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Checkout", { item: items });
+    window.fbq("track", "Checkout", { item: items, price, sku, currency });
   } else {
     console.warn("Facebook Pixel (fbq) is not initialized.");
   }
@@ -38,8 +37,11 @@ export const ViewContent = (
   content_type: any,
   content_name: any,
   content_category: any,
-  value: any
+  value: any,
+  currency: any,
+  sku: any,
 ) => {
+  
   if (typeof window !== "undefined" && window.fbq) {
     window.fbq("track", "ViewContent", {
       item,
@@ -48,7 +50,8 @@ export const ViewContent = (
       content_name,
       content_category,
       value,
-      currency: <BDT />,
+      currency,
+      sku,
     });
   } else {
     console.warn("Facebook Pixel (fbq) is not initialized.");

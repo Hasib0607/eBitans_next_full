@@ -167,7 +167,7 @@ const ProductCardTwo = ({ item }: any) => {
               className="absolute -bottom-2 left-2 right-2 mx-auto rounded-t-md px-1 quick font-normal text-md pb-2 text-black text-md flex justify-center items-center gap-x-1 shadow-4xl"
             >
               <IoEyeSharp color={design?.text_color} />
-              Quick View
+              Quick Views
             </button>
           </div>
         </div>
