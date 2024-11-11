@@ -886,14 +886,22 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
         <button
           onClick={onClick}
           type="submit"
-          className={singleProductPageData?.cart_btn2 == true? "cart-btn2 font-bold py-[10px] px-10 w-full": "cart-btn1 font-bold py-[10px] px-10 w-full"}
+          className={
+            singleProductPageData?.cart_btn2 == true
+              ? "cart-btn2 font-bold py-[10px] px-10 w-full"
+              : "cart-btn1 font-bold py-[10px] px-10 w-full"
+          }
         >
           কার্টে রাখুন
         </button>
         <button
           onClick={() => buyNowBtn()}
           type="submit"
-          className={singleProductPageData?.heartbeat_animation == true ? "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor heartbeat": "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor"}
+          className={
+            singleProductPageData?.heartbeat_animation == true
+              ? "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor heartbeat"
+              : "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor"
+          }
         >
           {button || "অর্ডার করুন"}
         </button>

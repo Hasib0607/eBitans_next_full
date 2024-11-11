@@ -12,10 +12,10 @@ const PurchaseGtm = () => {
   const cartList = useSelector((state: any) => state.cart.cartList);
   const searchParams = useSearchParams();
   // const total = searchParams.get("total");
-  const total = cartList.reduce((accumulator:any, item:any) => {
-    return accumulator + (item.price * item.qty);
+  const total = cartList.reduce((accumulator: any, item: any) => {
+    return accumulator + item.price * item.qty;
   }, 0);
-  const currency = headerSetting?.code;   // Define currency here or dynamically set it as needed
+  const currency = headerSetting?.code; // Define currency here or dynamically set it as needed
   console.log("total", total);
   useEffect(() => {
     sendGTMEvent({

@@ -15,12 +15,12 @@ const CheckoutGtm = () => {
       value: cartList,
     });
 
-    const totalPrice = cartList.reduce((accumulator:any, item:any) => {
-      return accumulator + (item.price * item.qty);
+    const totalPrice = cartList.reduce((accumulator: any, item: any) => {
+      return accumulator + item.price * item.qty;
     }, 0);
     // const sku = cartList[0].SKU;
-    const sku = cartList.map((item: { SKU: any; }) => item.SKU);
-    const currency = headerSetting?.code; 
+    const sku = cartList.map((item: { SKU: any }) => item.SKU);
+    const currency = headerSetting?.code;
 
     Checkout(cartList, totalPrice, sku, currency);
   }, [cartList]);
