@@ -5,6 +5,7 @@ export default function Pagination({ setPage, paginate }: any) {
   const scroll = () => {
     window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
   };
+  
   return (
     <div className=" px-4 py-3 flex items-center justify-between sm:px-6">
       <div className="flex-1 flex items-center justify-center">
@@ -21,7 +22,7 @@ export default function Pagination({ setPage, paginate }: any) {
                   <button
                     disabled={!item?.url}
                     onClick={() => {
-                      setPage(item?.url);
+                        setPage(item?.url);
                       scroll();
                     }}
                     aria-current="page"
@@ -35,9 +36,9 @@ export default function Pagination({ setPage, paginate }: any) {
                         : "cursor-not-allowed opacity-50"
                     }  relative inline-flex items-center px-4 py-2 border text-sm font-medium`}
                   >
-                    {item.label.includes("Previous") ? (
+                    {item.label.includes("previous") ? (
                       <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
-                    ) : item.label.includes("Next") ? (
+                    ) : item.label.includes("next") ? (
                       <ChevronRightIcon
                         className="h-5 w-5"
                         aria-hidden="true"

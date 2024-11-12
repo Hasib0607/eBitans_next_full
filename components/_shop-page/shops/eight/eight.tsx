@@ -19,7 +19,6 @@ import Pagination from "../one/pagination";
 
 const Eight = ({ data }: any) => {
   const { category, design, module } = useTheme();
-  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
   const [grid, setGrid] = useState("H");
   const [paginate, setPaginate] = useState({});
   const [products, setProducts] = useState([]);
@@ -31,8 +30,13 @@ const Eight = ({ data }: any) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const shop_load = parseInt(paginateModule?.status);
-  const pageShop = shop_load === 1 ? data?.page : page;
+  const [loading, setLoading] = useState(true);
+  const [paginatePage, setPaginatePage] = useState("?page=1");
+  const [paginateModule, setPaginateModule] = useState(false);
+
+
+  const getPaginateModule = module?.find((item: any) => item?.modulus_id === 105);
+  const shop_load = parseInt(getPaginateModule?.status);
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
@@ -51,88 +55,102 @@ const Eight = ({ data }: any) => {
  
     `;
 
-  return (
-    <div className="sm:container px-5 sm:py-10 py-5 bg-white">
-      <style>{styleCss}</style>
-      <div className="grid grid-cols-9">
-        {/* filter side design  */}
-        <div className="md:col-span-2 px-4 w-full items-end md:block hidden">
-          <div className="w-full bg-gray-100 border-2 border-gray-200 text-black  my-6 pl-6 pt-7 pb-6 ">
-            <h1 className="font-semibold ">FILTER BY</h1>
-            {category?.map((item: any) => (
-              <SingleCat key={item?.id} item={item} />
-            ))}
+  useEffect(() => {
+    setLoading(true);
+    const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+
+    if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+      const moduleVal = pageShopVal == 1 ? true : false;
+      setPaginateModule(moduleVal);
+      setLoading(false);
+    }
+
+  }, [shop_load]);
+
+    return (
+      <div className="sm:container px-5 sm:py-10 py-5 bg-white">
+        <style>{styleCss}</style>
+        <div className="grid grid-cols-9">
+          {/* filter side design  */}
+          <div className="md:col-span-2 px-4 w-full items-end md:block hidden">
+            <div className="w-full bg-gray-100 border-2 border-gray-200 text-black  my-6 pl-6 pt-7 pb-6 ">
+              <h1 className="font-semibold ">FILTER BY</h1>
+              {category?.map((item: any) => (
+                <SingleCat key={item?.id} item={item} />
+              ))}
+            </div>
+
+            <div className="bg-gray-100 border-2 border-gray-200 my-6 p-4">
+              <FilterByColor
+                setActiveColor={setActiveColor}
+                colors={colors}
+                activeColor={activeColor}
+                paginateModule={paginateModule}
+                setPage={setPage}
+                setHasMore={setHasMore}
+              />
+            </div>
+            <div className="bg-gray-100 border-2 border-gray-200 p-4">
+              <FilterByPrice
+                setVal={setVal}
+                val={val}
+                setPage={setPage}
+                setHasMore={setHasMore}
+              />
+            </div>
           </div>
 
-          <div className="bg-gray-100 border-2 border-gray-200 my-6 p-4">
-            <FilterByColor
-              setActiveColor={setActiveColor}
-              colors={colors}
-              activeColor={activeColor}
-              shop_load={shop_load}
-              setPage={setPage}
-              setHasMore={setHasMore}
-            />
-          </div>
-          <div className="bg-gray-100 border-2 border-gray-200 p-4">
-            <FilterByPrice
-              setVal={setVal}
-              val={val}
-              setPage={setPage}
-              setHasMore={setHasMore}
-            />
-          </div>
-        </div>
+          {/* filter side design finishes  */}
 
-        {/* filter side design finishes  */}
+          <div className="relative md:col-span-7 col-span-9 ">
+            {/* Sort by bar start  */}
 
-        <div className="relative md:col-span-7 col-span-9 ">
-          {/* Sort by bar start  */}
+            <div>
+              <Filter
+                onChange={(e: any) => {
+                  setSort(e.target.value);
+                  setPage(1);
+                  setHasMore(true);
+                }}
+                setGrid={setGrid}
+                paginate={paginate}
+                setOpen={setOpen}
+                open={open}
+              />
+            </div>
+            {/* All product card  */}
 
-          <div>
-            <Filter
-              onChange={(e: any) => {
-                setSort(e.target.value);
-                setPage(1);
-                setHasMore(true);
-              }}
-              setGrid={setGrid}
-              paginate={paginate}
-              setOpen={setOpen}
-              open={open}
-            />
-          </div>
-          {/* All product card  */}
-
-          <div className="mt-4 mb-6 mx-4 md:mx-0 ">
-            <Product
-              page={pageShop}
-              sort={sort}
-              grid={grid}
-              open={open}
-              products={products}
-              setProducts={setProducts}
-              setPaginate={setPaginate}
-              setColors={setColors}
-              activeColor={activeColor}
-              val={val}
-              setPage={setPage}
-              shop_load={shop_load}
-              setHasMore={setHasMore}
-              hasMore={hasMore}
-            />
-
-            {shop_load === 1 && (
-              <div className="my-5">
-                <Pagination paginate={paginate} />
-              </div>
-            )}
+            <div className="mt-4 mb-6 mx-4 md:mx-0 ">
+              <Product
+                page={page}
+                paginatePage={paginatePage}
+                sort={sort}
+                grid={grid}
+                open={open}
+                products={products}
+                setProducts={setProducts}
+                setPaginate={setPaginate}
+                setColors={setColors}
+                activeColor={activeColor}
+                val={val}
+                setPage={setPage}
+                paginateModule={paginateModule}
+                loading={loading}
+                setHasMore={setHasMore}
+                hasMore={hasMore}
+              />
+              {!loading && paginateModule && (
+                <div className="my-5">
+                  <Pagination setPage={setPaginatePage} paginate={paginate} />
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-};
+    );
+  }
+
 
 export default Eight;
 
@@ -149,7 +167,9 @@ const Product = ({
   activeColor,
   val,
   setPage,
-  shop_load,
+  paginatePage,
+  paginateModule,
+  loading,
   setHasMore,
   hasMore,
 }: any) => {
@@ -163,7 +183,7 @@ const Product = ({
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    shop_load === 1 && page,
+    paginateModule && paginatePage,
     setShops,
     activeColor,
     sort,
@@ -174,9 +194,10 @@ const Product = ({
 
   const fetchData = async () => {
     // get the data from the api
+  
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
-        page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
+        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
       }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
@@ -188,7 +209,7 @@ const Product = ({
       setColors(colors);
       return setError(error);
     } else if (data?.data?.length > 0) {
-      if (!shop_load) {
+      if (!paginateModule) {
         if (data?.current_page === 1) {
           setProducts(data?.data);
         } else {
@@ -210,7 +231,6 @@ const Product = ({
     } else {
       setHasMore(false);
     }
-    // ;
     setLoad(false);
     setSk(false);
   };
@@ -247,7 +267,7 @@ const Product = ({
         </div>
       )}
 
-      {!shop_load ? (
+      {!loading && !paginateModule ? (
         <div>
           <InfiniteScroll
             style={{ height: "auto", overflow: "hidden" }}
