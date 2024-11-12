@@ -1,5 +1,4 @@
 import FeatureProductFive from "@/components/_homepage/feature-product/feature-product-five";
-import FeatureProductEight from "./_homepage/feature-product/feature-product-eight";
 import FeatureProductEighteen from "./_homepage/feature-product/feature-product-eighteen";
 import FeatureProductFour from "./_homepage/feature-product/feature-product-four";
 import FeatureProductNine from "./_homepage/feature-product/feature-product-nine";
@@ -28,6 +27,7 @@ import FeatureProductTwentySeven from "./_homepage/feature-product/feature-produ
 import FeatureProductTwentySix from "./_homepage/feature-product/feature-product-twentysix";
 import FeatureProductTwentyThree from "./_homepage/feature-product/feature-product-twentythree";
 import FeatureProductTwentyTwo from "./_homepage/feature-product/feature-product-twentytwo";
+import FeatureProductEleven from "./_homepage/feature-product/feature-product-eleven";
 
 const FeatureProduct = ({
   feature_product,
@@ -69,7 +69,7 @@ const FeatureProduct = ({
         <FeatureProductNine feature_product={feature_product} design={design} />
       )}
       {theme === "eleven" && (
-        <FeatureProductEight
+        <FeatureProductEleven
           feature_product={feature_product}
           design={design}
           store_id={store_id}
