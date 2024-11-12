@@ -54,9 +54,10 @@ export const customizeSingleProductPage = [
   // for sparsebd.shop in single product page twenty-eight
   {
     id: 8927,
-    class_name: "flex flex-col-reverse sm:flex-row-reverse mt-3 items-center gap-3",
+    class_name:
+      "flex flex-col-reverse sm:flex-row-reverse mt-3 items-center gap-3",
     hidden: "hidden",
     heartbeat_animation: true,
-    cart_btn2: true
+    cart_btn2: true,
   },
 ];

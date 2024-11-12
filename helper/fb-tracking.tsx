@@ -1,4 +1,3 @@
-
 export const PageView = () => {
   if (typeof window !== "undefined" && window.fbq) {
     window.fbq("track", "PageView");
@@ -39,9 +38,8 @@ export const ViewContent = (
   content_category: any,
   value: any,
   currency: any,
-  sku: any,
+  sku: any
 ) => {
-  
   if (typeof window !== "undefined" && window.fbq) {
     window.fbq("track", "ViewContent", {
       item,
