@@ -19,7 +19,6 @@ import Pagination from "../one/pagination";
 
 const Eight = ({ data }: any) => {
   const { category, design, module } = useTheme();
-  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
   const [grid, setGrid] = useState("H");
   const [paginate, setPaginate] = useState({});
   const [products, setProducts] = useState([]);
@@ -31,8 +30,14 @@ const Eight = ({ data }: any) => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
 
-  const shop_load = parseInt(paginateModule?.status);
-  const pageShop = shop_load === 1 ? data?.page : page;
+  const [loading, setLoading] = useState(true);
+  const [paginatePage, setPaginatePage] = useState("?page=1");
+  const [paginateModule, setPaginateModule] = useState(false);
+
+  const getPaginateModule = module?.find(
+    (item: any) => item?.modulus_id === 105
+  );
+  const shop_load = parseInt(getPaginateModule?.status);
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
@@ -50,6 +55,17 @@ const Eight = ({ data }: any) => {
   }
  
     `;
+
+  useEffect(() => {
+    setLoading(true);
+    const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+
+    if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+      const moduleVal = pageShopVal == 1 ? true : false;
+      setPaginateModule(moduleVal);
+      setLoading(false);
+    }
+  }, [shop_load]);
 
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white">
@@ -69,7 +85,7 @@ const Eight = ({ data }: any) => {
               setActiveColor={setActiveColor}
               colors={colors}
               activeColor={activeColor}
-              shop_load={shop_load}
+              paginateModule={paginateModule}
               setPage={setPage}
               setHasMore={setHasMore}
             />
@@ -106,7 +122,8 @@ const Eight = ({ data }: any) => {
 
           <div className="mt-4 mb-6 mx-4 md:mx-0 ">
             <Product
-              page={pageShop}
+              page={page}
+              paginatePage={paginatePage}
               sort={sort}
               grid={grid}
               open={open}
@@ -117,14 +134,14 @@ const Eight = ({ data }: any) => {
               activeColor={activeColor}
               val={val}
               setPage={setPage}
-              shop_load={shop_load}
+              paginateModule={paginateModule}
+              loading={loading}
               setHasMore={setHasMore}
               hasMore={hasMore}
             />
-
-            {shop_load === 1 && (
+            {!loading && paginateModule && (
               <div className="my-5">
-                <Pagination paginate={paginate} />
+                <Pagination setPage={setPaginatePage} paginate={paginate} />
               </div>
             )}
           </div>
@@ -149,7 +166,9 @@ const Product = ({
   activeColor,
   val,
   setPage,
-  shop_load,
+  paginatePage,
+  paginateModule,
+  loading,
   setHasMore,
   hasMore,
 }: any) => {
@@ -163,7 +182,7 @@ const Product = ({
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    shop_load === 1 && page,
+    paginateModule && paginatePage,
     setShops,
     activeColor,
     sort,
@@ -174,9 +193,10 @@ const Product = ({
 
   const fetchData = async () => {
     // get the data from the api
+
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
-        page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
+        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
       }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
@@ -188,7 +208,7 @@ const Product = ({
       setColors(colors);
       return setError(error);
     } else if (data?.data?.length > 0) {
-      if (!shop_load) {
+      if (!paginateModule) {
         if (data?.current_page === 1) {
           setProducts(data?.data);
         } else {
@@ -210,7 +230,6 @@ const Product = ({
     } else {
       setHasMore(false);
     }
-    // ;
     setLoad(false);
     setSk(false);
   };
@@ -247,7 +266,7 @@ const Product = ({
         </div>
       )}
 
-      {!shop_load ? (
+      {!loading && !paginateModule ? (
         <div>
           <InfiniteScroll
             style={{ height: "auto", overflow: "hidden" }}

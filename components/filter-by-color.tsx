@@ -6,7 +6,7 @@ const FilterByColor = ({
   colors,
   activeColor,
   id,
-  shop_load,
+  paginateModule,
   setPage,
   setHasMore,
 }: any) => {
