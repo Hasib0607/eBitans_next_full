@@ -34,8 +34,9 @@ const Eight = ({ data }: any) => {
   const [paginatePage, setPaginatePage] = useState("?page=1");
   const [paginateModule, setPaginateModule] = useState(false);
 
-
-  const getPaginateModule = module?.find((item: any) => item?.modulus_id === 105);
+  const getPaginateModule = module?.find(
+    (item: any) => item?.modulus_id === 105
+  );
   const shop_load = parseInt(getPaginateModule?.status);
 
   const bgColor = design?.header_color;
@@ -64,93 +65,91 @@ const Eight = ({ data }: any) => {
       setPaginateModule(moduleVal);
       setLoading(false);
     }
-
   }, [shop_load]);
 
-    return (
-      <div className="sm:container px-5 sm:py-10 py-5 bg-white">
-        <style>{styleCss}</style>
-        <div className="grid grid-cols-9">
-          {/* filter side design  */}
-          <div className="md:col-span-2 px-4 w-full items-end md:block hidden">
-            <div className="w-full bg-gray-100 border-2 border-gray-200 text-black  my-6 pl-6 pt-7 pb-6 ">
-              <h1 className="font-semibold ">FILTER BY</h1>
-              {category?.map((item: any) => (
-                <SingleCat key={item?.id} item={item} />
-              ))}
-            </div>
-
-            <div className="bg-gray-100 border-2 border-gray-200 my-6 p-4">
-              <FilterByColor
-                setActiveColor={setActiveColor}
-                colors={colors}
-                activeColor={activeColor}
-                paginateModule={paginateModule}
-                setPage={setPage}
-                setHasMore={setHasMore}
-              />
-            </div>
-            <div className="bg-gray-100 border-2 border-gray-200 p-4">
-              <FilterByPrice
-                setVal={setVal}
-                val={val}
-                setPage={setPage}
-                setHasMore={setHasMore}
-              />
-            </div>
+  return (
+    <div className="sm:container px-5 sm:py-10 py-5 bg-white">
+      <style>{styleCss}</style>
+      <div className="grid grid-cols-9">
+        {/* filter side design  */}
+        <div className="md:col-span-2 px-4 w-full items-end md:block hidden">
+          <div className="w-full bg-gray-100 border-2 border-gray-200 text-black  my-6 pl-6 pt-7 pb-6 ">
+            <h1 className="font-semibold ">FILTER BY</h1>
+            {category?.map((item: any) => (
+              <SingleCat key={item?.id} item={item} />
+            ))}
           </div>
 
-          {/* filter side design finishes  */}
+          <div className="bg-gray-100 border-2 border-gray-200 my-6 p-4">
+            <FilterByColor
+              setActiveColor={setActiveColor}
+              colors={colors}
+              activeColor={activeColor}
+              paginateModule={paginateModule}
+              setPage={setPage}
+              setHasMore={setHasMore}
+            />
+          </div>
+          <div className="bg-gray-100 border-2 border-gray-200 p-4">
+            <FilterByPrice
+              setVal={setVal}
+              val={val}
+              setPage={setPage}
+              setHasMore={setHasMore}
+            />
+          </div>
+        </div>
 
-          <div className="relative md:col-span-7 col-span-9 ">
-            {/* Sort by bar start  */}
+        {/* filter side design finishes  */}
 
-            <div>
-              <Filter
-                onChange={(e: any) => {
-                  setSort(e.target.value);
-                  setPage(1);
-                  setHasMore(true);
-                }}
-                setGrid={setGrid}
-                paginate={paginate}
-                setOpen={setOpen}
-                open={open}
-              />
-            </div>
-            {/* All product card  */}
+        <div className="relative md:col-span-7 col-span-9 ">
+          {/* Sort by bar start  */}
 
-            <div className="mt-4 mb-6 mx-4 md:mx-0 ">
-              <Product
-                page={page}
-                paginatePage={paginatePage}
-                sort={sort}
-                grid={grid}
-                open={open}
-                products={products}
-                setProducts={setProducts}
-                setPaginate={setPaginate}
-                setColors={setColors}
-                activeColor={activeColor}
-                val={val}
-                setPage={setPage}
-                paginateModule={paginateModule}
-                loading={loading}
-                setHasMore={setHasMore}
-                hasMore={hasMore}
-              />
-              {!loading && paginateModule && (
-                <div className="my-5">
-                  <Pagination setPage={setPaginatePage} paginate={paginate} />
-                </div>
-              )}
-            </div>
+          <div>
+            <Filter
+              onChange={(e: any) => {
+                setSort(e.target.value);
+                setPage(1);
+                setHasMore(true);
+              }}
+              setGrid={setGrid}
+              paginate={paginate}
+              setOpen={setOpen}
+              open={open}
+            />
+          </div>
+          {/* All product card  */}
+
+          <div className="mt-4 mb-6 mx-4 md:mx-0 ">
+            <Product
+              page={page}
+              paginatePage={paginatePage}
+              sort={sort}
+              grid={grid}
+              open={open}
+              products={products}
+              setProducts={setProducts}
+              setPaginate={setPaginate}
+              setColors={setColors}
+              activeColor={activeColor}
+              val={val}
+              setPage={setPage}
+              paginateModule={paginateModule}
+              loading={loading}
+              setHasMore={setHasMore}
+              hasMore={hasMore}
+            />
+            {!loading && paginateModule && (
+              <div className="my-5">
+                <Pagination setPage={setPaginatePage} paginate={paginate} />
+              </div>
+            )}
           </div>
         </div>
       </div>
-    );
-  }
-
+    </div>
+  );
+};
 
 export default Eight;
 
@@ -194,7 +193,7 @@ const Product = ({
 
   const fetchData = async () => {
     // get the data from the api
-  
+
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
         page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`

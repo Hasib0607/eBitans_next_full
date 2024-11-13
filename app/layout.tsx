@@ -56,7 +56,7 @@ export default async function RootLayout({
         ) : (
           <>
             <SetFavicon faviconUrl={favicon} />
-            <GoogleTagManager gtmId={headersetting?.gtm} />
+            <GoogleTagManager gtmId={headersetting?.gtm?.google_tag_manager} />
             <NextTopLoader />
             <Announcement design={design} url={url} />
             <AppWrapper headerSetting={headersetting} design={design}>
