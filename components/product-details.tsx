@@ -103,10 +103,16 @@ const componentsMap: any = {
     () =>
       import("@/components/_product-details-page/product-details/twenty/twenty")
   ),
+  // twentyone: lazy(
+  //   () =>
+  //     import(
+  //       "@/components/_product-details-page/product-details/twenty-one/twenty-one"
+  //     )
+  // ),
   twentyone: lazy(
     () =>
       import(
-        "@/components/_product-details-page/product-details/twenty-one/twenty-one"
+        "@/components/_product-details-page/product-details/forty-one/forty-one"
       )
   ),
   twentytwo: lazy(

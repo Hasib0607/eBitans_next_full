@@ -16,6 +16,8 @@ const FeatureProductFive = ({ feature_product }: any) => {
   const cDesign = data?.data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
 
+  console.log(featuredProduct);
+
   if (!featuredProduct) {
     return null;
   }

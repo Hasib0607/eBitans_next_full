@@ -56,16 +56,16 @@ const Five = ({ data }: any) => {
  
     `;
 
-    useEffect(() => {
-      setLoading(true);
-      const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
-  
-      if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
-        const moduleVal = pageShopVal == 1 ? true : false;
-        setPaginateModule(moduleVal);
-        setLoading(false);
-      }
-    }, [shop_load]);
+  useEffect(() => {
+    setLoading(true);
+    const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+
+    if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+      const moduleVal = pageShopVal == 1 ? true : false;
+      setPaginateModule(moduleVal);
+      setLoading(false);
+    }
+  }, [shop_load]);
 
   return (
     <div className="lg:block sm:container px-5 sm:py-10 py-5 bg-white">
