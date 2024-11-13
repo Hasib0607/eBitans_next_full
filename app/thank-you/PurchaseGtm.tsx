@@ -8,15 +8,13 @@ import { useEffect } from "react";
 const PurchaseGtm = () => {
   const searchParams = useSearchParams();
   const total = searchParams.get("total");
-  const currency = "BDT";  // Define currency here or dynamically set it as needed
-
   useEffect(() => {
     sendGTMEvent({
       event: "purchase",
       total,
     });
-    Purchase(total, currency); // Now providing both total and currency
-  }, [total, currency]);
+    Purchase(total);
+  }, []);
 
   return null;
 };
