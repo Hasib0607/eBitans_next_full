@@ -14,7 +14,10 @@ const BestSellerFive = ({ best_sell_product, design, store_id }: any) => {
   const cDesign = data?.data?.custom_design || {};
   const bestSellProduct = cDesign?.best_sell_product?.[0] || null;
   if (!bestSellProduct) return null;
-  const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+
+  // const { title = "Default Title", title_color = "#000" } = bestSellProduct;
+  const title = bestSellProduct?.title || "Default Title";
+  const title_color = bestSellProduct?.title_color || "#000";
 
   return (
     <div className="shadow-lg py-5 sm:pt-20 pt-10 rounded-md bg-white">

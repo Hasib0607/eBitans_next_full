@@ -46,16 +46,16 @@ const TwentyOne = ({ data }: any) => {
   }
  `;
 
- useEffect(() => {
-  setLoading(true);
-  const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+  useEffect(() => {
+    setLoading(true);
+    const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
 
-  if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
-    const moduleVal = pageShopVal == 1 ? true : false;
-    setPaginateModule(moduleVal);
-    setLoading(false);
-  }
-}, [shop_load]);
+    if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+      const moduleVal = pageShopVal == 1 ? true : false;
+      setPaginateModule(moduleVal);
+      setLoading(false);
+    }
+  }, [shop_load]);
 
   return (
     <div>

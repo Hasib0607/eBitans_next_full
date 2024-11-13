@@ -520,9 +520,14 @@ const Details = ({
     .border-hover:hover {
         border: 1px solid ${design?.header_color};
     }
-    .cart-btn-twenty-one {
+    .cart-btn-forty-one {
         color:   ${design?.text_color};
         background:${design?.header_color};
+        border: 1px solid ${design?.header_color};
+    }
+    .cart-btn-forty-one2 {
+        color:   ${design?.header_color};
+        background:${design?.text_color};
         border: 1px solid ${design?.header_color};
     }
     .cart-btn-twenty-one:hover {
@@ -693,7 +698,7 @@ const Details = ({
             <div>
               <a
                 href={"tel:+88" + headerSetting?.phone}
-                className="cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full"
+                className="cart-btn-forty-one font-bold py-[11px] px-10 w-max rounded-full"
               >
                 Call for Price
               </a>
@@ -849,7 +854,7 @@ const AddCart = ({
   return (
     <>
       <style>{styleCss}</style>
-      <div className="flex flex-row flex-wrap gap-5">
+      <div className="flex flex-row flex-wrap gap-5 items-center">
         <div className=" w-max flex items-center ">
           <button
             className="px-4 py-3 border border-gray-100 rounded-tl-full rounded-bl-full text-xl bg-gray-50 text-black"
@@ -874,35 +879,35 @@ const AddCart = ({
             <HiPlus />
           </button>
         </div>
-        {product?.quantity === "0" ? (
-          <button className=" cart-btn-twenty-one  font-bold py-[11px] px-10 w-max rounded-full ">
-            Out of Stock
-          </button>
-        ) : (
-          <>
-            {store_id !== 6227 && (
+        <div>
+          {product?.quantity === "0" ? (
+            <button className=" cart-btn-forty-one  font-bold py-[11px] px-10 w-max rounded-full ">
+              Out of Stock
+            </button>
+          ) : (
+            <>
               <button
                 onClick={() => {
                   onClick();
                 }}
                 type="submit"
-                className=" cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full "
+                className=" cart-btn-forty-one font-bold py-[11px] px-10 w-max rounded-full "
               >
                 {button || "+ ADD TO CART"}
               </button>
-            )}
-          </>
-        )}
+            </>
+          )}
+        </div>
+        <div>
+          <button
+            onClick={buyNowBtn}
+            type="submit"
+            className={`cart-btn-forty-one2 font-bold py-[11px] px-10 w-max rounded-full`}
+          >
+            ORDER NOW
+          </button>
+        </div>
       </div>
-      {store_id !== 6227 && (
-        <button
-          onClick={buyNowBtn}
-          type="submit"
-          className={`cart-btn-twenty-one mt-3 font-bold py-[11px] px-10 w-full rounded-full`}
-        >
-          ORDER NOW
-        </button>
-      )}
 
       <div className="mt-5 flex  space-x-4 items-center">
         <h4>Social Share :</h4>
