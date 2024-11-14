@@ -103,16 +103,10 @@ const componentsMap: any = {
     () =>
       import("@/components/_product-details-page/product-details/twenty/twenty")
   ),
-  // twentyone: lazy(
-  //   () =>
-  //     import(
-  //       "@/components/_product-details-page/product-details/twenty-one/twenty-one"
-  //     )
-  // ),
   twentyone: lazy(
     () =>
       import(
-        "@/components/_product-details-page/product-details/forty-one/forty-one"
+        "@/components/_product-details-page/product-details/twenty-one/twenty-one"
       )
   ),
   twentytwo: lazy(
@@ -222,6 +216,12 @@ const componentsMap: any = {
   forty: lazy(
     () =>
       import("@/components/_product-details-page/product-details/forty/forty")
+  ),
+  fortyone: lazy(
+    () =>
+      import(
+        "@/components/_product-details-page/product-details/forty-one/forty-one"
+      )
   ),
 };
 

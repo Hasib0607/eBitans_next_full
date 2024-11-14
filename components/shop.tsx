@@ -38,6 +38,7 @@ import Twenty from "./_shop-page/shops/twenty/twenty";
 import Twentytwo from "./_shop-page/shops/twentytwo/twenty-two";
 import Two from "./_shop-page/shops/two/two";
 import CategorySevenNew from "./_category-page/category/category-seven-new";
+import FortyOne from "./_shop-page/shops/forty-one/forty-one";
 
 const ShopComponent = async () => {
   const url = getUrl();
@@ -87,6 +88,7 @@ const ShopComponent = async () => {
       {shop_page === "thirtyeight" && <ThirtyEight />}
       {shop_page === "thirtynine" && <ThirtyNine />}
       {shop_page === "forty" && <Forty />}
+      {shop_page === "fortyone" && <FortyOne />}
     </>
   );
 };

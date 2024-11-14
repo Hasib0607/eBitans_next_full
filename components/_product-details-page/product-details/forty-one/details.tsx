@@ -921,15 +921,15 @@ const AddCart = ({
             </button>
           ) : (
             <>
-                <button
-                  onClick={() => {
-                    onClick();
-                  }}
-                  type="submit"
-                  className=" cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full "
-                >
-                  {button || "+ ADD TO CART"}
-                </button> 
+              <button
+                onClick={() => {
+                  onClick();
+                }}
+                type="submit"
+                className=" cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full "
+              >
+                {button || "+ ADD TO CART"}
+              </button>
             </>
           )}
         </div>

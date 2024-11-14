@@ -26,9 +26,8 @@ const ViewContentGtm = ({ product }: any) => {
       event: "view_item",
       ecommerce: {
         items: [items],
-        currency
-      }
-      
+        currency,
+      },
     });
 
     // const currency = headerSetting?.code;
