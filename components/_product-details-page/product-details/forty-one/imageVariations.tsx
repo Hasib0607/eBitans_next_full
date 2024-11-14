@@ -19,40 +19,53 @@ export const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   );
 };
 
-export const ColorsOnly = ({ color, setColor, variant, setActiveImg, vrcolorimage, activeImg, productImage}: any) => {
-
+export const ColorsOnly = ({
+  color,
+  setColor,
+  variant,
+  setActiveImg,
+  vrcolorimage,
+  activeImg,
+  productImage,
+}: any) => {
   const hasNullImage = vrcolorimage?.some((item: any) => item?.image === null);
 
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-medium mb-2 text-base">Colors:</h3>
       <div className="flex flex-wrap gap-2">
-        {hasNullImage && variant?.map((item: any, id: any) => (
-          <ColorSet
-            key={id}
-            text={item}
-            select={color}
-            setSelect={setColor}
-            itemImage={item?.image}
-            setActiveImg={setActiveImg}
-          />
-        ))}
-        {!hasNullImage && vrcolorimage?.map((item: any, id: any) => (
-          <div
-            onClick={() => {
-              setColor(item?.color);
-              setActiveImg(item?.image);
-            }}
-            key={id}
-            className="focus:outline-none w-[50px] cursor-pointer"
-          >
-            <img
-              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? 'border-red-800': 'border-gray-400' }`}
-              src={item?.image != null ? productImg + item?.image : productImg + productImage}
-              alt=""
+        {hasNullImage &&
+          variant?.map((item: any, id: any) => (
+            <ColorSet
+              key={id}
+              text={item}
+              select={color}
+              setSelect={setColor}
+              itemImage={item?.image}
+              setActiveImg={setActiveImg}
             />
-          </div>
-        ))}
+          ))}
+        {!hasNullImage &&
+          vrcolorimage?.map((item: any, id: any) => (
+            <div
+              onClick={() => {
+                setColor(item?.color);
+                setActiveImg(item?.image);
+              }}
+              key={id}
+              className="focus:outline-none w-[50px] cursor-pointer"
+            >
+              <img
+                className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? "border-red-800" : "border-gray-400"}`}
+                src={
+                  item?.image != null
+                    ? productImg + item?.image
+                    : productImg + productImage
+                }
+                alt=""
+              />
+            </div>
+          ))}
       </div>
     </div>
   );
@@ -101,7 +114,7 @@ export const Colors = ({
             className="focus:outline-none w-[50px] cursor-pointer"
           >
             <img
-              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? 'border-red-800': 'border-gray-400' }`}
+              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? "border-red-800" : "border-gray-400"}`}
               src={productImg + item?.image}
               alt=""
             />

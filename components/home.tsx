@@ -13,7 +13,6 @@ const HomePage = async () => {
     ? layout.sort((a: any, b: any) => layoutposition[a] - layoutposition[b])
     : []; // Default to an empty array if layout is undefined
 
-
   return (
     <>
       <div>

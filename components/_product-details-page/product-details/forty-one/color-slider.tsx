@@ -13,7 +13,12 @@ import { productImg } from "@/site-settings/siteUrl";
 import "node_modules/slick-carousel/slick/slick.css";
 import "node_modules/slick-carousel/slick/slick-theme.css";
 
-export const ColorSlider = ({ product, variant, activeImg, setActiveImg }: any) => {
+export const ColorSlider = ({
+  product,
+  variant,
+  activeImg,
+  setActiveImg,
+}: any) => {
   const { design } = useTheme();
 
   const [isOpen, setIsOpen] = useState(false);
