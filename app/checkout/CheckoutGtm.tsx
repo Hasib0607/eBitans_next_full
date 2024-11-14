@@ -16,11 +16,11 @@ const CheckoutGtm = () => {
     item_category: item?.category || "",
     item_category2: item.subcategory || "General",
     item_id: item?.SKU,
-    discount: parseFloat(item.discount_price) || 0, 
+    discount: parseFloat(item.discount_price) || 0,
     item_variant: item.color || "default",
-    price: parseFloat(item.price) || 0, 
+    price: parseFloat(item.price) || 0,
     quantity: item?.qty,
-    tax_rate: parseFloat(item.tax_rate) || 0, 
+    tax_rate: parseFloat(item.tax_rate) || 0,
     shipping_fee: item.shipping_fee || 0,
   }));
 
@@ -29,16 +29,16 @@ const CheckoutGtm = () => {
       event: "checkout",
       currency,
       value: {
-        items
+        items,
       },
     });
-    
+
     const totalPrice = cartList.reduce((accumulator: any, item: any) => {
       return accumulator + item.price * item.qty;
     }, 0);
     // const sku = cartList[0].SKU;
     const sku = cartList.map((item: { SKU: any }) => item.SKU);
-    
+
     Checkout(cartList, totalPrice, sku, currency);
   }, [cartList, headerSetting]);
   useEffect(() => {

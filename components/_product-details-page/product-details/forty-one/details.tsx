@@ -22,16 +22,19 @@ import {
   WhatsappShareButton,
 } from "react-share";
 import { toast } from "react-toastify";
-import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-// import { HSlider } from "./slider";
+import { ColorSlider } from "./color-slider";
+import { FaShippingFast } from "react-icons/fa";
+import { TbTruckReturn, TbWorld } from "react-icons/tb";
+import { RiRefund2Line } from "react-icons/ri";
 
 const Details = ({
   fetchStatus,
   product,
   variant,
   vrcolor,
+  vrcolorimage,
   data,
   children,
 }: any) => {
@@ -520,12 +523,12 @@ const Details = ({
     .border-hover:hover {
         border: 1px solid ${design?.header_color};
     }
-    .cart-btn-forty-one {
+    .cart-btn-twenty-one {
         color:   ${design?.text_color};
         background:${design?.header_color};
         border: 1px solid ${design?.header_color};
     }
-    .cart-btn-forty-one2 {
+    .cart-btn-forty-one {
         color:   ${design?.header_color};
         background:${design?.text_color};
         border: 1px solid ${design?.header_color};
@@ -542,7 +545,7 @@ const Details = ({
       <style>{styleCss}</style>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         <div className="">
-          <HSlider
+          <ColorSlider
             product={product}
             variant={variant}
             activeImg={activeImg}
@@ -641,12 +644,14 @@ const Details = ({
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
             <>
-              {" "}
               <Colors
                 color={color}
                 setColor={setColor}
                 vrcolor={vrcolor}
                 setSize={setSize}
+                activeImg={activeImg}
+                setActiveImg={setActiveImg}
+                vrcolorimage={vrcolorimage}
               />
             </>
           )}
@@ -666,7 +671,10 @@ const Details = ({
                 color={color}
                 setColor={setColor}
                 variant={variant}
+                activeImg={activeImg}
                 setActiveImg={setActiveImg}
+                vrcolorimage={vrcolorimage}
+                productImage={product?.image}
               />
             </>
           )}
@@ -698,7 +706,7 @@ const Details = ({
             <div>
               <a
                 href={"tel:+88" + headerSetting?.phone}
-                className="cart-btn-forty-one font-bold py-[11px] px-10 w-max rounded-full"
+                className="cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full"
               >
                 Call for Price
               </a>
@@ -764,6 +772,33 @@ const Details = ({
           </div>
 
           {children}
+
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div className="bg-[#FEF2F2] h-28 w-full rounded-md flex flex-col justify-center pl-5">
+              <FaShippingFast className="text-2xl" />
+              <p className="font-bold mt-1">Free shipping</p>
+              <p className="text-sm text-gray-600">
+                On orders over BDT 5000.00
+              </p>
+            </div>
+            <div className="bg-[#F0F9FF] h-28 w-full rounded-md flex flex-col justify-center pl-5">
+              <TbTruckReturn className="text-2xl" />
+              <p className="font-bold mt-1">Very easy to return</p>
+              <p className="text-sm text-gray-600">Just phone number.</p>
+            </div>
+            <div className="bg-[#F0FDF4] h-28 w-full rounded-md flex flex-col justify-center pl-5">
+              <TbWorld className="text-2xl" />
+              <p className="font-bold mt-1">Nationwide Delivery</p>
+              <p className="text-sm text-gray-600">Fast delivery nationwide.</p>
+            </div>
+            <div className="bg-[#FFFBEB] h-28 w-full rounded-md flex flex-col justify-center pl-5">
+              <RiRefund2Line className="text-2xl" />
+              <p className="font-bold mt-1">Refunds policy</p>
+              <p className="text-sm text-gray-600">
+                60 days return for any reason
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -881,20 +916,20 @@ const AddCart = ({
         </div>
         <div>
           {product?.quantity === "0" ? (
-            <button className=" cart-btn-forty-one  font-bold py-[11px] px-10 w-max rounded-full ">
+            <button className=" cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full ">
               Out of Stock
             </button>
           ) : (
             <>
-              <button
-                onClick={() => {
-                  onClick();
-                }}
-                type="submit"
-                className=" cart-btn-forty-one font-bold py-[11px] px-10 w-max rounded-full "
-              >
-                {button || "+ ADD TO CART"}
-              </button>
+                <button
+                  onClick={() => {
+                    onClick();
+                  }}
+                  type="submit"
+                  className=" cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full "
+                >
+                  {button || "+ ADD TO CART"}
+                </button> 
             </>
           )}
         </div>
@@ -902,7 +937,7 @@ const AddCart = ({
           <button
             onClick={buyNowBtn}
             type="submit"
-            className={`cart-btn-forty-one2 font-bold py-[11px] px-10 w-max rounded-full`}
+            className={`cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full`}
           >
             ORDER NOW
           </button>
