@@ -34,7 +34,7 @@ const FortyOne = ({ data, updatedData }: any) => {
     enabled: !!updatedData.slug && !!updatedData.store_id,
   });
 
-  const { product, vrcolor, variant } = productDetailsData || {};
+  const { product, vrcolor, variant, vrcolorimage } = productDetailsData || {};
   return (
     <div className="bg-white mx-auto">
       {/* <style>{styleCss }</style> */}
@@ -47,6 +47,7 @@ const FortyOne = ({ data, updatedData }: any) => {
             product={product}
             variant={variant}
             vrcolor={vrcolor}
+            vrcolorimage={vrcolorimage}
             data={data}
           />
         </div>

@@ -166,11 +166,11 @@ const ContactPage = async () => {
                 <h2 className="mt-4 text-base font-medium text-gray-800">
                   {bangla ? "ফোন" : "Phone"}
                 </h2>
-                <p className="mt-2 text-sm text-gray-500">
+                {/* <p className="mt-2 text-sm text-gray-500">
                   {bangla
                     ? "শনিবার থেকে বৃহস্পতিবার সকাল ৯টা থেকে সন্ধ্যা ৬টা পর্যন্ত।"
                     : "Sat-Thus from 9am to 6pm."}
-                </p>
+                </p> */}
                 <p className="mt-2 text-sm text-blue-500 dark:text-blue-400">
                   {phone}
                 </p>

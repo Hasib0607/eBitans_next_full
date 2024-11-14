@@ -1,3 +1,5 @@
+import { productImg } from "@/site-settings/siteUrl";
+
 export const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
@@ -17,12 +19,15 @@ export const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   );
 };
 
-export const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
+export const ColorsOnly = ({ color, setColor, variant, setActiveImg, vrcolorimage, activeImg, productImage}: any) => {
+
+  const hasNullImage = vrcolorimage?.some((item: any) => item?.image === null);
+
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-medium mb-2 text-base">Colors:</h3>
       <div className="flex flex-wrap gap-2">
-        {variant?.map((item: any, id: any) => (
+        {hasNullImage && variant?.map((item: any, id: any) => (
           <ColorSet
             key={id}
             text={item}
@@ -31,6 +36,22 @@ export const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
             itemImage={item?.image}
             setActiveImg={setActiveImg}
           />
+        ))}
+        {!hasNullImage && vrcolorimage?.map((item: any, id: any) => (
+          <div
+            onClick={() => {
+              setColor(item?.color);
+              setActiveImg(item?.image);
+            }}
+            key={id}
+            className="focus:outline-none w-[50px] cursor-pointer"
+          >
+            <img
+              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? 'border-red-800': 'border-gray-400' }`}
+              src={item?.image != null ? productImg + item?.image : productImg + productImage}
+              alt=""
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -56,19 +77,35 @@ export const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   );
 };
 
-export const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
+export const Colors = ({
+  color,
+  setColor,
+  vrcolor,
+  setSize,
+  setActiveImg,
+  activeImg,
+  vrcolorimage,
+}: any) => {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-medium mb-2 text-base">Colors:</h3>
       <div className="flex flex-wrap gap-2">
-        {vrcolor?.map((item: any, id: any) => (
-          <Color
+        {vrcolorimage?.map((item: any, id: any) => (
+          <div
+            onClick={() => {
+              setColor(item?.color);
+              setSize(null);
+              setActiveImg(item?.image);
+            }}
             key={id}
-            text={item}
-            select={color}
-            setSelect={setColor}
-            setSize={setSize}
-          />
+            className="focus:outline-none w-[50px] cursor-pointer"
+          >
+            <img
+              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? 'border-red-800': 'border-gray-400' }`}
+              src={productImg + item?.image}
+              alt=""
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -107,12 +144,19 @@ export const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   );
 };
 
-export const Color = ({ text, select, setSelect, setSize }: any) => {
+export const Color = ({
+  text,
+  select,
+  setSelect,
+  setSize,
+  setActiveImg,
+}: any) => {
   return (
     <div
       onClick={() => {
         setSelect(text);
         setSize(null);
+        setActiveImg(text?.image);
       }}
       className={`border lg:cursor-pointer w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
         text === select ? "select-color" : "border-gray-300"
