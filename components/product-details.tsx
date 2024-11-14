@@ -225,7 +225,6 @@ const componentsMap: any = {
   ),
 };
 
-
 const ProductDetails = () => {
   const { productID: product_id, slug } = useParams<ParamsType>();
   const [updatedData, setUpdatedData] = useState<UpdateData>({

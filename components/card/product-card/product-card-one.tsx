@@ -300,7 +300,7 @@ export const HoverIcon = ({ text, children }: any) => {
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: -5 }}
         transition={{ delay: 1 }}
-        className="bg-orange-700 rounded-md shadow-sm pb-3 pt-1 font-semibold absolute -top-9 m-1 -left-8 px-2  invisible child_icon translate-y-6 transition-all duration-500 ease-in-out text-center text-xs text-gray-300"
+        className="bg-orange-700 rounded-md shadow-sm pb-3 pt-1 font-semibold absolute -top-9 m-1 -left-8 px-2 invisible child_icon translate-y-6 transition-all duration-500 ease-in-out text-center text-xs text-gray-300"
       >
         {text}
       </motion.div>
