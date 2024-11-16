@@ -1,5 +1,5 @@
 "use client";
-import Pagination from "@/components/_category-page/category/pagination";
+// import Pagination from "@/components/_category-page/category/pagination";
 import Card32 from "@/components/card/card32";
 import FilterByColor from "@/components/filter-by-color";
 import FilterByPrice from "@/components/filter-by-price";
@@ -13,12 +13,10 @@ import { BiFilterAlt } from "react-icons/bi";
 import { IoIosArrowForward } from "react-icons/io";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
+import Pagination from "../one/pagination";
 
 const Fourteen = ({ data }: any) => {
   const { category, design, module } = useTheme();
-
-  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
-
   const [paginate, setPaginate] = useState<any>({});
   const [products, setProducts] = useState<any>([]);
   const [open, setOpen] = useState<any>(false);
@@ -29,8 +27,14 @@ const Fourteen = ({ data }: any) => {
   const [page, setPage] = useState<any>(1);
   const [hasMore, setHasMore] = useState<any>(true);
 
-  const shop_load = parseInt(paginateModule?.status);
-  const pageShop = shop_load === 1 ? data?.page : page;
+  const [loading, setLoading] = useState(true);
+  const [paginatePage, setPaginatePage] = useState("?page=1");
+  const [paginateModule, setPaginateModule] = useState(false);
+
+  const getPaginateModule = module?.find(
+    (item: any) => item?.modulus_id === 105
+  );
+  const shop_load = parseInt(getPaginateModule?.status);
 
   const styleCss = `
   .btn-hover:hover {
@@ -46,6 +50,17 @@ const Fourteen = ({ data }: any) => {
     color: ${design?.header_color};   
   }
 `;
+
+useEffect(() => {
+  setLoading(true);
+  const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+
+  if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+    const moduleVal = pageShopVal == 1 ? true : false;
+    setPaginateModule(moduleVal);
+    setLoading(false);
+  }
+}, [shop_load]);
 
   return (
     <div>
@@ -113,7 +128,8 @@ const Fourteen = ({ data }: any) => {
 
             <div className="grid grid-cols-1 gap-4 pt-10">
               <Product
-                page={pageShop}
+                page={page}
+                paginatePage={paginatePage}
                 sort={sort}
                 products={products}
                 setProducts={setProducts}
@@ -122,14 +138,15 @@ const Fourteen = ({ data }: any) => {
                 activeColor={activeColor}
                 val={val}
                 setPage={setPage}
-                shop_load={shop_load}
+                paginateModule={paginateModule}
+                loading={loading}
                 setHasMore={setHasMore}
                 hasMore={hasMore}
               />
             </div>
-            {shop_load === 1 && (
+            {!loading && paginateModule && (
               <div className="my-5">
-                <Pagination paginate={paginate} />
+                <Pagination setPage={setPaginatePage} paginate={paginate} />
               </div>
             )}
           </div>
@@ -151,7 +168,7 @@ const Fourteen = ({ data }: any) => {
                 setActiveColor={setActiveColor}
                 colors={colors}
                 activeColor={activeColor}
-                shop_load={shop_load}
+                paginateModule={paginateModule}
                 setPage={setPage}
                 setHasMore={setHasMore}
               />
@@ -185,7 +202,9 @@ const Product = ({
   activeColor,
   val,
   setPage,
-  shop_load,
+  paginatePage,
+  paginateModule,
+  loading,
   setHasMore,
   hasMore,
 }: any) => {
@@ -196,7 +215,7 @@ const Product = ({
     setLoad(true);
     fetchData();
   }, [
-    shop_load === 1 && page,
+    paginateModule && paginatePage,
     setShops,
     activeColor,
     sort,
@@ -209,7 +228,7 @@ const Product = ({
     // get the data from the api
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
-        page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
+        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
       }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
@@ -221,7 +240,7 @@ const Product = ({
       setColors(colors);
       return setError(error);
     } else if (data?.data?.length > 0) {
-      if (!shop_load) {
+      if (!paginateModule) {
         if (data?.current_page === 1) {
           setProducts(data?.data);
         } else {
@@ -243,7 +262,6 @@ const Product = ({
     } else {
       setHasMore(false);
     }
-    // ;
     setLoad(false);
   };
 
@@ -264,7 +282,7 @@ const Product = ({
   }
   return (
     <>
-      {!shop_load ? (
+      {!loading && !paginateModule ? (
         <div>
           <InfiniteScroll
             style={{ height: "auto", overflow: "hidden" }}

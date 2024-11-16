@@ -305,7 +305,7 @@ const YourOrders = ({
                       // toast(verify, { type: 'success' })
                       // window.location.replace("/profile");
                       setOrderPlaced(true);
-                      router.push("/thank-you");
+                      router.push("/thank-you?total=" + data.total);
                       dispatch(clearCartList());
                     }
                     if (error) {
@@ -352,7 +352,7 @@ const YourOrders = ({
                   }
                 );
                 setOrderPlaced(true);
-                router.push("/thank-you");
+                router.push("/thank-you?total=" + data.total);
                 dispatch(clearCartList());
               }
               if (response?.error) {
