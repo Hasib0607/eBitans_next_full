@@ -408,7 +408,7 @@ const CheckOutFortyOrder = ({
                       // toast(verify, { type: 'success' })
                       // window.location.replace("/profile");
                       setOrderPlaced(true);
-                      router.push("/thank-you");
+                      router.push("/thank-you?total=" + data.total);
                       dispatch(clearCartList());
                     }
                   })
@@ -457,7 +457,7 @@ const CheckOutFortyOrder = ({
                   }
                 );
                 setOrderPlaced(true);
-                router.push("/thank-you");
+                router.push("/thank-you?total=" + data.total);
                 dispatch(clearCartList());
               }
               if (response?.error) {

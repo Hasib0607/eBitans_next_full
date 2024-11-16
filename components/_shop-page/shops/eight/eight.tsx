@@ -407,7 +407,7 @@ const Filter = ({ onChange, setGrid, setOpen, open }: any) => {
             onClick={() => setOpen(!open)}
             className={`px-10 py-1 md:hidden flex  text-sm font-semibold bg-black text-white ${
               open === true
-                ? "filter border-transparent "
+                ? "filter border-transparent"
                 : "bg-black border-black"
             } lg:cursor-pointer`}
           >

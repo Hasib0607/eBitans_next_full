@@ -2,15 +2,16 @@ import React, { useEffect } from "react";
 import "react-loading-skeleton/dist/skeleton.css";
 import ReactSkeleton from "react-loading-skeleton";
 interface SkeletonProps {
-  height?: string; // Make height optional
+  height?: string;
 }
 const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
-  // useEffect(() => {
-  //   document.body.style.overflow = "hidden";
-  //   return () => {
-  //     document.body.style.overflow = "";
-  //   };
-  // }, []);
+  useEffect(() => {
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, []);
+
   let page: any;
   const url: string = window.location.href;
   const checkPage = () => {
@@ -20,8 +21,6 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
       page = "category";
     } else if (url.includes("/shop")) {
       page = "shop";
-    } else if (url.includes("/")) {
-      page = "/";
     } else page = "other";
   };
   checkPage();
@@ -50,25 +49,6 @@ const Skeleton: React.FC<SkeletonProps> = ({ height }) => {
       <div className="bg-[#F9F8FF] w-full">
         <div className="w-full">
           <section className="animate-pulse translate-y-[38%] md:translate-y-[25%] lg:translate-y-[18%] xl:-translate-y-[10%]">
-            <div className="grid grid-cols-1 gap-8 mt-8 xl:grid-cols-4 xl:mt-2 xl:gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {Array.from({ length: 8 }).map((_, index) => (
-                <div key={index} className="w-full h-96">
-                  <div className="w-full h-64 bg-gray-300 rounded-lg dark:bg-gray-600"></div>
-                  <p className="w-60 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                  <p className="w-32 h-2 mt-4 bg-gray-200 rounded-lg dark:bg-gray-700"></p>
-                </div>
-              ))}
-            </div>
-          </section>
-        </div>
-      </div>
-    );
-  }
-  if (page === "/") {
-    return (
-      <div className="bg-[#F9F8FF] w-full mx-auto px-20">
-        <div className="w-full">
-          <section className="animate-pulse">
             <div className="grid grid-cols-1 gap-8 mt-8 xl:grid-cols-4 xl:mt-2 xl:gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {Array.from({ length: 8 }).map((_, index) => (
                 <div key={index} className="w-full h-96">
