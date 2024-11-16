@@ -37,6 +37,7 @@ import CategoryTwentySix from "./_category-page/category/category-twentysix";
 import CategoryTwentyThree from "./_category-page/category/category-twentythree";
 import CategoryTwentyTwo from "./_category-page/category/category-twentytwo";
 import CategoryTwo from "./_category-page/category/category-two";
+import CategoryFortyOne from "./_category-page/category/category-fortyone";
 
 const SubCategoryComponent = async () => {
   const url = getUrl();
@@ -83,6 +84,7 @@ const SubCategoryComponent = async () => {
       {theme === "thirtyeight" && <CategoryThirtyEight />}
       {theme === "thirtynine" && <CategoryThirtyNine />}
       {theme === "forty" && <CategoryForty />}
+      {theme === "fortyone" && <CategoryFortyOne />}
     </>
   );
 };
