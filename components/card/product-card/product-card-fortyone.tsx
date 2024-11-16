@@ -135,4 +135,3 @@ const ProductCardFortyOne = ({ item }: any) => {
 };
 
 export default ProductCardFortyOne;
-

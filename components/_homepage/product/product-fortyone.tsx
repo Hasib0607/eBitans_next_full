@@ -36,19 +36,31 @@ const ProductFortyOne = ({
           product
             ?.slice(0, 8)
             .map((item: any) => (
-              <ProductCardFortyOne store_id={store_id} item={item} key={item?.id} />
+              <ProductCardFortyOne
+                store_id={store_id}
+                item={item}
+                key={item?.id}
+              />
             ))}
         {active === "Featured" &&
           feature_product
             ?.slice(0, 8)
             .map((item: any) => (
-              <ProductCardFortyOne item={item} store_id={store_id} key={item?.id} />
+              <ProductCardFortyOne
+                item={item}
+                store_id={store_id}
+                key={item?.id}
+              />
             ))}
         {active === "Popular" &&
           best_seller_product
             ?.slice(0, 8)
             .map((item: any) => (
-              <ProductCardFortyOne item={item} store_id={store_id} key={item?.id} />
+              <ProductCardFortyOne
+                item={item}
+                store_id={store_id}
+                key={item?.id}
+              />
             ))}
       </div>
       {/* </div> */}
