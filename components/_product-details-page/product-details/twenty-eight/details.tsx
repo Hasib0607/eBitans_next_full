@@ -31,6 +31,7 @@ import { ProductSlider } from "./product-slider";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const Details = ({
   fetchStatus,
@@ -527,7 +528,17 @@ const Details = ({
         background: ${design?.header_color};
         border: 2px solid transparent;
     }
+    .cart-btn2 {
+        color:  ${design?.header_color};
+        background: ${design?.text_color};
+        border: 2px solid transparent;
+    }
     .cart-btn1:hover {
+        color:  ${design?.header_color};
+        background: transparent;
+        border: 2px solid ${design?.header_color};
+    }
+    .cart-btn2:hover {
         color:  ${design?.header_color};
         background: transparent;
         border: 2px solid ${design?.header_color};
@@ -747,6 +758,11 @@ export default Details;
 const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
   const { design, headerSetting } = useTheme();
 
+  const storeID = headerSetting?.store_id || null;
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == storeID
+  );
+
   const { data, error } = useHeaderSettings();
 
   const [referralCode, setReferralCode] = useState("");
@@ -800,6 +816,27 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
         background: ${design?.header_color};
     }
 
+    .heartbeat {
+      animation: heartbeat 2s infinite;
+    }
+    @keyframes heartbeat {
+  0% {
+    transform: scale(0.9); 
+  }
+  25% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(0.9);
+  }
+  75% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.9);
+  }
+}
+
   `;
 
   const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
@@ -839,23 +876,41 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
           </div>
         </div>
       </div>
-      <div className="grid sm:grid-cols-2 mt-3 items-center gap-3">
+      <div
+        className={
+          singleProductPageData?.class_name
+            ? singleProductPageData?.class_name
+            : "flex flex-col sm:flex-row mt-3 items-center gap-3"
+        }
+      >
         <button
           onClick={onClick}
           type="submit"
-          className=" cart-btn1 font-bold py-[10px] px-10 w-full "
+          className={
+            singleProductPageData?.cart_btn2 == true
+              ? "cart-btn2 font-bold py-[10px] px-10 w-full"
+              : "cart-btn1 font-bold py-[10px] px-10 w-full"
+          }
         >
           কার্টে রাখুন
         </button>
         <button
           onClick={() => buyNowBtn()}
           type="submit"
-          className=" cart-btn1 font-bold py-[10px] px-10 w-full"
+          className={
+            singleProductPageData?.heartbeat_animation == true
+              ? "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor heartbeat"
+              : "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor"
+          }
         >
           {button || "অর্ডার করুন"}
         </button>
       </div>
-      <div className="mt-3">
+      <div
+        className={
+          singleProductPageData?.hidden ? singleProductPageData?.hidden : "mt-3"
+        }
+      >
         <a href={`tel:+88${headerSetting?.phone}`}>
           <button className="cart-btn1 font-bold py-[10px] w-full">
             <FaPhoneSquareAlt className="inline text-xl" />{" "}

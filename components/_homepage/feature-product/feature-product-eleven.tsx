@@ -6,7 +6,7 @@ import Arrowbetween from "@/utils/arrow-between";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
-const FeatureProductEight = ({ feature_product, design, store_id }: any) => {
+const FeatureProductEleven = ({ feature_product, design, store_id }: any) => {
   const prev = "daily_best_seller_Prev";
   const next = "daily_best_seller_Next";
 
@@ -14,7 +14,7 @@ const FeatureProductEight = ({ feature_product, design, store_id }: any) => {
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
-  console.log("featuredProduct", featuredProduct);
+
   if (!featuredProduct) {
     return null;
   }
@@ -44,4 +44,4 @@ const FeatureProductEight = ({ feature_product, design, store_id }: any) => {
   );
 };
 
-export default FeatureProductEight;
+export default FeatureProductEleven;

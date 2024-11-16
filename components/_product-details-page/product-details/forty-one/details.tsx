@@ -3,7 +3,7 @@ import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import BDT from "@/utils/bdt";
-import CallForPrice from "@/utils/call-for-price";
+import { buyNow } from "@/utils/buy-now";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
@@ -11,14 +11,20 @@ import useHeaderSettings from "@/utils/query/use-header-settings";
 import Rate from "@/utils/rate";
 import { sendGTMEvent } from "@next/third-parties/google";
 import parse from "html-react-parser";
+import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiMinus, HiPlus } from "react-icons/hi";
 import { useDispatch } from "react-redux";
+import {
+  FacebookIcon,
+  FacebookShareButton,
+  WhatsappIcon,
+  WhatsappShareButton,
+} from "react-share";
 import { toast } from "react-toastify";
-import { HSlider } from "../ten/slider";
+import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-
 // import { HSlider } from "./slider";
 
 const Details = ({
@@ -32,23 +38,27 @@ const Details = ({
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
-  const [load, setLoad] = useState(false);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
   const [size, setSize] = useState<any>(null);
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
+  const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
-
   // image selector
-  // const [activeImg, setActiveImg] = useState("");
-  const [activeImg, setActiveImg] = useState(product?.defaultImage);
+  const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
+
+  const vPrice = variant?.map((item: any) => item?.additional_price);
+  const smallest = Math.min(vPrice);
+  const largest = Math.max(vPrice);
+
+  const router = useRouter();
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -123,6 +133,15 @@ const Details = ({
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
+
+  const buyNowBtn = () => {
+    if (store_id === 6227) {
+      window.location.href = `https://wa.me/${headerSetting?.whatsapp_phone}`;
+    } else {
+      buyNow(variant, size, color, unit, filterV, add_to_cart, router);
+    }
+  };
+
   useEffect(() => {
     setLoad(true);
     // declare the async data fetching function
@@ -141,10 +160,10 @@ const Details = ({
         setCamp(null);
       }
 
-      setColor(null);
-      setUnit(null);
-      setSize(null);
+      // set state with the result
       setLoad(false);
+      setColor(null);
+      setSize(null);
     };
 
     // call the function
@@ -152,14 +171,6 @@ const Details = ({
       // make sure to catch any error
       .catch(console.error);
   }, [data, store_id]);
-
-  if (fetchStatus === "fetching") {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <Skeleton />
-      </div>
-    );
-  }
 
   const regularPrice =
     parseInt(product?.regular_price) +
@@ -173,7 +184,7 @@ const Details = ({
     product?.discount_type
   );
 
-  const campPrice = getPrice(
+  let campPrice = getPrice(
     price,
     parseInt(camp?.discount_amount),
     camp?.discount_type
@@ -186,6 +197,13 @@ const Details = ({
     product?.quantity ||
     "Out of Stock";
 
+  if (fetchStatus === "fetching") {
+    return (
+      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+        <Skeleton />
+      </div>
+    );
+  }
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
@@ -340,7 +358,7 @@ const Details = ({
             dispatch(
               addToCartList({
                 cartId: makeid(100),
-                price: !price,
+                price: price,
                 qty: parseInt(qty),
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
@@ -352,7 +370,7 @@ const Details = ({
               event: "add_to_cart",
               value: {
                 cartId: makeid(100),
-                price: !price,
+                price: price,
                 qty: parseInt(qty),
                 variant_quantity: unit?.quantity,
                 variantId: unit.id,
@@ -480,6 +498,18 @@ const Details = ({
         color:   ${design?.text_color};
         background:${design?.header_color};
     }
+    .select-color {
+        border: 1px solid ${design?.header_color};
+    }
+    .select-size {
+        color:   ${design?.text_color};
+        background:${design?.header_color};
+        border: 1px solid ${design?.header_color};
+    }
+    .select-unit {
+        color : ${design?.header_color};
+        border: 1px solid ${design?.header_color};
+    }
     .text-color {
         color:  ${design?.header_color};
     }
@@ -489,61 +519,113 @@ const Details = ({
     }
     .border-hover:hover {
         border: 1px solid ${design?.header_color};
-       
+    }
+    .cart-btn-twenty-one {
+        color:   ${design?.text_color};
+        background:${design?.header_color};
+        border: 1px solid ${design?.header_color};
+    }
+    .cart-btn-twenty-one:hover {
+        color:   ${design?.header_color};
+        background:transparent;
+        border: 1px solid ${design?.header_color};
     }
   `;
 
-  const buttonEighteen =
-    "bg-black btn-hover text-white font-thin sm:py-[16px] py-2 px-5 sm:px-16 w-max";
-
   return (
-    <div className=" bg-white">
+    <div className=" bg-white h-full ">
       <style>{styleCss}</style>
-
-      <div className="grid grid-cols-1 lg:grid-cols-9 lg:gap-6 gap-8">
-        <div className="lg:col-span-5">
-          <div className="">
-            <HSlider
-              product={product}
-              variant={variant}
-              activeImg={activeImg}
-              setActiveImg={setActiveImg}
-            />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="">
+          <HSlider
+            product={product}
+            variant={variant}
+            activeImg={activeImg}
+            setActiveImg={setActiveImg}
+          />
         </div>
-        <div className="lg:col-span-4 space-y-8 font-seven">
-          <p className="text-sm text-[#5a5a5a] font-seven">
-            <span className="font-semibold text-[#212121] font-seven">
-              SKU:
-            </span>{" "}
-            {product?.SKU}
-          </p>
-          <h1 className="text-2xl text-[#212121] font-bold mb-3">
+        <div className="space-y-4 sticky top-28 h-max">
+          <h2 className="text-2xl font-bold mb-3 capitalize">
             {product?.name}
-          </h1>
-
-          <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
-            <BDT />
-            {camp?.status === "active" ? campPrice : price}{" "}
-            {camp?.status !== "active" &&
-            (product?.discount_type === "no_discount" ||
-              product?.discount_price === "0.00") ? (
-              " "
-            ) : (
-              <span className="text-gray-500 font-thin line-through text-xl font-seven">
+          </h2>
+          {/* price range  */}
+          {variant?.length !== 0 && !color && !size && !unit && (
+            <div className="flex items-center gap-1">
+              <p
+                className={`${
+                  store_id === 4174 ? "text-[#7eb68c]" : "text-color"
+                } text-lg font-bold`}
+              >
                 <BDT />
-                {regularPrice}
-              </span>
+                {campPrice ? campPrice : price} +
+                {largest > smallest && smallest}
+              </p>
+              {largest > smallest && (
+                <p
+                  className={`${
+                    store_id === 4174 ? "text-[#7eb68c]" : "text-color"
+                  } text-lg font-bold`}
+                >
+                  {" "}
+                  - <BDT /> {(campPrice ? campPrice : price || 0) + largest}
+                </p>
+              )}
+              {largest === smallest && (
+                <p className="text-gray-500 font-thin line-through text-xl font-seven ml-2">
+                  <BDT />
+                  {regularPrice}
+                </p>
+              )}
+            </div>
+          )}
+          {(variant?.length === 0 || color || size || unit) &&
+            store_id !== 6227 && (
+              <div className="flex justify-start items-center gap-x-4">
+                <div
+                  className={`${
+                    store_id === 4174 ? "text-[#7eb68c]" : "text-color"
+                  } text-lg font-bold flex justify-start items-center gap-4`}
+                >
+                  <BDT />
+                  {camp?.status === "active" ? campPrice : price}
+                  {camp?.status !== "active" &&
+                  (product.discount_type === "no_discount" ||
+                    product.discount_price === "0.00") ? (
+                    " "
+                  ) : (
+                    <span className="text-gray-500 font-thin line-through text-xl font-seven">
+                      <BDT />
+                      {regularPrice}
+                    </span>
+                  )}
+                </div>
+                {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
+                {product?.discount_type === "percent" &&
+                  product?.discount_price > 0 && (
+                    <p className="text-md text-gray-400">
+                      {" "}
+                      {Math.trunc(product?.discount_price)}% Off
+                    </p>
+                  )}
+              </div>
             )}
-          </div>
 
-          <div>
-            <Rate rating={product?.rating} />
+          <div className="flex gap-x-1 pt-2">
+            <div>
+              <Rate rating={product?.rating} />
+            </div>
+            <div className="text-gray-500 sm:text-sm text-xs">
+              ({product?.number_rating})
+            </div>
           </div>
           <div className="h-[1px] bg-gray-300 w-full"></div>
+          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
+            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
+            {product?.description?.length > 250 && "..."}
+          </p>
 
           {/* unit  */}
-          {!vrcolor && variant && variant?.length > 0 && variant[0]?.unit && (
+          {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
             <Units
               unit={unit}
               setUnit={setUnit}
@@ -554,6 +636,7 @@ const Details = ({
           {/* color and size  */}
           {vrcolor && sizeV !== undefined && (
             <>
+              {" "}
               <Colors
                 color={color}
                 setColor={setColor}
@@ -592,39 +675,46 @@ const Details = ({
             />
           )}
 
-          <div className="">
-            <CallForPrice
-              product={product}
-              headerSetting={headerSetting}
-              cls={buttonEighteen}
-              price={price}
-            />
+          <div className="flex items-center">
+            <div className="w-[120px] text-xl">Availability:</div>
+            <div className="text-[#212121] ">
+              {productQuantity !== "0" ? (
+                <p>
+                  <span className="font-medium">{productQuantity}</span>{" "}
+                  <span className="text-green-500">In Stock!</span>
+                </p>
+              ) : (
+                <span className="text-red-600">Out of Stock!</span>
+              )}
+            </div>
           </div>
+
+          {price === 0 && (
+            <div>
+              <a
+                href={"tel:+88" + headerSetting?.phone}
+                className="cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full"
+              >
+                Call for Price
+              </a>
+            </div>
+          )}
 
           {productQuantity !== "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
+                  product={product}
+                  variant={variant}
                   qty={qty}
+                  buyNowBtn={buyNowBtn}
                   setQty={setQty}
                   onClick={() => add_to_cart()}
-                  buttonEighteen={buttonEighteen}
                 />
               )}
             </div>
           )}
 
-          <div>
-            <h1 className="text-xl font-medium pb-2">Description</h1>
-            <div className="mb-5">
-              <p className="text-black apiHtml">
-                {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-                {product?.description?.length > 250 && "..."}
-              </p>
-            </div>
-          </div>
-
-          {children}
           {/* Display the referral link */}
           <div>
             {/* Display referral link and copy button */}
@@ -667,6 +757,8 @@ const Details = ({
               </div>
             )}
           </div>
+
+          {children}
         </div>
       </div>
     </div>
@@ -675,8 +767,18 @@ const Details = ({
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, buttonEighteen }: any) => {
+const AddCart = ({
+  setQty,
+  qty,
+  onClick,
+  variant,
+  product,
+  buyNowBtn,
+}: any) => {
   const { data, error } = useHeaderSettings();
+
+  const { design, store_id } = useTheme();
+
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
 
@@ -699,6 +801,7 @@ const AddCart = ({ setQty, qty, onClick, buttonEighteen }: any) => {
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
+            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {
@@ -706,11 +809,10 @@ const AddCart = ({ setQty, qty, onClick, buttonEighteen }: any) => {
         }
       }
     };
-    // fetchReferralCode();
   }, []);
 
   let incNum = () => {
-    setQty((prevCount: any) => prevCount + 1);
+    setQty(qty + 1);
   };
   let decNum = () => {
     if (qty <= 1) {
@@ -722,48 +824,97 @@ const AddCart = ({ setQty, qty, onClick, buttonEighteen }: any) => {
   let handleChange = (e: any) => {
     setQty(e.target.value);
   };
+  const styleCss = `
+    .searchHover:hover {
+        color:   ${design?.text_color};
+        background: ${design?.header_color};
+    }
+    .cart-btn {
+        color:  ${design?.text_color};
+        background: ${design?.header_color};
+        border: 2px solid ${design?.header_color};
+    }
+    .cart-btn:hover {
+        color:  ${design?.header_color};
+        background: transparent;
+        border: 2px solid ${design?.header_color};
+    }
+  `;
 
   const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
 
   if (error) {
     return <p>error from header settings</p>;
   }
-
   return (
-    <div className="flex gap-3 ">
-      <div className=" bg-gray-100 w-max flex px-4">
-        <div
-          onClick={decNum}
-          className="w-full h-full lg:cursor-pointer flex justify-center"
-        >
-          <button className="text-gray-400 focus:outline-none" type="button">
+    <>
+      <style>{styleCss}</style>
+      <div className="flex flex-row flex-wrap gap-5">
+        <div className=" w-max flex items-center ">
+          <button
+            className="px-4 py-3 border border-gray-100 rounded-tl-full rounded-bl-full text-xl bg-gray-50 text-black"
+            type="button"
+            onClick={decNum}
+          >
             <HiMinus />
           </button>
-        </div>
 
-        <div className="w-full h-full lg:cursor-pointer flex justify-center">
           <input
             type="text"
-            className="form-control bg-gray-100 w-10 text-center border-0  outline-none ring-0 focus:outline-none focus:ring-0 focus:border-0 py-[7px] text-lg font-semibold"
+            className="form-control w-14 text-center border border-gray-100 outline-none py-[8px] text-lg font-semibold"
             value={qty}
             onChange={handleChange}
-            disabled
           />
-        </div>
 
-        <div
-          onClick={incNum}
-          className="w-full h-full lg:cursor-pointer flex justify-center"
-        >
-          <button className="text-gray-400 " type="button">
+          <button
+            className="px-4 py-3 border border-gray-100 rounded-tr-full rounded-br-full text-xl bg-gray-50 text-black"
+            type="button"
+            onClick={incNum}
+          >
             <HiPlus />
           </button>
         </div>
+        {product?.quantity === "0" ? (
+          <button className=" cart-btn-twenty-one  font-bold py-[11px] px-10 w-max rounded-full ">
+            Out of Stock
+          </button>
+        ) : (
+          <>
+            {store_id !== 6227 && (
+              <button
+                onClick={() => {
+                  onClick();
+                }}
+                type="submit"
+                className=" cart-btn-twenty-one font-bold py-[11px] px-10 w-max rounded-full "
+              >
+                {button || "+ ADD TO CART"}
+              </button>
+            )}
+          </>
+        )}
       </div>
+      {store_id !== 6227 && (
+        <button
+          onClick={buyNowBtn}
+          type="submit"
+          className={`cart-btn-twenty-one mt-3 font-bold py-[11px] px-10 w-full rounded-full`}
+        >
+          ORDER NOW
+        </button>
+      )}
 
-      <div onClick={onClick} className="w-full">
-        <button className={buttonEighteen}>{button || "ADD TO CART"}</button>
+      <div className="mt-5 flex  space-x-4 items-center">
+        <h4>Social Share :</h4>
+        <span className="flex py-2 space-x-2">
+          <FacebookShareButton url={window.location.href}>
+            <FacebookIcon size={32} round={true} />
+          </FacebookShareButton>
+          <WhatsappShareButton url={window.location.href}>
+            <WhatsappIcon size={32} round={true} />
+          </WhatsappShareButton>
+        </span>
       </div>
-    </div>
+    </>
   );
 };

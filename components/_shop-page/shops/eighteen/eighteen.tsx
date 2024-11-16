@@ -1,6 +1,6 @@
 "use client";
 
-import Pagination from "@/components/_category-page/category/pagination";
+// import Pagination from "@/components/_category-page/category/pagination";
 import Card38 from "@/components/card/card38";
 import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
@@ -16,12 +16,10 @@ import { BiFilter } from "react-icons/bi";
 import { VscClose } from "react-icons/vsc";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
+import Pagination from "../one/pagination";
 
 const Eighteen = ({ data }: any) => {
   const { category, design, module } = useTheme();
-
-  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
-
   const [grid, setGrid] = useState<any>("H");
   const [sort, setSort] = useState<any>("");
   const [paginate, setPaginate] = useState<any>({});
@@ -34,11 +32,16 @@ const Eighteen = ({ data }: any) => {
   const [page, setPage] = useState<any>(1);
   const [hasMore, setHasMore] = useState<any>(true);
 
-  const shop_load = parseInt(paginateModule?.status);
-  const pageShop = shop_load === 1 ? data?.page : page;
+  const [loading, setLoading] = useState(true);
+  const [paginatePage, setPaginatePage] = useState("?page=1");
+  const [paginateModule, setPaginateModule] = useState(false);
+
+  const getPaginateModule = module?.find(
+    (item: any) => item?.modulus_id === 105
+  );
+  const shop_load = parseInt(getPaginateModule?.status);
 
   const styleCss = `
-
   .text-hover:hover {
     color:  ${design?.header_color};
   }
@@ -47,6 +50,17 @@ const Eighteen = ({ data }: any) => {
     color:  ${design?.text_color};
   }
     `;
+
+    useEffect(() => {
+      setLoading(true);
+      const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+  
+      if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+        const moduleVal = pageShopVal == 1 ? true : false;
+        setPaginateModule(moduleVal);
+        setLoading(false);
+      }
+    }, [shop_load]);
 
   return (
     <div>
@@ -70,7 +84,7 @@ const Eighteen = ({ data }: any) => {
                   setActiveColor={setActiveColor}
                   colors={colors}
                   activeColor={activeColor}
-                  shop_load={shop_load}
+                  paginateModule={paginateModule}
                   setPage={setPage}
                   setHasMore={setHasMore}
                 />
@@ -97,7 +111,8 @@ const Eighteen = ({ data }: any) => {
 
             <div className="flex-1">
               <Product
-                page={pageShop}
+                page={page}
+                paginatePage={paginatePage}
                 sort={sort}
                 grid={grid}
                 products={products}
@@ -105,7 +120,8 @@ const Eighteen = ({ data }: any) => {
                 setProducts={setProducts}
                 setPaginate={setPaginate}
                 setColors={setColors}
-                activeColor={activeColor}
+                paginateModule={paginateModule}
+                loading={loading}
                 val={val}
                 setPage={setPage}
                 shop_load={shop_load}
@@ -115,7 +131,7 @@ const Eighteen = ({ data }: any) => {
             </div>
             {shop_load === 1 && (
               <div className="my-5">
-                <Pagination paginate={paginate} />
+                <Pagination setPage={setPaginatePage} paginate={paginate} />
               </div>
             )}
           </div>
@@ -167,7 +183,9 @@ const Product = ({
   activeColor,
   val,
   setPage,
-  shop_load,
+  paginatePage,
+  paginateModule,
+  loading,
   setHasMore,
   hasMore,
 }: any) => {
@@ -180,7 +198,7 @@ const Product = ({
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    shop_load === 1 && page,
+    paginateModule && paginatePage,
     setShops,
     activeColor,
     sort,
@@ -193,7 +211,7 @@ const Product = ({
     // get the data from the api
     const { colors, data, error } = await httpReq.get(
       `shoppage/products${
-        page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
+        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
       }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
         Number(val) !== 0 ? Number(val) : ""
       }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
@@ -205,7 +223,7 @@ const Product = ({
       setColors(colors);
       return setError(error);
     } else if (data?.data?.length > 0) {
-      if (!shop_load) {
+      if (!paginateModule) {
         if (data?.current_page === 1) {
           setProducts(data?.data);
         } else {
@@ -248,7 +266,7 @@ const Product = ({
   }
   return (
     <>
-      {!shop_load ? (
+      {!loading && !paginateModule ? (
         <div>
           <InfiniteScroll
             style={{ height: "auto", overflow: "hidden" }}
