@@ -48,7 +48,7 @@ const Four = ({ data }: any) => {
     // get the data from the api
     const { data, error } = await httpReq.get(
       `shoppage/products${
-         page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
+        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
       }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
     );
 

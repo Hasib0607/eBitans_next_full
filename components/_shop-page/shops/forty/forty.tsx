@@ -40,7 +40,6 @@ const Forty = ({ data }: any) => {
     }
   }, [shop_load]);
 
-
   return (
     <div className="">
       <div className="sm:container px-5">

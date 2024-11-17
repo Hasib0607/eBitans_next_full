@@ -197,7 +197,6 @@ const Card44 = ({ item }: any) => {
               </h1>{" "}
             </Link>
           </div>
-
           <div className="text-sm font-semibold text-black flex items-center gap-2">
             {camp?.status !== "active" &&
             (item.discount_type === "no_discount" ||
