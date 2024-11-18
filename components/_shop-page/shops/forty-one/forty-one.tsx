@@ -15,8 +15,9 @@ import { IoGridSharp } from "react-icons/io5";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
 import Pagination from "../one/pagination";
+import ProductCardFortyOne from "@/components/card/product-card/product-card-fortyone";
 
-const TwentyOne = ({ data }: any) => {
+const FortyOne = ({ data }: any) => {
   const { category, design, module } = useTheme();
   const [grid, setGrid] = useState<any>("H");
   const [sort, setSort] = useState<any>("");
@@ -140,7 +141,7 @@ const TwentyOne = ({ data }: any) => {
   );
 };
 
-export default TwentyOne;
+export default FortyOne;
 
 const Product = ({
   products,
@@ -273,7 +274,7 @@ const Product = ({
                     exit={{ scale: 0 }}
                     transition={{ duration: 0.5, ease: "linear" }}
                   >
-                    <Card45 item={item} />
+                    <ProductCardFortyOne item={item} />
                   </motion.div>
                 ))}
               </div>
@@ -292,7 +293,7 @@ const Product = ({
                         type: "tween",
                       }}
                     >
-                      <Card6 item={item} />
+                      <ProductCardFortyOne item={item} />
                     </motion.div>
                   ))}
                 </div>
@@ -312,7 +313,7 @@ const Product = ({
                   exit={{ scale: 0 }}
                   transition={{ duration: 0.5, ease: "linear" }}
                 >
-                  <Card45 item={item} />
+                  <ProductCardFortyOne item={item} />
                 </motion.div>
               ))}
             </div>
@@ -331,7 +332,7 @@ const Product = ({
                       type: "tween",
                     }}
                   >
-                    <Card6 item={item} />
+                    <ProductCardFortyOne item={item} />
                   </motion.div>
                 ))}
               </div>

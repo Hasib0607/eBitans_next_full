@@ -217,6 +217,12 @@ const componentsMap: any = {
     () =>
       import("@/components/_product-details-page/product-details/forty/forty")
   ),
+  fortyone: lazy(
+    () =>
+      import(
+        "@/components/_product-details-page/product-details/forty-one/forty-one"
+      )
+  ),
 };
 
 const ProductDetails = () => {

@@ -1,5 +1,4 @@
 "use client";
-// import Pagination from "@/components/_category-page/category/pagination";
 import Card45 from "@/components/card/card45";
 import Card6 from "@/components/card/card6";
 import FilterByColor from "@/components/filter-by-color";
@@ -10,34 +9,40 @@ import httpReq from "@/utils/http/axios/http.service";
 import { MinusIcon, PlusIcon, Bars3Icon } from "@heroicons/react/24/outline";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { IoGridSharp } from "react-icons/io5";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
-import Pagination from "../one/pagination";
+import Pagination from "./pagination";
+import ProductCardFortyOne from "@/components/card/product-card/product-card-fortyone";
+const CategoryFortyOne = () => {
+  const { id: data }: any = useParams<{ id: string }>();
+  const { category, module, design } = useTheme();
 
-const TwentyOne = ({ data }: any) => {
-  const { category, design, module } = useTheme();
-  const [grid, setGrid] = useState<any>("H");
-  const [sort, setSort] = useState<any>("");
-  const [paginate, setPaginate] = useState<any>({});
-  const [products, setProducts] = useState<any>([]);
-  const [shops, setShops] = useState<any>({});
-  const [select, setSelect] = useState<any>(parseInt(data?.id));
-  const [val, setVal] = useState<any>(0);
-  const [colors, setColors] = useState<any>(null);
-  const [activeColor, setActiveColor] = useState<any>(null);
-  const [page, setPage] = useState<any>(1);
-  const [hasMore, setHasMore] = useState<any>(true);
+  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
 
-  const [loading, setLoading] = useState(true);
-  const [paginatePage, setPaginatePage] = useState("?page=1");
-  const [paginateModule, setPaginateModule] = useState(false);
+  const [grid, setGrid] = useState("H");
+  const [sort, setSort] = useState("");
+  const [paginate, setPaginate] = useState({});
+  const [products, setProducts] = useState([]);
+  const [shops, setShops] = useState({});
+  const [select, setSelect] = useState(parseInt(data?.id));
+  const [val, setVal] = useState(0);
+  const [colors, setColors] = useState(null);
+  const [activeColor, setActiveColor] = useState(null);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const [dataId, setDataId] = useState(null);
 
-  const getPaginateModule = module?.find(
-    (item: any) => item?.modulus_id === 105
-  );
-  const shop_load = parseInt(getPaginateModule?.status);
+  const shop_load = parseInt(paginateModule?.status);
+  const pageShop = shop_load === 1 ? data?.page : page;
+
+  useEffect(() => {
+    setPage(1);
+    setHasMore(true);
+    setDataId(data);
+  }, [data]);
 
   const styleCss = `
     .grid-active {
@@ -46,25 +51,15 @@ const TwentyOne = ({ data }: any) => {
   }
  `;
 
-  useEffect(() => {
-    setLoading(true);
-    const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
-
-    if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
-      const moduleVal = pageShopVal == 1 ? true : false;
-      setPaginateModule(moduleVal);
-      setLoading(false);
-    }
-  }, [shop_load]);
-
   return (
     <div>
       <Location category={shops} />
+
       <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
-          <div className="hidden md:block col-span-3 ">
-            <div className="w-full rounded-xl h-max p-4 shadow-2xl bg-white">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4">
+          <div className=" hidden lg:block col-span-3 ">
+            <div className="w-full rounded-xl h-max p-4 shadow-2xl">
               <h3 className="font-medium text-[#252525] text-xl px-4 mb-4 ">
                 Categories
               </h3>
@@ -72,23 +67,25 @@ const TwentyOne = ({ data }: any) => {
                 <SingleCat
                   key={item?.id}
                   item={item}
-                  setSelect={setSelect}
                   select={select}
+                  setSelect={setSelect}
                 />
               ))}
             </div>
-            <div className="rounded-xl h-max p-4 shadow-2xl bg-white my-6">
+            <div className="bg-white my-6 rounded-xl h-max p-4 shadow-2xl">
               <FilterByColor
+                id={data?.id}
                 setActiveColor={setActiveColor}
                 colors={colors}
                 activeColor={activeColor}
-                paginateModule={paginateModule}
+                shop_load={shop_load}
                 setPage={setPage}
                 setHasMore={setHasMore}
               />
             </div>
-            <div className="rounded-xl h-max p-4 shadow-2xl bg-white">
+            <div className="bg-white rounded-xl h-max p-4 shadow-2xl">
               <FilterByPrice
+                id={data?.id}
                 setVal={setVal}
                 val={val}
                 setPage={setPage}
@@ -96,8 +93,7 @@ const TwentyOne = ({ data }: any) => {
               />
             </div>
           </div>
-
-          <div className="col-span-1 md:col-span-9 flex flex-col min-h-[100vh-200px] h-full">
+          <div className="col-span-1 lg:col-span-9 flex flex-col min-h-[100vh-200px] h-full ">
             <Filter
               onChange={(e: any) => {
                 setSort(e.target.value);
@@ -110,8 +106,9 @@ const TwentyOne = ({ data }: any) => {
             />
             <div className="flex-1">
               <Product
-                page={page}
-                paginatePage={paginatePage}
+                id={data}
+                dataId={dataId}
+                page={pageShop}
                 sort={sort}
                 grid={grid}
                 products={products}
@@ -122,15 +119,14 @@ const TwentyOne = ({ data }: any) => {
                 activeColor={activeColor}
                 val={val}
                 setPage={setPage}
-                paginateModule={paginateModule}
-                loading={loading}
+                shop_load={shop_load}
                 setHasMore={setHasMore}
                 hasMore={hasMore}
               />
             </div>
             {shop_load === 1 && (
               <div className="my-5">
-                <Pagination setPage={setPaginatePage} paginate={paginate} />
+                <Pagination data={data} paginate={paginate} />
               </div>
             )}
           </div>
@@ -140,7 +136,7 @@ const TwentyOne = ({ data }: any) => {
   );
 };
 
-export default TwentyOne;
+export default CategoryFortyOne;
 
 const Product = ({
   products,
@@ -150,76 +146,95 @@ const Product = ({
   setProducts,
   setPaginate,
   setShops,
+  dataId,
   setColors,
   activeColor,
   val,
   setPage,
-  paginatePage,
-  paginateModule,
-  loading,
+  shop_load,
   setHasMore,
   hasMore,
+  id,
 }: any) => {
   const [load, setLoad] = useState(false);
+  const [showSk, setShowSk] = useState(true);
   const [error, setError] = useState(null);
+  const { category, subcategory } = useTheme();
 
   useEffect(() => {
     setLoad(true);
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
-    paginateModule && paginatePage,
+    shop_load === 1 && page,
+    category,
+    dataId,
+    setPaginate,
+    setProducts,
     setShops,
-    activeColor,
     sort,
+    subcategory,
     setColors,
     activeColor,
     val,
   ]);
 
   const fetchData = async () => {
-    // get the data from the api
-    const { colors, data, error } = await httpReq.get(
-      `shoppage/products${
-        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
-      }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}&priceFilter=${
-        Number(val) !== 0 ? Number(val) : ""
-      }&colorFilter=${activeColor ? encodeURIComponent(activeColor) : ""}`
-    );
+    try {
+      const pageQuery = page
+        ? shop_load === 1
+          ? page
+          : `?page=${page}`
+        : `?page=1`;
+      const colorFilter = activeColor ? encodeURIComponent(activeColor) : "";
+      const priceFilter = Number(val) !== 0 ? Number(val) : "";
+      const apiUrl = `getcatproducts${pageQuery}&filter=${sort}&priceFilter=${priceFilter}&colorFilter=${colorFilter}`;
 
-    if (error) {
-      setPaginate(null);
-      setProducts([]);
-      setColors(colors);
-      return setError(error);
-    } else if (data?.data?.length > 0) {
-      if (!paginateModule) {
-        if (data?.current_page === 1) {
-          setProducts(data?.data);
-        } else {
-          setProducts([...products, ...data?.data]);
-        }
-        setPage(page + 1);
-      } else {
-        setProducts(data?.data);
+      // Get the data from the API
+      let response = await httpReq.post(apiUrl, { id });
+      let { colors, data, error } = response;
+
+      if (data?.data?.length == 0) {
+        // If error, try fetching subcategory products
+        response = await httpReq.post(
+          apiUrl.replace("getcatproducts", "getsubcatproduct"),
+          { id }
+        );
+        ({ colors, data, error } = response);
       }
 
-      setPaginate(data);
+      if (data?.data?.length > 0) {
+        setHasMore(true);
+        setColors(colors);
+
+        if (!shop_load) {
+          if (data.current_page === 1) {
+            setProducts(data.data);
+          } else {
+            setProducts((prevProducts: any) => [...prevProducts, ...data.data]);
+          }
+          setPage(page + 1);
+        } else {
+          setProducts(data.data);
+        }
+
+        setPaginate(data);
+        setLoad(false);
+        setError(null);
+      } else {
+        setHasMore(false);
+        setLoad(false);
+      }
+    } catch (error: any) {
+      console.error("Unexpected error:", error);
+      setHasMore(false);
       setLoad(false);
-      setError(null);
-      setColors(colors);
-    } else if (data?.current_page === 1) {
-      setProducts([]);
-      setHasMore(false);
-      setPaginate(data);
-    } else {
-      setHasMore(false);
+      setError(error);
     }
-    // ;
-    setLoad(false);
+    setShowSk(false);
   };
 
-  if (load) {
+  if (load && showSk) {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
         <Skeleton />
@@ -236,7 +251,7 @@ const Product = ({
   }
   return (
     <>
-      {!loading && !paginateModule ? (
+      {!shop_load ? (
         <div>
           <InfiniteScroll
             style={{ height: "auto", overflow: "hidden" }}
@@ -252,7 +267,6 @@ const Product = ({
                   color="#f1593a"
                   ariaLabel="three-dots-loading"
                   wrapperStyle={{}}
-                  // wrapperClassName=""
                   visible={true}
                 />
               </div>
@@ -264,26 +278,26 @@ const Product = ({
             }
           >
             {grid === "H" && (
-              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-1 sm:gap-4 ">
-                {products?.map((item: any) => (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-1 sm:gap-4">
+                {products?.map((item: any, key: number) => (
                   <motion.div
-                    key={item?.id}
+                    key={key}
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     exit={{ scale: 0 }}
                     transition={{ duration: 0.5, ease: "linear" }}
                   >
-                    <Card45 item={item} />
+                    <ProductCardFortyOne item={item} />
                   </motion.div>
                 ))}
               </div>
             )}
             <AnimatePresence>
               {grid === "V" && (
-                <div className="grid grid-cols-1 gap-1 sm:gap-4 ">
-                  {products?.map((item: any) => (
+                <div className="grid grid-cols-1 gap-1 sm:gap-4">
+                  {products?.map((item: any, key: number) => (
                     <motion.div
-                      key={item?.id}
+                      key={key}
                       initial={{ translateX: 200 }}
                       animate={{ translateX: 0 }}
                       transition={{
@@ -292,7 +306,7 @@ const Product = ({
                         type: "tween",
                       }}
                     >
-                      <Card6 item={item} />
+                      <ProductCardFortyOne item={item} />
                     </motion.div>
                   ))}
                 </div>
@@ -304,15 +318,15 @@ const Product = ({
         <div>
           {grid === "H" && (
             <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 gap-1 sm:gap-4">
-              {products?.map((item: any) => (
+              {products?.map((item: any, key: number) => (
                 <motion.div
-                  key={item?.id}
+                  key={key}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
                   transition={{ duration: 0.5, ease: "linear" }}
                 >
-                  <Card45 item={item} />
+                  <ProductCardFortyOne item={item} />
                 </motion.div>
               ))}
             </div>
@@ -320,9 +334,9 @@ const Product = ({
           <AnimatePresence>
             {grid === "V" && (
               <div className="grid grid-cols-1 gap-1 sm:gap-4">
-                {products?.map((item: any) => (
+                {products?.map((item: any, key: number) => (
                   <motion.div
-                    key={item?.id}
+                    key={key}
                     initial={{ translateX: 200 }}
                     animate={{ translateX: 0 }}
                     transition={{
@@ -331,7 +345,7 @@ const Product = ({
                       type: "tween",
                     }}
                   >
-                    <Card6 item={item} />
+                    <ProductCardFortyOne item={item} />
                   </motion.div>
                 ))}
               </div>
@@ -343,13 +357,30 @@ const Product = ({
   );
 };
 
-const Location = ({ category }: any) => {
+const Location = ({}: any) => {
+  const [activecat, setActivecat] = useState(false);
+  const { id: data }: any = useParams<{ id: string }>();
+  const { category } = useTheme();
+  useEffect(() => {
+    for (let i = 0; i < category.length; i++) {
+      if (category[i]?.cat) {
+        for (let j = 0; j < category[i].cat.length; j++) {
+          if (category[i]?.cat[j]?.id == data) {
+            setActivecat(category[i]?.cat[j]?.name);
+          }
+        }
+      }
+      if (category[i]?.id == data) {
+        setActivecat(category[i].name);
+      }
+    }
+  }, [category]);
   return (
     <div className="w-full bg-[#f1f1f1] flex flex-col justify-center items-center py-5 mb-5">
       <h1 className="text-3xl font-medium ">Product</h1>
       <div className="flex items-center gap-1">
         <p>Home</p>
-        <p>/ {"shop"}</p>
+        <p>/ {activecat}</p>
       </div>
     </div>
   );
@@ -359,7 +390,7 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
   return (
     <div className="border-t border-b border-[#f1f1f1] py-3 mb-5 flex flex-wrap justify-between items-center px-2">
       <div className="text-gray-500 font-medium">
-        Showing {paginate?.from}-{paginate?.to} of {paginate?.total} results
+        Showing {paginate?.from}-{paginate?.to} of {paginate?.total} results{" "}
       </div>
       <div className="flex items-center gap-1 mb-3 md:mb-0">
         <div
@@ -379,13 +410,12 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
           <Bars3Icon className="h-4 w-4" />
         </div>
       </div>
-
       {/* Short by  */}
-      <div className="flex items-center gap-2 text-sm max-w-md w-full font-medium">
+      <div className="flex items-center gap-2 text-sm max-w-md w-full">
         <label className="max-w-fit"> Sort by:</label>
         <select
           onChange={onChange}
-          className="h-9 border border-gray-200 rounded  outline-0 ring-0 focus:ring-0 font-medium text-sm flex-1 bg-white"
+          className="h-9 border border-gray-200 rounded  outline-0 ring-0 focus:ring-0 text-xs flex-1 bg-white"
         >
           <option>Select One</option>
           <option value="az">Name, A to Z</option>
@@ -398,20 +428,36 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
   );
 };
 
-const SingleCat = ({ item, select, setSelect }: any) => {
+const SingleCat = ({ item, setSelect, select }: any) => {
   const [show, setShow] = useState(false);
-
+  const { id }: any = useParams<{ id: string }>();
+  useEffect(() => {
+    if (item.cat) {
+      for (let i = 0; i < item.cat.length; i++) {
+        item.cat[i].id == id && setShow(true);
+      }
+    }
+  }, [item?.cat]);
+  const { design } = useTheme();
+  const activeColor = `text-[${design?.header_color}] flex-1 text-lg font-medium`;
+  const inactiveColor = "text-gray-500 flex-1 text-lg font-medium";
+  const activesub = `text-[${design?.header_color}] py-2 px-4 text-sm`;
+  const inactivesub = `text-gray-600 py-2 px-4 text-sm`;
   return (
     <div className="">
       <div className="w-full border mb-2">
         <div className="flex items-center px-4 py-3">
           <Link
+            style={
+              parseInt(id) === parseInt(item?.id)
+                ? { color: `${design.header_color}` }
+                : {}
+            }
             onClick={() => setSelect(item.id)}
             href={"/category/" + item?.id}
-            className={`flex-1 text-lg font-medium ${
-              select === item.id ? "text-red-500" : "text-gray-900"
-            }`}
+            className={id == item?.id ? activeColor : inactiveColor}
           >
+            {" "}
             <p>{item.name}</p>
           </Link>
           {item?.cat ? (
@@ -433,16 +479,20 @@ const SingleCat = ({ item, select, setSelect }: any) => {
         {show && (
           <>
             <div className="">
-              {item?.cat?.map((sub: any, idx: any) => (
-                <div className="border-t" key={idx}>
+              {item?.cat?.map((sub: any, key: number) => (
+                <div className="border-t" key={key}>
                   <Link
                     onClick={() => setSelect(sub.id)}
                     href={"/category/" + sub?.id}
                   >
+                    {" "}
                     <p
-                      className={`py-2 px-4 text-sm ${
-                        select === sub.id ? "text-red-500" : "text-gray-500"
-                      }`}
+                      style={
+                        parseInt(id) === parseInt(sub?.id)
+                          ? { color: `${design.header_color}` }
+                          : {}
+                      }
+                      className={id == sub?.id ? activesub : inactivesub}
                     >
                       {sub?.name}
                     </p>

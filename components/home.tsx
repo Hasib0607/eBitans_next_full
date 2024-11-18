@@ -9,15 +9,9 @@ const HomePage = async () => {
   const layout = data?.layout;
   const layoutposition = data?.layoutposition;
 
-  // const sortedLayout = layout.sort(
-  //   (a: any, b: any) => layoutposition[a] - layoutposition[b]
-  // );
-
   const sortedLayout = layout
     ? layout.sort((a: any, b: any) => layoutposition[a] - layoutposition[b])
     : []; // Default to an empty array if layout is undefined
-
-  // console.log("Subdomain data:", data);
 
   return (
     <>
@@ -29,8 +23,8 @@ const HomePage = async () => {
             </p>
           }
         >
-          {layout &&
-            sortedLayout.map((item: any, index: number) => (
+          {sortedLayout.length > 0 &&
+            sortedLayout?.map((item: any, index: number) => (
               <RenderSection key={item} component={item} data={data} />
             ))}
         </Suspense>
