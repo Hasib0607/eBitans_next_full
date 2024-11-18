@@ -15,9 +15,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import SetFavicon from "@/utils/useSetFavicon";
 import { Metadata } from "next";
 // import AllMobileBottomMenu from "./mobileBottomMenu";
-
 const inter = Inter({ subsets: ["latin"] });
-
 export async function generateMetadata(): Promise<Metadata> {
   const url = getUrl();
   const subDomain = await getSubdomainName(url, "headersetting");
@@ -26,7 +24,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = `${websiteName}`;
   const description = headersetting?.short_description;
   const keywords = "eBitans, eCommerce builder platform";
-
   return {
     title: `${title}`,
     description: description,
@@ -34,7 +31,6 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: keywords,
   };
 }
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -46,21 +42,30 @@ export default async function RootLayout({
   const favicon = imgUrl + headersetting?.favicon;
   const design = subDomain?.design;
   const fbPixel = headersetting?.facebook_pixel;
-  const googleAnalytics = headersetting?.gtm?.google_analytic;
+  const googleAnalytics = headersetting?.gtm?.google_analytics;
   const googleSearchConsole = headersetting?.gtm?.google_search_console;
   const error = subDomain?.error;
-
   return (
     <html lang="en">
       <head>
         {googleAnalytics && (
-          <meta name="google-site-verification" content={googleAnalytics} />
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${googleAnalytics}');
+      `}
+            </Script>
+          </>
         )}
-         {googleSearchConsole && (
-          <meta
-            name="google-site-verification"
-            content={googleSearchConsole}
-          />
+        {googleSearchConsole && (
+          <meta name="google-site-verification" content={googleSearchConsole} />
         )}
       </head>
       <body className={`${inter.className} lg2 `}>
