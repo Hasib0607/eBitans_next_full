@@ -33,10 +33,10 @@ import {
   Units,
 } from "../_product-details-page/product-details/twenty-eight/imageVariations";
 
-const DetailTwentyEight = ({product_id, slug, children}: any) => {
+const DetailTwentyEight = ({ product_id, slug, children }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
-  const data = {product_id, slug, store_id};
+  const data = { product_id, slug, store_id };
 
   const dispatch = useDispatch();
   const [product, setProduct] = useState<any>({});
@@ -147,7 +147,6 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
       );
       setVariant(variant);
       setVrcolor(vrcolor);
-
 
       ///Code will be here....
 
