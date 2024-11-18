@@ -30,5 +30,20 @@ const getProductDetails = async ({
   return productDetails;
 };
 
+const getQuickViewProductDetails = async ({
+  store_id,
+  product_id,
+}: {
+  store_id: number;
+  product_id: string;
+}) => {
+  const { data } = await axios.post(
+    process.env.NEXT_PUBLIC_API_URL + "product-details",
+    { store_id, product_id }
+  );
+
+  return data;
+};
+
 // const getSiteInfo = async () => {};
-export { getProductDetails, getSubdomainName };
+export { getProductDetails, getSubdomainName, getQuickViewProductDetails };

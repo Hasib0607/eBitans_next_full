@@ -1,8 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-
-// import Details from '../../layouts/productDetails/fourteen/Details';
-
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";

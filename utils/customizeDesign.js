@@ -48,6 +48,11 @@ export const customizeCheckout = [
     id: 3020,
     Bkash_Payment: "Bkash Advance Payment",
   },
+  {
+    // checkout twenty-one (kiddy shop)
+    id: 9030,
+    cash_hide: "hidden"
+  },
 ];
 
 export const customizeSingleProductPage = [

@@ -46,10 +46,33 @@ export default async function RootLayout({
   const favicon = imgUrl + headersetting?.favicon;
   const design = subDomain?.design;
   const fbPixel = headersetting?.facebook_pixel;
+  const googleAnalytics = headersetting?.gtm?.google_analytics;
+  const googleSearchConsole = headersetting?.gtm?.google_search_console;
   const error = subDomain?.error;
 
   return (
     <html lang="en">
+      <head>
+        {googleAnalytics && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${googleAnalytics}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', '${googleAnalytics}');
+      `}
+            </Script>
+          </>
+        )}
+        {googleSearchConsole && (
+          <meta name="google-site-verification" content={googleSearchConsole} />
+        )}
+      </head>
       <body className={`${inter.className} lg2 `}>
         {error ? (
           <WrongUrl />

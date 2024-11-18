@@ -136,6 +136,7 @@ const Details = ({
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
+  
   useEffect(() => {
     setLoad(true);
     // declare the async data fetching function
@@ -566,6 +567,7 @@ const Details = ({
             {product?.description?.length > 250 && "..."}
           </p>
         </div>
+
         <div className="text-black flex items-center gap-2 mb-5">
           <VscCreditCard size={20} />
           <p>Cash on Delivery available</p>
