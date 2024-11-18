@@ -29,10 +29,6 @@ const ViewContentGtm = ({ product }: any) => {
         currency,
       },
     });
-<<<<<<< HEAD
-    ViewContent(product);
-  }, [product]);
-=======
 
     // const currency = headerSetting?.code;
     const content_ids = product?.id; // Assuming `product.id` is the content ID
@@ -53,7 +49,6 @@ const ViewContentGtm = ({ product }: any) => {
       sku
     );
   }, [product, headerSetting]);
->>>>>>> 09fa727b75610b7b7c14ec3d1b0fb1b77d177929
 
   useEffect(() => {
     sendEvent();

@@ -6,9 +6,9 @@ export const PageView = () => {
   }
 };
 
-export const Purchase = (value: any) => {
+export const Purchase = (value: any, currency: any) => {
   if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "Purchase", { value });
+    window.fbq("track", "Purchase", { value, currency });
   } else {
     console.warn("Facebook Pixel (fbq) is not initialized.");
   }

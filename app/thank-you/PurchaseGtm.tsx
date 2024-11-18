@@ -12,22 +12,7 @@ const PurchaseGtm = () => {
   const cartList = useSelector((state: any) => state.cart.cartList);
   const [total, setTotal] = useState<number | null>(null);
   const searchParams = useSearchParams();
-<<<<<<< HEAD
-<<<<<<< HEAD
-  const total = searchParams.get("total");
-=======
-  // const total = searchParams.get("total");
-  const total = cartList.reduce((accumulator: any, item: any) => {
-    return accumulator + item.price * item.qty;
-  }, 0);
-<<<<<<< HEAD
-  const currency = headerSetting?.code; // Define currency here or dynamically set it as needed
-  console.log("total", total);
->>>>>>> 09fa727b75610b7b7c14ec3d1b0fb1b77d177929
-=======
-=======
 
->>>>>>> d352cbdc6b03a66a8ed22ff5670a79684e43de4c
   const currency = headerSetting?.code;
 
   useEffect(() => {
@@ -40,19 +25,7 @@ const PurchaseGtm = () => {
     setTotal(parsedTotal);
   }, [searchParams]);
 
->>>>>>> 22934b8ca73d4243016dddc43554ac63bec67707
   useEffect(() => {
-<<<<<<< HEAD
-    sendGTMEvent({
-      event: "purchase",
-      currency,
-      value: {
-        items,
-      },
-    });
-    Purchase(total);
-  }, []);
-=======
     if (total !== null && currency) {
       // Send the Google Tag Manager event
       sendGTMEvent({
@@ -79,7 +52,6 @@ const PurchaseGtm = () => {
       Purchase(total, currency);
     }
   }, [total, currency, cartList]);
->>>>>>> d352cbdc6b03a66a8ed22ff5670a79684e43de4c
 
   return null;
 };
