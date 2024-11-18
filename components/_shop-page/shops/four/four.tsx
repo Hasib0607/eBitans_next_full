@@ -1,5 +1,5 @@
 "use client";
-import Pagination from "@/components/_category-page/category/pagination";
+// import Pagination from "@/components/_category-page/category/pagination";
 import ProductCardTwo from "@/components/card/product-card/product-card-two";
 import ShopWrapper from "@/components/shop-wrapper";
 import useTheme from "@/hooks/use-theme";
@@ -7,16 +7,33 @@ import httpReq from "@/utils/http/axios/http.service";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
+import Pagination from "../one/pagination";
 
 const Four = ({ data }: any) => {
   const { module } = useTheme();
-  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
   const [products, setProducts] = useState<any>([]);
   const [paginate, setPaginate] = useState<any>({});
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
-  const shop_load = parseInt(paginateModule?.status);
-  const pageShop = shop_load === 1 ? data?.page : page;
+  const [loading, setLoading] = useState(true);
+  const [paginatePage, setPaginatePage] = useState("?page=1");
+  const [paginateModule, setPaginateModule] = useState(false);
+
+  const getPaginateModule = module?.find(
+    (item: any) => item?.modulus_id === 105
+  );
+  const shop_load = parseInt(getPaginateModule?.status);
+
+  useEffect(() => {
+    setLoading(true);
+    const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+
+    if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+      const moduleVal = pageShopVal == 1 ? true : false;
+      setPaginateModule(moduleVal);
+      setLoading(false);
+    }
+  }, [shop_load]);
 
   const shop = {
     name: "Shop",
@@ -25,17 +42,13 @@ const Four = ({ data }: any) => {
   useEffect(() => {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [shop_load === 1 && page, setPaginate, setProducts]);
+  }, [paginateModule && paginatePage, setPaginate, setProducts]);
 
   const fetchData = async () => {
     // get the data from the api
     const { data, error } = await httpReq.get(
       `shoppage/products${
-        pageShop
-          ? shop_load === 1
-            ? pageShop
-            : `?page=${pageShop}`
-          : `?page=1`
+        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
       }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}`
     );
 
@@ -44,7 +57,7 @@ const Four = ({ data }: any) => {
       setProducts([]);
       return null;
     } else if (data?.data?.length > 0) {
-      if (!shop_load) {
+      if (!paginateModule) {
         if (data?.current_page === 1) {
           setProducts(data?.data);
         } else {
@@ -68,7 +81,7 @@ const Four = ({ data }: any) => {
   return (
     <div>
       <ShopWrapper categories={shop}>
-        {!shop_load ? (
+        {!loading && !paginateModule ? (
           <div>
             <InfiniteScroll
               style={{ height: "auto", overflow: "hidden" }}
@@ -120,9 +133,9 @@ const Four = ({ data }: any) => {
           </div>
         )}
       </ShopWrapper>
-      {shop_load === 1 && (
+      {!loading && paginateModule && (
         <div className="my-5">
-          <Pagination paginate={paginate} />
+          <Pagination setPage={setPaginatePage} paginate={paginate} />
         </div>
       )}
     </div>

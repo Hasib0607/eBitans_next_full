@@ -1,5 +1,5 @@
 "use client";
-import Pagination from "@/components/_category-page/category/pagination";
+// import Pagination from "@/components/_category-page/category/pagination";
 import Card69 from "@/components/card/card69";
 import Skeleton from "@/components/loader/skeleton";
 import useTheme from "@/hooks/use-theme";
@@ -10,19 +10,35 @@ import { useEffect, useState } from "react";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { ThreeDots } from "react-loader-spinner";
+import Pagination from "../one/pagination";
 
 const Forty = ({ data }: any) => {
   const { category, module } = useTheme();
-  const paginateModule = module?.find((item: any) => item?.modulus_id === 105);
-
   const [paginate, setPaginate] = useState<any>({});
   const [sort, setSort] = useState<any>("");
   const [products, setProducts] = useState<any>([]);
   const [page, setPage] = useState<any>(1);
   const [hasMore, setHasMore] = useState<any>(true);
 
-  const shop_load = parseInt(paginateModule?.status);
-  const pageShop = shop_load === 1 ? data?.page : page;
+  const [loading, setLoading] = useState(true);
+  const [paginatePage, setPaginatePage] = useState("?page=1");
+  const [paginateModule, setPaginateModule] = useState(false);
+
+  const getPaginateModule = module?.find(
+    (item: any) => item?.modulus_id === 105
+  );
+  const shop_load = parseInt(getPaginateModule?.status);
+
+  useEffect(() => {
+    setLoading(true);
+    const pageShopVal = !Number.isNaN(shop_load) ? shop_load : 0;
+
+    if (!Number.isNaN(shop_load) && (pageShopVal == 0 || pageShopVal == 1)) {
+      const moduleVal = pageShopVal == 1 ? true : false;
+      setPaginateModule(moduleVal);
+      setLoading(false);
+    }
+  }, [shop_load]);
 
   return (
     <div className="">
@@ -48,20 +64,22 @@ const Forty = ({ data }: any) => {
           <div className="mt-10">
             <div className="flex-1">
               <Product
-                page={pageShop}
+                page={page}
+                paginatePage={paginatePage}
                 products={products}
                 setProducts={setProducts}
                 setPaginate={setPaginate}
                 setPage={setPage}
-                shop_load={shop_load}
+                paginateModule={paginateModule}
+                loading={loading}
                 setHasMore={setHasMore}
                 hasMore={hasMore}
                 sort={sort}
               />
             </div>
-            {shop_load === 1 && (
+            {!loading && paginateModule && (
               <div className="my-5">
-                <Pagination paginate={paginate} />
+                <Pagination setPage={setPaginatePage} paginate={paginate} />
               </div>
             )}
           </div>
@@ -81,7 +99,9 @@ const Product = ({
   setPaginate,
   setShops,
   setPage,
-  shop_load,
+  paginatePage,
+  paginateModule,
+  loading,
   setHasMore,
   hasMore,
 }: any) => {
@@ -91,13 +111,13 @@ const Product = ({
   useEffect(() => {
     setLoad(true);
     fetchData();
-  }, [shop_load === 1 && page, setShops, sort]);
+  }, [paginateModule && paginatePage, setShops, sort]);
 
   const fetchData = async () => {
     // get the data from the api
     const { data, error } = await httpReq.get(
       `shoppage/products${
-        page ? (shop_load === 1 ? page : `?page=${page}`) : `?page=1`
+        page ? (paginateModule ? paginatePage : `?page=${page}`) : `?page=1`
       }&name=${window.location.host.startsWith("www.") ? window.location.host.slice(4) : window.location.host}&filter=${sort}`
     );
 
@@ -106,7 +126,7 @@ const Product = ({
       setProducts([]);
       return setError(error);
     } else if (data?.data?.length > 0) {
-      if (!shop_load) {
+      if (!paginateModule) {
         if (data?.current_page === 1) {
           setProducts(data?.data);
         } else {
@@ -148,7 +168,7 @@ const Product = ({
   }
   return (
     <>
-      {!shop_load ? (
+      {!loading && !paginateModule ? (
         <div>
           <InfiniteScroll
             style={{ height: "auto", overflow: "hidden" }}

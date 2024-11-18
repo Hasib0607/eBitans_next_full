@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 type Props = {
   params: { productID: string; slug: string };
 };
+
 export async function generateMetadata(
   { params }: Props,
   parent: ResolvingMetadata

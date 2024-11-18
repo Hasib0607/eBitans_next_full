@@ -174,7 +174,7 @@ const Details = ({
   }
 
   const regularPrice =
-    product?.regular_price +
+    parseInt(product?.regular_price) +
     (size?.additional_price ? parseInt(size?.additional_price) : 0) +
     (unit?.additional_price ? parseInt(unit?.additional_price) : 0) +
     (color?.additional_price ? parseInt(color?.additional_price) : 0);

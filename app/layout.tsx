@@ -46,10 +46,23 @@ export default async function RootLayout({
   const favicon = imgUrl + headersetting?.favicon;
   const design = subDomain?.design;
   const fbPixel = headersetting?.facebook_pixel;
+  const googleAnalytics = headersetting?.gtm?.google_analytic;
+  const googleSearchConsole = headersetting?.gtm?.google_search_console;
   const error = subDomain?.error;
 
   return (
     <html lang="en">
+      <head>
+        {googleAnalytics && (
+          <meta name="google-site-verification" content={googleAnalytics} />
+        )}
+         {googleSearchConsole && (
+          <meta
+            name="google-site-verification"
+            content={googleSearchConsole}
+          />
+        )}
+      </head>
       <body className={`${inter.className} lg2 `}>
         {error ? (
           <WrongUrl />

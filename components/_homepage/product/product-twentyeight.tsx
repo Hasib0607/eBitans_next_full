@@ -6,6 +6,7 @@ import useHeaderSettings from "@/utils/query/use-header-settings";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Skeleton from "@/components/loader/skeleton";
+import ProductSkeleton from "@/components/loader/product-skeleton";
 
 interface Product {
   id: number;
@@ -84,7 +85,7 @@ const ProductTwentyEight = ({
   if (isLoading || themeLoading || loadingProducts) {
     return (
       <div className="col-span-12 lg:col-span-9">
-        <Skeleton />
+        <ProductSkeleton />
       </div>
     );
   }
