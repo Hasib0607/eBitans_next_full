@@ -132,7 +132,7 @@ const Details = ({ data, children, fetchStatus }: any) => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
     const fil = variant?.find((item: any) => item?.color === color);
 
-    if(!rangePriceShow){
+    if (!rangePriceShow) {
       setSize(sizeV ? fil : null);
     }
   }, [color, variant, sizeV]);

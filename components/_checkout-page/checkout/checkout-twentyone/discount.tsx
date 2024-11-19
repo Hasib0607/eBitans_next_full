@@ -118,7 +118,9 @@ const Discount = ({
   useEffect(() => {
     if (
       headerSetting?.shipping_area_1 &&
-      (store_id === 3601 || store_id === 3904 || store_id === 5519 || store_id === 8590)
+      (store_id === 3601 ||
+        store_id === 3904 ||
+        store_id === 5519)
     ) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
     }
@@ -144,7 +146,13 @@ const Discount = ({
       >
         <div className={`px-4 py-5  space-y-6 sm:p-6`}>
           <div className="grid grid-cols-1 gap-6">
-            <div className={customizeCheckoutData?.cash_hide ? customizeCheckoutData?.cash_hide: ""}>
+            <div
+              className={
+                customizeCheckoutData?.cash_hide
+                  ? customizeCheckoutData?.cash_hide
+                  : ""
+              }
+            >
               <div className="flex flex-col justify-start gap-4 items-start pb-3">
                 <label
                   htmlFor="name"
@@ -153,7 +161,7 @@ const Discount = ({
                   {design?.template_id === "29" ||
                   store_id === 3601 ||
                   store_id === 3904 ||
-                  store_id === 5519 
+                  store_id === 5519
                     ? "শিপিং এরিয়া"
                     : "Shipping Area"}
                 </label>
@@ -172,7 +180,11 @@ const Discount = ({
                         //   store_id === 3904 ||
                         //   store_id === 5519 ||
                         // }
-                        defaultChecked={customizeCheckoutData?.checked? customizeCheckoutData?.checked: false}
+                        defaultChecked={
+                          customizeCheckoutData?.checked
+                            ? customizeCheckoutData?.checked
+                            : false
+                        }
                         className="mr-2"
                       />
                       <label
@@ -227,60 +239,59 @@ const Discount = ({
               </div>
             </div>
 
-            {
-              couponAvailable && (
-                <div className="">
-                  <div className="flex sm:flex-row flex-col gap-4 items-start sm:items-center pb-3 ">
-                    <label
-                      htmlFor="name"
-                      className="block text-xl font-semibold text-gray-700"
-                    >
-                      {design?.template_id === "29" ? "ডিসকাউন্ট" : "Discount"}
-                    </label>
-                    <form
-                      onSubmit={handleSubmit(onSubmit)}
-                      className="flex flex-wrap gap-2 justify-center items-start"
-                    >
-                      <div className="flex flex-col justify-center">
-                        <input
-                          {...register("code", { required: true })}
-                          type={"text"}
-                          className="border border-gray-400 text-black py-2 px-2 rounded-sm"
-                        />
-                        {errors.code && (
-                          <span className="text-red-500">Field is empty</span>
-                        )}
-                      </div>
-                      {loading ? (
-                        <div
-                          style={{
-                            backgroundColor: design?.header_color,
-                            color: design?.text_color,
-                          }}
-                          className={`flex justify-center items-center py-2 w-20 font-semibold rounded-sm text-lg lg:cursor-pointer ${btnhover}`}
-                        >
-                          <RotatingLines
-                            width="25"
-                            strokeColor="#6495ED"
-                            strokeWidth="6"
-                          />
-                          <input type={"submit"} value={""} />
-                        </div>
-                      ) : (
-                        <input
-                          type={"submit"}
-                          value={"Apply"}
-                          style={{
-                            backgroundColor: design?.header_color,
-                            color: design?.text_color,
-                          }}
-                          className={`w-20 py-2 font-semibold rounded-sm text-lg lg:cursor-pointer  ${btnhover}`}
-                        />
+            {couponAvailable && (
+              <div className="">
+                <div className="flex sm:flex-row flex-col gap-4 items-start sm:items-center pb-3 ">
+                  <label
+                    htmlFor="name"
+                    className="block text-xl font-semibold text-gray-700"
+                  >
+                    {design?.template_id === "29" ? "ডিসকাউন্ট" : "Discount"}
+                  </label>
+                  <form
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-wrap gap-2 justify-center items-start"
+                  >
+                    <div className="flex flex-col justify-center">
+                      <input
+                        {...register("code", { required: true })}
+                        type={"text"}
+                        className="border border-gray-400 text-black py-2 px-2 rounded-sm"
+                      />
+                      {errors.code && (
+                        <span className="text-red-500">Field is empty</span>
                       )}
-                    </form>
-                  </div>
+                    </div>
+                    {loading ? (
+                      <div
+                        style={{
+                          backgroundColor: design?.header_color,
+                          color: design?.text_color,
+                        }}
+                        className={`flex justify-center items-center py-2 w-20 font-semibold rounded-sm text-lg lg:cursor-pointer ${btnhover}`}
+                      >
+                        <RotatingLines
+                          width="25"
+                          strokeColor="#6495ED"
+                          strokeWidth="6"
+                        />
+                        <input type={"submit"} value={""} />
+                      </div>
+                    ) : (
+                      <input
+                        type={"submit"}
+                        value={"Apply"}
+                        style={{
+                          backgroundColor: design?.header_color,
+                          color: design?.text_color,
+                        }}
+                        className={`w-20 py-2 font-semibold rounded-sm text-lg lg:cursor-pointer  ${btnhover}`}
+                      />
+                    )}
+                  </form>
                 </div>
-              )}
+              </div>
+            )}
           </div>
         </div>
         {store_id === 5377 && (
