@@ -893,7 +893,9 @@ const AddCart = ({
               type="submit"
               className={buttonTwentyThree}
             >
-              {singleProductPageData?.order_korun_btn? "অর্ডার করুন": "+ ADD TO CART"}
+              {singleProductPageData?.order_korun_btn
+                ? "অর্ডার করুন"
+                : "+ ADD TO CART"}
             </button>
           )}
         </div>

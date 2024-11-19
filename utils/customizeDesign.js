@@ -52,6 +52,7 @@ export const customizeCheckout = [
     // checkout twenty-one (kiddy shop)
     id: 9030,
     cash_hide: "hidden",
+    checked: true,
   },
 ];
 
@@ -69,6 +70,6 @@ export const customizeSingleProductPage = [
   {
     id: 9209,
     custom_text_show: true,
-    order_korun_btn: true
+    order_korun_btn: true,
   },
 ];
