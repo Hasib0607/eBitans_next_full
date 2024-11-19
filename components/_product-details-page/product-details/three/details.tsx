@@ -136,7 +136,7 @@ const Details = ({
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
-  
+
   useEffect(() => {
     setLoad(true);
     // declare the async data fetching function

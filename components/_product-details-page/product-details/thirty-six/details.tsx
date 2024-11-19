@@ -561,9 +561,8 @@ const Details = ({ data, children, fetchStatus }: any) => {
           <h2 className="text-2xl text-[#212121] mb-3">{product?.name}</h2>
           <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
             <BDT />
-            {rangePriceShow && lowestPrice && highestPrice? (
-              <>
-              {`${lowestPrice} - ${highestPrice}`}</>
+            {rangePriceShow && lowestPrice && highestPrice && lowestPrice!= highestPrice ? (
+              <>{`${lowestPrice} - ${highestPrice}`}</>
             ) : (
               <>
                 {camp?.status === "active" ? campPrice : price}
