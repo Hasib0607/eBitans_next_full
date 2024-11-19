@@ -25,6 +25,7 @@ import { toast } from "react-toastify";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const Details = ({
   fetchStatus,
@@ -54,6 +55,10 @@ const Details = ({
   const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
+
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -611,6 +616,17 @@ const Details = ({
             </p>
           </div>
 
+          <div
+            className={
+              singleProductPageData?.custom_text_show
+                ? "flex gap-3 md:gap-12 flex-col md:flex-row font-semibold"
+                : "hidden"
+            }
+          >
+            <p>বই হাতে পেয়ে মূল্য পরিশোধের সুযোগ</p>
+            <p>সারাদেশে হোম ডেলিভারি</p>
+          </div>
+
           {/* unit  */}
           {!vrcolor &&
             Array.isArray(variant) &&
@@ -770,6 +786,24 @@ const AddCart = ({
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
 
+  const { design, store_id, headerSetting } = useTheme();
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
+
+  const styleCss = `
+  .cart-btn-details2 {
+      color:  ${design?.header_color};
+      background: transparent;
+      border: 2px solid ${design?.header_color};
+  }
+      .cart-btn-details2:hover {
+        color:  ${design?.header_color};
+        background: ${design?.text_color};
+        border: 2px solid ${design?.header_color};
+    }
+`;
+
   // Function to extract the 'referral' parameter from the URL
   const getReferralCodeFromURL = () => {
     const params = new URLSearchParams(window.location.search); // Get all URL parameters
@@ -823,6 +857,7 @@ const AddCart = ({
   return (
     <>
       <div className="">
+        <style>{styleCss}</style>
         <div className=" w-max flex items-center ">
           <button
             className="px-4 py-3 border border-gray-100 text-xl bg-gray-50 text-black"
@@ -858,12 +893,16 @@ const AddCart = ({
               type="submit"
               className={buttonTwentyThree}
             >
-              + ADD TO CART
+              {singleProductPageData?.order_korun_btn? "অর্ডার করুন": "+ ADD TO CART"}
             </button>
           )}
         </div>
         <Link href="/checkout">
-          <button onClick={onClick} type="submit" className={buttonTwentyThree}>
+          <button
+            onClick={onClick}
+            type="submit"
+            className="cart-btn-details2 font-bold py-[11px] w-48"
+          >
             {button || "BUY NOW"}
           </button>
         </Link>

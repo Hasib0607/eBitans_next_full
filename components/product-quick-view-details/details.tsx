@@ -26,14 +26,10 @@ import {
 import { toast } from "react-toastify";
 import getReferralCode from "@/utils/getReferralCode";
 import { HSlider } from "../_product-details-page/product-details/eight/slider";
-import { Colors, ColorsOnly, Sizes, Units } from "../_product-details-page/product-details/three/imageVariations";
 import { getQuickViewProductDetails } from "@/lib";
+import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 
-
-const Details = ({
-  updateData,
-  item
-}: any) => {
+const Details = ({ updateData, item }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
@@ -68,8 +64,8 @@ const Details = ({
     const checkStorage = localStorage.getItem("referralObj");
     let referralObj;
 
-    console.log("Store and data chnage")
-    
+    console.log("Store and data chnage");
+
     try {
       // Check if 'referralObj' exists and is valid JSON
       if (checkStorage) {
@@ -133,18 +129,19 @@ const Details = ({
   };
 
   useEffect(() => {
-    console.log("Variant and color chnage")
+    console.log("Variant and color chnage");
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
-  
+
   useEffect(() => {
-    console.log("Store and data chnage")
+    console.log("Store and data chnage");
     setLoad(true);
     // declare the async data fetching function
     const fetchData = async () => {
       // get the data from the api
-      const { product, variant, vrcolor } = await getQuickViewProductDetails(updateData);
-    
+      const { product, variant, vrcolor } =
+        await getQuickViewProductDetails(updateData);
+
       const response = await getCampaignProduct(product, store_id);
       if (!response?.error) {
         setCamp(response);

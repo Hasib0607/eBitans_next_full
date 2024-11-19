@@ -56,10 +56,10 @@ const TwentyThree = ({ data, updatedData }: any) => {
   return (
     <div
       className={`sm:container px-5 bg-white ${
-        store_id !== 1850 ? "xl:px-24" : ""
+        store_id !== 8590 ? "xl:px-24" : ""
       }`}
     >
-      {store_id !== 1850 && (
+      {store_id !== 8590 && (
         <div className="flex items-center gap-x-1 text-gray-500 text-sm mt-5">
           <Link href="/">
             <p>Home</p>
@@ -69,7 +69,7 @@ const TwentyThree = ({ data, updatedData }: any) => {
         </div>
       )}
       <style>{styleCss}</style>
-      {store_id !== 1850 ? (
+      {store_id !== 8590 ? (
         <Details
           fetchStatus={fetchStatus}
           product={product}
@@ -152,8 +152,8 @@ const TwentyThree = ({ data, updatedData }: any) => {
         <VideoPlayer videoUrl={product?.video_link} />
       )}
 
-      {store_id !== 1850 && <Related product={relatedProducts} />}
-      {store_id === 1850 && (
+      {store_id !== 8590 && <Related product={relatedProducts} />}
+      {store_id === 8590 && (
         <div className="w-full block lg:hidden py-3">
           <RelatedProduct product={relatedProducts} />
         </div>

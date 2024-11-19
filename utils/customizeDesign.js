@@ -51,7 +51,7 @@ export const customizeCheckout = [
   {
     // checkout twenty-one (kiddy shop)
     id: 9030,
-    cash_hide: "hidden"
+    cash_hide: "hidden",
   },
 ];
 
@@ -64,5 +64,11 @@ export const customizeSingleProductPage = [
     hidden: "hidden",
     heartbeat_animation: true,
     cart_btn2: true,
+  },
+  // for ucchas in single product page twenty-three
+  {
+    id: 9209,
+    custom_text_show: true,
+    order_korun_btn: true
   },
 ];

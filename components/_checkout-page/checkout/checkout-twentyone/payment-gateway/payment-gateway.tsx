@@ -15,7 +15,13 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
       <div className="">
         <div className="mt-5">
           <div className="col-span-6 sm:col-span-4">
-            <div className={checkoutData?.cash_hide? checkoutData?.cash_hide : "flex justify-between items-center pb-3"}>
+            <div
+              className={
+                checkoutData?.cash_hide
+                  ? checkoutData?.cash_hide
+                  : "flex justify-between items-center pb-3"
+              }
+            >
               <label
                 htmlFor="email-address"
                 className="block text-xl font-semibold text-gray-700"

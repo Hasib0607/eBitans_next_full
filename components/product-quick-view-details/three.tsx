@@ -13,7 +13,11 @@ import { useState } from "react";
 import { SwiperSlide } from "swiper/react";
 import Details from "./details";
 import VideoPlayer from "../_product-details-page/product-details/video-player";
-import { getProductDetails, getRelatedProducts, getReviews } from "../_product-details-page/apis";
+import {
+  getProductDetails,
+  getRelatedProducts,
+  getReviews,
+} from "../_product-details-page/apis";
 
 const Three = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
