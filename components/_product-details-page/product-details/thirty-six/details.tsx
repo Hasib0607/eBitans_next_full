@@ -131,7 +131,10 @@ const Details = ({ data, children, fetchStatus }: any) => {
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
     const fil = variant?.find((item: any) => item?.color === color);
-    setSize(sizeV ? fil : null);
+
+    if(!rangePriceShow){
+      setSize(sizeV ? fil : null);
+    }
   }, [color, variant, sizeV]);
 
   useEffect(() => {
@@ -204,7 +207,7 @@ const Details = ({ data, children, fetchStatus }: any) => {
   );
 
   // Include the base regular price itself in the array (in case no additional price applies)
-  combinedPrices.push(justRegularPrice);
+  // combinedPrices.push(justRegularPrice);
 
   // Sort the prices to get lowestPrice and highestPrice
   const sortedPrices = combinedPrices.sort((a: any, b: any) => a - b);
@@ -561,7 +564,10 @@ const Details = ({ data, children, fetchStatus }: any) => {
           <h2 className="text-2xl text-[#212121] mb-3">{product?.name}</h2>
           <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
             <BDT />
-            {rangePriceShow && lowestPrice && highestPrice && lowestPrice!= highestPrice ? (
+            {rangePriceShow &&
+            lowestPrice &&
+            highestPrice &&
+            lowestPrice != highestPrice ? (
               <>{`${lowestPrice} - ${highestPrice}`}</>
             ) : (
               <>

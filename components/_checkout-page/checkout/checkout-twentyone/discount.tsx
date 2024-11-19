@@ -1,6 +1,7 @@
 "use client";
 import useTheme from "@/hooks/use-theme";
 import { btnhover } from "@/site-settings/style";
+import { customizeCheckout } from "@/utils/customizeDesign";
 import { getDiscount } from "@/utils/get-discount";
 import axiosInstance from "@/utils/http/axios/axios-instance";
 import httpReq from "@/utils/http/axios/http.service";
@@ -24,7 +25,9 @@ const Discount = ({
   } = useForm();
   const { store_id, design, headerSetting, userData } = useTheme();
   const cartList = useSelector((state: any) => state.cart.cartList);
-
+  const customizeCheckoutData = customizeCheckout.find(
+    (item) => item.id == store_id
+  );
   const [loading, setLoading] = useState(false);
 
   const [couponAvailable, setCouponAvailable] = useState(false);
@@ -115,7 +118,7 @@ const Discount = ({
   useEffect(() => {
     if (
       headerSetting?.shipping_area_1 &&
-      (store_id === 3601 || store_id === 3904 || store_id === 5519)
+      (store_id === 3601 || store_id === 3904 || store_id === 5519 || store_id === 8590)
     ) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
     }
@@ -141,7 +144,7 @@ const Discount = ({
       >
         <div className={`px-4 py-5  space-y-6 sm:p-6`}>
           <div className="grid grid-cols-1 gap-6">
-            <div className="">
+            <div className={customizeCheckoutData?.cash_hide ? customizeCheckoutData?.cash_hide: ""}>
               <div className="flex flex-col justify-start gap-4 items-start pb-3">
                 <label
                   htmlFor="name"
@@ -150,7 +153,7 @@ const Discount = ({
                   {design?.template_id === "29" ||
                   store_id === 3601 ||
                   store_id === 3904 ||
-                  store_id === 5519
+                  store_id === 5519 
                     ? "শিপিং এরিয়া"
                     : "Shipping Area"}
                 </label>
@@ -167,8 +170,9 @@ const Discount = ({
                         // checked={
                         //   store_id === 3601 ||
                         //   store_id === 3904 ||
-                        //   store_id === 5519
+                        //   store_id === 5519 ||
                         // }
+                        defaultChecked={customizeCheckoutData?.checked? customizeCheckoutData?.checked: false}
                         className="mr-2"
                       />
                       <label
@@ -223,11 +227,7 @@ const Discount = ({
               </div>
             </div>
 
-            {store_id !== 3601 &&
-              store_id !== 3904 &&
-              store_id !== 4633 &&
-              store_id !== 5519 &&
-              store_id !== 6357 &&
+            {
               couponAvailable && (
                 <div className="">
                   <div className="flex sm:flex-row flex-col gap-4 items-start sm:items-center pb-3 ">
