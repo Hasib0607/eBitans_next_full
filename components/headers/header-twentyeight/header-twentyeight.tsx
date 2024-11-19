@@ -173,7 +173,7 @@ const HeaderTwentyEight = ({ headerSetting }: any) => {
               ) : (
                 <Link href="/">
                   <img
-                    className="h-auto w-40 overflow-hidden"
+                    className="h-auto w-20 overflow-hidden"
                     src={imgUrl + headerSetting?.logo}
                     alt="logo"
                   />
@@ -219,11 +219,12 @@ const HeaderTwentyEight = ({ headerSetting }: any) => {
             </div>
             <div className="flex items-center gap-x-5">
               <div className="flex items-center gap-2">
-                {/* <div className="flex items-center gap-1">
-                  <a href={`tel:+88${headerSetting?.phone}`}>
-                    <span>{headerSetting?.phone}</span>
-                  </a>
-                </div> */}
+                <div className="items-center gap-1 md:hidden block">
+                  <p>
+                    <FaPhoneSquareAlt className="inline text-xl" />{" "}
+                    {headerSetting?.phone}
+                  </p>
+                </div>
                 <div
                   onClick={() => setCartOpen(!cartOpen)}
                   className="flex flex-col justify-center items-center relative lg:cursor-pointer"
