@@ -118,9 +118,7 @@ const Discount = ({
   useEffect(() => {
     if (
       headerSetting?.shipping_area_1 &&
-      (store_id === 3601 ||
-        store_id === 3904 ||
-        store_id === 5519)
+      (store_id === 3601 || store_id === 3904 || store_id === 5519)
     ) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
     }
