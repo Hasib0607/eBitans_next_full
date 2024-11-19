@@ -720,7 +720,6 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick, variant }: any) => {
-
   const { makeid, store_id, headerSetting, design } = useTheme();
   const { data, error } = useHeaderSettings();
 
@@ -788,11 +787,10 @@ const AddCart = ({ setQty, qty, onClick, variant }: any) => {
   }
     `;
 
-const buttonSeven =
-  "text-lg font-semibold relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black min-w-[220px] text-center button-single-product hover:shadow-none duration-500";
-const buttonThirtyFive =
-  "promo-bg text-lg font-semibold relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black min-w-[220px] text-center button-single-product1 hover:shadow-none duration-500";
-
+  const buttonSeven =
+    "text-lg font-semibold relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black min-w-[220px] text-center button-single-product hover:shadow-none duration-500";
+  const buttonThirtyFive =
+    "promo-bg text-lg font-semibold relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black min-w-[220px] text-center button-single-product1 hover:shadow-none duration-500";
 
   return (
     <div className="py-5">
@@ -816,7 +814,7 @@ const buttonThirtyFive =
       </div>
       <div className="flex flex-wrap items-center gap-5 mt-5">
         <button className={buttonThirtyFive} onClick={onClick}>
-          Add to bag
+          Order Now
         </button>
         <Link href="/checkout">
           {" "}

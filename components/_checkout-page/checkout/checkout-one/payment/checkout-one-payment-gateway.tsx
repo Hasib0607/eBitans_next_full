@@ -62,7 +62,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 onChange={(e) => setSelectPayment(e.target.value)}
                 className="mr-2"
               />
-              <img src={bkashLogo.src} className="h-8 mr-2" alt="bkashLogo" />
+              {headerSetting?.bkash_text || <img src={bkashLogo.src} className="h-8 mr-2" alt="bkashLogo" />}
             </label>
           )}
 
@@ -84,7 +84,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                   onChange={(e) => setSelectPayment(e.target.value)}
                   className="mr-2"
                 />
-                Cash On Delivery
+                {headerSetting?.cod_text || "Cash On Delivery"}
                 <FaTruck className="ml-2" />
               </label>
               {selectPayment === "cod" && (
@@ -112,7 +112,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 onChange={(e) => setSelectPayment(e.target.value)}
                 className="mr-2"
               />
-              Advance Payment
+              {headerSetting?.ap_text || "Advance Payment"}
             </label>
           )}
         </div>

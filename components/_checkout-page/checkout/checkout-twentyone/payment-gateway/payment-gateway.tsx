@@ -52,7 +52,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 >
                   <div className="flex justify-between lg:cursor-pointer">
                     <h3 className="font-semibold tracking-wider">
-                      {"SSL Commerz"}
+                      SSL Commerz
                     </h3>
                   </div>
                   <input
@@ -84,12 +84,13 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                       checkoutData?.full_payment
                     ) : (
                       <div className="flex gap-2">
-                        <img
-                          src={bkashLogo.src}
-                          className=" h-8 "
-                          alt="bkashLogo"
-                        />
-                        {/* <h3 className='font-semibold tracking-wider'>{"Bkash Payment"}</h3> */}
+                        {headerSetting?.bkash_text || (
+                          <img
+                            src={bkashLogo.src}
+                            className="h-8 mr-2"
+                            alt="bkashLogo"
+                          />
+                        )}
                       </div>
                     )}
                   </div>
@@ -124,9 +125,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                   >
                     <div className="flex justify-between items-center lg:cursor-pointer">
                       <h3 className="font-semibold tracking-wider">
-                        {design?.template_id === "29"
-                          ? "ক্যাশ অন ডেলিভারি"
-                          : "Cash On Delivery"}
+                        {headerSetting?.cod_text || "Cash On Delivery"}
                       </h3>
                     </div>
 
@@ -155,13 +154,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 >
                   <div className="flex justify-between items-center lg:cursor-pointer">
                     <h3 className="font-semibold tracking-wider">
-                      {design?.template_id === "29"
-                        ? "অ্যাডভান্স পেমেন্ট"
-                        : `${
-                            checkoutData?.partial_payment
-                              ? checkoutData?.partial_payment
-                              : "Advance Payment"
-                          }`}
+                      {headerSetting?.ap_text || "Advance Payment"}
                     </h3>
                   </div>
 
