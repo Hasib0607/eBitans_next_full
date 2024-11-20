@@ -77,6 +77,6 @@ export const customizeModalPopup = [
   // for mrchickenbd.com, modal will not open
   {
     id: 9208,
-    modal_not_show: true
+    modal_not_show: true,
   },
 ];

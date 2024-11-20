@@ -166,15 +166,15 @@ const Card58 = ({ item }: any) => {
     // if (item?.variant.length !== 0) {
     //   setView(!view);
     // } else {
-      filterOfferProduct(item);
+    filterOfferProduct(item);
     // }
   };
   const buy_now = () => {
     // if (item?.variant.length !== 0) {
     //   setView(!view);
     // } else {
-      filterOfferProduct(item);
-      router.push("/checkout");
+    filterOfferProduct(item);
+    router.push("/checkout");
     // }
   };
 

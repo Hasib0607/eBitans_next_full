@@ -1,0 +1,10 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://ebitans.com.bd
+
+# Sitemaps
+Sitemap: https://ebitans.com.bd/sitemap.xml
+

@@ -24,9 +24,7 @@ import { customizeModalPopup } from "@/utils/customizeDesign";
 
 const Card63 = ({ item }: any) => {
   const { design, store_id, makeid } = useTheme();
-  const modalPopup = customizeModalPopup.find(
-    (item) => item.id == store_id
-  );
+  const modalPopup = customizeModalPopup.find((item) => item.id == store_id);
   const { data, error } = useHeaderSettings();
 
   const [camp, setCamp] = useState<any>(null);
@@ -214,7 +212,7 @@ const Card63 = ({ item }: any) => {
       filterOfferProduct(item);
       return;
     }
-    
+
     setView(!view);
   };
 
