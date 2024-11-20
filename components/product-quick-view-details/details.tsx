@@ -765,6 +765,7 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   if (error) return <p>error from header setting</p>;
 
   return (
+    <>
     <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
       <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
         <div
@@ -791,5 +792,11 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
         )}
       </div>
     </div>
+      <div>
+        <button onClick={onClick} className={buttonOne}>
+          {"Add to Cart"}
+        </button>
+      </div>
+    </>
   );
 };
