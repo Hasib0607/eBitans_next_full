@@ -10,7 +10,6 @@ const FooterDefault = ({ headerSetting, category }: any) => {
     <a
       href={`${process.env.NEXT_PUBLIC_BASE}/design/homepage/footer`}
       target="_blank"
-      rel="noopener noreferrer"
     >
       <div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:justify-between justify-items-start px-5 xl:px-60 bg-yellow-300 py-10 gap-5 overflow-hidden items-center my-10 ">
