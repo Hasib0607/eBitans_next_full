@@ -26,23 +26,14 @@ import {
 import { toast } from "react-toastify";
 import getReferralCode from "@/utils/getReferralCode";
 import { HSlider } from "../_product-details-page/product-details/eight/slider";
-import {
-  Colors,
-  ColorsOnly,
-  Sizes,
-  Units,
-} from "../_product-details-page/product-details/twenty-eight/imageVariations";
+import { getQuickViewProductDetails } from "@/lib";
+import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 
-const DetailTwentyEight = ({product_id, slug, children}: any) => {
+const Details = ({ updateData, item }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
 
-  const data = {product_id, slug, store_id};
-
   const dispatch = useDispatch();
-  const [product, setProduct] = useState<any>({});
-  const [variant, setVariant] = useState<any>({});
-  const [vrcolor, setVrcolor] = useState<any>({});
-  const [sizeV, setSizeV] = useState<any>({});
+  const [product, setProduct] = useState<any>(item);
 
   const [filterV, setFilterV] = useState<any>([]);
   const [load, setLoad] = useState(false);
@@ -57,9 +48,13 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
+  const [variant, setVariant] = useState<any>([]);
+  const [vrcolor, setVrcolor] = useState<any>([]);
 
   // image selector
   const [activeImg, setActiveImg] = useState("");
+
+  const sizeV = variant?.find((item: any) => item?.size !== null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -68,6 +63,8 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
     // Get the referral object from localStorage
     const checkStorage = localStorage.getItem("referralObj");
     let referralObj;
+
+    console.log("Store and data chnage");
 
     try {
       // Check if 'referralObj' exists and is valid JSON
@@ -132,27 +129,18 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
   };
 
   useEffect(() => {
+    console.log("Variant and color chnage");
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
 
   useEffect(() => {
+    console.log("Store and data chnage");
     setLoad(true);
     // declare the async data fetching function
     const fetchData = async () => {
-      data["store_id"] = store_id;
       // get the data from the api
-      const { product, variant, vrcolor } = await httpReq.post(
-        "product-details",
-        data
-      );
-      setVariant(variant);
-      setVrcolor(vrcolor);
-
-
-      ///Code will be here....
-
-      const getSizeV = variant?.find((item: any) => item?.size !== null);
-      setSizeV(getSizeV);
+      const { product, variant, vrcolor } =
+        await getQuickViewProductDetails(updateData);
 
       const response = await getCampaignProduct(product, store_id);
       if (!response?.error) {
@@ -161,14 +149,18 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
         setCamp(null);
       }
       setProduct(product);
+      setVariant(variant);
+      setVrcolor(vrcolor);
       setLoad(false);
       setColor(null);
       setSize(null);
     };
 
     // call the function
-    fetchData();
-  }, [data, store_id]);
+    fetchData()
+      // make sure to catch any error
+      .catch(console.error);
+  }, [store_id]);
 
   if (load) {
     return (
@@ -555,6 +547,7 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
               </span>
             )}{" "}
           </div>
+          {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
           {product?.discount_type === "percent" &&
             product?.discount_price > 0 && (
               <p className="text-md text-gray-400">
@@ -570,13 +563,14 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
             {product?.description?.length > 250 && "..."}
           </p>
         </div>
+
         <div className="text-black flex items-center gap-2 mb-5">
           <VscCreditCard size={20} />
           <p>Cash on Delivery available</p>
         </div>
 
         {/* unit  */}
-        {!vrcolor && variant && variant?.length !== 0 && variant[0]?.unit && (
+        {!vrcolor && variant && variant?.length > 0 && variant[0]?.unit && (
           <Units
             unit={unit}
             setUnit={setUnit}
@@ -717,14 +711,12 @@ const DetailTwentyEight = ({product_id, slug, children}: any) => {
             </div>
           )}
         </div>
-
-        {children}
       </div>
     </div>
   );
 };
 
-export default DetailTwentyEight;
+export default Details;
 
 const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   const { data, error } = useHeaderSettings();

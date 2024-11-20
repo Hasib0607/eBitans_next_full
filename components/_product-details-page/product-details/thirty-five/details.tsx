@@ -719,9 +719,9 @@ const Details = ({
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
-  // const { store_id } = useTheme()
+const AddCart = ({ setQty, qty, onClick, variant }: any) => {
 
+  const { makeid, store_id, headerSetting, design } = useTheme();
   const { data, error } = useHeaderSettings();
 
   const [referralCode, setReferralCode] = useState("");
@@ -774,8 +774,29 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
     return <p>error from header settings</p>;
   }
 
+  const styleCss = `
+  .promo-bg {
+      color:  ${design?.text_color};
+      background: ${design?.header_color};
+      border: 1px solid ${design?.text_color};
+  }
+  .button-single-product{
+      box-shadow: 5px 5px 0px 2px ${design?.header_color};
+  }
+  .button-single-product1{
+      box-shadow: 5px 5px 0px 2px ${design?.text_color};
+  }
+    `;
+
+const buttonSeven =
+  "text-lg font-semibold relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black min-w-[220px] text-center button-single-product hover:shadow-none duration-500";
+const buttonThirtyFive =
+  "promo-bg text-lg font-semibold relative z-[2] py-3 text-center duration-500 bg-white border border-black text-black min-w-[220px] text-center button-single-product1 hover:shadow-none duration-500";
+
+
   return (
     <div className="py-5">
+      <style>{styleCss}</style>
       <div className="flex border border-gray-300 w-max rounded-md">
         <div
           className="h-12 w-12 flex justify-center items-center rounded-l-md font-semibold lg:cursor-pointer transition-all duration-300 ease-linear"
@@ -794,7 +815,7 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, variant }: any) => {
         </div>
       </div>
       <div className="flex flex-wrap items-center gap-5 mt-5">
-        <button className={buttonSeven} onClick={onClick}>
+        <button className={buttonThirtyFive} onClick={onClick}>
           Add to bag
         </button>
         <Link href="/checkout">

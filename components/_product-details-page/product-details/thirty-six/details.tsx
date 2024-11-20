@@ -46,7 +46,17 @@ const Details = ({ data, children, fetchStatus }: any) => {
   // image selector
   const [activeImg, setActiveImg] = useState("");
 
+  const [price, setPrice] = useState<any>(0);
+  const [campPrice, setCampPrice] = useState<any>(0);
+  const [rangePriceShow, setRangePriceShow] = useState(true);
+
   const sizeV = variant?.find((item: any) => item.size !== null);
+
+  const regularPrice =
+    parseInt(product?.regular_price) +
+    (size?.additional_price ? parseInt(size?.additional_price) : 0) +
+    (unit?.additional_price ? parseInt(unit?.additional_price) : 0) +
+    (color?.additional_price ? parseInt(color?.additional_price) : 0);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -121,7 +131,10 @@ const Details = ({ data, children, fetchStatus }: any) => {
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
     const fil = variant?.find((item: any) => item?.color === color);
-    setSize(sizeV ? fil : null);
+
+    if (!rangePriceShow) {
+      setSize(sizeV ? fil : null);
+    }
   }, [color, variant, sizeV]);
 
   useEffect(() => {
@@ -150,11 +163,12 @@ const Details = ({ data, children, fetchStatus }: any) => {
       setVrcolor(vrcolor);
       setQty(1);
       setLoad(false);
-      setUnit(!sizeVariant && !vrcolor ? variant[0] : null);
-      setSize(sizeVariant ? sizeVariant : null);
-      setColor(
-        !sizeVariant && vrcolor ? variant[0] : vrcolor ? vrcolor[0] : null
-      );
+      setRangePriceShow(true);
+      // setUnit(!sizeVariant && !vrcolor ? variant[0] : null);
+      // setSize(sizeVariant ? sizeVariant : null);
+      // setColor(
+      //   !sizeVariant && vrcolor ? variant[0] : vrcolor ? vrcolor[0] : null
+      // );
     };
 
     // call the function
@@ -162,6 +176,45 @@ const Details = ({ data, children, fetchStatus }: any) => {
       // make sure to catch any error
       .catch(console.error);
   }, [data, store_id]);
+
+  useEffect(() => {
+    const newPrice = getPrice(
+      regularPrice,
+      product?.discount_price,
+      product?.discount_type
+    );
+    setPrice(newPrice);
+
+    const newCampPrice = getPrice(
+      newPrice,
+      parseInt(camp?.discount_amount),
+      camp?.discount_type
+    );
+    setCampPrice(newCampPrice);
+    setRangePriceShow(false);
+  }, [regularPrice]);
+
+  const justRegularPrice = parseInt(product?.regular_price || 0);
+
+  // Extract all additional_price values, ensuring they are numbers
+  const additionalPrices = variant.map((v: any) =>
+    parseInt(v.additional_price || 0)
+  );
+
+  // Create an array of prices by adding each additional price to justRegularPrice
+  const combinedPrices = additionalPrices.map(
+    (price: any) => justRegularPrice + price
+  );
+
+  // Include the base regular price itself in the array (in case no additional price applies)
+  // combinedPrices.push(justRegularPrice);
+
+  // Sort the prices to get lowestPrice and highestPrice
+  const sortedPrices = combinedPrices.sort((a: any, b: any) => a - b);
+
+  // Lowest and highest prices
+  const lowestPrice = sortedPrices[0];
+  const highestPrice = sortedPrices[sortedPrices.length - 1];
 
   const router = useRouter();
 
@@ -176,45 +229,6 @@ const Details = ({ data, children, fetchStatus }: any) => {
       </div>
     );
   }
-
-  const regularPrice =
-    parseInt(product?.regular_price) +
-    (size?.additional_price ? parseInt(size?.additional_price) : 0) +
-    (unit?.additional_price ? parseInt(unit?.additional_price) : 0) +
-    (color?.additional_price ? parseInt(color?.additional_price) : 0);
-
-  const price = getPrice(
-    regularPrice,
-    product?.discount_price,
-    product?.discount_type
-  );
-
-
-  const justRegularPrice = parseInt(product?.regular_price || 0);
-
-  // Extract all additional_price values, ensuring they are numbers
-  const additionalPrices = variant.map((v: any) =>
-    parseInt(v.additional_price || 0)
-  );
-
-  // Create an array of prices by adding each additional price to justRegularPrice
-  const combinedPrices = additionalPrices.map(
-    (price: any) => justRegularPrice + price
-  );
-
-  // Sort the prices to get lowestPrice and highestPrice
-  const sortedPrices = combinedPrices.sort((a: any, b: any) => a - b);
-
-  // Lowest and highest prices
-  const lowestPrice = sortedPrices[0];
-  const highestPrice = sortedPrices[sortedPrices.length - 1];
-
-
-  const campPrice = getPrice(
-    price,
-    parseInt(camp?.discount_amount),
-    camp?.discount_type
-  );
 
   const productQuantity =
     size?.quantity ||
@@ -548,25 +562,28 @@ const Details = ({ data, children, fetchStatus }: any) => {
         </div>
         <div className="lg:col-span-4 space-y-8 font-seven">
           <h2 className="text-2xl text-[#212121] mb-3">{product?.name}</h2>
-
           <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
             <BDT />
-            {lowestPrice && highestPrice
-              ? camp?.status === "active"
-                ? campPrice
-                : `${lowestPrice} - ${highestPrice}`
-              : camp?.status === "active"
-                ? campPrice
-                : price}
-            {camp?.status !== "active" &&
-            (product?.discount_type === "no_discount" ||
-              product?.discount_price === "0.00") ? (
-              " "
+            {rangePriceShow &&
+            lowestPrice &&
+            highestPrice &&
+            lowestPrice != highestPrice ? (
+              <>{`${lowestPrice} - ${highestPrice}`}</>
             ) : (
-              <span className="text-gray-500 font-thin line-through text-xl font-seven">
-                <BDT />
-                {regularPrice}
-              </span>
+              <>
+                {camp?.status === "active" ? campPrice : price}
+
+                {camp?.status !== "active" &&
+                (product?.discount_type === "no_discount" ||
+                  product?.discount_price === "0.00") ? (
+                  " "
+                ) : (
+                  <span className="text-gray-500 font-thin line-through text-xl font-seven">
+                    <BDT />
+                    {regularPrice}
+                  </span>
+                )}
+              </>
             )}
           </div>
 

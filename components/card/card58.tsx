@@ -13,10 +13,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
-import DetailTwentyEight from "../product-quick-view-details/twenty-eight";
-import { useQuery } from "@tanstack/react-query";
-import { getProductDetails } from "@/lib";
-import Details from "../_product-details-page/product-details/three/details";
+import Details from "../product-quick-view-details/details";
+// import Details from "../_product-details-page/product-details/three/details";
 
 const Card58 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
@@ -270,10 +268,14 @@ const Card58 = ({ item }: any) => {
         <p className="">কার্টে যোগ করুন</p>
       </div>
       <QuikView open={view} setOpen={setView}>
-        {/* <DetailTwentyEight 
-        data={{ product_id:item.id, slug:item.slug }}
-        /> */}
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

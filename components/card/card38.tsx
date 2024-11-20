@@ -13,8 +13,6 @@ import { toast } from "react-toastify";
 import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
 
-// import Details from '../../layouts/productDetails/fourteen/Details';
-
 const Card38 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
   const [camp, setCamp] = useState<any>(null);

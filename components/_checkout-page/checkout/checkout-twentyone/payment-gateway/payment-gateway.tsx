@@ -2,7 +2,7 @@
 import React from "react";
 import bkashLogo from "@/assets/paymentMethodLogo/bkashLogo.png";
 import useTheme from "@/hooks/use-theme";
-import { customizeCheckout } from "@/utils/customizeDesign";
+import { customizeCheckout, customizeFooter } from "@/utils/customizeDesign";
 
 const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
   const { design, headerSetting, module, store_id } = useTheme();
@@ -16,7 +16,13 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
       <div className="">
         <div className="mt-5">
           <div className="col-span-6 sm:col-span-4">
-            <div className="flex justify-between items-center pb-3">
+            <div
+              className={
+                checkoutData?.cash_hide
+                  ? checkoutData?.cash_hide
+                  : "flex justify-between items-center pb-3"
+              }
+            >
               <label
                 htmlFor="email-address"
                 className="block text-xl font-semibold text-gray-700"
@@ -102,37 +108,43 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 </label>
               )}
 
-              {headerSetting?.cod === "active" && (
-                <label
-                  style={{
-                    backgroundColor:
-                      selectPayment === "cod" ? design?.header_color : "#fff",
-                    color:
-                      selectPayment === "cod" ? design?.text_color : "#000",
-                  }}
-                  className={`py-2 px-5 rounded-full space-y-2 sm:w-max w-full transition-colors duration-300 relative flex justify-between border border-gray-300`}
-                >
-                  <div className="flex justify-between items-center lg:cursor-pointer">
-                    <h3 className="font-semibold tracking-wider">
-                      {design?.template_id === "29"
-                        ? "ক্যাশ অন ডেলিভারি"
-                        : "Cash On Delivery"}
-                    </h3>
-                  </div>
+              <div
+                className={
+                  checkoutData?.cash_hide ? checkoutData?.cash_hide : ""
+                }
+              >
+                {headerSetting?.cod === "active" && (
+                  <label
+                    style={{
+                      backgroundColor:
+                        selectPayment === "cod" ? design?.header_color : "#fff",
+                      color:
+                        selectPayment === "cod" ? design?.text_color : "#000",
+                    }}
+                    className={`py-2 px-5 rounded-full space-y-2 sm:w-max w-full transition-colors duration-300 relative flex justify-between border border-gray-300`}
+                  >
+                    <div className="flex justify-between items-center lg:cursor-pointer">
+                      <h3 className="font-semibold tracking-wider">
+                        {design?.template_id === "29"
+                          ? "ক্যাশ অন ডেলিভারি"
+                          : "Cash On Delivery"}
+                      </h3>
+                    </div>
 
-                  <input
-                    className="
+                    <input
+                      className="
                                     hidden
                                     checked:focus:bg-black
                                     checked:focus:border-black
                                     checked:focus:ring-black"
-                    name="address_type"
-                    type="radio"
-                    value={"cod"}
-                    onChange={(e) => setSelectPayment(e.target.value)}
-                  />
-                </label>
-              )}
+                      name="address_type"
+                      type="radio"
+                      value={"cod"}
+                      onChange={(e) => setSelectPayment(e.target.value)}
+                    />
+                  </label>
+                )}
+              </div>
               {advancePay?.status === "1" && (
                 <label
                   style={{
