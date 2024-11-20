@@ -618,8 +618,8 @@ const Details = ({
             <h1 className="text-xl font-medium pb-2">Description</h1>
             <div className="mb-5">
               <p className="text-black apiHtml">
-                {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-                {product?.description?.length > 250 && "..."}
+                {parse(`${product?.description}`)}{" "}
+                {/* {product?.description?.length > 250 && "..."} */}
               </p>
             </div>
           </div>

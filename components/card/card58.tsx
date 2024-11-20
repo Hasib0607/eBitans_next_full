@@ -14,12 +14,13 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import { customizeModalPopup } from "@/utils/customizeDesign";
 // import Details from "../_product-details-page/product-details/three/details";
 
 const Card58 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
   const [camp, setCamp] = useState<any>(null);
-
+  const modalPopup = customizeModalPopup.find((item) => item.id == store_id);
   const dispatch = useDispatch();
   const router = useRouter();
 
@@ -162,20 +163,39 @@ const Card58 = ({ item }: any) => {
     });
   };
 
-  const add_cart_item = () => {
-    // if (item?.variant.length !== 0) {
-    //   setView(!view);
-    // } else {
-    filterOfferProduct(item);
-    // }
-  };
+  // const add_cart_item = () => {
+  //   // if (item?.variant.length !== 0) {
+  //   //   setView(!view);
+  //   // } else {
+  //   filterOfferProduct(item);
+  //   // }
+  // };
   const buy_now = () => {
-    // if (item?.variant.length !== 0) {
-    //   setView(!view);
-    // } else {
-    filterOfferProduct(item);
-    router.push("/checkout");
-    // }
+    if (modalPopup?.modal_not_show && item?.variant.length !== 0) {
+      setView(!view);
+      return;
+    }
+
+    if (item?.variant.length !== 0) {
+      // setView(!view);
+      router.push("/product/" + item?.id + "/" + item?.slug);
+    } else {
+      filterOfferProduct(item);
+      router.push("/checkout");
+    }
+  };
+
+  const add_cart_item = () => {
+    if (modalPopup?.modal_not_show && item?.variant.length !== 0) {
+      setView(!view);
+      return;
+    }
+
+    if (item?.variant.length !== 0) {
+      router.push("/product/" + item?.id + "/" + item?.slug);
+    } else {
+      filterOfferProduct(item);
+    }
   };
 
   return (
