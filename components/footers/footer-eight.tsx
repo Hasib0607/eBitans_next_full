@@ -190,7 +190,6 @@ const FooterEight = ({
               <a
                 href="https://ebitans.com/"
                 target="_blank"
-                rel="noopener noreferrer"
                 className="font-semibold text-red-700 menu-hover"
               >
                 eBitans

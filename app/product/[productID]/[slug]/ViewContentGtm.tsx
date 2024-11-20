@@ -52,7 +52,7 @@ const ViewContentGtm = ({ product }: any) => {
 
   useEffect(() => {
     sendEvent();
-  }, [sendEvent]);
+  }, []);
 
   return null;
 };

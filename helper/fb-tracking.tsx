@@ -14,9 +14,9 @@ export const Purchase = (value: any, currency: any) => {
   }
 };
 
-export const AddToCart = (item: any, content_ids: any, content_type: any) => {
+export const AddToCart = (item: any) => {
   if (typeof window !== "undefined" && window.fbq) {
-    window.fbq("track", "AddToCart", { item, content_ids, content_type });
+    window.fbq("track", "AddToCart", { item });
   } else {
     console.warn("Facebook Pixel (fbq) is not initialized.");
   }

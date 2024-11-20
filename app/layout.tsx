@@ -15,9 +15,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import SetFavicon from "@/utils/useSetFavicon";
 import { Metadata } from "next";
 // import AllMobileBottomMenu from "./mobileBottomMenu";
-
 const inter = Inter({ subsets: ["latin"] });
-
 export async function generateMetadata(): Promise<Metadata> {
   const url = getUrl();
   const subDomain = await getSubdomainName(url, "headersetting");
@@ -26,7 +24,6 @@ export async function generateMetadata(): Promise<Metadata> {
   const title = `${websiteName}`;
   const description = headersetting?.short_description;
   const keywords = "eBitans, eCommerce builder platform";
-
   return {
     title: `${title}`,
     description: description,
@@ -34,7 +31,6 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: keywords,
   };
 }
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -49,7 +45,6 @@ export default async function RootLayout({
   const googleAnalytics = headersetting?.gtm?.google_analytics;
   const googleSearchConsole = headersetting?.gtm?.google_search_console;
   const error = subDomain?.error;
-
   return (
     <html lang="en">
       <head>
@@ -71,6 +66,7 @@ export default async function RootLayout({
         )}
         {googleSearchConsole && (
           <meta name="google-site-verification" content={googleSearchConsole} />
+          
         )}
       </head>
       <body className={`${inter.className} lg2 `}>
