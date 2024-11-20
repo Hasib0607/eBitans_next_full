@@ -171,36 +171,32 @@ const Card58 = ({ item }: any) => {
   //   // }
   // };
   const buy_now = () => {
-
     if (modalPopup?.modal_not_show && item?.variant.length !== 0) {
       setView(!view);
       return;
     }
-  
+
     if (item?.variant.length !== 0) {
       // setView(!view);
       router.push("/product/" + item?.id + "/" + item?.slug);
     } else {
-    filterOfferProduct(item);
-    router.push("/checkout");
+      filterOfferProduct(item);
+      router.push("/checkout");
     }
   };
-  
+
   const add_cart_item = () => {
     if (modalPopup?.modal_not_show && item?.variant.length !== 0) {
       setView(!view);
       return;
     }
-  
+
     if (item?.variant.length !== 0) {
-      router.push("/product/" + item?.id + "/" + item?.slug);   
+      router.push("/product/" + item?.id + "/" + item?.slug);
     } else {
       filterOfferProduct(item);
     }
   };
-
- 
-
 
   return (
     <div className="group relative">

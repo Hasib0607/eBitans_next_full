@@ -766,32 +766,34 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
 
   return (
     <>
-    <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
-      <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
-        <div
-          className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-l-md hover:text-white font-semibold transition-all duration-300 ease-linear"
-          onClick={decNum}
-        >
-          <MinusIcon width={15} />
+      <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
+        <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
+          <div
+            className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-l-md hover:text-white font-semibold transition-all duration-300 ease-linear"
+            onClick={decNum}
+          >
+            <MinusIcon width={15} />
+          </div>
+          <div className="h-12 w-24  flex justify-center items-center">
+            {qty}
+          </div>
+          <div
+            className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
+            onClick={incNum}
+          >
+            <PlusIcon width={15} />
+          </div>
         </div>
-        <div className="h-12 w-24  flex justify-center items-center">{qty}</div>
-        <div
-          className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
-          onClick={incNum}
-        >
-          <PlusIcon width={15} />
+        <div className="">
+          {product?.quantity === "0" ? (
+            <button className={buttonOne}>Out of Stock</button>
+          ) : (
+            <button className={buttonOne} onClick={onClick}>
+              {button || "Add to cart"}
+            </button>
+          )}
         </div>
       </div>
-      <div className="">
-        {product?.quantity === "0" ? (
-          <button className={buttonOne}>Out of Stock</button>
-        ) : (
-          <button className={buttonOne} onClick={onClick}>
-            {button || "Add to cart"}
-          </button>
-        )}
-      </div>
-    </div>
       <div>
         <button onClick={onClick} className={buttonOne}>
           {"Add to Cart"}

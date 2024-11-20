@@ -213,7 +213,7 @@ const Card63 = ({ item }: any) => {
       router.push("/product/" + item?.id + "/" + item?.slug);
       return;
     }
-  
+
     if (item?.variant.length !== 0) {
       setView(!view);
     } else {
