@@ -77,7 +77,7 @@ const Single = ({ item, setSearch }: any) => {
           alt=""
         />
         <div className="flex flex-col justify-between p-4 leading-normal">
-          <p className="mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-white capitalize">
+          <p className="mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-gray-600 capitalize">
             {item.name.slice(0, 100)}
           </p>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">

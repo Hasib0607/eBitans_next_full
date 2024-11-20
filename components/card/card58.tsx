@@ -163,19 +163,19 @@ const Card58 = ({ item }: any) => {
   };
 
   const add_cart_item = () => {
-    if (item?.variant.length !== 0) {
-      setView(!view);
-    } else {
-      filterOfferProduct(item);
-    }
+    // if (item?.variant.length !== 0) {
+    //   setView(!view);
+    // } else {
+    filterOfferProduct(item);
+    // }
   };
   const buy_now = () => {
-    if (item?.variant.length !== 0) {
-      setView(!view);
-    } else {
-      filterOfferProduct(item);
-      router.push("/checkout");
-    }
+    // if (item?.variant.length !== 0) {
+    //   setView(!view);
+    // } else {
+    filterOfferProduct(item);
+    router.push("/checkout");
+    // }
   };
 
   return (

@@ -80,7 +80,7 @@ const Single = ({ item, setSearch }: any) => {
         <Link
           href={"/product/" + item?.id + "/" + item?.slug}
           onClick={() => setSearch("")}
-          className="mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-white capitalize"
+          className="mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-gray-600 capitalize"
         >
           {item.name.slice(0, 100)}
         </Link>

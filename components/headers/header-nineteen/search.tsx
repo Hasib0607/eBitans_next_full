@@ -96,7 +96,7 @@ const Single = ({ item, setSearch, setSearchInput }: any) => {
           alt=""
         />
         <div className="flex flex-col justify-between p-4 leading-normal">
-          <div className="mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-white">
+          <div className="mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-gray-700">
             {item.name.slice(0, 100)}
           </div>
           <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">

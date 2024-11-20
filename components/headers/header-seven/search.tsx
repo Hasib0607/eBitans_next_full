@@ -82,25 +82,24 @@ const Single = ({ item, setSearch, setSearchInput }: any) => {
       href={"/product/" + item?.id + "/" + item?.slug}
       onClick={() => {
         setSearch("");
-        setSearchInput(false);
       }}
     >
       <motion.div
         initial={{ y: -20 }}
         animate={{ y: 0 }}
         transition={{ ease: "easeOut", duration: 1 }}
-        className="flex flex-col border-b-2 items-center bg-white md:flex-row z-40 px-4 border border-gray-100 last:border-b-0"
+        className="flex items-center bg-white rounded-lg border shadow-md flex-row mx-4 hover:bg-gray-100 dark:bg-gray-100 dark:hover:bg-gray-200"
       >
         <img
-          className="object-cover h-24 rounded-t-lg w-24 "
+          className="object-cover w-16 h-16 sm:w-24 sm:h-24 rounded-t-lg md:rounded-none md:rounded-l-lg"
           src={productImg + item?.image}
           alt=""
         />
         <div className="flex flex-col justify-between p-4 leading-normal">
-          <div className="mb-2 text-sm font-semibold tracking-tight text-gray-900 dark:text-white">
+          <div className="mb-2 text-sm font-semibold tracking-tight text-gray-700 dark:text-gray-800">
             {item.name.slice(0, 100)}
           </div>
-          <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+          <p className="mb-3 font-normal text-gray-700 dark:text-gray-800">
             <Taka tk={price} />
           </p>
         </div>

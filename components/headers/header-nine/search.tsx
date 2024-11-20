@@ -72,7 +72,7 @@ const Single = ({ item, setSearch }: any) => {
       initial={{ y: -20 }}
       animate={{ y: 0 }}
       transition={{ ease: "easeOut", duration: 1 }}
-      className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row z-40 mx-4 hover:bg-gray-100 dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700"
+      className="flex flex-col items-center bg-white rounded-lg border shadow-md md:flex-row z-40 mx-4 hover:bg-gray-100 dark:border-gray-400 dark:bg-gray-100 dark:hover:bg-gray-200"
     >
       <img
         className="object-cover h-24 rounded-t-lg w-24 md:rounded-none md:rounded-l-lg"
@@ -83,11 +83,11 @@ const Single = ({ item, setSearch }: any) => {
         <Link
           href={"/product/" + item?.id + "/" + item?.slug}
           onClick={() => setSearch("")}
-          className="mb-2 text-lg font-semibold tracking-tight text-gray-900 dark:text-white"
+          className="mb-2 text-lg font-semibold tracking-tight  text-gray-700 dark:text-gray-800"
         >
           {item.name.slice(0, 100)}
         </Link>
-        <p className="mb-3 font-normal text-gray-700 dark:text-gray-400">
+        <p className="mb-3 font-normal text-gray-700 dark:text-gray-800">
           <Taka tk={price} />
         </p>
       </div>

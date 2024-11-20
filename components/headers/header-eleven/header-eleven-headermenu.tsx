@@ -10,11 +10,11 @@ import { BiLogOut } from "react-icons/bi";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import Link from "next/link";
-import Search from "../header-ten/search";
 import { imgUrl } from "@/site-settings/siteUrl";
 import { headerBg } from "@/site-settings/color";
 import useTheme from "@/hooks/use-theme";
 import { logout } from "@/redux/features/auth.slice";
+import Search from "../header-four/search";
 
 const HeaderElevenHeaderMenu = () => {
   const { isLoggedIn } = useSelector((state: any) => state.auth);
