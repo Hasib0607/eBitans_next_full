@@ -64,8 +64,6 @@ const Details = ({ updateData, item }: any) => {
     const checkStorage = localStorage.getItem("referralObj");
     let referralObj;
 
-    console.log("Store and data chnage");
-
     try {
       // Check if 'referralObj' exists and is valid JSON
       if (checkStorage) {
@@ -129,12 +127,10 @@ const Details = ({ updateData, item }: any) => {
   };
 
   useEffect(() => {
-    console.log("Variant and color chnage");
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
 
   useEffect(() => {
-    console.log("Store and data chnage");
     setLoad(true);
     // declare the async data fetching function
     const fetchData = async () => {
@@ -743,7 +739,6 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
-            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {

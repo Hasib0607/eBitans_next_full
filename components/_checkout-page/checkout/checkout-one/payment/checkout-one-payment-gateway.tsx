@@ -62,7 +62,9 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 onChange={(e) => setSelectPayment(e.target.value)}
                 className="mr-2"
               />
-              {headerSetting?.bkash_text || <img src={bkashLogo.src} className="h-8 mr-2" alt="bkashLogo" />}
+              {headerSetting?.bkash_text || (
+                <img src={bkashLogo.src} className="h-8 mr-2" alt="bkashLogo" />
+              )}
             </label>
           )}
 

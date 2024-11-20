@@ -20,10 +20,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import { customizeModalPopup } from "@/utils/customizeDesign";
 
 const Card63 = ({ item }: any) => {
   const { design, store_id, makeid } = useTheme();
-
+  const modalPopup = customizeModalPopup.find(
+    (item) => item.id == store_id
+  );
   const { data, error } = useHeaderSettings();
 
   const [camp, setCamp] = useState<any>(null);
@@ -207,11 +210,12 @@ const Card63 = ({ item }: any) => {
   };
 
   const add_cart_item = () => {
-    if (item?.variant.length !== 0) {
-      setView(!view);
-    } else {
+    if (modalPopup?.modal_not_show || item?.variant.length === 0) {
       filterOfferProduct(item);
+      return;
     }
+    
+    setView(!view);
   };
 
   const { button } = data?.data?.custom_design?.product?.[0] || {};
