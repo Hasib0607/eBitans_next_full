@@ -21,6 +21,11 @@ export const customizeFooter = [
     id: 8727,
     free_shipping: true,
   },
+  {
+    // footer twenty-one for kiddyshop
+    id: 9030,
+    payment_hide: true,
+  },
 ];
 
 export const customizeHeader = [

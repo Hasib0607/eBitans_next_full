@@ -9,6 +9,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
   const advancePay = module?.find((item: any) => item?.modulus_id === 106);
 
   const checkoutData = customizeCheckout.find((item) => item.id == store_id);
+  const customizeFooter = customizeCheckout.find((item) => item.id == store_id);
 
   return (
     <>
