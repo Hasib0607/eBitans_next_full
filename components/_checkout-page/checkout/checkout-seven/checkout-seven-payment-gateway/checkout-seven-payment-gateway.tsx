@@ -43,7 +43,7 @@ const CheckOutSevenPaymentGateway = ({
                 >
                   <div className="flex justify-between lg:cursor-pointer">
                     <h3 className="font-semibold tracking-wider">
-                      {"SSL Commerz"}
+                      SSL Commerz
                     </h3>
                   </div>
                   <input
@@ -68,11 +68,13 @@ const CheckOutSevenPaymentGateway = ({
                 >
                   <div className="flex justify-center ">
                     <div>
-                      <img
-                        src={bkashLogo.src}
-                        className=" max-h-8 "
-                        alt="bkashLogo"
-                      />
+                      {headerSetting?.bkash_text || (
+                        <img
+                          src={bkashLogo.src}
+                          className="h-8 mr-2"
+                          alt="bkashLogo"
+                        />
+                      )}
                     </div>
                   </div>
                   <input
@@ -101,7 +103,7 @@ const CheckOutSevenPaymentGateway = ({
                 >
                   <div className="flex justify-between">
                     <h3 className="font-semibold tracking-wider">
-                      {"Cash On Delivery"}
+                      {headerSetting?.cod_text || "Cash On Delivery"}
                     </h3>
                   </div>
 
@@ -130,7 +132,7 @@ const CheckOutSevenPaymentGateway = ({
                 >
                   <div className="flex justify-between lg:cursor-pointer">
                     <h3 className="font-semibold tracking-wider">
-                      {"Advance Payment"}
+                      {headerSetting?.ap_text || "Advance Payment"}
                     </h3>
                   </div>
 

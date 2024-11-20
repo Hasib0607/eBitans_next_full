@@ -357,13 +357,14 @@ const Card63 = ({ item }: any) => {
 
         {/* for modal open  */}
         <QuikView open={view} setOpen={setView} design={design}>
-          <Details 
+          <Details
             item={item}
             updateData={{
               product_id: item?.id,
               slug: item.slug,
               store_id,
-            }} />
+            }}
+          />
         </QuikView>
       </div>
     </div>
