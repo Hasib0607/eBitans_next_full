@@ -780,7 +780,6 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
 
 `;
 
-
   const handleClick = () => {
     if (onClick) {
       onClick(); // Call the passed `onClick` handler if it exists.
@@ -815,16 +814,22 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
         </div>
       </div>
       <div className="flex gap-5 mb-5">
-      <div>
-        <button onClick={onClick} className="font-bold btn-add-to-cart rounded-md w-60 py-3 text-center">
-          {"Add to Cart"}
-        </button>
-      </div>
-      <div className="">
+        <div>
+          <button
+            onClick={onClick}
+            className="font-bold btn-add-to-cart rounded-md w-60 py-3 text-center"
+          >
+            {"Add to Cart"}
+          </button>
+        </div>
+        <div className="">
           {product?.quantity === "0" ? (
             <button className={buttonOne}>Out of Stock</button>
           ) : (
-            <button className="font-bold btn-buy-now rounded-md w-60 py-3 text-center" onClick={handleClick}>
+            <button
+              className="font-bold btn-buy-now rounded-md w-60 py-3 text-center"
+              onClick={handleClick}
+            >
               {button || "Buy Now"}
             </button>
           )}

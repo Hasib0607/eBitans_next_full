@@ -32,7 +32,6 @@ const PurchaseGtm = () => {
         event: "purchase",
         pageType: "order-received",
         ecommerce: {
-          
           items: cartList.map((item: any) => ({
             item_name: item?.name,
             item_category_id: item?.category_id,
