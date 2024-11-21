@@ -17,7 +17,10 @@ import { GiHamburgerMenu } from "react-icons/gi";
 
 export default function HeaderMid() {
   const { menu, headerSetting, category, design } = useTheme();
-  const { logo, phone } = headerSetting;
+  // const { logo, phone } = headerSetting;
+
+  const logo = headerSetting?.logo;
+  const phone = headerSetting?.phone;
 
   const { user } = useSelector((state: any) => state.auth);
 
