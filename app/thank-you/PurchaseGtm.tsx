@@ -25,30 +25,47 @@ const PurchaseGtm = () => {
     setTotal(parsedTotal);
   }, [searchParams]);
 
+  // const totalTax = cartList.reduce((accumulator: any, item: any) => {
+  //   return accumulator + item?.tax_rate * item?.qty;
+  // }, 0);
+
+  // const totalShippingFee = cartList.reduce((accumulator: any, item: any) => {
+  //   return accumulator + item.shipping_fee * item?.qty;
+  // }, 0);
+
+  const items = cartList.map((item: any, index: number) => ({
+    item_name: item?.name,
+    item_category_id: item?.category_id,
+    item_category: item?.category || "",
+    item_category2: item.subcategory || "General",
+    item_id: item?.SKU,
+    discount: parseFloat(item.discount_price) || 0,
+    item_variant: item.color || "default",
+    price: parseFloat(item.price) || 0,
+    quantity: item?.qty,
+    tax_rate: parseFloat(item.tax_rate) || 0,
+    shipping_fee: item.shipping_fee || 0,
+  }));
+
   useEffect(() => {
     if (total !== null && currency) {
+      
       // Send the Google Tag Manager event
       sendGTMEvent({
         event: "purchase",
+        gtm: {
+          uniqueEventId: Math.floor(Math.random() * 1000),
+          start: Date.now(),
+        },
         pageType: "order-received",
         ecommerce: {
-          items: cartList.map((item: any) => ({
-            item_name: item?.name,
-            item_category_id: item?.category_id,
-            item_category: item?.category || "",
-            item_category2: item.subcategory || "General",
-            item_id: item?.SKU,
-            discount: parseFloat(item.discount_price) || 0,
-            item_variant: item.color || "default",
-            price: parseFloat(item.price) || 0,
-            quantity: item?.qty,
-            tax_rate: parseFloat(item.tax_rate) || 0,
-            shipping_fee: item.shipping_fee || 0,
-          })),
+          value: total,
+          currency: currency,
+          items: items,
         },
       });
 
-      // Call the `Purchase` tracking function
+      // Call Facebook's Purchase function
       Purchase(total, currency);
     }
   }, [total, currency, cartList]);
