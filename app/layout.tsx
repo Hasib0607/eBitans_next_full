@@ -66,7 +66,6 @@ export default async function RootLayout({
         )}
         {googleSearchConsole && (
           <meta name="google-site-verification" content={googleSearchConsole} />
-          
         )}
       </head>
       <body className={`${inter.className} lg2 `}>

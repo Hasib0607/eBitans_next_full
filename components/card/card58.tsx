@@ -171,7 +171,7 @@ const Card58 = ({ item }: any) => {
   //   // }
   // };
   const buy_now = () => {
-    if (modalPopup?.modal_not_show && item?.variant.length !== 0) {
+    if (modalPopup?.modal_show && item?.variant.length !== 0) {
       setView(!view);
       return;
     }
@@ -186,7 +186,7 @@ const Card58 = ({ item }: any) => {
   };
 
   const add_cart_item = () => {
-    if (modalPopup?.modal_not_show && item?.variant.length !== 0) {
+    if (modalPopup?.modal_show && item?.variant.length !== 0) {
       setView(!view);
       return;
     }

@@ -9,14 +9,17 @@ const ViewContentGtm = ({ product }: any) => {
   const { headerSetting } = useTheme();
   const currency = headerSetting?.code;
   const items = {
+    id: product.SKU || "",
     item_id: product.SKU || "",
     item_name: product.name || "",
     currency: headerSetting?.code,
+    price: parseFloat(product.regular_price) || 0,
+    item_brand: product.brand || "",
+    google_business_vertical: "retail",
     discount: parseFloat(product.discount_price) || 0,
     item_category: product.category || "General",
     item_category2: product.subcategory || "General",
     item_variant: product.slug || "default",
-    price: parseFloat(product.regular_price) || 0,
     quantity: parseInt(product.quantity, 10) || 1,
     tax_rate: parseFloat(product.tax_rate) || 0,
     shipping_fee: parseFloat(product.shipping_fee) || 0,
@@ -24,10 +27,13 @@ const ViewContentGtm = ({ product }: any) => {
   const sendEvent = useCallback(() => {
     sendGTMEvent({
       event: "view_item",
+      pageType: "product-page",
+      productType: "simple",
       ecommerce: {
         items: [items],
-        currency,
       },
+      value: parseFloat(product.regular_price) || 0,
+      currency: headerSetting?.code || "BDT",
     });
 
     // const currency = headerSetting?.code;

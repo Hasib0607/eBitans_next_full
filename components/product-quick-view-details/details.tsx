@@ -28,6 +28,7 @@ import getReferralCode from "@/utils/getReferralCode";
 import { HSlider } from "../_product-details-page/product-details/eight/slider";
 import { getQuickViewProductDetails } from "@/lib";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { useRouter } from "next/navigation";
 
 const Details = ({ updateData, item }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
@@ -716,6 +717,8 @@ export default Details;
 
 const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   const { data, error } = useHeaderSettings();
+  const router = useRouter();
+  const { design } = useTheme();
 
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
@@ -760,6 +763,30 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
     }
   };
 
+  const styleCss = `
+    .btn-add-to-cart{
+        color:   ${design?.text_color};
+        background:${design?.header_color};
+    }
+    .btn-buy-now{
+        color:   ${design?.header_color};
+        background:${design?.text_color};
+    }
+    .btn-hover:hover {
+        color:   ${design?.text_color};
+        background:${design?.header_color};
+        border: 1px solid transparent;
+    }
+
+`;
+
+  const handleClick = () => {
+    if (onClick) {
+      onClick(); // Call the passed `onClick` handler if it exists.
+    }
+    router.push("/checkout"); // Navigate to the checkout page.
+  };
+
   const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
 
   if (error) return <p>error from header setting</p>;
@@ -767,6 +794,7 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   return (
     <>
       <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
+        <style>{styleCss}</style>
         <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
           <div
             className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-l-md hover:text-white font-semibold transition-all duration-300 ease-linear"
@@ -784,20 +812,28 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
             <PlusIcon width={15} />
           </div>
         </div>
+      </div>
+      <div className="flex gap-5 mb-5">
+        <div>
+          <button
+            onClick={onClick}
+            className="font-bold btn-add-to-cart rounded-md w-60 py-3 text-center"
+          >
+            {"Add to Cart"}
+          </button>
+        </div>
         <div className="">
           {product?.quantity === "0" ? (
             <button className={buttonOne}>Out of Stock</button>
           ) : (
-            <button className={buttonOne} onClick={onClick}>
-              {button || "Add to cart"}
+            <button
+              className="font-bold btn-buy-now rounded-md w-60 py-3 text-center"
+              onClick={handleClick}
+            >
+              {button || "Buy Now"}
             </button>
           )}
         </div>
-      </div>
-      <div>
-        <button onClick={onClick} className={buttonOne}>
-          {"Add to Cart"}
-        </button>
       </div>
     </>
   );

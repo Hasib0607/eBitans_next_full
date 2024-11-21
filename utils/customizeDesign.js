@@ -86,6 +86,6 @@ export const customizeModalPopup = [
   },
   {
     id: 9317 && 7948,
-    modal_not_show: true,
+    modal_show: true,
   },
 ];

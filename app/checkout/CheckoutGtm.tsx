@@ -24,20 +24,22 @@ const CheckoutGtm = () => {
     shipping_fee: item.shipping_fee || 0,
   }));
 
+  const totalPrice = cartList.reduce((accumulator: any, item: any) => {
+    return accumulator + item.price * item.qty;
+  }, 0);
+  // const sku = cartList[0].SKU;
+  const sku = cartList.map((item: { SKU: any }) => item.SKU);
+
   const checkoutEvent = useCallback(() => {
     sendGTMEvent({
-      event: "checkout",
-      currency,
-      value: {
-        items,
+      event: "begin_checkout",
+      pageType: "Checkout",
+      ecommerce: {
+        currency: headerSetting?.code || "BDT",
+        value: parseFloat(totalPrice) || 0,
+        items: [items],
       },
     });
-
-    const totalPrice = cartList.reduce((accumulator: any, item: any) => {
-      return accumulator + item.price * item.qty;
-    }, 0);
-    // const sku = cartList[0].SKU;
-    const sku = cartList.map((item: { SKU: any }) => item.SKU);
 
     Checkout(cartList, totalPrice, sku, currency);
   }, [cartList, headerSetting]);
