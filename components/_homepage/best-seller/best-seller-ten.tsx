@@ -1,3 +1,4 @@
+"use client";
 import Card21 from "@/components/card/card21";
 import SectionHeadingSeventeen from "@/components/section-heading/section-heading-seventeen";
 import useHeaderSettings from "@/utils/query/use-header-settings";
@@ -5,7 +6,7 @@ import useHeaderSettings from "@/utils/query/use-header-settings";
 const BestSellerTen = ({ best_sell_product, item, design, store_id }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 

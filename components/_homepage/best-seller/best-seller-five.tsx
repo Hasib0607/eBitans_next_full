@@ -11,7 +11,7 @@ const BestSellerFive = ({ best_sell_product, design, store_id }: any) => {
   const next1 = "best_seller_Next1";
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const bestSellProduct = cDesign?.best_sell_product?.[0] || null;
   if (!bestSellProduct) return null;
 

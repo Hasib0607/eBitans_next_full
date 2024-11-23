@@ -1,3 +1,4 @@
+"use client";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import Card17 from "../card/card17";
 import SectionHeadingSeven from "../section-heading/section-heading-seven";
@@ -5,7 +6,7 @@ import SectionHeadingSeven from "../section-heading/section-heading-seven";
 const NewArrivalProductTwelve = ({ product, design, store_id }: any) => {
   let arrayItem = product.slice(0, 10);
   const { data, error } = useHeaderSettings();
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
   if (error) {

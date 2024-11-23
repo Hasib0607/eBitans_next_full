@@ -829,7 +829,7 @@ const AddCart = ({ setQty, qty, onClick, product, store_id, buyNow }: any) => {
     setQty(e.target.value);
   };
 
-  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+  const { button } = data?.custom_design?.single_product_page?.[0] || {};
 
   if (error) {
     return <p>error from header settings</p>;

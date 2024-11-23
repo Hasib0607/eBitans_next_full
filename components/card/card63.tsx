@@ -221,7 +221,7 @@ const Card63 = ({ item }: any) => {
     }
   };
 
-  const { button } = data?.data?.custom_design?.product?.[0] || {};
+  const { button } = data?.custom_design?.product?.[0] || {};
   if (error) {
     return <p> error from headersettings</p>;
   }

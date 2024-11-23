@@ -1,3 +1,4 @@
+"use client";
 import Card59 from "@/components/card/card59";
 import SectionHeadingThirtyThree from "@/components/section-heading/section-heading-thirtythree";
 import DefaultSlider from "@/components/slider/default-slider";
@@ -48,7 +49,7 @@ const BestSellerThirtyThree = ({
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 

@@ -1,3 +1,4 @@
+"use client";
 import Card56 from "@/components/card/card56";
 import DefaultSlider from "@/components/slider/default-slider";
 import useHeaderSettings from "@/utils/query/use-header-settings";
@@ -35,7 +36,7 @@ const BestSellerTwentySix = ({ best_sell_product, design, store_id }: any) => {
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
