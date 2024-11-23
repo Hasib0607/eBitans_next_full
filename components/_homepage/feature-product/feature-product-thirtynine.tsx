@@ -2,11 +2,11 @@
 import Card67 from "@/components/card/card67";
 import DefaultSlider from "@/components/slider/default-slider";
 import useHeaderSettings from "@/utils/query/use-header-settings";
-import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+// import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Pagination } from "swiper/modules";
 import { SwiperSlide } from "swiper/react";
-import ScrollTrigger from "react-scroll-trigger";
+// import ScrollTrigger from "react-scroll-trigger";
 
 const FeatureProductThirtyNine = ({
   feature_product,
@@ -56,8 +56,14 @@ const FeatureProductThirtyNine = ({
   const cDesign = data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
   // const { title = "Default Title", title_color = "#000" } = featuredProduct;
+
   const title = featuredProduct?.title;
   const title_color = featuredProduct?.title_color;
+
+  if (error) {
+    return <p> error from headersettings</p>;
+  }
+
 
   if (feature_product?.length === 0) {
     return null;
@@ -72,7 +78,7 @@ const FeatureProductThirtyNine = ({
             style={{ color: title_color }}
             className="font-semibold text-[24px]"
           >
-            {title}
+            {title || "Feature Products"}
           </p>
         </div>
 
