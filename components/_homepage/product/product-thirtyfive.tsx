@@ -38,7 +38,7 @@ const ProductThirtyFive = ({ product, design, store_id }: any) => {
   const nextEl = "product-next";
 
   const { data, error } = useHeaderSettings();
-  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  const { title, title_color } = data?.custom_design?.product?.[0] || {};
   if (error) {
     return <p> error from headersettings</p>;
   }

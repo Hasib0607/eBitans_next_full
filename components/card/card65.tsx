@@ -76,7 +76,7 @@ const Card65 = ({ item, design, store_id }: any) => {
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const featureProduct = cDesign?.feature_product?.[0] || {};
 
   const { title = "Default title", title_color = "#000" } = featureProduct;

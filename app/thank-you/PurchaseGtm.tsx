@@ -49,7 +49,6 @@ const PurchaseGtm = () => {
 
   useEffect(() => {
     if (total !== null && currency) {
-      
       // Send the Google Tag Manager event
       sendGTMEvent({
         event: "purchase",

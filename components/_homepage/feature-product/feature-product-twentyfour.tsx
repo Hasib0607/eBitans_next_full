@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Card49 from "@/components/card/card49";
 import SectionHeadingTwentyFour from "@/components/section-heading/section-heading-twenty-four";
 import useHeaderSettings from "@/utils/query/use-header-settings";
@@ -27,7 +27,7 @@ const FeatureProductTwentyFour = ({
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = featuredProduct;
 

@@ -18,7 +18,6 @@
 
 // export default useHeaderSettings;
 
-
 import { getClientUrl } from "@/app/product/utils/getClientUrl";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -32,7 +31,10 @@ const useHeaderSettings = () => {
       throw new Error("API URL or Client URL is missing");
     }
 
-    const response = await axios.post(`${apiUrl}header-settings?name=${clientUrl}`);
+    const response = await axios.post(
+      `${apiUrl}header-settings?name=${clientUrl}`
+    );
+    
     return response.data;
   };
 
@@ -48,4 +50,3 @@ const useHeaderSettings = () => {
 };
 
 export default useHeaderSettings;
-

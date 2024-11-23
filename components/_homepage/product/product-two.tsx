@@ -38,7 +38,7 @@ const ProductTwo = ({ category, design, store_id }: any) => {
     }
     `;
 
-  const { title, title_color } = data?.data?.custom_design?.product?.[0] || {};
+  const { title, title_color } = data?.custom_design?.product?.[0] || {};
   if (error) {
     return <p> error from headersettings</p>;
   }

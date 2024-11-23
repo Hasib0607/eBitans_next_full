@@ -5,7 +5,7 @@ import useHeaderSettings from "@/utils/query/use-header-settings";
 const DefaultFeaturedCategory = ({ category }: any) => {
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const featureCategory = cDesign?.feature_category?.[0] || {};
   const { title, title_color } = featureCategory;
   return (

@@ -11,14 +11,14 @@ const CopyrightAll = ({ headerSetting }: any) => {
         <Link href="/" className="font-semibold text-red-700">
           {headerSetting?.website_name}
         </Link>
-        | Developed by
+        | Developed by{" "}
         <a
           href="https://ebitans.com/"
           target="_blank"
           // rel="noopener noreferrer"
           className="font-semibold text-red-700"
         >
-          eBitans
+           eBitans
         </a>
       </p>
     </div>

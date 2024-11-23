@@ -1,3 +1,4 @@
+"use client";
 import "./best-seller-seventeen.css";
 import image from "./bg-img/17/show_divider_2_69x61.webp";
 
@@ -23,7 +24,7 @@ const BestSellerSeventeen = ({ best_sell_product, design, store_id }: any) => {
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 

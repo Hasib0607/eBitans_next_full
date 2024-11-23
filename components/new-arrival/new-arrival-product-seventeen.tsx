@@ -15,7 +15,7 @@ import img1 from "./bg-img/17/bg.webp";
 
 const NewArrivalProductSeventeen = ({ product, design, store_id }: any) => {
   const { data, error } = useHeaderSettings();
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const newArrivalProduct = cDesign?.new_arrival_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = newArrivalProduct;
   if (error) {

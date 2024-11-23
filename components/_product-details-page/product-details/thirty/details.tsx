@@ -847,7 +847,7 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
 
   `;
 
-  const { button } = data?.data?.custom_design?.single_product_page?.[0] || {};
+  const { button } = data?.custom_design?.single_product_page?.[0] || {};
 
   if (error) {
     return <p>error from header settings</p>;

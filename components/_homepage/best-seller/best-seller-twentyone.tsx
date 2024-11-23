@@ -41,7 +41,7 @@ const BestSellerTwentyOne = ({
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 

@@ -33,7 +33,7 @@ const FeatureProductTwelve = ({ feature_product, design }: any) => {
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
-  const cDesign = data?.data?.custom_design || {};
+  const cDesign = data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = featuredProduct;
 
