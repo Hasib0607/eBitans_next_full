@@ -34,7 +34,7 @@ const useHeaderSettings = () => {
     const response = await axios.post(
       `${apiUrl}header-settings?name=${clientUrl}`
     );
-    
+
     return response.data;
   };
 

@@ -71,19 +71,28 @@ export const ColorsOnly = ({
   );
 };
 
-export const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
+export const Sizes = ({ size, setSize, variant,activeImg, setActiveImg }: any) => {
   return (
     <div className="flex flex-col gap-2">
       <h3 className="font-medium text-base mb-2">Sizes:</h3>
       <div className="flex flex-wrap gap-2">
-        {variant?.map((item: any, id: any) => (
-          <Size
-            key={id}
-            item={item}
-            select={size}
-            setSelect={setSize}
-            setActiveImg={setActiveImg}
-          />
+        {variant
+          ?.filter((item: any) => item?.image) // Filter out objects where 'image' is null
+          .map((item: any, id: any) => (
+          <div
+          key={id}
+            onClick={() => {
+              setSize(item);
+              setActiveImg(item?.image);
+            }}
+            className="focus:outline-none w-[50px] cursor-pointer"
+          >
+            <img
+              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? "border-red-800" : "border-gray-400"}`}
+              src={productImg + item?.image}
+              alt=""
+            />
+          </div>
         ))}
       </div>
     </div>
@@ -103,19 +112,21 @@ export const Colors = ({
     <div className="flex flex-col gap-2">
       <h3 className="font-medium mb-2 text-base">Colors:</h3>
       <div className="flex flex-wrap gap-2">
-        {vrcolorimage?.map((item: any, id: any) => (
+        {vrcolorimage
+        ?.filter((item: any) => item?.color_image) // Exclude items where 'color_image' is null
+        ?.map((item: any, id: any) => (
           <div
             onClick={() => {
               setColor(item?.color);
               setSize(null);
-              setActiveImg(item?.image);
+              setActiveImg(item?.color_image);
             }}
             key={id}
             className="focus:outline-none w-[50px] cursor-pointer"
           >
             <img
-              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? "border-red-800" : "border-gray-400"}`}
-              src={productImg + item?.image}
+              className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${color == item?.color ? "border-red-800" : "border-gray-400"}`}
+              src={productImg + item?.color_image}
               alt=""
             />
           </div>
