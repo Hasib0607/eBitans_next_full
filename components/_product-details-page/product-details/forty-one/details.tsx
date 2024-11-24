@@ -660,6 +660,7 @@ const Details = ({
               size={size}
               setSize={setSize}
               variant={filterV}
+              activeImg={activeImg}
               setActiveImg={setActiveImg}
             />
           )}
@@ -684,6 +685,7 @@ const Details = ({
               size={size}
               setSize={setSize}
               variant={filterV}
+              activeImg={activeImg}
               setActiveImg={setActiveImg}
             />
           )}

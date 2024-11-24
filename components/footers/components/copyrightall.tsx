@@ -18,7 +18,7 @@ const CopyrightAll = ({ headerSetting }: any) => {
           // rel="noopener noreferrer"
           className="font-semibold text-red-700"
         >
-           eBitans
+          eBitans
         </a>
       </p>
     </div>
