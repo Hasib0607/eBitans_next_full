@@ -64,7 +64,6 @@ const FeatureProductThirtyNine = ({
     return <p> error from headersettings</p>;
   }
 
-
   if (feature_product?.length === 0) {
     return null;
   }
