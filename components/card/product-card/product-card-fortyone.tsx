@@ -13,10 +13,11 @@ const ProductCardFortyOne = ({ item }: any) => {
   const { makeid, store_id } = useTheme();
   const router = useRouter();
   const dispatch = useDispatch();
-
   const [open, setOpen] = useState(false);
   const [result, setResult] = useState<any>({});
   const [camp, setCamp] = useState<any>(null);
+
+  const [variant, setVariant] = useState<any>([]);
 
   const price = getPrice(
     item?.regular_price,
@@ -39,6 +40,30 @@ const ProductCardFortyOne = ({ item }: any) => {
       camp?.discount_type
     )
   );
+
+
+
+
+  useEffect(() => {
+    const variantImage = item?.variant?.length > 0 && item?.variant?.[0]?.color == null ? true : false;
+
+    if(variantImage){
+      setVariant(item?.variant);
+    }else{
+        const uniqueColors = item?.variant?.reduce((acc:any, current:any) => {
+          if (!acc.some((item:any) => item.color === current.color)) {
+            acc.push({
+              ...current,
+              color: current.color,
+              image: current.color_image,
+            });
+          }
+          return acc;
+        }, []);
+        setVariant(uniqueColors);
+    }
+
+  }, [item]);
 
   useEffect(() => {
     async function handleCampaign() {
@@ -119,10 +144,11 @@ const ProductCardFortyOne = ({ item }: any) => {
             />
           </h6>
           <div className="flex flex-wrap gap-2 justify-center mt-4">
-            {item?.image?.map((imgSrc: string, index: number) => (
+            {variant?.map((item: any, index: number) => (
+              item?.image &&
               <img
                 key={index}
-                src={productImg + imgSrc}
+                src={productImg + item?.image}
                 alt=""
                 className="w-8 lg:w-12 rounded border border-red-700"
               />
