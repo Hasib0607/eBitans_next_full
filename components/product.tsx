@@ -125,16 +125,10 @@ const Product = ({
         <ProductTwenty product={product} category={category} design={design} />
       )}
       {theme === "twentyone" && (
-        <ProductTwentyOne
-          design={design}
-          category={category}
-        />
+        <ProductTwentyOne design={design} category={category} />
       )}
       {theme === "twentyfour" && (
-        <ProductTwentyFour
-          design={design}
-          category={category}
-        />
+        <ProductTwentyFour design={design} category={category} />
       )}
       {theme === "twentysix" && (
         <ProductTwentySix
