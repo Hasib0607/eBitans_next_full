@@ -125,7 +125,7 @@ const PrivacyPolicyPage = () => {
           )}
         </div>
       ) : (
-        <NotFoundPage /> // Render NotFoundPage if no data
+        null
       )}
       {contact && store_id === 3685 && (
         <div className="relative w-full mt-[100px]">

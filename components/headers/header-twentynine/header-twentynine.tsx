@@ -268,7 +268,7 @@ const HeaderTwentyNine = ({ headerSetting }: any) => {
         <div className="hidden lg:flex items-center sm:container px-5 py-4">
           <div>
             <ul className="lg:flex lg:flex-row lg:gap-8 hidden ">
-              {menu.map((item: any) => (
+              {/* {menu.map((item: any) => (
                 <div key={item.id} className="">
                   <li>
                     <Link href={"/" + item?.url}>
@@ -278,7 +278,7 @@ const HeaderTwentyNine = ({ headerSetting }: any) => {
                     </Link>
                   </li>
                 </div>
-              ))}
+              ))} */}
             </ul>
           </div>
         </div>
