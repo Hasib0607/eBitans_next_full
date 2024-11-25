@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import dynamic from "next/dynamic";
 import { Suspense, useEffect, useState } from "react";
 import BlogSection from "./blog/blog-section";
@@ -44,40 +44,40 @@ interface RenderSectionProps {
 }
 
 const RenderSection = ({ component, data }: RenderSectionProps) => {
-  const { slider,category, banner, testimonials, design, store_id, brand } = data;
+  const { slider, category, banner, testimonials, design, store_id, brand } =
+    data;
 
   const [renderData, setRenderData] = useState<any>({});
   const [loading, setLoading] = useState<any>(true);
 
-    useEffect(() => {
-      const getRenderData = (domain: any) => {
-          const head =
-              "product,best_sell_product,feature_product";
-        
-            axios.post(
-              process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
-              {
-                name: domain,
-                head: head,
-              }
-            ).then((response) => {
-              setLoading(false);
-              const responseData = response?.data || {};
+  useEffect(() => {
+    const getRenderData = (domain: any) => {
+      const head = "product,best_sell_product,feature_product";
 
-              setRenderData(responseData);
-            }).then((err) => {
-              // console.log("err")
-            })
-      };
+      axios
+        .post(process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name", {
+          name: domain,
+          head: head,
+        })
+        .then((response) => {
+          setLoading(false);
+          const responseData = response?.data || {};
 
-      if (typeof window !== "undefined") {
-        const domain = window.location.host.startsWith("www.")
-          ? window.location.host.slice(4)
-          : window.location.host;
-  
-        getRenderData(domain);
-      }
-    }, []);
+          setRenderData(responseData);
+        })
+        .then((err) => {
+          // console.log("err")
+        });
+    };
+
+    if (typeof window !== "undefined") {
+      const domain = window.location.host.startsWith("www.")
+        ? window.location.host.slice(4)
+        : window.location.host;
+
+      getRenderData(domain);
+    }
+  }, []);
 
   const renderTestimonialAndBlog = () => {
     if (component === "testimonial") {
@@ -95,7 +95,6 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
         </>
       );
     }
-
   };
 
   switch (component) {
@@ -105,7 +104,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     // add new design
     case "feature_category":
-      if(!loading){
+      if (!loading) {
         return (
           <FeaturedCategory
             theme={design?.feature_category}
@@ -116,7 +115,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
           />
         );
       }
-      
+
     case "banner":
       return (
         <Promo
@@ -137,15 +136,15 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     // add new design
     case "product":
-      if(!loading){
+      if (!loading) {
         return (
           <Product
             theme={design?.product}
             design={design}
             store_id={store_id}
-             product={renderData?.product || []}
-             best_sell_product={renderData?.best_sell_product || []}
-             feature_product={renderData?.feature_product || []}
+            product={renderData?.product || []}
+            best_sell_product={renderData?.best_sell_product || []}
+            feature_product={renderData?.feature_product || []}
             category={category}
           />
         );
@@ -153,7 +152,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
 
     // add new design
     case "new_arrival":
-      if(!loading){
+      if (!loading) {
         return (
           <NewArrival
             product={renderData?.product || []}
@@ -166,7 +165,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       }
     // add new design
     case "best_sell_product":
-      if(!loading){
+      if (!loading) {
         return (
           <BestSellerProduct
             theme={design?.best_sell_product}
@@ -180,7 +179,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       }
     //  add new design
     case "feature_product":
-      if(!loading){
+      if (!loading) {
         return (
           <FeatureProduct
             theme={design?.feature_product}
