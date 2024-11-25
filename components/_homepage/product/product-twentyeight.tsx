@@ -96,7 +96,7 @@ const ProductTwentyEight = ({
       <p className="text-center text-red-500">Error loading header settings.</p>
     );
   }
-
+console.log("categories", categories);
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
