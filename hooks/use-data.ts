@@ -44,15 +44,15 @@ const useData = () => {
   const [category, setCategory] = useState([]);
   const [subcategory, setSubcategory] = useState([]);
   const [slider, setSlider] = useState([]);
-  // const [product, setProduct] = useState([]);
+  const [product, setProduct] = useState([]);
   const [productByFirstCategory, setProductByFirstCategory] = useState([]);
-  // const [feature_product, set_feature_product] = useState([]);
-  // const [best_sell_product, set_best_sell_product] = useState([]);
+  const [feature_product, set_feature_product] = useState([]);
+  const [best_sell_product, set_best_sell_product] = useState([]);
   const [banner, setBanner] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [store_id, setStore_id] = useState(null);
   const [userData, setUser] = useState(null);
-  // const [offer, setOffer] = useState([]);
+  const [offer, setOffer] = useState([]);
   const [campaign, setCampaign] = useState([]);
   const [loading, setLoading] = useState("idle");
   const [store, setStore] = useState({});
@@ -82,8 +82,17 @@ const useData = () => {
 
   const [token, setToken] = useState("");
   const [v, setV] = useState<any>(null);
+  const [domain, setDomain] = useState("");
+
   useEffect(() => {
     if (typeof window !== "undefined") {
+      const getDomain = window.location.host.startsWith("www.")
+        ? window.location.host.slice(4)
+        : window.location.host;
+      if (getDomain) {
+        setDomain(getDomain);
+      }
+
       if (localStorage.getItem("persist:root")) {
         const auth = JSON.parse(localStorage.getItem("persist:root")!)?.auth;
 
@@ -139,7 +148,7 @@ const useData = () => {
         );
         setBookingData(data?.data);
       } catch (error) {
-        console.log(error, "error");
+        // console.log(error, "error");
       }
     }
     if (store_id) {
@@ -173,7 +182,7 @@ const useData = () => {
         }
       } catch (error) {
         // setError(error)
-        console.log(error, "error");
+        // console.log(error, "error");
       }
     }
     fetchData();
@@ -323,71 +332,73 @@ const useData = () => {
   // main home page api
 
   //check here
-  const fetchHeader = useCallback(
-    async (data: any) => {
-      const res = await axios.post(
-        process.env.NEXT_PUBLIC_API_URL + "getsubdomain/data",
-        data
-      );
-      const {
-        store,
-        store_id,
-        menu,
-        headersetting,
-        category,
-        subcategory,
-        slider,
-        // product,
-        // feature_product,
-        // best_sell_product,
-        banner,
-        testimonials,
-        design,
-        layout,
-        page,
-        // offer,
-        campaign,
-        brand,
-        productByFirstCategory,
-      } = res?.data;
-
-      if (token && v) {
-        const user = await httpReq.get("getuser");
-
-        setUser(user);
+  const fetchHeader = useCallback(async () => {
+    const res = await axios.post(
+      process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
+      {
+        name: domain,
       }
+    );
 
-      // set state with the result
+    const {
+      store,
+      store_id,
+      menu,
+      headersetting,
+      category,
+      subcategory,
+      slider,
+      product,
+      feature_product,
+      best_sell_product,
+      banner,
+      testimonials,
+      design,
+      layout,
+      page,
+      offer,
+      campaign,
+      brand,
+      productByFirstCategory,
+    } = res?.data;
+
+    if (token && v) {
+      const user = await httpReq.get("getuser");
+
+      setUser(user);
+    }
+
+    // set state with the result
+    if (res) {
       setHeaderSetting(headersetting);
       setMenu(menu);
       setPage(page);
       setCategory(category);
       setSubcategory(subcategory);
       setSlider(slider);
-      // setProduct(product);
-      // set_feature_product(feature_product);
-      // set_best_sell_product(best_sell_product);
+      setProduct(product);
+      set_feature_product(feature_product);
+      set_best_sell_product(best_sell_product);
       setBanner(banner);
       setTestimonials(testimonials);
       setStore_id(store_id);
       setDesign(design);
       setLayout(layout);
-      // setOffer(offer);
+      setOffer(offer);
       setCampaign(campaign);
       setStore(store);
       setBrand(brand);
       setProductByFirstCategory(productByFirstCategory);
-    },
-    [token, v]
-  );
+    }
+  }, [token, v]);
 
   useEffect(() => {
-    const domain = window.location.host.startsWith("www.")
-      ? window.location.host.slice(4)
-      : window.location.host;
-    const data = { name: domain };
+    // const domain = window.location.host.startsWith("www.")
+    //   ? window.location.host.slice(4)
+    //   : window.location.host;
+    // const data = { name: domain };
     // call the function
-    fetchHeader(data)
+    fetchHeader()
       // make sure to catch any error
       .catch(console.error);
   }, [fetchHeader]);
@@ -417,11 +428,11 @@ const useData = () => {
     category,
     subcategory,
     slider,
-    // product,
-    // feature_product,
-    // best_sell_product,
+    product,
+    feature_product,
+    best_sell_product,
     banner,
-    // offer,
+    offer,
     campaign,
     testimonials,
     darktheme,
