@@ -60,6 +60,24 @@ const TermsAndConditionPage = () => {
         font-weight: 700;
         background: ${design?.header_color};
     }
+    .singlePage h1 {
+          font-size: 32px;
+        }
+        .singlePage h2 {
+          font-size: 24px;
+        }
+        .singlePage h3 {
+          font-size: 20px;
+        }
+        .singlePage h4 {
+          font-size: 16px;
+        }
+        .singlePage h5 {
+          font-size: 13.28px;
+        }
+        .singlePage h6 {
+          font-size: 10.72px;
+        }
   `;
 
   return (
@@ -81,7 +99,7 @@ const TermsAndConditionPage = () => {
       <style>{styleCss}</style>
       {data ? (
         <div className="sm:container px-5 sm:py-10 py-5 lg:flex justify-between gap-20">
-          <div className="">
+          <div className="singlePage">
             <h1 className="font-bold text-3xl pb-10">{data?.name}</h1>
             {parse(data?.details)} {/* Directly pass data.details */}
           </div>
@@ -124,9 +142,7 @@ const TermsAndConditionPage = () => {
             </div>
           )}
         </div>
-      ) : (
-        null
-      )}
+      ) : null}
       {contact && store_id === 3685 && (
         <div className="relative w-full mt-[100px]">
           <div style={{ width: "100%" }}>

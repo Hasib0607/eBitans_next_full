@@ -20,7 +20,7 @@ const AboutPage = () => {
   const [load, setLoad] = useState(false);
   const pathname = usePathname();
   const contact = pathname === "/contact";
-  
+
   useEffect(() => {
     setLoad(true);
     const result = page?.find(
@@ -78,50 +78,45 @@ const AboutPage = () => {
       }`}
     >
       <style>{styleCss}</style>
-      {data?  (
+      {data ? (
         <div className="sm:container px-5 sm:py-10 py-5 lg:flex justify-between gap-20">
           <div className="">
             <h1 className="font-bold text-3xl pb-10">{data?.name}</h1>
             {parse(data?.details)} {/* Directly pass data.details */}
           </div>
-          
-            <div
-              className={`lg:flex hidden flex-col border-2 rounded-md h-max sticky top-20 page-menu ${
-                design?.template_id === "34" ? "border-white" : "border-black"
-              }`}
-            >
-              {menu?.map((item: any, id: any) => (
-                <Link
-                  key={id}
-                  href={`/${item?.url}`}
-                  className={`border-b ${
-                    design?.template_id === "34"
-                      ? "border-white"
-                      : "border-black"
-                  } last:border-b-0 border-solid py-2 px-5 w-[250px]`}
-                >
-                  <div>
-                    <h1>{item?.name}</h1>
-                  </div>
-                </Link>
-              ))}
-              {result?.map((item: any, id: any) => (
-                <Link
-                  key={id}
-                  href={`/${item?.link}`}
-                  className={`border-b ${
-                    design?.template_id === "34"
-                      ? "border-white"
-                      : "border-black"
-                  } last:border-b-0 border-solid py-2 px-5 w-[250px]`}
-                >
-                  <div>
-                    <h1>{item?.name}</h1>
-                  </div>
-                </Link>
-              ))}
-            </div>
-          
+
+          <div
+            className={`lg:flex hidden flex-col border-2 rounded-md h-max sticky top-20 page-menu ${
+              design?.template_id === "34" ? "border-white" : "border-black"
+            }`}
+          >
+            {menu?.map((item: any, id: any) => (
+              <Link
+                key={id}
+                href={`/${item?.url}`}
+                className={`border-b ${
+                  design?.template_id === "34" ? "border-white" : "border-black"
+                } last:border-b-0 border-solid py-2 px-5 w-[250px]`}
+              >
+                <div>
+                  <h1>{item?.name}</h1>
+                </div>
+              </Link>
+            ))}
+            {result?.map((item: any, id: any) => (
+              <Link
+                key={id}
+                href={`/${item?.link}`}
+                className={`border-b ${
+                  design?.template_id === "34" ? "border-white" : "border-black"
+                } last:border-b-0 border-solid py-2 px-5 w-[250px]`}
+              >
+                <div>
+                  <h1>{item?.name}</h1>
+                </div>
+              </Link>
+            ))}
+          </div>
         </div>
       ) : null}
       {contact && store_id === 3685 && (

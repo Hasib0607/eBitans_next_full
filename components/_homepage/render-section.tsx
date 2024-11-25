@@ -142,6 +142,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     // add new design
     case "best_sell_product":
+      
       return (
         <BestSellerProduct
           theme={design?.best_sell_product}
