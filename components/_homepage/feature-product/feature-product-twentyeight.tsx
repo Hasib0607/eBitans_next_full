@@ -49,7 +49,7 @@ const FeatureProductTwentyEight = ({
     return null;
   }
 
-  const title = featuredProduct?.title || "Default Title";
+  const title = featuredProduct?.title || "See More";
   const title_color = featuredProduct?.title_color || "#000";
 
   return (

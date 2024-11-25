@@ -41,28 +41,27 @@ const ProductCardFortyOne = ({ item }: any) => {
     )
   );
 
-
-
-
   useEffect(() => {
-    const variantImage = item?.variant?.length > 0 && item?.variant?.[0]?.color == null ? true : false;
+    const variantImage =
+      item?.variant?.length > 0 && item?.variant?.[0]?.color == null
+        ? true
+        : false;
 
-    if(variantImage){
+    if (variantImage) {
       setVariant(item?.variant);
-    }else{
-        const uniqueColors = item?.variant?.reduce((acc:any, current:any) => {
-          if (!acc.some((item:any) => item.color === current.color)) {
-            acc.push({
-              ...current,
-              color: current.color,
-              image: current.color_image,
-            });
-          }
-          return acc;
-        }, []);
-        setVariant(uniqueColors);
+    } else {
+      const uniqueColors = item?.variant?.reduce((acc: any, current: any) => {
+        if (!acc.some((item: any) => item.color === current.color)) {
+          acc.push({
+            ...current,
+            color: current.color,
+            image: current.color_image,
+          });
+        }
+        return acc;
+      }, []);
+      setVariant(uniqueColors);
     }
-
   }, [item]);
 
   useEffect(() => {
@@ -144,15 +143,17 @@ const ProductCardFortyOne = ({ item }: any) => {
             />
           </h6>
           <div className="flex flex-wrap gap-2 justify-center mt-4">
-            {variant?.map((item: any, index: number) => (
-              item?.image &&
-              <img
-                key={index}
-                src={productImg + item?.image}
-                alt=""
-                className="w-8 lg:w-12 rounded border border-red-700"
-              />
-            ))}
+            {variant?.map(
+              (item: any, index: number) =>
+                item?.image && (
+                  <img
+                    key={index}
+                    src={productImg + item?.image}
+                    alt=""
+                    className="w-8 lg:w-12 rounded border border-red-700"
+                  />
+                )
+            )}
           </div>
         </div>
       </div>

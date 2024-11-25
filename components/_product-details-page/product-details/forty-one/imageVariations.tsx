@@ -85,47 +85,44 @@ export const Sizes = ({
     <div className="flex flex-col gap-2">
       <h3 className="font-medium text-base mb-2">Sizes:</h3>
       <div className="flex flex-wrap gap-2">
-        {hasImages ? (
-          // Render variants with valid 'image'
-          variant
-            ?.filter((item: any) => item?.image)
-            .map((item: any, id: any) => (
-              <div
+        {hasImages
+          ? // Render variants with valid 'image'
+            variant
+              ?.filter((item: any) => item?.image)
+              .map((item: any, id: any) => (
+                <div
+                  key={id}
+                  onClick={() => {
+                    setSize(item);
+                    setActiveImg(item?.image);
+                  }}
+                  className="focus:outline-none w-[50px] cursor-pointer"
+                >
+                  <img
+                    className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${
+                      activeImg == item?.image
+                        ? "border-red-800"
+                        : "border-gray-400"
+                    }`}
+                    src={productImg + item?.image}
+                    alt=""
+                  />
+                </div>
+              ))
+          : // Render all variants when no valid 'image' is found
+            variant?.map((item: any, id: any) => (
+              <Size
                 key={id}
-                onClick={() => {
-                  setSize(item);
-                  setActiveImg(item?.image);
-                }}
-                className="focus:outline-none w-[50px] cursor-pointer"
-              >
-                <img
-                  className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${
-                    activeImg == item?.image
-                      ? "border-red-800"
-                      : "border-gray-400"
-                  }`}
-                  src={productImg + item?.image}
-                  alt=""
-                />
-              </div>
-            ))
-        ) : (
-          // Render all variants when no valid 'image' is found
-          variant?.map((item: any, id: any) => (
-            <Size
-              key={id}
-              item={item}
-              select={size}
-              setSelect={setSize}
-              setActiveImg={setActiveImg}
-            />
-          ))
-        )}
+                item={item}
+                select={size}
+                setSelect={setSize}
+                setActiveImg={setActiveImg}
+              />
+            ))}
       </div>
     </div>
   );
 };
-
 
 export const Colors = ({
   color,

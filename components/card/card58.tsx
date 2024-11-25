@@ -15,7 +15,6 @@ import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
 import { customizeModalPopup } from "@/utils/customizeDesign";
-// import Details from "../_product-details-page/product-details/three/details";
 
 const Card58 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
