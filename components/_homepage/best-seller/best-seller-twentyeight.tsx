@@ -3,15 +3,44 @@ import Card58 from "@/components/card/card58";
 import DefaultSlider from "@/components/slider/default-slider";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 
 const BestSellerTwentyEight = ({
-  best_sell_product,
   design,
   store_id,
 }: any) => {
   const prevEl = "best-product-prev";
   const nextEl = "best-product-next";
+
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const getBestSellProduct = (domain:any) =>{
+      const url =process.env.NEXT_PUBLIC_REACT_APP_BASE_URL_V2 + `/get-domain/${domain}/best_sell_product`;
+      axios.get(url).then((response) => {
+        setLoading(false);
+        const productData = response?.data?.data || [];
+        setProducts(productData);
+      })
+      .then((err) =>{
+        // console.log("Best sell product error: ", err);
+      })
+         
+    }
+
+    if (typeof window !== "undefined") {
+      const domain = window.location.host.startsWith("www.")
+        ? window.location.host.slice(4)
+        : window.location.host;
+
+        getBestSellProduct(domain);
+    }
+
+  }, []);
+
 
   const styleCss = `
     .btn-best-product {
@@ -52,13 +81,18 @@ const BestSellerTwentyEight = ({
   const bestSellProduct = cDesign?.best_sell_product?.[0] || {};
   const { title = "Default Title", title_color = "#000" } = bestSellProduct;
 
-  // Check if there are any best selling products
-  if (!best_sell_product || best_sell_product.length === 0) {
-    return null;
+  let content = null;
+
+  if(loading){
+    return <p>Loading.....</p>
   }
 
-  return (
-    <div className="sm:container px-5 sm:py-10 py-5">
+  if(!loading && products?.length == 0){
+    return <p>Not product Found!</p>
+  }
+
+  if(!loading && products?.length > 0){
+    content = <div className="sm:container px-5 sm:py-10 py-5">
       <style>{styleCss}</style>
       <div className="relative arrow-hov">
         <div className="mb-3 pb-2">
@@ -115,7 +149,7 @@ const BestSellerTwentyEight = ({
             },
           }}
         >
-          {best_sell_product?.slice(0, 10).map((item: any) => (
+          {products?.slice(0, 10).map((item: any) => (
             <SwiperSlide key={item?.id}>
               <div className="px-2 pb-3">
                 <Card58 item={item} design={design} store_id={store_id} />
@@ -124,8 +158,12 @@ const BestSellerTwentyEight = ({
           ))}
         </DefaultSlider>
       </div>
-    </div>
-  );
+    </div>;
+  }
+
+
+  return content;
+
 };
 
 export default BestSellerTwentyEight;

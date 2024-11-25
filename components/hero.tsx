@@ -139,7 +139,7 @@ const heroComponents: any = {
 };
 
 const Hero = ({ theme, slider, design }: any) => {
-  const SelectedHeroComponent = heroComponents[design.hero_slider];
+  const SelectedHeroComponent = heroComponents[design?.hero_slider];
 
   return (
     <>

@@ -54,7 +54,6 @@ const Product = ({
   design,
   theme,
   category,
-  headerSetting,
 }: any) => {
   return (
     <>
@@ -128,18 +127,12 @@ const Product = ({
       {theme === "twentyone" && (
         <ProductTwentyOne
           design={design}
-          store_id={store_id}
-          headerSetting={headerSetting}
-          product={product}
           category={category}
         />
       )}
       {theme === "twentyfour" && (
         <ProductTwentyFour
           design={design}
-          store_id={store_id}
-          headerSetting={headerSetting}
-          product={product}
           category={category}
         />
       )}
