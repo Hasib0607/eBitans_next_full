@@ -4,7 +4,6 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import OvalLoader from "@/components/loader/oval-loader";
 import useTheme from "@/hooks/use-theme";
-import NotFoundPage from "../not-found";
 import httpReq from "@/utils/http/axios/http.service";
 import parse from "html-react-parser";
 
@@ -21,7 +20,7 @@ const AboutPage = () => {
   const [load, setLoad] = useState(false);
   const pathname = usePathname();
   const contact = pathname === "/contact";
-
+  
   useEffect(() => {
     setLoad(true);
     const result = page?.find(
@@ -79,13 +78,13 @@ const AboutPage = () => {
       }`}
     >
       <style>{styleCss}</style>
-      {data ? (
+      {data?  (
         <div className="sm:container px-5 sm:py-10 py-5 lg:flex justify-between gap-20">
           <div className="">
             <h1 className="font-bold text-3xl pb-10">{data?.name}</h1>
             {parse(data?.details)} {/* Directly pass data.details */}
           </div>
-          {store_id !== 6433 && (
+          
             <div
               className={`lg:flex hidden flex-col border-2 rounded-md h-max sticky top-20 page-menu ${
                 design?.template_id === "34" ? "border-white" : "border-black"
@@ -122,11 +121,9 @@ const AboutPage = () => {
                 </Link>
               ))}
             </div>
-          )}
+          
         </div>
-      ) : (
-        <NotFoundPage /> // Render NotFoundPage if no data
-      )}
+      ) : null}
       {contact && store_id === 3685 && (
         <div className="relative w-full mt-[100px]">
           <div style={{ width: "100%" }}>

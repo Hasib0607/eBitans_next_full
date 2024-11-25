@@ -96,45 +96,46 @@ const ProductTwentyEight = ({
       <p className="text-center text-red-500">Error loading header settings.</p>
     );
   }
-console.log("categories", categories);
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 w-full">
       <style>{styleCss}</style>
 
       <div className="my-5 w-full relative flex flex-col lg2:flex-row justify-between lg2:items-center">
         <div className="flex flex-wrap gap-5 lg:cursor-pointer uppercase text-sm font-medium text-gray-600 justify-center pt-10">
-          {categories && categories
-            .filter(
-              (category: Category) =>
-                categoryProducts[category?.name]?.length > 0
-            )
-            .map((category: Category) => (
-              <div key={category.id} className="mb-8">
-                <div className="flex justify-between items-center">
-                  <h2 className="py-5 md:py-10 font-semibold text-lg">
-                    {category.name}
-                  </h2>
-                  <div>
-                    <button
-                      style={{ backgroundColor: bgColor, color: textColor }}
-                      className="text-white px-4 py-2 rounded transition duration-300 hover:bg-opacity-75"
-                      onClick={() => router.push(`/category/${category?.id}`)}
-                    >
-                      Load More
-                    </button>
+          {categories &&
+            categories
+              .filter(
+                (category: Category) =>
+                  categoryProducts[category?.name]?.length > 0
+              )
+              .map((category: Category) => (
+                <div key={category.id} className="mb-8">
+                  <div className="flex justify-between items-center">
+                    <h2 className="py-5 md:py-10 font-semibold text-lg">
+                      {category.name}
+                    </h2>
+                    <div>
+                      <button
+                        style={{ backgroundColor: bgColor, color: textColor }}
+                        className="text-white px-4 py-2 rounded transition duration-300 hover:bg-opacity-75"
+                        onClick={() => router.push(`/category/${category?.id}`)}
+                      >
+                        Load More
+                      </button>
+                    </div>
+                  </div>
+                  <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 xl3:grid-cols-6 gap-2 sm:gap-5">
+                    {categoryProducts[category?.name]
+                      ?.slice(0, 8)
+                      ?.map((productData: Product) => (
+                        <div key={productData.id}>
+                          <Card58 item={productData} />
+                        </div>
+                      ))}
                   </div>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg2:grid-cols-4 xl:grid-cols-5 xl3:grid-cols-6 gap-2 sm:gap-5">
-                  {categoryProducts[category?.name]
-                    ?.slice(0, 8)
-                    ?.map((productData: Product) => (
-                      <div key={productData.id}>
-                        <Card58 item={productData} />
-                      </div>
-                    ))}
-                </div>
-              </div>
-            ))}
+              ))}
         </div>
         <div className="absolute h-[1px] bg-gray-300 w-full top-[39px]"></div>
       </div>
