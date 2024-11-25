@@ -103,7 +103,7 @@ const ProductTwentyEight = ({
 
       <div className="my-5 w-full relative flex flex-col lg2:flex-row justify-between lg2:items-center">
         <div className="flex flex-wrap gap-5 lg:cursor-pointer uppercase text-sm font-medium text-gray-600 justify-center pt-10">
-          {categories
+          {categories && categories
             .filter(
               (category: Category) =>
                 categoryProducts[category?.name]?.length > 0
