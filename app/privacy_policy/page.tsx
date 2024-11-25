@@ -124,9 +124,7 @@ const PrivacyPolicyPage = () => {
             </div>
           )}
         </div>
-      ) : (
-        null
-      )}
+      ) : null}
       {contact && store_id === 3685 && (
         <div className="relative w-full mt-[100px]">
           <div style={{ width: "100%" }}>
