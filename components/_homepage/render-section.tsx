@@ -1,6 +1,8 @@
+"use client"
 import dynamic from "next/dynamic";
-import { Suspense } from "react";
+import { Suspense, useEffect, useState } from "react";
 import BlogSection from "./blog/blog-section";
+import axios from "axios";
 const Hero = dynamic(() => import("../hero"), { ssr: false });
 const FeaturedCategory = dynamic(() => import("../featured-category"), {
   ssr: false,
@@ -31,13 +33,9 @@ type ComponentType =
 interface RenderSectionProps {
   component: ComponentType;
   data: {
-    headersetting?: any;
     slider?: any;
     category?: any;
     banner?: any;
-    product?: any;
-    best_sell_product?: any;
-    feature_product?: any;
     testimonials?: any;
     design?: any;
     store_id?: any;
@@ -46,19 +44,40 @@ interface RenderSectionProps {
 }
 
 const RenderSection = ({ component, data }: RenderSectionProps) => {
-  const {
-    headersetting,
-    slider,
-    category,
-    banner,
-    product,
-    best_sell_product,
-    feature_product,
-    testimonials,
-    design,
-    store_id,
-    brand,
-  } = data;
+  const { slider,category, banner, testimonials, design, store_id, brand } = data;
+
+  const [renderData, setRenderData] = useState<any>({});
+  const [loading, setLoading] = useState<any>(true);
+
+    useEffect(() => {
+      const getRenderData = (domain: any) => {
+          const head =
+              "product,best_sell_product,feature_product";
+        
+            axios.post(
+              process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
+              {
+                name: domain,
+                head: head,
+              }
+            ).then((response) => {
+              setLoading(false);
+              const responseData = response?.data || {};
+
+              setRenderData(responseData);
+            }).then((err) => {
+              // console.log("err")
+            })
+      };
+
+      if (typeof window !== "undefined") {
+        const domain = window.location.host.startsWith("www.")
+          ? window.location.host.slice(4)
+          : window.location.host;
+  
+        getRenderData(domain);
+      }
+    }, []);
 
   const renderTestimonialAndBlog = () => {
     if (component === "testimonial") {
@@ -76,12 +95,9 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
         </>
       );
     }
-    return (
-      <Suspense>
-        <BlogSection />
-      </Suspense>
-    );
+
   };
+
   switch (component) {
     case "hero_slider":
       return (
@@ -89,15 +105,18 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     // add new design
     case "feature_category":
-      return (
-        <FeaturedCategory
-          theme={design?.feature_category}
-          category={category}
-          design={design}
-          product={product}
-          store_id={store_id}
-        />
-      );
+      if(!loading){
+        return (
+          <FeaturedCategory
+            theme={design?.feature_category}
+            category={category}
+            design={design}
+            product={renderData?.product || []}
+            store_id={store_id}
+          />
+        );
+      }
+      
     case "banner":
       return (
         <Promo
@@ -117,55 +136,63 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     // add new design
     case "product":
-      return (
-        <Product
-          theme={design?.product}
-          design={design}
-          store_id={store_id}
-          product={product}
-          best_sell_product={best_sell_product}
-          feature_product={feature_product}
-          category={category}
-          headerSetting={headersetting}
-        />
-      );
+      if(!loading){
+        return (
+          <Product
+            theme={design?.product}
+            design={design}
+            store_id={store_id}
+             product={renderData?.product || []}
+             best_sell_product={renderData?.best_sell_product || []}
+             feature_product={renderData?.feature_product || []}
+            category={category}
+          />
+        );
+      }
+
     // add new design
     case "new_arrival":
-      return (
-        <NewArrival
-          product={product}
-          theme={design?.new_arrival}
-          design={design}
-          store_id={store_id}
-          category={category}
-        />
-      );
+      if(!loading){
+        return (
+          <NewArrival
+            product={renderData?.product || []}
+            theme={design?.new_arrival}
+            design={design}
+            store_id={store_id}
+            category={category}
+          />
+        );
+      }
     // add new design
     case "best_sell_product":
-      return (
-        <BestSellerProduct
-          theme={design?.best_sell_product}
-          best_sell_product={best_sell_product}
-          design={design}
-          store_id={store_id}
-          product={product}
-          banner={banner}
-        />
-      );
+      if(!loading){
+        return (
+          <BestSellerProduct
+            theme={design?.best_sell_product}
+            best_sell_product={renderData?.best_sell_product || []}
+            design={design}
+            store_id={store_id}
+            product={renderData?.product || []}
+            banner={banner}
+          />
+        );
+      }
     //  add new design
     case "feature_product":
-      return (
-        <FeatureProduct
-          theme={design?.feature_product}
-          feature_product={feature_product}
-          design={design}
-          store_id={store_id}
-          product={product}
-          banner={banner}
-        />
-      );
+      if(!loading){
+        return (
+          <FeatureProduct
+            theme={design?.feature_product}
+            feature_product={renderData?.feature_product || []}
+            design={design}
+            store_id={store_id}
+            product={renderData?.product || []}
+            banner={banner}
+          />
+        );
+      }
     case "testimonial":
-      return renderTestimonialAndBlog();
+      renderTestimonialAndBlog();
     default:
       return null;
   }

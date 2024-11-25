@@ -126,22 +126,10 @@ const Product = ({
         <ProductTwenty product={product} category={category} design={design} />
       )}
       {theme === "twentyone" && (
-        <ProductTwentyOne
-          design={design}
-          store_id={store_id}
-          headerSetting={headerSetting}
-          product={product}
-          category={category}
-        />
+        <ProductTwentyOne design={design} category={category} />
       )}
       {theme === "twentyfour" && (
-        <ProductTwentyFour
-          design={design}
-          store_id={store_id}
-          headerSetting={headerSetting}
-          product={product}
-          category={category}
-        />
+        <ProductTwentyFour design={design} category={category} />
       )}
       {theme === "twentysix" && (
         <ProductTwentySix

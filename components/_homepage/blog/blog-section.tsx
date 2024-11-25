@@ -1,48 +1,67 @@
+"use client"
+
 import BlogCard from "@/app/blog/_components/blog-card";
-import getUrl from "@/utils/get-url";
 import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 
-const BlogSection = async () => {
-  const url = getUrl();
+const BlogSection = () => {
+  const [allBlogs, setBlogs] = useState<any>([]);
+  const [loading, setLoading] = useState<any>(true);
 
-  let allBlogs;
-  try {
-    const data = await axios.get(
-      process.env.NEXT_PUBLIC_API_URL_BLOG + `blog/get?page=${1}&name=${url}`
-    );
+  useEffect(() => {
+    const getBlogs = (domain: any) => {
+            axios.get(
+              process.env.NEXT_PUBLIC_API_URL_BLOG + `blog/get?page=${1}&name=${domain}`
+            ).then((response) => {
+            setLoading(false);
+            const responseData = response?.data || {};
+            setBlogs(responseData);
+          }).then((err) => {
+            // console.log("err")
+          })
+    };
 
-    allBlogs = data.data.results.data;
-  } catch (error) {
-    console.log(error);
-  }
+    if (typeof window !== "undefined") {
+      const domain = window.location.host.startsWith("www.")
+        ? window.location.host.slice(4)
+        : window.location.host;
 
-  if (allBlogs.length <= 0) {
+      getBlogs(domain);
+    }
+  }, []);
+
+
+  if (loading && allBlogs.length <= 0) {
     return null;
   }
 
-  return (
-    <div className="container px-5">
-      <h2 className="py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center">
-        Blog
-      </h2>
+  let content = null;
 
-      <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-8">
-        {allBlogs?.slice(0, 6).map((item: any) => {
-          return <BlogCard key={item?.id} item={item} />;
-        })}
-      </div>
+  if (!loading && allBlogs.length > 0) {
+    content = <div className="container px-5">
+    <h2 className="py-10 sm:py-12 md:py-16 lg:py-20 xl:py-24 text-lg sm:text-xl md:text-2xl lg:text-3xl xl:text-4xl text-center">
+      Blog
+    </h2>
 
-      <div className="py-10 text-center">
-        <Link
-          className="bg-[#f1593a] px-4 py-2 font-semibold rounded-sm"
-          href={"/blog"}
-        >
-          View All Blogs
-        </Link>
-      </div>
+    <div className="grid xl:grid-cols-3 md:grid-cols-2 gap-8">
+      {allBlogs?.slice(0, 6).map((item: any) => {
+        return <BlogCard key={item?.id} item={item} />;
+      })}
     </div>
-  );
+
+    <div className="py-10 text-center">
+      <Link
+        className="bg-[#f1593a] px-4 py-2 font-semibold rounded-sm"
+        href={"/blog"}
+      >
+        View All Blogs
+      </Link>
+    </div>
+  </div>
+  }
+
+  return content;
 };
 
 export default BlogSection;
