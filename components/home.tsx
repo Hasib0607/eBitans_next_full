@@ -38,8 +38,7 @@ const HomePage = () => {
     }, []);
 
     if(loading){
-      return <p className="h-screen flex justify-center items-center bg-[#e74c3c]">
-      Loading from home...
+      return <p className="h-screen flex justify-center items-center bg-[#ffff]">
     </p>;
     }
 
