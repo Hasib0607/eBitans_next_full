@@ -58,7 +58,7 @@ type ComponentType =
     product,
     best_sell_product,
     feature_product,
-  } = await getSubdomainName(url,head);
+  } = await getSubdomainName(url);
 
   // const {
   //   // slider,
