@@ -5,7 +5,10 @@ import RenderSection from "./_homepage/render-section";
 
 const HomePage = async () => {
   const url = getUrl();
-  const data = await getSubdomainName(url);
+  const head = "layout,layoutposition,category,banner,brand,testimonials,design";
+
+  const data = await getSubdomainName(url,head);
+  
   const layout = data?.layout;
   const layoutposition = data?.layoutposition;
 
@@ -18,14 +21,14 @@ const HomePage = async () => {
       <div>
         <Suspense
           fallback={
-            <p className="h-screen flex justify-center items-center bg-red-500">
+            <p className="h-screen flex justify-center items-center bg-[#e74c3c]">
               Loading from home...
             </p>
           }
         >
           {sortedLayout.length > 0 &&
             sortedLayout?.map((item: any, index: number) => (
-              <RenderSection key={item} component={item} data={data} />
+              <RenderSection key={index} component={item} data={data} />
             ))}
         </Suspense>
       </div>

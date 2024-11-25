@@ -1,6 +1,8 @@
 import dynamic from "next/dynamic";
 import { Suspense } from "react";
 import BlogSection from "./blog/blog-section";
+import getUrl from "@/utils/get-url";
+import { getSubdomainName } from "@/lib";
 const Hero = dynamic(() => import("../hero"), { ssr: false });
 const FeaturedCategory = dynamic(() => import("../featured-category"), {
   ssr: false,
@@ -28,62 +30,77 @@ type ComponentType =
   | "feature_product"
   | "testimonial";
 
-interface RenderSectionProps {
-  component: ComponentType;
-  data: {
-    headersetting?: any;
-    slider?: any;
-    category?: any;
-    banner?: any;
-    product?: any;
-    best_sell_product?: any;
-    feature_product?: any;
-    testimonials?: any;
-    design?: any;
-    store_id?: any;
-    brand?: any;
-  };
-}
+  interface RenderSectionProps {
+    component: ComponentType;
+    data: {
+      category?: any;
+      banner?: any;
+      testimonials?: any;
+      design?: any;
+      store_id?: any;
+      brand?: any;
+    };
+  }
+  
+  const RenderSection = async({ component, data }: RenderSectionProps) => {
+    const {
+      category,
+      banner,
+      testimonials,
+      design,
+      store_id,
+      brand,
+    } = data;
 
-const RenderSection = ({ component, data }: RenderSectionProps) => {
+  const url = getUrl();
+  const head = "product,best_sell_product,feature_product";
   const {
-    headersetting,
-    slider,
-    category,
-    banner,
     product,
     best_sell_product,
     feature_product,
-    testimonials,
-    design,
-    store_id,
-    brand,
-  } = data;
+  } = await getSubdomainName(url,head);
 
-  const renderTestimonialAndBlog = () => {
-    if (component === "testimonial") {
-      return (
-        <>
-          <Suspense fallback={<p>Loading...</p>}>
-            <BlogSection />
-          </Suspense>
+  // const {
+  //   // slider,
+  //   category,
+  //   banner,
+  //   product,
+  //   best_sell_product,
+  //   feature_product,
+  //   testimonials,
+  //   design,
+  //   store_id,
+  //   brand,
+  // } = getData || {};
 
-          <Testimonial
-            testimonials={testimonials}
-            theme={design?.testimonial}
-            design={design}
-          />
-        </>
-      );
-    }
-    return (
-      <Suspense>
-        <BlogSection />
-      </Suspense>
-    );
-  };
+  // console.log("getData", getData)
+
+  // const renderTestimonialAndBlog = () => {
+  //   if (component === "testimonial") {
+  //     return (
+  //       <>
+  //         <Suspense fallback={<p>Loading...</p>}>
+  //           <BlogSection />
+  //         </Suspense>
+
+  //         <Testimonial
+  //           testimonials={testimonials}
+  //           theme={design?.testimonial}
+  //           design={design}
+  //         />
+  //       </>
+  //     );
+  //   }
+  //   return (
+  //     <Suspense>
+  //       <BlogSection />
+  //     </Suspense>
+  //   );
+  // };
+
   switch (component) {
     case "hero_slider":
+      const {slider} = await getSubdomainName(url,"slider");
       return (
         <Hero slider={slider} theme={design?.hero_slider} design={design} />
       );
@@ -107,6 +124,7 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
           banner={banner}
         />
       );
+      
     case "banner_bottom":
       return (
         <PromoBottom
@@ -126,7 +144,6 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
           best_sell_product={best_sell_product}
           feature_product={feature_product}
           category={category}
-          headerSetting={headersetting}
         />
       );
     // add new design
@@ -142,7 +159,6 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     // add new design
     case "best_sell_product":
-      
       return (
         <BestSellerProduct
           theme={design?.best_sell_product}
@@ -166,10 +182,25 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
         />
       );
     case "testimonial":
-      return renderTestimonialAndBlog();
+      return (
+        <>
+          <Suspense fallback={<p>Loading...</p>}>
+            <BlogSection />
+          </Suspense>
+
+          <Testimonial
+            testimonials={testimonials}
+            theme={design?.testimonial}
+            design={design}
+          />
+        </>
+      );
     default:
       return null;
   }
+
+
+
 };
 
 RenderSection.displayName = "RenderSection";
