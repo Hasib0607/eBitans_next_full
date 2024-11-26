@@ -54,6 +54,7 @@ const Product = ({
   design,
   theme,
   category,
+  headerSetting,
 }: any) => {
   return (
     <>
