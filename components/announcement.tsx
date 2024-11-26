@@ -43,22 +43,6 @@ const Announcement = async ({ design, url }: any) => {
                 ))}
               </div>
             </Marquee>
-            {/* <Marquee speed={10}>
-          <div
-            style={{ background: design?.header_color }}
-            className="absolute top-0 py-2  whitespace-nowrap"
-          >
-            {alternatedArray.map((an: any, index: number) => (
-              <span
-                style={{ color: design?.text_color }}
-                key={index}
-                className="text-[10px] md:text-xl mx-4"
-              >
-                {an.announcement}
-              </span>
-            ))}
-          </div>
-        </Marquee> */}
           </div>
         </div>
       )}
