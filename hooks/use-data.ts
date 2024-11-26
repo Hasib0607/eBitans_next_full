@@ -1,42 +1,10 @@
 "use client";
 import { useCallback, useEffect, useState } from "react";
-// import { token } from "../services/AxiosInstance";
-// import { isMobile, isTablet, isBrowser } from "react-device-detect";
 import httpReq from "@/utils/http/axios/http.service";
 import { getFromLocalStorage, saveToLocalStorage } from "@/utils/localstorage";
 import axios from "axios";
-// import httpReq from "../services/http.service";
-// import {
-//   getFromLocalStorage,
-//   saveToLocalStorage,
-// } from "../services/utils/localStorage";
-
-// if (typeof window !== "undefined") {
-// let token = JSON.parse(localStorage.getItem("persist:root")!)?.auth
-//   ? JSON.parse(JSON.parse(localStorage.getItem("persist:root")!)?.auth)?.user
-//       ?.token
-//   : null;
-// }
-
-// console.log(token, "token");
-
-// let v: any = "";
-
-// if (typeof window !== "undefined") {
-// let v = JSON.parse(localStorage.getItem("persist:root")!)?.auth
-//   ? JSON.parse(JSON.parse(localStorage.getItem("persist:root")!)?.auth)?.user
-//       ?.verify
-//   : null;
-// }
-
-// console.log(v, "v");
-
-// export const v = JSON.parse(localStorage.getItem("persist:root")!)?.auth
-//   ? JSON.parse(JSON.parse(localStorage.getItem("persist:root")!)?.auth)?.user
-//   : null;
 
 const useData = () => {
-  const [layout, setLayout] = useState([]);
   const [design, setDesign] = useState<any>(null);
   const [headerSetting, setHeaderSetting] = useState<any>({});
   const [menu, setMenu] = useState([]);
@@ -44,15 +12,11 @@ const useData = () => {
   const [category, setCategory] = useState([]);
   const [subcategory, setSubcategory] = useState([]);
   const [slider, setSlider] = useState([]);
-  const [product, setProduct] = useState([]);
   const [productByFirstCategory, setProductByFirstCategory] = useState([]);
-  const [feature_product, set_feature_product] = useState([]);
-  const [best_sell_product, set_best_sell_product] = useState([]);
   const [banner, setBanner] = useState([]);
   const [testimonials, setTestimonials] = useState([]);
   const [store_id, setStore_id] = useState(null);
   const [userData, setUser] = useState(null);
-  const [offer, setOffer] = useState([]);
   const [campaign, setCampaign] = useState([]);
   const [loading, setLoading] = useState("idle");
   const [store, setStore] = useState({});
@@ -82,17 +46,8 @@ const useData = () => {
 
   const [token, setToken] = useState("");
   const [v, setV] = useState<any>(null);
-  const [domain, setDomain] = useState("");
-
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const getDomain = window.location.host.startsWith("www.")
-        ? window.location.host.slice(4)
-        : window.location.host;
-      if (getDomain) {
-        setDomain(getDomain);
-      }
-
       if (localStorage.getItem("persist:root")) {
         const auth = JSON.parse(localStorage.getItem("persist:root")!)?.auth;
 
@@ -148,7 +103,7 @@ const useData = () => {
         );
         setBookingData(data?.data);
       } catch (error) {
-        // console.log(error, "error");
+        console.log(error, "error");
       }
     }
     if (store_id) {
@@ -215,193 +170,75 @@ const useData = () => {
     setCity(res?.data?.city);
   };
 
-  // user info
-  // const url = window.location.href;
-  // let timeSpentScrolling = 0;
-  // let isHalted = false;
-  // let haltedStartTime, haltedEndTime;
-  // let totalHaltedTime = 0;
-
-  // const update_halt_state = () => {
-  //   if (isHalted) {
-  //     isHalted = false;
-  //     haltedEndTime = new Date().getTime();
-  //     totalHaltedTime += (haltedEndTime - haltedStartTime) / 1000;
-  //   } else {
-  //     isHalted = true;
-  //     haltedStartTime = new Date().getTime();
-  //   }
-  // };
-
-  // Listen for scroll events
-  // window.addEventListener("scroll", () => {
-  //   timeSpentScrolling += 1.8;
-
-  //   update_halt_state();
-  // });
-
-  // document.addEventListener("DOMContentLoaded", () => {
-  //   const start = new Date().getTime();
-
-  //   // AVERAGE SCROLLING INTERVAL - 39 seconds
-  //   setInterval(() => {
-  //     if (new Date().getTime() - start > 39000) {
-  //       update_halt_state();
-  //     }
-  //   }, 39000);
-
-  //   window.addEventListener("beforeunload", () => {
-  //     const end = new Date().getTime();
-
-  //     update_halt_state();
-
-  //     const totalTime =
-  //       (end - start) / 1000 - timeSpentScrolling / 1000 - totalHaltedTime;
-  //     // console.log(totalTime, "totalTime");
-  //     navigator.sendBeacon(
-  //       `https://admin.ebitans.com/api/v1/ebi-analytics/store?store_id=${store_id}&user_id=${
-  //         userData ? userData?.id : null
-  //       }&device=${device}&ip=${ip}&mac=${"c5-65-89-45"}&url=${url}&city=${city}&country_code=${country_code}&country_name=${country_name}&latitude=${latitude}&longitude=${longitude}&postal=${postal}&state=${state}&location=${address}&page_title=${"Time"}&category_id=${""}&product_id=${""}&browser=${browser}&os=${
-  //         mobileOs === "Unknown" ? os : mobileOs
-  //       }&isTime=${totalTime}`
-  //     );
-  //   });
-  // });
-
-  // browser detect and os detect
-  // useEffect(() => {
-  //   const platform = navigator.platform;
-
-  //   // browser detect
-  //   if (
-  //     navigator.userAgent.indexOf("Opera") !== -1 ||
-  //     navigator.userAgent.indexOf("OPR") !== -1
-  //   ) {
-  //     setBrowser("Opera");
-  //   } else if (
-  //     navigator.userAgent.indexOf("Safari") !== -1 &&
-  //     navigator.userAgent.indexOf("Chrome") === -1
-  //   ) {
-  //     setBrowser("Safari");
-  //   } else if (navigator.userAgent.indexOf("Edg") !== -1) {
-  //     setBrowser("Microsoft Edge");
-  //   } else if (navigator.userAgent.indexOf("Chrome") !== -1) {
-  //     setBrowser("Chrome");
-  //   } else if (navigator.userAgent.indexOf("Firefox") !== -1) {
-  //     setBrowser("Firefox");
-  //   } else if (navigator.userAgent.indexOf("Brave") !== -1) {
-  //     setBrowser("Brave");
-  //   } else {
-  //     setBrowser("Unknown");
-  //   }
-
-  //   // os detect
-  //   const userAgent = navigator.userAgent || navigator.vendor || window.opera;
-  //   let MobileOs = "Unknown";
-  //   if (userAgent.match(/iPad/i) || userAgent.match(/iPhone/i))
-  //     MobileOs = "iOS";
-  //   if (userAgent.match(/Android/i)) MobileOs = "Android";
-  //   setMobileOs(MobileOs);
-
-  //   let os = "Unknown";
-  //   if (platform.indexOf("Win") !== -1) os = "Windows";
-  //   if (platform.indexOf("Mac") !== -1) os = "MacOS";
-  //   if (platform.indexOf("Linux") !== -1) os = "Linux";
-  //   setOs(os);
-  // }, [mobileOs]);
-
-  // device detect
-  // useEffect(() => {
-  //   if (isMobile) {
-  //     setDevice("Mobile");
-  //   }
-  //   if (isTablet) {
-  //     setDevice("Tablet");
-  //   }
-  //   if (isBrowser) {
-  //     setDevice("Desktop");
-  //   }
-  //   //passing getData method to the lifecycle method
-  // }, []);
-
-  // const darkThemeColor = {
-  //   backgroundColor: "rgb(51 65 85)",
-  //   textColor: "white",
-  // };
-
-  // main home page api
-
   //check here
-  const fetchHeader = useCallback(async () => {
-    const res = await axios.post(
-      process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name",
-      {
-        name: domain,
+  const fetchHeader = useCallback(
+    async (data: any) => {
+      const res = await axios.post(
+        process.env.NEXT_PUBLIC_API_URL + "getsubdomain/data",
+        data
+      );
+      const {
+        store,
+        store_id,
+        menu,
+        headersetting,
+        category,
+        subcategory,
+        slider,
+        // product,
+        // feature_product,
+        // best_sell_product,
+        banner,
+        testimonials,
+        design,
+        layout,
+        page,
+        // offer,
+        campaign,
+        brand,
+        productByFirstCategory,
+      } = res?.data;
+
+      if (token && v) {
+        const user = await httpReq.get("getuser");
+
+        setUser(user);
       }
-    );
 
-    const {
-      store,
-      store_id,
-      menu,
-      headersetting,
-      category,
-      subcategory,
-      slider,
-      product,
-      feature_product,
-      best_sell_product,
-      banner,
-      testimonials,
-      design,
-      layout,
-      page,
-      offer,
-      campaign,
-      brand,
-      productByFirstCategory,
-    } = res?.data;
-
-    if (token && v) {
-      const user = await httpReq.get("getuser");
-
-      setUser(user);
-    }
-
-    // set state with the result
-    if (res) {
+      // set state with the result
       setHeaderSetting(headersetting);
       setMenu(menu);
       setPage(page);
       setCategory(category);
       setSubcategory(subcategory);
       setSlider(slider);
-      setProduct(product);
-      set_feature_product(feature_product);
-      set_best_sell_product(best_sell_product);
       setBanner(banner);
       setTestimonials(testimonials);
       setStore_id(store_id);
       setDesign(design);
-      setLayout(layout);
-      setOffer(offer);
       setCampaign(campaign);
       setStore(store);
       setBrand(brand);
       setProductByFirstCategory(productByFirstCategory);
-    }
-  }, [token, v]);
+    },
+    [token, v]
+  );
 
   useEffect(() => {
-    // const domain = window.location.host.startsWith("www.")
-    //   ? window.location.host.slice(4)
-    //   : window.location.host;
-    // const data = { name: domain };
-    // call the function
-    fetchHeader()
-      // make sure to catch any error
-      .catch(console.error);
-  }, [fetchHeader]);
+    if (typeof window !== "undefined") {
+      const domain = window.location.host.startsWith("www.")
+        ? window.location.host.slice(4)
+        : window.location.host;
+
+      const data = { name: domain };
+      // call the function
+      if (domain != "") {
+        fetchHeader(data).catch(console.error);
+      } else {
+        window.location.reload();
+      }
+    }
+  }, []);
 
   const makeid = (length: any) => {
     var result = "";
@@ -420,7 +257,6 @@ const useData = () => {
     setLoading,
     loading,
     store_id,
-    layout,
     design,
     headerSetting,
     menu,
@@ -428,15 +264,10 @@ const useData = () => {
     category,
     subcategory,
     slider,
-    product,
-    feature_product,
-    best_sell_product,
     banner,
-    offer,
     campaign,
     testimonials,
     darktheme,
-    // darkThemeColor,
     setDarktheme,
     store,
     brand,

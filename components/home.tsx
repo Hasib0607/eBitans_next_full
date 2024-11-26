@@ -1,73 +1,37 @@
-"use client";
-
-import { useEffect, useState } from "react";
+import getUrl from "@/utils/get-url";
 import RenderSection from "./_homepage/render-section";
-import axios from "axios";
+import { getDomainInfo } from "@/lib";
 
-const HomePage = () => {
-  const [data, setData] = useState<any>({});
-  const [loading, setLoading] = useState<any>(true);
+const HomePage = async () => {
+  const url = getUrl();
 
-  useEffect(() => {
-    const getHomeData = (domain: any) => {
-      const head =
-        "layout,layoutposition,slider,category,banner,brand,testimonials,design";
-
-      axios
-        .post(process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name", {
-          name: domain,
-          head: "",
-        })
-        .then((response) => {
-          setLoading(false);
-          const responseData = response?.data || {};
-          setData(responseData);
-        })
-        .then((err) => {
-          // console.log("err")
-        });
-    };
-
-    if (typeof window !== "undefined") {
-      const domain = window.location.host.startsWith("www.")
-        ? window.location.host.slice(4)
-        : window.location.host;
-
-      getHomeData(domain);
-    }
-  }, []);
-
-  if (loading) {
-    return (
-      <p className="h-screen flex justify-center items-center bg-[#ffffff]"></p>
-    );
+  let generalData = null;
+  if(url != ""){
+    generalData = await getDomainInfo(url);
   }
 
-  // let content = null;
+  let content = null;
 
-  if (!loading && data?.layout) {
-    const layout = data?.layout;
-    const layoutposition = data?.layoutposition;
+  if (generalData) {
+    const layout = generalData?.layout;
+    const layoutposition = generalData?.layoutposition;
 
     const sortedLayout = layout
       ? layout.sort((a: any, b: any) => layoutposition[a] - layoutposition[b])
-      : []; // Default to an empty array if layout is undefined
+      : [];
 
-    return (
-      <div>
-        {sortedLayout.length > 0 &&
-          sortedLayout?.map((item: any, index: number) => (
-            <RenderSection key={index} component={item} data={data} />
-          ))}
-      </div>
-    );
-  } else {
-    <p className="h-screen flex justify-center items-center bg-[#e74c3c]">
-      Somwthing wrong...
-    </p>;
+      if(sortedLayout.length > 0){
+        content =
+        <div>
+          {sortedLayout?.map((item: any, index: number) => (
+              <RenderSection key={index} component={item} data={generalData} />
+            ))}
+        </div>;
+      }
   }
 
-  // return content;
+  return content;
+
 };
 
 export default HomePage;

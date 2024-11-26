@@ -16,11 +16,11 @@ const Taka = ({ tk }: any) => {
   });
 
   if (status === "pending") {
-    return <p>Loading...</p>;
+    return <span>Loading...</span>;
   }
 
   if (error) {
-    return <p>Currency not defined.</p>;
+    return <span>Currency not defined.</span>;
   }
 
   // ৳ default

@@ -15,6 +15,21 @@ const getSubdomainName = async (url: string, head: string = "") => {
   }
 };
 
+const getDomainInfo = async (url: string, head: string = "") => {
+  try {
+    const res = await axios.post(
+      process.env.NEXT_PUBLIC_API_URL + "getsubdomain/data",
+      {
+        name: url,
+        head: head,
+      }
+    );
+    return res?.data;
+  } catch (error) {
+    // console.log(error);
+  }
+};
+
 const getProductDetails = async ({
   store_id,
   product_id,
@@ -46,4 +61,9 @@ const getQuickViewProductDetails = async ({
 };
 
 // const getSiteInfo = async () => {};
-export { getProductDetails, getSubdomainName, getQuickViewProductDetails };
+export {
+  getProductDetails,
+  getSubdomainName,
+  getQuickViewProductDetails,
+  getDomainInfo,
+};
