@@ -16,7 +16,7 @@ const HomePage = () => {
       axios
         .post(process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name", {
           name: domain,
-          head: head,
+          head: "",
         })
         .then((response) => {
           setLoading(false);
@@ -67,7 +67,7 @@ const HomePage = () => {
     </p>;
   }
 
-  // return content;
+  
 };
 
 export default HomePage;
