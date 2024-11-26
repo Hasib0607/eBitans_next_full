@@ -66,8 +66,6 @@ const HomePage = () => {
       Somwthing wrong...
     </p>;
   }
-
-  
 };
 
 export default HomePage;

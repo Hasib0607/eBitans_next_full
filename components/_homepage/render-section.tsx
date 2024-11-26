@@ -46,8 +46,18 @@ interface RenderSectionProps {
 }
 
 const RenderSection = ({ component, data }: RenderSectionProps) => {
-  const { slider,product, category,best_sell_product,feature_product, banner, testimonials, design, store_id, brand } =
-    data;
+  const {
+    slider,
+    product,
+    category,
+    best_sell_product,
+    feature_product,
+    banner,
+    testimonials,
+    design,
+    store_id,
+    brand,
+  } = data;
 
   // const [renderData, setRenderData] = useState<any>({});
   // const [loading, setLoading] = useState<any>(true);
@@ -106,15 +116,15 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
       );
     // add new design
     case "feature_category":
-        return (
-          <FeaturedCategory
-            theme={design?.feature_category}
-            category={category}
-            design={design}
-            product={product || []}
-            store_id={store_id}
-          />
-        );
+      return (
+        <FeaturedCategory
+          theme={design?.feature_category}
+          category={category}
+          design={design}
+          product={product || []}
+          store_id={store_id}
+        />
+      );
 
     case "banner":
       return (
@@ -137,58 +147,58 @@ const RenderSection = ({ component, data }: RenderSectionProps) => {
     // add new design
     case "product":
       // if (!loading) {
-        return (
-          <Product
-            theme={design?.product}
-            design={design}
-            store_id={store_id}
-            product={product}
-            best_sell_product={best_sell_product}
-            feature_product={feature_product}
-            category={category}
-          />
-        );
-      // }
+      return (
+        <Product
+          theme={design?.product}
+          design={design}
+          store_id={store_id}
+          product={product}
+          best_sell_product={best_sell_product}
+          feature_product={feature_product}
+          category={category}
+        />
+      );
+    // }
 
     // add new design
     case "new_arrival":
-        return (
-          <NewArrival
-            product={product}
-            theme={design?.new_arrival}
-            design={design}
-            store_id={store_id}
-            category={category}
-          />
-        );
+      return (
+        <NewArrival
+          product={product}
+          theme={design?.new_arrival}
+          design={design}
+          store_id={store_id}
+          category={category}
+        />
+      );
     // add new design
     case "best_sell_product":
       // if (!loading) {
-        return (
-          <BestSellerProduct
-            theme={design?.best_sell_product}
-            best_sell_product={best_sell_product}
-            design={design}
-            store_id={store_id}
-            product={product}
-            banner={banner}
-          />
-        );
-      // }
+      return (
+        <BestSellerProduct
+          theme={design?.best_sell_product}
+          best_sell_product={best_sell_product}
+          design={design}
+          store_id={store_id}
+          product={product}
+          banner={banner}
+        />
+      );
+    // }
     //  add new design
     case "feature_product":
       // if (!loading) {
-        return (
-          <FeatureProduct
-            theme={design?.feature_product}
-            feature_product={feature_product}
-            design={design}
-            store_id={store_id}
-            product={product}
-            banner={banner}
-          />
-        );
-      // }
+      return (
+        <FeatureProduct
+          theme={design?.feature_product}
+          feature_product={feature_product}
+          design={design}
+          store_id={store_id}
+          product={product}
+          banner={banner}
+        />
+      );
+    // }
     case "testimonial":
       renderTestimonialAndBlog();
     default:
