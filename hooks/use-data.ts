@@ -63,7 +63,7 @@ const useData = () => {
       setToken(
         JSON.parse(localStorage.getItem("persist:root")!)?.auth
           ? JSON.parse(JSON.parse(localStorage.getItem("persist:root")!)?.auth)
-            ?.user?.token
+              ?.user?.token
           : null
       );
     }
@@ -148,7 +148,8 @@ const useData = () => {
   const fetchAddress = async (lat: any, lng: any) => {
     if (lat) {
       const response = await fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${lat ? lat : latitude
+        `https://nominatim.openstreetmap.org/reverse?format=jsonv2&lat=${
+          lat ? lat : latitude
         }&lon=${lng ? lng : longitude}`
       );
       const data = await response.json();
@@ -226,8 +227,8 @@ const useData = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const domain = window.location.host.startsWith("www.")
-      ? window.location.host.slice(4)
-      : window.location.host;
+        ? window.location.host.slice(4)
+        : window.location.host;
 
       const data = { name: domain };
       // call the function

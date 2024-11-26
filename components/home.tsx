@@ -4,7 +4,11 @@ import { getDomainInfo } from "@/lib";
 
 const HomePage = async () => {
   const url = getUrl();
-  const generalData = await getDomainInfo(url);
+
+  let generalData = null;
+  if(url != ""){
+    generalData = await getDomainInfo(url);
+  }
 
   let content = null;
 
