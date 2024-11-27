@@ -4,11 +4,19 @@ import SectionHeadingNine from "@/components/section-heading/section-heading-nin
 import GridSliderThirteen from "@/components/slider/grid-slider/grid-slider-thirteen";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 
 const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
   const prev = "best_seller_nine_prev";
   const next = "best_seller_nine_next";
+  const [bestSellProductData, setBestSellProductData] = useState<any>([]);
+
+  useEffect(() => {
+    if (best_sell_product) {
+      setBestSellProductData(best_sell_product);
+    }
+  }, [best_sell_product]);
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
@@ -49,7 +57,7 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
           subtitle={""}
           title_color={title_color || "#000"}
         />
-        {best_sell_product?.length > 0 && (
+        {bestSellProductData?.length > 0 &&
           <div className="arrow-hov relative">
             <div className=" gap-2 lg:cursor-pointer hidden arrow ">
               <div
@@ -67,7 +75,7 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
             <GridSliderThirteen
               prevEl={prev}
               nextEl={next}
-              isLoop={best_sell_product?.length > 1}
+              isLoop={bestSellProductData?.length > 1}
               breakpoints={{
                 300: {
                   slidesPerView: 2,
@@ -92,15 +100,14 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
               }}
               className={"md:h-[1080px] h-[700px]"}
             >
-              {best_sell_product?.length > 0 &&
-                best_sell_product?.slice(0, 10).map((item: any) => (
-                  <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
-                    <Card22 item={item} design={design} store_id={store_id} />
-                  </SwiperSlide>
-                ))}
+              {bestSellProductData?.length > 0 && bestSellProductData?.slice(0, 10).map((item: any) => (
+                <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
+                  <Card22 item={item} design={design} store_id={store_id} />
+                </SwiperSlide>
+              ))}
             </GridSliderThirteen>
           </div>
-        )}
+        }
       </div>
     </div>
   );
