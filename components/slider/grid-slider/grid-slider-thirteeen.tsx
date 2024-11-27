@@ -27,13 +27,14 @@ const GridSliderThirteen = ({
   children,
   breakpoints,
   className,
+  isLoop=true,
   grid = { rows: 2 },
   ...rest
 }: any) => {
   return (
     <div className="">
       <Swiper
-        loop={true}
+        loop={isLoop}
         breakpoints={breakpoints}
         autoplay={{
           delay: 3000,

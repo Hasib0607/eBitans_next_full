@@ -55,7 +55,7 @@ const FeaturedSix = ({ category, design }: any) => {
           })}
         </div>
       </div>
-
+      {category?.length > 0 &&
       <div className="group z-0 xl:hidden block py-10 bg-gray-200 xl:px-60 px-5">
         <style>{styleCss}</style>
         <div className=" gap-2 relative lg:cursor-pointer lg:hidden lg:group-hover:block ">
@@ -71,14 +71,15 @@ const FeaturedSix = ({ category, design }: any) => {
           </div>
         </div>
 
-        <GridSliderSixCat prevEl={prevEl} nextEl={nextEl}>
-          {category?.map((item: any) => (
+        <GridSliderSixCat prevEl={prevEl} nextEl={nextEl} isLoop={category?.length > 1}>
+          {category?.length > 0 && category?.map((item: any) => (
             <SwiperSlide className="swiperjs-slider-six " key={item?.id}>
               <FeatureCatSix item={item} />
             </SwiperSlide>
           ))}
         </GridSliderSixCat>
       </div>
+}
     </div>
   );
 };

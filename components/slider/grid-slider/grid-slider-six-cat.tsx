@@ -21,7 +21,7 @@ import "./grid-slider-six-cat.css";
 
 // import required modules
 
-const GridSliderSixCat = ({ nextEl, prevEl, children, ...rest }: any) => {
+const GridSliderSixCat = ({ nextEl, prevEl,isLoop=true, children, ...rest }: any) => {
   return (
     <Swiper
       slidesPerView={2}
@@ -34,7 +34,7 @@ const GridSliderSixCat = ({ nextEl, prevEl, children, ...rest }: any) => {
       }}
       observer={true}
       observeParents={true}
-      loop={true}
+      loop={isLoop}
       spaceBetween={0}
       modules={[Grid, Navigation, Autoplay, A11y, EffectFade, Controller]}
       navigation={{

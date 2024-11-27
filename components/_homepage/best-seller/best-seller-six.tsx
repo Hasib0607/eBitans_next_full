@@ -160,21 +160,23 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
               </div>
             </div>
           </div>
-          <div className="lg:col-span-2 md:col-span-2 relative bestSellerCustomHover">
-            <div className="flex px-1 -top-10 absolute inset-1 items-center">
-              <ArrowSquare prevEl={prev} nextEl={next}>
-                {" "}
-              </ArrowSquare>
+          {product?.length > 0 &&
+            <div className="lg:col-span-2 md:col-span-2 relative bestSellerCustomHover">
+              <div className="flex px-1 -top-10 absolute inset-1 items-center">
+                <ArrowSquare prevEl={prev} nextEl={next}>
+                  {" "}
+                </ArrowSquare>
+              </div>
+              {/* start here */}
+              <GridSliderFive prevEl={prev} nextEl={next} isLoop={product?.length > 1}>
+                {product?.map((item: any) => (
+                  <SwiperSlide className="swiperjs-slide" key={item?.id}>
+                    <Card7 item={item} design={design} store_id={store_id} />
+                  </SwiperSlide>
+                ))}
+              </GridSliderFive>
             </div>
-            {/* start here */}
-            <GridSliderFive prevEl={prev} nextEl={next}>
-              {product?.map((item: any) => (
-                <SwiperSlide className="swiperjs-slide" key={item?.id}>
-                  <Card7 item={item} design={design} store_id={store_id} />
-                </SwiperSlide>
-              ))}
-            </GridSliderFive>
-          </div>
+          }
         </div>
       </div>
     </div>

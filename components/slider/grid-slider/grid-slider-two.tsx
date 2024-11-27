@@ -9,11 +9,11 @@ import {
 } from "swiper/modules";
 import { Swiper } from "swiper/react";
 
-const GridSliderTwo = ({ nextEl, prevEl, children, ...rest }: any) => {
+const GridSliderTwo = ({ nextEl, prevEl,isLoop=true, children, ...rest }: any) => {
   return (
     <div className="">
       <Swiper
-        loop={true}
+        loop={isLoop}
         breakpoints={{
           640: {
             slidesPerView: 1,

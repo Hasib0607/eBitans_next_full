@@ -49,54 +49,57 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
           subtitle={""}
           title_color={title_color || "#000"}
         />
-        <div className="arrow-hov relative">
-          <div className=" gap-2 lg:cursor-pointer hidden arrow ">
-            <div
-              className={`${prev} bg-gray-400 text-white rounded-full transition-all duration-500  ease-linear absolute -left-4  top-1/2 -translate-y-1/2 z-[1] `}
-            >
-              <ChevronLeftIcon className="h-8 text-2xl font-serif font-bold" />
+        {best_sell_product?.length > 0 &&
+          <div className="arrow-hov relative">
+            <div className=" gap-2 lg:cursor-pointer hidden arrow ">
+              <div
+                className={`${prev} bg-gray-400 text-white rounded-full transition-all duration-500  ease-linear absolute -left-4  top-1/2 -translate-y-1/2 z-[1] `}
+              >
+                <ChevronLeftIcon className="h-8 text-2xl font-serif font-bold" />
+              </div>
+              <div
+                className={`${next} bg-gray-400 text-white rounded-full transition-all duration-500 ease-linear absolute -right-4 top-1/2 -translate-y-1/2 z-[1] `}
+              >
+                <ChevronRightIcon className="h-8 text-2xl font-serif font-bold" />
+              </div>
             </div>
-            <div
-              className={`${next} bg-gray-400 text-white rounded-full transition-all duration-500 ease-linear absolute -right-4 top-1/2 -translate-y-1/2 z-[1] `}
-            >
-              <ChevronRightIcon className="h-8 text-2xl font-serif font-bold" />
-            </div>
-          </div>
 
-          <GridSliderThirteen
-            prevEl={prev}
-            nextEl={next}
-            breakpoints={{
-              300: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              480: {
-                slidesPerView: 2,
-                spaceBetween: 30,
-              },
-              768: {
-                slidesPerView: 3,
-                spaceBetween: 10,
-              },
-              1024: {
-                slidesPerView: 4,
-                spaceBetween: 20,
-              },
-              1440: {
-                slidesPerView: 5,
-                spaceBetween: 20,
-              },
-            }}
-            className={"md:h-[1080px] h-[700px]"}
-          >
-            {best_sell_product?.slice(0, 10).map((item: any) => (
-              <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
-                <Card22 item={item} design={design} store_id={store_id} />
-              </SwiperSlide>
-            ))}
-          </GridSliderThirteen>
-        </div>
+            <GridSliderThirteen
+              prevEl={prev}
+              nextEl={next}
+              isLoop={best_sell_product?.length > 1 }
+              breakpoints={{
+                300: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                480: {
+                  slidesPerView: 2,
+                  spaceBetween: 30,
+                },
+                768: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+                1024: {
+                  slidesPerView: 4,
+                  spaceBetween: 20,
+                },
+                1440: {
+                  slidesPerView: 5,
+                  spaceBetween: 20,
+                },
+              }}
+              className={"md:h-[1080px] h-[700px]"}
+            >
+              {best_sell_product?.length > 0 && best_sell_product?.slice(0, 10).map((item: any) => (
+                <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
+                  <Card22 item={item} design={design} store_id={store_id} />
+                </SwiperSlide>
+              ))}
+            </GridSliderThirteen>
+          </div>
+        }
       </div>
     </div>
   );

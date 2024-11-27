@@ -21,10 +21,10 @@ import {
   EffectFade,
   Controller,
 } from "swiper/modules";
-const GridSliderFive = ({ nextEl, prevEl, children, ...rest }: any) => {
+const GridSliderFive = ({ nextEl, prevEl,isLoop=true, children, ...rest }: any) => {
   return (
     <Swiper
-      loop={true}
+      loop={isLoop}
       slidesPerView={4}
       autoplay={{
         delay: 3000,
