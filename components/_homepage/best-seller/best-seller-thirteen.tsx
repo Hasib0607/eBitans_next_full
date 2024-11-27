@@ -63,11 +63,12 @@ const BestSellerThirteen = ({ best_sell_product, store_id }: any) => {
             grid={{ rows: 3 }}
             className={"h-[380px] mt-2 md:my-12"}
           >
-            {bestSellProductData?.length > 0 && bestSellProductData?.slice(0, 20).map((item: any) => (
-              <SwiperSlide className="swiperjs_grid_three" key={item?.id}>
-                <Card20 item={item} store_id={store_id} />
-              </SwiperSlide>
-            ))}
+            {bestSellProductData?.length > 0 &&
+              bestSellProductData?.slice(0, 20).map((item: any) => (
+                <SwiperSlide className="swiperjs_grid_three" key={item?.id}>
+                  <Card20 item={item} store_id={store_id} />
+                </SwiperSlide>
+              ))}
           </GridSliderThirteen>
         )}
       </div>
