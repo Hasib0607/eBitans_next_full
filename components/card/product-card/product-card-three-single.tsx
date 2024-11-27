@@ -14,6 +14,7 @@ const ProductCardThreeSingleCard = ({ item, store_id }: any) => {
     item?.discount_price,
     item?.discount_type
   );
+  
   const campPrice = getPrice(
     productGetPrice,
     parseInt(camp?.discount_amount),

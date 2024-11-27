@@ -15,6 +15,7 @@ const getSubdomainName = async (url: string, head: string = "") => {
   }
 };
 
+
 const getDomainInfo = async (url: string, head: string = "") => {
   try {
     const res = await axios.post(
@@ -61,9 +62,4 @@ const getQuickViewProductDetails = async ({
 };
 
 // const getSiteInfo = async () => {};
-export {
-  getProductDetails,
-  getSubdomainName,
-  getQuickViewProductDetails,
-  getDomainInfo,
-};
+export { getProductDetails, getSubdomainName, getQuickViewProductDetails, getDomainInfo };

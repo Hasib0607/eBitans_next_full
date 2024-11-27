@@ -11,7 +11,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroEight = ({ slider }: any) => {
   let menu = ["", "", "", ""];
-
+  let isLoop = slider.length > 1;
   const nextEl = "hero-slider-next";
   const prevEl = "hero-slider-prev";
 
@@ -59,7 +59,7 @@ const HeroEight = ({ slider }: any) => {
                 prevEl: `.${prevEl}`,
                 nextEl: `.${nextEl}`,
               }}
-              loop={true}
+              loop={isLoop}
               spaceBetween={30}
               pagination={pagination}
               autoplay={{

@@ -5,6 +5,7 @@ import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
 const ProductThirtySix = ({ product, design, store_id }: any) => {
+  let isLoop = product.length > 1;
   const styleCss = `
    
     .new-product-prev {
@@ -56,7 +57,7 @@ const ProductThirtySix = ({ product, design, store_id }: any) => {
           <DefaultSlider
             prevEl={prevEl}
             nextEl={nextEl}
-            loop={true}
+            loop={isLoop}
             breakpoints={{
               320: {
                 slidesPerView: 2,

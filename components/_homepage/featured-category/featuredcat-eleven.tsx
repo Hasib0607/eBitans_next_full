@@ -26,6 +26,7 @@ const FeaturedEleven = ({ category, design, store_id }: any) => {
   const navigationPrevRef = useRef<any>(null);
   const navigationNextRef = useRef<any>(null);
   const router = useRouter();
+  let isLoop = category.length > 1;
   const customCss = `
     .hoverBorder:hover{
         border:1px solid ${design?.header_color}
@@ -67,7 +68,7 @@ const FeaturedEleven = ({ category, design, store_id }: any) => {
       <Swiper
         autoplay={{ delay: 2500 }}
         speed={1000}
-        // loop={true}
+        loop={isLoop}
         modules={[Autoplay, EffectFade, Navigation, Controller]}
         navigation={{
           prevEl: navigationPrevRef.current,

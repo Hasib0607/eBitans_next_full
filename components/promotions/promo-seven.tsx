@@ -14,6 +14,8 @@ const PromoSeven = ({ banner }: any) => {
   const prevEl = "promo_seven_Prev";
   const nextEl = "promo_seven_Next";
 
+  let isLoop = banner.length > 1;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 bg-white">
       <div className=" sm:grid-cols-2 gap-6 md:grid hidden">
@@ -51,7 +53,7 @@ const PromoSeven = ({ banner }: any) => {
             nextEl: `.${nextEl}`,
           }}
           spaceBetween={30}
-          loop={true}
+          loop={isLoop}
           autoplay={{
             delay: 2000,
           }}

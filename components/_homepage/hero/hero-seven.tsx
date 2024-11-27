@@ -12,6 +12,7 @@ import "./hero-seven.css";
 
 const HeroSeven = ({ slider, design }: any) => {
   let menu = [""];
+  let isLoop = slider.length > 1;
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
@@ -43,7 +44,7 @@ const HeroSeven = ({ slider, design }: any) => {
         <div className="swiper-pagination-seven hidden sm:block"></div>
       </div>
       <Swiper
-        loop={true}
+        loop={isLoop}
         spaceBetween={30}
         pagination={pagination}
         autoplay={{

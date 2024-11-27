@@ -17,7 +17,7 @@ const FilterByColorNew = ({ setActiveColor, colors, activeColor }: any) => {
         {colors?.map((item: any, id: any) => (
           <>
             <div
-              key={id}
+            key={id}
               onClick={() => {
                 setActiveColor(item?.code);
               }}

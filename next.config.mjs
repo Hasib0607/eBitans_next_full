@@ -14,6 +14,7 @@ const nextConfig = {
       },
     ],
   },
+  reactStrictMode: false,
 };
 
 const analyzerConfig = withBundleAnalyzer({

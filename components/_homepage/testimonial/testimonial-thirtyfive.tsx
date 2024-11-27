@@ -11,7 +11,7 @@ import Rate from "@/utils/rate";
 
 const TestimonialThirtyFive = ({ testimonials }: any) => {
   let menu = [""];
-
+  let isLoop = testimonials.length > 1;
   const pagination = {
     el: ".swiper-pagination-testimonial-thirtyfive",
     clickable: true,
@@ -84,7 +84,7 @@ const TestimonialThirtyFive = ({ testimonials }: any) => {
         </div>
         <Swiper
           // spaceBetween={60}
-          loop={true}
+          loop={isLoop}
           pagination={pagination}
           autoplay={{
             delay: 2000,

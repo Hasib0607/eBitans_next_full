@@ -22,7 +22,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroFive = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const nextEl = "hero-slider-next";
   const prevEl = "hero-slider-prev";
 
@@ -110,7 +110,7 @@ const HeroFive = ({ slider, design }: any) => {
         }}
         speed={1000}
         effect={"fade"}
-        loop={true}
+        loop={isLoop}
         pagination={pagination}
         autoplay={{
           delay: 2000,

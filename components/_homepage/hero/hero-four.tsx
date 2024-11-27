@@ -13,13 +13,15 @@ import { BsPlusLg } from "react-icons/bs";
 import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroFour = ({ slider }: any) => {
+  let isLoop = slider.length > 1;
+  
   if (slider.length === 0) {
     return;
   }
   return (
     <div className="z-0">
       <Swiper
-        loop={true}
+        loop={isLoop}
         spaceBetween={30}
         pagination={{
           clickable: true,

@@ -10,6 +10,8 @@ import SectionHeading from "@/components/section-heading/section-heading";
 import { testimonialImg } from "@/site-settings/siteUrl";
 
 const TestimonialFour = ({ testimonials, design }: any) => {
+  let isLoop = testimonials.length > 1;
+
   if (testimonials.length === 0) {
     return;
   }
@@ -21,7 +23,7 @@ const TestimonialFour = ({ testimonials, design }: any) => {
       </div>
       <div className="shadow-lg rounded-md py-5 mt-6 bg-white">
         <Swiper
-          loop={true}
+          loop={isLoop}
           spaceBetween={30}
           pagination={{
             clickable: true,

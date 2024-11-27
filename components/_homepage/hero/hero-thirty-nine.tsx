@@ -33,7 +33,7 @@ const HeroThirtyNine = ({ slider, design }: any) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
 
@@ -118,7 +118,7 @@ const HeroThirtyNine = ({ slider, design }: any) => {
             nextEl: `.${nextEl}`,
           }}
           speed={1000}
-          loop={true}
+          loop={isLoop}
           pagination={pagination}
           modules={[
             Pagination,

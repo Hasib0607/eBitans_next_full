@@ -11,10 +11,11 @@ import "swiper/css/pagination";
 import { Autoplay, EffectFade, Pagination } from "swiper/modules";
 
 const HeroOne = ({ slider }: any) => {
+  let isLoop = slider.length > 1;
   return (
     <>
       <Swiper
-        loop={true}
+        loop={isLoop}
         autoplay={{
           delay: 2000,
         }}

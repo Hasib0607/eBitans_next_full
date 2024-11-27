@@ -14,7 +14,7 @@ const FeatureProductThirtyNine = ({
   store_id,
 }: any) => {
   const [animate, setAnimate] = useState(false);
-
+  let isLoop = feature_product.length > 1;
   const prevEl = "feature-product-prev-thirtynine";
   const nextEl = "feature-product-next-thirtynine";
 
@@ -95,7 +95,7 @@ const FeatureProductThirtyNine = ({
         <DefaultSlider
           prevEl={prevEl}
           nextEl={nextEl}
-          loop={true}
+          loop={isLoop}
           modules={[Pagination]}
           paginationType={"fraction"}
           breakpoints={{

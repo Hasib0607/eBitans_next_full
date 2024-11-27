@@ -3,6 +3,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import createWebStorage from "redux-persist/lib/storage/createWebStorage";
 import rootReducer from "./root-reducer";
+import { apiSlice } from "./features/api/apiSlice";
 
 // Create a fallback for environments where localStorage is not available
 const createNoopStorage = () => {
@@ -44,7 +45,7 @@ const store = configureStore({
         ignoredPaths: ["register", "rehydrate"],
         serializableCheck: false, // Disable serializable check
       },
-    }),
+    }).concat(apiSlice.middleware),
 });
 
 export const persistor = persistStore(store);

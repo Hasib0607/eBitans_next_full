@@ -12,6 +12,7 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
 const FeaturedEighteen = ({ category, design }: any) => {
+  let isLoop = category.length > 1;
   const prevEl = "feature-category-prev";
   const nextEl = "feature-category-next";
 
@@ -71,7 +72,7 @@ const FeaturedEighteen = ({ category, design }: any) => {
       <DefaultSlider
         prevEl={prevEl}
         nextEl={nextEl}
-        loop={true}
+        loop={isLoop}
         breakpoints={{
           375: {
             slidesPerView: 2,

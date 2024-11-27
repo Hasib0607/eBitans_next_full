@@ -13,6 +13,7 @@ import SectionHeading from "../section-heading/section-heading";
 import { bannerImg } from "@/site-settings/siteUrl";
 
 const PromoFour = ({ banner, design }: any) => {
+  let isLoop = banner.length > 1;
   if (banner.length === 0) {
     return;
   }
@@ -24,7 +25,7 @@ const PromoFour = ({ banner, design }: any) => {
         </div>
         <div className=" shadow-xl rounded-md p-8">
           <Swiper
-            loop={true}
+            loop={isLoop}
             spaceBetween={30}
             navigation={true}
             modules={[A11y, EffectFade, Navigation]}

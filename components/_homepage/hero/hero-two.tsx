@@ -15,7 +15,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroTwo = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const pagination = {
     el: ".swiper-pagination-two",
     clickable: true,
@@ -52,7 +52,7 @@ const HeroTwo = ({ slider, design }: any) => {
         <div className="swiper-pagination-two"></div>
       </div>
       <Swiper
-        loop={false}
+        loop={isLoop}
         pagination={pagination}
         autoplay={{
           delay: 3000,

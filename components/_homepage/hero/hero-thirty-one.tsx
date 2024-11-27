@@ -26,7 +26,7 @@ const HeroThirtyOne = ({ slider, design }: any) => {
   const prevEl = "hero-slider-prev";
 
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
 
@@ -121,7 +121,7 @@ const HeroThirtyOne = ({ slider, design }: any) => {
         }}
         speed={1000}
         // effect={"fade"}
-        loop={true}
+        loop={isLoop}
         pagination={pagination}
         autoplay={{
           delay: 5000,

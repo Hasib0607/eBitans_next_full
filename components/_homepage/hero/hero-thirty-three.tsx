@@ -22,7 +22,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroThirtyThree = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const nextEl = "hero-slider-next";
   const prevEl = "hero-slider-prev";
 
@@ -122,7 +122,7 @@ const HeroThirtyThree = ({ slider, design }: any) => {
               prevEl: `.${prevEl}`,
               nextEl: `.${nextEl}`,
             }}
-            loop={true}
+            loop={isLoop}
             spaceBetween={30}
             effect={"fade"}
             pagination={pagination}

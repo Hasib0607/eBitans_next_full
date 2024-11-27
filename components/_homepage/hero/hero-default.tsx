@@ -9,6 +9,9 @@ import "swiper/css";
 
 const HeroDefault = ({ slider }: any) => {
   let menu = [""];
+
+  let isLoop = slider.length > 1;
+
   const pagination = {
     el: ".swiper-pagination-seven",
     clickable: true,
@@ -34,7 +37,7 @@ const HeroDefault = ({ slider }: any) => {
         <div className="swiper-pagination-seven"></div>
       </div>
       <Swiper
-        loop={true}
+        loop={isLoop}
         spaceBetween={30}
         pagination={pagination}
         autoplay={{

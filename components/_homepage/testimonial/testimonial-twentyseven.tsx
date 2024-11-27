@@ -9,6 +9,8 @@ import { FaQuoteLeft, FaQuoteRight } from "react-icons/fa";
 import { testimonialImg } from "@/site-settings/siteUrl";
 
 const TestimonialTwentySeven = ({ testimonials, design }: any) => {
+  let isLoop = testimonials.length > 1;
+
   return (
     <div className="sm:container px-5 sm:py-10 py-5 ">
       <div className="pt-10 text-center font-bold text-3xl">
@@ -21,7 +23,7 @@ const TestimonialTwentySeven = ({ testimonials, design }: any) => {
       <div className=" mx-auto rounded-md py-5 mt-6 xl:px-[400px] lg:px-[200px] flex items-center gap-x-5">
         <FaQuoteLeft className="text-[100px] text-[#CFEAE7]" />
         <Swiper
-          loop={true}
+          loop={isLoop}
           spaceBetween={30}
           pagination={{
             clickable: true,

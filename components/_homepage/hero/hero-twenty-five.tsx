@@ -8,10 +8,11 @@ import "swiper/css/pagination";
 import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroTwentyFive = ({ slider, design }: any) => {
+  let isLoop = slider.length > 1;
   return (
     <div className={`${design?.header === "twentyfive" && "pt-20"}`}>
       <Swiper
-        loop={true}
+        loop={isLoop}
         pagination={{
           clickable: true,
         }}

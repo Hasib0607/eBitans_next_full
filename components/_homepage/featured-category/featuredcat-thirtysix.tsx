@@ -14,6 +14,8 @@ const FeaturedThirtySix = ({ category, design }: any) => {
   const prevEl = "feature-category-prev";
   const nextEl = "feature-category-next";
 
+  let isLoop = category.length > 1;
+
   const styleCss = `
     .feature-category-prev:hover {
       color:  ${design?.text_color};
@@ -54,7 +56,7 @@ const FeaturedThirtySix = ({ category, design }: any) => {
       <DefaultSlider
         prevEl={prevEl}
         nextEl={nextEl}
-        loop={true}
+        loop={isLoop}
         breakpoints={{
           375: {
             slidesPerView: 1.75,

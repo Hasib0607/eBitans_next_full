@@ -14,6 +14,8 @@ const BestSellerTwentyEight = ({ design, store_id }: any) => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  let isLoop = products.length > 1;
+
   useEffect(() => {
     const getBestSellProduct = (domain: any) => {
       const url =
@@ -120,7 +122,7 @@ const BestSellerTwentyEight = ({ design, store_id }: any) => {
           <DefaultSlider
             prevEl={prevEl}
             nextEl={nextEl}
-            loop={true}
+            loop={isLoop}
             breakpoints={{
               320: {
                 slidesPerView: 2,

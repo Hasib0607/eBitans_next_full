@@ -18,6 +18,7 @@ import { bannerImg } from "@/site-settings/siteUrl";
 const PromoTwentySeven = ({ banner }: any) => {
   const navigationPrevRef = React.useRef(null);
   const navigationNextRef = React.useRef(null);
+  let isLoop = banner.length > 1;
 
   return (
     <div>
@@ -48,7 +49,7 @@ const PromoTwentySeven = ({ banner }: any) => {
           <Swiper
             autoplay={{ delay: 2500 }}
             speed={1000}
-            loop={true}
+            loop={isLoop}
             modules={[Autoplay, EffectFade, Navigation, Controller]}
             navigation={{
               prevEl: navigationPrevRef.current,

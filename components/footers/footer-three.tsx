@@ -33,13 +33,8 @@ const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
           </p>
           <p className="text-sm leading-none text-gray-800 mt-4 text-center">
             Developed by{" "}
-            <a
-              href="https://ebitans.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-semibold text-red-700 menu-hover"
-            >
-              eBitans
+            <a href="https://ebitans.com/" target="_blank">
+              <span className="font-semibold text-red-700">eBitans </span>
             </a>
           </p>
           <div className="flex items-center gap-x-4 mt-3 mb-5">

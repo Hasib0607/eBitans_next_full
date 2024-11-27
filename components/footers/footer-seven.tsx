@@ -171,9 +171,8 @@ const FooterSeven = ({
         <a
           href="https://ebitans.com/"
           target="_blank"
-          className="font-semibold text-red-700 menu-hover"
         >
-          eBitans
+          <span className="font-semibold text-red-700">eBitans </span>
         </a>
       </p>
       {/* <Messenger /> */}

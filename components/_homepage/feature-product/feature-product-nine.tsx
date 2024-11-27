@@ -26,7 +26,7 @@ import {
 const FeatureProductNine = ({ feature_product, design }: any) => {
   const prevEl: any = "feature-product-prev";
   const nextEl: any = "feature-product-next";
-
+  let isLoop = feature_product.length > 1;
   const styleCss = `
     .feature-product-prev:hover {
       color:  ${design?.text_color};
@@ -70,7 +70,7 @@ const FeatureProductNine = ({ feature_product, design }: any) => {
         </div>
 
         <Swiper
-          loop={true}
+          loop={isLoop}
           autoplay={{
             delay: 5000,
           }}

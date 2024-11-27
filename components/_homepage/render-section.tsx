@@ -36,87 +36,88 @@ interface RenderSectionProps {
 }
 
 const RenderSection = async ({ component, data }: RenderSectionProps) => {
-  const { slider, category, banner, testimonials, design, store_id, brand } =
-    data;
+const { slider, category, banner, testimonials, design, store_id, brand } = data;
 
-  switch (component) {
-    case "hero_slider":
-      return (
-        <Hero slider={slider} theme={design?.hero_slider} design={design} />
-      );
+switch (component) {
+  case "hero_slider":
+    return (
+      <Hero slider={slider} theme={design?.hero_slider} design={design} />
+    );
 
-    case "banner":
-      return (
-        <Promo
+  case "banner":
+    return (
+      <Promo
+        design={design}
+        store_id={store_id}
+        theme={design?.banner}
+        banner={banner}
+      />
+    );
+
+  case "banner_bottom":
+    return (
+      <PromoBottom
+        theme={design?.banner_bottom}
+        banner={banner}
+        brand={brand}
+      />
+    );
+
+  case "feature_category":
+    return (
+    <FeaturedCategoryMain
+      category={category}
+      design={design}
+      store_id={store_id}
+    />
+  );
+
+  case "feature_product":
+    return (
+    <FeaturedProductMain
+      banner={banner}
+      design={design}
+      store_id={store_id}
+    />
+  );
+
+  case "product":
+    return (<ProductMain
+      category={category}
+      design={design}
+      store_id={store_id}
+    />)
+
+  case "best_sell_product":
+    return (<BestSellMain
+      banner={banner}
+      design={design}
+      store_id={store_id}
+    />)
+
+  case "new_arrival":
+    return (<NewArrivalProductMain
+      category={category}
+      design={design}
+      store_id={store_id}
+    />)
+
+  case "testimonial":
+    return (
+      <>
+        <Suspense fallback={<p></p>}>
+          <BlogSection />
+        </Suspense>
+
+        <Testimonial
+          testimonials={testimonials}
+          theme={design?.testimonial}
           design={design}
-          store_id={store_id}
-          theme={design?.banner}
-          banner={banner}
         />
-      );
-
-    case "banner_bottom":
-      return (
-        <PromoBottom
-          theme={design?.banner_bottom}
-          banner={banner}
-          brand={brand}
-        />
-      );
-
-    case "feature_category":
-      return (
-        <FeaturedCategoryMain
-          category={category}
-          design={design}
-          store_id={store_id}
-        />
-      );
-
-    case "feature_product":
-      return (
-        <FeaturedProductMain
-          banner={banner}
-          design={design}
-          store_id={store_id}
-        />
-      );
-
-    case "product":
-      return (
-        <ProductMain category={category} design={design} store_id={store_id} />
-      );
-
-    case "best_sell_product":
-      return (
-        <BestSellMain banner={banner} design={design} store_id={store_id} />
-      );
-
-    case "new_arrival":
-      return (
-        <NewArrivalProductMain
-          category={category}
-          design={design}
-          store_id={store_id}
-        />
-      );
-
-    case "testimonial":
-      return (
-        <>
-          <Suspense fallback={<p></p>}>
-            <BlogSection />
-          </Suspense>
-
-          <Testimonial
-            testimonials={testimonials}
-            theme={design?.testimonial}
-            design={design}
-          />
-        </>
-      );
-    default:
-      return null;
+      </>
+    );
+  default:
+    return null;
   }
 };
 

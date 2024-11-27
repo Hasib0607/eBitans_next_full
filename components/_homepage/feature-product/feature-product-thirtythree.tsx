@@ -13,7 +13,7 @@ const FeatureProductThirtyThree = ({
 }: any) => {
   const prevEl = "new-product-prev";
   const nextEl = "new-product-next";
-
+  let isLoop = feature_product.length > 1;
   const styleCss = `
    
     .new-product-prev {
@@ -62,7 +62,7 @@ const FeatureProductThirtyThree = ({
         <DefaultSlider
           prevEl={prevEl}
           nextEl={nextEl}
-          loop={true}
+          loop={isLoop}
           breakpoints={{
             320: {
               slidesPerView: 1,
