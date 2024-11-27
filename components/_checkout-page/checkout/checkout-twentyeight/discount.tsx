@@ -156,12 +156,7 @@ const Discount = ({
                   htmlFor="name"
                   className="block text-xl font-semibold text-gray-700"
                 >
-                  {design?.template_id === "29" ||
-                  store_id === 3601 ||
-                  store_id === 3904 ||
-                  store_id === 5519
-                    ? "শিপিং এরিয়া"
-                    : "Shipping Area"}
+                  কুরিয়ার চার্জ
                 </label>
                 <div className="flex flex-col gap-2">
                   {/* Radio button for Shipping Area 1 */}
@@ -244,7 +239,7 @@ const Discount = ({
                     htmlFor="name"
                     className="block text-xl font-semibold text-gray-700"
                   >
-                    {design?.template_id === "29" ? "ডিসকাউন্ট" : "Discount"}
+                     ডিসকাউন্ট
                   </label>
                   <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -278,7 +273,7 @@ const Discount = ({
                     ) : (
                       <input
                         type={"submit"}
-                        value={"Apply"}
+                        value={"অ্যাপ্লাই"}
                         style={{
                           backgroundColor: design?.header_color,
                           color: design?.text_color,
