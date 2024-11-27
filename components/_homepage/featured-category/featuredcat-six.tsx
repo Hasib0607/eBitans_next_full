@@ -55,30 +55,36 @@ const FeaturedSix = ({ category, design }: any) => {
           })}
         </div>
       </div>
+      {category?.length > 0 && (
+        <div className="group z-0 xl:hidden block py-10 bg-gray-200 xl:px-60 px-5">
+          <style>{styleCss}</style>
+          <div className=" gap-2 relative lg:cursor-pointer lg:hidden lg:group-hover:block ">
+            <div
+              className={`${prevEl} bg-gray-500 text-white  rounded-full transition-all duration-500  ease-linear absolute -left-4  top-[145px] z-10 `}
+            >
+              <ChevronLeftIcon className="h-8 text-2xl font-serif font-bold" />
+            </div>
+            <div
+              className={`${nextEl} bg-gray-500 text-white rounded-full transition-all duration-500  ease-linear absolute -right-4 top-[145px] z-10 `}
+            >
+              <ChevronRightIcon className="h-8 text-2xl font-serif font-bold" />
+            </div>
+          </div>
 
-      <div className="group z-0 xl:hidden block py-10 bg-gray-200 xl:px-60 px-5">
-        <style>{styleCss}</style>
-        <div className=" gap-2 relative lg:cursor-pointer lg:hidden lg:group-hover:block ">
-          <div
-            className={`${prevEl} bg-gray-500 text-white  rounded-full transition-all duration-500  ease-linear absolute -left-4  top-[145px] z-10 `}
+          <GridSliderSixCat
+            prevEl={prevEl}
+            nextEl={nextEl}
+            isLoop={category?.length > 1}
           >
-            <ChevronLeftIcon className="h-8 text-2xl font-serif font-bold" />
-          </div>
-          <div
-            className={`${nextEl} bg-gray-500 text-white rounded-full transition-all duration-500  ease-linear absolute -right-4 top-[145px] z-10 `}
-          >
-            <ChevronRightIcon className="h-8 text-2xl font-serif font-bold" />
-          </div>
+            {category?.length > 0 &&
+              category?.map((item: any) => (
+                <SwiperSlide className="swiperjs-slider-six " key={item?.id}>
+                  <FeatureCatSix item={item} />
+                </SwiperSlide>
+              ))}
+          </GridSliderSixCat>
         </div>
-
-        <GridSliderSixCat prevEl={prevEl} nextEl={nextEl}>
-          {category?.map((item: any) => (
-            <SwiperSlide className="swiperjs-slider-six " key={item?.id}>
-              <FeatureCatSix item={item} />
-            </SwiperSlide>
-          ))}
-        </GridSliderSixCat>
-      </div>
+      )}
     </div>
   );
 };

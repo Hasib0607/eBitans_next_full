@@ -25,40 +25,43 @@ const BestSellerThirteen = ({ best_sell_product, store_id }: any) => {
           title={title || "Best Seller"}
           title_color={title_color || "#000"}
         />
-        <GridSliderThirteen
-          prevEl={prev}
-          nextEl={next}
-          breakpoints={{
-            40: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            500: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            750: {
-              slidesPerView: 3,
-              spaceBetween: 20,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            1280: {
-              slidesPerView: 5,
-              spaceBetween: 20,
-            },
-          }}
-          grid={{ rows: 3 }}
-          className={"h-[380px] mt-2 md:my-12"}
-        >
-          {best_sell_product?.slice(0, 20).map((item: any) => (
-            <SwiperSlide className="swiperjs_grid_three" key={item?.id}>
-              <Card20 item={item} store_id={store_id} />
-            </SwiperSlide>
-          ))}
-        </GridSliderThirteen>
+        {best_sell_product?.length > 0 && (
+          <GridSliderThirteen
+            prevEl={prev}
+            nextEl={next}
+            isLoop={best_sell_product?.length > 1}
+            breakpoints={{
+              40: {
+                slidesPerView: 1,
+                spaceBetween: 10,
+              },
+              500: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              750: {
+                slidesPerView: 3,
+                spaceBetween: 20,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+              1280: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+              },
+            }}
+            grid={{ rows: 3 }}
+            className={"h-[380px] mt-2 md:my-12"}
+          >
+            {best_sell_product?.slice(0, 20).map((item: any) => (
+              <SwiperSlide className="swiperjs_grid_three" key={item?.id}>
+                <Card20 item={item} store_id={store_id} />
+              </SwiperSlide>
+            ))}
+          </GridSliderThirteen>
+        )}
       </div>
     </div>
   );

@@ -6,7 +6,7 @@ const HomePage = async () => {
   const url = getUrl();
 
   let generalData = null;
-  if(url != ""){
+  if (url != "") {
     generalData = await getDomainInfo(url);
   }
 
@@ -20,18 +20,18 @@ const HomePage = async () => {
       ? layout.sort((a: any, b: any) => layoutposition[a] - layoutposition[b])
       : [];
 
-      if(sortedLayout.length > 0){
-        content =
+    if (sortedLayout.length > 0) {
+      content = (
         <div>
           {sortedLayout?.map((item: any, index: number) => (
-              <RenderSection key={index} component={item} data={generalData} />
-            ))}
-        </div>;
-      }
+            <RenderSection key={index} component={item} data={generalData} />
+          ))}
+        </div>
+      );
+    }
   }
 
   return content;
-
 };
 
 export default HomePage;

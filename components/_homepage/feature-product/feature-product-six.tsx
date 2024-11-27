@@ -25,23 +25,30 @@ const FeatureProductSix = ({ product, store_id }: any) => {
           subtitle={""}
           title_color={title_color}
         />
-        <div
-          className="mt-10 group featureCustomHoverSix"
-          style={{ border: "2px solid #f5f5f5", padding: "10px" }}
-        >
-          <div className="col-span-2">
-            <div className="flex px-1 top-5 absolute inset-1 items-center">
-              <ArrowSquare prevEl={prev} nextEl={next}></ArrowSquare>
+        {product?.length > 0 && (
+          <div
+            className="mt-10 group featureCustomHoverSix"
+            style={{ border: "2px solid #f5f5f5", padding: "10px" }}
+          >
+            <div className="col-span-2">
+              <div className="flex px-1 top-5 absolute inset-1 items-center">
+                <ArrowSquare prevEl={prev} nextEl={next}></ArrowSquare>
+              </div>
+              <GridSliderFour
+                prevEl={prev}
+                nextEl={next}
+                isLoop={product?.length > 1}
+              >
+                {product?.length > 0 &&
+                  product?.map((item: any) => (
+                    <SwiperSlide className="swiperjs-slide" key={item?.id}>
+                      <Card8 item={item} store_id={store_id} />
+                    </SwiperSlide>
+                  ))}
+              </GridSliderFour>
             </div>
-            <GridSliderFour prevEl={prev} nextEl={next}>
-              {product?.map((item: any) => (
-                <SwiperSlide className="swiperjs-slide" key={item?.id}>
-                  <Card8 item={item} store_id={store_id} />
-                </SwiperSlide>
-              ))}
-            </GridSliderFour>
           </div>
-        </div>
+        )}
       </div>
     </div>
   );
