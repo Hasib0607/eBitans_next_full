@@ -92,9 +92,7 @@ const CheckOutTwentyEight = () => {
       }`}
     >
       <div className="sm:container px-5 xl:px-24">
-        <h2 className="py-10 text-4xl font-semibold text-center">
-          চেকআউট 
-        </h2>
+        <h2 className="py-10 text-4xl font-semibold text-center">চেকআউট</h2>
         <div className="container">
           <div className="lg:grid lg:grid-cols-2 lg:gap-6 mt-1 py-4">
             <div className="mt-5 lg:mt-0 lg:col-span-1 lg:h-max lg:sticky lg:top-28">

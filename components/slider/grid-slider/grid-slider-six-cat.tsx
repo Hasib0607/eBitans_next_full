@@ -21,7 +21,13 @@ import "./grid-slider-six-cat.css";
 
 // import required modules
 
-const GridSliderSixCat = ({ nextEl, prevEl,isLoop=true, children, ...rest }: any) => {
+const GridSliderSixCat = ({
+  nextEl,
+  prevEl,
+  isLoop = true,
+  children,
+  ...rest
+}: any) => {
   return (
     <Swiper
       slidesPerView={2}

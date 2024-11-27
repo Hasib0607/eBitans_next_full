@@ -21,7 +21,13 @@ import {
   EffectFade,
   Controller,
 } from "swiper/modules";
-const GridSliderFive = ({ nextEl, prevEl,isLoop=true, children, ...rest }: any) => {
+const GridSliderFive = ({
+  nextEl,
+  prevEl,
+  isLoop = true,
+  children,
+  ...rest
+}: any) => {
   return (
     <Swiper
       loop={isLoop}

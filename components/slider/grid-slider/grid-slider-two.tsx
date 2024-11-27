@@ -9,7 +9,13 @@ import {
 } from "swiper/modules";
 import { Swiper } from "swiper/react";
 
-const GridSliderTwo = ({ nextEl, prevEl,isLoop=true, children, ...rest }: any) => {
+const GridSliderTwo = ({
+  nextEl,
+  prevEl,
+  isLoop = true,
+  children,
+  ...rest
+}: any) => {
   return (
     <div className="">
       <Swiper

@@ -17,7 +17,6 @@ const FeatureProductFive = ({ feature_product }: any) => {
   const cDesign = data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
 
-
   if (!featuredProduct) {
     return null;
   }
@@ -48,16 +47,16 @@ const FeatureProductFive = ({ feature_product }: any) => {
                 <Arrow prevEl={prev1} nextEl={next1}></Arrow>
               </div>
             </div>
-            {feature_product?.length > 0 &&
-            <GridSliderTwo loop={isLoop} prevEl={prev1} nextEl={next1}>
-              {feature_product?.length > 0  &&
-                feature_product?.slice(0, 10).map((item: any) => (
-                  <SwiperSlide className="swiperjs-slide" key={item?.id}>
-                    <Card57 item={item} />
-                  </SwiperSlide>
-                ))}
-            </GridSliderTwo>
-}
+            {feature_product?.length > 0 && (
+              <GridSliderTwo loop={isLoop} prevEl={prev1} nextEl={next1}>
+                {feature_product?.length > 0 &&
+                  feature_product?.slice(0, 10).map((item: any) => (
+                    <SwiperSlide className="swiperjs-slide" key={item?.id}>
+                      <Card57 item={item} />
+                    </SwiperSlide>
+                  ))}
+              </GridSliderTwo>
+            )}
           </div>
         </div>
       </div>

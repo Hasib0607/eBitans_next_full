@@ -14,7 +14,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroFour = ({ slider }: any) => {
   let isLoop = slider.length > 1;
-  
+
   if (slider.length === 0) {
     return;
   }

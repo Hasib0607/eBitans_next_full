@@ -49,7 +49,7 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
           subtitle={""}
           title_color={title_color || "#000"}
         />
-        {best_sell_product?.length > 0 &&
+        {best_sell_product?.length > 0 && (
           <div className="arrow-hov relative">
             <div className=" gap-2 lg:cursor-pointer hidden arrow ">
               <div
@@ -67,7 +67,7 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
             <GridSliderThirteen
               prevEl={prev}
               nextEl={next}
-              isLoop={best_sell_product?.length > 1 }
+              isLoop={best_sell_product?.length > 1}
               breakpoints={{
                 300: {
                   slidesPerView: 2,
@@ -92,14 +92,15 @@ const BestSellerNine = ({ best_sell_product, design, store_id }: any) => {
               }}
               className={"md:h-[1080px] h-[700px]"}
             >
-              {best_sell_product?.length > 0 && best_sell_product?.slice(0, 10).map((item: any) => (
-                <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
-                  <Card22 item={item} design={design} store_id={store_id} />
-                </SwiperSlide>
-              ))}
+              {best_sell_product?.length > 0 &&
+                best_sell_product?.slice(0, 10).map((item: any) => (
+                  <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
+                    <Card22 item={item} design={design} store_id={store_id} />
+                  </SwiperSlide>
+                ))}
             </GridSliderThirteen>
           </div>
-        }
+        )}
       </div>
     </div>
   );

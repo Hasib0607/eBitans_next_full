@@ -29,7 +29,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
               >
                 পেমেন্ট
                 <span className="text-sm">
-                 (আপনার পেমেন্ট পদ্ধতি নির্বাচন করুন)
+                  (আপনার পেমেন্ট পদ্ধতি নির্বাচন করুন)
                 </span>
               </label>
             </div>

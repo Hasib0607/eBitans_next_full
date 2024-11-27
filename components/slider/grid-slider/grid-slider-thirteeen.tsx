@@ -27,7 +27,7 @@ const GridSliderThirteen = ({
   children,
   breakpoints,
   className,
-  isLoop=true,
+  isLoop = true,
   grid = { rows: 2 },
   ...rest
 }: any) => {

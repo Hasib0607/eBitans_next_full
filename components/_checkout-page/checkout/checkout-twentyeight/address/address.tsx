@@ -96,15 +96,15 @@ const Address = ({
         <div className={`px-4 py-5 space-y-6 sm:p-6`}>
           <div className="">
             <div className="flex justify-between items-center pb-3">
-                <label
-                  htmlFor="name"
-                  className="block text-xl font-semibold text-gray-700"
-                >
-                  ঠিকানা{" "}
-                  <span className="text-sm">
-                    ( অনুগ্রহ করে আপনার ঠিকানা নির্বাচন করুন )
-                  </span>
-                </label>
+              <label
+                htmlFor="name"
+                className="block text-xl font-semibold text-gray-700"
+              >
+                ঠিকানা{" "}
+                <span className="text-sm">
+                  ( অনুগ্রহ করে আপনার ঠিকানা নির্বাচন করুন )
+                </span>
+              </label>
               {user && (
                 <span
                   className="text-green-600 font-semibold tracking-wider lg:cursor-pointer"
@@ -117,51 +117,54 @@ const Address = ({
             </div>
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
-                {/* Name Input with Icon */}
-                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaUser className="text-black" />
-                  </div>
+                {/* Name Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    আপনার নাম লিখুন <span className="text-red-500">*</span>
+                  </label>
                   <input
                     onChange={(e) => setUserName(e.target.value)}
                     type="text"
-                    placeholder= "নাম"
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                    placeholder="সম্পূর্ণ নামটি লিখুন"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
                   />
                 </div>
 
-                {/* Phone Input with Icon */}
-                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaPhoneAlt className="text-black" />
-                  </div>
+                {/* Phone Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    আপনার মোবাইল নাম্বার লিখুন{" "}
+                    <span className="text-red-500">*</span>
+                  </label>
                   <input
                     value={userPhone}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     type="number"
+                    placeholder="১১ ডিজিটের মোবাইল নাম্বারটি লিখুন"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
                     maxLength={11}
                     minLength={11}
-                    placeholder= "ফোন"
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
                   />
+                  {/* Phone Validation Error */}
+                  {!isPhoneValid && (
+                    <small className="text-rose-500">Need 11 digits</small>
+                  )}
                 </div>
 
-                {/* Phone Validation Error */}
-                {!isPhoneValid && (
-                  <small className="text-rose-500">Need 11 digits</small>
-                )}
-
-                {/* Address Input with Icon */}
-                <div className="flex items-start border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaMapMarkerAlt className="text-black" />
-                  </div>
+                {/* Address Input */}
+                <div className="flex flex-col">
+                  <label className="font-semibold">
+                    সম্পূর্ণ ঠিকানা <span className="text-red-500">*</span>
+                  </label>
                   <textarea
                     onChange={(e) => setUserAddress(e.target.value)}
-                    placeholder= "ঠিকানা"
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                  />
+                    placeholder="হাউজ নাম্বার, রোড, ইউনিয়ন, উপজেলা, জেলা"
+                    required
+                    className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
+                  ></textarea>
                 </div>
               </div>
             ) : (
@@ -709,7 +712,7 @@ export function UpdateAddress({
                 htmlFor="name"
                 className="block text-sm font-medium text-gray-700"
               >
-                Name
+                নাম
               </label>
               <input
                 {...register("name")}
@@ -725,7 +728,7 @@ export function UpdateAddress({
                 htmlFor="phone"
                 className="block text-sm font-medium text-gray-700"
               >
-                Phone
+                ফোন
               </label>
               <input
                 {...register("phone", {
@@ -748,7 +751,7 @@ export function UpdateAddress({
                 htmlFor="address"
                 className="block text-sm font-medium text-gray-700"
               >
-                Address
+                ঠিকানা
               </label>
               <textarea
                 {...register("address")}

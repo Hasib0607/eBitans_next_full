@@ -25,7 +25,7 @@ const BestSellerThirteen = ({ best_sell_product, store_id }: any) => {
           title={title || "Best Seller"}
           title_color={title_color || "#000"}
         />
-        {best_sell_product?.length > 0 &&
+        {best_sell_product?.length > 0 && (
           <GridSliderThirteen
             prevEl={prev}
             nextEl={next}
@@ -61,7 +61,7 @@ const BestSellerThirteen = ({ best_sell_product, store_id }: any) => {
               </SwiperSlide>
             ))}
           </GridSliderThirteen>
-        }
+        )}
       </div>
     </div>
   );

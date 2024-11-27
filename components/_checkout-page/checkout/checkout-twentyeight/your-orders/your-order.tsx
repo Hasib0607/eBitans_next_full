@@ -408,9 +408,7 @@ const YourOrders = ({
     >
       <style>{styleCss}</style>
       {/* {error && <SnackBar open={true} msg={error} />} */}
-      <h3 className="text-center font-semibold text-lg ">
-        আপনার অর্ডার সমূহ
-      </h3>
+      <h3 className="text-center font-semibold text-lg ">আপনার অর্ডার সমূহ</h3>
       {cartList ? (
         <>
           <div className="my-16">
@@ -460,9 +458,7 @@ const YourOrders = ({
           <p>{<BDT price={parseInt(tax)} />}</p>
         </div>
         <div className="flex justify-between items-center">
-          <p>
-           এস্টিমেটেড শিপিং 
-          </p>
+          <p>এস্টিমেটেড শিপিং</p>
           {shipping_area === "--Select Area--" ? (
             <p>
               <BDT /> 0
@@ -520,7 +516,7 @@ const YourOrders = ({
           className={`font-semibold tracking-wider my-1 rounded-full border cart-btn border-gray-300 w-full py-3   ${btnhover}`}
           onClick={() => handleCheckout()}
         >
-            অর্ডার কনফার্ম করুন
+          অর্ডার কনফার্ম করুন
         </button>
       )}
 
