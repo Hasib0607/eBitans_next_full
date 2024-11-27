@@ -10,7 +10,7 @@ import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import Taka from "@/utils/taka";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { SwiperSlide } from "swiper/react";
@@ -25,13 +25,6 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
 
   const prev = "feature_product_prev";
   const next = "feature_product_next";
-  const [bestSellProductData, setBestSellProductData] = useState<any>([]);
-
-  useEffect(() => {
-    if (product) {
-      setBestSellProductData(product);
-    }
-  }, [product]);
 
   const productGetPrice = getPrice(
     product.regular_price,
@@ -167,7 +160,7 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
               </div>
             </div>
           </div>
-          {bestSellProductData?.length > 0 && (
+          {product?.length > 0 && (
             <div className="lg:col-span-2 md:col-span-2 relative bestSellerCustomHover">
               <div className="flex px-1 -top-10 absolute inset-1 items-center">
                 <ArrowSquare prevEl={prev} nextEl={next}>
@@ -178,7 +171,7 @@ const BestSellerSix = ({ product, design, store_id }: any) => {
               <GridSliderFive
                 prevEl={prev}
                 nextEl={next}
-                isLoop={bestSellProductData?.length > 1}
+                isLoop={product?.length > 1}
               >
                 {product?.map((item: any) => (
                   <SwiperSlide className="swiperjs-slide" key={item?.id}>

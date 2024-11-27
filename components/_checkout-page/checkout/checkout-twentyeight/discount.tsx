@@ -239,7 +239,7 @@ const Discount = ({
                     htmlFor="name"
                     className="block text-xl font-semibold text-gray-700"
                   >
-                     ডিসকাউন্ট
+                    ডিসকাউন্ট
                   </label>
                   <form
                     onSubmit={handleSubmit(onSubmit)}
@@ -287,22 +287,6 @@ const Discount = ({
             )}
           </div>
         </div>
-        {store_id === 5377 && (
-          <div className="px-4 pb-10 space-y-2">
-            <p className="text-red-600 text-sm font-bold">
-              <FaRegArrowAltCircleRight className="inline mr-1 text-xl" />{" "}
-              এডভান্স পেমেন্ট আবশ্যক (ফেক অর্ডার প্রতিরোধ করতে) আমাদের গ্যাজেট
-              আইটেম গুলো অর্ডারের ক্ষেত্রে আংশিক পেমেন্ট করতে হয়। Cash On
-              Delivery (COD) এর ক্ষেত্রে অবশ্যই প্রতি অর্ডারে ২০০৳ - ১০০০৳ টাকা
-              প্রদান করতে হয়। যদি চান ফুল পেমেন্ট ও করতে পারবেন।
-            </p>
-            <p className="text-red-600 text-sm font-bold">
-              <FaRegArrowAltCircleRight className="inline mr-1 text-xl" /> আপনার
-              প্রদানকৃত এডভান্স টাকা টোটাল বিল থেকে মাইনাস করা হবে। বাকি টাকা
-              ডেলিভারি ম্যানকে দিয়ে পন্য বুঝে নিবেন।
-            </p>
-          </div>
-        )}
       </div>
     </>
   );
