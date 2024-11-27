@@ -13,6 +13,7 @@ const HeroSix = ({ slider, design }: any) => {
   const nextEl = "hero-slider-next";
   const prevEl = "hero-slider-prev";
   let menu = [""];
+  let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
   const pagination = {
@@ -88,7 +89,7 @@ const HeroSix = ({ slider, design }: any) => {
           prevEl: `.${prevEl}`,
           nextEl: `.${nextEl}`,
         }}
-        loop={false}
+        loop={isLoop}
         spaceBetween={30}
         pagination={pagination}
         autoplay={{

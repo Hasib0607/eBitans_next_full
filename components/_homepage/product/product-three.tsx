@@ -16,6 +16,7 @@ const ProductThree = ({ product, design, store_id }: any) => {
   if (error) {
     return <p> error from headersettings</p>;
   }
+  let isLoop = product.length > 1;
   return (
     <div className=" relative sm:py-10 py-5">
       <div className="sm:container px-5 mx-auto">
@@ -31,7 +32,7 @@ const ProductThree = ({ product, design, store_id }: any) => {
         <DefaultSlider
           prevEl={prev}
           nextEl={next}
-          loop={true}
+          loop={isLoop}
           breakpoints={{
             350: {
               slidesPerView: 2,

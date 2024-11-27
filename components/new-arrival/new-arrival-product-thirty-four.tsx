@@ -7,6 +7,8 @@ import SectionHeadingThirtyFour from "../section-heading/section-heading-thirtyf
 import DefaultSlider from "../slider/default-slider";
 
 const NewArrivalProductThirtyFour = ({ product, design, store_id }: any) => {
+  let isLoop = product.length > 1;
+
   const styleCss = `
    
     .new-product-prev {
@@ -61,7 +63,7 @@ const NewArrivalProductThirtyFour = ({ product, design, store_id }: any) => {
           <DefaultSlider
             prevEl={prevEl}
             nextEl={nextEl}
-            loop={true}
+            loop={isLoop}
             breakpoints={{
               320: {
                 slidesPerView: 2,

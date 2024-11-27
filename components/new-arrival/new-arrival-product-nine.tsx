@@ -27,7 +27,7 @@ import SectionHeadingNine from "../section-heading/section-heading-nine";
 const NewArrivalProductNine = ({ product, design }: any) => {
   const prevEl = "new-product-prev";
   const nextEl = "new-product-next";
-
+  let isLoop = product.length > 1;
   const styleCss = `
     .new-product-prev:hover {
       color:  ${design?.text_color};
@@ -72,7 +72,7 @@ const NewArrivalProductNine = ({ product, design }: any) => {
         </div>
 
         <Swiper
-          loop={true}
+          loop={isLoop}
           autoplay={{
             delay: 5000,
           }}

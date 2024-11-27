@@ -1,61 +1,63 @@
-"use client"; // Marks this file as a Client Component
+"use client" // Marks this file as a Client Component
 
+import { useGetSettingQuery } from "@/redux/features/home/homeApi";
+import getDomain from "@/utils/getDomain";
 import axios from "axios";
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 
 const FeatureProduct = dynamic(() => import("@/components/feature-product"), {
-  ssr: false,
-});
+    ssr: false,
+  });
 
 interface Props {
-  banner?: any;
-  design?: any;
-  store_id?: any;
+    banner?: any;
+    design?: any;
+    store_id?: any;
 }
 
 const FeaturedProductMain = ({ banner, design, store_id }: Props) => {
-  const [product, setProduct] = useState<any>([]);
-  const [featureProduct, setFeatureProduct] = useState<any>([]);
+    const [product, setProduct] = useState<any>([]);
+    const [featureProduct, setFeatureProduct] = useState<any>([]);
+    const [url, setUrl] = useState<any>(getDomain());
+    const [skip, setSkip] = useState<any>(true);
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const domain = window.location.host.startsWith("www.")
-        ? window.location.host.slice(4)
-        : window.location.host;
+    const { data: productData, isLoading: productLoading, isSuccess: productSuccess } = useGetSettingQuery({ domain: url, slug: "product" }, { skip: skip });
+    const { data: featureProductData, isLoading: featureLoading, isSuccess: featureSuccess } = useGetSettingQuery({ domain: url, slug: "feature_product" }, { skip: skip });
+  
+    useEffect(() => {
+        const siteURL = getDomain();
+        if (siteURL != "") {
+            setUrl(siteURL);
+            setSkip(false);
+        }
+    }, []);
 
-      if (domain != "") {
-        const head = "product,feature_product";
+    useEffect(() => {
+        if (productData) {
+            const getProductData = productData?.data || [];
+            setProduct(getProductData);
+        }
+    }, [productSuccess, productData]);
 
-        axios
-          .post(process.env.NEXT_PUBLIC_API_URL + "getsubdomain/name", {
-            name: domain,
-            head: head,
-          })
-          .then((response) => {
-            const productData = response?.data?.product || [];
-            setProduct(productData);
 
-            const FeatureProductData = response?.data?.feature_product || [];
-            setFeatureProduct(FeatureProductData);
-          })
-          .then((err) => {
-            // console.log("error get product", err);
-          });
-      }
-    }
-  }, []);
-
-  return (
-    <FeatureProduct
-      theme={design?.feature_product}
-      feature_product={featureProduct}
-      design={design}
-      store_id={store_id}
-      product={product}
-      banner={banner}
-    />
-  );
+    useEffect(() => {
+        if (featureProductData) {
+            const getFeatureProductData = featureProductData?.data || [];
+            setFeatureProduct(getFeatureProductData);
+        }
+    }, [featureSuccess, featureProductData]);
+       
+    return (
+        <FeatureProduct
+          theme={design?.feature_product}
+          feature_product={featureProduct}
+          design={design}
+          store_id={store_id}
+          product={product}
+          banner={banner}
+        />
+    );
 };
 
 export default FeaturedProductMain;

@@ -13,7 +13,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroTwelve = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
 
@@ -94,7 +94,7 @@ const HeroTwelve = ({ slider, design }: any) => {
           prevEl: `.${prevEl}`,
           nextEl: `.${nextEl}`,
         }}
-        loop={true}
+        loop={isLoop}
         spaceBetween={30}
         pagination={pagination}
         autoplay={{

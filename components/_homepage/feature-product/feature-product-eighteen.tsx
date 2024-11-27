@@ -13,7 +13,7 @@ import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 const FeatureProductEighteen = ({ feature_product, design, store_id }: any) => {
   const prevEl = "feature_product-sixteen-prev";
   const nextEl = "feature_product-sixteen-next";
-
+  let isLoop = feature_product.length > 1;
   const styleCss = `
   .arrow-hov:hover .arrow {
     opacity:1;
@@ -52,7 +52,7 @@ const FeatureProductEighteen = ({ feature_product, design, store_id }: any) => {
       <DefaultSlider
         prevEl={prevEl}
         nextEl={nextEl}
-        loop={true}
+        loop={isLoop}
         loopFillGroupWithBlank={true}
         breakpoints={{
           250: {

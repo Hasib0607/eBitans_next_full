@@ -8,6 +8,7 @@ import DefaultSlider from "../slider/default-slider";
 import { bannerImg } from "@/site-settings/siteUrl";
 
 const PromoTwentyEight = ({ nextEl, prevEl, banner }: any) => {
+  let isLoop = banner.length > 1;
   return (
     <div>
       <div className="sm:container px-5 sm:py-10 py-5">
@@ -37,7 +38,7 @@ const PromoTwentyEight = ({ nextEl, prevEl, banner }: any) => {
               prevEl: `.${prevEl}`,
               nextEl: `.${nextEl}`,
             }}
-            loop={true}
+            loop={isLoop}
             breakpoints={{
               380: {
                 slidesPerView: 1,

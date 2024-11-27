@@ -14,11 +14,12 @@ import "swiper/css/pagination";
 import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroThirteen = ({ slider }: any) => {
+  let isLoop = slider.length > 1;
   return (
     <>
       <div className="sm:container px-5 py-3">
         <Swiper
-          loop={true}
+          loop={isLoop}
           autoplay={{
             delay: 2000,
           }}

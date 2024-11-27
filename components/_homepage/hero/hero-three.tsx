@@ -22,7 +22,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroThree = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
 
@@ -90,7 +90,7 @@ const HeroThree = ({ slider, design }: any) => {
         }}
         speed={1000}
         effect={"fade"}
-        loop={false}
+        loop={isLoop}
         spaceBetween={30}
         pagination={pagination}
         autoplay={{

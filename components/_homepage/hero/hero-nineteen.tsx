@@ -20,7 +20,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroNineteen = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const nextEl = "hero-slider-next";
   const prevEl = "hero-slider-prev";
 
@@ -104,7 +104,7 @@ const HeroNineteen = ({ slider, design }: any) => {
         }}
         speed={1000}
         effect={"fade"}
-        loop={true}
+        loop={isLoop}
         spaceBetween={30}
         pagination={pagination}
         autoplay={{

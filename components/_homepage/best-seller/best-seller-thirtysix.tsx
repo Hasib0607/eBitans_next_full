@@ -8,6 +8,7 @@ import { SwiperSlide } from "swiper/react";
 const BestSellerThirtySix = ({ best_sell_product, design, store_id }: any) => {
   const prevEl = "best-product-prev";
   const nextEl = "best-product-next";
+  let isLoop = best_sell_product.length > 1;
 
   const styleCss = `
     .btn-best-product {
@@ -74,7 +75,7 @@ const BestSellerThirtySix = ({ best_sell_product, design, store_id }: any) => {
         <DefaultSlider
           prevEl={prevEl}
           nextEl={nextEl}
-          loop={true}
+          loop={isLoop}
           breakpoints={{
             320: {
               slidesPerView: 2,

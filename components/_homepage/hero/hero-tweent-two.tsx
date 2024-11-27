@@ -23,7 +23,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroTwentyTwo = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
 
@@ -119,7 +119,7 @@ const HeroTwentyTwo = ({ slider, design }: any) => {
         }}
         speed={1000}
         effect={"fade"}
-        loop={true}
+        loop={isLoop}
         spaceBetween={30}
         pagination={pagination}
         autoplay={{

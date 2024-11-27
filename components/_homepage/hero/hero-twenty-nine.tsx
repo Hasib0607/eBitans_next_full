@@ -22,7 +22,7 @@ import { sliderImg } from "@/site-settings/siteUrl";
 
 const HeroTwentyNine = ({ slider, design }: any) => {
   let menu = [""];
-
+  let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
 
@@ -121,7 +121,7 @@ const HeroTwentyNine = ({ slider, design }: any) => {
         }}
         speed={1000}
         // effect={"fade"}
-        loop={true}
+        loop={isLoop}
         pagination={pagination}
         autoplay={{
           delay: 3000,

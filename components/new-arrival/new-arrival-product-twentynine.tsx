@@ -12,6 +12,8 @@ const NewArrivalProductTwentyNine = ({ product, design, store_id }: any) => {
   const prevEl = "new-product-prev";
   const nextEl = "new-product-next";
 
+  let isLoop = product.length > 1;
+
   const styleCss = `
    
     .new-product-prev {
@@ -72,7 +74,7 @@ const NewArrivalProductTwentyNine = ({ product, design, store_id }: any) => {
         <DefaultSlider
           prevEl={prevEl}
           nextEl={nextEl}
-          loop={true}
+          loop={isLoop}
           breakpoints={{
             320: {
               slidesPerView: 2,

@@ -10,13 +10,13 @@ import { SwiperSlide } from "swiper/react";
 const FeatureProductFive = ({ feature_product }: any) => {
   const prev1 = "feature_product_prev";
   const next1 = "feature_product_next";
+  let isLoop = feature_product.length > 1;
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
   const cDesign = data?.custom_design || {};
   const featuredProduct = cDesign?.feature_product?.[0] || {};
 
-  console.log(featuredProduct);
 
   if (!featuredProduct) {
     return null;
@@ -48,7 +48,7 @@ const FeatureProductFive = ({ feature_product }: any) => {
                 <Arrow prevEl={prev1} nextEl={next1}></Arrow>
               </div>
             </div>
-            <GridSliderTwo loop={true} prevEl={prev1} nextEl={next1}>
+            <GridSliderTwo loop={isLoop} prevEl={prev1} nextEl={next1}>
               {feature_product &&
                 feature_product?.slice(0, 10).map((item: any) => (
                   <SwiperSlide className="swiperjs-slide" key={item?.id}>

@@ -7,6 +7,8 @@ import { ImQuotesLeft } from "react-icons/im";
 import { testimonialImg } from "@/site-settings/siteUrl";
 
 const TestimonialSeven = ({ testimonials }: any) => {
+  let isLoop = testimonials.length > 1;
+
   return (
     <div className=" bg-white sm:container px-5 sm:py-10 py-5">
       <div className="">
@@ -17,7 +19,7 @@ const TestimonialSeven = ({ testimonials }: any) => {
           <div className="swiper-pagination-testimonial"></div>
         </div>
         <Swiper
-          loop={true}
+          loop={isLoop}
           spaceBetween={30}
           //   slideActiveclassName="slide-active"
           //   pagination={pagination}

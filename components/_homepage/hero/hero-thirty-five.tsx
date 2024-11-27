@@ -17,6 +17,7 @@ import {
 import { Swiper, SwiperSlide } from "swiper/react";
 
 const HeroThirtyFive = ({ slider }: any) => {
+  let isLoop = slider.length > 1;
   const styleCss = `
       `;
   return (
@@ -27,7 +28,7 @@ const HeroThirtyFive = ({ slider }: any) => {
         <Swiper
           speed={2000}
           // effect={"fade"}
-          loop={true}
+          loop={isLoop}
           autoplay={{
             delay: 5000,
           }}
