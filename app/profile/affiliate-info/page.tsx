@@ -31,7 +31,6 @@ const AffiliateInfo = () => {
 
   const [page, setPage] = useState<any>("1");
   const [pagination, setPagination] = useState<any>(1);
-  // console.log(affiliateInfo);
   const productListData = affiliateInfo?.productList?.data;
 
   const openModal = (order: any) => {
@@ -64,7 +63,6 @@ const AffiliateInfo = () => {
     axiosInstance
       .post("/customer-affiliate/create/withdraw-requests", withdrawData)
       .then((response) => {
-        console.log(response.data);
         if (response?.data?.status) {
           setAffiliateInfo((prevState) => ({
             ...prevState, // Copy the previous state

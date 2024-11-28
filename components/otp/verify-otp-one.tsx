@@ -109,7 +109,7 @@ const VerifyOtpOne = () => {
         }
       })
       .catch((error: any) => {
-        console.log(error, "error");
+        // console.log(error, "error");
         toast("Credential Doesn't Match", { type: "error" });
         setLoading(false);
       });

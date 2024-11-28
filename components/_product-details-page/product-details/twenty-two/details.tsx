@@ -721,7 +721,6 @@ const AddCart = ({ setQty, qty, onClick, buttonTwentyTwo }: any) => {
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
-            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {

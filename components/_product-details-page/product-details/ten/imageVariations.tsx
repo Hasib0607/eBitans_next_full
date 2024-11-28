@@ -130,7 +130,7 @@ export const ColorSet = ({
   itemImage,
   setActiveImg,
 }: any) => {
-  console.log(itemImage, "item image");
+
   return (
     <div
       onClick={() => {

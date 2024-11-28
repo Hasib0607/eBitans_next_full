@@ -34,7 +34,7 @@ const GetProductByCatId = ({ categories }: any) => {
         })
         .catch((err) => {
           setLoader(false);
-          console.log(err);
+          // console.log(err);
         });
       return null;
     });

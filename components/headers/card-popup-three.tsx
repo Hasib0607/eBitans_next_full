@@ -194,7 +194,6 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
       autoClose: 1000,
     });
   };
-  // console.log(product, 'product');
   return (
     <motion.li
       initial={{ y: 0, opacity: 1 }}

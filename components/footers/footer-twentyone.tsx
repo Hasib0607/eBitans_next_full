@@ -18,6 +18,7 @@ import MyAccount from "./components/myaccount";
 import NewsletterThree from "./components/newsletter-three";
 import WhatsApp from "./components/whatsApp";
 import { customizeFooter } from "@/utils/customizeDesign";
+import PageList from "./components/page-list";
 
 const FooterTwentyOne = ({
   headerSetting,
@@ -45,7 +46,7 @@ const FooterTwentyOne = ({
         <div className="sm:container px-5 sm:py-10 py-5">
           <NewsletterThree store_id={store_id} />
           {/* footer top section  */}
-          <div className="grid lg2:grid-cols-5 md:grid-cols-3 grid-cols-1 sm:gap-y-10 gap-y-2  text-white ">
+          <div className="grid lg2:grid-cols-6 md:grid-cols-4 grid-cols-1 sm:gap-y-10 gap-y-2  text-white ">
             <div className="flex flex-col gap-5 lg2:col-span-2 md:col-span-2 col-span-1 mb-5 sm:mb-0">
               <div>
                 <h1 className="text-xl uppercase font-bold">ABOUT US</h1>
@@ -133,7 +134,17 @@ const FooterTwentyOne = ({
                   RESOURCES
                 </h1>
                 <div className="flex flex-col gap-2 ">
-                  <MenuList cls={cls} menu={menu} page={page} />
+                  <MenuList cls={cls} menu={menu} />
+                </div>
+              </div>
+            </div>
+            <div className="lg2:justify-self-center md:col-span-2 lg2:col-span-1 md:block hidden">
+              <div>
+                <h1 className="sm:text-xl uppercase font-bold pb-5">
+                  LEGAL
+                </h1>
+                <div className="flex flex-col gap-2 ">
+                  <PageList cls={cls} page={page} />
                 </div>
               </div>
             </div>
@@ -186,6 +197,28 @@ const FooterTwentyOne = ({
                 {heading === "resource" && (
                   <div className="flex flex-col gap-2">
                     <MenuList cls={cls} />
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className="lg2:justify-self-center md:hidden block">
+              <div>
+                <div
+                  // onClick={() =>
+                  //   setHeading(heading !== "resource" ? "resource" : "")
+                  // }
+                  className="flex justify-between items-center"
+                >
+                  <h1 className="sm:text-xl uppercase font-bold ">LEGAL</h1>
+                  {heading === "resource" ? (
+                    <MinusIcon className="h-4 w-4 text-white" />
+                  ) : (
+                    <PlusIcon className="h-4 w-4 text-white" />
+                  )}
+                </div>
+                {heading === "resource" && (
+                  <div className="flex flex-col gap-2">
+                    <PageList cls={cls} />
                   </div>
                 )}
               </div>

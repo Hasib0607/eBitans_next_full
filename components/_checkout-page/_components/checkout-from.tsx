@@ -60,7 +60,7 @@ const CheckoutFrom = ({ store, setCall, store_id, setToken, user }: any) => {
           setCall(Math.random() * 100);
           toast(success, { type: "success" });
         })
-        .catch((err) => console.log(err));
+        // .catch((err) => console.log(err));
     }
   };
 

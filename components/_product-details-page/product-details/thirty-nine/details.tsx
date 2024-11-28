@@ -534,7 +534,6 @@ const Details = ({
     }
   `;
 
-  // console.log(bookingData, "bookingData");
 
   const buttonSeven =
     "w-full lg:w-96 flex items-center gap-2 rounded-md text-center py-3 justify-center lg:cursor-pointer cart-btn-thirty-seven";
@@ -803,7 +802,6 @@ const AddCart = ({
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
-            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {

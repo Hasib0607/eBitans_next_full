@@ -75,7 +75,7 @@ export const HSlider = ({ product, colorid, setColorid, vrcolor }: any) => {
     // vertical: false,
     // verticalSwiping: true,
     beforeChange: function (currentSlide: any, nextSlide: any) {
-      console.log("before change", currentSlide, nextSlide);
+      // console.log("before change", currentSlide, nextSlide);
     },
     afterChange: function (currentSlide: any) {},
   };

@@ -325,7 +325,6 @@ const Filter = ({ paginate, onChange, setGrid, grid }: any) => {
 
 const SingleCat = ({ item, select, setSelect }: any) => {
   const [show, setShow] = useState(false);
-  // console.log(item,"item");
   return (
     <div className="border-b py-2">
       <div className="w-full">

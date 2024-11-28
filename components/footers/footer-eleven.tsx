@@ -23,6 +23,7 @@ import CopyrightAll from "./components/copyrightall";
 import Link from "next/link";
 import CategoryList from "./components/category-list";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterEleven = ({
   design,
@@ -51,7 +52,7 @@ const FooterEleven = ({
     <div className="mt-[60px] bg-gray-50 xl:mt-0 md:mt-[25px] lg:mt-0">
       <Newsletter headerSetting={headerSetting} store_id={store_id} />
       <style>{customDesign}</style>
-      <div className="sm:container px-5 grid grid-cols-1 xl:grid-cols-8 lg:grid-cols-6 md:grid-cols-6 gap-8 ">
+      <div className="sm:container px-5 grid grid-cols-1 xl:grid-cols-10 lg:grid-cols-6 md:grid-cols-6 gap-8 ">
         <div className="col-span-2 xl:col-span-3 lg:col-span-2 md:col-span-6 col col">
           <img
             className="w-auto h-20  sm:h-10"
@@ -107,7 +108,13 @@ const FooterEleven = ({
         <div className="col-span-2 hidden sm:hidden lg:block xl:col-span-2 md:col-span-1 lg:col-span-1">
           <h2 className="font-bold">Menu</h2>
           <div className="mt-4">
-            <MenuList cls={cls} menu={menu} page={page} />
+            <MenuList cls={cls} menu={menu} />
+          </div>
+        </div>
+        <div className="col-span-2 hidden sm:hidden lg:block xl:col-span-2 md:col-span-1 lg:col-span-1">
+          <h1 className="font-bold">Legal</h1>
+          <div className="mt-4">
+            <PageList cls={cls} page={page} />
           </div>
         </div>
         <div className="col-span-2 xl:col-span-1 md:col-span-6 lg:col-span-1 lg:hidden">

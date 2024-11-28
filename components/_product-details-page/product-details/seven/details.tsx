@@ -44,7 +44,6 @@ export const fetchCampaignProduct = async (id: any, store_id: any) => {
 
   try {
     const response = await httpReq.post("get/offer/product", { id, store_id });
-    console.log("1111");
     // Cache the response data
     campaignProductCache[cacheKey] = response;
 

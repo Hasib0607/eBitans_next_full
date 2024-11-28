@@ -149,7 +149,6 @@ const Details = ({
     setLoad(true);
     // declare the async data fetching function
     const fetchData = async () => {
-      // console.log(data, "data");
       data["store_id"] = store_id;
       // get the data from the api
       const { product, variant, vrcolor } = await httpReq.post(
@@ -759,7 +758,6 @@ const AddCart = ({ setQty, qty, onClick, variant }: any) => {
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
-            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {

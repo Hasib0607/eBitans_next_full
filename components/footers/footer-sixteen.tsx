@@ -8,6 +8,7 @@ import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import FollowUs from "./components/follow-us";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterSixteen = ({
   headerSetting,
@@ -59,7 +60,7 @@ const FooterSixteen = ({
 
       <div className="sm:container px-5 mt-10">
         <Newsletter headerSetting={headerSetting} store_id={store_id} />
-        <div className="grid lg:grid-cols-4 grid-cols-2 py-6 gap-5 ">
+        <div className="grid lg:grid-cols-5 grid-cols-2 py-6 gap-5 ">
           <div className="col-span-2 md:col-span-1">
             <Link href="/">
               <img className="h-14" src={imgUrl + headerSetting?.logo} alt="" />{" "}
@@ -91,7 +92,15 @@ const FooterSixteen = ({
               <h1 className="text-lg font-semibold  ">TOP MENU</h1>
             </div>
             <div className="flex flex-col gap-3 text-base text-gray-500">
-              <MenuList menu={menu} page={page} />
+              <MenuList menu={menu} />
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <div>
+              <h1 className="text-lg font-semibold  ">LEGAL</h1>
+            </div>
+            <div className="flex flex-col gap-3 text-base text-gray-500">
+              <PageList page={page} />
             </div>
           </div>
         </div>

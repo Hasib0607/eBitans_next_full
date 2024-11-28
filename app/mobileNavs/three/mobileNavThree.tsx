@@ -314,11 +314,11 @@ const searchIcon = (
     fill="none"
     viewBox="0 0 24 24"
     stroke="currentcolor"
-    stroke-width="2"
+    strokeWidth="2"
   >
     <path
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeLinecap="round"
+      strokeLinejoin="round"
       d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
     />
   </svg>
@@ -332,9 +332,9 @@ export const cancelIcon = (
     className="size-6"
   >
     <path
-      fill-rule="evenodd"
+      fillRule="evenodd"
       d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
   </svg>
 );
@@ -349,7 +349,7 @@ const cancelIcon2 = (
     <path
       fill-rule="evenodd"
       d="M5.47 5.47a.75.75 0 0 1 1.06 0L12 10.94l5.47-5.47a.75.75 0 1 1 1.06 1.06L13.06 12l5.47 5.47a.75.75 0 1 1-1.06 1.06L12 13.06l-5.47 5.47a.75.75 0 0 1-1.06-1.06L10.94 12 5.47 6.53a.75.75 0 0 1 0-1.06Z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     />
   </svg>
 );
@@ -390,7 +390,7 @@ const userIcon = (
     <path
       fill-rule="evenodd"
       d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
-      clip-rule="evenodd"
+      clipRule="evenodd"
     ></path>
   </svg>
 );

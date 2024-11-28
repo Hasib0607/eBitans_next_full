@@ -10,6 +10,7 @@ import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterEighteen = ({
   headerSetting,
@@ -31,7 +32,7 @@ const FooterEighteen = ({
       <div className="sm:container px-5">
         <Newsletter headerSetting={headerSetting} store_id={store_id} />
       </div>
-      <div className="sm:container px-5 grid grid-cols-2 sm:grid-cols-3 gap-5 sm:gap-2">
+      <div className="sm:container px-5 grid grid-cols-2 sm:grid-cols-4 gap-5 sm:gap-2">
         <div className="">
           <h1 className="text-xl font-medium">Categories</h1>
           <div className="flex flex-col gap-3 pt-3 text-gray-500">
@@ -41,7 +42,13 @@ const FooterEighteen = ({
         <div className="justify-self-center">
           <h1 className="text-xl font-medium ">Buy with Us</h1>
           <div className="flex flex-col gap-3 pt-3 text-gray-500">
-            <MenuList menu={menu} page={page} />
+            <MenuList menu={menu} />
+          </div>
+        </div>
+        <div className="lg:justify-self-center border-b-2 lg:border-0 pb-5 lg:pb-0">
+          <h1 className="text-xl font-medium ">Legal</h1>
+          <div className="flex flex-col gap-3 pt-3 text-gray-500">
+            <PageList page={page} />
           </div>
         </div>
         <div className="sm:justify-self-end">

@@ -12,6 +12,7 @@ import Link1 from "../link1";
 import Link from "next/link";
 import MenuList from "./components/menu-list";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterOne = ({
   category,
@@ -56,8 +57,15 @@ const FooterOne = ({
               Menu
             </h2>
             <nav className="list-none mb-10 space-y-2">
-              {/* {menu?.map((item) => <Link1 key={item.id} text={item.name} href={item.url} />)} */}
-              <MenuList cls={cls} menu={menu} page={page} />
+              <MenuList cls={cls} menu={menu} />
+            </nav>
+          </div>
+          <div className="lg:w-1/6 md:w-1/2 w-full px-4">
+            <h2 className=" font-semibold text-gray-900 tracking-widest text-xl mb-3">
+              Legal
+            </h2>
+            <nav className="list-none mb-10 space-y-2">
+              <PageList cls={cls} page={page} />
             </nav>
           </div>
           <div className="lg:w-1/6 md:w-1/2 w-full px-4">
@@ -77,7 +85,7 @@ const FooterOne = ({
             </nav>
           </div>
 
-          <div className="lg:w-2/6 md:w-1/2 w-full px-4 flex justify-center md:justify-end">
+          <div className="lg:w-1/6 md:w-1/2 w-full px-4 flex justify-center md:justify-end">
             <div className="flex flex-col items-center">
               <h2 className=" font-semibold text-gray-900 tracking-widest text-xl mb-3">
                 Follow Us

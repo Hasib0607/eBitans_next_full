@@ -396,7 +396,7 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
           });
       }
     } catch (error) {
-      console.error("Error in onSubmit:", error);
+      // console.error("Error in onSubmit:", error);
       toast("Error saving address", { type: "error" });
     }
   };
@@ -819,7 +819,6 @@ export function UpdateAddress({
 
 // modal for address update
 export function Modal({ open, setOpen, children, design }: any) {
-  // console.log(open, "open fron dia");
   const cancelButtonRef = useRef(null);
 
   return (

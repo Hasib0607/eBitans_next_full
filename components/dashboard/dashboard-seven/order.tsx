@@ -16,7 +16,6 @@ const Orders = () => {
   const { user } = useSelector((state: any) => state.auth);
   const token = user?.token;
 
-  // console.log(orders,"orders");
 
   useEffect(() => {
     // declare the async data fetching function

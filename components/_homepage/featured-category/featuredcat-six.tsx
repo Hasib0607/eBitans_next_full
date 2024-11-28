@@ -11,18 +11,10 @@ import "swiper/css/grid";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import FeatureCatSix from "./suppliment/catsix";
-import { useEffect, useState } from "react";
 
 const FeaturedSix = ({ category, design }: any) => {
   const prevEl = "feature_cat_prev";
   const nextEl = "feature_cat_next";
-  const [featuredCatData, setFeaturedCatData] = useState<any>([]);
-
-  useEffect(() => {
-    if (category) {
-      setFeaturedCatData(category);
-    }
-  }, [category]);
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
@@ -82,10 +74,10 @@ const FeaturedSix = ({ category, design }: any) => {
           <GridSliderSixCat
             prevEl={prevEl}
             nextEl={nextEl}
-            isLoop={featuredCatData?.length > 1}
+            isLoop={category?.length > 1}
           >
-            {featuredCatData?.length > 0 &&
-              featuredCatData?.map((item: any) => (
+            {category?.length > 0 &&
+              category?.map((item: any) => (
                 <SwiperSlide className="swiperjs-slider-six " key={item?.id}>
                   <FeatureCatSix item={item} />
                 </SwiperSlide>

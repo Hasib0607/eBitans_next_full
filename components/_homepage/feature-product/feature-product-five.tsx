@@ -5,21 +5,13 @@ import SectionHeadingFive from "@/components/section-heading/section-heading-fiv
 import GridSliderTwo from "@/components/slider/grid-slider/grid-slider-two";
 import Arrow from "@/utils/arrow";
 import useHeaderSettings from "@/utils/query/use-header-settings";
-import { useEffect, useState } from "react";
 import { SwiperSlide } from "swiper/react";
 
 const FeatureProductFive = ({ feature_product }: any) => {
   const prev1 = "feature_product_prev";
   const next1 = "feature_product_next";
-  const [featureProductData, setFeatureProductData] = useState<any>([]);
 
-  useEffect(() => {
-    if (feature_product) {
-      setFeatureProductData(feature_product);
-    }
-  }, [feature_product]);
-
-  let isLoop = featureProductData.length > 1;
+  let isLoop = feature_product.length > 1;
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
@@ -56,10 +48,10 @@ const FeatureProductFive = ({ feature_product }: any) => {
                 <Arrow prevEl={prev1} nextEl={next1}></Arrow>
               </div>
             </div>
-            {featureProductData?.length > 0 && (
+            {feature_product?.length > 0 && (
               <GridSliderTwo loop={isLoop} prevEl={prev1} nextEl={next1}>
-                {featureProductData?.length > 0 &&
-                  featureProductData?.slice(0, 10).map((item: any) => (
+                {feature_product?.length > 0 &&
+                  feature_product?.slice(0, 10).map((item: any) => (
                     <SwiperSlide className="swiperjs-slide" key={item?.id}>
                       <Card57 item={item} />
                     </SwiperSlide>

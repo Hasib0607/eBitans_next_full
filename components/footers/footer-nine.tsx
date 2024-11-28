@@ -7,6 +7,7 @@ import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import FollowUs from "./components/follow-us";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterNine = ({
   headerSetting,
@@ -78,7 +79,7 @@ const FooterNine = ({
           </div>
 
           <div className="xl:col-span-2" style={{ background: "#efefef" }}>
-            <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 py-8 px-5">
+            <div className="grid xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-2 sm:grid-cols-1 gap-4 py-8 px-5">
               <div>
                 <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">
                   Products
@@ -92,7 +93,13 @@ const FooterNine = ({
                   Our Pages
                 </h1>
                 <div className="mt-5">
-                  <MenuList cls={clsMenu} menu={menu} page={page} />
+                  <MenuList cls={clsMenu} menu={menu} />
+                </div>
+              </div>
+              <div>
+                <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">Legal</h1>
+                <div className="mt-5">
+                  <PageList cls={clsMenu} page={page} />
                 </div>
               </div>
               <div className="xl:col-span-2 lg:col-span-2">

@@ -100,7 +100,7 @@ const CheckOutElevenDiscount = ({
     fetchData()
       // make sure to catch any error
       .catch((er) => {
-        console.log(er);
+        // console.log(er);
       });
   };
 

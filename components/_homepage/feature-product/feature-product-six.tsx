@@ -6,18 +6,10 @@ import ArrowSquare from "@/utils/arrow-square";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 import "./feature-product-six.css";
-import { useEffect, useState } from "react";
 
 const FeatureProductSix = ({ product, store_id }: any) => {
   const prev = "feature_product_prev";
   const next = "feature_product_next";
-  const [featureProductData, setFeatureProductData] = useState<any>([]);
-
-  useEffect(() => {
-    if (product) {
-      setFeatureProductData(product);
-    }
-  }, [product]);
 
   const { data, error } = useHeaderSettings();
   if (error) return <p>error from header-settings</p>;
@@ -45,10 +37,10 @@ const FeatureProductSix = ({ product, store_id }: any) => {
               <GridSliderFour
                 prevEl={prev}
                 nextEl={next}
-                isLoop={featureProductData?.length > 1}
+                isLoop={product?.length > 1}
               >
-                {featureProductData?.length > 0 &&
-                  featureProductData?.map((item: any) => (
+                {product?.length > 0 &&
+                  product?.map((item: any) => (
                     <SwiperSlide className="swiperjs-slide" key={item?.id}>
                       <Card8 item={item} store_id={store_id} />
                     </SwiperSlide>

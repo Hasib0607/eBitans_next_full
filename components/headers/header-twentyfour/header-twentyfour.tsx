@@ -25,7 +25,6 @@ const HeaderTwentyFour = ({ headerSetting }: any) => {
   // const cartList = useSelector((state) => state.cart.cartList);
   const { user } = useSelector((state: any) => state.auth);
   const dispatch = useDispatch();
-  // console.log(user);
 
   const handleClose = () => {
     setSearch("");

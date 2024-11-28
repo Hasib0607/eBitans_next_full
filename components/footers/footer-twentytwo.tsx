@@ -9,13 +9,14 @@ import MyAccount from "./components/myaccount";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterTwentyTwo = ({ headerSetting, store_id, page, menu }: any) => {
   return (
     <div className="bg-black pt-10 pb-24 lg:pb-5">
       <div className="sm:container px-5">
         <Newsletter headerSetting={headerSetting} store_id={store_id} />
-        <div className="grid lg:grid-cols-4 grid-cols-2 gap-4 py-5">
+        <div className="grid lg:grid-cols-5 grid-cols-2 gap-4 py-5">
           <div className="col-span-2 md:col-span-1">
             <div>
               <img
@@ -24,7 +25,7 @@ const FooterTwentyTwo = ({ headerSetting, store_id, page, menu }: any) => {
                 className="h-12 w-auto"
               />
             </div>
-            <div className="flex gap-x-4 mt-5">
+            <div className="flex gap-x-2 mt-5">
               {headerSetting?.facebook_link && (
                 <a
                   href={headerSetting?.facebook_link}
@@ -114,7 +115,13 @@ const FooterTwentyTwo = ({ headerSetting, store_id, page, menu }: any) => {
           <div>
             <h1 className="text-xl uppercase font-bold text-white">Menu</h1>
             <div className="text-white mt-2 font-medium text-sm">
-              <MenuList menu={menu} page={page} />
+              <MenuList menu={menu} />
+            </div>
+          </div>
+          <div>
+            <h1 className="text-xl uppercase font-bold text-white">Legal</h1>
+            <div className="text-white mt-2 font-medium text-sm">
+              <PageList page={page} />
             </div>
           </div>
         </div>

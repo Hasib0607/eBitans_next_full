@@ -279,8 +279,6 @@ const YourOrders = ({
         );
         const placeOrder = async () => {
           try {
-            console.log(formData);
-
             const response = await axios.post(apiOrder, formData, {
               headers: {
                 Authorization: `Bearer ${responseInfo?.data?.token?.token}`,
@@ -349,7 +347,6 @@ const YourOrders = ({
         httpReq
           .post(`placeorder`, formData)
           .then((response) => {
-            // console.log('successful:', response);
             if (response?.url) {
               window.location.replace(response.url);
               dispatch(clearCartList());
@@ -382,8 +379,6 @@ const YourOrders = ({
           })
           .catch((error) => {
             const { errors, message } = error.response.data;
-            // console.log(errors);
-            // console.log(message);
             // error.response.data?.errors.map(i => alert.show(i.message, { type: 'error' }))
           });
       }

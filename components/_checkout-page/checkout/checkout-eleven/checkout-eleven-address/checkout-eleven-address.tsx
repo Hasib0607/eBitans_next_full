@@ -348,8 +348,6 @@ const Single = ({
           });
           toast(response.data.success, { type: "success" });
           setCall(Math.random() * 100);
-
-          console.log("Post successful:", response.data);
         } catch (error) {
           console.error("Error posting data:", error);
           // Handle any errors here
@@ -429,8 +427,6 @@ export function SaveAddress({
     reset,
   } = useForm();
   const { user } = useSelector((state: any) => state.auth);
-
-  // console.log("open", open, "save address");
 
   const onSubmit = async (data: any) => {
     data["store_id"] = store_id;
@@ -592,7 +588,6 @@ export function UpdateAddress({
   setSelectAddress,
   token,
 }: any) {
-  console.log(open, setOpen, "update address");
   const { store, store_id } = useTheme();
   const { user } = useSelector((state: any) => state.auth);
   const apiEdit = process.env.NEXT_PUBLIC_API_URL + "address/edit";
