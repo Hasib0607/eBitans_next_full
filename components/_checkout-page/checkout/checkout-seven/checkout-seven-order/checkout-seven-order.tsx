@@ -56,7 +56,6 @@ const CheckOutSevenOrder = ({
     bookingData,
   } = useTheme();
 
-  // console.log(selectAddress?.phone, "this is user address");
 
   const cartList = useSelector((state: any) => state.cart.cartList);
   const { user } = useSelector((state: any) => state.auth);
@@ -442,7 +441,6 @@ const CheckOutSevenOrder = ({
         httpReq
           .post(`placeorder`, formData)
           .then((response) => {
-            // console.log('successful:', response);
             if (response?.url) {
               window.location.replace(response.url);
               dispatch(clearCartList());
@@ -475,8 +473,7 @@ const CheckOutSevenOrder = ({
           })
           .catch((error) => {
             const { errors, message } = error.response.data;
-            console.log(errors);
-            console.log(message);
+            // console.log(errors);
             // error.response.data?.errors.map(i => alert.show(i.message, { type: 'error' }))
           });
       }

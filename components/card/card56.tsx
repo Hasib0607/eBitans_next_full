@@ -24,9 +24,7 @@ const Card56 = ({ item }: any) => {
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
-
-  // console.log(item?.quantity, "item?.quantity")
-  // const [id, setId] = useState(0)
+  
   const [view, setView] = useState(false);
 
   const secondImg = item?.image[1] ? item?.image[1] : item?.image[0];

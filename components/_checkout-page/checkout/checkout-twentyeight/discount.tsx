@@ -111,7 +111,7 @@ const Discount = ({
       // make sure to catch any error
       .catch((er) => {
         // setLoad(false)
-        console.log(er);
+        // console.log(er);
       });
   };
 

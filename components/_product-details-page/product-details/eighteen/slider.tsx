@@ -95,10 +95,10 @@ export const HSlider = ({ product }: any) => {
     vertical: true,
     verticalSwiping: true,
     beforeChange: function (currentSlide: any, nextSlide: any) {
-      console.log("before change", currentSlide, nextSlide);
+      // console.log("before change", currentSlide, nextSlide);
     },
     afterChange: function (currentSlide: any) {
-      console.log("after change", currentSlide);
+      // console.log("after change", currentSlide);
     },
   };
   const settingsSmall = {
@@ -107,10 +107,10 @@ export const HSlider = ({ product }: any) => {
     slidesToScroll: 1,
     verticalSwiping: true,
     beforeChange: function (currentSlide: any, nextSlide: any) {
-      console.log("before change", currentSlide, nextSlide);
+      // console.log("before change", currentSlide, nextSlide);
     },
     afterChange: function (currentSlide: any) {
-      console.log("after change", currentSlide);
+      // console.log("after change", currentSlide);
     },
   };
 

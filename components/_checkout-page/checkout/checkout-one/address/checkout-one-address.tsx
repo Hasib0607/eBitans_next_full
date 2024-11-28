@@ -1028,7 +1028,6 @@ export function UpdateAddress({
 
 // modal for address update
 export function Modal({ open, setOpen, children, design }: any) {
-  // console.log(open, "open fron dia");
   const cancelButtonRef = useRef(null);
 
   return (

@@ -7,6 +7,7 @@ import MenuList from "./components/menu-list";
 import CategoryList from "./components/category-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterNineteen = ({
   headerSetting,
@@ -24,7 +25,7 @@ const FooterNineteen = ({
         <div className="sm:container px-5">
           <Newsletter headerSetting={headerSetting} store_id={store_id} />
           <div className="py-10">
-            <div className="grid grid-cols-2 xl:grid-cols-6 lg:grid-cols-4 md:grid-cols-2 gap-y-10">
+            <div className="grid grid-cols-2 xl:grid-cols-7 lg:grid-cols-5 md:grid-cols-2 gap-y-10">
               <div className="col-span-2 xl:col-span-4 lg:col-span-2 md:col-span-2">
                 {headerSetting?.logo === null ? (
                   <Link href="/">
@@ -53,7 +54,10 @@ const FooterNineteen = ({
               </div>
 
               <div className="flex flex-col gap-y-2">
-                <MenuList page={page} menu={menu} />
+                <MenuList menu={menu} />
+              </div>
+              <div className="flex flex-col gap-y-2">
+                <PageList page={page} />
               </div>
 
               <div className="flex flex-col gap-y-2">

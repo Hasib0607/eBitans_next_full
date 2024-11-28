@@ -36,7 +36,7 @@ export async function generateMetadata(
     redirect("/");
   }
   const { name, description, seo_keywords, image } = product;
-  // console.log(product);
+
   const websiteName = capitalizeFirstLetter(headersetting?.website_name);
   // Ensure image is a string and not an array
   const imageURL = Array.isArray(image) ? image[0] : image;

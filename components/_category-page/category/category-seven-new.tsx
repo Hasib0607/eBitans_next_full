@@ -46,11 +46,9 @@ const fetchData = async (
         );
 
         const { colors, data } = subcategoryResponse;
-
-        console.log(data);
         return { colors, data };
       } catch (err) {
-        console.error(err);
+        // console.error(err);
       }
     }
 
@@ -73,10 +71,8 @@ const CategorySevenNew = () => {
   const [priceValue, setPriceValue] = useState("");
   useEffect(() => {
     for (let i = 0; i < category.length; i++) {
-      console.log("from outercat", category[0].id);
       if (category[i]?.cat) {
         for (let j = 0; j < category[i].cat.length; j++) {
-          console.log("from subcat", category[i].cat[j].id);
           if (category[i]?.cat[j]?.id == id) {
             setActivecat(category[i]?.cat[j]?.name);
           }

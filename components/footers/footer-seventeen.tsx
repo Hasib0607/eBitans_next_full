@@ -16,6 +16,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterSeventeen = ({
   headerSetting,
@@ -59,7 +60,7 @@ const FooterSeventeen = ({
       <style>{customDesignFooterSeventeen}</style>
       <div className="container px-5 xl:px-80 lg:pb-0 pb-10 pt-10">
         <Newsletter headerSetting={headerSetting} store_id={store_id} />
-        <div className="grid grid-cols-1 xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-1 pt-[80px] pb-10 gap-2">
+        <div className="grid grid-cols-1 xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-1 pt-[80px] pb-10 gap-2">
           <div className="pb-2">
             <div className="">
               {headerSetting?.logo === null ? (
@@ -94,7 +95,19 @@ const FooterSeventeen = ({
             </div>
             <div className="pt-4">
               <div className="flex flex-col gap-4 text-white">
-                <MenuList menu={menu} page={page} />
+                <MenuList menu={menu} />
+              </div>
+            </div>
+          </div>
+
+          <div className="pb-3">
+            <div>
+              <h2 className="text-white text-2xl text-style w-max">Legal</h2>
+              <p className="h-[1px] w-12 bg-white mt-2"></p>
+            </div>
+            <div className="pt-4">
+              <div className="flex flex-col gap-4 text-white">
+                <PageList page={page} />
               </div>
             </div>
           </div>

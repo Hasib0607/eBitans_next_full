@@ -18,14 +18,14 @@ const BestSellerThirteen = ({ best_sell_product, store_id }: any) => {
 
   return (
     <div className="bg-white ">
-      <div className="sm:container px-5 sm:py-10 py-5">
-        <SectionHeadingThirteen
-          prev={prev}
-          next={next}
-          title={title || "Best Seller"}
-          title_color={title_color || "#000"}
-        />
-        {best_sell_product?.length > 0 && (
+      {best_sell_product?.length > 0 &&
+        <div className="sm:container px-5 sm:py-10 py-5">
+          <SectionHeadingThirteen
+            prev={prev}
+            next={next}
+            title={title || "Best Seller"}
+            title_color={title_color || "#000"}
+          />
           <GridSliderThirteen
             prevEl={prev}
             nextEl={next}
@@ -55,15 +55,14 @@ const BestSellerThirteen = ({ best_sell_product, store_id }: any) => {
             grid={{ rows: 3 }}
             className={"h-[380px] mt-2 md:my-12"}
           >
-            {best_sell_product?.length > 0 &&
-              best_sell_product?.slice(0, 20).map((item: any) => (
-                <SwiperSlide className="swiperjs_grid_three" key={item?.id}>
-                  <Card20 item={item} store_id={store_id} />
-                </SwiperSlide>
-              ))}
+            {best_sell_product?.length && best_sell_product?.slice(0, 20).map((item: any, index: any) => (
+              <SwiperSlide className="swiperjs_grid_three" key={index}>
+                <Card20 item={item} store_id={store_id} />
+              </SwiperSlide>
+            ))}
           </GridSliderThirteen>
-        )}
-      </div>
+        </div>
+      }
     </div>
   );
 };

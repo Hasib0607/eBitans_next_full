@@ -8,10 +8,7 @@ const SpecificDate = ({ item }: any) => {
 
   const start_time = item?.start_time;
 
-  // console.log(start_time,"start_time");
-
   const offerday = moment(item?.specific_dates).format("L");
-  // console.log(offerday,"offerday");
 
   const today = moment().format("L");
   const current_time = moment().format("HH:mm");

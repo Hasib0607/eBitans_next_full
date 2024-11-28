@@ -228,7 +228,7 @@ const Card60 = ({ item }: any) => {
               (item.discount_type === "no_discount" ||
                 item.discount_price === "0.00") ? (
                 ""
-              ) : (
+              ) : item.regular_price != productGetPrice && (
                 <p className="line-through text-xs text-color-thirty">
                   {" "}
                   <BDT price={Math.trunc(item.regular_price)} />

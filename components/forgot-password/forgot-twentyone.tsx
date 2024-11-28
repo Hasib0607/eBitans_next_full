@@ -51,7 +51,7 @@ const Finding = ({ setPage, setUser }: any) => {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  // console.log(errors);
+
   const onSubmit = (data: any) => {
     setLoading(true);
     if (data.phone) {

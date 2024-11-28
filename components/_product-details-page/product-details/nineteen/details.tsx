@@ -529,8 +529,6 @@ const Details = ({
   // Merge product and variant images into a single array
   const allImages = [...productImages, ...variantImages];
 
-  console.log(allImages, "all images");
-
   return (
     <div className="h-full ">
       <style>{styleCss}</style>
@@ -740,7 +738,6 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
-            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {

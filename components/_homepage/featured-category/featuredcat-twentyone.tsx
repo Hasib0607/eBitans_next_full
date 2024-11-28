@@ -48,7 +48,6 @@ export default FeaturedTwentyOne;
 
 const FeatureCatSix = ({ item, setText, text }: any) => {
   const [result, setResult] = useState(null);
-  // console.log('result', result)
   const fetchData = async () => {
     const data = await axios.post(
       process.env.NEXT_PUBLIC_API_URL + `getcatproducts`,
@@ -60,7 +59,6 @@ const FeatureCatSix = ({ item, setText, text }: any) => {
   useEffect(() => {
     fetchData();
   }, [item?.id]);
-  // console.log(item.id);
   return (
     <div>
       <Link

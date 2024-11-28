@@ -26,8 +26,9 @@ import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { ColorSlider } from "./color-slider";
 import { FaShippingFast } from "react-icons/fa";
-import { TbTruckReturn, TbWorld } from "react-icons/tb";
-import { RiRefund2Line } from "react-icons/ri";
+import { TbTruckReturn } from "react-icons/tb";
+import { BiSolidCustomize } from "react-icons/bi";
+import { FaHome } from "react-icons/fa";
 
 const Details = ({
   fetchStatus,
@@ -628,8 +629,8 @@ const Details = ({
           </div>
           <div className="h-[1px] bg-gray-300 w-full"></div>
           <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
-            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-            {product?.description?.length > 250 && "..."}
+            {parse(`${product?.description?.slice(0, 300)}`)}{" "}
+            {product?.description?.length > 300 && "..."}
           </p>
 
           {/* unit  */}
@@ -776,28 +777,39 @@ const Details = ({
           {children}
 
           <div className="grid sm:grid-cols-2 gap-5">
-            <div className="bg-[#FEF2F2] h-28 w-full rounded-md flex flex-col justify-center pl-5">
+            <div
+              className="bg-[#FEF2F2] h-28 w-full rounded-md flex flex-col justify-center pl-5 cursor-pointer"
+              onClick={() => router.push("/terms_and_condition")}
+            >
               <FaShippingFast className="text-2xl" />
               <p className="font-bold mt-1">Free shipping</p>
+              <p className="text-sm text-gray-600">Nationwide Free Delivery</p>
+            </div>
+            <div className="bg-[#F0F9FF] h-28 w-full rounded-md flex flex-col justify-center pl-5 cursor-pointer">
+              <TbTruckReturn className="text-2xl" />
+              <p className="font-bold mt-1">Do it your installation</p>
               <p className="text-sm text-gray-600">
-                On orders over BDT 5000.00
+                (DIY) do-it-yourself installation within 10 minutes
               </p>
             </div>
-            <div className="bg-[#F0F9FF] h-28 w-full rounded-md flex flex-col justify-center pl-5">
-              <TbTruckReturn className="text-2xl" />
-              <p className="font-bold mt-1">Very easy to return</p>
-              <p className="text-sm text-gray-600">Just phone number.</p>
-            </div>
-            <div className="bg-[#F0FDF4] h-28 w-full rounded-md flex flex-col justify-center pl-5">
-              <TbWorld className="text-2xl" />
-              <p className="font-bold mt-1">Nationwide Delivery</p>
-              <p className="text-sm text-gray-600">Fast delivery nationwide.</p>
-            </div>
-            <div className="bg-[#FFFBEB] h-28 w-full rounded-md flex flex-col justify-center pl-5">
-              <RiRefund2Line className="text-2xl" />
-              <p className="font-bold mt-1">Refunds policy</p>
+            <div
+              className="bg-[#F0FDF4] h-28 w-full rounded-md flex flex-col justify-center pl-5 cursor-pointer"
+              onClick={() => router.push("/contact")}
+            >
+              <BiSolidCustomize className="text-2xl" />
+              <p className="font-bold mt-1">Easy Customization</p>
               <p className="text-sm text-gray-600">
-                60 days return for any reason
+                Call Us to know more. +8801678004256
+              </p>
+            </div>
+            <div
+              className="bg-[#FFFBEB] h-28 w-full rounded-md flex flex-col justify-center pl-5 cursor-pointer"
+              onClick={() => router.push("/contact")}
+            >
+              <FaHome className="text-2xl" />
+              <p className="font-bold mt-1">Remodelling your Home?</p>
+              <p className="text-sm text-gray-600">
+                We provide full turnkey solutions.
               </p>
             </div>
           </div>
@@ -843,11 +855,10 @@ const AddCart = ({
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
-            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {
-          console.error("Error fetching referral code:", error);
+          // console.error("Error fetching referral code:", error);
         }
       }
     };

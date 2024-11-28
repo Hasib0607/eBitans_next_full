@@ -514,7 +514,6 @@ const Details = ({
   const variantImage = variant?.map((v: any) => v.image) || []; // Ensure variantImage is an array
   const productImages = Array.isArray(product?.image) ? product.image : []; // Ensure product?.image is an array
   const allImages = [...productImages, ...variantImage]; // Spread both arrays safely
-  console.log(allImages, "allImages");
 
   return (
     <div className="bg-white">
@@ -750,7 +749,6 @@ const AddCart = ({ setQty, qty, onClick }: any) => {
             localStorage.setItem("referralCode", code);
             const link = `?referral=${code}`;
             setReferralLink(link);
-            console.log("Generated referral link:", link);
             window.history.replaceState(null, "", link);
           }
         } catch (error) {

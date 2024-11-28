@@ -12,6 +12,7 @@ import MenuList from "./components/menu-list";
 import CategoryList from "./components/category-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterTwelve = ({
   headerSetting,
@@ -141,7 +142,15 @@ const FooterTwelve = ({
               <h1 className="text-sm font-semibold ">Pages</h1>
             </div>
             <div className="text-[15px] text-gray-500">
-              <MenuList page={page} menu={menu} />
+              <MenuList menu={menu} />
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <div>
+              <h1 className="text-sm font-semibold ">Legal</h1>
+            </div>
+            <div className="text-[15px] text-gray-500">
+              <PageList page={page} />
             </div>
           </div>
           <div className="flex flex-col gap-4">

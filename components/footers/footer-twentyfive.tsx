@@ -7,6 +7,7 @@ import MyAccount from "./components/myaccount";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import PageList from "./components/page-list";
 
 const FooterTwentyFive = ({
   headerSetting,
@@ -22,7 +23,7 @@ const FooterTwentyFive = ({
     >
       <div className="container sm:px-10 px-5 py-10 mx-auto">
         <Newsletter headerSetting={headerSetting} store_id={store_id} />
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-x-10 ">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-x-10 ">
           <div className="w-full">
             <h2 className="title-font font-bold tracking-widest text-lg mb-3 ">
               Contact Us
@@ -61,14 +62,23 @@ const FooterTwentyFive = ({
               </div>
             </div>
           </div>
-
           <div className="w-full mt-5 lg:mt-0">
             <div className="xl:col-span-2 lg:col-span-2">
               <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">
                 Our Menu
               </h1>
               <div className="flex flex-col mt-5">
-                <MenuList menu={menu} page={page} />
+                <MenuList menu={menu} />
+              </div>
+            </div>
+          </div>
+          <div className="w-full mt-5 lg:mt-0">
+            <div className="xl:col-span-2 lg:col-span-2">
+              <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">
+                Legal
+              </h1>
+              <div className="flex flex-col mt-5">
+                <PageList page={page} />
               </div>
             </div>
           </div>

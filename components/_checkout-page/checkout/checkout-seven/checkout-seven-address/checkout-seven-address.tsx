@@ -63,7 +63,6 @@ const CheckOutSevenAddress = ({
         .then(({ address }) => {
           setAddress(address);
           setSelectAddress(address[0]);
-          // console.log(address, 'address');
           setLoading(false);
         })
         .catch((err) => console.log(err, "error"));

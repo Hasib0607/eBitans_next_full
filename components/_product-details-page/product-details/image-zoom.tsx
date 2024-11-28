@@ -16,8 +16,6 @@ export default function ImageZoom(props: any) {
     }
   };
 
-  console.log(zoomed, "zoomed");
-
   return (
     <div
       style={{ position: "relative" }}

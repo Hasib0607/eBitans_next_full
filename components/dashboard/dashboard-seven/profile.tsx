@@ -43,7 +43,6 @@ const Profile = () => {
       reader.onerror = (error) => reject(error);
     });
   const update_profile = (res: any) => {
-    // console.log(res, "res");
     httpReq
       .post("user/updateprofile", res)
       .then((res) => {
@@ -90,8 +89,7 @@ const Profile = () => {
     }
   };
 
-  const imageChange = (e: any) => {
-    // console.log(e, "e");
+  const imageChange = (e: any) => {;
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0]);
     }

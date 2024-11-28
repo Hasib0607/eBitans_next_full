@@ -367,7 +367,6 @@ const Filter = ({ paginate, onChange, setGrid }: any) => {
 
 const SingleCat = ({ item }: any) => {
   const [show, setShow] = useState(false);
-  // console.log(item, 'item');
   return (
     <>
       <div className="w-full flex px-4 py-1">

@@ -139,8 +139,6 @@ const Card26 = ({ item }: any) => {
     }
   };
 
-  console.log(item, "item");
-
   return (
     <div>
       <div className="group cardHover border-[1px] rounded-lg relative overflow-hidden lg:hover:-translate-y-2 duration-700">

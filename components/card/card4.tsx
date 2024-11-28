@@ -20,8 +20,6 @@ const Card4 = ({ item }: any) => {
 
   const { design, store_id, makeid } = useTheme();
 
-  // console.log(camp, "v");
-
   const dispatch = useDispatch();
 
   const styleCss = `

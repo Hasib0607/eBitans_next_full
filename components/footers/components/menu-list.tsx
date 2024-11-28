@@ -1,10 +1,8 @@
 import Link from "next/link";
 import React from "react";
 
-const MenuList = ({ cls, menu, page }: any) => {
-  const result = page.filter(
-    (item: any) => !menu.find((menuItem: any) => menuItem.url === item.link)
-  );
+const MenuList = ({ cls, menu }: any) => {
+  
   return (
     <>
       {menu?.map((m: any) =>
@@ -16,13 +14,6 @@ const MenuList = ({ cls, menu, page }: any) => {
           </p>
         ) : null
       )}
-      {result?.map((m: any) => (
-        <p key={m?.id}>
-          <Link href={"/" + m?.link} className={cls}>
-            {m?.name}
-          </Link>
-        </p>
-      ))}
     </>
   );
 };

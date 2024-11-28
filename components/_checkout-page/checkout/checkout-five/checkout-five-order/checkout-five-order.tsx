@@ -346,7 +346,6 @@ const CheckOutFiveOrder = ({
         httpReq
           .post(`placeorder`, formData)
           .then((response) => {
-            // console.log('successful:', response);
             if (response?.url) {
               window.location.replace(response.url);
               dispatch(clearCartList());
