@@ -1,7 +1,9 @@
 const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
   // Convert the normal YouTube URL to an embeddable one
   const videoId = videoUrl?.split("embed/")[1]; // Extract video ID from the URL
+
   const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
 
   return (
     <div className="video-container">
