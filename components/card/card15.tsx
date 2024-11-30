@@ -16,7 +16,7 @@ import { addToCartList } from "@/redux/features/product.slice";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import { useDispatch } from "react-redux";
-import Details from "../_product-details-page/product-details/three/details";
+import Details from "../product-quick-view-details/details";
 
 const Card15 = ({ item }: any) => {
   const { design, store_id, makeid } = useTheme();
@@ -223,7 +223,14 @@ const Card15 = ({ item }: any) => {
         </div>
       </motion.div>
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

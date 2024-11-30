@@ -89,7 +89,7 @@ const Profile = () => {
     }
   };
 
-  const imageChange = (e: any) => {;
+  const imageChange = (e: any) => {
     if (e.target.files && e.target.files.length > 0) {
       setSelectedImage(e.target.files[0]);
     }

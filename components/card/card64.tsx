@@ -6,8 +6,8 @@ import { getPrice } from "@/utils/get-price";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card64 = ({ item }: any) => {
   const { design, store_id } = useTheme();
@@ -127,7 +127,14 @@ const Card64 = ({ item }: any) => {
         </div>
       </div>
       <QuikView open={view} setOpen={setView}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

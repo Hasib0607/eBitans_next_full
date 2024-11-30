@@ -12,6 +12,7 @@ import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
 import CategorySeven from "./category-seven";
 import Search from "./search";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderSeven = ({ headerSetting, design }: any) => {
   const { user } = useSelector((state: any) => state.auth);
@@ -174,7 +175,7 @@ const HeaderSeven = ({ headerSetting, design }: any) => {
                             src={
                               userData?.image
                                 ? profileImg + userData?.image
-                                : "https://ebitans.com/Image/theme/default-user-image.png"
+                                : `${defaultUserImage.src}`
                             }
                             alt=""
                             className="object-fit"

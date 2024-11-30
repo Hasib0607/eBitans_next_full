@@ -7,8 +7,8 @@ import Link from "next/link";
 // created by iazadur
 import { useEffect, useState } from "react";
 import { AiOutlineSearch } from "react-icons/ai";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card34 = ({ item, design, store_id }: any) => {
   const [open, setOpen] = useState(false);
@@ -126,7 +126,14 @@ const Card34 = ({ item, design, store_id }: any) => {
         </Link>
       </div>
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

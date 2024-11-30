@@ -236,7 +236,6 @@ const Single = ({
       .catch(console.error);
   }, [store_id, item?.product_id]);
 
-
   useEffect(() => {
     let copyText = document.querySelector(".copy-text");
 

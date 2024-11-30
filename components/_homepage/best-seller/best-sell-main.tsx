@@ -61,7 +61,6 @@ const BestSellMain = ({ banner, design, store_id }: Props) => {
     }
   }, [bestSellSuccess, bestSellProductData]);
 
-  
   return (
     <BestSellerProduct
       theme={design?.best_sell_product}

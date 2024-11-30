@@ -4,7 +4,6 @@ const VideoPlayer = ({ videoUrl }: { videoUrl: string }) => {
 
   const embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
 
-
   return (
     <div className="video-container">
       <iframe

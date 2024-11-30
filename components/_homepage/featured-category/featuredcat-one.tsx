@@ -17,7 +17,7 @@ const FeaturedOne = ({ category, design }: any) => {
   const { title, title_color } = featureCategory;
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
-      {category?.length > 0 &&
+      {category?.length > 0 && (
         <div className="">
           <div className="my-5 w-full pt-1 flex justify-between items-center flex-wrap">
             <Title title_color={title_color} text={title || "Popular"} />
@@ -41,14 +41,15 @@ const FeaturedOne = ({ category, design }: any) => {
               },
             }}
           >
-            {category?.length > 0 && category?.map((cat: any) => (
-              <SwiperSlide key={cat?.id}>
-                <SingleCard cat={cat} />
-              </SwiperSlide>
-            ))}
+            {category?.length > 0 &&
+              category?.map((cat: any) => (
+                <SwiperSlide key={cat?.id}>
+                  <SingleCard cat={cat} />
+                </SwiperSlide>
+              ))}
           </Slider1>
         </div>
-      }
+      )}
     </div>
   );
 };

@@ -7,7 +7,6 @@ import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import { useRouter } from "next/navigation";
 import { AiOutlineShoppingCart } from "react-icons/ai";
@@ -226,14 +225,14 @@ const Card60 = ({ item }: any) => {
             <div className="flex items-center gap-2">
               {camp?.status !== "active" &&
               (item.discount_type === "no_discount" ||
-                item.discount_price === "0.00") ? (
-                ""
-              ) : item.regular_price != productGetPrice && (
-                <p className="line-through text-xs text-color-thirty">
-                  {" "}
-                  <BDT price={Math.trunc(item.regular_price)} />
-                </p>
-              )}
+                item.discount_price === "0.00")
+                ? ""
+                : item.regular_price != productGetPrice && (
+                    <p className="line-through text-xs text-color-thirty">
+                      {" "}
+                      <BDT price={Math.trunc(item.regular_price)} />
+                    </p>
+                  )}
               <p className="text-sm py-1 rounded-lg text-[#83C341] font-bold">
                 <BDT
                   price={

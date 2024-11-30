@@ -140,9 +140,7 @@ const FooterTwentyOne = ({
             </div>
             <div className="lg2:justify-self-center md:col-span-2 lg2:col-span-1 md:block hidden">
               <div>
-                <h1 className="sm:text-xl uppercase font-bold pb-5">
-                  LEGAL
-                </h1>
+                <h1 className="sm:text-xl uppercase font-bold pb-5">LEGAL</h1>
                 <div className="flex flex-col gap-2 ">
                   <PageList cls={cls} page={page} />
                 </div>

@@ -56,7 +56,6 @@ const CheckOutSevenOrder = ({
     bookingData,
   } = useTheme();
 
-
   const cartList = useSelector((state: any) => state.cart.cartList);
   const { user } = useSelector((state: any) => state.auth);
   // const token = user?.token;

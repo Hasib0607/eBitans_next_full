@@ -16,8 +16,8 @@ import { BsPlusLg } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card17 = ({ item }: any) => {
   const router = useRouter();
@@ -196,7 +196,14 @@ const Card17 = ({ item }: any) => {
         </div>
       </motion.div>
       <QuikView open={view} setOpen={setView}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

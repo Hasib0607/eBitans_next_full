@@ -10,8 +10,8 @@ import { useEffect, useState } from "react";
 import { IoIosEye } from "react-icons/io";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card38 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
@@ -197,7 +197,14 @@ const Card38 = ({ item }: any) => {
         </div>
       </div>
       <QuikView open={view} setOpen={setView}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );
