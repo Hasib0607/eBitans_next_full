@@ -13,8 +13,8 @@ import { BsEye } from "react-icons/bs";
 import { MdAddShoppingCart } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card56 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
@@ -24,7 +24,7 @@ const Card56 = ({ item }: any) => {
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
-  
+
   const [view, setView] = useState(false);
 
   const secondImg = item?.image[1] ? item?.image[1] : item?.image[0];
@@ -265,7 +265,14 @@ const Card56 = ({ item }: any) => {
         </div>
       </div>
       <QuikView open={view} setOpen={setView}>
-        <Details data={{ product_id: item?.id }} />
+      <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

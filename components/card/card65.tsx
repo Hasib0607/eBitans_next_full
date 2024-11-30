@@ -6,8 +6,8 @@ import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card65 = ({ item, design, store_id }: any) => {
   const [camp, setCamp] = useState<any>(null);
@@ -140,7 +140,14 @@ const Card65 = ({ item, design, store_id }: any) => {
         </div>
       </div>
       <QuikView open={view} setOpen={setView}>
-        <Details data={{ product_id: item?.id }} />
+      <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

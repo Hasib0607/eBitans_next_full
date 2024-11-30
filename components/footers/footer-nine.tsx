@@ -97,7 +97,9 @@ const FooterNine = ({
                 </div>
               </div>
               <div>
-                <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">Legal</h1>
+                <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">
+                  Legal
+                </h1>
                 <div className="mt-5">
                   <PageList cls={clsMenu} page={page} />
                 </div>

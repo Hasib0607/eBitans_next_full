@@ -1,5 +1,4 @@
 "use client";
-import Details from "@/components/_product-details-page/product-details/three/details";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -13,6 +12,7 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card42 = ({ item }: any) => {
   const [open, setOpen] = useState<any>(false);
@@ -193,7 +193,14 @@ const Card42 = ({ item }: any) => {
         </div>
       </div>
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+      <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </>
   );

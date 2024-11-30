@@ -13,8 +13,8 @@ import { useEffect, useState } from "react";
 import { IoSearchCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card41 = ({ item }: any) => {
   const [open, setOpen] = useState<any>(false);
@@ -196,7 +196,15 @@ const Card41 = ({ item }: any) => {
         </div>
       </div>
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          data={{ product_id: item?.id }}
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

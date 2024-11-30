@@ -2,7 +2,6 @@ import Link from "next/link";
 import React from "react";
 
 const MenuList = ({ cls, menu }: any) => {
-  
   return (
     <>
       {menu?.map((m: any) =>

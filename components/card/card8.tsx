@@ -5,8 +5,8 @@ import Taka from "@/utils/taka";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import QuikView from "../quick-view";
-import Details from "../_product-details-page/product-details/three/details";
 import { productImg } from "@/site-settings/siteUrl";
+import Details from "../product-quick-view-details/details";
 
 const Card8 = ({ item }: any) => {
   const [open, setOpen] = useState(false);
@@ -78,7 +78,14 @@ const Card8 = ({ item }: any) => {
           </div>
         </div>
         <QuikView open={open} setOpen={setOpen}>
-          <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
         </QuikView>
       </Link>
     </>

@@ -52,15 +52,13 @@ const CheckoutFrom = ({ store, setCall, store_id, setToken, user }: any) => {
       setCall(Math.random() * 100);
       toast(response?.data?.success, { type: "success" });
     } else {
-      httpReq
-        .post("address/save", data)
-        .then(({ success, token }) => {
-          reset();
-          setToken(token);
-          setCall(Math.random() * 100);
-          toast(success, { type: "success" });
-        })
-        // .catch((err) => console.log(err));
+      httpReq.post("address/save", data).then(({ success, token }) => {
+        reset();
+        setToken(token);
+        setCall(Math.random() * 100);
+        toast(success, { type: "success" });
+      });
+      // .catch((err) => console.log(err));
     }
   };
 

@@ -14,8 +14,8 @@ import { AiOutlineSearch } from "react-icons/ai";
 import { BsPlusLg } from "react-icons/bs";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card16 = ({ item }: any) => {
   const [open, setOpen] = useState(false);
@@ -212,7 +212,14 @@ const Card16 = ({ item }: any) => {
         </div>
       </motion.div>
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

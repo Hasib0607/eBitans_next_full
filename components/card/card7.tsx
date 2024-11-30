@@ -2,7 +2,6 @@
 import { ShoppingBagIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 // import "./cardCss/Card.css";
-import Details from "@/components/_product-details-page/product-details/three/details";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -17,6 +16,7 @@ import { IoSearchCircleOutline } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card7 = ({ item }: any) => {
   const [open, setOpen] = useState(false);
@@ -239,7 +239,14 @@ const Card7 = ({ item }: any) => {
         </Link>
       </motion.div>
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+      <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </>
   );

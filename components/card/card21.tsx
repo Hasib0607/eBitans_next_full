@@ -12,8 +12,8 @@ import { useEffect, useState } from "react";
 import { AiOutlineEye, AiOutlineShoppingCart } from "react-icons/ai";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card21 = ({ item }: any) => {
   const [open, setOpen] = useState(false);
@@ -242,7 +242,14 @@ const Card21 = ({ item }: any) => {
       </div>
 
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+      <Details 
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </>
   );

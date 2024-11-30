@@ -33,7 +33,7 @@ const FooterFourteen = ({
           <CopyrightAll headerSetting={headerSetting} />
         </div>
         <div className="flex flex-wrap md:space-x-5 space-x-3 justify-center py-2">
-          <MenuList cls={cls} menu={menu}  />
+          <MenuList cls={cls} menu={menu} />
         </div>
         <div className="flex flex-wrap md:space-x-5 space-x-3 justify-center py-2">
           <PageList cls={cls} page={page} />

@@ -1,5 +1,4 @@
 "use client";
-import Details from "@/components/_product-details-page/product-details/three/details";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
 import { productImg } from "@/site-settings/siteUrl";
@@ -14,6 +13,7 @@ import { BiSearch } from "react-icons/bi";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card45 = ({ item }: any) => {
   const { design, makeid, store_id, headerSetting } = useTheme();
@@ -275,7 +275,14 @@ const Card45 = ({ item }: any) => {
         )}
       </div>
       <QuikView open={view} setOpen={setView}>
-        <Details data={{ product_id: item?.id }} />
+      <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

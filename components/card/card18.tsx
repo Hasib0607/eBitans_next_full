@@ -13,8 +13,8 @@ import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
-import Details from "../_product-details-page/product-details/three/details";
 import QuikView from "../quick-view";
+import Details from "../product-quick-view-details/details";
 
 const Card18 = ({ item, store_id }: any) => {
   const dispatch = useDispatch();
@@ -200,7 +200,14 @@ const Card18 = ({ item, store_id }: any) => {
         </div>
       </Link>
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+      <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );
