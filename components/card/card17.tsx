@@ -196,7 +196,7 @@ const Card17 = ({ item }: any) => {
         </div>
       </motion.div>
       <QuikView open={view} setOpen={setView}>
-      <Details
+        <Details
           item={item}
           updateData={{
             product_id: item?.id,

@@ -277,7 +277,7 @@ const Card47 = ({ item, stopAutoplay }: any) => {
         </div>
       </div>
       <QuikView open={view} setOpen={setView}>
-      <Details
+        <Details
           item={item}
           updateData={{
             product_id: item?.id,

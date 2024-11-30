@@ -200,7 +200,7 @@ const Card18 = ({ item, store_id }: any) => {
         </div>
       </Link>
       <QuikView open={open} setOpen={setOpen}>
-      <Details
+        <Details
           item={item}
           updateData={{
             product_id: item?.id,

@@ -126,7 +126,7 @@ const Card34 = ({ item, design, store_id }: any) => {
         </Link>
       </div>
       <QuikView open={open} setOpen={setOpen}>
-      <Details
+        <Details
           item={item}
           updateData={{
             product_id: item?.id,

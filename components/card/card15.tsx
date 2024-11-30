@@ -223,7 +223,7 @@ const Card15 = ({ item }: any) => {
         </div>
       </motion.div>
       <QuikView open={open} setOpen={setOpen}>
-      <Details
+        <Details
           item={item}
           updateData={{
             product_id: item?.id,
