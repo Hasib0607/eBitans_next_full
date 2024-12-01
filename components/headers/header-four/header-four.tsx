@@ -43,7 +43,6 @@ export default function HeaderFour({ headerSetting }: any) {
     window.addEventListener("scroll", changeNavbar);
   }, []);
 
-
   const styleCss = `
   
       .navbarFour{

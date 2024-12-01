@@ -79,7 +79,7 @@ const Card67 = ({ item, design, store_id }: any) => {
               alt=""
               className="h-auto min-w-full object-center object-cover group-hover:scale-110 duration-1000"
             />
-            <div className="absolute bottom-3 right-3 bg-[#127266] text-white z-[2] px-4 py-1 rounded-lg text-sm">
+            <div className="absolute bottom-3 right-3 bg-color text-white z-[2] px-4 py-1 rounded-lg text-sm">
               {item?.quantity === "0" ? "Out of stock" : "Sale"}
             </div>
           </div>

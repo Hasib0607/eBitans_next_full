@@ -91,7 +91,7 @@ const HeaderThirtyNine = ({ headerSetting }: any) => {
     <div
       className={`${
         menuBar ? "h-16" : "h-20"
-      } fixed z-[5] duration-500 top-0 left-0 flex items-center bg-[#127266] text-white w-full`}
+      } fixed z-[5] duration-500 top-0 left-0 flex items-center bg-color text-white w-full`}
     >
       {/* cart open  */}
       <BottomCart open={cartOpen} setOpen={setCartOpen} />
@@ -123,7 +123,7 @@ const HeaderThirtyNine = ({ headerSetting }: any) => {
             ))}
           </div>
           <div
-            className={`bg-[#127266] text-white w-full fixed z-[2] ${
+            className={`bg-color text-white w-full fixed z-[2] ${
               open ? "top-0" : "-top-[100%]"
             } duration-1000 left-0 ${
               menuBar ? "h-16" : "h-20"

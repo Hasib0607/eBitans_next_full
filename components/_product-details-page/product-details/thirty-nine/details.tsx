@@ -532,6 +532,10 @@ const Details = ({
         background:transparent;
         border: 1px solid ${design?.header_color};
     }
+    .bg-color {
+        color:  ${design?.text_color};
+        background: ${design?.header_color};
+    }
   `;
 
   const buttonSeven =
@@ -567,8 +571,8 @@ const Details = ({
             setActiveImg={setActiveImg}
           />
         </div>
-        <div className="md:col-span-4 space-y-3 sticky top-20 h-max">
-          <h2 className="lg:text-5xl text-2xl text-[#212121] font-semibold">
+        <div className="md:col-span-4 space-y-3 sticky top-20 h-max mt-3 md:mt-40">
+          <h2 className="lg:text-3xl text-2xl text-[#212121] font-semibold">
             {product?.name}
           </h2>
 
@@ -586,7 +590,7 @@ const Details = ({
               )}
               <BDT />
               {camp?.status === "active" ? campPrice : price}
-              <p className="bg-[#127266] text-white z-[2] px-4 py-1 rounded-lg text-sm">
+              <p className="bg-color text-white z-[2] px-4 py-1 rounded-lg text-sm">
                 Sale
               </p>
             </div>
@@ -594,7 +598,7 @@ const Details = ({
             {/* {product?.discount_type === 'percent' && <p className='text-md text-gray-400'> {product?.discount_price}% Off</p>} */}
           </div>
           {discount > 0 && (
-            <p className="bg-[#127266] text-white z-[2] px-4 py-1 text-lg w-max">
+            <p className="bg-color text-white z-[2] px-4 py-1 text-lg w-max">
               You Save {discount}
             </p>
           )}
@@ -721,9 +725,9 @@ const Details = ({
           <div>
             {/* Display referral link and copy button */}
             {referralLink && (
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                 {/* Underlined referral link */}
-                <p>
+                <p className="text-center sm:text-left">
                   Referral Link:{" "}
                   <a
                     href={referralLink}
@@ -737,8 +741,8 @@ const Details = ({
 
                 {/* Copy button */}
                 <button
-                  className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
-                  ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
+                  className={`mt-2 sm:mt-0 px-4 py-2 font-semibold rounded-lg transition-all duration-300 
+                    ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
                   onClick={handleCopyLink}
                 >
                   <svg
