@@ -61,23 +61,18 @@ const MobileNavThree = () => {
             >
               {
                 item === "category" && (
-                  <div
-                    className={`${active === "search" ? "text-gray-400" : ""} `}
-                    color={design?.text_color}
-                  >
-                    {gridIcon}
+                  <div className={`${active === "category" ? "text-gray-400" : ""}`}>
+                    {React.cloneElement(gridIcon, { color: design?.text_color })}
                   </div>
+
                 )
                 //  <ViewGridIcon width={25} color={design?.text_color} className={active === 'category' ? 'text-gray-400' : null} />
               }
               {item === "search" && (
-                <div
-                  className={`${active === "search" ? "text-gray-400" : ""} `}
-                  color={design?.text_color}
-                >
-                  {searchIcon}
-                  {/* <SearchIcon width={25} color={design?.text_color} /> */}
+                <div className={`${active === "search" ? "text-gray-400" : ""}`}>
+                  {React.cloneElement(searchIcon, { color: design?.text_color })}
                 </div>
+
               )}
               {item === "home" && (
                 <Link href="/" passHref>
