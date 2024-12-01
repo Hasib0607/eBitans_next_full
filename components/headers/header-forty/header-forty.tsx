@@ -13,6 +13,7 @@ import Search from "./search";
 import Link from "next/link";
 import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import SideMenu from "../header-three/side-menu";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderForty = ({ headerSetting }: any) => {
   const { userData, category } = useTheme();
@@ -185,7 +186,7 @@ const HeaderForty = ({ headerSetting }: any) => {
                         src={
                           userData?.image
                             ? profileImg + userData?.image
-                            : "https://ebitans.com/Image/theme/default-user-image.png"
+                            : `${defaultUserImage.src}`
                         }
                         alt=""
                         className="object-fit"

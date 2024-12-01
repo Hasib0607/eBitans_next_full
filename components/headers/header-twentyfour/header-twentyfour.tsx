@@ -11,6 +11,7 @@ import { RiShoppingBagLine } from "react-icons/ri";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import Search from "./search";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderTwentyFour = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
@@ -185,7 +186,7 @@ const HeaderTwentyFour = ({ headerSetting }: any) => {
                           />
                         ) : (
                           <img
-                            src="https://ebitans.com/Image/theme/default-user-image.png"
+                            src={defaultUserImage.src}
                             alt="user"
                             className="object-fit"
                           />

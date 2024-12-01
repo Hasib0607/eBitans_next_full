@@ -16,6 +16,7 @@ import { TbLayoutGrid } from "react-icons/tb";
 import { useDispatch, useSelector } from "react-redux";
 import SideMenu from "../header-three/side-menu";
 import Search from "./search";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderThirtyThree = ({ headerSetting }: any) => {
   const { category, design, subcategory, menu, userData } = useTheme();
@@ -202,7 +203,7 @@ const HeaderThirtyThree = ({ headerSetting }: any) => {
                       />
                     ) : (
                       <img
-                        src="https://ebitans.com/Image/theme/default-user-image.png"
+                        src={defaultUserImage.src}
                         alt="user"
                         className="object-fit"
                       />

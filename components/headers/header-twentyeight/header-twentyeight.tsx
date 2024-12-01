@@ -17,6 +17,7 @@ import Search from "./search";
 import { ArrowLeftIcon, TableCellsIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
 import { GiHamburgerMenu } from "react-icons/gi";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderTwentyEight = ({ headerSetting }: any) => {
   const { design, category, userData } = useTheme();
@@ -254,7 +255,7 @@ const HeaderTwentyEight = ({ headerSetting }: any) => {
                               src={
                                 userData?.image
                                   ? profileImg + userData?.image
-                                  : "https://ebitans.com/Image/theme/default-user-image.png"
+                                  : `${defaultUserImage.src}`
                               }
                               alt=""
                               className="object-fit"
