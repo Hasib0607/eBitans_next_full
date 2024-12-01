@@ -14,10 +14,10 @@ import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import Search from "./search";
 import userImg from "@/assets/img/user.png";
 import { XMarkIcon } from "@heroicons/react/24/outline";
-import SideMenu from "../header-three/side-menu";
+import SideMenuWithCategory from "./side-menu-with-category";
 
 const HeaderTwentyThree = ({ headerSetting }: any) => {
-  const { design, menu, userData } = useTheme();
+  const { design, userData, category } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
   // const [searchInput, setSearchInput] = useState(false)
@@ -164,7 +164,7 @@ const HeaderTwentyThree = ({ headerSetting }: any) => {
                 onChange={(e) => setSearch(e.target.value)}
                 type="text"
                 placeholder="Search"
-                className="outline-none focus:outline-none focus:ring-0 focus:border-gray-400 h-8 bg-gray-100 border-0 border-b border-gray-400 text-sm"
+                className="pl-2 outline-none focus:outline-none focus:ring-0 focus:border-gray-400 h-8 bg-gray-100 border-0 border-b border-gray-400 text-sm"
               />
               <div className="absolute top-2.5 right-2">
                 {searchTxt.length === 0 ? (
@@ -299,16 +299,17 @@ const HeaderTwentyThree = ({ headerSetting }: any) => {
           openMenu && "navbarTwentyOne openMenu"
         } bg-color lg:block hidden`}
       >
-        <div className="flex gap-10 uppercase text-[14px] sm:container px-5 py-4">
-          {menu?.map((menu: any) => (
-            <ul key={menu.id}>
-              <Link href={"/" + menu?.url}>
-                <li className="duration-500 border border-transparent border-hover-menu">
-                  {menu.name}
-                </li>
-              </Link>
-            </ul>
-          ))}
+        <div className="flex gap-10 uppercase text-[14px] sm:container px-5 py-4 justify-center">
+          {category?.map((cat: any) => (
+                  <Link key={cat.id} href={"/category/" + cat?.id}>
+                    <ul
+                      className=""
+                      key={cat?.id}
+                    >
+                      <li className="duration-500 border border-transparent border-hover-menu">{cat?.name}</li>
+                    </ul>
+                  </Link>
+                ))}
         </div>
       </div>
 
@@ -349,7 +350,7 @@ const HeaderTwentyThree = ({ headerSetting }: any) => {
           </div>
 
           <div className="px-6">
-            <SideMenu setOpen={setOpen} />
+            <SideMenuWithCategory setOpen={setOpen} />
           </div>
         </ul>
       </div>
