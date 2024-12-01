@@ -13,6 +13,7 @@ import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import Search from "./search";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -123,7 +124,7 @@ const HeaderThirtyEight = ({ headerSetting }: any) => {
                             src={
                               userData?.image
                                 ? profileImg + userData?.image
-                                : "https://ebitans.com/Image/theme/default-user-image.png"
+                                : `${defaultUserImage.src}`
                             }
                             alt=""
                             className="object-fit"

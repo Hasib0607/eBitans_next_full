@@ -13,6 +13,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
 import Search from "./search";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -171,7 +172,7 @@ const HeaderThirtySeven = ({ headerSetting }: any) => {
                             src={
                               userData?.image
                                 ? profileImg + userData?.image
-                                : "https://ebitans.com/Image/theme/default-user-image.png"
+                                : `${defaultUserImage.src}`
                             }
                             alt=""
                             className="object-fit"

@@ -14,6 +14,7 @@ import { IoSearchOutline } from "react-icons/io5";
 import { Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SideMenu from "../header-three/side-menu";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderTwentySeven = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
@@ -174,7 +175,7 @@ const HeaderTwentySeven = ({ headerSetting }: any) => {
                         />
                       ) : (
                         <img
-                          src="https://ebitans.com/Image/theme/default-user-image.png"
+                          src={defaultUserImage.src}
                           alt="user"
                           className="object-fit"
                         />

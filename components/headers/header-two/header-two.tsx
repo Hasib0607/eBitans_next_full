@@ -15,6 +15,7 @@ import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-fourteen/side-menu";
 import Search from "./search";
 import SideCategory from "./side-category";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderTwo = ({ headerSetting }: any) => {
   const { design, menu, userData } = useTheme();
@@ -155,7 +156,7 @@ const HeaderTwo = ({ headerSetting }: any) => {
                         ? profileImg + userData?.image
                         : userData?.social_img
                           ? profileImg + userData?.social_img
-                          : "https://ebitans.com/Image/theme/default-user-image.png"
+                          : `${defaultUserImage.src}`
                     }
                     alt=""
                     className="object-fit h-8 w-8 rounded-full overflow-hidden"

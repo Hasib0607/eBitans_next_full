@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import HeaderMenu from "./header-menu";
 import "./header-three.css";
 import SideMenu from "./side-menu";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -229,7 +230,7 @@ const HeaderThree = ({ headerSetting }: any) => {
                           src={
                             userData?.image
                               ? profileImg + userData?.image
-                              : "https://ebitans.com/Image/theme/default-user-image.png"
+                              : `${defaultUserImage.src}`
                           }
                           alt=""
                           className="object-fit"

@@ -2,7 +2,6 @@
 import React, { Fragment, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
-
 import { motion } from "framer-motion";
 import useTheme from "@/hooks/use-theme";
 import Link from "next/link";
@@ -10,6 +9,7 @@ import { imgUrl, profileImg } from "@/site-settings/siteUrl";
 import { IoSearchCircleOutline } from "react-icons/io5";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import SearchBox from "./searchbox";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderDown = () => {
   const { headerSetting, userData } = useTheme();
@@ -67,7 +67,7 @@ const HeaderDown = () => {
                           ? profileImg + userData?.image
                           : userData?.social_img
                             ? profileImg + userData?.social_img
-                            : "https://ebitans.com/Image/theme/default-user-image.png"
+                            : `${defaultUserImage.src}`
                       }
                       alt=""
                       className="object-fit"

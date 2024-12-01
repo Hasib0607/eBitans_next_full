@@ -21,6 +21,7 @@ import Search from "./search";
 // customize design
 import { customizeHeader } from "@/utils/customizeDesign";
 import { cancelIcon, SingleCat } from "@/app/mobileNavs/three/mobileNavThree";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderThirtyFour = ({ headerSetting }: any) => {
   const { category, design, subcategory, menu, userData } = useTheme();
@@ -232,7 +233,7 @@ const HeaderThirtyFour = ({ headerSetting }: any) => {
                         />
                       ) : (
                         <img
-                          src="https://ebitans.com/Image/theme/default-user-image.png"
+                          src={defaultUserImage.src}
                           alt="user"
                           className="object-fit"
                         />

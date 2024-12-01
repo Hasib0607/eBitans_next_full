@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import Search from "./search";
 import SideMenu from "./side-menu";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 const HeaderFourteen = ({ headerSetting }: any) => {
   const { design, userData } = useTheme();
@@ -172,7 +173,7 @@ const HeaderFourteen = ({ headerSetting }: any) => {
                             src={
                               userData?.image
                                 ? profileImg + userData?.image
-                                : "https://ebitans.com/Image/theme/default-user-image.png"
+                                : `${defaultUserImage.src}`
                             }
                             alt=""
                             className="object-fit"

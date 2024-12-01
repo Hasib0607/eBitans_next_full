@@ -17,6 +17,7 @@ import Search from "./search";
 import { red } from "@/site-settings/color";
 import { btnhover } from "@/site-settings/style";
 import { GiHamburgerMenu } from "react-icons/gi";
+import defaultUserImage from "@/assets/default-user-image.png";
 
 function classNames(...classes: any) {
   return classes.filter(Boolean).join(" ");
@@ -41,6 +42,7 @@ export default function HeaderFour({ headerSetting }: any) {
     };
     window.addEventListener("scroll", changeNavbar);
   }, []);
+
 
   const styleCss = `
   
@@ -214,7 +216,7 @@ export default function HeaderFour({ headerSetting }: any) {
                         src={
                           userData?.image
                             ? profileImg + userData?.image
-                            : "https://ebitans.com/Image/theme/default-user-image.png"
+                            : `${defaultUserImage.src}`
                         }
                         alt=""
                         className="object-fit"
