@@ -63,6 +63,7 @@ const MobileNavThree = () => {
                 item === "category" && (
                   <div
                     className={`${active === "search" ? "text-gray-400" : ""} `}
+                    color={design?.text_color}
                   >
                     {gridIcon}
                   </div>
@@ -72,6 +73,7 @@ const MobileNavThree = () => {
               {item === "search" && (
                 <div
                   className={`${active === "search" ? "text-gray-400" : ""} `}
+                  color={design?.text_color}
                 >
                   {searchIcon}
                   {/* <SearchIcon width={25} color={design?.text_color} /> */}
@@ -85,6 +87,7 @@ const MobileNavThree = () => {
                   >
                     <HomeIcon
                       width={25}
+                      color={design?.text_color}
                       className={active === "home" ? "hoverIcon" : ""}
                     />
                   </div>
@@ -116,6 +119,7 @@ const MobileNavThree = () => {
                   >
                     <UserIcon
                       width={25}
+                      color={design?.text_color}
                       className={active === "user" ? "hoverIcon" : ""}
                     />
                   </div>
