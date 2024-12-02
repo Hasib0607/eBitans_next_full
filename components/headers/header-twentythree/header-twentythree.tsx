@@ -301,15 +301,14 @@ const HeaderTwentyThree = ({ headerSetting }: any) => {
       >
         <div className="flex gap-10 uppercase text-[14px] sm:container px-5 py-4 justify-center">
           {category?.map((cat: any) => (
-                  <Link key={cat.id} href={"/category/" + cat?.id}>
-                    <ul
-                      className=""
-                      key={cat?.id}
-                    >
-                      <li className="duration-500 border border-transparent border-hover-menu">{cat?.name}</li>
-                    </ul>
-                  </Link>
-                ))}
+            <Link key={cat.id} href={"/category/" + cat?.id}>
+              <ul className="" key={cat?.id}>
+                <li className="duration-500 border border-transparent border-hover-menu">
+                  {cat?.name}
+                </li>
+              </ul>
+            </Link>
+          ))}
         </div>
       </div>
 

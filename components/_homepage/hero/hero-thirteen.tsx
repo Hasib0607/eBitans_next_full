@@ -32,7 +32,7 @@ const HeroThirteen = ({ slider }: any) => {
           modules={[EffectFade, Pagination, Autoplay]}
           className="mySwiper relative"
         >
-          {slider?.map((i: any, id: number) => (
+          {slider?.length > 0 && slider?.map((i: any, id: number) => (
             <SwiperSlide key={id}>
               <div>
                 <div className="absolute top-1/2 -translate-y-1/2 left-[10%] md:max-w-sm max-w-[250px] ">
