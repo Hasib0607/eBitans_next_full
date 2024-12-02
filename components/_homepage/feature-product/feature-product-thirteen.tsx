@@ -47,8 +47,8 @@ const FeatureProductThirteen = ({ feature_product, store_id }: any) => {
             },
           }}
         >
-          {feature_product?.slice(0, 10).map((item: any) => (
-            <SwiperSlide className="swiperjs-slide py-10" key={item?.id}>
+          {feature_product?.length > 0 && feature_product?.slice(0, 10).map((item: any, index:any) => (
+            <SwiperSlide className="swiperjs-slide py-10" key={index}>
               <Card18 item={item} store_id={store_id} />
             </SwiperSlide>
           ))}
