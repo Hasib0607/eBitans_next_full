@@ -20,7 +20,7 @@ const NewArrivalProductThirteeen = ({ product, design, store_id }: any) => {
 
   return (
     <div className="bg-white ">
-      <div className="sm:container px-5 sm:py-10 py-5">
+      {product?.length > 0 && <div className="sm:container px-5 sm:py-10 py-5">
         <SectionHeadingThirteen
           prev={prev}
           next={next}
@@ -55,13 +55,14 @@ const NewArrivalProductThirteeen = ({ product, design, store_id }: any) => {
           }}
           className={"h-[1000px] my-2 sm:my-12"}
         >
-          {product?.slice(0, 10).map((item: any) => (
+          {product?.length > 0 && product?.slice(0, 10).map((item: any) => (
             <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
               <Card18 item={item} store_id={store_id} />
             </SwiperSlide>
           ))}
         </GridSliderThirteen>
-      </div>
+      </div>}
+      
     </div>
   );
 };

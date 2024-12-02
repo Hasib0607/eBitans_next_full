@@ -32,32 +32,33 @@ const HeroThirteen = ({ slider }: any) => {
           modules={[EffectFade, Pagination, Autoplay]}
           className="mySwiper relative"
         >
-          {slider?.length > 0 && slider?.map((i: any, id: number) => (
-            <SwiperSlide key={id}>
-              <div>
-                <div className="absolute top-1/2 -translate-y-1/2 left-[10%] md:max-w-sm max-w-[250px] ">
-                  <div style={{ color: i?.color }} className="">
-                    <h1 className="xl:text-4xl md:text-[24px] text-[14px] font-seven mb-1 md:mb-5 font-bold bg-white bg-opacity-70 p-2">
-                      {i?.title}
-                    </h1>
-                    <p className="md:text-base text-xs font-seven">
-                      {i?.subtitle}
-                    </p>
+          {slider?.length > 0 &&
+            slider?.map((i: any, id: number) => (
+              <SwiperSlide key={id}>
+                <div>
+                  <div className="absolute top-1/2 -translate-y-1/2 left-[10%] md:max-w-sm max-w-[250px] ">
+                    <div style={{ color: i?.color }} className="">
+                      <h1 className="xl:text-4xl md:text-[24px] text-[14px] font-seven mb-1 md:mb-5 font-bold bg-white bg-opacity-70 p-2">
+                        {i?.title}
+                      </h1>
+                      <p className="md:text-base text-xs font-seven">
+                        {i?.subtitle}
+                      </p>
+                    </div>
+                    <a href={i?.link} target="_blank" rel="noopener noreferrer">
+                      <h1 className="md:mt-5 mt-1 lg:px-5 px-2 lg:py-2 py-1 bg-transparent text-white font-seven lg:text-lg text-xs rounded-md w-max border border-white hover:bg-white hover:bg-opacity-20">
+                        Shop Now
+                      </h1>
+                    </a>
                   </div>
-                  <a href={i?.link} target="_blank" rel="noopener noreferrer">
-                    <h1 className="md:mt-5 mt-1 lg:px-5 px-2 lg:py-2 py-1 bg-transparent text-white font-seven lg:text-lg text-xs rounded-md w-max border border-white hover:bg-white hover:bg-opacity-20">
-                      Shop Now
-                    </h1>
-                  </a>
                 </div>
-              </div>
-              <img
-                alt=""
-                className={"min-w-full min-h-[200px]"}
-                src={sliderImg + i.image}
-              />
-            </SwiperSlide>
-          ))}
+                <img
+                  alt=""
+                  className={"min-w-full min-h-[200px]"}
+                  src={sliderImg + i.image}
+                />
+              </SwiperSlide>
+            ))}
         </Swiper>
       </div>
     </>
