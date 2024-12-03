@@ -118,6 +118,7 @@ const CheckOutTwentyOne = () => {
               <Discount
                 setCouponDis={setCouponDis}
                 setShipping_area={setShipping_area}
+                shipping_area={shipping_area}
                 setCoupon={setCoupon}
                 setCouponResult={setCouponResult}
                 design={design}
