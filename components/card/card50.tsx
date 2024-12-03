@@ -146,15 +146,22 @@ const Card50 = ({ item }: any) => {
             </h4>
           </div>
         </Link>
+        {/* show unit range in card bottom */}
+        {item?.variant?.length > 0 &&
+          (() => {
+            const volumes = item.variant.map((v:any) => v.volume);
+            const minVolume = Math.min(...volumes);
+            const maxVolume = Math.max(...volumes);
 
-        {item?.variant[0]?.unit && store_id === 2109 && (
-          <div className="px-2">
-            <p>
-              <b>Unit:</b> {item?.variant[0]?.volume} {item?.variant[0]?.unit}
-            </p>
-          </div>
-        )}
-
+            return minVolume === 0 && maxVolume === 0 ? null : (
+              <div className="px-2">
+                <p>
+                  <b>Unit:</b> {minVolume} - {maxVolume} {item.variant[0]?.unit}
+                </p>
+              </div>
+            );
+          })()}
+          
         <div className="text-[13px] px-2 flex items-center gap-2">
           <p className={`font-bold text-sm sm:text-base`}>
             ৳{" "}

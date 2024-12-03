@@ -203,7 +203,24 @@ const Card59 = ({ item }: any) => {
                 </h1>
               </Link>
             </div>
+            {/* show unit range in card bottom */}
+            <div>
+              {item?.variant?.length > 0 &&
+                (() => {
+                  const volumes = item.variant.map((v: any) => v.volume);
+                  const minVolume = Math.min(...volumes);
+                  const maxVolume = Math.max(...volumes);
 
+                  return minVolume === 0 && maxVolume === 0 ? null : (
+                    <div className="">
+                      <p>
+                        <b>Unit:</b> {minVolume} - {maxVolume}{" "}
+                        {item.variant[0]?.unit}
+                      </p>
+                    </div>
+                  );
+                })()}
+            </div>
             <div className=" font-semibold flex flex-wrap justify-around items-center gap-2 w-full ">
               <div className="flex items-center flex-col gap-2">
                 {camp?.status !== "active" &&

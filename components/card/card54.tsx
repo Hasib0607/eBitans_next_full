@@ -279,14 +279,24 @@ const Card54 = ({ item }: any) => {
               </div>
             </div>
 
-            {item?.variant[0]?.unit && store_id === 2109 && (
-              <div>
-                <p>
-                  <b>Unit:</b> {item?.variant[0]?.volume}{" "}
-                  {item?.variant[0]?.unit}
-                </p>
-              </div>
-            )}
+            {/* show unit range in card bottom */}
+            <div>
+              {item?.variant?.length > 0 &&
+                (() => {
+                  const volumes = item.variant.map((v: any) => v.volume);
+                  const minVolume = Math.min(...volumes);
+                  const maxVolume = Math.max(...volumes);
+
+                  return minVolume === 0 && maxVolume === 0 ? null : (
+                    <div className="">
+                      <p>
+                        <b>Unit:</b> {minVolume} - {maxVolume}{" "}
+                        {item.variant[0]?.unit}
+                      </p>
+                    </div>
+                  );
+                })()}
+            </div>
             {store_id !== 2875 ? (
               <div className=" font-semibold flex justify-between items-center gap-2 w-full ">
                 <div className="flex items-center flex-wrap gap-2">
@@ -356,7 +366,14 @@ const Card54 = ({ item }: any) => {
 
       {/* for modal open  */}
       <QuikView open={view} setOpen={setView} design={design}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </div>
   );

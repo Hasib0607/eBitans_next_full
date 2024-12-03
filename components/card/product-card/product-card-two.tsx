@@ -3,11 +3,8 @@ import { useEffect, useState } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 import { IoEyeSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-
 import "./product-card-two.css";
 // import CardModal from './CardModal';
-
-import Details from "@/components/_product-details-page/product-details/three/details";
 import QuikView from "@/components/quick-view";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList, decrementQty } from "@/redux/features/product.slice";
@@ -18,6 +15,7 @@ import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import Link from "next/link";
 import { toast } from "react-toastify";
+import Details from "@/components/product-quick-view-details/details";
 
 const ProductCardTwo = ({ item }: any) => {
   const [open, setOpen] = useState(false);
@@ -178,7 +176,24 @@ const ProductCardTwo = ({ item }: any) => {
               {name.length > 25 ? name.slice(0, 20) + "..." : name}
             </Link>
           </h3>
+          {/* show unit range in card bottom */}
+          <div className="text-center">
+            {item?.variant?.length > 0 &&
+              (() => {
+                const volumes = item.variant.map((v: any) => v.volume);
+                const minVolume = Math.min(...volumes);
+                const maxVolume = Math.max(...volumes);
 
+                return minVolume === 0 && maxVolume === 0 ? null : (
+                  <div className="">
+                    <p>
+                      <b>Unit:</b> {minVolume} - {maxVolume}{" "}
+                      {item.variant[0]?.unit}
+                    </p>
+                  </div>
+                );
+              })()}
+          </div>
           <p className=" text-center text-lg font-semibold text-black">
             &#2547; {camp?.status === "active" ? campPrice : productGetPrice}
           </p>
@@ -243,7 +258,14 @@ const ProductCardTwo = ({ item }: any) => {
       </div>
       {/* <CardModal setModal={setModal} modal={modal} item={item} /> */}
       <QuikView open={open} setOpen={setOpen}>
-        <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
       </QuikView>
     </>
   );
