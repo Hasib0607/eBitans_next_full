@@ -15,6 +15,7 @@ import { toast } from "react-toastify";
 const Discount = ({
   setCouponDis,
   setShipping_area,
+  shipping_area,
   setCoupon,
   setCouponResult,
 }: any) => {
@@ -51,7 +52,8 @@ const Discount = ({
       const result: any = getDiscount(
         total,
         res?.discount_amount,
-        res?.discount_type
+        res?.discount_type,
+        shipping_area
       );
       const dis = total - result;
       toast("Successfully Apply Coupon", {
@@ -63,7 +65,8 @@ const Discount = ({
       const result: any = getDiscount(
         total,
         res?.discount_amount,
-        res?.discount_type
+        res?.discount_type,
+        shipping_area
       );
       const dis = total - result;
       toast("Successfully Apply Coupon", {
@@ -117,19 +120,17 @@ const Discount = ({
 
   useEffect(() => {
     if (
-      headerSetting?.shipping_area_1 &&
-      (store_id === 3601 || store_id === 3904 || store_id === 5519)
+      headerSetting?.shipping_area_1
     ) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
     }
   }, [
-    headerSetting?.shipping_area_1,
-    headerSetting?.shipping_area_1_cost,
-    setShipping_area,
+    headerSetting,
     store_id,
   ]);
 
   const shippingPrice = (e: any) => {
+    setCouponDis(0);
     setShipping_area(e.target.value);
   };
 

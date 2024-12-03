@@ -20,49 +20,51 @@ const NewArrivalProductThirteeen = ({ product, design, store_id }: any) => {
 
   return (
     <div className="bg-white ">
-      {product?.length > 0 && <div className="sm:container px-5 sm:py-10 py-5">
-        <SectionHeadingThirteen
-          prev={prev}
-          next={next}
-          title={title || "New Arrival Products"}
-          design={design}
-          title_color={title_color || "#000"}
-        />
-        <GridSliderThirteen
-          prevEl={prev}
-          nextEl={next}
-          breakpoints={{
-            350: {
-              slidesPerView: 1,
-              spaceBetween: 20,
-            },
-            600: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            1440: {
-              slidesPerView: 5,
-              spaceBetween: 20,
-            },
-          }}
-          className={"h-[1000px] my-2 sm:my-12"}
-        >
-          {product?.length > 0 && product?.slice(0, 10).map((item: any) => (
-            <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
-              <Card18 item={item} store_id={store_id} />
-            </SwiperSlide>
-          ))}
-        </GridSliderThirteen>
-      </div>}
-      
+      {product?.length > 0 && (
+        <div className="sm:container px-5 sm:py-10 py-5">
+          <SectionHeadingThirteen
+            prev={prev}
+            next={next}
+            title={title || "New Arrival Products"}
+            design={design}
+            title_color={title_color || "#000"}
+          />
+          <GridSliderThirteen
+            prevEl={prev}
+            nextEl={next}
+            breakpoints={{
+              350: {
+                slidesPerView: 1,
+                spaceBetween: 20,
+              },
+              600: {
+                slidesPerView: 2,
+                spaceBetween: 10,
+              },
+              768: {
+                slidesPerView: 3,
+                spaceBetween: 10,
+              },
+              1024: {
+                slidesPerView: 4,
+                spaceBetween: 20,
+              },
+              1440: {
+                slidesPerView: 5,
+                spaceBetween: 20,
+              },
+            }}
+            className={"h-[1000px] my-2 sm:my-12"}
+          >
+            {product?.length > 0 &&
+              product?.slice(0, 10).map((item: any) => (
+                <SwiperSlide className="swiperjs_grid_two" key={item?.id}>
+                  <Card18 item={item} store_id={store_id} />
+                </SwiperSlide>
+              ))}
+          </GridSliderThirteen>
+        </div>
+      )}
     </div>
   );
 };
