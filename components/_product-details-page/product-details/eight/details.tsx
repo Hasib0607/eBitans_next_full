@@ -105,21 +105,20 @@ const Details = ({
 
   useEffect(() => {
     const newProductQuantity =
-  size?.quantity ||
-  color?.quantity ||
-  unit?.quantity ||
-  product?.quantity ||
-  "Out of Stock";
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
 
-  setProductQuantity(newProductQuantity);
+    setProductQuantity(newProductQuantity);
 
-  if(unit == null && color == null && size == null){
-    setStockShow(false);
-  }else{
-    setStockShow(true);
-  }
-  
-}, [color, size, unit]);
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -669,7 +668,9 @@ const Details = ({
             <div className="text-[#212121] ">
               {productQuantity >= "0" ? (
                 <p>
-                  {stockShow && (<span className="font-medium">{productQuantity}</span>)}{" "}
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (

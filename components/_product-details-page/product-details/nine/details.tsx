@@ -230,7 +230,6 @@ const Details = ({
       return false;
     }
 
-
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
         if (variant?.length) {
