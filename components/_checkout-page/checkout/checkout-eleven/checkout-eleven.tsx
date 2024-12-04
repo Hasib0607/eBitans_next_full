@@ -11,7 +11,7 @@ import CheckOutElevenOrder from "./checkout-eleven-order/checkout-eleven-order";
 import CheckOutElevenAddress from "./checkout-eleven-address/checkout-eleven-address";
 
 const CheckOutEleven = () => {
-  const { store_id, headerSetting } = useTheme();
+  const { store_id, headerSetting, design } = useTheme();
 
   const [selectAddress, setSelectAddress] = useState<any>(null);
   const [couponDis, setCouponDis] = useState<any>(0);
@@ -123,6 +123,43 @@ const CheckOutEleven = () => {
               selectPayment={selectPayment}
               setSelectPayment={setSelectPayment}
             />
+            {headerSetting?.online === "active" && (
+              <>
+                <div>
+                  I have read and agree with the website’s{" "}
+                  <span>
+                    <a
+                      href="/terms_and_condition"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Terms & Conditions
+                    </a>
+                  </span>
+                  ,{" "}
+                  <span>
+                    <a
+                      href="/privacy_policy"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Privacy Policy
+                    </a>
+                  </span>{" "}
+                  and{" "}
+                  <span>
+                    <a
+                      href="/return_policy"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Refund Policy
+                    </a>
+                  </span>
+                  .
+                </div>
+              </>
+            )}
           </div>
           <div className="border-l-2 pl-8">
             <CheckOutElevenOrder

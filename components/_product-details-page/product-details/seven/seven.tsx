@@ -65,25 +65,6 @@ const Seven = ({ data, updatedData }: Props) => {
       >
         <div className="h-[1px] bg-gray-300 w-full "></div>
         <div className="flex flex-col space-y-3 font-seven">
-          <SkeletonWrapper fetchStatus={fetchStatus} width={"200px"}>
-            <div className="flex items-center gap-x-3 py-3">
-              <div className="font-semibold text-[#212121] font-seven">
-                Availability:
-              </div>
-              <div className="text-sm">
-                {productDetailsData?.product?.quantity !== "0" ? (
-                  <p>
-                    <span className="font-medium">
-                      {productDetailsData?.product?.quantity}
-                    </span>{" "}
-                    <span className="text-green-500">In Stock!</span>
-                  </p>
-                ) : (
-                  <span className="text-red-600">Out of Stock!</span>
-                )}
-              </div>
-            </div>
-          </SkeletonWrapper>
           <SkeletonWrapper fetchStatus={fetchStatus} width={"100px"}>
             <p className="text-sm text-[#5a5a5a] font-seven">
               <span className="font-semibold text-[#212121] font-seven">

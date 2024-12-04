@@ -12,7 +12,7 @@ import CheckOutFortyOrder from "./order/checkout-forty-order";
 // import Booking from '../../"@/components/booking/Booking';
 
 const CheckOutForty = () => {
-  const { store_id, bookingData } = useTheme();
+  const { store_id, bookingData, headerSetting, design } = useTheme();
 
   const [selectAddress, setSelectAddress] = useState(null);
   const [couponDis, setCouponDis] = useState(0);
@@ -134,6 +134,43 @@ const CheckOutForty = () => {
             selectPayment={selectPayment}
             setSelectPayment={setSelectPayment}
           />
+          {headerSetting?.online === "active" && (
+              <>
+                <div>
+                  I have read and agree with the website’s{" "}
+                  <span>
+                    <a
+                      href="/terms_and_condition"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Terms & Conditions
+                    </a>
+                  </span>
+                  ,{" "}
+                  <span>
+                    <a
+                      href="/privacy_policy"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Privacy Policy
+                    </a>
+                  </span>{" "}
+                  and{" "}
+                  <span>
+                    <a
+                      href="/return_policy"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Refund Policy
+                    </a>
+                  </span>
+                  .
+                </div>
+              </>
+            )}
         </div>
 
         <div className="mt-5 lg:mt-0 lg:col-span-1">

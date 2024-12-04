@@ -11,7 +11,7 @@ import CheckOutSevenOrder from "./checkout-seven-order/checkout-seven-order";
 import CheckOutSevenPaymentGateway from "./checkout-seven-payment-gateway/checkout-seven-payment-gateway";
 
 const CheckOutSeven = () => {
-  const { store_id, bookingData } = useTheme();
+  const { store_id, bookingData, headerSetting, design } = useTheme();
   const [selectAddress, setSelectAddress] = useState(null);
   const [couponDis, setCouponDis] = useState(0);
   const [coupon, setCoupon] = useState(null);
@@ -143,6 +143,43 @@ const CheckOutSeven = () => {
             selectPayment={selectPayment}
             setSelectPayment={setSelectPayment}
           />
+          {headerSetting?.online === "active" && (
+              <>
+                <div>
+                  I have read and agree with the website’s{" "}
+                  <span>
+                    <a
+                      href="/terms_and_condition"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Terms & Conditions
+                    </a>
+                  </span>
+                  ,{" "}
+                  <span>
+                    <a
+                      href="/privacy_policy"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Privacy Policy
+                    </a>
+                  </span>{" "}
+                  and{" "}
+                  <span>
+                    <a
+                      href="/return_policy"
+                      style={{ color: design?.header_color }}
+                      className="underline"
+                    >
+                      Refund Policy
+                    </a>
+                  </span>
+                  .
+                </div>
+              </>
+            )}
         </div>
         <div className="mt-5 md:mt-0 lg:col-span-1">
           <CheckOutSevenOrder

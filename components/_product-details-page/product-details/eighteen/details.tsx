@@ -192,6 +192,14 @@ const Details = ({
       store_id,
     };
 
+    if (qty > productQuantity) {
+      toast("Quantity doesn't exits from stock", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
+
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
         if (variant?.length) {
@@ -601,7 +609,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart

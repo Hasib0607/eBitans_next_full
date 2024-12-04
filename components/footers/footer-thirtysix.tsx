@@ -13,6 +13,7 @@ import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import SSLImg from "@/assets/SSLCommerz-Pay-With-logo-All-Size-03.webp";
 
 const FooterThirtySix = ({
   headerSetting,
@@ -122,10 +123,17 @@ const FooterThirtySix = ({
         </div>
       </div>
 
-      <div className="border-t border-b border-gray-500 my-5">
+      <div className="border-t border-b border-gray-500 my-5 flex justify-between items-center">
         <div className="sm:container px-5 text-[15px] py-8 font-light text-[#333333]">
           <CopyrightAll headerSetting={headerSetting} />
         </div>
+        {headerSetting?.online === "active" && (
+          <>
+            <div>
+              <img src={SSLImg?.src} alt="" />
+            </div>
+          </>
+        )}
       </div>
       {/* <Messenger /> */}
       <WhatsApp />

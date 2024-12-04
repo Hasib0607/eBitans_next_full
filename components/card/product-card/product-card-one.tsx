@@ -280,14 +280,14 @@ const ProductCardOne = ({ item }: any) => {
 
       <QuikView open={open} setOpen={setOpen}>
         <div className="p-5">
-        <Details
-          item={item}
-          updateData={{
-            product_id: item?.id,
-            slug: item.slug,
-            store_id,
-          }}
-        />
+          <Details
+            item={item}
+            updateData={{
+              product_id: item?.id,
+              slug: item.slug,
+              store_id,
+            }}
+          />
         </div>
       </QuikView>
     </div>

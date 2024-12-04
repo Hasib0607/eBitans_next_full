@@ -71,7 +71,6 @@ const Details = ({ updateData, item }: any) => {
     }
   };
 
-
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
