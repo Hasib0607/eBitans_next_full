@@ -47,9 +47,8 @@ const Details = ({
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
-
-  // image selector
-  // const [activeImg, setActiveImg] = useState("");
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
   const [activeImg, setActiveImg] = useState(product?.defaultImage);
 
   const [loading, setLoading] = useState(true);
@@ -104,6 +103,23 @@ const Details = ({
     fetchReferralCode();
   }, []);
 
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
+
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
     navigator.clipboard
@@ -130,13 +146,6 @@ const Details = ({
     : [0];
   const smallest = Math.min(...vPrice);
   const largest = Math.max(...vPrice);
-
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -193,6 +202,14 @@ const Details = ({
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity doesn't exits from stock", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -649,9 +666,11 @@ const Details = ({
           <div className="flex items-center">
             <div className="w-[120px] text-xl">Availability:</div>
             <div className="text-[#212121] ">
-              {productQuantity !== "0" ? (
+              {productQuantity >= "0" ? (
                 <p>
-                  <span className="font-medium">{productQuantity}</span>{" "}
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (
@@ -671,7 +690,7 @@ const Details = ({
             </div>
           )}
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart

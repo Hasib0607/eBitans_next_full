@@ -83,7 +83,7 @@ export const Sizes = ({
 
   return (
     <div className="flex flex-col gap-2">
-      <h3 className="font-medium text-base mb-2">Sizes:</h3>
+      <h3 className="font-medium text-base mb-2">Pattern:</h3>
       <div className="flex flex-wrap gap-2">
         {hasImages
           ? // Render variants with valid 'image'

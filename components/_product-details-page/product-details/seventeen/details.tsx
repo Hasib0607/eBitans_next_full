@@ -46,6 +46,8 @@ const Details = ({
   // image selector
   // const [activeImg, setActiveImg] = useState("");
   const [activeImg, setActiveImg] = useState(product?.defaultImage);
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -97,6 +99,23 @@ const Details = ({
 
     fetchReferralCode();
   }, []);
+
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -180,18 +199,19 @@ const Details = ({
     camp?.discount_type
   );
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -594,9 +614,11 @@ const Details = ({
             <div className="flex items-center">
               <div className="w-[120px] text-xl">Availability:</div>
               <div className="text-[#212121] text-lg ">
-                {productQuantity !== "0" ? (
+                {productQuantity >= "0" ? (
                   <p>
-                    <span className="font-medium">{productQuantity}</span>{" "}
+                    {stockShow && (
+                      <span className="font-medium">{productQuantity}</span>
+                    )}{" "}
                     <span className="text-green-500">In Stock!</span>
                   </p>
                 ) : (
@@ -614,7 +636,7 @@ const Details = ({
               />
             </div>
 
-            {productQuantity !== "0" && (
+            {productQuantity >= "0" && (
               <div>
                 {price !== 0 && (
                   <AddCart

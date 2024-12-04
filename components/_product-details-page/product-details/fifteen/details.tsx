@@ -633,7 +633,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart

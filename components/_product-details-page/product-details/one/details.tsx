@@ -167,6 +167,13 @@ const Details = ({
   }, [data, store_id, fetchStatus]);
 
   const buyNowBtn = () => {
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
@@ -207,6 +214,14 @@ const Details = ({
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -649,7 +664,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart

@@ -53,9 +53,9 @@ const Details = ({
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
-  // image selector
-  // const [activeImg, setActiveImg] = useState("");
   const [activeImg, setActiveImg] = useState(product?.defaultImage);
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -73,6 +73,12 @@ const Details = ({
         type: "warning",
         autoClose: 1000,
       });
+    } else if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
     } else {
       add_to_cart();
       router.push("/checkout");
@@ -128,6 +134,23 @@ const Details = ({
     fetchReferralCode();
   }, []);
 
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
+
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
     navigator.clipboard
@@ -152,6 +175,7 @@ const Details = ({
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
   }, [color, variant]);
+
   useEffect(() => {
     setLoad(true);
     // declare the async data fetching function
@@ -185,6 +209,10 @@ const Details = ({
       // make sure to catch any error
       .catch(console.error);
   }, [data, store_id]);
+
+  useEffect(() => {
+    setFilterV(variant?.filter((item: any) => item?.color === color));
+  }, [color, variant]);
 
   if (fetchStatus === "fetching") {
     return (
@@ -225,19 +253,20 @@ const Details = ({
     camp?.discount_type
   );
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
       store_id,
       image: activeImg,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -660,9 +689,11 @@ const Details = ({
           <div className="flex items-center gap-x-3">
             <div className="">Availability:</div>
             <div className="text-[#212121] ">
-              {productQuantity !== "0" ? (
+              {productQuantity >= "0" ? (
                 <p>
-                  <span className="font-medium">{productQuantity}</span>{" "}
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (
@@ -684,7 +715,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
@@ -807,25 +838,26 @@ const AddCart = ({ setQty, qty, onClick, product, store_id, buyNow }: any) => {
             window.history.replaceState(null, "", link);
           }
         } catch (error) {
-          console.error("Error fetching referral code:", error);
+          // console.error("Error fetching referral code:", error);
         }
       }
     };
     // fetchReferralCode();
   }, []);
 
-  let incNum = () => {
-    setQty(qty + 1);
+  const incNum = () => {
+    setQty((prevCount: any) => prevCount + 1);
   };
-  let decNum = () => {
-    if (qty <= 1) {
-      setQty(1);
-    } else {
-      setQty((prevCount: any) => prevCount - 1);
+
+  const decNum = () => {
+    setQty((prevCount: any) => (prevCount > 1 ? prevCount - 1 : 1));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = parseInt(e.target.value, 10);
+    if (!isNaN(value) && value > 0) {
+      setQty(value);
     }
-  };
-  let handleChange = (e: any) => {
-    setQty(e.target.value);
   };
 
   const { button } = data?.custom_design?.single_product_page?.[0] || {};

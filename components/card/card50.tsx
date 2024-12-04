@@ -149,7 +149,7 @@ const Card50 = ({ item }: any) => {
         {/* show unit range in card bottom */}
         {item?.variant?.length > 0 &&
           (() => {
-            const volumes = item.variant.map((v:any) => v.volume);
+            const volumes = item.variant.map((v: any) => v.volume);
             const minVolume = Math.min(...volumes);
             const maxVolume = Math.max(...volumes);
 
@@ -161,7 +161,7 @@ const Card50 = ({ item }: any) => {
               </div>
             );
           })()}
-          
+
         <div className="text-[13px] px-2 flex items-center gap-2">
           <p className={`font-bold text-sm sm:text-base`}>
             ৳{" "}

@@ -10,7 +10,7 @@ import PaymentGateway from "./payment-gateway/payment-gateway";
 import YourOrders from "./your-orders/your-orders";
 
 const CheckOutFour = () => {
-  const { store_id } = useTheme();
+  const { store_id, headerSetting, design } = useTheme();
 
   const [couponDis, setCouponDis] = useState<any>(0);
   const [coupon, setCoupon] = useState<any>(null);
@@ -115,6 +115,43 @@ const CheckOutFour = () => {
                 shipping_area={shipping_area}
                 coupon={coupon}
               />
+              {headerSetting?.online === "active" && (
+                <>
+                  <div>
+                    I have read and agree with the website’s{" "}
+                    <span>
+                      <a
+                        href="/terms_and_condition"
+                        style={{ color: design?.header_color }}
+                        className="underline"
+                      >
+                        Terms & Conditions
+                      </a>
+                    </span>
+                    ,{" "}
+                    <span>
+                      <a
+                        href="/privacy_policy"
+                        style={{ color: design?.header_color }}
+                        className="underline"
+                      >
+                        Privacy Policy
+                      </a>
+                    </span>{" "}
+                    and{" "}
+                    <span>
+                      <a
+                        href="/return_policy"
+                        style={{ color: design?.header_color }}
+                        className="underline"
+                      >
+                        Refund Policy
+                      </a>
+                    </span>
+                    .
+                  </div>
+                </>
+              )}
             </div>
             <div className="mt-5 lg:mt-0 lg:col-span-1">
               <YourOrders
