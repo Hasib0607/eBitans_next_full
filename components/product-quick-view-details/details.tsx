@@ -31,7 +31,7 @@ import { useRouter } from "next/navigation";
 
 const Details = ({ updateData, item }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
-
+  const router = useRouter();
   const dispatch = useDispatch();
   const [product, setProduct] = useState<any>(item);
 
@@ -53,6 +53,24 @@ const Details = ({ updateData, item }: any) => {
   const [activeImg, setActiveImg] = useState("");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
+
+  const buyNow = () => {
+    if (variant?.length && !size && !color && !unit) {
+      toast("Please Select Variant", {
+        type: "warning",
+        autoClose: 1000,
+      });
+    } else if (variant?.length && !size && color && filterV?.length) {
+      toast("Please Select Variant", {
+        type: "warning",
+        autoClose: 1000,
+      });
+    } else {
+      add_to_cart();
+      router.push("/checkout");
+    }
+  };
+
 
   useEffect(() => {
     setFilterV(variant?.filter((item: any) => item?.color === color));
@@ -409,6 +427,7 @@ const Details = ({ updateData, item }: any) => {
             type: "success",
             autoClose: 1000,
           });
+          router.push("/checkout");
         }
       }
     });
@@ -560,6 +579,7 @@ const Details = ({ updateData, item }: any) => {
                 qty={qty}
                 product={product}
                 setQty={setQty}
+                buyNow={buyNow}
                 onClick={() => add_to_cart()}
                 buttonOne={buttonOne}
               />
@@ -599,7 +619,7 @@ const Details = ({ updateData, item }: any) => {
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
+const AddCart = ({ setQty, qty, onClick, buttonOne, product, buyNow }: any) => {
   const { data, error } = useHeaderSettings();
   const router = useRouter();
   const { design } = useTheme();
@@ -680,7 +700,7 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
           ) : (
             <button
               className="font-bold btn-buy-now rounded-md w-60 py-3 text-center"
-              onClick={handleClick}
+              onClick={buyNow}
             >
               {button || "Buy Now"}
             </button>

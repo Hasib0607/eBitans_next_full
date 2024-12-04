@@ -119,15 +119,10 @@ const Discount = ({
   };
 
   useEffect(() => {
-    if (
-      headerSetting?.shipping_area_1
-    ) {
+    if (headerSetting?.shipping_area_1) {
       setShipping_area(parseInt(headerSetting?.shipping_area_1_cost));
     }
-  }, [
-    headerSetting,
-    store_id,
-  ]);
+  }, [headerSetting, store_id]);
 
   const shippingPrice = (e: any) => {
     setCouponDis(0);

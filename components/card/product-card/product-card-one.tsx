@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import { BsBagPlus } from "react-icons/bs";
 import "./product-card-one.css";
 // import Badge from '../utils/Badge';
-import Details from "@/components/_product-details-page/product-details/three/details";
 import QuikView from "@/components/quick-view";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList, incrementQty } from "@/redux/features/product.slice";
@@ -17,6 +16,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import Details from "@/components/product-quick-view-details/details";
 
 const ProductCardOne = ({ item }: any) => {
   const { makeid, store_id } = useTheme();
@@ -280,7 +280,14 @@ const ProductCardOne = ({ item }: any) => {
 
       <QuikView open={open} setOpen={setOpen}>
         <div className="p-5">
-          <Details data={{ product_id: item?.id }} />
+        <Details
+          item={item}
+          updateData={{
+            product_id: item?.id,
+            slug: item.slug,
+            store_id,
+          }}
+        />
         </div>
       </QuikView>
     </div>
