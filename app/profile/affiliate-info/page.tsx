@@ -103,13 +103,13 @@ const AffiliateInfo = () => {
     }
   }, [user_id, userData, page]);
 
-  if (loading) {
-    return (
-      <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
-        <Skeleton />
-      </div>
-    );
-  }
+  // if (loading) {
+  //   return (
+  //     <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
+  //       <Skeleton />
+  //     </div>
+  //   );
+  // }
 
   return (
     <div>
@@ -232,7 +232,7 @@ const AffiliateInfo = () => {
               </tr>
             </thead>
             <tbody>
-              {productListData.map((productData: any, index: any) => (
+              {productListData?.length > 0 && productListData?.map((productData: any, index: any) => (
                 <tr key={productData.id} className="hover:bg-gray-50">
                   <td className="py-2 px-4 border-b">
                     {productData?.product?.name}

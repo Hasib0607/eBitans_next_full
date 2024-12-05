@@ -203,7 +203,6 @@ const useData = () => {
 
       if (token && v) {
         const user = await httpReq.get("getuser");
-
         setUser(user);
       }
 
@@ -240,7 +239,7 @@ const useData = () => {
         window.location.reload();
       }
     }
-  }, []);
+  }, [token, v]);
 
   const makeid = (length: any) => {
     var result = "";

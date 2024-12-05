@@ -39,7 +39,7 @@ const Details = ({
   children,
 }: any) => {
   const router = useRouter();
-  const { makeid, design, store_id, headerSetting } = useTheme();
+  const { makeid, design, store_id, headerSetting, userData } = useTheme();
   const dispatch = useDispatch();
 
   const [filterV, setFilterV] = useState<any>([]);
@@ -57,6 +57,8 @@ const Details = ({
   // image selector
   // const [activeImg, setActiveImg] = useState("");
   const [activeImg, setActiveImg] = useState(product?.defaultImage);
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -108,6 +110,23 @@ const Details = ({
 
     fetchReferralCode();
   }, []);
+
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -165,6 +184,13 @@ const Details = ({
   }, [data, store_id]);
 
   const buyNowBtn = () => {
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
@@ -199,6 +225,14 @@ const Details = ({
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -509,13 +543,6 @@ const Details = ({
   
   `;
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const callForPrice =
     "bg-black btn-hover text-white text-xs font-bold sm:py-[16px] py-3 sm:px-16 px-2";
 
@@ -634,9 +661,9 @@ const Details = ({
           <div className="flex items-center gap-x-3">
             <div className="">Availability:</div>
             <div className="text-gray-800 ">
-              {productQuantity !== "0" ? (
+              {productQuantity >= "0" ? (
                 <p>
-                  <span className="font-medium">{productQuantity}</span>{" "}
+                  {stockShow && (<span className="font-medium">{productQuantity}</span>)}{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (
@@ -658,7 +685,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart

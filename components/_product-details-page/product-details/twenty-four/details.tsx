@@ -50,6 +50,8 @@ const Details = ({
   const [copied, setCopied] = useState(false);
   // image selector
   const [activeImg, setActiveImg] = useState("");
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -101,6 +103,23 @@ const Details = ({
 
     fetchReferralCode();
   }, []);
+
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -179,23 +198,22 @@ const Details = ({
     camp?.discount_type
   );
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
       store_id,
     };
 
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
+
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
-        //
-        //
         if (variant?.length) {
           // unit with offer
           if (unit) {
@@ -641,7 +659,7 @@ const Details = ({
             <p className="absolute bg-black bg-opacity-20 top-0 left-0 right-0 scale-x-0 group-hover:scale-x-100 transform origin-[0%_100%] group-hover:ease-[cubic-bezier(0.52,1.64,0.87,.70)] ease-[cubic-bezier(0.52,1.64,0.87,0.66)] duration-500 bottom-0 lg:cursor-pointer"></p>
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart

@@ -53,6 +53,8 @@ const Details = ({
   const [copied, setCopied] = useState(false);
   // image selector
   const [activeImg, setActiveImg] = useState("");
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
@@ -104,6 +106,23 @@ const Details = ({
 
     fetchReferralCode();
   }, []);
+
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -161,6 +180,13 @@ const Details = ({
   }, [data, store_id]);
 
   const buyNowBtn = () => {
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
   };
 
@@ -186,18 +212,19 @@ const Details = ({
 
   const campPrice = getPrice(price, camp?.discount_amount, camp?.discount_type);
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -643,7 +670,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
@@ -719,9 +746,11 @@ const Details = ({
             <p>Category: {product?.category} </p>
             <p>
               Availability:{" "}
-              {productQuantity !== "0"
-                ? ` ${productQuantity} In Stock`
-                : "Out Of Stock"}{" "}
+              {productQuantity >= "0"
+                ? stockShow
+                  ? `${productQuantity} In Stock`
+                  : "In Stock"
+                : "Out Of Stock"}
             </p>
           </div>
         </div>
