@@ -112,7 +112,7 @@ const YourOrders = ({
 
   useEffect(() => {
     if (headerSetting?.tax) {
-      const tax = (parseInt(headerSetting?.tax) / 100) * total;
+      const tax = ((headerSetting?.tax) / 100) * total;
       setTax(tax);
     }
   }, [headerSetting?.tax, total]);

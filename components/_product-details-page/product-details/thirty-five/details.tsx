@@ -30,6 +30,7 @@ import ImageModal from "@/utils/image-modal";
 import { ProductSlider } from "../twenty-eight/product-slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { useRouter } from "next/navigation";
 
 const Details = ({
   fetchStatus,
@@ -60,8 +61,35 @@ const Details = ({
 
   // image selector
   const [activeImg, setActiveImg] = useState("");
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
+
+  const router = useRouter();
+
+  const buyNow = () => {
+    if (variant?.length && !size && !color && !unit) {
+      toast("Please Select Variant", {
+        type: "warning",
+        autoClose: 1000,
+      });
+    } else if (variant?.length && !size && color && filterV?.length) {
+      toast("Please Select Variant", {
+        type: "warning",
+        autoClose: 1000,
+      });
+    } else if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    } else {
+      add_to_cart();
+      router.push("/checkout");
+    }
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -111,6 +139,23 @@ const Details = ({
 
     fetchReferralCode();
   }, []);
+
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -201,18 +246,19 @@ const Details = ({
     camp?.discount_type
   );
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -619,13 +665,14 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
                   qty={qty}
                   setQty={setQty}
                   buyNowBtn={buttonSeven}
+                  buyNow={buyNow}
                   onClick={() => add_to_cart()}
                   variant={variant}
                   buttonTwentyNine={buttonSeven}
@@ -701,9 +748,11 @@ const Details = ({
             <p>Category: {product?.category} </p>
             <p>
               Availability:{" "}
-              {productQuantity !== "0"
-                ? ` ${productQuantity} In Stock`
-                : "Out Of Stock"}{" "}
+              {productQuantity >= "0" ? (
+                <>{stockShow && `${productQuantity} `}In Stock</>
+              ) : (
+                "Out Of Stock"
+              )}
             </p>
           </div>
         </div>
@@ -719,7 +768,7 @@ const Details = ({
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, variant }: any) => {
+const AddCart = ({ setQty, qty, onClick, variant, buyNow }: any) => {
   const { makeid, store_id, headerSetting, design } = useTheme();
   const { data, error } = useHeaderSettings();
 
@@ -815,12 +864,9 @@ const AddCart = ({ setQty, qty, onClick, variant }: any) => {
         <button className={buttonThirtyFive} onClick={onClick}>
           Order Now
         </button>
-        <Link href="/checkout">
-          {" "}
-          <button onClick={onClick} className={buttonSeven}>
-            {button || "Buy now"}
-          </button>
-        </Link>
+        <button onClick={buyNow} className={buttonSeven}>
+          {button || "Buy now"}
+        </button>
       </div>
     </div>
   );

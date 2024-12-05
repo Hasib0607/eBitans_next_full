@@ -51,8 +51,10 @@ const Details = ({
   // image selector
   // const [activeImg, setActiveImg] = useState("");
   const [activeImg, setActiveImg] = useState(product?.defaultImage);
-  const sizeV = variant?.find((item: any) => item.size !== null);
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
+  const sizeV = variant?.find((item: any) => item.size !== null);
   const vPrice = variant?.map((item: any) => item?.additional_price);
   const smallest = Math.min(vPrice);
   const largest = Math.max(vPrice);
@@ -105,6 +107,23 @@ const Details = ({
 
     fetchReferralCode();
   }, []);
+
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -188,18 +207,19 @@ const Details = ({
     camp?.discount_type
   );
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -697,7 +717,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
@@ -770,8 +790,17 @@ const Details = ({
           <div className="text-lg flex flex-col gap-y-1">
             <p>Category: {product?.category} </p>
             <p>Availability</p>
-            <p className="border-2 py-0.5 px-2 border-gray-800 w-max text-green-500">
-              {productQuantity !== "0" ? ` In Stock!` : "Out Of Stock"}
+            <p className="border-2 py-0.5 px-2 border-gray-800 w-max">
+              {productQuantity >= "0" ? (
+                <>
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
+                  <span className="text-green-500">In Stock!</span>
+                </>
+              ) : (
+                <span className="text-red-600">Out of Stock!</span>
+              )}
             </p>
           </div>
         </div>

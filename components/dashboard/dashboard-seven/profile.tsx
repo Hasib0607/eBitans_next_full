@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const { user } = useSelector((state: any) => state.auth);
-  const { store_id } = useTheme();
+  const { store_id, userData } = useTheme();
   const [userDetails, setuserDetails] = useState<any>(null);
   const [call, setCall] = useState(false);
   const [selectedImage, setSelectedImage] = useState<any>();
@@ -34,6 +34,10 @@ const Profile = () => {
       // make sure to catch any error
       .catch(console.error);
   }, [call, store_id, user?.verify]);
+
+  useEffect(() => {
+    setuserDetails(userData);
+  }, [userData]);
 
   const toBase64 = (file: any) =>
     new Promise((resolve, reject) => {

@@ -146,10 +146,10 @@ const CheckOutElevenPaymentGateway = ({
 
                   <input
                     className="
-                                    hidden
-                                    checked:focus:bg-black
-                                    checked:focus:border-black
-                                    checked:focus:ring-black"
+                              hidden
+                              checked:focus:bg-black
+                              checked:focus:border-black
+                              checked:focus:ring-black"
                     name="address_type"
                     type="radio"
                     value={"ap"}
