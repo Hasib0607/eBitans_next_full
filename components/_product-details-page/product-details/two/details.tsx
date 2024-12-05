@@ -201,6 +201,14 @@ const Details = ({
       store_id,
     };
 
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
+
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
         if (variant?.length) {
@@ -646,7 +654,7 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
@@ -722,7 +730,7 @@ const Details = ({
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
+const AddCart = ({ setQty, qty, onClick, product }: any) => {
   const { data, error } = useHeaderSettings();
   const { design } = useTheme();
 
@@ -770,6 +778,9 @@ const AddCart = ({ setQty, qty, onClick, buttonOne, product }: any) => {
   };
 
   const { button } = data?.custom_design?.single_product_page?.[0] || {};
+
+  const buttonOne =
+    "font-bold text-white bg-gray-600 rounded-md w-max px-10 py-3 text-center";
 
   if (error) return <p>error from header setting</p>;
 

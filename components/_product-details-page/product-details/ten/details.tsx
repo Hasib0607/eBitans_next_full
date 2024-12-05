@@ -193,7 +193,6 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
     camp?.discount_type
   );
 
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
@@ -614,7 +613,9 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
               <div className="text-sm">
                 {productQuantity >= "0" ? (
                   <p>
-                    {stockShow && (<span className="font-medium">{productQuantity}</span>)}{" "}
+                    {stockShow && (
+                      <span className="font-medium">{productQuantity}</span>
+                    )}{" "}
                     <span className="text-green-500">In Stock!</span>
                   </p>
                 ) : (

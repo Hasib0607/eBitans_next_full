@@ -56,7 +56,6 @@ const Details = ({
   const [stockShow, setStockShow] = useState<boolean>(false);
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
-
   const sizeV = variant?.find((item: any) => item.size !== null);
 
   useEffect(() => {
@@ -689,7 +688,9 @@ const Details = ({
             <div className="text-[#5a5a5a] text-sm">
               {productQuantity >= "0" ? (
                 <p>
-                  {stockShow && (<span className="font-medium">{productQuantity}</span>)}{" "}
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (
