@@ -110,7 +110,7 @@ const CheckOutElevenOrder = ({
 
   useEffect(() => {
     if (headerSetting?.tax) {
-      const tax = ((headerSetting?.tax) / 100) * total;
+      const tax = (headerSetting?.tax / 100) * total;
       setTax(tax);
     }
   }, [headerSetting?.tax, total]);

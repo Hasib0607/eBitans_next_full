@@ -26,6 +26,7 @@ import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { customizeSingleProductPage } from "@/utils/customizeDesign";
+import { useRouter } from "next/navigation";
 
 const Details = ({
   fetchStatus,
@@ -50,15 +51,41 @@ const Details = ({
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
-
   // image selector
   const [activeImg, setActiveImg] = useState("");
+  const [stockShow, setStockShow] = useState<boolean>(false);
+  const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
 
   const singleProductPageData = customizeSingleProductPage.find(
     (item) => item.id == store_id
   );
+
+  const router = useRouter();
+
+  const buyNow = () => {
+    if (variant?.length && !size && !color && !unit) {
+      toast("Please Select Variant", {
+        type: "warning",
+        autoClose: 1000,
+      });
+    } else if (variant?.length && !size && color && filterV?.length) {
+      toast("Please Select Variant", {
+        type: "warning",
+        autoClose: 1000,
+      });
+    } else if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    } else {
+      add_to_cart();
+      router.push("/checkout");
+    }
+  };
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -108,6 +135,23 @@ const Details = ({
 
     fetchReferralCode();
   }, []);
+
+  useEffect(() => {
+    const newProductQuantity =
+      size?.quantity ||
+      color?.quantity ||
+      unit?.quantity ||
+      product?.quantity ||
+      "Out of Stock";
+
+    setProductQuantity(newProductQuantity);
+
+    if (unit == null && color == null && size == null) {
+      setStockShow(false);
+    } else {
+      setStockShow(true);
+    }
+  }, [color, size, unit]);
 
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
@@ -190,18 +234,19 @@ const Details = ({
     camp?.discount_type
   );
 
-  const productQuantity =
-    size?.quantity ||
-    color?.quantity ||
-    unit?.quantity ||
-    product?.quantity ||
-    "Out of Stock";
-
   const add_to_cart = () => {
     let productDetails = {
       id: product?.id,
       store_id,
     };
+
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
 
     httpReq.post("get/offer/product", productDetails).then((res) => {
       if (!res?.error) {
@@ -608,12 +653,21 @@ const Details = ({
                 {product?.category}
               </Link>
             </p>
-            <p>
-              Availability:
-              {product?.quantity > 0
-                ? ` ${product?.quantity} In Stock`
-                : "Out Of Stock"}
-            </p>
+            <div className="flex items-center gap-x-3">
+              <div className="">Availability:</div>
+              <div className="text-[#212121] ">
+                {productQuantity >= "0" ? (
+                  <p>
+                    {stockShow && (
+                      <span className="font-medium">{productQuantity}</span>
+                    )}{" "}
+                    <span className="">In Stock!</span>
+                  </p>
+                ) : (
+                  <span className="text-red-600">Out of Stock!</span>
+                )}
+              </div>
+            </div>
           </div>
 
           <div
@@ -695,13 +749,14 @@ const Details = ({
             />
           </div>
 
-          {productQuantity !== "0" && (
+          {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
                 <AddCart
                   qty={qty}
                   setQty={setQty}
                   variant={variant}
+                  buyNow={buyNow}
                   onClick={() => add_to_cart()}
                   productQuantity={productQuantity}
                   buttonTwentyThree={buttonTwentyThree}
@@ -781,6 +836,7 @@ const AddCart = ({
   product,
   buttonTwentyThree,
   productQuantity,
+  buyNow,
 }: any) => {
   const { data, error } = useHeaderSettings();
   const [referralCode, setReferralCode] = useState("");
@@ -898,15 +954,13 @@ const AddCart = ({
             </button>
           )}
         </div>
-        <Link href="/checkout">
-          <button
-            onClick={onClick}
-            type="submit"
-            className="cart-btn-details2 font-bold py-[11px] w-48"
-          >
-            {button || "BUY NOW"}
-          </button>
-        </Link>
+        <button
+          onClick={buyNow}
+          type="submit"
+          className="cart-btn-details2 font-bold py-[11px] w-48"
+        >
+          {button || "BUY NOW"}
+        </button>
       </div>
     </>
   );

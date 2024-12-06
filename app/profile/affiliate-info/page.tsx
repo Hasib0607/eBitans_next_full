@@ -232,31 +232,34 @@ const AffiliateInfo = () => {
               </tr>
             </thead>
             <tbody>
-              {productListData?.length > 0 && productListData?.map((productData: any, index: any) => (
-                <tr key={productData.id} className="hover:bg-gray-50">
-                  <td className="py-2 px-4 border-b">
-                    {productData?.product?.name}
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {productData?.product?.regular_price}
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {productData?.product?.quantity}
-                  </td>
-                  <td className="py-2 px-4 border-b">
-                    {productData?.commission_percent}
-                  </td>
-                  <td className="py-2 px-4 border-b">{productData?.amount}</td>
-                  <td className="py-2 px-4 border-b">
-                    <button
-                      onClick={() => openModal(productData)}
-                      className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out"
-                    >
-                      View
-                    </button>
-                  </td>
-                </tr>
-              ))}
+              {productListData?.length > 0 &&
+                productListData?.map((productData: any, index: any) => (
+                  <tr key={productData.id} className="hover:bg-gray-50">
+                    <td className="py-2 px-4 border-b">
+                      {productData?.product?.name}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {productData?.product?.regular_price}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {productData?.product?.quantity}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {productData?.commission_percent}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      {productData?.amount}
+                    </td>
+                    <td className="py-2 px-4 border-b">
+                      <button
+                        onClick={() => openModal(productData)}
+                        className="bg-blue-500 text-white font-semibold py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition duration-300 ease-in-out"
+                      >
+                        View
+                      </button>
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
           {/* Pagination */}

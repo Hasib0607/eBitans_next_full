@@ -663,7 +663,9 @@ const Details = ({
             <div className="text-gray-800 ">
               {productQuantity >= "0" ? (
                 <p>
-                  {stockShow && (<span className="font-medium">{productQuantity}</span>)}{" "}
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (
