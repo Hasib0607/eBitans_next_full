@@ -953,17 +953,17 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
           </button>
         )}
         {button && (
-        <button
-          onClick={() => buyNowBtn()}
-          type="submit"
-          className={
-            singleProductPageData?.heartbeat_animation == true
-              ? "button font-bold py-[10px] px-10 w-full heartbeat"
-              : "button font-bold py-[10px] px-10 w-full"
-          }
-        >
-          {button}
-        </button>
+          <button
+            onClick={() => buyNowBtn()}
+            type="submit"
+            className={
+              singleProductPageData?.heartbeat_animation == true
+                ? "button font-bold py-[10px] px-10 w-full heartbeat"
+                : "button font-bold py-[10px] px-10 w-full"
+            }
+          >
+            {button}
+          </button>
         )}
       </div>
       <div
