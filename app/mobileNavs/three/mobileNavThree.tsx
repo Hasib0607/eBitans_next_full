@@ -13,6 +13,7 @@ import Search from "@/components/headers/header-four/search";
 import { useSelector } from "react-redux";
 import { IoIosArrowDown, IoIosArrowUp } from "react-icons/io";
 import { iconImg } from "@/site-settings/siteUrl";
+import { customizeMobileNavThree } from "@/utils/customizeDesign";
 
 const MobileNavThree = () => {
   const [active, setActive] = useState("home");
@@ -216,13 +217,13 @@ const SearchDiv: React.FC<SearchDivProps> = ({ setSearchshow }) => {
 
 interface SubCategory {
   id: string;
-  icon: string;
+  icon?: string;
   name: string;
 }
 
 interface Category {
   id: string;
-  icon: string;
+  icon?: string;
   name: string;
   cat?: SubCategory[];
 }
@@ -239,6 +240,10 @@ export const SingleCat: React.FC<SingleCatProps> = ({
   setOpen,
 }) => {
   const [show, setShow] = useState(false);
+  const { store_id } = useTheme();
+  const mobileNavThreeIcon = customizeMobileNavThree.find(
+    (item) => item.id == store_id
+  );
   return (
     <>
       <div className="w-full flex justify-between py-3 lg:cursor-pointer">
@@ -247,11 +252,14 @@ export const SingleCat: React.FC<SingleCatProps> = ({
             onClick={() => setOpen(!open)}
             className="flex-1 flex items-center gap-x-2 text-sm text-gray-900 font-medium w-max"
           >
-            <img
-              src={`${iconImg}${item?.icon}`}
-              alt={item.name}
-              className="h-5"
-            />
+            {/* this condition for lotus bloem which store_id is 9501 */}
+            {!mobileNavThreeIcon?.category_icon_not_show && (
+              <img
+                src={`${iconImg}${item?.icon}`}
+                alt={item.name}
+                className="h-5"
+              />
+            )}
             <p>{item.name}</p>
           </span>
         </Link>
@@ -281,11 +289,14 @@ export const SingleCat: React.FC<SingleCatProps> = ({
                   onClick={() => setOpen(!open)}
                   className="flex items-center gap-x-2 pb-2"
                 >
-                  <img
-                    src={`${iconImg}${sub.icon}`}
-                    alt={sub.name}
-                    className="h-5"
-                  />
+                  {/* this condition for lotus bloem which store_id is 9501 */}
+                  {!mobileNavThreeIcon?.category_icon_not_show && (
+                    <img
+                      src={`${iconImg}${sub.icon}`}
+                      alt={sub.name}
+                      className="h-5"
+                    />
+                  )}
                   <p className="text-sm text-gray-500">{sub.name}</p>
                 </span>
               </Link>

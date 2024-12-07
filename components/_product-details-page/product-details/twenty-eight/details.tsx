@@ -572,7 +572,7 @@ const Details = ({
     }
   `;
 
-  const buttonTwentyNine = "cart-btn1 font-bold py-[10px] px-10 w-full w-max ";
+  const buttonTwentyNine = " font-bold py-[10px] px-10 w-full w-max ";
 
   return (
     <div className="bg-white h-full ">
@@ -841,7 +841,38 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
   let handleChange = (e: any) => {
     setQty(e.target.value);
   };
+
+  const {
+    button,
+    button_color,
+    button_bg_color,
+    button1,
+    button1_color,
+    button1_bg_color,
+  } = data?.custom_design?.single_product_page?.[0] || {};
+
   const styleCss = `
+    .button {
+        color:  ${button_color};
+        background: ${button_bg_color};
+        border: 2px solid transparent;
+    }
+    .button:hover {
+        color:  ${button_color};
+        background: transparent;
+        border: 2px solid ${button_color};
+    }
+    .button1 {
+        color:  ${button1_color};
+        background: ${button1_bg_color};
+        border: 2px solid transparent;
+    }
+    .button1:hover {
+        color:  ${button1_color};
+        background: transparent;
+        border: 2px solid ${button1_color};
+    }
+
     .searchHover:hover {
         color:   ${design?.text_color};
         background: ${design?.header_color};
@@ -850,27 +881,25 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
     .heartbeat {
       animation: heartbeat 2s infinite;
     }
-    @keyframes heartbeat {
-  0% {
-    transform: scale(0.9); 
+      @keyframes heartbeat {
+    0% {
+      transform: scale(0.9); 
+    }
+    25% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(0.9);
+    }
+    75% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(0.9);
+    }
   }
-  25% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(0.9);
-  }
-  75% {
-    transform: scale(1);
-  }
-  100% {
-    transform: scale(0.9);
-  }
-}
 
   `;
-
-  const { button } = data?.custom_design?.single_product_page?.[0] || {};
 
   if (error) {
     return <p>error from header settings</p>;
@@ -914,28 +943,28 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
             : "flex flex-col sm:flex-row mt-3 items-center gap-3"
         }
       >
-        <button
-          onClick={onClick}
-          type="submit"
-          className={
-            singleProductPageData?.cart_btn2 == true
-              ? "cart-btn2 font-bold py-[10px] px-10 w-full"
-              : "cart-btn1 font-bold py-[10px] px-10 w-full"
-          }
-        >
-          কার্টে রাখুন
-        </button>
+        {button1 && (
+          <button
+            onClick={onClick}
+            type="submit"
+            className="button1 font-bold py-[10px] px-10 w-full"
+          >
+            {button1}
+          </button>
+        )}
+        {button && (
         <button
           onClick={() => buyNowBtn()}
           type="submit"
           className={
             singleProductPageData?.heartbeat_animation == true
-              ? "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor heartbeat"
-              : "cart-btn1 font-bold py-[10px] px-10 w-full textColor bgColor"
+              ? "button font-bold py-[10px] px-10 w-full heartbeat"
+              : "button font-bold py-[10px] px-10 w-full"
           }
         >
-          {button || "অর্ডার করুন"}
+          {button}
         </button>
+        )}
       </div>
       <div
         className={

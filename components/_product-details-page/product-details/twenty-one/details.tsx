@@ -215,7 +215,6 @@ const Details = ({
     camp?.discount_type
   );
 
-
   if (fetchStatus === "fetching") {
     return (
       <div className="text-center text-4xl font-bold text-gray-400 h-screen flex justify-center items-center">
@@ -707,7 +706,9 @@ const Details = ({
             <div className="text-[#212121] ">
               {productQuantity >= "0" ? (
                 <p>
-                  {stockShow && (<span className="font-medium">{productQuantity}</span>)}{" "}
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (

@@ -49,7 +49,7 @@ const FooterThirtySeven = ({
             <div className="">
               <div className="">
                 <img
-                  className="w-auto h-14"
+                  className="w-auto h-20"
                   src={imgUrl + headerSetting?.logo}
                   alt=""
                 />

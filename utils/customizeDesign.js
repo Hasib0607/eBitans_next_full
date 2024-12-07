@@ -89,3 +89,11 @@ export const customizeModalPopup = [
     modal_show: true,
   },
 ];
+
+export const customizeMobileNavThree = [
+  // for lotus bloem, category icon will not show
+  {
+    id: 9501,
+    category_icon_not_show: true,
+  },
+];
