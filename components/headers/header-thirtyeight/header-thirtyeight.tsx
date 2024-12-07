@@ -95,7 +95,7 @@ const HeaderThirtyEight = ({ headerSetting }: any) => {
               onChange={(e) => setSearch(e.target.value)}
               type="text"
               placeholder="Search Products"
-              className="w-full border border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
+              className="pl-2 py-[9px] w-full border border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
             />
             <div
               onClick={handleClose}

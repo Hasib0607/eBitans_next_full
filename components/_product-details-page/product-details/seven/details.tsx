@@ -26,6 +26,8 @@ import { HSlider } from "../eight/slider";
 import Skeleton from "react-loading-skeleton";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { buyNow } from "@/utils/buy-now";
+import { useRouter } from "next/navigation";
 
 // Define the type for the cache
 interface CampaignProductCache {
@@ -64,8 +66,7 @@ const Details = ({
   product,
   fetchStatus,
 }: any) => {
-  // this is product
-  // console.log(product, "product form product details");
+  const router = useRouter();
   const { makeid, store_id, headerSetting, bookingData } = useTheme();
   const dispatch = useDispatch();
   const [filterV, setFilterV] = useState<any>([]);
@@ -216,6 +217,17 @@ const Details = ({
     unit?.quantity ||
     product?.quantity ||
     "Out of Stock";
+
+  const buyNowBtn = () => {
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
+    buyNow(variant, size, color, unit, filterV, add_to_cart, router);
+  };
 
   const add_to_cart = () => {
     let productDetails = {
@@ -663,6 +675,7 @@ const Details = ({
                   bookingData={bookingData}
                   onClick={() => add_to_cart()}
                   buttonSeven={buttonSeven}
+                  buyNowBtn={buyNowBtn}
                 />
               )}
             </div>
@@ -700,9 +713,9 @@ const Details = ({
           <div>
             {/* Display referral link and copy button */}
             {referralLink && (
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 {/* Underlined referral link */}
-                <p>
+                <p className="w-auto">
                   Referral Link:{" "}
                   <a
                     href={referralLink}
@@ -758,7 +771,14 @@ const Details = ({
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
+const AddCart = ({
+  setQty,
+  qty,
+  onClick,
+  buttonSeven,
+  bookingData,
+  buyNowBtn,
+}: any) => {
   const { data, error } = useHeaderSettings();
 
   const { store_id } = useTheme();
@@ -805,12 +825,44 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
     }
   };
 
-  const { button } = data?.custom_design?.single_product_page?.[0] || {};
+  const {
+    button,
+    button_color,
+    button_bg_color,
+    button1,
+    button1_color,
+    button1_bg_color,
+  } = data?.custom_design?.single_product_page?.[0] || {};
+
+  const styleCss = `
+    .button {
+        color:  ${button_color};
+        background: ${button_bg_color};
+        border: 2px solid transparent;
+    }
+    .button:hover {
+        color:  ${button_color};
+        background: transparent;
+        border: 2px solid ${button_color};
+    }
+    .button1 {
+        color:  ${button1_color};
+        background: ${button1_bg_color};
+        border: 2px solid transparent;
+    }
+    .button1:hover {
+        color:  ${button1_color};
+        background: transparent;
+        border: 2px solid ${button1_color};
+    }
+
+  `;
 
   if (error) return <p>error from header setting</p>;
 
   return (
     <>
+      <style>{styleCss}</style>
       {bookingData?.from_type !== "single" && (
         <div className="flex flex-wrap justify-start items-center gap-8 py-10">
           <div className="flex border border-gray-300 divide-x-2 rounded-md">
@@ -830,10 +882,27 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, bookingData }: any) => {
               <PlusIcon width={15} />
             </div>
           </div>
-          <div className="">
-            <button className={buttonSeven} onClick={onClick}>
-              {button || "Add to Cart"}
-            </button>
+          <div className="flex flex-col md:flex-row gap-6">
+            <>
+              {button1 && (
+                <button
+                  onClick={onClick}
+                  type="submit"
+                  className="button1 font-bold px-10 rounded-md w-60 py-3 text-center"
+                >
+                  {button1}
+                </button>
+              )}
+              {button && (
+                <button
+                  onClick={() => buyNowBtn()}
+                  type="submit"
+                  className="button font-bold px-10 rounded-md w-60 py-3 text-center"
+                >
+                  {button}
+                </button>
+              )}
+            </>
           </div>
         </div>
       )}

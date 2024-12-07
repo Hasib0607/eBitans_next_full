@@ -30,6 +30,8 @@ import ImageZoom from "../image-zoom";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { buyNow } from "@/utils/buy-now";
+import { useRouter } from "next/navigation";
 
 const Details = ({
   data,
@@ -39,6 +41,7 @@ const Details = ({
   fetchStatus,
   children,
 }: any) => {
+  const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
 
   const dispatch = useDispatch();
@@ -197,6 +200,17 @@ const Details = ({
     unit?.quantity ||
     product?.quantity ||
     "Out of Stock";
+
+  const buyNowBtn = () => {
+    if (qty > productQuantity) {
+      toast("Quantity cannot exceed stock.", {
+        type: "warning",
+        autoClose: 1000,
+      });
+      return false;
+    }
+    buyNow(variant, size, color, unit, filterV, add_to_cart, router);
+  };
 
   const add_to_cart = () => {
     let productDetails = {
@@ -649,6 +663,7 @@ const Details = ({
                   setQty={setQty}
                   onClick={() => add_to_cart()}
                   buttonTwentyTwo={buttonOne}
+                  buyNowBtn={buyNowBtn}
                 />
               )}
             </div>
@@ -660,10 +675,20 @@ const Details = ({
             <p className="font-medium">Share :</p>
             <span className="flex space-x-2">
               <FacebookShareButton url={window.location.href}>
-                <FacebookIcon size={32} round={true} />
+                <FacebookIcon
+                  size={32}
+                  round={true}
+                  iconFillColor="white"
+                  bgStyle={{ fill: "black" }}
+                />
               </FacebookShareButton>
               <WhatsappShareButton url={window.location.href}>
-                <WhatsappIcon size={32} round={true} />
+                <WhatsappIcon
+                  size={32}
+                  round={true}
+                  iconFillColor="white"
+                  bgStyle={{ fill: "black" }}
+                />
               </WhatsappShareButton>
             </span>
           </div>
@@ -717,7 +742,7 @@ const Details = ({
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, product }: any) => {
+const AddCart = ({ setQty, qty, onClick, product, buyNowBtn }: any) => {
   const { data, error } = useHeaderSettings();
 
   const [referralCode, setReferralCode] = useState("");
@@ -763,7 +788,38 @@ const AddCart = ({ setQty, qty, onClick, product }: any) => {
     }
   };
 
-  const { button } = data?.custom_design?.single_product_page?.[0] || {};
+  const {
+    button,
+    button_color,
+    button_bg_color,
+    button1,
+    button1_color,
+    button1_bg_color,
+  } = data?.custom_design?.single_product_page?.[0] || {};
+
+  const styleCss = `
+    .button {
+        color:  ${button_color};
+        background: ${button_bg_color};
+        border: 2px solid transparent;
+    }
+    .button:hover {
+        color:  ${button_color};
+        background: transparent;
+        border: 2px solid ${button_color};
+    }
+    .button1 {
+        color:  ${button1_color};
+        background: ${button1_bg_color};
+        border: 2px solid transparent;
+    }
+    .button1:hover {
+        color:  ${button1_color};
+        background: transparent;
+        border: 2px solid ${button1_color};
+    }
+
+  `;
 
   if (error) return <p>error from header setting</p>;
 
@@ -771,31 +827,53 @@ const AddCart = ({ setQty, qty, onClick, product }: any) => {
     "font-bold text-white bg-gray-600 rounded-md w-60 py-3 text-center";
 
   return (
-    <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
-      <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
-        <div
-          className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-l-md hover:text-white font-semibold transition-all duration-300 ease-linear"
-          onClick={decNum}
-        >
-          <MinusIcon width={15} />
+    <>
+      <style>{styleCss}</style>
+      <div className="flex lg2:flex-row flex-col justify-start lg2:items-center gap-8 py-10">
+        <div className="flex border border-gray-300 divide-x-2 rounded-md w-max">
+          <div
+            className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-l-md hover:text-white font-semibold transition-all duration-300 ease-linear"
+            onClick={decNum}
+          >
+            <MinusIcon width={15} />
+          </div>
+          <div className="h-12 w-24  flex justify-center items-center">
+            {qty}
+          </div>
+          <div
+            className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
+            onClick={incNum}
+          >
+            <PlusIcon width={15} />
+          </div>
         </div>
-        <div className="h-12 w-24  flex justify-center items-center">{qty}</div>
-        <div
-          className="h-12 w-12  flex justify-center items-center hover:bg-black rounded-r-md hover:text-white font-semibold transition-all duration-300 ease-linear"
-          onClick={incNum}
-        >
-          <PlusIcon width={15} />
+        <div className="flex flex-col md:flex-row gap-6">
+          {product?.quantity === "0" ? (
+            <button className={buttonOne}>Out of Stock</button>
+          ) : (
+            <>
+              {button1 && (
+                <button
+                  onClick={onClick}
+                  type="submit"
+                  className="button1 font-bold px-10 rounded-md w-60 py-3 text-center"
+                >
+                  {button1}
+                </button>
+              )}
+              {button && (
+                <button
+                  onClick={() => buyNowBtn()}
+                  type="submit"
+                  className="button font-bold px-10 rounded-md w-60 py-3 text-center"
+                >
+                  {button}
+                </button>
+              )}
+            </>
+          )}
         </div>
       </div>
-      <div className="">
-        {product?.quantity === "0" ? (
-          <button className={buttonOne}>Out of Stock</button>
-        ) : (
-          <button className={buttonOne} onClick={onClick}>
-            {button || "Add to cart"}
-          </button>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
