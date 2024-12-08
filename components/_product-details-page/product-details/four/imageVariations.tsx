@@ -1,4 +1,6 @@
-export const Units = ({ unit, setUnit, variant, setId, setActiveImg }: any) => {
+import { productImg } from "@/site-settings/siteUrl";
+
+export const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Units</h3>
@@ -7,10 +9,8 @@ export const Units = ({ unit, setUnit, variant, setId, setActiveImg }: any) => {
           <Unit
             key={id}
             item={item}
-            index={id}
             select={unit}
             setSelect={setUnit}
-            setId={setId}
             setActiveImg={setActiveImg}
           />
         ))}
@@ -19,81 +19,157 @@ export const Units = ({ unit, setUnit, variant, setId, setActiveImg }: any) => {
   );
 };
 
-export const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
+export const ColorsOnly = ({
+  color,
+  setColor,
+  variant,
+  setActiveImg,
+  vrcolorimage,
+  activeImg,
+  productImage,
+}: any) => {
+  const hasNullImage = vrcolorimage?.some((item: any) => item?.image === null);
+
   return (
-    <div className="">
-      <h3 className="font-medium font-sans text-xl mb-2">Colors</h3>
+    <div className="flex flex-col gap-2">
+      <h3 className="font-medium mb-2 text-base">Colors:</h3>
       <div className="flex flex-wrap gap-2">
-        {variant?.map((item: any, id: any) => (
-          <ColorSet
-            key={id}
-            text={item}
-            select={color}
-            setSelect={setColor}
-            itemImage={item?.image}
-            setActiveImg={setActiveImg}
-          />
-        ))}
+        {hasNullImage &&
+          variant?.map((item: any, id: any) => (
+            <ColorSet
+              key={id}
+              text={item}
+              select={color}
+              setSelect={setColor}
+              itemImage={item?.image}
+              setActiveImg={setActiveImg}
+            />
+          ))}
+        {!hasNullImage &&
+          vrcolorimage?.map((item: any, id: any) => (
+            <div
+              onClick={() => {
+                setColor(item?.color);
+                setActiveImg(item?.image);
+              }}
+              key={id}
+              className="focus:outline-none w-[50px] cursor-pointer"
+            >
+              <img
+                className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${activeImg == item?.image ? "border-red-800" : "border-gray-400"}`}
+                src={
+                  item?.image != null
+                    ? productImg + item?.image
+                    : productImg + productImage
+                }
+                alt=""
+              />
+            </div>
+          ))}
       </div>
     </div>
   );
 };
 
-export const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
-  return (
-    <div className="">
-      <h3 className="font-medium font-sans text-xl mb-2">Size</h3>
-      <div className="flex gap-2 flex-wrap">
-        {variant?.map((item: any, id: any) => (
-          <Size
-            key={id}
-            item={item}
-            select={size}
-            setSelect={setSize}
-            setActiveImg={setActiveImg}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
-  return (
-    <div className="">
-      <h3 className="font-medium font-sans text-xl mb-2">Color</h3>
-      <div className="flex flex-wrap gap-2">
-        {vrcolor?.map((item: any, id: any) => (
-          <Color
-            key={id}
-            text={item}
-            select={color}
-            setSelect={setColor}
-            setSize={setSize}
-          />
-        ))}
-      </div>
-    </div>
-  );
-};
-
-export const Unit = ({
-  item,
-  select,
-  setSelect,
-  setId,
-  index,
+export const Sizes = ({
+  size,
+  setSize,
+  variant,
+  activeImg,
   setActiveImg,
 }: any) => {
+  // Check if the variant array has any items with a valid 'image'
+  const hasImages = variant?.some((item: any) => item?.image);
+
+  return (
+    <div className="flex flex-col gap-2">
+      <h3 className="font-medium text-base mb-2">Sizes:</h3>
+      <div className="flex flex-wrap gap-2">
+        {hasImages
+          ? // Render variants with valid 'image'
+            variant
+              ?.filter((item: any) => item?.image)
+              .map((item: any, id: any) => (
+                <div
+                  key={id}
+                  onClick={() => {
+                    setSize(item);
+                    setActiveImg(item?.image);
+                  }}
+                  className="focus:outline-none w-[50px] cursor-pointer"
+                >
+                  <img
+                    className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${
+                      activeImg == item?.image
+                        ? "border-red-800"
+                        : "border-gray-400"
+                    }`}
+                    src={productImg + item?.image}
+                    alt=""
+                  />
+                </div>
+              ))
+          : // Render all variants when no valid 'image' is found
+            variant?.map((item: any, id: any) => (
+              <Size
+                key={id}
+                item={item}
+                select={size}
+                setSelect={setSize}
+                setActiveImg={setActiveImg}
+              />
+            ))}
+      </div>
+    </div>
+  );
+};
+
+export const Colors = ({
+  color,
+  setColor,
+  vrcolor,
+  setSize,
+  setActiveImg,
+  activeImg,
+  vrcolorimage,
+}: any) => {
+  return (
+    <div className="flex flex-col gap-2">
+      <h3 className="font-medium mb-2 text-base">Colors:</h3>
+      <div className="flex flex-wrap gap-2">
+        {vrcolorimage
+          ?.filter((item: any) => item?.color_image) // Exclude items where 'color_image' is null
+          ?.map((item: any, id: any) => (
+            <div
+              onClick={() => {
+                setColor(item?.color);
+                setSize(null);
+                setActiveImg(item?.color_image);
+              }}
+              key={id}
+              className="focus:outline-none w-[50px] cursor-pointer"
+            >
+              <img
+                className={`h-[50px] w-[50px] rounded-full object-cover object-center bg-gray-100 border ${color == item?.color ? "border-red-800" : "border-gray-400"}`}
+                src={productImg + item?.color_image}
+                alt=""
+              />
+            </div>
+          ))}
+      </div>
+    </div>
+  );
+};
+
+export const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   return (
     <div
       onClick={() => {
         setSelect(item);
-        // setId(index);
         setActiveImg(item?.image);
       }}
-      className={`border px-2 w-auto h-10 flex flex-wrap justify-center items-center font-sans text-sm rounded lg:cursor-pointer ${
-        item === select ? "border-gray-900" : "border-gray-300"
+      className={`border lg:cursor-pointer w-auto px-1 h-10 flex justify-center items-center font-sans text-sm rounded ${
+        item === select ? "select-unit" : "border-gray-300"
       }`}
     >
       {item?.volume + " " + item?.unit}
@@ -108,8 +184,8 @@ export const Size = ({ item, select, setSelect, setActiveImg }: any) => {
         setSelect(item);
         setActiveImg(item?.image);
       }}
-      className={`border px-4 py-3 w-auto h-max flex justify-center items-center font-sans font-medium rounded ${
-        item === select ? "border-gray-900" : "border-gray-300"
+      className={`border border-gray-500 lg:cursor-pointer w-auto px-3 h-10 flex justify-center items-center font-sans font-medium rounded ${
+        item === select ? "select-size" : "border-gray-300"
       }`}
     >
       {item?.size}
@@ -117,18 +193,28 @@ export const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   );
 };
 
-export const Color = ({ text, select, setSelect, setSize }: any) => {
+export const Color = ({
+  text,
+  select,
+  setSelect,
+  setSize,
+  setActiveImg,
+}: any) => {
   return (
     <div
       onClick={() => {
         setSelect(text);
         setSize(null);
+        setActiveImg(text?.image);
       }}
-      className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
-        text === select ? "border-gray-900" : "border-gray-300"
+      className={`border lg:cursor-pointer w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
+        text === select ? "select-color" : "border-gray-300"
       }`}
     >
-      <div style={{ backgroundColor: text }} className="w-7 h-7"></div>
+      <div
+        style={{ backgroundColor: text }}
+        className="w-5 h-5 rounded-full"
+      ></div>
     </div>
   );
 };
@@ -146,11 +232,14 @@ export const ColorSet = ({
         setSelect(text);
         setActiveImg(itemImage);
       }}
-      className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
-        text === select ? "border-gray-900" : "border-gray-300"
+      className={`border lg:cursor-pointer w-7 h-7 flex justify-center items-center font-sans font-medium rounded-full bg-white ${
+        text === select ? "select-color" : "border-gray-300"
       }`}
     >
-      <div style={{ backgroundColor: text?.color }} className="w-7 h-7"></div>
+      <div
+        style={{ backgroundColor: text?.color }}
+        className="w-5 h-5 rounded-full"
+      ></div>
     </div>
   );
 };
