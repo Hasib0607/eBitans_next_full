@@ -123,7 +123,7 @@ const Discount = ({
                     id="country"
                     name="country"
                     autoComplete="country-name"
-                    className="mt-1 block sm:w-full w-36 py-2  font-semibold border capitalize border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                    className="mt-1 block sm:w-full w-36 py-2 font-semibold border capitalize border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 text-sm"
                   >
                     <option value={""}>--Select Area--</option>
                     {headerSetting?.shipping_area_1 && (
