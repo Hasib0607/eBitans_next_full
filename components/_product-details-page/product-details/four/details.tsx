@@ -40,6 +40,7 @@ const Details = ({
   vrcolor,
   fetchStatus,
   children,
+  vrcolorimage
 }: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
@@ -613,6 +614,9 @@ const Details = ({
                 setColor={setColor}
                 vrcolor={vrcolor}
                 setSize={setSize}
+                activeImg={activeImg}
+                setActiveImg={setActiveImg}
+                vrcolorimage={vrcolorimage}
               />
             </>
           )}
@@ -621,6 +625,7 @@ const Details = ({
               size={size}
               setSize={setSize}
               variant={filterV}
+              activeImg={activeImg}
               setActiveImg={setActiveImg}
             />
           )}
@@ -633,6 +638,8 @@ const Details = ({
                 setColor={setColor}
                 variant={variant}
                 setActiveImg={setActiveImg}
+                vrcolorimage={vrcolorimage}
+                productImage={product?.image}
               />
             </>
           )}
@@ -642,6 +649,7 @@ const Details = ({
               size={size}
               setSize={setSize}
               variant={filterV}
+              activeImg={activeImg}
               setActiveImg={setActiveImg}
             />
           )}
