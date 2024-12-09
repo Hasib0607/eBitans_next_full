@@ -31,7 +31,7 @@ const CartPopUpThree = () => {
         className={`${
           open
             ? "invisible opacity-0 "
-            : "invisible sm:opacity-100 relative  lg:visible transition-all duration-1000 ease-linear"
+            : "invisible sm:opacity-100 relative lg:visible transition-all duration-1000 ease-linear"
         } `}
       >
         <div
@@ -327,7 +327,7 @@ const SingleCartProduct = ({ product, setOpen, referralCode }: any) => {
         </div>
         <p className="text-gray-900 flex text-center font-semibold text-base">
           {" "}
-          {parseInt(product?.price) * product?.qty} BDT
+          {parseInt(product?.price) * product?.qty} <BDT />
         </p>
       </div>
     </motion.li>
