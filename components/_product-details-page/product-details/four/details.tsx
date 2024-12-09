@@ -40,7 +40,7 @@ const Details = ({
   vrcolor,
   fetchStatus,
   children,
-  vrcolorimage
+  vrcolorimage,
 }: any) => {
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
