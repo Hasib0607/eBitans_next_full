@@ -17,9 +17,11 @@ const AppWrapper = ({ children, design, headerSetting }: any) => {
       <QueryClientProvider client={queryClient}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
-            <Header design={design} headerSetting={headerSetting} />
-            {children}
-            <Footer />
+            <div className={`header-${design?.header}`}>
+              <Header design={design} headerSetting={headerSetting} />
+              <div className="bodyWrapper">{children}</div>
+              <Footer />
+            </div>
             <CartPopUp />
             <ToastContainer position="top-right" newestOnTop />
           </PersistGate>
