@@ -19,10 +19,10 @@ const Address = ({
   setUserPhone,
   setUserName,
   userPhone,
+  setUserEmail,
+  setUserNote
 }: any) => {
   const [address, setAddress] = useState<any>(null);
-  const [userEmail, setUserEmail] = useState<any>(null);
-  const [userNote, setUserNote] = useState<any>(null);
   const [open, setOpen] = useState<any>(false);
   const [call, setCall] = useState<any>(null);
   const [loading, setLoading] = useState<any>(false);
@@ -63,7 +63,6 @@ const Address = ({
         // );
       }
     };
-
     if (store_id) {
       fetchCheckoutFormFields();
     }
@@ -657,7 +656,7 @@ export function SaveAddress({
                           name="name"
                           id="name"
                           autoComplete="address-level1"
-                          className="mt-1 border focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className="mt-1 py-1 border focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {errors.name && (
                           <span className="text-red-500">Name is required</span>
@@ -684,7 +683,7 @@ export function SaveAddress({
                           name="email"
                           id="email"
                           autoComplete="email"
-                          className="mt-1 border focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className="mt-1 py-1 border focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {errors.email && (
                           <span className="text-red-500">
@@ -717,7 +716,7 @@ export function SaveAddress({
                           name="phone"
                           id="phone"
                           autoComplete="address-level1"
-                          className="mt-1 border focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                          className="mt-1 py-1 border focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                         />
                         {errors.phone?.type === "required" && (
                           <span className="text-red-500">
@@ -795,7 +794,7 @@ export function SaveAddress({
                 type="submit"
                 className="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
-                Savex
+                Save
               </button>
             </div>
           </div>

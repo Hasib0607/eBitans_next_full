@@ -26,6 +26,8 @@ const CheckOutEleven = () => {
   const [userName, setUserName] = useState<any>(null);
   const [userPhone, setUserPhone] = useState<any>(null);
   const [userAddress, setUserAddress] = useState<any>(null);
+  const [userEmail, setUserEmail] = useState<any>(null);
+  const [userNote, setUserNote] = useState<any>(null);
   const [campaign, setCampaign] = useState<any>([]);
 
   const [isButtonDisabled, setIsButtonDisabled] = useState<any>(false);
@@ -110,6 +112,8 @@ const CheckOutEleven = () => {
               userPhone={userPhone}
               setUserPhone={setUserPhone}
               setUserName={setUserName}
+              setUserEmail={setUserEmail}
+              setUserNote={setUserNote}
               isButtonDisabled={isButtonDisabled}
               setIsButtonDisabled={setIsButtonDisabled}
             />
@@ -175,6 +179,8 @@ const CheckOutEleven = () => {
               userAddress={userAddress}
               userPhone={userPhone}
               userName={userName}
+              userEmail={userEmail}
+              userNote={userNote}
               isButtonDisabled={isButtonDisabled}
             />
           </div>

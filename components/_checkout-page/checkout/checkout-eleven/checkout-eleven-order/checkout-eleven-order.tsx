@@ -29,6 +29,8 @@ const CheckOutElevenOrder = ({
   userName,
   userPhone,
   userAddress,
+  userEmail,
+  userNote,
   isButtonDisabled,
   setIsButtonDisabled,
 }: any) => {
@@ -174,6 +176,8 @@ const CheckOutElevenOrder = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
+      email: selectAddress?.email,
+      note: selectAddress?.note,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -265,6 +269,8 @@ const CheckOutElevenOrder = ({
           name: userName,
           phone: userPhone,
           address: userAddress,
+          email: userEmail,
+          note: userNote,
           store_id: store_id,
         };
         const responseInfo = await axios.post(
