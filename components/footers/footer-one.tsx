@@ -204,7 +204,7 @@ const FooterOne = ({
       <div className="bg-gray-100 mb-14 lg:mb-0">
         <div className="sm:container px-5 py-4 flex flex-wrap justify-center">
           <span className="sm:ml-auto sm:mt-0 mt-2 sm:w-auto w-full sm:text-left text-center text-gray-500 text-sm">
-            © {date} All Rights Received{" "}
+            © {date} All Rights Reserved{" "}
             <Link href="/" className="font-semibold text-red-700 menu-hover">
               {headerSetting?.website_name}
             </Link>{" "}
