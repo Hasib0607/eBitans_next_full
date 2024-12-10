@@ -106,7 +106,7 @@ const Footer = () => {
   const { headerSetting, category, design, store_id, menu, page } = useTheme();
 
   return (
-    <>
+    <div className="footerWrapper">
       {design?.footer === "default" && (
         <DynamicFooterDefault
           headerSetting={headerSetting}
@@ -497,7 +497,7 @@ const Footer = () => {
         />
       )}
       <AllMobileBottomMenu />
-    </>
+    </div>
   );
 };
 

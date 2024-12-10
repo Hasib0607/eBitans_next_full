@@ -105,6 +105,9 @@ const headers: any = {
   forty: dynamic(
     () => import("@/components/headers/header-forty/header-forty")
   ),
+  fortyone: dynamic(
+    () => import("@/components/headers/header-fortyone/header-fortyone")
+  ),
 };
 
 const AllHeaders = ({ design, headerSetting }: any) => {

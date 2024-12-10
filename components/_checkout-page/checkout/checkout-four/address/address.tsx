@@ -20,7 +20,7 @@ const Address = ({
   setUserName,
   userPhone,
   setUserEmail,
-  setUserNote
+  setUserNote,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState<any>(false);

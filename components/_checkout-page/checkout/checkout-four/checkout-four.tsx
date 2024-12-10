@@ -26,7 +26,6 @@ const CheckOutFour = () => {
   const [userEmail, setUserEmail] = useState<any>(null);
   const [userNote, setUserNote] = useState<any>(null);
   const [campaign, setCampaign] = useState<any>([]);
-  
 
   const cartList = useSelector((state: any) => state.cart.cartList);
 

@@ -2,6 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* styles.css for header fortyone */
+@layer utilities {
+  .header-fortyone > .bodyWrapper,
+  .header-fortyone > .footerWrapper {
+    @apply pl-0; /* Default for small screens */
+  }
+
+  @screen md {
+    .header-fortyone > .bodyWrapper,
+    .header-fortyone > .footerWrapper {
+      @apply pl-48; /* Medium screens */
+    }
+  }
+
+  @screen lg {
+    .header-fortyone > .bodyWrapper,
+    .header-fortyone > .footerWrapper {
+      @apply pl-96; /* Large screens */
+    }
+  }
+
+  @screen xl {
+    .header-fortyone > .bodyWrapper,
+    .header-fortyone > .footerWrapper {
+      @apply pl-96; /* Extra-large screens */
+    }
+  }
+}
+
 /* custom scrollbar*/
 *,
 html {
