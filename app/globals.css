@@ -2,7 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-
 /* styles.css for header fortyone */
 @layer utilities {
   .header-fortyone > .bodyWrapper,

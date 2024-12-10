@@ -50,7 +50,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   return (
-    < >
+    <>
       <HomePage />
       <HomepageLoad />
     </>
