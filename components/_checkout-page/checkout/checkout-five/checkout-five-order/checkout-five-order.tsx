@@ -41,6 +41,8 @@ const CheckOutFiveOrder = ({
   userName,
   userPhone,
   userAddress,
+  userEmail,
+  userNote,
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState<any>(false);
@@ -181,6 +183,8 @@ const CheckOutFiveOrder = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
+      email: selectAddress?.email,
+      note: selectAddress?.note,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -272,6 +276,8 @@ const CheckOutFiveOrder = ({
           name: userName,
           phone: userPhone,
           address: userAddress,
+          email: userEmail,
+          note: userNote,
           store_id: store_id,
         };
         const responseInfo = await axios.post(

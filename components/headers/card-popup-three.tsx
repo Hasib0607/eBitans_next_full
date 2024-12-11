@@ -9,12 +9,15 @@ import {
   PlusIcon,
   ShoppingBagIcon,
   XMarkIcon,
+  TrashIcon,
 } from "@heroicons/react/24/outline";
 import useTheme from "@/hooks/use-theme";
 import Link from "next/link";
 import { productImg } from "@/site-settings/siteUrl";
 import { decrementQty, incrementQty } from "@/redux/features/product.slice";
 import { ToastContainer, toast } from "react-toastify";
+import BDT from "@/utils/bdt";
+import { removeToCartList } from "@/redux/features/product.slice";
 
 const CartPopUpThree = () => {
   const { design } = useTheme();
@@ -169,7 +172,9 @@ const ShoppingCart = ({ setOpen }: any) => {
           <p className="sm:text-base text-sm font-bold ">
             {design?.template_id === "29" ? "অর্ডার করুন" : "Checkout"}
           </p>{" "}
-          <p className="pl-4 sm:text-base text-sm">{total} BDT</p>
+          <p className="pl-4 sm:text-base text-sm">
+            {total} <BDT />{" "}
+          </p>
         </Link>
       </div>
     </div>
@@ -245,7 +250,7 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
               ) : null}
             </div>
             <p className="sm:text-sm text-xs text-gray-600">
-              Unit Price: {parseInt(product?.price)} BDT
+              Unit Price: {parseInt(product?.price)} <BDT />
             </p>
           </div>
           <div className="hidden sm:flex gap-3 items-center justify-between text-sm">
@@ -283,9 +288,19 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
             </div>
             <p className="text-gray-900 flex text-center font-semibold text-base">
               {" "}
-              {parseInt(product?.price) * product?.qty} BDT
+              {parseInt(product?.price) * product?.qty} <BDT />
             </p>
           </div>
+        </div>
+        <div className="ml-14 pb-5 flex justify-end items-end min-w-fit lg:cursor-pointer">
+          <TrashIcon
+            onClick={() => {
+              dispatch(removeToCartList(product?.cartId));
+              deleteBtn();
+            }}
+            width={15}
+            className={"text-gray-700"}
+          />{" "}
         </div>
       </div>
       <div className="flex items-center mt-3 gap-3 justify-between text-sm sm:hidden">
@@ -319,7 +334,7 @@ const SingleCartProduct = ({ product, setOpen }: any) => {
         </div>
         <p className="text-gray-900 flex text-center font-semibold text-base">
           {" "}
-          {parseInt(product?.price) * product?.qty} BDT
+          {parseInt(product?.price) * product?.qty} <BDT />
         </p>
       </div>
     </motion.li>
