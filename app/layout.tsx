@@ -31,6 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
     keywords: keywords,
   };
 }
+
 export default async function RootLayout({
   children,
 }: Readonly<{

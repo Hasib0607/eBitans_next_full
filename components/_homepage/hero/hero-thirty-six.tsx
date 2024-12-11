@@ -94,7 +94,7 @@ const HeroThirtySix = ({ slider, design }: any) => {
 
       `;
   return (
-    <div className="z-0 relative group mt-16">
+    <div className="z-0 relative group mt-20">
       <style>{styleCss}</style>
       <div>
         <div className="swiper-pagination-twentyseven"></div>
