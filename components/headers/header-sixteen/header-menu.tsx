@@ -91,13 +91,15 @@ const HeaderMenu = () => {
                 </Link>
               ) : (
                 <Link href="/">
-                  <img
-                    className={`h-[40px] w-[40px]  ${
-                      openMenu ? "max-w-[100px]" : "max-w-[120px]"
-                    }`}
-                    src={imgUrl + headerSetting?.logo}
-                    alt="logo"
-                  />
+                  <div
+                    className={`h-[50px] w-[80px] ${openMenu ? "max-w-[100px]" : "max-w-[120px]"}`}
+                  >
+                    <img
+                      className="h-full w-full object-contain"
+                      src={imgUrl + headerSetting?.logo}
+                      alt="logo"
+                    />
+                  </div>
                 </Link>
               )}
             </div>

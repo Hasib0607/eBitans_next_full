@@ -95,4 +95,3 @@ const HeaderFortyOneCategory = () => {
 };
 
 export default HeaderFortyOneCategory;
-
