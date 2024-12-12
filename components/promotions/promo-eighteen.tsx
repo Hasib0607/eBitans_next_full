@@ -7,12 +7,14 @@ const PromoEighteen = ({ banner }: any) => {
       <div className="">
         <div className="grid sm:grid-cols-2 gap-6">
           {banner.slice(0, 2).map((ban: any) => (
-            <div key={ban.id} className="relative overflow-hidden">
+            <div key={ban?.id} className="relative overflow-hidden">
+              <a href={ban?.link} target="_blank" rel="noopener noreferrer">
               <img
                 alt="gallery"
                 className="min-h-[150px] min-w-full object-cover object-center block hover:scale-105 lg:cursor-pointer ease-in-out duration-700"
-                src={bannerImg + ban.image}
+                src={bannerImg + ban?.image}
               />
+              </a>
               <div className="absolute top-0 bottom-0 left-4 flex justify-start items-center "></div>
             </div>
           ))}

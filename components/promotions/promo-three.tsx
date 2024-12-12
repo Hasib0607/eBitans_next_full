@@ -16,7 +16,7 @@ const PromoThree = ({ banner }: any) => {
             rel="noopener noreferrer"
           >
             <div
-              key={ban.id}
+              key={ban?.id}
               className="relative overflow-hidden shine-three shine-three-one"
             >
               {ban?.link && (
@@ -28,7 +28,7 @@ const PromoThree = ({ banner }: any) => {
               <img
                 alt="gallery"
                 className="w-full object-cover object-center h-auto lg:cursor-pointer ease-in-out duration-700"
-                src={bannerImg + ban.image}
+                src={bannerImg + ban?.image}
               />
             </div>
           </a>

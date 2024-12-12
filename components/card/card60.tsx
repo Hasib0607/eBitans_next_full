@@ -13,6 +13,7 @@ import { AiOutlineShoppingCart } from "react-icons/ai";
 import { HiOutlineDocumentText } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import useHeaderSettings from "@/utils/query/use-header-settings";
 
 const Card60 = ({ item }: any) => {
   const router = useRouter();
@@ -20,6 +21,7 @@ const Card60 = ({ item }: any) => {
   const [camp, setCamp] = useState<any>(null);
   const dispatch = useDispatch();
   const [id, setId] = useState(0);
+  const { data, error } = useHeaderSettings();
 
   const bgColor = design?.header_color;
   const textColor = design?.text_color;
@@ -55,6 +57,15 @@ const Card60 = ({ item }: any) => {
     handleCampaign();
   }, [item, store_id]);
 
+  const {
+    button,
+    button_color,
+    button_bg_color,
+    button1,
+    button1_color,
+    button1_bg_color,
+  } = data?.custom_design?.best_sell_product?.[0] || {};
+
   const styleCss = `
     .searchHover:hover {
         color:  white;
@@ -73,6 +84,27 @@ const Card60 = ({ item }: any) => {
     }
     .cart-thirty-three {  
         background: ${bgColor};
+    }
+
+     .c60_button {
+        color:  ${button_color};
+        background: ${button_bg_color};
+        border: 2px solid transparent;
+    }
+    .c60_button:hover {
+        color:  ${button_color};
+        background: transparent;
+        border: 2px solid ${button_color};
+    }
+    .c60_button1 {
+        color:  ${button1_color};
+        background: ${button1_bg_color};
+        border: 2px solid transparent;
+    }
+    .c60_button1:hover {
+        color:  ${button1_color};
+        background: transparent;
+        border: 2px solid ${button1_color};
     }
 
     .view-eye:hover .quick-view {
@@ -251,20 +283,33 @@ const Card60 = ({ item }: any) => {
               </Link>
             ) : (
               <div>
-                <div
-                  onClick={add_cart_item}
-                  className="flex py-2 searchHover duration-500 bg-color justify-center gap-1 items-center relative rounded-md z-[1] lg:cursor-pointer font-bold "
-                >
-                  <AiOutlineShoppingCart className="text-lg" />
-                  <p className="text-sm">Add to Cart</p>
-                </div>
-                <div
-                  onClick={buy_now}
-                  className="flex py-2 mt-2 searchHover duration-500 bg-color justify-center gap-1 items-center relative rounded-md z-[1] lg:cursor-pointer font-bold "
-                >
-                  <AiOutlineShoppingCart className="text-lg" />
-                  <p className="text-sm">Buy Now</p>
-                </div>
+                {!button && !button1 ? (
+                  <div
+                    onClick={add_cart_item}
+                    className="bg-color flex py-2 searchHover duration-500 justify-center gap-1 items-center relative rounded-md z-[1] lg:cursor-pointer font-bold "
+                  >
+                    {button1}
+                  </div>
+                ) : (
+                  <>
+                    {button && (
+                      <div
+                        onClick={buy_now}
+                        className="c60_button mb-2 flex py-2 mt-2 searchHover duration-500 justify-center gap-1 items-center relative rounded-md z-[1] lg:cursor-pointer font-bold "
+                      >
+                        {button}
+                      </div>
+                    )}
+                  </>
+                )}
+                {button1 && (
+                  <div
+                    onClick={add_cart_item}
+                    className="c60_button1 flex py-2 searchHover duration-500 justify-center gap-1 items-center relative rounded-md z-[1] lg:cursor-pointer font-bold "
+                  >
+                    {button1}
+                  </div>
+                )}
               </div>
             )}
           </div>

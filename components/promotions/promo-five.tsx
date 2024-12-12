@@ -7,7 +7,7 @@ const PromoFive = ({ banner }: any) => {
       <div className="container px-5 bg-white">
         <div className="grid sm:grid-cols-2 gap-6">
           {banner.slice(0, 2).map((ban: any) => (
-            <div key={ban.id} className="relative overflow-hidden">
+            <div key={ban?.id} className="relative overflow-hidden">
               <img
                 alt="gallery"
                 className="min-h-[150px] min-w-full object-cover object-center hover:scale-105 ease-in-out duration-700"

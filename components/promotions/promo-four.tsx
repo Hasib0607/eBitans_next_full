@@ -42,7 +42,7 @@ const PromoFour = ({ banner, design }: any) => {
             className="mySwiper"
           >
             {banner?.map((b: any) => (
-              <SwiperSlide key={b.id}>
+              <SwiperSlide key={b?.id}>
                 <div className="">
                   <a href={b?.link} target="_blank" rel="noopener noreferrer">
                     <img

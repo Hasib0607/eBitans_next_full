@@ -19,11 +19,11 @@ const PromoBottomThirtySix = ({ banner }: any) => {
         <div className="sm:container px-5 sm:py-10 py-5">
           <div className="">
             {banner.slice(1, 2).map((ban: any) => (
-              <div key={ban.id} className="relative overflow-hidden">
+              <div key={ban?.id} className="relative overflow-hidden">
                 <img
                   alt="gallery"
                   className="w-full object-cover object-center block h-auto"
-                  src={bannerImg + ban.image}
+                  src={bannerImg + ban?.image}
                 />
               </div>
             ))}
