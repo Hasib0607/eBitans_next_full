@@ -249,15 +249,23 @@ const Card58 = ({ item }: any) => {
             ""
           ) : (
             <>
-            <div className="h-10 absolute top-2 right-2 z-[2]">
-              <img src={shape.src} alt="" className="h-full" />
-              <p className="text-[10px] text-white absolute top-2 left-3 leading-[12px]">
-                Dis {item.discount_type === "fixed" ? <> <Taka /> </> : ""}{" "}
-                {Math.trunc(item.discount_price)}{" "}
-                {item.discount_type === "percent" ? "% off" : ""}
-              </p>
-            </div>
-          </>
+              <div className="h-10 absolute top-2 right-2 z-[2]">
+                <img src={shape.src} alt="" className="h-full" />
+                <p className="text-[10px] text-white absolute top-2 left-3 leading-[12px]">
+                  Dis{" "}
+                  {item.discount_type === "fixed" ? (
+                    <>
+                      {" "}
+                      <Taka />{" "}
+                    </>
+                  ) : (
+                    ""
+                  )}{" "}
+                  {Math.trunc(item.discount_price)}{" "}
+                  {item.discount_type === "percent" ? "% off" : ""}
+                </p>
+              </div>
+            </>
           )}
           <style>{styleCss}</style>
           <div className="relative overflow-hidden">

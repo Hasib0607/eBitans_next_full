@@ -10,11 +10,11 @@ const PromoEight = ({ banner }: any) => {
           {banner?.slice(0, 3).map((banner: any) => (
             <div key={banner?.id} className="w-full h-full overflow-hidden">
               <a href={banner?.link} target="_blank" rel="noopener noreferrer">
-              <img
-                className="h-auto min-w-full object-cover object-center hover:scale-[1.03] transition-all duration-200 ease-in"
-                src={bannerImg + banner?.image}
-                alt=""
-              />
+                <img
+                  className="h-auto min-w-full object-cover object-center hover:scale-[1.03] transition-all duration-200 ease-in"
+                  src={bannerImg + banner?.image}
+                  alt=""
+                />
               </a>
             </div>
           ))}
