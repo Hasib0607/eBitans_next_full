@@ -43,7 +43,7 @@ const HeaderThirtySix = ({ headerSetting }: any) => {
   return (
     <>
       <div
-        style={{ top: scrollPassed ? 0 : 0 }}
+        style={{ top: scrollPassed ? 0 : announcementHeight }}
         className="bg-[#FDD670] h-20 fixed w-full  left-0 z-[6] flex items-center"
       >
         <div className="sm:container px-5 flex justify-between items-center gap-x-5 w-full">
@@ -72,7 +72,7 @@ const HeaderThirtySix = ({ headerSetting }: any) => {
               )}
             </div>
           </div>
-          <div className="w-full lg:block hidden relative ">
+          <div className="w-full lg:block hidden relative">
             <input
               value={searchTxt}
               onChange={(e) => setSearch(e.target.value)}
@@ -219,11 +219,11 @@ const HeaderThirtySix = ({ headerSetting }: any) => {
 
       <div className="">
         <ul
-          className={`bg-white fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-[5] lg:cursor-pointer ${
+          className={`bg-white mt-28  fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-[5] lg:cursor-pointer ${
             open ? "left-0" : "left-[-160%]"
           } `}
         >
-          <div className="px-6 pt-24">
+          <div className="px-6">
             <SideCat />
           </div>
         </ul>

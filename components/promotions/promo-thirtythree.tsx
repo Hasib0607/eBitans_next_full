@@ -11,7 +11,7 @@ const PromoThirtyThree = ({ banner }: any) => {
               <img
                 alt="gallery"
                 className="w-full object-cover object-center block h-auto hover:opacity-90 lg:cursor-pointer ease-in-out duration-700"
-                src={bannerImg + ban.image}
+                src={bannerImg + ban?.image}
               />
             </a>
           </div>

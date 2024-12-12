@@ -20,11 +20,13 @@ const PromoThirtySix = ({ banner, design }: any) => {
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-3">
           {banner.slice(0, 3).map((ban: any) => (
             <div key={ban?.id} className="relative overflow-hidden">
-              <img
-                alt="gallery"
-                className="w-full object-cover object-center block h-auto"
-                src={bannerImg + ban?.image}
-              />
+              <a href={ban?.link} target="_blank" rel="noopener noreferrer">
+                <img
+                  alt="gallery"
+                  className="w-full object-cover object-center block h-auto"
+                  src={bannerImg + ban?.image}
+                />
+              </a>
             </div>
           ))}
         </div>

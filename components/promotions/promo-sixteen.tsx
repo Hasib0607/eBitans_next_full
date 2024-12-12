@@ -7,11 +7,13 @@ const PromoSixteen = ({ banner }: any) => {
         <div className="basis-1/2">
           {banner?.slice(0, 1).map((ban: any) => (
             <div key={ban?.id} className="relative overflow-hidden ">
-              <img
-                alt="gallery"
-                className="w-full xl:h-[520px] lg:h-[450px] h-auto hover:scale-105 lg:cursor-pointer ease-in-out duration-700"
-                src={bannerImg + ban?.image}
-              />
+              <a href={ban?.link} target="_blank" rel="noopener noreferrer">
+                <img
+                  alt="gallery"
+                  className="w-full xl:h-[520px] lg:h-[450px] h-auto hover:scale-105 lg:cursor-pointer ease-in-out duration-700"
+                  src={bannerImg + ban?.image}
+                />
+              </a>
             </div>
           ))}
         </div>

@@ -14,8 +14,10 @@ import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
 import Search from "./search";
 import defaultUserImage from "@/assets/default-user-image.png";
+import useAnnouncementScroll from "@/utils/use-annoucement-height";
 
 const HeaderThirtyNine = ({ headerSetting }: any) => {
+  const { announcementHeight, scrollPassed } = useAnnouncementScroll();
   const { design, menu, userData } = useTheme();
 
   const [searchTxt, setSearch] = useState("");
@@ -89,6 +91,7 @@ const HeaderThirtyNine = ({ headerSetting }: any) => {
 
   return (
     <div
+      style={{ top: scrollPassed ? 0 : announcementHeight }}
       className={`${
         menuBar ? "h-16" : "h-20"
       } fixed z-[5] duration-500 top-0 left-0 flex items-center bg-color text-white w-full`}

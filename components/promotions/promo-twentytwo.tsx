@@ -8,12 +8,13 @@ const PromoTwentyTwo = ({ banner }: any) => {
     <div className="sm:container px-5 sm:py-10 py-5">
       {banner.slice(0, 1).map((item: any, index: number) => (
         <div className="relative group mt-5" key={index}>
-          <img
-            className="h-auto w-[100%]"
-            src={bannerImg + item.image}
-            alt=""
-          />
-
+          <a href={item?.link} target="_blank" rel="noopener noreferrer">
+            <img
+              className="h-auto w-[100%]"
+              src={bannerImg + item?.image}
+              alt=""
+            />
+          </a>
           <div className="absolute w-max z-[1] top-[40%] xl:top-[40%] lg:top-[50%] md:top-[45%] left-[50%] xl:left-[80%] lg:left-[80%] md:left-[50%] -translate-x-[50%] -translate-y-[50%]">
             <h1 className="text-md xl:text-5xl lg:text-4xl md:text-3xl font-medium text-black text-3xl ">
               shopping everyday{" "}

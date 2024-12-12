@@ -14,7 +14,7 @@ const PromoThirtyOne = ({ banner }: any) => {
                 <img
                   alt="gallery"
                   className="min-w-full h-auto hover:scale-105 lg:cursor-pointer ease-in-out duration-700"
-                  src={bannerImg + ban.image}
+                  src={bannerImg + ban?.image}
                 />
               </a>
             </div>

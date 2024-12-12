@@ -852,22 +852,22 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
   } = data?.custom_design?.single_product_page?.[0] || {};
 
   const styleCss = `
-    .button {
+    .pd_button {
         color:  ${button_color};
         background: ${button_bg_color};
         border: 2px solid transparent;
     }
-    .button:hover {
+    .pd_button:hover {
         color:  ${button_color};
         background: transparent;
         border: 2px solid ${button_color};
     }
-    .button1 {
+    .pd_button1 {
         color:  ${button1_color};
         background: ${button1_bg_color};
         border: 2px solid transparent;
     }
-    .button1:hover {
+    .pd_button1:hover {
         color:  ${button1_color};
         background: transparent;
         border: 2px solid ${button1_color};
@@ -947,7 +947,7 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
           <button
             onClick={onClick}
             type="submit"
-            className="button1 font-bold py-[10px] px-10 w-full"
+            className="pd_button1 font-bold py-[10px] px-10 w-full"
           >
             {button1}
           </button>
@@ -958,8 +958,8 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
             type="submit"
             className={
               singleProductPageData?.heartbeat_animation == true
-                ? "button font-bold py-[10px] px-10 w-full heartbeat"
-                : "button font-bold py-[10px] px-10 w-full"
+                ? "pd_button font-bold py-[10px] px-10 w-full heartbeat"
+                : "pd_button font-bold py-[10px] px-10 w-full"
             }
           >
             {button}

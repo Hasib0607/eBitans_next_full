@@ -10,8 +10,8 @@ const SideCat = () => {
   const [heading, setHeading] = useState("");
 
   return (
-    <nav>
-      <div className="flex flex-col gap-3">
+    <nav className="">
+      <div className="flex flex-col gap-3 mt-16">
         {category?.map((item: any) => (
           <div key={item.id} className="relative z-[1]">
             <div

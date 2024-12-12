@@ -593,7 +593,7 @@ const Details = ({
       <style>{styleCss}</style>
 
       <div className="grid grid-cols-1 md:grid-cols-9 gap-5">
-        <div className="md:col-span-4 min-w-full">
+        <div className="md:col-span-4 w-full md:w-3/4 mx-auto">
           <HSlider
             product={product}
             variant={variant}

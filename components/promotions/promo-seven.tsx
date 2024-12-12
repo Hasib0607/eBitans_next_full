@@ -20,7 +20,7 @@ const PromoSeven = ({ banner }: any) => {
     <div className="sm:container px-5 sm:py-10 py-5 bg-white">
       <div className=" sm:grid-cols-2 gap-6 md:grid hidden">
         {banner?.slice(0, 2).map((ban: any) => (
-          <div key={ban.id} className="relative shine overflow-hidden">
+          <div key={ban?.id} className="relative shine overflow-hidden">
             <a href={ban?.link} target="_blank" rel="noopener noreferrer">
               <img
                 alt="gallery shine"
