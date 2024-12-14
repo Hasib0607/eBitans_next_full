@@ -37,6 +37,7 @@ const YourOrders = ({
   userEmail,
   userNote,
   setToken,
+  checked,
 }: any) => {
   const router = useRouter();
   const [loading, setLoading] = useState<any>(false);
@@ -486,30 +487,34 @@ const YourOrders = ({
           )}
         </div>
       </div>
-
-      {loading ? (
-        <button
-          className={`font-semibold tracking-wider my-1 rounded-sm border border-gray-300 w-full py-3 ${btnhover}`}
-          style={{
-            backgroundColor: design?.header_color,
-            color: design?.text_color,
-          }}
-        >
-          Loading
-        </button>
-      ) : (
-        <button
-          // disabled={userPhone?.length !== 11}
-          className={`font-semibold tracking-wider my-1 rounded-sm border border-gray-300 w-full py-3 ${btnhover}`}
-          style={{
-            backgroundColor: design?.header_color,
-            color: design?.text_color,
-          }}
-          onClick={() => handleCheckout()}
-        >
-          {store_id !== 5184 ? "Place Order" : "Confirm Order"}
-        </button>
-      )}
+      <div
+        style={
+          {
+            "--header-color": design?.header_color,
+            "--text-color": design?.text_color,
+          } as React.CSSProperties
+        }
+      >
+        {loading ? (
+          <button
+            className={`font-semibold tracking-wider my-1 rounded-sm border border-gray-300 w-full py-3 ${btnhover}`}
+            style={{
+              backgroundColor: design?.header_color,
+              color: design?.text_color,
+            }}
+          >
+            Loading
+          </button>
+        ) : (
+          <button
+            disabled={store_id === 8729 ? checked : !checked}
+            className={`font-semibold tracking-wider my-1 rounded-sm border w-full py-3 disabled:bg-gray-400 disabled:cursor-not-allowed text-[var(--text-color)] bg-[var(--header-color)] ${btnhover}`}
+            onClick={() => handleCheckout()}
+          >
+            {store_id !== 5184 ? "Place Order" : "Confirm Order"}
+          </button>
+        )}
+      </div>
 
       <MyModal
         files={files}

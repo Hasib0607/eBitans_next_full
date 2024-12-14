@@ -26,7 +26,7 @@ const CheckOutFour = () => {
   const [userEmail, setUserEmail] = useState<any>(null);
   const [userNote, setUserNote] = useState<any>(null);
   const [campaign, setCampaign] = useState<any>([]);
-
+  const [checked, setChecked] = useState<boolean>(true);
   const cartList = useSelector((state: any) => state.cart.cartList);
 
   useEffect(() => {
@@ -86,6 +86,10 @@ const CheckOutFour = () => {
     );
   }
 
+  const handleChecked = () => {
+    setChecked((prev: any) => !prev);
+  };
+
   return (
     <>
       <div className="" style={{ backgroundColor: "#F3F4F6" }}>
@@ -122,37 +126,46 @@ const CheckOutFour = () => {
               {headerSetting?.online === "active" && (
                 <>
                   <div>
-                    I have read and agree with the website’s{" "}
-                    <span>
-                      <a
-                        href="/terms_and_condition"
-                        style={{ color: design?.header_color }}
-                        className="underline"
-                      >
-                        Terms & Conditions
-                      </a>
-                    </span>
-                    ,{" "}
-                    <span>
-                      <a
-                        href="/privacy_policy"
-                        style={{ color: design?.header_color }}
-                        className="underline"
-                      >
-                        Privacy Policy
-                      </a>
-                    </span>{" "}
-                    and{" "}
-                    <span>
-                      <a
-                        href="/return_policy"
-                        style={{ color: design?.header_color }}
-                        className="underline"
-                      >
-                        Refund Policy
-                      </a>
-                    </span>
-                    .
+                    <label>
+                      {store_id === 8729 && (
+                        <input
+                          type="checkbox"
+                          className="mr-2"
+                          onChange={() => handleChecked()}
+                        />
+                      ) }
+                      I have read and agree with the website’s{" "}
+                      <span>
+                        <a
+                          href="/terms_and_condition"
+                          style={{ color: design?.header_color }}
+                          className="underline"
+                        >
+                          Terms & Conditions
+                        </a>
+                      </span>
+                      ,{" "}
+                      <span>
+                        <a
+                          href="/privacy_policy"
+                          style={{ color: design?.header_color }}
+                          className="underline"
+                        >
+                          Privacy Policy
+                        </a>
+                      </span>{" "}
+                      and{" "}
+                      <span>
+                        <a
+                          href="/return_policy"
+                          style={{ color: design?.header_color }}
+                          className="underline"
+                        >
+                          Refund Policy
+                        </a>
+                      </span>
+                      .
+                    </label>
                   </div>
                 </>
               )}
@@ -173,6 +186,7 @@ const CheckOutFour = () => {
                 userName={userName}
                 userEmail={userEmail}
                 userNote={userNote}
+                checked={checked}
               />
             </div>
           </div>
