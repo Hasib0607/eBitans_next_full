@@ -193,6 +193,11 @@ const Address = ({
                       </option>
                     ))}
                   </select>
+                  {!selectedDistrict && (
+                    <p className="text-red-500 text-sm mt-1">
+                      জেলা সিলেক্ট করা আবশ্যক।
+                    </p>
+                  )}
                 </div>
                 {/* Address Input */}
                 <div className="flex flex-col">

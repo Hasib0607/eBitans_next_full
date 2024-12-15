@@ -39,6 +39,7 @@ const YourOrders = ({
   userName,
   userPhone,
   userAddress,
+  userDistrict,
   note,
   setShipping_area,
 }: any) => {
@@ -243,6 +244,12 @@ const YourOrders = ({
         autoClose: 1000,
       });
     }
+    if (!userDistrict && !data.district) {
+      toast("Please Select The District", {
+        type: "warning",
+        autoClose: 1000,
+      });
+    }
     if (!userPhone && !user) {
       toast("Please write your phone number", {
         type: "warning",
@@ -273,7 +280,7 @@ const YourOrders = ({
       data.payment_type &&
       data.product &&
       shipping_area &&
-      (data.address || (userAddress && userName && userPhone))
+      (data.address || (userAddress && userName && userPhone && shipping_area))
     ) {
       setLoadPay(true);
 
@@ -281,6 +288,7 @@ const YourOrders = ({
         const dataInfo = {
           name: userName,
           phone: userPhone,
+          district: userDistrict,
           address: userAddress,
           store_id: store_id,
         };

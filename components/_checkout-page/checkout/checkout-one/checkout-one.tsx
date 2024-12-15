@@ -25,6 +25,7 @@ const CheckOutOne = () => {
   const [userName, setUserName] = useState(null);
   const [userPhone, setUserPhone] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
+  const [userDistrict, setUserDistrict] = useState(null);
   const [note, setNote] = useState(null);
   const [campaign, setCampaign] = useState([]);
 
@@ -183,11 +184,12 @@ const CheckOutOne = () => {
                 setSelectPayment={setSelectPayment}
                 shipping_area={shipping_area}
                 coupon={coupon}
-                userAddress={userAddress}
-                userPhone={userPhone}
                 userName={userName}
-                setShipping_area={setShipping_area}
+                userPhone={userPhone}
+                userAddress={userAddress}
+                userDistrict={userDistrict}
                 setNote={setNote}
+                setShipping_area={setShipping_area}
               />
             </div>
           </div>
