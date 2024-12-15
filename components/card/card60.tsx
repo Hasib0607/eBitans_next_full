@@ -288,7 +288,7 @@ const Card60 = ({ item }: any) => {
                     onClick={add_cart_item}
                     className="bg-color flex py-2 searchHover duration-500 justify-center gap-1 items-center relative rounded-md z-[1] lg:cursor-pointer font-bold "
                   >
-                    {button1}
+                    Add To Cart
                   </div>
                 ) : (
                   <>

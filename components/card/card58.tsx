@@ -322,7 +322,7 @@ const Card58 = ({ item }: any) => {
             onClick={add_cart_item}
             className="bg-color flex px-2 py-2 justify-center gap-1 items-center lg:cursor-pointer mt-1"
           >
-            Add to cart
+           কার্টে যোগ করুন
           </div>
         ) : (
           <>
