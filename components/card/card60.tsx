@@ -64,7 +64,12 @@ const Card60 = ({ item }: any) => {
     button1,
     button1_color,
     button1_bg_color,
-  } = data?.custom_design?.best_sell_product?.[0] || {};
+  } =
+    data?.custom_design?.best_sell_product?.[0] ||
+    data?.custom_design?.product?.[0] ||
+    data?.custom_design?.feature_product?.[0] ||
+    data?.custom_design?.new_arrival?.[0] ||
+    {};
 
   const styleCss = `
     .searchHover:hover {
@@ -288,7 +293,7 @@ const Card60 = ({ item }: any) => {
                     onClick={add_cart_item}
                     className="bg-color flex py-2 searchHover duration-500 justify-center gap-1 items-center relative rounded-md z-[1] lg:cursor-pointer font-bold "
                   >
-                    {button1}
+                    Add To Cart
                   </div>
                 ) : (
                   <>
