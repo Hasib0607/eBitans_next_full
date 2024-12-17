@@ -89,7 +89,7 @@ export default function HeaderMid() {
             as="nav"
             className="hidden lg:flex flex-wrap xl:space-x-10 space-x-3"
           >
-            {menu?.map((item: any) => (
+            {menu?.slice(0, 6)?.map((item: any) => (
               <SingleMenuItem key={item.id} item={item} category={category} />
             ))}
 
@@ -146,16 +146,23 @@ export default function HeaderMid() {
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {menu?.map((item: any) => (
-                    <Link
-                      href={"/" + item.url}
-                      key={item.id}
-                      className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
-                    >
-                      <Popover.Button className="ml-3 text-base font-medium text-gray-900">
-                        {item.name}
-                      </Popover.Button>
-                    </Link>
+                  {menu?.slice(0, 6)?.map((item: any) => (
+                    <>
+                      {item?.status == 1 && (
+                        <Link
+                          href={
+                            item?.custom_link ||
+                            (item?.url ? `/${item?.url}` : "/")
+                          }
+                          key={item.id}
+                          className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50"
+                        >
+                          <Popover.Button className="ml-3 text-base font-medium text-gray-900">
+                            {item.name}
+                          </Popover.Button>
+                        </Link>
+                      )}
+                    </>
                   ))}
                 </nav>
               </div>
@@ -207,6 +214,8 @@ const SingleMenuItem = ({ item, category }: any) => {
   const { design } = useTheme();
   const styles = `.hoverText:hover{color:${design?.header_color}}`;
 
+  const linkUrl = item?.custom_link || (item?.url ? `/${item.url}` : "/");
+
   return (
     <>
       <style>{styles}</style>
@@ -220,12 +229,16 @@ const SingleMenuItem = ({ item, category }: any) => {
           </Link>
         </MultiStep>
       ) : (
-        <Link
-          href={item?.url ? `/${item?.url}` : "/"}
-          className="text-base font-medium text-gray-500 hoverText"
-        >
-          {item.name}
-        </Link>
+        <>
+          {item?.status == 1 && (
+            <Link
+              href={linkUrl}
+              className="text-base font-medium text-gray-500 hoverText"
+            >
+              {item.name}
+            </Link>
+          )}
+        </>
       )}
     </>
   );

@@ -74,17 +74,25 @@ const HeaderTwentyNineMenu = () => {
         <div className="lg:basis-3/4 flex justify-between items-center">
           <div>
             <ul className="lg:flex lg:flex-row lg:gap-8 lg:justify-center hidden ">
-              {menu.map((item: any) => (
-                <div key={item.id} className="">
-                  <li>
-                    <Link href={"/" + item?.url}>
-                      <h1 className="flex uppercase justify-between items-center group font-semibold text-sm ">
-                        {item.name}
-                      </h1>
-                    </Link>
-                  </li>
-                </div>
-              ))}
+              {menu?.slice(0, 6)?.map(
+                (item: any) =>
+                  item.status == 1 && (
+                    <div key={item.id} className="">
+                      <li>
+                        <Link
+                          href={
+                            item?.custom_link ||
+                            (item?.url ? `/${item?.url}` : "/")
+                          }
+                        >
+                          <h1 className="flex uppercase justify-between items-center group font-semibold text-sm ">
+                            {item.name}
+                          </h1>
+                        </Link>
+                      </li>
+                    </div>
+                  )
+              )}
             </ul>
           </div>
           <div className="flex lg:gap-6 gap-2 text-gray-500 mr-3">

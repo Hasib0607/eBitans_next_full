@@ -296,7 +296,7 @@ const YourOrders = ({
           process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
           dataInfo
         );
-        
+
         const placeOrder = async () => {
           try {
             const response = await axios.post(apiOrder, formData, {

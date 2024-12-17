@@ -131,13 +131,21 @@ const HeaderTwentyFour = ({ headerSetting }: any) => {
           </div>
           <div className={`lg:ml-24 lg:block hidden w-full`}>
             <div className="flex justify-center xl:gap-10 gap-4 uppercase text-[14px] py-4">
-              {menu?.slice(0, 7).map((menu: any) => (
-                <ul key={menu.id}>
-                  <Link href={"/" + menu?.url}>
-                    <li className="">{menu.name}</li>
-                  </Link>
-                </ul>
-              ))}
+              {menu?.slice(0, 7).map(
+                (menu: any) =>
+                  menu.status == 1 && (
+                    <ul key={menu.id}>
+                      <Link
+                        href={
+                          menu?.custom_link ||
+                          (menu?.url ? `/${menu?.url}` : "/")
+                        }
+                      >
+                        <li className="">{menu.name}</li>
+                      </Link>
+                    </ul>
+                  )
+              )}
             </div>
           </div>
           <div className="flex justify-between items-center gap-x-5 ">
@@ -289,13 +297,20 @@ const HeaderTwentyFour = ({ headerSetting }: any) => {
             <IoMdMenu className="text2xl" />
           </div>
           <div className="pb-5 pt-20 pl-4 text-white">
-            {menu?.slice(0, 7).map((menu: any) => (
-              <ul key={"/" + menu.id}>
-                <Link href={menu.url}>
-                  <li className="">{menu.name}</li>
-                </Link>
-              </ul>
-            ))}
+            {menu?.slice(0, 7).map(
+              (menu: any) =>
+                menu.status == 1 && (
+                  <ul key={"/" + menu.id}>
+                    <Link
+                      href={
+                        menu?.custom_link || (menu?.url ? `/${menu?.url}` : "/")
+                      }
+                    >
+                      <li className="">{menu.name}</li>
+                    </Link>
+                  </ul>
+                )
+            )}
           </div>
         </div>
       </div>

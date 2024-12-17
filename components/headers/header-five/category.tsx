@@ -31,7 +31,7 @@ const Category = ({ openMenu }: any) => {
         {category?.slice(0, 4).map((item: any) => (
           <div key={item.id} className="group relative">
             <Link
-              className="menu-hover"
+              className=""
               onClick={() => setActive(item.id)}
               href={"/category/" + item?.id}
             >
@@ -66,7 +66,7 @@ const Category = ({ openMenu }: any) => {
                           <h1
                             className={`${
                               active === subItem.id ? "active-menu" : ""
-                            } menu-hover `}
+                            } `}
                           >
                             {subItem.name}{" "}
                           </h1>
@@ -83,7 +83,7 @@ const Category = ({ openMenu }: any) => {
         <li className="lg:relative group lg:py-2 lg:flex items-center justify-between">
           <div
             className={` ${
-              openMenu ? "" : "menu-hover"
+              openMenu ? "" : ""
             } text-sm px-4 uppercase relative lg:cursor-pointer`}
           >
             <h1>
@@ -96,24 +96,30 @@ const Category = ({ openMenu }: any) => {
             </h1>
           </div>
           <div className="lg:absolute z-50 group-hover:block hidden bg-white text-gray-500 w-[250px] top-[76px] left-[-50%] lg:cursor-pointer">
-            {menu.map((menuItem: any) => (
-              <div key={menuItem.id} className="relative">
-                <div className="px-6 py-1 menu-hover">
-                  <Link
-                    onClick={() => setActive(menuItem.id)}
-                    href={"/" + menuItem?.url}
-                  >
-                    <h1
-                      className={`${
-                        active === menuItem.id ? "active-menu" : ""
-                      } `}
-                    >
-                      {menuItem.name === "Home" ? " " : menuItem.name}{" "}
-                    </h1>
-                  </Link>
-                </div>
-              </div>
-            ))}
+            {menu?.slice(0, 6)?.map(
+              (menuItem: any) =>
+                menuItem.status == 1 && (
+                  <div key={menuItem.id} className="relative">
+                    <div className="px-6 py-1">
+                      <Link
+                        onClick={() => setActive(menuItem.id)}
+                        href={
+                          menuItem?.custom_link ||
+                          (menuItem?.url ? `/${menuItem?.url}` : "/")
+                        }
+                      >
+                        <h1
+                          className={`${
+                            active === menuItem.id ? "active-menu" : ""
+                          } `}
+                        >
+                          {menuItem.name === "Home" ? " " : menuItem.name}{" "}
+                        </h1>
+                      </Link>
+                    </div>
+                  </div>
+                )
+            )}
           </div>
         </li>
       </ul>

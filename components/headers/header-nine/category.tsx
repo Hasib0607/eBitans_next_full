@@ -91,23 +91,31 @@ const Category = () => {
             </h1>
           </Link>
           <div className="absolute z-50 group-hover:block hidden bg-gray-200 w-[250px] top-[75px] left-[-50%] lg:cursor-pointer">
-            {menu.map((menuItem: any, k: any) => (
-              <div key={menuItem.id} className="relative ">
-                <div className="px-6 py-4 text-[#7a7a7a]">
-                  <Link href={"/" + menuItem?.url}>
-                    <h1
-                      style={{
-                        color: hoverMenu === k ? bgColor : "",
-                      }}
-                      onMouseEnter={() => handleMouseEnterMenu(k)}
-                      onMouseLeave={handleMouseLeave}
-                    >
-                      {menuItem.name}{" "}
-                    </h1>
-                  </Link>
-                </div>
-              </div>
-            ))}
+            {menu?.slice(0, 6)?.map(
+              (menuItem: any, k: any) =>
+                menuItem?.status == 1 && (
+                  <div key={menuItem.id} className="relative ">
+                    <div className="px-6 py-4 text-[#7a7a7a]">
+                      <Link
+                        href={
+                          menuItem?.custom_link ||
+                          (menuItem?.url ? `/${menuItem?.url}` : "/")
+                        }
+                      >
+                        <h1
+                          style={{
+                            color: hoverMenu === k ? bgColor : "",
+                          }}
+                          onMouseEnter={() => handleMouseEnterMenu(k)}
+                          onMouseLeave={handleMouseLeave}
+                        >
+                          {menuItem.name}{" "}
+                        </h1>
+                      </Link>
+                    </div>
+                  </div>
+                )
+            )}
           </div>
         </li>
       </ul>

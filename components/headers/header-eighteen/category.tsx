@@ -28,7 +28,7 @@ const Category = ({ openMenu }: any) => {
     <nav>
       <style>{styleCss}</style>
       <ul className="flex lg:flex-row lg:gap-1 lg:justify-center flex-col  gap-3 mt-4 lg:mt-0">
-        <li className="lg:py-2 uppercase flex items-center text-sm justify-between menu-hover ">
+        <li className="lg:py-2 uppercase flex items-center text-sm justify-between">
           <Link
             id="home"
             href="/"
@@ -42,7 +42,7 @@ const Category = ({ openMenu }: any) => {
         </li>
         {category?.slice(0, 5).map((item: any) => (
           <div key={item.id} className="group relative">
-            <li className={`lg:py-7 menu-hover  `}>
+            <li className={`lg:py-7`}>
               <Link
                 onClick={() => setActive(item.id)}
                 href={"/category/" + item?.id}
@@ -79,7 +79,7 @@ const Category = ({ openMenu }: any) => {
                           <h1
                             className={`${
                               active === subItem.id ? "active-menu" : ""
-                            } menu-hover `}
+                            }`}
                           >
                             {subItem.name}{" "}
                           </h1>
@@ -93,7 +93,7 @@ const Category = ({ openMenu }: any) => {
           </div>
         ))}
 
-        <li className="lg:relative group lg:py-2 lg:flex items-center justify-between  menu-hover">
+        <li className="lg:relative group lg:py-2 lg:flex items-center justify-between">
           <div
             className={` ${
               openMenu ? "text-menu" : ""
@@ -111,24 +111,27 @@ const Category = ({ openMenu }: any) => {
             </h1>
           </div>
           <div className="lg:absolute z-50 group-hover:block hidden bg-white py-2 text-gray-500 w-[250px] top-[74px] left-[-50%] lg:cursor-pointer">
-            {menu.map((menuItem: any) => (
-              <div key={menuItem.id} className="relative ">
-                <div className="px-6 py-1 menu-hover">
-                  <Link
-                    onClick={() => setActive(menuItem.id)}
-                    href={menuItem?.url}
-                  >
-                    <h1
-                      className={`${
-                        active === menuItem.id ? "active-menu" : ""
-                      } `}
-                    >
-                      {menuItem.name === "Home" ? null : menuItem.name}
-                    </h1>
-                  </Link>
-                </div>
-              </div>
-            ))}
+            {menu?.slice(0, 6)?.map(
+              (menuItem: any) =>
+                menuItem.status == 1 && (
+                  <div key={menuItem.id} className="relative ">
+                    <div className="px-6 py-1">
+                      <Link
+                        onClick={() => setActive(menuItem.id)}
+                        href={menuItem?.custom_link || menuItem?.url}
+                      >
+                        <h1
+                          className={`${
+                            active === menuItem.id ? "active-menu" : ""
+                          } `}
+                        >
+                          {menuItem.name === "Home" ? null : menuItem.name}
+                        </h1>
+                      </Link>
+                    </div>
+                  </div>
+                )
+            )}
           </div>
         </li>
       </ul>
