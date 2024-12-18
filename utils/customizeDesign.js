@@ -82,7 +82,7 @@ export const customizeSingleProductPage = [
   {
     id: 8428,
     btn_design: true,
-  }
+  },
 ];
 export const customizeModalPopup = [
   // for mrchickenbd.com, modal will not open

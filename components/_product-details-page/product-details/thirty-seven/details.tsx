@@ -774,8 +774,8 @@ export default Details;
 const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
   const { headerSetting, store_id } = useTheme();
   const singleProductPageData = customizeSingleProductPage.find(
-      (item) => item.id == store_id
-    );
+    (item) => item.id == store_id
+  );
 
   const { data, error } = useHeaderSettings();
 
@@ -850,7 +850,14 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
           <PlusIcon width={15} />
         </div>
       </div>
-      <div className={singleProductPageData?.btn_design ? rbeliAddToCartBtn: `${buttonSeven}`} onClick={onClick}>
+      <div
+        className={
+          singleProductPageData?.btn_design
+            ? rbeliAddToCartBtn
+            : `${buttonSeven}`
+        }
+        onClick={onClick}
+      >
         <IoMdCart />
         <button>কার্টে যোগ করুন</button>
       </div>
@@ -861,7 +868,12 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
         <IoMdCart />
         <button>{button || "অর্ডার করুন"}</button>
       </div>
-      <a href={"tel:+88" + headerSetting?.phone} className={singleProductPageData?.btn_design ? rbeliPhoneBtn: `${buttonSeven}`}>
+      <a
+        href={"tel:+88" + headerSetting?.phone}
+        className={
+          singleProductPageData?.btn_design ? rbeliPhoneBtn : `${buttonSeven}`
+        }
+      >
         <FiPhone />
         <p>{headerSetting?.phone}</p>
       </a>
