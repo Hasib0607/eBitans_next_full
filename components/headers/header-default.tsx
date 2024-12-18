@@ -17,11 +17,13 @@ const HeaderDefault = ({ headerSetting, menu, navigation }: any) => {
                 className="relative flex items-center justify-between sm:h-10"
                 aria-label="Global"
               >
-                <div className="">
+                <div className="w-96 h-96">
                   <Link href="/">
                     {headerSetting?.logo ? (
                       <Image
+
                         className="h-auto hidden lg:block text-white"
+
                         src={imgUrl + headerSetting?.logo}
                         alt="logo"
                         width={192}

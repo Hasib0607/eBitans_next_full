@@ -31,7 +31,7 @@ const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
           ))}
         </div>
         <p className="text-center pt-5 lg:pb-5 pb-20">
-          © {date} All Rights Received{" "}
+          © {date} All Rights Reserved{" "}
           <Link href="/" className="font-semibold text-red-700 menu-hover">
             {headerSetting?.website_name}
           </Link>{" "}
