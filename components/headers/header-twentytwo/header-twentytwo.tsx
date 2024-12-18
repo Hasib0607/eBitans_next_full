@@ -200,28 +200,33 @@ const HeaderTwentyTwo = ({ headerSetting }: any) => {
 
                 <div className="flex gap-5 justify-center items-center ">
                   <ul className=" lg:flex pt-2 ml-0 xl:ml-24 lg:ml-0  lg:flex-row lg:gap-10 lg:justify-center hidden md:flex  item-center">
-                    {menu?.map((menuData: any, idx: any) =>
+                    {menu?.slice(0, 6)?.map((menuData: any, idx: any) =>
                       menuData?.url === "category" ? (
                         <Cat item={menuData} key={idx} />
                       ) : (
-                        <Link
-                          href={menuData?.url ? `${menuData?.url}` : "/"}
-                          // style={({ isActive }) =>
-                          //   isActive
-                          //     ? {
-                          //         color: `red`,
-                          //       }
-                          //     : { color: "black" }
-                          // }
-                          className=" font-bold text-sm "
-                          key={idx}
-                        >
-                          <h1
-                            className={`flex group justify-between py-2 items-center group font-bold text-sm ml-4`}
+                        menuData.status == 1 && (
+                          <Link
+                            href={
+                              menuData?.custom_link ||
+                              (menuData?.url ? `/${menuData?.url}` : "/")
+                            }
+                            // style={({ isActive }) =>
+                            //   isActive
+                            //     ? {
+                            //         color: `red`,
+                            //       }
+                            //     : { color: "black" }
+                            // }
+                            className=" font-bold text-sm "
+                            key={idx}
                           >
-                            {menuData?.name}
-                          </h1>
-                        </Link>
+                            <h1
+                              className={`flex group justify-between py-2 items-center group font-bold text-sm ml-4`}
+                            >
+                              {menuData?.name}
+                            </h1>
+                          </Link>
+                        )
                       )
                     )}
                   </ul>
@@ -381,18 +386,24 @@ const HeaderTwentyTwo = ({ headerSetting }: any) => {
                 </div>
                 <div className="flex flex-col space-y-3 mt-5 z-50">
                   <style>{styleCss}</style>
-                  {menu?.map((item: any) => (
-                    <div key={item.id}>
-                      <Link
-                        onClick={() => setOpen(false)}
-                        href={"/" + item?.url}
-                      >
-                        <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
-                          {item.name}
-                        </p>
-                      </Link>
-                    </div>
-                  ))}
+                  {menu?.slice(0, 6)?.map(
+                    (item: any) =>
+                      item.status == 1 && (
+                        <div key={item.id}>
+                          <Link
+                            onClick={() => setOpen(false)}
+                            href={
+                              item?.custom_link ||
+                              (item?.url ? `/${item?.url}` : "/")
+                            }
+                          >
+                            <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
+                              {item.name}
+                            </p>
+                          </Link>
+                        </div>
+                      )
+                  )}
                 </div>
               </div>
             </ul>

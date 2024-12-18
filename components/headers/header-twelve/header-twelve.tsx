@@ -289,15 +289,22 @@ const HeaderTwelve = ({ headerSetting }: any) => {
           )}
         </div>
         <div className="flex gap-10 uppercase font-twelve text-[14px] text-gray-600">
-          {menu?.map((menu: any) => (
-            <ul key={menu.id}>
-              <Link href={"/" + menu?.url}>
-                <li className="hover:scale-105 duration-100 menu-hover">
-                  {menu.name}
-                </li>
-              </Link>
-            </ul>
-          ))}
+          {menu?.slice(0, 6)?.map(
+            (menu: any) =>
+              menu.status == 1 && (
+                <ul key={menu.id}>
+                  <Link
+                    href={
+                      menu?.custom_link || (menu?.url ? `/${menu?.url}` : "/")
+                    }
+                  >
+                    <li className="hover:scale-105 duration-100">
+                      {menu.name}
+                    </li>
+                  </Link>
+                </ul>
+              )
+          )}
         </div>
       </div>
 

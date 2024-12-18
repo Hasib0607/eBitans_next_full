@@ -109,19 +109,27 @@ const HeaderElevenCategory = () => {
           </div>
 
           {/* Menu links */}
-          <div className="lg:flex lg:flex-row gap-5 xl:gap-10 lg:justify-center item-center">
-            {menu?.map((menuData: any, index: number) => (
-              <Link
-                key={menuData?.id}
-                href={"/" + menuData?.url}
-                className={`font-bold text-sm ${activeMenuIndex === index ? "active-menu" : ""}`}
-                onClick={() => setActiveMenuIndex(index)} // Update active menu index on click
-              >
-                <h1 className="flex group justify-between items-center font-bold text-sm">
-                  {menuData?.name}
-                </h1>
-              </Link>
-            ))}
+          <div className="lg:flex lg:flex-row gap-5 xl:gap-10 lg:justify-center items-center">
+            {menu
+              ?.slice(0, 6)
+              .map(
+                (menuData: any, index: number) =>
+                  menuData?.status == 1 && (
+                    <Link
+                      key={menuData?.id}
+                      href={
+                        menuData?.custom_link ||
+                        (menuData?.url ? `/${menuData?.url}` : "/")
+                      }
+                      className={`font-bold text-sm ${activeMenuIndex === index ? "active-menu" : ""}`}
+                      onClick={() => setActiveMenuIndex(index)} // Update active menu index on click
+                    >
+                      <h1 className="flex group justify-between items-center font-bold text-sm">
+                        {menuData?.name}
+                      </h1>
+                    </Link>
+                  )
+              )}
           </div>
 
           {/* Phone contact */}

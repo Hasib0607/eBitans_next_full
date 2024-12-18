@@ -133,7 +133,7 @@ const CheckOutFour = () => {
                           className="mr-2"
                           onChange={() => handleChecked()}
                         />
-                      ) }
+                      )}
                       I have read and agree with the website’s{" "}
                       <span>
                         <a

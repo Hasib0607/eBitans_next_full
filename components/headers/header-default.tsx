@@ -21,9 +21,13 @@ const HeaderDefault = ({ headerSetting, menu, navigation }: any) => {
                   <Link href="/">
                     {headerSetting?.logo ? (
                       <Image
-                        className="h-auto hidden lg:block w-auto text-white"
+
+                        className="h-auto hidden lg:block text-white"
+
                         src={imgUrl + headerSetting?.logo}
                         alt="logo"
+                        width={192}
+                        height={64}
                       />
                     ) : (
                       <h1>{headerSetting?.website_name}</h1>

@@ -569,15 +569,22 @@ const HeaderTwentyOne = ({ headerSetting }: any) => {
 
           {/* menu section  */}
           <div className="flex gap-5 uppercase text-[14px] ">
-            {menu?.map((menu: any) => (
-              <ul key={menu.id}>
-                <Link href={"/" + menu?.url}>
-                  <li className="duration-500 px-3 py-1.5 border border-transparent border-hover-menu rounded-full">
-                    {menu.name}
-                  </li>
-                </Link>
-              </ul>
-            ))}
+            {menu?.slice(0, 6)?.map(
+              (menu: any) =>
+                menu.status == 1 && (
+                  <ul key={menu.id}>
+                    <Link
+                      href={
+                        menu?.custom_link || (menu?.url ? `/${menu?.url}` : "/")
+                      }
+                    >
+                      <li className="duration-500 px-3 py-1.5 border border-transparent border-hover-menu rounded-full">
+                        {menu.name}
+                      </li>
+                    </Link>
+                  </ul>
+                )
+            )}
           </div>
           {/* design for sticky navbar  */}
           <div>

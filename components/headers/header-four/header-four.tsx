@@ -181,22 +181,28 @@ export default function HeaderFour({ headerSetting }: any) {
                     <Popover.Panel className="absolute z-10 left-1/2 transform -translate-x-1/2 mt-3 px-2 w-screen max-w-max sm:px-0">
                       <div className="rounded-lg shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden">
                         <div className="relative grid gap-3 bg-white px-2 py-4 sm:gap-8 sm:p-8">
-                          {headermenu?.map((item: any) => (
-                            <Link
-                              key={item?.id}
-                              href={item?.url ? `/${item?.url}` : "/"}
-                            >
-                              <Popover.Button className="-m-3 p-2 flex items-start rounded-lg hover:bg-gray-50">
-                                {/* <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" /> */}
-                                <div className="">
-                                  <p className="text-base font-medium text-gray-900">
-                                    {item?.name}
-                                  </p>
-                                  {/* <p className="mt-1 text-sm text-gray-500">{item.description}</p> */}
-                                </div>
-                              </Popover.Button>
-                            </Link>
-                          ))}
+                          {headermenu?.slice(0, 6)?.map(
+                            (item: any) =>
+                              item?.status == 1 && (
+                                <Link
+                                  key={item?.id}
+                                  href={
+                                    item?.custom_link ||
+                                    (item?.url ? `/${item?.url}` : "/")
+                                  }
+                                >
+                                  <Popover.Button className="-m-3 p-2 flex items-start rounded-lg hover:bg-gray-50">
+                                    {/* <item.icon className="flex-shrink-0 h-6 w-6 text-indigo-600" aria-hidden="true" /> */}
+                                    <div className="">
+                                      <p className="text-base font-medium text-gray-900">
+                                        {item?.name}
+                                      </p>
+                                      {/* <p className="mt-1 text-sm text-gray-500">{item.description}</p> */}
+                                    </div>
+                                  </Popover.Button>
+                                </Link>
+                              )
+                          )}
                         </div>
                       </div>
                     </Popover.Panel>
@@ -338,15 +344,24 @@ export default function HeaderFour({ headerSetting }: any) {
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {menu?.map((item: any) => (
-                    <Link key={item.id} href={item.url}>
-                      <Popover.Button className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50 w-full">
-                        <span className=" text-base font-medium text-gray-900">
-                          {item.name}
-                        </span>
-                      </Popover.Button>
-                    </Link>
-                  ))}
+                  {menu?.slice(0, 6)?.map(
+                    (item: any) =>
+                      item?.status == 1 && (
+                        <Link
+                          key={item.id}
+                          href={
+                            item?.custom_link ||
+                            (item?.url ? `/${item?.url}` : "/")
+                          }
+                        >
+                          <Popover.Button className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50 w-full">
+                            <span className=" text-base font-medium text-gray-900">
+                              {item.name}
+                            </span>
+                          </Popover.Button>
+                        </Link>
+                      )
+                  )}
                 </nav>
               </div>
             </div>

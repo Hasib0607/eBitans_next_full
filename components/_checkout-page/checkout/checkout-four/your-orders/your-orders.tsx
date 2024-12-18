@@ -292,7 +292,6 @@ const YourOrders = ({
                 "Content-Type": "application/json", // Adjust the content type according to your API requirements
               },
             });
-
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
               localStorage.removeItem("referralObj");
@@ -358,7 +357,6 @@ const YourOrders = ({
               window.location.replace(response.url);
               dispatch(clearCartList());
             }
-
             if (response) {
               if (!response?.url && !response?.error) {
                 toast(

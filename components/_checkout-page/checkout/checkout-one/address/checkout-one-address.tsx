@@ -561,20 +561,6 @@ const AddressView = ({
               )}
             </div>
 
-            {/* <Controller
-              name="district"
-              control={control}
-              render={({ onChange, id, ref }) => (
-                <Select
-                  options={district}
-                  value={district.find((c: any) => c.id === id)}
-                  onChange={(val) => onChange(val.id)}
-                  defaultValue={district.find((c: any) => c.id === id)}
-                />
-              )}
-              rules={{ required: true }}
-            /> */}
-
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <label
                 htmlFor="address"

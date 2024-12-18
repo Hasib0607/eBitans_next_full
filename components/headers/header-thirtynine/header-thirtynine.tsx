@@ -117,13 +117,20 @@ const HeaderThirtyNine = ({ headerSetting }: any) => {
         </div>
         <div className={`lg:block hidden`}>
           <div className="flex justify-start xl:gap-10 gap-4 uppercase text-[14px] py-4">
-            {menu?.map((menu: any) => (
-              <ul key={menu.id}>
-                <Link href={"/" + menu.url}>
-                  <li className="">{menu.name}</li>
-                </Link>
-              </ul>
-            ))}
+            {menu?.slice(0, 6)?.map(
+              (menu: any) =>
+                menu.status == 1 && (
+                  <ul key={menu.id}>
+                    <Link
+                      href={
+                        menu?.custom_link || (menu?.url ? `/${menu?.url}` : "/")
+                      }
+                    >
+                      <li className="">{menu.name}</li>
+                    </Link>
+                  </ul>
+                )
+            )}
           </div>
           <div
             className={`bg-color text-white w-full fixed z-[2] ${
