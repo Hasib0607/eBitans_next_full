@@ -184,7 +184,7 @@ const FooterSix = ({
       </div>
       <hr />
       <p className="sm:container px-5 pt-3 pb-20 lg:pb-3 text-[13px] font-light text-[#333333]">
-        © {date} All Rights Received{" "}
+        © {date} All Rights Reserved{" "}
         <Link href="/" className="font-semibold text-red-700 menu-hover">
           {headerSetting?.website_name}
         </Link>{" "}

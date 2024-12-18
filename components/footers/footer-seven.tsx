@@ -163,7 +163,7 @@ const FooterSeven = ({
       </div>
       <hr />
       <p className="container px-5 py-5 text-sm text-gray-600 ">
-        © {date} All Rights Received{" "}
+        © {date} All Rights Reserved{" "}
         <Link href="/" className="font-semibold text-red-700 menu-hover">
           {headerSetting?.website_name}
         </Link>{" "}
