@@ -77,6 +77,12 @@ export const customizeSingleProductPage = [
     custom_text_show: true,
     order_korun_btn: true,
   },
+
+  // for RBeli Fashion store id 8428
+  {
+    id: 8428,
+    btn_design: true,
+  }
 ];
 export const customizeModalPopup = [
   // for mrchickenbd.com, modal will not open

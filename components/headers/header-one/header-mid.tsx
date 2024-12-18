@@ -89,9 +89,11 @@ export default function HeaderMid() {
             as="nav"
             className="hidden lg:flex flex-wrap xl:space-x-10 space-x-3"
           >
-            {menu?.slice(0, 6)?.map((item: any) => (
-              <SingleMenuItem key={item.id} item={item} category={category} />
-            ))}
+            {menu
+              ?.slice(0, 6)
+              ?.map((item: any) => (
+                <SingleMenuItem key={item.id} item={item} category={category} />
+              ))}
 
             {/* <MultiStep category={category} /> */}
           </Popover.Group>

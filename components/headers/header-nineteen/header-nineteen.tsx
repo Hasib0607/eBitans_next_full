@@ -306,7 +306,13 @@ const HeaderNineteen = ({ headerSetting }: any) => {
             {menu?.slice(0, 6)?.map(
               (menuData: any, id: any) =>
                 menuData.status == 1 && (
-                  <Link key={id} href={menuData?.custom_link || (menuData?.url ? `/${menuData?.url}` : "/")}>
+                  <Link
+                    key={id}
+                    href={
+                      menuData?.custom_link ||
+                      (menuData?.url ? `/${menuData?.url}` : "/")
+                    }
+                  >
                     <h1 className={`flex justify-between items-center group`}>
                       {menuData?.name}
                     </h1>

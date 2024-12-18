@@ -274,7 +274,10 @@ export default function HeaderEight({ headerSetting }: any) {
                           <Disclosure.Button
                             key={item.id}
                             as="a"
-                            href={item?.custom_link || (item?.url ? `/${item?.url}` : "/")}
+                            href={
+                              item?.custom_link ||
+                              (item?.url ? `/${item?.url}` : "/")
+                            }
                             className={classNames(
                               item.current
                                 ? "bg-gray-900 text-white"
