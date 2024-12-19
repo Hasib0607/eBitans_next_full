@@ -8,6 +8,7 @@ import { useCallback, useEffect } from "react";
 const ViewContentGtm = ({ product }: any) => {
   const { headerSetting } = useTheme();
   const currency = headerSetting?.code;
+
   const items = {
     id: product.SKU || "",
     item_id: product.SKU || "",
@@ -24,6 +25,7 @@ const ViewContentGtm = ({ product }: any) => {
     tax_rate: parseFloat(product.tax_rate) || 0,
     shipping_fee: parseFloat(product.shipping_fee) || 0,
   };
+
   const sendEvent = useCallback(() => {
     sendGTMEvent({
       event: "view_item",
@@ -36,12 +38,11 @@ const ViewContentGtm = ({ product }: any) => {
       currency: headerSetting?.code || "BDT",
     });
 
-    // const currency = headerSetting?.code;
-    const content_ids = product?.id; // Assuming `product.id` is the content ID
-    const content_type = "product"; // Example value, replace with the actual content type
-    const content_name = product?.name; // Assuming `product.name` is the content name
-    const content_category = product?.category; // Assuming `product.category` is the content category
-    const value = product?.regular_price - product?.discount_price; // Assuming `product.price` is the value
+    const content_ids = product?.id;
+    const content_type = "product";
+    const content_name = product?.name;
+    const content_category = product?.category;
+    const value = product?.regular_price - product?.discount_price;
     const sku = product?.SKU;
 
     ViewContent(
@@ -58,9 +59,37 @@ const ViewContentGtm = ({ product }: any) => {
 
   useEffect(() => {
     sendEvent();
-  }, []);
+    sendConversionEvent(product);
+  }, [product, sendEvent]);
 
   return null;
 };
 
 export default ViewContentGtm;
+
+async function sendConversionEvent(product: any) {
+  try {
+    const response = await fetch("/api/conversion-api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        pixelId: product.pixelId,
+        accessToken: process.env.NEXT_PUBLIC_FB_ACCESS_TOKEN, // Use public env variable
+        productSku: product.SKU,
+        quantity: product.quantity || 1,
+        sourceUrl: typeof window !== "undefined" ? window.location.href : "", // Ensure `window` is available
+      }),
+    });
+
+    const data = await response.json();
+    if (!response.ok) {
+      throw new Error(data.error || "Failed to send conversion event.");
+    }
+
+    console.log("Conversion event sent successfully:", data);
+  } catch (error) {
+    // console.error("Error sending conversion event:", error.message);
+  }
+}
