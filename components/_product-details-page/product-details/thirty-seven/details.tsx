@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const Details = ({
   data,
@@ -771,7 +772,10 @@ const Details = ({
 export default Details;
 
 const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
-  const { headerSetting } = useTheme();
+  const { headerSetting, store_id } = useTheme();
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
 
   const { data, error } = useHeaderSettings();
 
@@ -821,6 +825,12 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
   if (error) {
     return <p>error from header settings</p>;
   }
+
+  const rbeliAddToCartBtn =
+    "w-full flex items-center gap-2 rounded-md w-full text-center py-3 justify-center lg:cursor-pointer bg-[#fe5631] text-white border border-transparent hover:bg-transparent hover:text-[#e24b28] hover:border-[#e24b28]";
+  const rbeliPhoneBtn =
+    "w-full flex items-center gap-2 rounded-md w-full text-center py-3 justify-center lg:cursor-pointer bg-[#feab33] text-white border border-transparent hover:bg-transparent hover:text-[#feab33] hover:border-[#feab33]";
+
   return (
     <div className="flex flex-col justify-start items-center gap-3 py-1 w-96">
       <div className="flex border border-gray-300 divide-x-2 rounded-md">
@@ -840,12 +850,19 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
           <PlusIcon width={15} />
         </div>
       </div>
-      <div className={`${buttonSeven} cart-btn-thirty-seven`} onClick={onClick}>
+      <div
+        className={
+          singleProductPageData?.btn_design
+            ? rbeliAddToCartBtn
+            : `${buttonSeven}`
+        }
+        onClick={onClick}
+      >
         <IoMdCart />
         <button>কার্টে যোগ করুন</button>
       </div>
       <div
-        className={`${buttonSeven} cart-btn-thirty-seven opacity-70 hover:opacity-100`}
+        className={`${buttonSeven} opacity-70 hover:opacity-100`}
         onClick={buyNowBtn}
       >
         <IoMdCart />
@@ -853,7 +870,9 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
       </div>
       <a
         href={"tel:+88" + headerSetting?.phone}
-        className={`${buttonSeven} cart-btn-thirty-seven`}
+        className={
+          singleProductPageData?.btn_design ? rbeliPhoneBtn : `${buttonSeven}`
+        }
       >
         <FiPhone />
         <p>{headerSetting?.phone}</p>
@@ -862,7 +881,7 @@ const AddCart = ({ setQty, qty, onClick, buttonSeven, buyNowBtn }: any) => {
         href={
           "https://api.whatsapp.com/send?phone=" + headerSetting?.whatsapp_phone
         }
-        className={`${buttonSeven} cart-btn-thirty-seven opacity-70 hover:opacity-100`}
+        className={`${buttonSeven} opacity-70 hover:opacity-100`}
       >
         <FaWhatsapp />
         <p>{headerSetting?.whatsapp_phone}</p>
