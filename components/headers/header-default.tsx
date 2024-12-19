@@ -21,9 +21,7 @@ const HeaderDefault = ({ headerSetting, menu, navigation }: any) => {
                   <Link href="/">
                     {headerSetting?.logo ? (
                       <Image
-
                         className="h-auto hidden lg:block text-white"
-
                         src={imgUrl + headerSetting?.logo}
                         alt="logo"
                         width={192}

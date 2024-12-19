@@ -12,3 +12,4 @@ const getUrl = () => {
 };
 
 export default getUrl;
+
