@@ -9,7 +9,13 @@ import { useForm } from "react-hook-form";
 import { RotatingLines } from "react-loader-spinner";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { FaUser, FaPhoneAlt, FaMapMarkerAlt } from "react-icons/fa";
+import {
+  FaUser,
+  FaPhoneAlt,
+  FaMapMarkerAlt,
+  FaStickyNote,
+  FaEnvelope,
+} from "react-icons/fa";
 
 const Address = ({
   selectAddress,
@@ -21,6 +27,8 @@ const Address = ({
   userPhone,
   setUserPhone,
   setUserName,
+  setUserEmail,
+  setUserNote,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -28,6 +36,7 @@ const Address = ({
   const { store_id, store } = useTheme();
   const [loading, setLoading] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(true);
+  const [formField, setFormField] = useState<any>(null);
 
   const { user } = useSelector((state: any) => state.auth);
 
@@ -45,6 +54,27 @@ const Address = ({
   };
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL + "address";
+
+  useEffect(() => {
+    const fetchCheckoutFormFields = async () => {
+      try {
+        const apiFormField =
+          process.env.NEXT_PUBLIC_REACT_APP_BASE_URL_V2 +
+          `/checkout-page/form-field/${store_id}`;
+
+        const response = await axios.get(apiFormField);
+        setFormField(response?.data);
+      } catch (error: any) {
+        // console.error(
+        //   "Error fetching checkout form fields:",
+        //   error.response?.data || error.message
+        // );
+      }
+    };
+    if (store_id) {
+      fetchCheckoutFormFields();
+    }
+  }, [store_id]);
 
   useEffect(() => {
     if (store?.auth_type === "EasyOrder" && !user) {
@@ -131,70 +161,136 @@ const Address = ({
             </div>
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
-                {/* Name Input with Icon */}
-                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaUser className="text-black" />
-                  </div>
-                  <input
-                    onChange={(e) => setUserName(e.target.value)}
-                    type="text"
-                    placeholder={
-                      design?.template_id === "29" ||
-                      store_id === 3601 ||
-                      store_id === 3904
-                        ? "নাম"
-                        : "Name"
-                    }
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                  />
-                </div>
+                {formField?.data?.map((field: any) => {
+                  if (field.status == 1 && field.name == "name") {
+                    return (
+                      <div
+                        key={field.name}
+                        className="flex items-center border border-gray-400 rounded focus-within:border-gray-400"
+                      >
+                        <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                          <FaUser className="text-black" />
+                        </div>
+                        <input
+                          onChange={(e) => setUserName(e.target.value)}
+                          type="text"
+                          placeholder={
+                            design?.template_id === "29" ||
+                            store_id === 3601 ||
+                            store_id === 3904
+                              ? "নাম"
+                              : "Name"
+                          }
+                          className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                        />
+                      </div>
+                    );
+                  }
 
-                {/* Phone Input with Icon */}
-                <div className="flex items-center border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaPhoneAlt className="text-black" />
-                  </div>
-                  <input
-                    value={userPhone}
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    type="number"
-                    maxLength={11}
-                    minLength={11}
-                    placeholder={
-                      design?.template_id === "29" ||
-                      store_id === 3601 ||
-                      store_id === 3904
-                        ? "ফোন"
-                        : "Phone"
-                    }
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                  />
-                </div>
+                  if (field.status == 1 && field.name == "email") {
+                    return (
+                      <div
+                        key={field.name}
+                        className="flex items-center border border-gray-400 rounded focus-within:border-gray-400"
+                      >
+                        <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                          <FaEnvelope className="text-black" />
+                        </div>
+                        <input
+                          onChange={(e) => setUserEmail(e.target.value)}
+                          type="email"
+                          placeholder={
+                            design?.template_id === "29" ||
+                            store_id === 3601 ||
+                            store_id === 3904
+                              ? "ইমেইল"
+                              : "Email"
+                          }
+                          className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                        />
+                      </div>
+                    );
+                  }
 
-                {/* Phone Validation Error */}
-                {!isPhoneValid && (
-                  <small className="text-rose-500">Need 11 digits</small>
-                )}
+                  if (field.status == 1 && field.name == "phone") {
+                    return (
+                      <div
+                        key={field.name}
+                        className="flex items-center border border-gray-400 rounded focus-within:border-gray-400"
+                      >
+                        <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                          <FaPhoneAlt className="text-black" />
+                        </div>
+                        <input
+                          value={userPhone}
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          type="number"
+                          maxLength={11}
+                          minLength={11}
+                          placeholder={
+                            design?.template_id === "29" ||
+                            store_id === 3601 ||
+                            store_id === 3904
+                              ? "ফোন"
+                              : "Phone"
+                          }
+                          className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                        />
+                      </div>
+                    );
+                  }
 
-                {/* Address Input with Icon */}
-                <div className="flex items-start border border-gray-400 rounded focus-within:border-gray-400">
-                  <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                    <FaMapMarkerAlt className="text-black" />
-                  </div>
-                  <textarea
-                    onChange={(e) => setUserAddress(e.target.value)}
-                    placeholder={
-                      design?.template_id === "29" ||
-                      store_id === 3601 ||
-                      store_id === 3904
-                        ? "ঠিকানা"
-                        : "Address"
-                    }
-                    className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                  />
-                </div>
+                  if (field.status == 1 && field.name == "address") {
+                    return (
+                      <div
+                        key={field.name}
+                        className="flex items-start border border-gray-400 rounded focus-within:border-gray-400"
+                      >
+                        <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                          <FaMapMarkerAlt className="text-black" />
+                        </div>
+                        <textarea
+                          onChange={(e) => setUserAddress(e.target.value)}
+                          placeholder={
+                            design?.template_id === "29" ||
+                            store_id === 3601 ||
+                            store_id === 3904
+                              ? "ঠিকানা"
+                              : "Address"
+                          }
+                          className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                        />
+                      </div>
+                    );
+                  }
+
+                  if (field.status == 1 && field.name == "note") {
+                    return (
+                      <div
+                        key={field.name}
+                        className="flex items-start border border-gray-400 rounded focus-within:border-gray-400"
+                      >
+                        <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                          <FaStickyNote className="text-black" />
+                        </div>
+                        <textarea
+                          onChange={(e) => setUserNote(e.target.value)}
+                          placeholder={
+                            design?.template_id === "29" ||
+                            store_id === 3601 ||
+                            store_id === 3904
+                              ? "নোট"
+                              : "Note"
+                          }
+                          className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                        />
+                      </div>
+                    );
+                  }
+
+                  return null; // For fields that do not match the required conditions
+                })}
               </div>
             ) : (
               <div>
@@ -208,6 +304,7 @@ const Address = ({
                       address={address}
                       store_id={store_id}
                       setToken={setToken}
+                      formField={formField}
                     />
                   </div>
                 )}
@@ -233,6 +330,7 @@ const Address = ({
                           selectAddress={selectAddress}
                           setSelectAddress={setSelectAddress}
                           setCall={setCall}
+                          formField={formField}
                         />
                       ))}
                   </div>
@@ -252,6 +350,7 @@ const Address = ({
         setOpen={setOpen}
         setCall={setCall}
         design={design}
+        formField={formField}
       />
     </>
   );
@@ -265,6 +364,7 @@ const Single = ({
   setSelectAddress,
   setCall,
   token,
+  formField,
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -340,15 +440,22 @@ const Single = ({
             setCall={setCall}
             setSelectAddress={setSelectAddress}
             design={design}
+            formField={formField}
           />
         </div>
       </div>
+      <p className="font-normal text-sm tracking-wider">
+        <span className="text-base font-medium">Email:</span> {item?.email}
+      </p>
       <p className="font-normal text-sm tracking-wider">
         <span className="text-base font-medium">Phone:</span> {item?.phone}
       </p>
       <p className="font-normal text-sm tracking-wider">
         <span className="text-base font-medium">Address: </span>
         {item?.address}
+      </p>
+      <p className="font-normal text-sm tracking-wider">
+        <span className="text-base font-medium">Note:</span> {item?.note}
       </p>
       <input
         className="absolute bottom-5 right-5"
@@ -360,7 +467,14 @@ const Single = ({
   );
 };
 
-const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
+const AddressView = ({
+  setCall,
+  store_id,
+  setToken,
+  store,
+  design,
+  formField,
+}: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const {
     register,
@@ -406,101 +520,197 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="shadow overflow-hidden sm:rounded-md w-full">
           <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "নাম"
-                  : "Name"}
-              </label>
-              <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                  <FaUser className="text-black" />
-                </div>
-                <input
-                  {...register("name", { required: true })}
-                  type="text"
-                  name="name"
-                  id="name"
-                  autoComplete="address-level1"
-                  className="flex-grow ml-2 outline-none"
-                />
-              </div>
-              {errors.name && (
-                <span className="text-red-500">Name is required</span>
-              )}
-            </div>
+            {formField?.data?.map((field: any) => {
+              if (field.status === 1 && field.name === "name") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "নাম"
+                        : "Name"}
+                    </label>
+                    <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                        <FaUser className="text-black" />
+                      </div>
+                      <input
+                        {...register("name", { required: true })}
+                        type="text"
+                        name="name"
+                        id="name"
+                        autoComplete="address-level1"
+                        className="flex-grow ml-2 outline-none"
+                      />
+                    </div>
+                    {errors.name && (
+                      <span className="text-red-500">Name is required</span>
+                    )}
+                  </div>
+                );
+              }
 
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ফোন"
-                  : "Phone"}
-              </label>
-              <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                  <FaPhoneAlt className="text-black" />
-                </div>
-                <input
-                  {...register("phone", {
-                    required: true,
-                    minLength: 11,
-                    maxLength: 11,
-                  })}
-                  type="number"
-                  name="phone"
-                  id="phone"
-                  autoComplete="address-level1"
-                  className="flex-grow ml-2 outline-none"
-                />
-              </div>
-              {errors.phone?.type === "required" && (
-                <span className="text-red-500">Phone number is required</span>
-              )}
-              {errors.phone?.type === "minLength" && (
-                <span className="text-red-500">
-                  Please enter a valid phone number
-                </span>
-              )}
-            </div>
+              if (field.status === 1 && field.name === "email") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "ইমেইল"
+                        : "Email"}
+                    </label>
+                    <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                        <FaEnvelope className="text-black" />
+                      </div>
+                      <input
+                        {...register("email", { required: true })}
+                        type="email"
+                        name="email"
+                        id="email"
+                        autoComplete="email"
+                        className="flex-grow ml-2 outline-none"
+                      />
+                    </div>
+                    {errors.email && (
+                      <span className="text-red-500">Email is required</span>
+                    )}
+                  </div>
+                );
+              }
 
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                {design?.template_id === "29" ||
-                store_id === 3601 ||
-                store_id === 3904
-                  ? "ঠিকানা"
-                  : "Address"}
-              </label>
-              <div className="flex items-start mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
-                <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                  <FaMapMarkerAlt className="text-black" />
-                </div>
-                <textarea
-                  {...register("address", { required: true })}
-                  rows={6}
-                  name="address"
-                  id="address"
-                  autoComplete="address-level1"
-                  className="flex-grow ml-2 outline-none"
-                />
-              </div>
-              {errors.address && (
-                <span className="text-red-500">Address is required</span>
-              )}
-            </div>
+              if (field.status === 1 && field.name === "phone") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "ফোন"
+                        : "Phone"}
+                    </label>
+                    <div className="flex items-center mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                        <FaPhoneAlt className="text-black" />
+                      </div>
+                      <input
+                        {...register("phone", {
+                          required: true,
+                          minLength: 11,
+                          maxLength: 11,
+                        })}
+                        type="number"
+                        name="phone"
+                        id="phone"
+                        autoComplete="tel"
+                        className="flex-grow ml-2 outline-none"
+                      />
+                    </div>
+                    {errors.phone?.type === "required" && (
+                      <span className="text-red-500">
+                        Phone number is required
+                      </span>
+                    )}
+                    {errors.phone?.type === "minLength" && (
+                      <span className="text-red-500">
+                        Please enter a valid phone number
+                      </span>
+                    )}
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "address") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "ঠিকানা"
+                        : "Address"}
+                    </label>
+                    <div className="flex items-start mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                        <FaMapMarkerAlt className="text-black" />
+                      </div>
+                      <textarea
+                        {...register("address", { required: true })}
+                        rows={6}
+                        name="address"
+                        id="address"
+                        autoComplete="street-address"
+                        className="flex-grow ml-2 outline-none"
+                      />
+                    </div>
+                    {errors.address && (
+                      <span className="text-red-500">Address is required</span>
+                    )}
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "note") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="note"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      {design?.template_id === "29" ||
+                      store_id === 3601 ||
+                      store_id === 3904
+                        ? "নোট"
+                        : "Note"}
+                    </label>
+                    <div className="flex items-start mt-1 border focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md">
+                      <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                        <FaStickyNote className="text-black" />
+                      </div>
+                      <textarea
+                        {...register("note")}
+                        rows={4}
+                        name="note"
+                        id="note"
+                        autoComplete="note"
+                        className="flex-grow ml-2 outline-none"
+                      />
+                    </div>
+                  </div>
+                );
+              }
+
+              return null; // Skip fields that don't match the logic
+            })}
           </div>
 
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
@@ -527,6 +737,7 @@ export function SaveAddress({
   setToken,
   store_id,
   design,
+  formField,
 }: any) {
   const {
     register,
@@ -586,76 +797,158 @@ export function SaveAddress({
             <div
               className={`px-4 py-5 ${
                 design?.template_id === "34" ? "bg-thirty-one" : "bg-[#F3F4F6]"
-              }  space-y-6 sm:p-6`}
+              } space-y-6 sm:p-6`}
             >
-              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Name
-                </label>
-                <input
-                  {...register("name", { required: true })}
-                  type="text"
-                  name="name"
-                  id="name"
-                  autoComplete="address-level1"
-                  className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                />
-                {errors.name && (
-                  <span className="text-red-500">Name is required</span>
-                )}
-              </div>
-              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Phone
-                </label>
-                <input
-                  {...register("phone", {
-                    required: true,
-                    minLength: 11,
-                    maxLength: 11,
-                  })}
-                  type="number"
-                  name="phone"
-                  id="phone"
-                  autoComplete="address-level1"
-                  className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                />
+              {formField?.data?.map((field: any) => {
+                if (field.status === 1 && field.name === "name") {
+                  return (
+                    <div
+                      key={field.id}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Name
+                      </label>
+                      <input
+                        {...register("name", { required: true })}
+                        type="text"
+                        name="name"
+                        id="name"
+                        autoComplete="address-level1"
+                        className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.name && (
+                        <span className="text-red-500">Name is required</span>
+                      )}
+                    </div>
+                  );
+                }
 
-                {errors.phone?.type === "required" && (
-                  <span className="text-red-500">Phone number is required</span>
-                )}
-                {errors.phone?.type === "minLength" && (
-                  <span className="text-red-500">
-                    Please enter correct phone number
-                  </span>
-                )}
-              </div>
-              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Address
-                </label>
-                <textarea
-                  {...register("address", { required: true })}
-                  rows={6}
-                  name="address"
-                  id="address"
-                  autoComplete="address-level1"
-                  className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                />
-                {errors.address && (
-                  <span className="text-red-500">Address is required</span>
-                )}
-              </div>
+                if (field.status === 1 && field.name === "email") {
+                  return (
+                    <div
+                      key={field.id}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Email
+                      </label>
+                      <input
+                        {...register("email", { required: true })}
+                        type="email"
+                        name="email"
+                        id="email"
+                        autoComplete="email"
+                        className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.email && (
+                        <span className="text-red-500">Email is required</span>
+                      )}
+                    </div>
+                  );
+                }
+
+                if (field.status === 1 && field.name === "phone") {
+                  return (
+                    <div
+                      key={field.id}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Phone
+                      </label>
+                      <input
+                        {...register("phone", {
+                          required: true,
+                          minLength: 11,
+                          maxLength: 11,
+                        })}
+                        type="number"
+                        name="phone"
+                        id="phone"
+                        autoComplete="address-level1"
+                        className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.phone?.type === "required" && (
+                        <span className="text-red-500">
+                          Phone number is required
+                        </span>
+                      )}
+                      {errors.phone?.type === "minLength" && (
+                        <span className="text-red-500">
+                          Please enter correct phone number
+                        </span>
+                      )}
+                    </div>
+                  );
+                }
+
+                if (field.status === 1 && field.name === "address") {
+                  return (
+                    <div
+                      key={field.id}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="address"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Address
+                      </label>
+                      <textarea
+                        {...register("address", { required: true })}
+                        rows={6}
+                        name="address"
+                        id="address"
+                        autoComplete="address-level1"
+                        className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.address && (
+                        <span className="text-red-500">
+                          Address is required
+                        </span>
+                      )}
+                    </div>
+                  );
+                }
+
+                if (field.status === 1 && field.name === "note") {
+                  return (
+                    <div
+                      key={field.id}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="note"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Note
+                      </label>
+                      <textarea
+                        {...register("note")}
+                        rows={4}
+                        name="note"
+                        id="note"
+                        autoComplete="note"
+                        className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                  );
+                }
+
+                return null;
+              })}
             </div>
+
             <div className="px-4 py-3 text-right sm:px-6">
               <button
                 type="submit"
@@ -680,6 +973,7 @@ export function UpdateAddress({
   setSelectAddress,
   design,
   token,
+  formField,
 }: any) {
   const { store } = useTheme();
 
@@ -746,63 +1040,140 @@ export function UpdateAddress({
               design?.template_id === "34"
                 ? "bg-thirty-one border border-white"
                 : "bg-white"
-            }  space-y-6 sm:p-6`}
+            } space-y-6 sm:p-6`}
           >
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <input
-                {...register("name")}
-                type="text"
-                name="name"
-                id="name"
-                autoComplete="address-level1"
-                className="mt-1 border p-2  focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Phone
-              </label>
-              <input
-                {...register("phone", {
-                  required: true,
-                  minLength: 11,
-                  maxLength: 11,
-                })}
-                type="number"
-                name="phone"
-                id="phone"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-              {errors.phone && (
-                <span className="text-red-500">Phone number is required</span>
-              )}
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Address
-              </label>
-              <textarea
-                {...register("address")}
-                rows={6}
-                id="address"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-            </div>
+            {formField?.data?.map((field: any) => {
+              if (field.status === 1 && field.name === "name") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Name
+                    </label>
+                    <input
+                      {...register("name")}
+                      type="text"
+                      name="name"
+                      id="name"
+                      autoComplete="address-level1"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "email") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email
+                    </label>
+                    <input
+                      {...register("email")}
+                      type="email"
+                      name="email"
+                      id="email"
+                      autoComplete="email"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "phone") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      {...register("phone", {
+                        required: true,
+                        minLength: 11,
+                        maxLength: 11,
+                      })}
+                      type="number"
+                      name="phone"
+                      id="phone"
+                      autoComplete="address-level1"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.phone && (
+                      <span className="text-red-500">
+                        Phone number is required
+                      </span>
+                    )}
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "address") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Address
+                    </label>
+                    <textarea
+                      {...register("address")}
+                      rows={6}
+                      id="address"
+                      autoComplete="address-level1"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "note") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="note"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Note
+                    </label>
+                    <textarea
+                      {...register("note")}
+                      rows={4}
+                      id="note"
+                      autoComplete="note"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                );
+              }
+
+              return null;
+            })}
           </div>
+
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
               type="submit"

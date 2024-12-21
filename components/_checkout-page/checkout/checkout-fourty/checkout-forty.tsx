@@ -25,6 +25,8 @@ const CheckOutForty = () => {
   const [userName, setUserName] = useState(null);
   const [userPhone, setUserPhone] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
+  const [userEmail, setUserEmail] = useState<any>(null);
+  const [userNote, setUserNote] = useState<any>(null);
   const [campaign, setCampaign] = useState([]);
   const [formBookData, setFormBookData] = useState({
     name: "",
@@ -121,6 +123,8 @@ const CheckOutForty = () => {
               userPhone={userPhone}
               setUserPhone={setUserPhone}
               setUserName={setUserName}
+              setUserEmail={setUserEmail}
+              setUserNote={setUserNote}
             />
           )}
           <CheckOutFortyDiscount
@@ -187,6 +191,8 @@ const CheckOutForty = () => {
             userAddress={userAddress}
             userPhone={userPhone}
             userName={userName}
+            userEmail={userEmail}
+            userNote={userNote}
           />
         </div>
       </div>

@@ -12,21 +12,30 @@ export async function POST(req: NextRequest) {
     const pixelId = headersetting?.facebook_pixel;
 
     if (!pixelId) {
-      return NextResponse.json({ error: "Facebook Pixel ID not found." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Facebook Pixel ID not found." },
+        { status: 400 }
+      );
     }
 
     // Accessing the Facebook Access Token from environment variables
-    const accessToken = process.env.FB_ACCESS_TOKEN;
+    const accessToken = process.env.NEXT_PUBLIC_FB_ACCESS_TOKEN;
 
     if (!accessToken) {
-      return NextResponse.json({ error: "Access token is not defined." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Access token is not defined." },
+        { status: 400 }
+      );
     }
 
     // Extracting other fields from the request body
     const { productSku, quantity, sourceUrl } = await req.json();
 
     if (!productSku || !quantity || !sourceUrl) {
-      return NextResponse.json({ error: "Missing required parameters." }, { status: 400 });
+      return NextResponse.json(
+        { error: "Missing required parameters." },
+        { status: 400 }
+      );
     }
 
     // Getting client IP and User Agent from the request headers
@@ -37,8 +46,8 @@ export async function POST(req: NextRequest) {
     const FBConversionAPI = new FacebookConversionAPI(
       accessToken,
       pixelId,
-      ["email1", "email2"], // Replace with actual data
-      ["phone1", "phone2"], // Replace with actual data
+      ["moon@gmail.com", "ebitans@gmail.com"], // Replace with actual data
+      ["01712714334", "01712714334"], // Replace with actual data
       clientIp,
       userAgent,
       "fbp",

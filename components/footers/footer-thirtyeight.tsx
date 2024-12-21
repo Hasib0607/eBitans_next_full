@@ -59,7 +59,7 @@ const FooterThirtyEight = ({
           </div>
 
           <div className="xl:col-span-2 lg:col-span-2">
-            <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 px-5">
+            <div className="grid xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-2 sm:grid-cols-1 gap-4 px-5">
               <div>
                 <h1 className="text-sm tracking-widest uppercase">Products</h1>
                 <div className="mt-5">
@@ -91,6 +91,11 @@ const FooterThirtyEight = ({
                       </li>
                     ) : null
                   )}
+                </div>
+              </div>
+              <div>
+                <h1 className="text-sm tracking-widest uppercase">Legal</h1>
+                <div className="mt-5 list-none">
                   {result?.map((m: any) => (
                     <li key={m?.id}>
                       <Link

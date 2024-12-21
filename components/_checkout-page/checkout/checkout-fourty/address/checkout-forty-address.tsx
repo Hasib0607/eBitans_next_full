@@ -19,6 +19,8 @@ const CheckOutFortyAddress = ({
   setUserPhone,
   userPhone,
   setUserName,
+  setUserEmail,
+  setUserNote,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -26,6 +28,7 @@ const CheckOutFortyAddress = ({
   const { store_id, store } = useTheme();
   const [loading, setLoading] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(true);
+  const [formField, setFormField] = useState<any>(null);
 
   const { user } = useSelector((state: any) => state.auth);
 
@@ -43,6 +46,27 @@ const CheckOutFortyAddress = ({
   };
 
   const apiUrl = process.env.NEXT_PUBLIC_API_URL + "address";
+
+  useEffect(() => {
+    const fetchCheckoutFormFields = async () => {
+      try {
+        const apiFormField =
+          process.env.NEXT_PUBLIC_REACT_APP_BASE_URL_V2 +
+          `/checkout-page/form-field/${store_id}`;
+
+        const response = await axios.get(apiFormField);
+        setFormField(response?.data);
+      } catch (error: any) {
+        // console.error(
+        //   "Error fetching checkout form fields:",
+        //   error.response?.data || error.message
+        // );
+      }
+    };
+    if (store_id) {
+      fetchCheckoutFormFields();
+    }
+  }, [store_id]);
 
   useEffect(() => {
     if (store?.auth_type === "EasyOrder" && !user) {
@@ -108,33 +132,79 @@ const CheckOutFortyAddress = ({
             </div>
             {store?.auth_type === "EasyOrder" && !user ? (
               <div className="flex flex-col gap-3">
-                <input
-                  onChange={(e) => setUserName(e.target.value)}
-                  type="text"
-                  placeholder="Name"
-                  className="border p-2 border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
-                />
-                <input
-                  value={userPhone}
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  type="number"
-                  placeholder="Phone"
-                  maxLength={11}
-                  minLength={11}
-                  className="border p-2 border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
-                />
+                {formField?.data?.map((field: any) => {
+                  if (field.status === 1 && field.name === "name") {
+                    return (
+                      <input
+                        key={field.id}
+                        onChange={(e) => setUserName(e.target.value)}
+                        type="text"
+                        placeholder="Name"
+                        className="border p-2 border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
+                      />
+                    );
+                  }
 
-                {!isPhoneValid && (
-                  <small className="text-rose-500">Need 11 digits</small>
-                )}
+                  if (field.status === 1 && field.name === "phone") {
+                    return (
+                      <div key={field.id}>
+                        <input
+                          value={userPhone}
+                          onBlur={handleBlur}
+                          onChange={handleChange}
+                          type="number"
+                          placeholder="Phone"
+                          maxLength={11}
+                          minLength={11}
+                          className="border p-2 w-full border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
+                        />
+                        {!isPhoneValid && (
+                          <small className="text-rose-500">
+                            Need 11 digits
+                          </small>
+                        )}
+                      </div>
+                    );
+                  }
 
-                <textarea
-                  rows={6}
-                  onChange={(e) => setUserAddress(e.target.value)}
-                  placeholder="Address"
-                  className="border p-2 border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
-                />
+                  if (field.status === 1 && field.name === "email") {
+                    return (
+                      <input
+                        key={field.id}
+                        onChange={(e) => setUserEmail(e.target.value)}
+                        type="email"
+                        placeholder="Email"
+                        className="border p-2 border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
+                      />
+                    );
+                  }
+
+                  if (field.status === 1 && field.name === "address") {
+                    return (
+                      <textarea
+                        key={field.id}
+                        rows={6}
+                        onChange={(e) => setUserAddress(e.target.value)}
+                        placeholder="Address"
+                        className="border p-2 border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
+                      />
+                    );
+                  }
+
+                  if (field.status === 1 && field.name === "note") {
+                    return (
+                      <textarea
+                        key={field.id}
+                        rows={4}
+                        onChange={(e) => setUserNote(e.target.value)}
+                        placeholder="Note"
+                        className="border p-2 border-gray-400 focus:outline-none focus:border focus:border-gray-400 rounded focus:ring-0"
+                      />
+                    );
+                  }
+
+                  return null;
+                })}
               </div>
             ) : (
               <div>
@@ -147,6 +217,7 @@ const CheckOutFortyAddress = ({
                       address={address}
                       store_id={store_id}
                       setToken={setToken}
+                      formField={formField}
                     />
                   </div>
                 )}
@@ -165,6 +236,7 @@ const CheckOutFortyAddress = ({
                           selectAddress={selectAddress}
                           setSelectAddress={setSelectAddress}
                           setCall={setCall}
+                          formField={formField}
                         />
                       ))}
                   </div>
@@ -183,6 +255,7 @@ const CheckOutFortyAddress = ({
         open={open}
         setOpen={setOpen}
         setCall={setCall}
+        formField={formField}
       />
     </>
   );
@@ -196,6 +269,7 @@ const Single = ({
   setSelectAddress,
   setCall,
   token,
+  formField,
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -261,15 +335,22 @@ const Single = ({
             item={item}
             setCall={setCall}
             setSelectAddress={setSelectAddress}
+            formField={formField}
           />
         </div>
       </div>
+      <p className="font-normal text-sm tracking-wider">
+        <span className="text-base font-medium">Email:</span> {item?.email}
+      </p>
       <p className="font-normal text-sm tracking-wider">
         <span className="text-base font-medium">Phone:</span> {item?.phone}
       </p>
       <p className="font-normal text-sm tracking-wider">
         <span className="text-base font-medium">Address: </span>
         {item?.address}
+      </p>
+      <p className="font-normal text-sm tracking-wider">
+        <span className="text-base font-medium">Note:</span> {item?.note}
       </p>
       <input
         className="absolute bottom-5 right-5"
@@ -281,7 +362,13 @@ const Single = ({
   );
 };
 
-const AddressView = ({ store, setCall, store_id, setToken }: any) => {
+const AddressView = ({
+  store,
+  setCall,
+  store_id,
+  setToken,
+  formField,
+}: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const {
     register,
@@ -320,74 +407,149 @@ const AddressView = ({ store, setCall, store_id, setToken }: any) => {
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="shadow overflow-hidden sm:rounded-md w-full">
           <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <input
-                {...register("name", { required: true })}
-                type="text"
-                name="name"
-                id="name"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-              {errors.name && (
-                <span className="text-red-500">Phone name is required</span>
-              )}
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Phone
-              </label>
-              <input
-                {...register("phone", {
-                  required: true,
-                  minLength: 11,
-                  maxLength: 11,
-                })}
-                type="number"
-                name="phone"
-                id="phone"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
+            {formField?.data?.map((field: any) => {
+              if (field.status === 1 && field.name === "name") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Name
+                    </label>
+                    <input
+                      {...register("name", { required: true })}
+                      type="text"
+                      id="name"
+                      autoComplete="address-level1"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.name && (
+                      <span className="text-red-500">Name is required</span>
+                    )}
+                  </div>
+                );
+              }
 
-              {errors.phone?.type === "required" && (
-                <span className="text-red-500">Phone number is required</span>
-              )}
-              {errors.phone?.type === "minLength" && (
-                <span className="text-red-500">
-                  Please enter correct phone number
-                </span>
-              )}
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Address
-              </label>
-              <textarea
-                {...register("address", { required: true })}
-                rows={6}
-                name="address"
-                id="address"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-              {errors.address && (
-                <span className="text-red-500">Phone address is required</span>
-              )}
-            </div>
+              if (field.status === 1 && field.name === "phone") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      {...register("phone", {
+                        required: true,
+                        minLength: 11,
+                        maxLength: 11,
+                      })}
+                      type="number"
+                      id="phone"
+                      autoComplete="address-level1"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.phone?.type === "required" && (
+                      <span className="text-red-500">
+                        Phone number is required
+                      </span>
+                    )}
+                    {errors.phone?.type === "minLength" && (
+                      <span className="text-red-500">
+                        Please enter a correct phone number
+                      </span>
+                    )}
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "email") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email
+                    </label>
+                    <input
+                      {...register("email", { required: true })}
+                      type="email"
+                      id="email"
+                      autoComplete="email"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.email && (
+                      <span className="text-red-500">Email is required</span>
+                    )}
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "address") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Address
+                    </label>
+                    <textarea
+                      {...register("address", { required: true })}
+                      rows={6}
+                      id="address"
+                      autoComplete="address-level1"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.address && (
+                      <span className="text-red-500">Address is required</span>
+                    )}
+                  </div>
+                );
+              }
+
+              if (field.status === 1 && field.name === "note") {
+                return (
+                  <div
+                    key={field.id}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="note"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Note
+                    </label>
+                    <textarea
+                      {...register("note")}
+                      rows={4}
+                      id="note"
+                      autoComplete="off"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                );
+              }
+
+              return null;
+            })}
           </div>
+
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
               type="submit"
@@ -411,6 +573,7 @@ export function SaveAddress({
   setCall,
   setToken,
   store_id,
+  formField,
 }: any) {
   const {
     register,
@@ -468,73 +631,144 @@ export function SaveAddress({
         <form className="" onSubmit={handleSubmit(onSubmit)}>
           <div className="shadow overflow-hidden sm:rounded-md w-full">
             <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Name
-                </label>
-                <input
-                  {...register("name", { required: true })}
-                  type="text"
-                  name="name"
-                  id="name"
-                  autoComplete="address-level1"
-                  className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                />
-                {errors.name && (
-                  <span className="text-red-500">Name is required</span>
-                )}
-              </div>
-              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label
-                  htmlFor="phone"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Phone
-                </label>
-                <input
-                  {...register("phone", {
-                    required: true,
-                    minLength: 11,
-                    maxLength: 11,
-                  })}
-                  type="number"
-                  name="phone"
-                  id="phone"
-                  autoComplete="address-level1"
-                  className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                />
-
-                {errors.phone?.type === "required" && (
-                  <span className="text-red-500">Phone number is required</span>
-                )}
-                {errors.phone?.type === "minLength" && (
-                  <span className="text-red-500">
-                    Please enter correct phone number
-                  </span>
-                )}
-              </div>
-              <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label
-                  htmlFor="address"
-                  className="block text-sm font-medium text-gray-700"
-                >
-                  Address
-                </label>
-                <textarea
-                  {...register("address", { required: true })}
-                  rows={6}
-                  name="address"
-                  id="address"
-                  autoComplete="address-level1"
-                  className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                />
-                {errors.address && (
-                  <span className="text-red-500">Address is required</span>
-                )}
-              </div>
+              {formField?.data?.map((field: any) => {
+                if (field.status === 1 && field.name === "name") {
+                  return (
+                    <div
+                      key={field.name}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="name"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Name
+                      </label>
+                      <input
+                        {...register("name", { required: true })}
+                        type="text"
+                        id="name"
+                        autoComplete="name"
+                        className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.name && (
+                        <span className="text-red-500">Name is required</span>
+                      )}
+                    </div>
+                  );
+                }
+                if (field.status === 1 && field.name === "phone") {
+                  return (
+                    <div
+                      key={field.name}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="phone"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Phone
+                      </label>
+                      <input
+                        {...register("phone", {
+                          required: true,
+                          minLength: 11,
+                          maxLength: 11,
+                        })}
+                        type="number"
+                        id="phone"
+                        autoComplete="tel"
+                        className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.phone?.type === "required" && (
+                        <span className="text-red-500">
+                          Phone number is required
+                        </span>
+                      )}
+                      {errors.phone?.type === "minLength" && (
+                        <span className="text-red-500">
+                          Please enter a correct phone number
+                        </span>
+                      )}
+                    </div>
+                  );
+                }
+                if (field.status === 1 && field.name === "email") {
+                  return (
+                    <div
+                      key={field.name}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="email"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Email
+                      </label>
+                      <input
+                        {...register("email", { required: true })}
+                        type="email"
+                        id="email"
+                        autoComplete="email"
+                        className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.email && (
+                        <span className="text-red-500">Email is required</span>
+                      )}
+                    </div>
+                  );
+                }
+                if (field.status === 1 && field.name === "address") {
+                  return (
+                    <div
+                      key={field.name}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="address"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Address
+                      </label>
+                      <textarea
+                        {...register("address", { required: true })}
+                        id="address"
+                        rows={6}
+                        autoComplete="street-address"
+                        className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                      {errors.address && (
+                        <span className="text-red-500">
+                          Address is required
+                        </span>
+                      )}
+                    </div>
+                  );
+                }
+                if (field.status === 1 && field.name === "note") {
+                  return (
+                    <div
+                      key={field.name}
+                      className="col-span-6 sm:col-span-3 lg:col-span-2"
+                    >
+                      <label
+                        htmlFor="note"
+                        className="block text-sm font-medium text-gray-700"
+                      >
+                        Note
+                      </label>
+                      <textarea
+                        {...register("note")}
+                        id="note"
+                        rows={4}
+                        autoComplete="off"
+                        className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                      />
+                    </div>
+                  );
+                }
+                return null;
+              })}
             </div>
             <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
               <button
@@ -559,6 +793,7 @@ export function UpdateAddress({
   setCall,
   setSelectAddress,
   token,
+  formField,
 }: any) {
   const { store } = useTheme();
 
@@ -621,62 +856,144 @@ export function UpdateAddress({
       <form className="" onSubmit={handleSubmit(onSubmit)}>
         <div className="shadow overflow-hidden sm:rounded-md w-full">
           <div className="px-4 py-5 bg-white space-y-6 sm:p-6">
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="name"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Name
-              </label>
-              <input
-                {...register("name")}
-                type="text"
-                name="name"
-                id="name"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="phone"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Phone
-              </label>
-              <input
-                {...register("phone", {
-                  required: true,
-                  minLength: 11,
-                  maxLength: 11,
-                })}
-                type="number"
-                name="phone"
-                id="phone"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-              {errors.phone && (
-                <span className="text-red-500">Phone number is required</span>
-              )}
-            </div>
-            <div className="col-span-6 sm:col-span-3 lg:col-span-2">
-              <label
-                htmlFor="address"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Address
-              </label>
-              <textarea
-                {...register("address")}
-                rows={6}
-                name="address"
-                id="address"
-                autoComplete="address-level1"
-                className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-              />
-            </div>
+            {formField?.data?.map((field: any) => {
+              if (field.status === 1 && field.name === "name") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="name"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Name
+                    </label>
+                    <input
+                      {...register("name", { required: true })}
+                      type="text"
+                      id="name"
+                      autoComplete="name"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.name && (
+                      <span className="text-red-500">Name is required</span>
+                    )}
+                  </div>
+                );
+              }
+              if (field.status === 1 && field.name === "phone") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="phone"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Phone
+                    </label>
+                    <input
+                      {...register("phone", {
+                        required: true,
+                        minLength: 11,
+                        maxLength: 11,
+                      })}
+                      type="number"
+                      id="phone"
+                      autoComplete="tel"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.phone && (
+                      <span className="text-red-500">
+                        Phone number is required
+                      </span>
+                    )}
+                  </div>
+                );
+              }
+              if (field.status === 1 && field.name === "email") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="email"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Email
+                    </label>
+                    <input
+                      {...register("email", {
+                        required: true,
+                        pattern: /^\S+@\S+\.\S+$/,
+                      })}
+                      type="email"
+                      id="email"
+                      autoComplete="email"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.email && (
+                      <span className="text-red-500">
+                        Valid email is required
+                      </span>
+                    )}
+                  </div>
+                );
+              }
+              if (field.status === 1 && field.name === "address") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="address"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Address
+                    </label>
+                    <textarea
+                      {...register("address", { required: true })}
+                      rows={4}
+                      id="address"
+                      autoComplete="street-address"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                    {errors.address && (
+                      <span className="text-red-500">Address is required</span>
+                    )}
+                  </div>
+                );
+              }
+              if (field.status === 1 && field.name === "note") {
+                return (
+                  <div
+                    key={field.name}
+                    className="col-span-6 sm:col-span-3 lg:col-span-2"
+                  >
+                    <label
+                      htmlFor="note"
+                      className="block text-sm font-medium text-gray-700"
+                    >
+                      Note
+                    </label>
+                    <textarea
+                      {...register("note")}
+                      rows={4}
+                      id="note"
+                      autoComplete="off"
+                      className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
+                    />
+                  </div>
+                );
+              }
+              return null;
+            })}
           </div>
+
           <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
             <button
               type="submit"

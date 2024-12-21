@@ -24,6 +24,8 @@ const CheckOutTwentyOne = () => {
   const [userName, setUserName] = useState(null);
   const [userPhone, setUserPhone] = useState(null);
   const [userAddress, setUserAddress] = useState(null);
+  const [userEmail, setUserEmail] = useState<any>(null);
+  const [userNote, setUserNote] = useState<any>(null);
   const [campaign, setCampaign] = useState([]);
 
   const cartList = useSelector((state: any) => state.cart.cartList);
@@ -114,6 +116,8 @@ const CheckOutTwentyOne = () => {
                 userPhone={userPhone}
                 setUserPhone={setUserPhone}
                 setUserName={setUserName}
+                setUserEmail={setUserEmail}
+                setUserNote={setUserNote}
               />
               <Discount
                 setCouponDis={setCouponDis}
@@ -176,6 +180,8 @@ const CheckOutTwentyOne = () => {
                 userAddress={userAddress}
                 userPhone={userPhone}
                 userName={userName}
+                userEmail={userEmail}
+                userNote={userNote}
               />
             </div>
           </div>
