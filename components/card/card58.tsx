@@ -257,11 +257,10 @@ const Card58 = ({ item }: any) => {
               <div className="h-10 absolute top-2 right-2 z-[2]">
                 <img src={shape.src} alt="" className="h-full" />
                 <p className="text-[10px] text-white absolute top-2 left-3 leading-[12px]">
-                 {" "}
+                  {" "}
                   {item.discount_type === "fixed" ? (
                     <>
-                       Dis{" "}
-                      <Taka />{" "}
+                      Dis <Taka />{" "}
                     </>
                   ) : (
                     ""

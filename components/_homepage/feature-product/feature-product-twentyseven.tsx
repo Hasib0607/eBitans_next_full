@@ -1,4 +1,5 @@
 "use client";
+import Card51 from "@/components/card/card51";
 import Card52 from "@/components/card/card52";
 import SectionHeadingTwentySeven from "@/components/section-heading/section-heading-twenty-seven";
 import DefaultSlider from "@/components/slider/default-slider";
@@ -96,7 +97,7 @@ const FeatureProductTwentySeven = ({
         >
           {feature_product?.slice(0, 10).map((productData: any) => (
             <SwiperSlide key={productData.id}>
-              <Card52 item={productData} design={design} store_id={store_id} />
+              <Card51 item={productData} design={design} store_id={store_id} />
             </SwiperSlide>
           ))}
         </DefaultSlider>
