@@ -19,7 +19,7 @@ import Details from "../product-quick-view-details/details";
 const Card56 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
   const [camp, setCamp] = useState<any>(null);
-
+// console.log("item", item);
   const dispatch = useDispatch();
 
   const bgColor = design?.header_color;
