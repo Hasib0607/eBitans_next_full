@@ -11,6 +11,7 @@ const FeatureProductThirtyFour = ({
   design,
   store_id,
 }: any) => {
+  console.log("feature_product", feature_product);
   let isLoop = feature_product.length > 1;
 
   const styleCss = `

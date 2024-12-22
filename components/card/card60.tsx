@@ -14,8 +14,12 @@ import { HiOutlineDocumentText } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import useHeaderSettings from "@/utils/query/use-header-settings";
+import newLogo from "@/assets/new.png";
+import Taka from "@/utils/taka";
+import shape from "@/assets/img/shape.png";
 
 const Card60 = ({ item }: any) => {
+  console.log("item", item?.created_at);
   const router = useRouter();
   const { design, store_id, makeid } = useTheme();
   const [camp, setCamp] = useState<any>(null);
@@ -235,6 +239,53 @@ const Card60 = ({ item }: any) => {
       <div className="">
         <style>{styleCss}</style>
         <div className="relative overflow-hidden">
+          <div>
+            {(() => {
+              if (item?.created_at) {
+                const createdAtDate = new Date(item.created_at); // Convert created_at to a Date object
+                const currentDate = new Date(); // Get the current date
+                const tenDaysAgo = new Date();
+                tenDaysAgo.setDate(currentDate.getDate() - 10); // Subtract 10 days from the current date
+
+                if (createdAtDate >= tenDaysAgo) {
+                  return (
+                    <div>
+                      <img src={newLogo.src} alt="" className="w-14" />
+                    </div>
+                  );
+                }
+              }
+              return null; // Return nothing if criteria not met
+            })()}
+          </div>
+
+          <div>
+            {item.discount_price === "0.00" ||
+            item.discount_type === "no_discount" ? (
+              ""
+            ) : (
+              <>
+                <div className="absolute top-0 -right-6 z-[2]">
+                  {/* Triangle shape */}
+                  <div className="relative w-0 h-0 rotate-[45deg] border-l-[50px] border-l-transparent border-r-[50px] border-r-transparent border-b-[50px] border-b-red-500">
+                    {/* Text inside the triangle */}
+                    <p className="absolute top-[30px] left-[-20px] text-white font-bold text-[12px] whitespace-nowrap flex items-center justify-center">
+                      {item.discount_type === "fixed" ? (
+                        <>
+                          Dis <Taka />{" "}
+                        </>
+                      ) : (
+                        ""
+                      )}
+                      {Math.trunc(item.discount_price)}{" "}
+                      {item.discount_type === "percent" ? "% off" : ""}
+                    </p>
+                  </div>
+                </div>
+              </>
+            )}
+          </div>
+
           <div className="relative overflow-hidden w-full h-full sm:p-5 p-1 border-b">
             <Link href={"/product/" + item?.id + "/" + item?.slug}>
               {/* <img src={productImg + item.image[0]} alt="" className='sm:h-full h-auto w-auto mx-auto' /> */}
