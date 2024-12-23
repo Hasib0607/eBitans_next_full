@@ -120,6 +120,7 @@ const CheckOutOne = () => {
                 setToken={setToken}
                 token={token}
                 setUserAddress={setUserAddress}
+                setUserDistrict={setUserDistrict}
                 userPhone={userPhone}
                 setUserPhone={setUserPhone}
                 setUserName={setUserName}

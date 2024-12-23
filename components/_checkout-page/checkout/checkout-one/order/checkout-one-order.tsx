@@ -186,7 +186,7 @@ const YourOrders = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
-      district: selectAddress?.district,
+      district: userDistrict,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -198,6 +198,7 @@ const YourOrders = ({
       referral_code: referralCode || "",
       note: note || "",
     };
+
 
     formData.append("store_id", store_id);
     formData.append(
@@ -280,7 +281,7 @@ const YourOrders = ({
       data.payment_type &&
       data.product &&
       shipping_area &&
-      (data.address || (userAddress && userName && userPhone))
+      (data.address || (userAddress && userName && userPhone && userDistrict))
     ) {
       setLoadPay(true);
 
