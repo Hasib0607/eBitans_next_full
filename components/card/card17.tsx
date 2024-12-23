@@ -18,11 +18,13 @@ import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import CallForPriceForCard from "@/utils/call-for-price-for-card";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Card17 = ({ item }: any) => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const { design, store_id } = useTheme();
+  const { design, store_id, headerSetting } = useTheme();
   const [camp, setCamp] = useState<any>(null);
 
   const [view, setView] = useState(false);
@@ -50,7 +52,6 @@ const Card17 = ({ item }: any) => {
     parseInt(camp?.discount_amount),
     camp?.discount_type
   );
-
   useEffect(() => {
     async function handleCampaign() {
       try {
@@ -167,9 +168,18 @@ const Card17 = ({ item }: any) => {
             </h3>
           </Link>
           <div className="font-twelve text-sm text-gray-600 antialiased mb-2 group-hover:opacity-0 flex items-center gap-2">
-            <BDT
-              price={camp?.status === "active" ? campPrice : productGetPrice}
-            />
+            {productGetPrice === 0 ? (
+              <CallForPriceForCard
+                product={item}
+                headerSetting={headerSetting}
+                price={productGetPrice}
+              />
+            ) : (
+              <BDT
+                price={camp?.status === "active" ? campPrice : productGetPrice}
+              />
+            )}
+
             {camp?.status !== "active" &&
             (item.discount_type === "no_discount" ||
               item.discount_price === "0.00") ? (
@@ -183,15 +193,26 @@ const Card17 = ({ item }: any) => {
           </div>
         </div>
         <div className="font-twelve duration-5000 cart lg:absolute bottom-3 lg:opacity-0 group-hover:opacity-100 duration-500 flex justify-between items-center w-full px-3 flex-wrap gap-y-2">
-          <div
-            onClick={add_cart_item}
-            className="flex gap-1 items-center  border-b-2 border-black lg:cursor-pointer"
-          >
-            <BsPlusLg className="text-xs " />
-            <p className="text-sm font-twelve font-medium">
-              {store_id === 2680 ? "Order Now" : "Add To Cart"}
-            </p>
-          </div>
+          {productGetPrice === 0 ? (
+            <div>
+              <a
+                href={
+                  "https://api.whatsapp.com/send?phone=" + headerSetting?.phone
+                }
+                className="flex items-center gap-1"
+              >
+                <FaWhatsapp /> Call for Price
+              </a>
+            </div>
+          ) : (
+            <div
+              onClick={add_cart_item}
+              className="flex gap-1 items-center  border-b-2 border-black lg:cursor-pointer"
+            >
+              <BsPlusLg className="text-xs " />
+              <p className="text-sm font-twelve font-medium">Add To Cart</p>
+            </div>
+          )}
           <Rate rating={item?.rating} className="font-twelve" />
         </div>
       </motion.div>
