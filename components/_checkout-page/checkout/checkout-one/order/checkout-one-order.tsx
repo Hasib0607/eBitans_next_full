@@ -186,7 +186,7 @@ const YourOrders = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
-      district: selectAddress?.district,
+      district: userDistrict,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -280,7 +280,7 @@ const YourOrders = ({
       data.payment_type &&
       data.product &&
       shipping_area &&
-      (data.address || (userAddress && userName && userPhone && shipping_area))
+      (data.address || (userAddress && userName && userPhone && userDistrict))
     ) {
       setLoadPay(true);
 
@@ -296,6 +296,7 @@ const YourOrders = ({
           process.env.NEXT_PUBLIC_API_URL + "address/easy-order/save",
           dataInfo
         );
+
         const placeOrder = async () => {
           try {
             const response = await axios.post(apiOrder, formData, {
@@ -304,7 +305,6 @@ const YourOrders = ({
                 "Content-Type": "application/json",
               },
             });
-
             if (response?.data?.url) {
               window.location.replace(response?.data.url);
               localStorage.removeItem("referralObj");

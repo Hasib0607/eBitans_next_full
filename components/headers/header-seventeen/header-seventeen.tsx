@@ -329,25 +329,28 @@ const SideMenu = ({ setOpen, open }: any) => {
     <div>
       <div className="">
         <ul className="flex lg:flex-row flex-col lg:items-center lg:gap-10 gap-4">
-          {menu?.map((item: any) => (
-            <div
-              key={item.id}
-              className="relative border-t lg:border-t-0 lg:pt-0 pt-4"
-            >
-              <li
-                className=""
-                onClick={() => {
-                  heading !== item.name
-                    ? setHeading(item.name)
-                    : setHeading("");
-                }}
-              >
-                <Link href={"/" + item?.url}>
-                  <h1 className="hover-color w-max uppercase font-semibold text-base lg:text-white menu-hover">
-                    {item.name}
-                  </h1>
-                </Link>
-              </li>
+          {menu?.slice(0, 6)?.map((item: any) => (
+            <div key={item.id} className="relative lg:pt-0 pt-4">
+              {item?.status == 1 && (
+                <li
+                  className="border-t lg:border-t-0"
+                  onClick={() => {
+                    heading !== item.name
+                      ? setHeading(item.name)
+                      : setHeading("");
+                  }}
+                >
+                  <Link
+                    href={
+                      item?.custom_link || (item?.url ? `/${item?.url}` : "/")
+                    }
+                  >
+                    <h1 className="hover-color w-max uppercase font-semibold text-base lg:text-white menu-hover">
+                      {item.name}
+                    </h1>
+                  </Link>
+                </li>
+              )}
               {item.url === "category" && (
                 <ChevronDownIcon
                   onClick={() => {

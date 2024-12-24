@@ -68,7 +68,16 @@ const Card58 = ({ item }: any) => {
     button1,
     button1_color,
     button1_bg_color,
+<<<<<<< HEAD
   } = data?.custom_design?.best_sell_product?.[0] || data?.custom_design?.product?.[0] || {};
+=======
+  } =
+    data?.custom_design?.best_sell_product?.[0] ||
+    data?.custom_design?.product?.[0] ||
+    data?.custom_design?.feature_product?.[0] ||
+    data?.custom_design?.new_arrival?.[0] ||
+    {};
+>>>>>>> b82255afce0e7e256aa56c7028cf18eaaf98e6c2
 
   const styleCss = `
     .searchHover:hover {
@@ -252,11 +261,10 @@ const Card58 = ({ item }: any) => {
               <div className="h-10 absolute top-2 right-2 z-[2]">
                 <img src={shape.src} alt="" className="h-full" />
                 <p className="text-[10px] text-white absolute top-2 left-3 leading-[12px]">
-                  Dis{" "}
+                  {" "}
                   {item.discount_type === "fixed" ? (
                     <>
-                      {" "}
-                      <Taka />{" "}
+                      Dis <Taka />{" "}
                     </>
                   ) : (
                     ""
@@ -322,7 +330,7 @@ const Card58 = ({ item }: any) => {
             onClick={add_cart_item}
             className="bg-color flex px-2 py-2 justify-center gap-1 items-center lg:cursor-pointer mt-1"
           >
-           কার্টে যোগ করুন
+            কার্টে যোগ করুন
           </div>
         ) : (
           <>

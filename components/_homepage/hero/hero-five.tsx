@@ -138,12 +138,14 @@ const HeroFive = ({ slider, design }: any) => {
                 <h1 className="xl:text-4xl md:text-[28px] text-[16px] font-bold md:text-center md:leading-7">
                   {s?.title}
                 </h1>
-                {/* <p className='h-[2px] w-10 bg-black mx-auto md:block hidden'></p> */}
-                <a href={s?.link} target="_blank" rel="noopener noreferrer">
-                  <h1 className="lg:px-6 px-3 md:py-2 py-1 arrow-hover-five duration-300 lg:text-base text-xs sm:text-center w-max md:mx-auto lg:cursor-pointer uppercase font-medium rounded-full">
-                    Shop Now{" "}
-                  </h1>
-                </a>
+                {/* <p className="h-[2px] w-10 bg-black mx-auto md:block hidden"></p> */}
+                {s?.link && (
+                  <a href={s?.link} target="_blank" rel="noopener noreferrer">
+                    <h1 className="lg:px-6 px-3 md:py-2 py-1 arrow-hover-five duration-300 lg:text-base text-xs sm:text-center w-max md:mx-auto lg:cursor-pointer uppercase font-medium rounded-full">
+                      Shop Now
+                    </h1>
+                  </a>
+                )}
               </div>
             </div>
             <img

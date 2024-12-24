@@ -36,6 +36,8 @@ const CheckOutFortyOrder = ({
   userName,
   userPhone,
   userAddress,
+  userEmail,
+  userNote,
   formBookData,
 }: any) => {
   const [loading, setLoading] = useState(false);
@@ -233,6 +235,8 @@ const CheckOutFortyOrder = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
+      email: selectAddress?.email,
+      note: selectAddress?.note,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -362,6 +366,8 @@ const CheckOutFortyOrder = ({
           name: bookingData?.status === 200 ? formBookData?.name : userName,
           phone: bookingData?.status === 200 ? formBookData?.phone : userPhone,
           address: userAddress,
+          email: userEmail,
+          note: userNote,
           store_id: store_id,
         };
         const responseInfo = await axios.post(
@@ -558,7 +564,9 @@ const CheckOutFortyOrder = ({
         <hr />
         <div className="flex justify-between items-center px-2 pt-2">
           <p>Total</p>
-          {shipping_area === "--Select Area--" || shipping_area === null ? (
+          {!shipping_area ||
+          shipping_area === "--Select Area--" ||
+          shipping_area === null ? (
             <p>{<Taka tk={parseInt(total + tax) - couponDis} />}</p>
           ) : (
             <p>

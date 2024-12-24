@@ -332,15 +332,23 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
             </div>
           </div>
           <div className={`flex gap-4`}>
-            {menu?.slice(0, 7).map((menu: any) => (
-              <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
-                <Link href={"/" + menu?.url} className="flex items-center">
-                  <li className="text-lg font-medium py-3 uppercase menu-hover">
-                    {menu?.name}
-                  </li>
-                </Link>
-              </ul>
-            ))}
+            {menu?.slice(0, 7).map(
+              (menu: any) =>
+                menu.status == 1 && (
+                  <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
+                    <Link
+                      href={
+                        menu?.custom_link || (menu?.url ? `/${menu?.url}` : "/")
+                      }
+                      className="flex items-center"
+                    >
+                      <li className="text-lg font-medium py-3 uppercase menu-hover">
+                        {menu?.name}
+                      </li>
+                    </Link>
+                  </ul>
+                )
+            )}
           </div>
         </div>
         <div
@@ -349,15 +357,23 @@ const HeaderTwentySix = ({ headerSetting }: any) => {
           }`}
         >
           <div className="sm:container px-5 flex gap-4">
-            {menu?.slice(0, 7).map((menu: any) => (
-              <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
-                <Link href={"/" + menu?.url} className="flex items-center">
-                  <li className="text-lg font-medium py-3 uppercase menu-hover">
-                    {menu?.name}
-                  </li>
-                </Link>
-              </ul>
-            ))}
+            {menu?.slice(0, 7).map(
+              (menu: any) =>
+                menu.status == 1 && (
+                  <ul className="group relative xl:pr-10 pr-6" key={menu?.id}>
+                    <Link
+                      href={
+                        menu?.custom_link || (menu?.url ? `/${menu?.url}` : "/")
+                      }
+                      className="flex items-center"
+                    >
+                      <li className="text-lg font-medium py-3 uppercase menu-hover">
+                        {menu?.name}
+                      </li>
+                    </Link>
+                  </ul>
+                )
+            )}
           </div>
         </div>
       </div>

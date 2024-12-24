@@ -87,16 +87,21 @@ const HeaderTwo = ({ headerSetting }: any) => {
           </div>
         </div>
         <div className="lg:flex hidden space-x-5">
-          {menu?.map((item: any) => (
-            <div key={item.id} className="header-menu">
-              <Link
-                href={item?.url ? `/${item?.url}` : "/"}
-                className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium"
-              >
-                {item.name}
-              </Link>
-            </div>
-          ))}
+          {menu?.slice(0, 6)?.map(
+            (item: any) =>
+              item?.status == 1 && (
+                <div key={item?.id} className="header-menu">
+                  <Link
+                    href={
+                      item?.custom_link || (item?.url ? `/${item?.url}` : "/")
+                    }
+                    className="uppercase sm:text-base text-sm text-gray-500 font-medium"
+                  >
+                    {item?.name}
+                  </Link>
+                </div>
+              )
+          )}
         </div>
         <div className="flex gap-3 items-center">
           <div className="flex items-center relative">

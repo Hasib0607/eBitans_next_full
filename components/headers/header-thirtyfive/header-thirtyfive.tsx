@@ -148,14 +148,23 @@ const HeaderThirtyFive = ({ headerSetting }: any) => {
           </div>
 
           <div className="hidden lg:flex gap-5 items-center border-r-2 border-black w-full justify-center h-20 px-4 thirty-five-menu">
-            {menu.map((item: any) => (
-              <p
-                key={item.id}
-                className="text-base font-semibold leading-4 lg:cursor-pointer"
-              >
-                <Link href={"/" + item.url}>{item.name}</Link>
-              </p>
-            ))}
+            {menu?.slice(0, 6)?.map(
+              (item: any) =>
+                item.status == 1 && (
+                  <p
+                    key={item.id}
+                    className="text-base font-semibold leading-4 lg:cursor-pointer"
+                  >
+                    <Link
+                      href={
+                        item?.custom_link || (item?.url ? `/${item?.url}` : "/")
+                      }
+                    >
+                      {item.name}
+                    </Link>
+                  </p>
+                )
+            )}
           </div>
 
           <div className="w-full hidden lg:flex justify-end">

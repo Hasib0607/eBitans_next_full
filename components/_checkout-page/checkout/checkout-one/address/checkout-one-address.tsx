@@ -26,6 +26,7 @@ const Address = ({
   setShipping_area,
   setNote,
   item,
+  setUserDistrict,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -182,7 +183,10 @@ const Address = ({
                   </label>
                   <select
                     value={selectedDistrict}
-                    onChange={(e) => setSelectedDistrict(e.target.value)}
+                    onChange={(e) => {
+                      setSelectedDistrict(e.target.value);
+                      setUserDistrict(e.target.value);
+                    }}
                     required
                     className="border border-gray-400 rounded px-3 py-2 focus:outline-none focus:border-gray-400"
                   >
@@ -339,7 +343,7 @@ const Single = ({
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
     }
   }, [headerSetting, setShipping_area, selectAddress]);
-
+  console.log("item", item);
   return (
     <label
       style={{
@@ -388,7 +392,7 @@ const Single = ({
       </p>
       <p className="font-normal text-sm tracking-wider">
         <span className="text-base font-medium">District: </span>
-        {item?.districtData?.bn_name}
+        {item?.district?.bn_name}
       </p>
       <input
         className="absolute bottom-5 right-5"
@@ -457,7 +461,7 @@ const AddressView = ({
             toast(success, { type: "success" });
           })
           .catch((err) => {
-            // console.log("Error during HTTP request:", err);
+            console.log("Error during HTTP request:", err);
             toast("Error saving address", { type: "error" });
           });
       }
@@ -560,20 +564,6 @@ const AddressView = ({
                 <span className="text-red-500">District is required</span>
               )}
             </div>
-
-            {/* <Controller
-              name="district"
-              control={control}
-              render={({ onChange, id, ref }) => (
-                <Select
-                  options={district}
-                  value={district.find((c: any) => c.id === id)}
-                  onChange={(val) => onChange(val.id)}
-                  defaultValue={district.find((c: any) => c.id === id)}
-                />
-              )}
-              rules={{ required: true }}
-            /> */}
 
             <div className="col-span-6 sm:col-span-3 lg:col-span-2">
               <label

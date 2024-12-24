@@ -352,13 +352,24 @@ const HeaderThirtyOne = ({ headerSetting }: any) => {
           <div
             className={`lg:flex hidden justify-center sm:container px-5 py-2 gap-4 w-full text-white`}
           >
-            {menu?.slice(0, 5).map((menuItem: any) => (
-              <ul className="group relative px-5" key={menuItem?.id}>
-                <Link href={"/" + menuItem?.url} className="flex items-center">
-                  <li className="text-xl font-medium py-3">{menuItem?.name}</li>
-                </Link>
-              </ul>
-            ))}
+            {menu?.slice(0, 5).map(
+              (menuItem: any) =>
+                menuItem.status == 1 && (
+                  <ul className="group relative px-5" key={menuItem?.id}>
+                    <Link
+                      href={
+                        menuItem?.custom_link ||
+                        (menuItem?.url ? `/${menuItem?.url}` : "/")
+                      }
+                      className="flex items-center"
+                    >
+                      <li className="text-xl font-medium py-3">
+                        {menuItem?.name}
+                      </li>
+                    </Link>
+                  </ul>
+                )
+            )}
           </div>
         </div>
       </div>

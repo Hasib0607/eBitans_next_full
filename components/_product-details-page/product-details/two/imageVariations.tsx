@@ -17,18 +17,19 @@ export const Units = ({ unit, setUnit, variant, setActiveImg }: any) => {
   );
 };
 
-export const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
+export const ColorsOnly = ({ color, setColor, vrImage, setActiveImg }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Colors</h3>
       <div className="flex gap-2 flex-wrap">
-        {variant?.map((item: any, id: any) => (
+        {vrImage?.map((item: any, id: any) => (
           <ColorSet
             key={id}
-            text={item}
+            text={item?.color}
             select={color}
             setSelect={setColor}
             itemImage={item?.image}
+            colorName={item?.color_name}
             setActiveImg={setActiveImg}
           />
         ))}
@@ -56,7 +57,7 @@ export const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   );
 };
 
-export const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
+export const Colors = ({ color, setColor, vrcolor, setSize, colorName, setColorName }: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Color</h3>
@@ -64,10 +65,11 @@ export const Colors = ({ color, setColor, vrcolor, setSize }: any) => {
         {vrcolor?.map((item: any, id: any) => (
           <Color
             key={id}
-            text={item}
+            text={item?.color}
             select={color}
             setSelect={setColor}
             setSize={setSize}
+            colorName={item?.color_name}
           />
         ))}
       </div>
@@ -107,8 +109,10 @@ export const Size = ({ item, select, setSelect, setActiveImg }: any) => {
   );
 };
 
-export const Color = ({ text, select, setSelect, setSize }: any) => {
+export const Color = ({ text, select, setSelect, setSize, colorName }: any) => {
   return (
+    <>
+    <div className="flex flex-col justify-center items-center">
     <div
       onClick={() => {
         setSelect(text);
@@ -120,17 +124,22 @@ export const Color = ({ text, select, setSelect, setSize }: any) => {
     >
       <div style={{ backgroundColor: text }} className="w-7 h-7"></div>
     </div>
+      <p className="text-sm">{colorName}</p>
+    </div>
+    </>
   );
 };
 
 export const ColorSet = ({
   text,
+  colorName,
   select,
   setSelect,
   itemImage,
   setActiveImg,
 }: any) => {
   return (
+    <div className="flex flex-col justify-center items-center">
     <div
       onClick={() => {
         setSelect(text);
@@ -141,6 +150,8 @@ export const ColorSet = ({
       }`}
     >
       <div style={{ backgroundColor: text?.color }} className="w-7 h-7"></div>
+    </div>
+      <p className="text-sm">{colorName}</p>
     </div>
   );
 };

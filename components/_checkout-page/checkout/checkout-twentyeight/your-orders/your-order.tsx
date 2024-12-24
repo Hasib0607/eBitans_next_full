@@ -472,7 +472,9 @@ const YourOrders = ({
         <div className="h-[2px] w-full bg-gray-300 mt-4 mb-2"></div>
         <div className="flex justify-between items-center  font-semibold">
           <p>মোট</p>
-          {shipping_area === "--Select Area--" || shipping_area === null ? (
+          {!shipping_area ||
+          shipping_area === "--Select Area--" ||
+          shipping_area === null ? (
             <p>{<BDT price={parseInt(total + tax) - couponDis} />}</p>
           ) : (
             <p>

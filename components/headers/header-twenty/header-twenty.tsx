@@ -1,7 +1,6 @@
 "use client";
 import { Fragment, useState } from "react";
 import { Popover, Transition, Menu } from "@headlessui/react";
-
 import { HiUser } from "react-icons/hi";
 import { useSelector, useDispatch } from "react-redux";
 import { CgClose } from "react-icons/cg";
@@ -38,15 +37,20 @@ export default function HeaderTwenty({ headerSetting }: any) {
       <div className="sm:container px-5">
         <div className="flex justify-between items-center lg:grid grid-cols-3 py-6 lg:space-x-10">
           <Popover.Group as="nav" className="hidden lg:flex space-x-6">
-            {menu?.slice(0, 5)?.map((data: any) => (
-              <Link
-                href={"/" + data?.url}
-                key={data?.id}
-                className="text-base font-medium text-gray-500 hover:text-gray-900"
-              >
-                {data?.name}
-              </Link>
-            ))}
+            {menu?.slice(0, 5)?.map(
+              (data: any) =>
+                data.status == 1 && (
+                  <Link
+                    href={
+                      data?.custom_link || (data?.url ? `/${data?.url}` : "/")
+                    }
+                    key={data?.id}
+                    className="text-base font-medium text-gray-500 hover:text-gray-900"
+                  >
+                    {data?.name}
+                  </Link>
+                )
+            )}
           </Popover.Group>
 
           <div className="justify-self-center">
@@ -208,15 +212,24 @@ export default function HeaderTwenty({ headerSetting }: any) {
               </div>
               <div className="mt-6">
                 <nav className="grid gap-y-8">
-                  {menu?.map((item: any) => (
-                    <Link key={item.id} href={item.url}>
-                      <Popover.Button className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50 w-full">
-                        <span className=" text-base font-medium text-gray-900">
-                          {item.name}
-                        </span>
-                      </Popover.Button>
-                    </Link>
-                  ))}
+                  {menu?.slice(0, 5)?.map(
+                    (item: any) =>
+                      item.status == 1 && (
+                        <Link
+                          key={item.id}
+                          href={
+                            item?.custom_link ||
+                            (item?.url ? `/${item?.url}` : "/")
+                          }
+                        >
+                          <Popover.Button className="-m-3 p-3 flex items-center rounded-md hover:bg-gray-50 w-full">
+                            <span className=" text-base font-medium text-gray-900">
+                              {item.name}
+                            </span>
+                          </Popover.Button>
+                        </Link>
+                      )
+                  )}
                 </nav>
               </div>
             </div>

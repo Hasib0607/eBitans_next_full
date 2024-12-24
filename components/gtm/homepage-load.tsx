@@ -9,8 +9,8 @@ const HomepageLoad = () => {
     sendGTMEvent({
       event: "page_load",
     });
-    PageView();
-  }, []);
+    // PageView();
+  }, [PageView]);
   return <div></div>;
 };
 export default HomepageLoad;

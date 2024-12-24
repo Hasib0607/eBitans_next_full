@@ -104,15 +104,23 @@ const HeaderCatTen = () => {
                 }}
                 className="absolute z-50 group-hover:block hidden w-[250px] top-[67px] left-[-50%] lg:cursor-pointer"
               >
-                {menu.map((menuItem: any, j: any) => (
-                  <div key={menuItem.id} className="relative ">
-                    <div className="px-6 py-2 hover:bg-gray-300 hover:text-gray-900 ">
-                      <Link href={"/" + menuItem?.url}>
-                        <h1>{menuItem.name} </h1>
-                      </Link>
-                    </div>
-                  </div>
-                ))}
+                {menu?.slice(0, 6)?.map(
+                  (menuItem: any, j: any) =>
+                    menuItem.status == 1 && (
+                      <div key={menuItem.id} className="relative ">
+                        <div className="px-6 py-2 hover:bg-gray-300 hover:text-gray-900 ">
+                          <Link
+                            href={
+                              menuItem?.custom_link ||
+                              (menuItem?.url ? `/${menuItem?.url}` : "/")
+                            }
+                          >
+                            <h1>{menuItem.name} </h1>
+                          </Link>
+                        </div>
+                      </div>
+                    )
+                )}
               </div>
             </li>
           </ul>

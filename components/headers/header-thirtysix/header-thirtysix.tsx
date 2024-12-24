@@ -219,7 +219,7 @@ const HeaderThirtySix = ({ headerSetting }: any) => {
 
       <div className="">
         <ul
-          className={`bg-white mt-28  fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-[5] lg:cursor-pointer ${
+          className={`bg-white mt-20  fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-[5] lg:cursor-pointer ${
             open ? "left-0" : "left-[-160%]"
           } `}
         >

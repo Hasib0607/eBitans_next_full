@@ -553,7 +553,9 @@ const CheckOutSevenOrder = ({
         </div>
         <div className="flex justify-between items-center last:border-0 border-b border-gray-200 py-3">
           <p>Total</p>
-          {shipping_area === "--Select Area--" || shipping_area === null ? (
+          {!shipping_area ||
+          shipping_area === "--Select Area--" ||
+          shipping_area === null ? (
             <p>{<Taka tk={parseInt(total + tax) - couponDis} />}</p>
           ) : (
             <p>

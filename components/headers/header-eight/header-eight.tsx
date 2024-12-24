@@ -219,13 +219,15 @@ export default function HeaderEight({ headerSetting }: any) {
                     <div className="">
                       <div className="hidden md:block">
                         <div className="flex gap-4">
-                          {menu?.map((item: any, idx: any) =>
-                            item?.url === "category" ? (
-                              <Cat item={item} key={idx} />
-                            ) : (
-                              <SingleMenu key={item?.id} item={item} />
-                            )
-                          )}
+                          {menu
+                            ?.slice(0, 6)
+                            ?.map((item: any, idx: any) =>
+                              item?.url === "category" ? (
+                                <Cat item={item} key={idx} />
+                              ) : (
+                                <SingleMenu key={item?.id} item={item} />
+                              )
+                            )}
                         </div>
                       </div>
                     </div>
@@ -266,21 +268,28 @@ export default function HeaderEight({ headerSetting }: any) {
 
                 <Disclosure.Panel className="md:hidden">
                   <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-                    {menu?.map((item: any) => (
-                      <Disclosure.Button
-                        key={item.id}
-                        as="a"
-                        className={classNames(
-                          item.current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "block px-3 py-2 rounded-md text-base font-medium"
-                        )}
-                        aria-current={item.current ? "page" : undefined}
-                      >
-                        {item?.name}
-                      </Disclosure.Button>
-                    ))}
+                    {menu?.slice(0, 6)?.map(
+                      (item: any) =>
+                        item.status == 1 && (
+                          <Disclosure.Button
+                            key={item.id}
+                            as="a"
+                            href={
+                              item?.custom_link ||
+                              (item?.url ? `/${item?.url}` : "/")
+                            }
+                            className={classNames(
+                              item.current
+                                ? "bg-gray-900 text-white"
+                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                              "block px-3 py-2 rounded-md text-base font-medium"
+                            )}
+                            aria-current={item.current ? "page" : undefined}
+                          >
+                            {item?.name}
+                          </Disclosure.Button>
+                        )
+                    )}
                   </div>
                 </Disclosure.Panel>
               </>
@@ -422,17 +431,19 @@ const Sticky = ({ setSearchInput, searchInput, headerSetting }: any) => {
 const SingleMenu = ({ item }: any) => {
   return (
     <div className="py-3 flex ">
-      <Link
-        href={"/" + item?.url}
-        className={classNames(
-          item.current
-            ? "bg-gray-900 text-white"
-            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-          "py-2 rounded-md text-sm font-medium px-3"
-        )}
-      >
-        {item?.name}
-      </Link>
+      {item.status == 1 && (
+        <Link
+          href={item?.custom_link || (item?.url ? `/${item?.url}` : "/")}
+          className={classNames(
+            item.current
+              ? "bg-gray-900 text-white"
+              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+            "py-2 rounded-md text-sm font-medium px-3"
+          )}
+        >
+          {item?.name}
+        </Link>
+      )}
     </div>
   );
 };

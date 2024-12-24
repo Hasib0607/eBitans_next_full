@@ -303,13 +303,22 @@ const HeaderNineteen = ({ headerSetting }: any) => {
       >
         <div className="col-span-3 justify-self-center lg:block hidden">
           <ul className=" flex gap-10 justify-center item-center">
-            {menu?.map((menuData: any, id: any) => (
-              <Link key={id} href={"/" + menuData?.url}>
-                <h1 className={`flex justify-between items-center group`}>
-                  {menuData?.name}
-                </h1>
-              </Link>
-            ))}
+            {menu?.slice(0, 6)?.map(
+              (menuData: any, id: any) =>
+                menuData.status == 1 && (
+                  <Link
+                    key={id}
+                    href={
+                      menuData?.custom_link ||
+                      (menuData?.url ? `/${menuData?.url}` : "/")
+                    }
+                  >
+                    <h1 className={`flex justify-between items-center group`}>
+                      {menuData?.name}
+                    </h1>
+                  </Link>
+                )
+            )}
           </ul>
         </div>
       </div>

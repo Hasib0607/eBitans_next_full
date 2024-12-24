@@ -34,6 +34,8 @@ const YourOrders = ({
   userName,
   userPhone,
   userAddress,
+  userEmail,
+  userNote,
 }: any) => {
   const [loading, setLoading] = useState(false);
   const [tax, setTax] = useState<any>(0);
@@ -178,6 +180,8 @@ const YourOrders = ({
       phone: selectAddress?.phone,
       payment_type: selectPayment,
       address: selectAddress?.address,
+      email: selectAddress?.email,
+      note: selectAddress?.note,
       subtotal: total,
       shipping: parseInt(shipping_area),
       total:
@@ -264,8 +268,10 @@ const YourOrders = ({
       if (store?.auth_type === "EasyOrder" && !user) {
         const dataInfo = {
           name: userName,
+          email: userEmail,
           phone: userPhone,
           address: userAddress,
+          note: userNote,
           store_id: store_id,
         };
         const responseInfo = await axios.post(

@@ -588,6 +588,8 @@ const Details = ({
     );
   }
 
+  console.log("product", product);
+
   return (
     <div className="bg-white h-full mt-5">
       <style>{styleCss}</style>
@@ -636,6 +638,10 @@ const Details = ({
             <div className="text-gray-500 sm:text-sm text-xs">
               ({product?.number_rating})
             </div>
+          </div>
+          <div>
+            {product?.supplier_name && <p>লেখকঃ {product?.supplier_name}</p>}
+            {product?.brand_name && <p>প্রকাশনীঃ {product?.brand_name}</p>}
           </div>
           <div className="h-[1px] bg-gray-300 w-full"></div>
           <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">

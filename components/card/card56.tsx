@@ -15,9 +15,11 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import CallForPriceForCard from "@/utils/call-for-price-for-card";
+import { FaWhatsapp } from "react-icons/fa";
 
 const Card56 = ({ item }: any) => {
-  const { design, makeid, store_id } = useTheme();
+  const { design, makeid, store_id, headerSetting } = useTheme();
   const [camp, setCamp] = useState<any>(null);
 
   const dispatch = useDispatch();
@@ -216,13 +218,23 @@ const Card56 = ({ item }: any) => {
             </div>
 
             <div className="text-gray-600 flex flex-wrap items-center gap-1 sm:gap-2 w-full">
-              <p className="text-color text-lg">
-                <BDT
-                  price={
-                    camp?.status === "active" ? campPrice : productGetPrice
-                  }
-                />
-              </p>
+              <div className="">
+                {price === 0 ? (
+                  <CallForPriceForCard
+                    product={item}
+                    headerSetting={headerSetting}
+                    price={price}
+                  />
+                ) : (
+                  <p className="text-color text-lg">
+                    <BDT
+                      price={
+                        camp?.status === "active" ? campPrice : productGetPrice
+                      }
+                    />
+                  </p>
+                )}
+              </div>
               <h1 className="line-through text-xs ">
                 {camp?.status !== "active" &&
                 (item?.discount_type === "no_discount" ||
@@ -255,12 +267,28 @@ const Card56 = ({ item }: any) => {
           </div>
 
           {store_id !== 5184 && (
-            <div
-              onClick={add_cart_item}
-              className="lg:cursor-pointer hover:border hover:border-gray-600 hover:p-1 hover:rounded-full hover:touch-pinch-zoom  border p-2 cart-hover-fs duration-300"
-            >
-              <MdAddShoppingCart className="text-2xl" />
-            </div>
+            <>
+              {price === 0 ? (
+                <div>
+                  <a
+                    href={
+                      "https://api.whatsapp.com/send?phone=" +
+                      headerSetting?.phone
+                    }
+                    className="text-xl"
+                  >
+                    <FaWhatsapp />
+                  </a>
+                </div>
+              ) : (
+                <div
+                  onClick={add_cart_item}
+                  className="lg:cursor-pointer hover:border hover:border-gray-600 hover:p-1 hover:rounded-full hover:touch-pinch-zoom border p-2 cart-hover-fs duration-300"
+                >
+                  <MdAddShoppingCart className="text-2xl" />
+                </div>
+              )}
+            </>
           )}
         </div>
       </div>

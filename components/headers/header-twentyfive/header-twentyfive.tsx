@@ -293,15 +293,24 @@ const HeaderDown = () => {
 
           <div className="px-6">
             <div className="flex flex-col space-y-3 mt-5 z-50">
-              {menu?.map((item: any) => (
-                <div key={item.id}>
-                  <Link onClick={() => setOpen(false)} href={"/" + item?.url}>
-                    <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
-                      {item.name}
-                    </p>
-                  </Link>
-                </div>
-              ))}
+              {menu?.slice(0, 6)?.map(
+                (item: any) =>
+                  item?.status == 1 && (
+                    <div key={item.id}>
+                      <Link
+                        onClick={() => setOpen(false)}
+                        href={
+                          item?.custom_link ||
+                          (item?.url ? `/${item?.url}` : "/")
+                        }
+                      >
+                        <p className="menu-hover uppercase sm:text-base text-sm text-gray-500 font-medium">
+                          {item.name}
+                        </p>
+                      </Link>
+                    </div>
+                  )
+              )}
             </div>
           </div>
         </ul>
