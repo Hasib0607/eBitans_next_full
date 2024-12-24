@@ -26,7 +26,7 @@ const Address = ({
   setShipping_area,
   setNote,
   item,
-  setUserDistrict
+  setUserDistrict,
 }: any) => {
   const [address, setAddress] = useState<any>(null);
   const [open, setOpen] = useState(false);
@@ -343,7 +343,7 @@ const Single = ({
       setShipping_area(parseInt(headerSetting?.shipping_area_2_cost));
     }
   }, [headerSetting, setShipping_area, selectAddress]);
-console.log("item", item);
+  console.log("item", item);
   return (
     <label
       style={{

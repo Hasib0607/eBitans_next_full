@@ -30,7 +30,7 @@ const Announcement = async ({ design, url }: any) => {
       ) : (
         <div id="annoucement" style={{ background: design?.header_color }}>
           <div className="relative flex overflow-x-hidden container">
-            <Marquee speed={10} pauseOnHover={true}>
+            <Marquee speed={30} pauseOnHover={true}>
               <div className="py-2  whitespace-nowrap">
                 {alternatedArray.map((an: any, index: number) => (
                   <span
