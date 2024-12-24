@@ -264,7 +264,7 @@ const HeaderTwentyOne = ({ headerSetting }: any) => {
 
       <div
         className={`${
-          (store_id === 3601 || store_id === 3904 || store_id === 10042) && "bg-color"
+          (store_id === 3601 || store_id === 3904 || store_id === 10057) && "bg-color"
         } pt-3`}
       >
         <div className="flex justify-between items-center sm:container px-5 pb-3">
