@@ -68,7 +68,7 @@ const Card58 = ({ item }: any) => {
     button1,
     button1_color,
     button1_bg_color,
-  } = data?.custom_design?.best_sell_product?.[0] || {};
+  } = data?.custom_design?.best_sell_product?.[0] || data?.custom_design?.product?.[0] || {};
 
   const styleCss = `
     .searchHover:hover {
