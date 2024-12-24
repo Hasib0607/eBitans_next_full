@@ -179,6 +179,8 @@ const Address = ({
                       address={address}
                       store_id={store_id}
                       setToken={setToken}
+                      isPhoneValid={isPhoneValid}
+                      handleChange={handleChange}
                     />
                   </div>
                 )}
@@ -204,6 +206,7 @@ const Address = ({
                           selectAddress={selectAddress}
                           setSelectAddress={setSelectAddress}
                           setCall={setCall}
+                          isPhoneValid={isPhoneValid}
                         />
                       ))}
                   </div>
@@ -236,6 +239,7 @@ const Single = ({
   setSelectAddress,
   setCall,
   token,
+  isPhoneValid
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -311,6 +315,7 @@ const Single = ({
             setCall={setCall}
             setSelectAddress={setSelectAddress}
             design={design}
+            isPhoneValid={isPhoneValid}
           />
         </div>
       </div>
@@ -331,7 +336,15 @@ const Single = ({
   );
 };
 
-const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
+const AddressView = ({
+  setCall,
+  store_id,
+  setToken,
+  store,
+  design,
+  isPhoneValid,
+  handleChange
+}: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const {
     register,
@@ -424,8 +437,12 @@ const AddressView = ({ setCall, store_id, setToken, store, design }: any) => {
                   id="phone"
                   autoComplete="address-level1"
                   className="flex-grow ml-2 outline-none"
+                  onChange={handleChange}
                 />
               </div>
+                {!isPhoneValid && (
+                  <small className="text-rose-500">Need 11 digits</small>
+                )}
               {errors.phone?.type === "required" && (
                 <span className="text-red-500">Phone number is required</span>
               )}
@@ -639,6 +656,7 @@ export function UpdateAddress({
   setSelectAddress,
   design,
   token,
+  isPhoneValid
 }: any) {
   const { store } = useTheme();
 
