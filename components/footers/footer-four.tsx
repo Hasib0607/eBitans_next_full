@@ -6,6 +6,7 @@ import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
   const result = page.filter(
@@ -19,7 +20,7 @@ const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
     >
       <div className="sm:container px-5 sm:py-10 py-5">
         <Newsletter headerSetting={headerSetting} store_id={store_id} />
-        <div className="grid sm:grid-cols-2 md:grid-cols-3  gap-3 md:text-left text-center">
+        <div className="grid sm:grid-cols-3 md:grid-cols-4  gap-3 md:text-left text-center">
           <div className="sm:col-span-2 md:col-span-1 px-2 pb-4 flex sm:justify-center">
             <div className="flex flex-col sm:items-center space-y-4">
               {headerSetting?.logo && (
@@ -60,6 +61,18 @@ const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
                     </li>
                   ) : null
                 )}
+              </nav>
+            </div>
+          </div>
+          <div className="col-span-1 px-2 flex sm:justify-center">
+            <div className="flex flex-col">
+              <h2
+                className="title-font font-bold tracking-widest text-left text-lg mb-3  border-b-2 min-w-[200px]"
+                style={{ color: "#fff", borderBottomColor: "#fff" }}
+              >
+                Legal
+              </h2>
+              <nav className="list-none text-sm text-left mb-10">
                 {result?.map((m: any) => (
                   <li key={m?.id}>
                     <Link
@@ -119,6 +132,9 @@ const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
       <WhatsApp />

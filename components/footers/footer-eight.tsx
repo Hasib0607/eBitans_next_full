@@ -16,6 +16,7 @@ import {
 
 import Link from "next/link";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterEight = ({
   headerSetting,
@@ -30,11 +31,11 @@ const FooterEight = ({
   );
 
   return (
-    <div className="py-5 ">
+    <div className="py-5">
       <div className="sm:container px-5">
         <Newsletter headerSetting={headerSetting} store_id={store_id} />
       </div>
-      <div className="sm:container px-5 grid lg:grid-cols-4 grid-cols-2 space-y-8 ">
+      <div className="sm:container px-5 grid lg:grid-cols-5 grid-cols-2 space-y-8 ">
         <div className="col-span-1">
           <img
             className="w-auto h-20  sm:h-10"
@@ -85,6 +86,11 @@ const FooterEight = ({
                 </p>
               ) : null
             )}
+          </ul>
+        </div>
+        <div className="col-span-1 lg:justify-self-center">
+          <h2 className="font-bold">Legal</h2>
+          <ul className="flex flex-col gap-2 mt-3">
             {result?.map((m: any) => (
               <p key={m?.id}>
                 <Link href={"/" + m?.link} className="menu-hover">
@@ -111,6 +117,10 @@ const FooterEight = ({
             </Link>
           </ul>
         </div>
+      </div>
+
+      <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
       </div>
 
       <div className="sm:container px-5 pt-10 pb-4">

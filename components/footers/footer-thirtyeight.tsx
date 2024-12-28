@@ -5,6 +5,7 @@ import { BsTelephoneFill } from "react-icons/bs";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirtyEight = ({
   headerSetting,
@@ -121,6 +122,9 @@ const FooterThirtyEight = ({
         {/* <Messenger /> */}
         <WhatsApp />
       </footer>
+      <div className="sm:container px-5 mt-8 mb-4 text-[#666666]">
+        <AllPaymantGateway headerSetting={headerSetting} />
+      </div>
       <div className="pb-20 lg:pb-5 sm:container px-5 text-[#666666]">
         <CopyrightAll headerSetting={headerSetting} />
       </div>

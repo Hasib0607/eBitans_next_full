@@ -13,6 +13,7 @@ import CategoryList from "./components/category-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwelve = ({
   headerSetting,
@@ -162,6 +163,9 @@ const FooterTwelve = ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <hr />
       <p className="sm:container px-5 sm:py-10 py-5 text-[13px] font-light text-[#333333]">

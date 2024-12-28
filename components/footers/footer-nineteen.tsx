@@ -8,6 +8,7 @@ import CategoryList from "./components/category-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterNineteen = ({
   headerSetting,
@@ -66,6 +67,9 @@ const FooterNineteen = ({
             </div>
           </div>
         </div>
+      <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
+      </div>
       </div>
       <div className="border mb-16 lg:mb-0">
         <div className="sm:container px-5">

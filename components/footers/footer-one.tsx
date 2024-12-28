@@ -13,6 +13,7 @@ import Link from "next/link";
 import MenuList from "./components/menu-list";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterOne = ({
   category,
@@ -192,14 +193,8 @@ const FooterOne = ({
           </div>
         </div>
       </div>
-      <div className="sm:container px-5">
-        <img
-          src={
-            "https://bishworang.netlify.app/static/media/SSLCOMMERZ%20Pay%20With%20logo%20All%20Size_Aug%2021-05-Nov-18-2021-05-46-29-86-AM%20(1).407b60596845fa47cd55.png"
-          }
-          className="container"
-          alt=""
-        />
+      <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <div className="bg-gray-100 mb-14 lg:mb-0">
         <div className="sm:container px-5 py-4 flex flex-wrap justify-center">

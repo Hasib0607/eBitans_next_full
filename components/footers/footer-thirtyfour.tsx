@@ -14,6 +14,7 @@ import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import { customizeFooter } from "@/utils/customizeDesign";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
   const srcMatch = headerSetting?.map_address?.match(/src="([^"]+)"/);
@@ -165,6 +166,10 @@ const FooterThirtyFour = ({ category, menu, headerSetting, design }: any) => {
               </Link>
             </div>
           </div>
+        </div>
+
+        <div className="sm:container px-5 mt-8 text-gray-400">
+          <AllPaymantGateway headerSetting={headerSetting} />
         </div>
 
         <div className="sm:pt-10 pt-5 text-[13px] font-light text-gray-400">

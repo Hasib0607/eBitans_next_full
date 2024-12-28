@@ -239,7 +239,7 @@ const Single = ({
   setSelectAddress,
   setCall,
   token,
-  isPhoneValid
+  isPhoneValid,
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -343,7 +343,7 @@ const AddressView = ({
   store,
   design,
   isPhoneValid,
-  handleChange
+  handleChange,
 }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const {
@@ -440,9 +440,9 @@ const AddressView = ({
                   onChange={handleChange}
                 />
               </div>
-                {!isPhoneValid && (
-                  <small className="text-rose-500">Need 11 digits</small>
-                )}
+              {!isPhoneValid && (
+                <small className="text-rose-500">Need 11 digits</small>
+              )}
               {errors.phone?.type === "required" && (
                 <span className="text-red-500">Phone number is required</span>
               )}
@@ -656,7 +656,7 @@ export function UpdateAddress({
   setSelectAddress,
   design,
   token,
-  isPhoneValid
+  isPhoneValid,
 }: any) {
   const { store } = useTheme();
 

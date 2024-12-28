@@ -7,6 +7,7 @@ import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwenty = ({ headerSetting, page, menu, store_id, design }: any) => {
   const cls = "text-xl";
@@ -36,6 +37,9 @@ const FooterTwenty = ({ headerSetting, page, menu, store_id, design }: any) => {
             <div className="flex flex-col gap-y-3">
               <MyAccount />
             </div>
+          </div>
+          <div className="sm:container mt-8 mb-4">
+            <AllPaymantGateway headerSetting={headerSetting} />
           </div>
           <div className="pt-2 lg:pb-5 pb-20 ">
             <div className="flex flex-col gap-y-2 md:flex-row justify-center items-center md:justify-between ">

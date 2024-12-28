@@ -15,6 +15,7 @@ import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirtyFive = ({
   headerSetting,
@@ -127,7 +128,9 @@ const FooterThirtyFive = ({
           </div>
         </div>
       </div>
-
+      <div className="sm:container px-5 mt-8 text-gray-500">
+        <AllPaymantGateway headerSetting={headerSetting} />
+      </div>
       <div className="border-t border-gray-500 mt-5">
         <div className="sm:container px-5 text-[15px] pt-8 font-light text-[#333333]">
           <CopyrightAll headerSetting={headerSetting} />

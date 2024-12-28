@@ -14,6 +14,7 @@ import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
 import SSLImg from "@/assets/SSLCommerz-Pay-With-logo-All-Size-03.webp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirtySix = ({
   headerSetting,
@@ -121,6 +122,10 @@ const FooterThirtySix = ({
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="sm:container px-5 mt-8">
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
 
       <div className="border-t border-b border-gray-500 my-5 flex justify-between items-center">

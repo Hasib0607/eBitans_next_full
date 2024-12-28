@@ -143,6 +143,7 @@ const CheckOutElevenDiscount = ({
                         value={parseInt(headerSetting?.shipping_area_1_cost)}
                         onChange={shippingPrice}
                         className="mr-2"
+                        defaultChecked
                       />
                       <label
                         htmlFor="shippingArea1"

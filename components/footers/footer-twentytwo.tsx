@@ -10,6 +10,7 @@ import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwentyTwo = ({ headerSetting, store_id, page, menu }: any) => {
   return (
@@ -124,6 +125,9 @@ const FooterTwentyTwo = ({ headerSetting, store_id, page, menu }: any) => {
               <PageList page={page} />
             </div>
           </div>
+        </div>
+        <div className="sm:container mt-8 mb-4 text-white">
+          <AllPaymantGateway headerSetting={headerSetting} />
         </div>
         <div className="text-white">
           <CopyrightAll headerSetting={headerSetting} />

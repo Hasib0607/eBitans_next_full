@@ -2,6 +2,7 @@ import React from "react";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
   const date = new Date().getFullYear();
@@ -29,6 +30,9 @@ const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
               </Link>
             </div>
           ))}
+        </div>
+        <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
         </div>
         <p className="text-center pt-5 lg:pb-5 pb-20">
           © {date} All Rights Reserved{" "}

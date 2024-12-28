@@ -5,6 +5,7 @@ import MenuList from "./components/menu-list";
 import FollowUs from "./components/follow-us";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterFourteen = ({
   design,
@@ -27,6 +28,9 @@ const FooterFourteen = ({
   return (
     <div className="sm:container px-5 sm:pt-10 pt-5 pb-20 lg:pb-3">
       <Newsletter headerSetting={headerSetting} store_id={store_id} />
+      <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
+      </div>
       <div className="grid lg:grid-cols-4 grid-cols-1 justify-items-center items-center border-t-2 py-4 sm:pb-4 pb-20">
         <style>{customDesign}</style>
         <div>

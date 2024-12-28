@@ -16,6 +16,7 @@ import { RiInstagramLine } from "react-icons/ri";
 import CopyrightAll from "./components/copyrightall";
 import Newsletter from "./components/newsletter";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwentyFour = ({
   headerSetting,
@@ -205,6 +206,10 @@ const FooterTwentyFour = ({
               ))}
             </div>
           </div>
+        </div>
+
+        <div className="sm:container px-5 mt-8 text-gray-400">
+          <AllPaymantGateway headerSetting={headerSetting} />
         </div>
 
         <div className="flex md:flex-row flex-col md:justify-center items-center sm:container px-5 pt-10 pb-20 ">

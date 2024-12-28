@@ -11,6 +11,7 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirty = ({
   category,
@@ -135,6 +136,10 @@ const FooterThirty = ({
             </div>
           </div>
         </div>
+      </div>
+
+      <div className="sm:container px-5 mt-8">
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
 
       <div className="sm:container px-5 sm:pt-10 pt-5 text-[13px] font-light text-[#333333]">

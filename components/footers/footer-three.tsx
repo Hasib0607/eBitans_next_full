@@ -9,6 +9,7 @@ import { FaFacebookF } from "react-icons/fa";
 import { RiInstagramLine } from "react-icons/ri";
 import Newsletter from "./components/newsletter";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
   const date = new Date().getFullYear();
@@ -109,7 +110,7 @@ const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
           <h2 className="text-base font-semibold leading-4 text-gray-800">
             Menu
           </h2>
-          {menu.map((item: any) => (
+          {menu?.map((item: any) => (
             <p
               key={item.id}
               className="menu-hover text-base leading-4 mt-6 text-gray-800 lg:cursor-pointer"
@@ -132,7 +133,9 @@ const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
           ))}
         </div>
       </div>
-
+      <div className="sm:container px-5 mt-8">
+          <AllPaymantGateway headerSetting={headerSetting} />
+      </div>
       {/* <Messenger /> */}
       <WhatsApp />
     </div>

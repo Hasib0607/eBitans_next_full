@@ -7,6 +7,7 @@ import {
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
   // const { user } = useSelector((state) => state.auth);
@@ -79,6 +80,9 @@ const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
             </div>
           </div>
         </div>
+      </div>
+      <div className="sm:container px-5 mt-8 mb-20 md:mb-0">
+          <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
       <WhatsApp />
