@@ -167,7 +167,7 @@ const FooterEleven = ({
         </div>
       </div>
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <div className="sm:container px-5 pb-14 lg:pb-0 mt-10 mb-0 lg:mb-5 ">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">

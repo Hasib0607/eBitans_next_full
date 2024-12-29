@@ -82,7 +82,7 @@ const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
         </div>
       </div>
       <div className="sm:container px-5 mt-8 mb-20 md:mb-0">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
       <WhatsApp />

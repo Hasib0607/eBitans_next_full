@@ -107,7 +107,7 @@ const FooterSixteen = ({
         </div>
       </div>
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <hr />
       <div className="flex md:flex-row flex-col gap-3 md:justify-between text-center items-center sm:container px-5 pt-5 pb-20 lg:pb-5 ">

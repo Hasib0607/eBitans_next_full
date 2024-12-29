@@ -214,7 +214,7 @@ const FooterTwentyThree = ({
       </div>
       <div className="bg-gray-600 h-[1px] w-full"></div>
       <div className="sm:container px-5 mt-8 text-white">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* bottom section  */}
       <div className="sm:container px-5 pt-5 flex flex-col md:flex-row gap-5 items-center md:justify-between text-white">

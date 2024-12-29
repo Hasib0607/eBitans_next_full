@@ -134,7 +134,7 @@ const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
         </div>
       </div>
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
       <WhatsApp />

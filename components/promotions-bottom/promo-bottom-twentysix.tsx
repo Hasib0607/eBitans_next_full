@@ -4,6 +4,7 @@ import React from "react";
 import { SwiperSlide } from "swiper/react";
 import DefaultSlider from "../slider/default-slider";
 import Link from "next/link";
+import MobileAppIcon from "./mobile-app-icon";
 
 const PromoBottomTwentySix = ({ banner, brand }: any) => {
   return (
@@ -71,6 +72,7 @@ const PromoBottomTwentySix = ({ banner, brand }: any) => {
               </DefaultSlider>
             </div>
           )}
+          <MobileAppIcon />
         </div>
       )}
     </>

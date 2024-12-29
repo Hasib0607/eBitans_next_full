@@ -67,9 +67,9 @@ const FooterNineteen = ({
             </div>
           </div>
         </div>
-      <div className="sm:container px-5 mt-8">
+        <div className="sm:container px-5 mt-8">
           <AllPaymantGateway headerSetting={headerSetting} />
-      </div>
+        </div>
       </div>
       <div className="border mb-16 lg:mb-0">
         <div className="sm:container px-5">

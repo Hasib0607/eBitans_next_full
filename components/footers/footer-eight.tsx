@@ -120,7 +120,7 @@ const FooterEight = ({
       </div>
 
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
 
       <div className="sm:container px-5 pt-10 pb-4">

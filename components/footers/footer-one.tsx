@@ -194,7 +194,7 @@ const FooterOne = ({
         </div>
       </div>
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <div className="bg-gray-100 mb-14 lg:mb-0">
         <div className="sm:container px-5 py-4 flex flex-wrap justify-center">

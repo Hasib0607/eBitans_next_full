@@ -191,7 +191,7 @@ const FooterSix = ({
         </div>
       </div>
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <hr />
       <p className="sm:container px-5 pt-3 pb-20 lg:pb-3 text-[13px] font-light text-[#333333]">

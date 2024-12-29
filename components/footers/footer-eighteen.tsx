@@ -115,7 +115,7 @@ const FooterEighteen = ({
       </div>
 
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
 
       <div className=" sm:container px-5 text-[15px] pt-14 font-light text-[#333333]">

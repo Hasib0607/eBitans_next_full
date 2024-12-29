@@ -165,7 +165,7 @@ const FooterTwelve = ({
         </div>
       </div>
       <div className="sm:container px-5 mt-8">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <hr />
       <p className="sm:container px-5 sm:py-10 py-5 text-[13px] font-light text-[#333333]">

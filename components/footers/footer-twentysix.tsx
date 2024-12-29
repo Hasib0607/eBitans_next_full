@@ -116,7 +116,7 @@ const FooterTwentySix = ({
         </div>
       </div>
       <div className="sm:container px-5 mt-8 mb-4">
-          <AllPaymantGateway headerSetting={headerSetting} />
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <div className="sm:container px-5 text-[18px] pt-14 text-[#333333] text-center border-t pb-14">
         <CopyrightAll headerSetting={headerSetting} />

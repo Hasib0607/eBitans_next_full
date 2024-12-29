@@ -38,7 +38,7 @@ const Details = ({
   children,
 }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
-  
+
   const dispatch = useDispatch();
 
   const [filterV, setFilterV] = useState<any>([]);
