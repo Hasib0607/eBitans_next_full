@@ -83,6 +83,12 @@ export const customizeSingleProductPage = [
     id: 8428,
     btn_design: true,
   },
+
+  // for watch-time-bd revview not show in details page 28, store id: 
+  {
+    id: 10064,
+    review_not_show: true,                          
+  },
 ];
 export const customizeModalPopup = [
   // for mrchickenbd.com, modal will not open
@@ -101,5 +107,13 @@ export const customizeMobileNavThree = [
   {
     id: 9501,
     category_icon_not_show: true,
+  },
+];
+
+export const customizeCards = [
+  // for watch-time-bd rating not show in card 58, store id: 10064
+  {
+    id: 10064,
+    rating_not_show: true,                          
   },
 ];

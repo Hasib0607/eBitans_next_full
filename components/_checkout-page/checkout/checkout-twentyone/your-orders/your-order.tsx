@@ -468,10 +468,12 @@ const YourOrders = ({
           <p>{design?.template_id === "29" ? "ডিসকাউন্ট" : "Discount"}</p>
           <p>{<BDT price={couponDis} />}</p>
         </div>
-        <div className="flex justify-between items-center">
-          <p>{design?.template_id === "29" ? "ট্যাক্স" : "Tax"}</p>
-          <p>{<BDT price={parseInt(tax)} />}</p>
-        </div>
+        {tax !== 0 && (
+          <div className="flex justify-between items-center">
+            <p>{design?.template_id === "29" ? "ট্যাক্স" : "Tax"}</p>
+            <p>{<BDT price={parseInt(tax)} />}</p>
+          </div>
+        )}
         <div className="flex justify-between items-center">
           <p>
             {design?.template_id === "29"

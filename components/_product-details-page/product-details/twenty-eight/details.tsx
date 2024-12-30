@@ -31,7 +31,10 @@ import { ProductSlider } from "./product-slider";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-import { customizeSingleProductPage } from "@/utils/customizeDesign";
+import {
+  customizeCards,
+  customizeSingleProductPage,
+} from "@/utils/customizeDesign";
 
 const Details = ({
   fetchStatus,
@@ -44,7 +47,7 @@ const Details = ({
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-
+  const CardData = customizeCards.find((item) => item.id == store_id);
   const [filterV, setFilterV] = useState<any>([]);
 
   // select variant state
@@ -615,7 +618,15 @@ const Details = ({
                 </p>
               )}
           </div>
-          <Rate rating={product?.rating} />
+          {CardData?.rating_not_show ? (
+            " "
+          ) : (
+            <>
+              <div>
+                <Rate rating={product?.rating} />
+              </div>
+            </>
+          )}
           <div className="h-[1px] bg-gray-300 w-full"></div>
           <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
