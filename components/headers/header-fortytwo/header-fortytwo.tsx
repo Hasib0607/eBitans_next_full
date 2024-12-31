@@ -17,10 +17,6 @@ import { TiArrowSortedUp } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import { BottomCart } from "../card-popup-three";
 import SideMenu from "../header-three/side-menu";
-
-// customize design
-import { customizeHeader } from "@/utils/customizeDesign";
-import { cancelIcon, SingleCat } from "@/app/mobileNavs/three/mobileNavThree";
 import defaultUserImage from "@/assets/default-user-image.png";
 import Search from "./search";
 
@@ -38,11 +34,6 @@ const HeaderFortyTwo = ({ headerSetting }: any) => {
 
   const dispatch = useDispatch();
   const { user } = useSelector((state: any) => state.auth);
-
-  // custom
-  const storeID = headerSetting?.store_id || null;
-
-  const headerData = customizeHeader.find((item) => item.id == storeID);
 
   const cartList = useSelector((state: any) => state.cart.cartList);
   const priceList = cartList?.map((p: any) => p.qty * p.price);
@@ -133,6 +124,11 @@ const HeaderFortyTwo = ({ headerSetting }: any) => {
       }
       .border-hover-menu:hover{
         border: 1px solid ${design?.text_color};
+      }
+
+      .bg-color-in-header {
+          color:  ${design?.header_color};
+          background: ${design?.text_color};
       }
     
       
@@ -365,8 +361,18 @@ const HeaderFortyTwo = ({ headerSetting }: any) => {
           </div>
         </div>
       </div>
-
-      {/* bottom menu */}
+      {/* category show in small device */}
+      <div className="lg:hidden block">
+        <div className="sm:container px-5 flex flex-wrap justify-center gap-x-2">
+          {category?.slice(0, 5).map((cat: any) => (
+            <Link key={cat.id} href={"/category/" + cat?.id}>
+              <ul className="" key={cat?.id}>
+                <li className="text-sm font-medium">{cat?.name}</li>
+              </ul>
+            </Link>
+          ))}
+        </div>
+      </div>
 
       {/* category section  */}
       <div
@@ -383,7 +389,7 @@ const HeaderFortyTwo = ({ headerSetting }: any) => {
             <div className={`lg:block  hidden relative`}>
               <div
                 onClick={() => setOpenCat(!openCat)}
-                className={`bg-[#83C341] text-[14px] flex justify-between lg:cursor-pointer pl-3 pr-12 gap-2 py-2 items-center z-[12] relative w-max`}
+                className={`bg-color-in-header text-[14px] flex justify-between lg:cursor-pointer pl-3 pr-12 gap-2 py-2 items-center z-[12] relative w-max`}
               >
                 <div>
                   <FiBarChart className="text-[28px] text-white rotate-90" />
@@ -498,68 +504,39 @@ const HeaderFortyTwo = ({ headerSetting }: any) => {
         ></div>
       )}
 
-      {headerData?.id ? (
-        // show category
-        <div className={`px-4 z-[7] block lg:hidden`}>
-          <ul
-            className={`pt-5 top-0 bg-white duration-500 fixed md:w-96 w-64 sm:w-80 overflow-y-auto bottom-0 pb-5 z-[7] lg:cursor-pointer ${open ? "left-0" : "left-[-140%]"}`}
-          >
-            <div className="pb-7 pt-3 px-6">
-              <div className="text-xl border-b-[2px] pb-5 text-center text-color flex justify-between items-center">
-                <p>Category</p>
-                <div onClick={() => setOpen(!open)} className="h-8">
-                  {cancelIcon}
-                </div>
-              </div>
-              <div className="flex flex-col gap-3">
-                {category?.map((item: any) => (
-                  <SingleCat
-                    key={item?.id}
-                    item={item}
-                    open={open}
-                    setOpen={setOpen}
+      <div className="block lg:hidden">
+        {/* menu */}
+        <ul
+          className={`lg:hidden bg-white fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-10 lg:cursor-pointer ${
+            open ? "left-0" : "left-[-160%]"
+          } `}
+        >
+          <div className="flex justify-between px-6 py-4 lg:hidden">
+            <div>
+              {headerSetting?.logo === null ? (
+                <Link href="/">
+                  <p className="text-xl uppercase">
+                    {headerSetting?.website_name}
+                  </p>
+                </Link>
+              ) : (
+                <Link href="/">
+                  <img
+                    className="h-10"
+                    src={imgUrl + headerSetting?.logo}
+                    alt="logo"
                   />
-                ))}
-              </div>
+                </Link>
+              )}
             </div>
-          </ul>
-        </div>
-      ) : (
-        // show menu
-        <div className="block lg:hidden">
-          {/* menu */}
-          <ul
-            className={`lg:hidden bg-white fixed sm:w-[350px] md:w-[400px] w-[250px] top-0 overflow-y-auto bottom-0 pb-5 duration-1000 z-10 lg:cursor-pointer ${
-              open ? "left-0" : "left-[-160%]"
-            } `}
-          >
-            <div className="flex justify-between px-6 py-4 lg:hidden">
-              <div>
-                {headerSetting?.logo === null ? (
-                  <Link href="/">
-                    <p className="text-xl uppercase">
-                      {headerSetting?.website_name}
-                    </p>
-                  </Link>
-                ) : (
-                  <Link href="/">
-                    <img
-                      className="h-10"
-                      src={imgUrl + headerSetting?.logo}
-                      alt="logo"
-                    />
-                  </Link>
-                )}
-              </div>
-              <XMarkIcon onClick={() => setOpen(!open)} className="h-7" />
-            </div>
+            <XMarkIcon onClick={() => setOpen(!open)} className="h-7" />
+          </div>
 
-            <div className="px-6">
-              <SideMenu setOpen={setOpen} />
-            </div>
-          </ul>
-        </div>
-      )}
+          <div className="px-6">
+            <SideMenu setOpen={setOpen} />
+          </div>
+        </ul>
+      </div>
     </div>
   );
 };

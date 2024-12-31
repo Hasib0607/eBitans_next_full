@@ -24,6 +24,7 @@ import { toast } from "react-toastify";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -788,7 +789,7 @@ const Details = ({
           {children}
 
           <div className="text-lg flex flex-col gap-y-1">
-            <p>Category: {product?.category} </p>
+          <ProdMultiCategory product={product} design={design}/>
             <p>Availability</p>
             <p className="border-2 py-0.5 px-2 border-gray-800 w-max">
               {productQuantity >= "0" ? (

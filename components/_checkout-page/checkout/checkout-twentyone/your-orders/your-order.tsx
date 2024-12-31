@@ -20,6 +20,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import PaymentGateway from "../payment-gateway/payment-gateway";
 import getReferral from "@/utils/getReferral";
+import { customizeCheckout } from "@/utils/customizeDesign";
 
 const YourOrders = ({
   couponDis,
@@ -46,6 +47,10 @@ const YourOrders = ({
   let [index, setIndex] = useState(null);
 
   const { headerSetting, store_id, design, store, setOrderPlaced } = useTheme();
+
+  const customizeTextData = customizeCheckout.find(
+    (item) => item.id == store_id
+  );
 
   const cartList = useSelector((state: any) => state.cart.cartList);
   const { user } = useSelector((state: any) => state.auth);
@@ -456,7 +461,6 @@ const YourOrders = ({
           </h3>
         </div>
       )}
-
       <div className="my-5 text-gray-500 px-2" style={{ fontWeight: 500 }}>
         <div className="flex justify-between items-center">
           <p>{design?.template_id === "29" ? "সাব টোটাল" : "Sub Total"}</p>
@@ -512,7 +516,6 @@ const YourOrders = ({
           setSelectPayment={setSelectPayment}
         />
       </div>
-
       {store_id === 3020 && (
         <div>
           <p className="px-2">
@@ -524,7 +527,9 @@ const YourOrders = ({
           </p>
         </div>
       )}
-
+      {customizeTextData?.customize_text_show_for_watchtime
+        ? customizeTextData?.customize_text_show_for_watchtime
+        : ""}
       {loading ? (
         <button
           className={`font-semibold tracking-wider my-1 rounded-full cart-btn border border-gray-300 w-full py-3 ${btnhover}`}
@@ -544,7 +549,6 @@ const YourOrders = ({
             : "Place Order"}
         </button>
       )}
-
       <MyModal
         files={files}
         index={index}
