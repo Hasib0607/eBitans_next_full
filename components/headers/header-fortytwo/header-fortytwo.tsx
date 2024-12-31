@@ -362,14 +362,33 @@ const HeaderFortyTwo = ({ headerSetting }: any) => {
         </div>
       </div>
       {/* category show in small device */}
-      <div className="lg:hidden block">
-        <div className="sm:container px-5 flex flex-wrap justify-center gap-x-2">
-          {category?.slice(0, 5).map((cat: any) => (
-            <Link key={cat.id} href={"/category/" + cat?.id}>
-              <ul className="" key={cat?.id}>
-                <li className="text-sm font-medium">{cat?.name}</li>
-              </ul>
-            </Link>
+      <div
+        className="lg:hidden block bg-color"
+        style={{
+          overflowX: "auto",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+        }}
+      >
+        <style jsx>
+          {`
+            div::-webkit-scrollbar {
+              display: none;
+            }
+          `}
+        </style>
+        <div className="sm:container py-3 px-5 flex justify-center w-max  overflow-x-auto whitespace-nowrap text-white">
+          {category?.slice(0, 5).map((cat: any, index: number) => (
+            <div key={cat.id} className="flex items-center">
+              <Link href={"/category/" + cat?.id}>
+                <ul className="">
+                  <li className="font-medium uppercase">{cat?.name}</li>
+                </ul>
+              </Link>
+              {index < category.slice(0, 5).length - 1 && (
+                <span className="mx-2 text-white">|</span>
+              )}
+            </div>
           ))}
         </div>
       </div>
