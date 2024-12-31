@@ -1,5 +1,6 @@
 import { bannerImg } from "@/site-settings/siteUrl";
 import React from "react";
+import MobileAppIcon from "./mobile-app-icon";
 
 const PromoBottomEleven = ({ banner }: any) => {
   return (
@@ -23,6 +24,7 @@ const PromoBottomEleven = ({ banner }: any) => {
               </a>
             )}
           </div>
+          <MobileAppIcon />
         </div>
       )}
     </>

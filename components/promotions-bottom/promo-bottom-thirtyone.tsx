@@ -2,6 +2,7 @@
 import useTheme from "@/hooks/use-theme";
 import { bannerImg } from "@/site-settings/siteUrl";
 import React from "react";
+import MobileAppIcon from "./mobile-app-icon";
 
 const PromoBottomThirtyOne = ({ banner }: any) => {
   const { design } = useTheme();
@@ -26,6 +27,7 @@ const PromoBottomThirtyOne = ({ banner }: any) => {
               </a>
             )}
           </div>
+          <MobileAppIcon />
         </div>
       )}
     </div>

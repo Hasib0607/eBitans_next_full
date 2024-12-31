@@ -11,6 +11,7 @@ import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 // import { imgUrl } from '../../../siteSettings/siteUrl'
 
 const FooterTwentyNine = ({
@@ -130,6 +131,10 @@ const FooterTwentyNine = ({
             ))}
           </div>
         </div>
+      </div>
+
+      <div className="sm:container px-5 mt-8">
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
 
       <div className="sm:container px-5 text-[13px] pt-14 font-light text-[#333333]">

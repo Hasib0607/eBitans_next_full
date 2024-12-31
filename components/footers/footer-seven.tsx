@@ -8,6 +8,7 @@ import { BsFacebook, BsYoutube } from "react-icons/bs";
 import Newsletter from "./components/newsletter";
 import WhatsApp from "./components/whatsApp";
 import { customizeFooter } from "@/utils/customizeDesign";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterSeven = ({
   headerSetting,
@@ -133,6 +134,13 @@ const FooterSeven = ({
                   </p>
                 ) : null
               )}
+            </div>
+          </div>
+          <div className="flex flex-col gap-4">
+            <div>
+              <h1 className="text-lg font-semibold">Legal</h1>
+            </div>
+            <div className="flex flex-col gap-3 text-gray-500 text-sm footer-seven-menu">
               {result?.map((m: any) => (
                 <p key={m?.id}>
                   <Link href={"/" + m?.link} className="menu-hover">
@@ -160,6 +168,9 @@ const FooterSeven = ({
             </div>
           </div>
         </div>
+      </div>
+      <div className="sm:container px-5 mt-8">
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <hr />
       <p className="container px-5 py-5 text-sm text-gray-600 ">

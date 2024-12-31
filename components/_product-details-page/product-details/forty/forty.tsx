@@ -14,8 +14,12 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
+import useTheme from "@/hooks/use-theme";
+
 
 const Forty = ({ data, updatedData }: any) => {
+  const { design } = useTheme();
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-40"],
     queryFn: () => getProductDetails(updatedData),
@@ -58,14 +62,7 @@ const Forty = ({ data, updatedData }: any) => {
         variant={variant}
       >
         <div className="flex flex-col space-y-3">
-          <p className="text-base text-[#5a5a5a]">
-            <span className="font-semibold text-[#212121]">Category:</span>{" "}
-            <Link
-              href={"/category/" + productDetailsData?.product?.category_id}
-            >
-              {productDetailsData?.product?.category}
-            </Link>
-          </p>
+        <ProdMultiCategory product={product} design={design}/>
         </div>
       </Details>
 

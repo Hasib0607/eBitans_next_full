@@ -4,6 +4,7 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination, Autoplay } from "swiper/modules";
 import { bannerImg } from "@/site-settings/siteUrl";
+import MobileAppIcon from "./mobile-app-icon";
 
 const PromoBottomFifteen = ({ banner }: any) => {
   return (
@@ -58,6 +59,7 @@ const PromoBottomFifteen = ({ banner }: any) => {
               </SwiperSlide>
             ))}
           </Swiper>
+          <MobileAppIcon />
         </div>
       )}
     </div>

@@ -6,6 +6,7 @@ import CopyrightAll from "./components/copyrightall";
 import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterFive = ({
   headerSetting,
@@ -86,8 +87,8 @@ const FooterFive = ({
             </div>
           </div>
 
-          <div className="xl:col-span-2 lg:col-span-2 pb-20 ">
-            <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 py-8 px-5">
+          <div className="xl:col-span-2 lg:col-span-2 md:pb-20 ">
+            <div className="grid xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-1 gap-4 py-8 px-5">
               <div>
                 <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">
                   Products
@@ -123,6 +124,13 @@ const FooterFive = ({
                       </li>
                     ) : null
                   )}
+                </div>
+              </div>
+              <div>
+                <h1 className="footerFiveBorder footerFiveBorderCustom text-lg font-semibold">
+                  Legal
+                </h1>
+                <div className="mt-5 list-none">
                   {result?.map((m: any) => (
                     <li key={m?.id}>
                       <Link
@@ -149,6 +157,9 @@ const FooterFive = ({
               </div>
             </div>
           </div>
+        </div>
+        <div className="sm:container px-5 mt-8 mb-20 md:mb-0">
+          <AllPaymantGateway headerSetting={headerSetting} />
         </div>
         {/* <Messenger /> */}
         <WhatsApp />

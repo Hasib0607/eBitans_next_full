@@ -31,6 +31,7 @@ import { ProductSlider } from "../twenty-eight/product-slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { useRouter } from "next/navigation";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -745,7 +746,7 @@ const Details = ({
           {children}
 
           <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            <p>Category: {product?.category} </p>
+          <ProdMultiCategory product={product} design={design}/>
             <p>
               Availability:{" "}
               {productQuantity >= "0" ? (

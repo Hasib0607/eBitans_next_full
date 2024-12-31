@@ -17,6 +17,7 @@ import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterSeventeen = ({
   headerSetting,
@@ -81,6 +82,9 @@ const FooterSeventeen = ({
             </div>
             <div className="text-white pt-16">
               <h2>{headerSetting?.short_description}</h2>
+            </div>
+            <div className="sm:container text-white mt-8">
+              <AllPaymantGateway headerSetting={headerSetting} />
             </div>
             <div className="mt-3 text-white">
               <CopyrightAll headerSetting={headerSetting} />

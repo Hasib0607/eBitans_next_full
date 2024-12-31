@@ -59,6 +59,17 @@ export const customizeCheckout = [
     cash_hide: "hidden",
     checked: true,
   },
+  {
+    // for watch-time-bd custom text show checkout 21, store id:10064
+    id: 10064,
+    customize_text_show_for_watchtime: (
+      <p>
+        বি: দ্র: - অর্ডার করার পূর্বে পছন্দের পণ্যটি দেখে-জেনে-বুঝে মূল্য ও
+        ডেলিভারি চার্জ নিশ্চিত হয়ে অর্ডারটি কনফার্ম করুন। অযথা হয়রানি করলে
+        বিশেষ ব্যবস্থা নেওয়া হবে।
+      </p>
+    ),
+  },
 ];
 
 export const customizeSingleProductPage = [
@@ -83,6 +94,35 @@ export const customizeSingleProductPage = [
     id: 8428,
     btn_design: true,
   },
+
+  // for watch-time-bd review not show in details page 28, store id:10064
+  {
+    id: 10064,
+    review_not_show: true,
+  },
+  // for watch-time-bd customize text show in details page 28, store id:10064
+  {
+    id: 10064,
+    customize_text_show_for_watchtime: (
+      <div>
+        <p>কেন এখানে অর্ডার করবেন?</p>
+        <p>- বেস্ট প্রাইস</p>
+        <p>- আফটার সেল সার্ভিস (বিক্রয় পরবর্তী সেবা)</p>
+        <p>- দ্রুত প্রোডাক্ট ডেলিভারির নিশ্চয়তা⁠</p>
+        <p>- প্রোডাক্ট হাতে পেয়ে টাকা প্রদান এর সুবিধা</p>
+        <p>- ১০০% অরিজিনাল প্রোডাক্ট</p>
+        <p>- ⁠১ বছরের অফিসিয়াল মেশিন ওয়ারেন্টি</p>
+        <p>- ⁠বাংলাদেশ এর যেকোনো জায়গায় হোম ডেলিভারি সুবিধা</p>
+        <p>- প্রোডাক্ট খুলে দেখে চেক করে নেওয়ার সুবিধা</p>
+        <p>
+          - ইজি রিটার্ন সুবিধা (প্রোডাক্ট পছন্দ না হলে ডেলিভারি চার্জ পরিশোধ
+          সাপেক্ষে)
+        </p>
+        <p>- সার্বক্ষণিক কাস্টমার সাপোর্ট</p>
+        <p>- ⁠গ্রাহকের সন্তষ্টিই আমাদের একমাত্র কাম্য</p>
+      </div>
+    ),
+  },
 ];
 export const customizeModalPopup = [
   // for mrchickenbd.com, modal will not open
@@ -101,5 +141,13 @@ export const customizeMobileNavThree = [
   {
     id: 9501,
     category_icon_not_show: true,
+  },
+];
+
+export const customizeCards = [
+  // for watch-time-bd rating not show in card 58, store id: 10064
+  {
+    id: 10064,
+    rating_not_show: true,
   },
 ];

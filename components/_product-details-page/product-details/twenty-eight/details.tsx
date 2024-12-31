@@ -31,7 +31,11 @@ import { ProductSlider } from "./product-slider";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-import { customizeSingleProductPage } from "@/utils/customizeDesign";
+import {
+  customizeCards,
+  customizeSingleProductPage,
+} from "@/utils/customizeDesign";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -44,7 +48,10 @@ const Details = ({
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-
+  const RatingData = customizeCards.find((item) => item.id == store_id);
+  const customizeTextData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
   const [filterV, setFilterV] = useState<any>([]);
 
   // select variant state
@@ -615,7 +622,15 @@ const Details = ({
                 </p>
               )}
           </div>
-          <Rate rating={product?.rating} />
+          {RatingData?.rating_not_show ? (
+            " "
+          ) : (
+            <>
+              <div>
+                <Rate rating={product?.rating} />
+              </div>
+            </>
+          )}
           <div className="h-[1px] bg-gray-300 w-full"></div>
           <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
@@ -697,6 +712,10 @@ const Details = ({
             </div>
           )}
 
+          {customizeTextData?.customize_text_show_for_watchtime
+            ? customizeTextData?.customize_text_show_for_watchtime
+            : ""}
+
           <div className="flex items-center gap-x-3">
             <p className="font-medium">শেয়ার :</p>
             <span className="flex space-x-2">
@@ -761,7 +780,7 @@ const Details = ({
           {children}
 
           <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            <p>Category: {product?.category} </p>
+          <ProdMultiCategory product={product} design={design}/>
             <p>
               Availability:{" "}
               {productQuantity >= "0" ? (

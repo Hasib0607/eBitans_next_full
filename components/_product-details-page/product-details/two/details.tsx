@@ -38,14 +38,6 @@ const Details = ({
   children,
 }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
-//  console.log("variant", variant);
-
-// useEffect(() => {
-//   variant?.map((item: any) => {
-//     const colorName = item.get_color.name;
-//     console.log(colorName); 
-//   });
-// }, [variant]);
 
   const dispatch = useDispatch();
 
@@ -148,7 +140,7 @@ const Details = ({
     const fetchData = async () => {
       data["store_id"] = store_id;
       // get the data from the api
-      const { product, variant, vrcolor,vrcolorimage } = await httpReq.post(
+      const { product, variant, vrcolor, vrcolorimage } = await httpReq.post(
         "product-details",
         data
       );
@@ -159,7 +151,7 @@ const Details = ({
       } else {
         setCamp(null);
       }
-      setVrImage(vrcolorimage)
+      setVrImage(vrcolorimage);
 
       setLoad(false);
       setColor(null);

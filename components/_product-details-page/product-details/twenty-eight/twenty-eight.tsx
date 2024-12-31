@@ -14,9 +14,14 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
+import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const TwentyEight = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
+
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
 
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-28"],
@@ -79,15 +84,21 @@ const TwentyEight = ({ data, updatedData }: any) => {
             >
               পন্যের বিবরণ
             </Tab>
-            <Tab
-              className={({ selected }) =>
-                selected
-                  ? "text-lg focus:outline-none border-t-2 pt-3 px-5 border-l-2 border-t-black active-des-review uppercase"
-                  : "bg-white text-black pt-3 px-5 text-lg uppercase"
-              }
-            >
-              রিভিউ
-            </Tab>
+            {singleProductPageData?.review_not_show ? (
+              ""
+            ) : (
+              <>
+                <Tab
+                  className={({ selected }) =>
+                    selected
+                      ? "text-lg focus:outline-none border-t-2 pt-3 px-5 border-l-2 border-t-black active-des-review uppercase"
+                      : "bg-white text-black pt-3 px-5 text-lg uppercase"
+                  }
+                >
+                  রিভিউ
+                </Tab>
+              </>
+            )}
           </Tab.List>
           <Tab.Panels className="">
             <Tab.Panel>

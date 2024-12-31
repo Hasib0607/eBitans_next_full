@@ -8,6 +8,7 @@ import MenuList from "./components/menu-list";
 import FollowUs from "./components/follow-us";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterNine = ({
   headerSetting,
@@ -72,6 +73,9 @@ const FooterNine = ({
                     <h5>NEED HELP ?</h5>
                     <h1 className="font-semibold">{headerSetting?.phone}</h1>
                   </div>
+                </div>
+                <div className="sm:container px-5 mt-8 mb-7">
+                  <AllPaymantGateway headerSetting={headerSetting} />
                 </div>
                 <CopyrightAll headerSetting={headerSetting} />
               </div>

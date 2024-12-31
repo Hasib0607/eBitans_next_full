@@ -57,7 +57,14 @@ export const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
   );
 };
 
-export const Colors = ({ color, setColor, vrcolor, setSize, colorName, setColorName }: any) => {
+export const Colors = ({
+  color,
+  setColor,
+  vrcolor,
+  setSize,
+  colorName,
+  setColorName,
+}: any) => {
   return (
     <div className="">
       <h3 className="font-medium font-sans text-xl mb-2">Color</h3>
@@ -112,20 +119,20 @@ export const Size = ({ item, select, setSelect, setActiveImg }: any) => {
 export const Color = ({ text, select, setSelect, setSize, colorName }: any) => {
   return (
     <>
-    <div className="flex flex-col justify-center items-center">
-    <div
-      onClick={() => {
-        setSelect(text);
-        setSize(null);
-      }}
-      className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
-        text === select ? "border-gray-900" : "border-gray-300"
-      }`}
-    >
-      <div style={{ backgroundColor: text }} className="w-7 h-7"></div>
-    </div>
-      <p className="text-sm">{colorName}</p>
-    </div>
+      <div className="flex flex-col justify-center items-center">
+        <div
+          onClick={() => {
+            setSelect(text);
+            setSize(null);
+          }}
+          className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
+            text === select ? "border-gray-900" : "border-gray-300"
+          }`}
+        >
+          <div style={{ backgroundColor: text }} className="w-7 h-7"></div>
+        </div>
+        <p className="text-sm">{colorName}</p>
+      </div>
     </>
   );
 };
@@ -140,17 +147,17 @@ export const ColorSet = ({
 }: any) => {
   return (
     <div className="flex flex-col justify-center items-center">
-    <div
-      onClick={() => {
-        setSelect(text);
-        setActiveImg(itemImage);
-      }}
-      className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
-        text === select ? "border-gray-900" : "border-gray-300"
-      }`}
-    >
-      <div style={{ backgroundColor: text?.color }} className="w-7 h-7"></div>
-    </div>
+      <div
+        onClick={() => {
+          setSelect(text);
+          setActiveImg(itemImage);
+        }}
+        className={`border w-10 h-10 flex justify-center items-center font-sans font-medium rounded bg-white ${
+          text === select ? "border-gray-900" : "border-gray-300"
+        }`}
+      >
+        <div style={{ backgroundColor: text?.color }} className="w-7 h-7"></div>
+      </div>
       <p className="text-sm">{colorName}</p>
     </div>
   );

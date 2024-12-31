@@ -19,6 +19,7 @@ import NewsletterThree from "./components/newsletter-three";
 import WhatsApp from "./components/whatsApp";
 import { customizeFooter } from "@/utils/customizeDesign";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwentyOne = ({
   headerSetting,
@@ -321,6 +322,10 @@ const FooterTwentyOne = ({
           </div>
         </div>
         <div className="bg-gray-600 h-[1px] w-full"></div>
+
+        <div className="sm:container px-5 mt-8 text-white">
+          <AllPaymantGateway headerSetting={headerSetting} />
+        </div>
 
         {/* bottom section  */}
         <div className="sm:container px-5 pt-5 flex flex-col md:flex-row gap-5 items-center md:justify-between text-white">

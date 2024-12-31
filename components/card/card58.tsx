@@ -14,7 +14,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
-import { customizeModalPopup } from "@/utils/customizeDesign";
+import { customizeCards, customizeModalPopup } from "@/utils/customizeDesign";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import shape from "@/assets/img/shape.png";
 import Taka from "@/utils/taka";
@@ -23,6 +23,7 @@ const Card58 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
   const [camp, setCamp] = useState<any>(null);
   const modalPopup = customizeModalPopup.find((item) => item.id == store_id);
+  const CardData = customizeCards.find((item) => item.id == store_id);
   const dispatch = useDispatch();
   const router = useRouter();
   const { data, error } = useHeaderSettings();
@@ -315,9 +316,15 @@ const Card58 = ({ item }: any) => {
                   </h1>{" "}
                 </Link>
               </div>
-              <div>
-                <Rate rating={item?.rating} />
-              </div>
+              {CardData?.rating_not_show ? (
+                " "
+              ) : (
+                <>
+                  <div>
+                    <Rate rating={item?.rating} />
+                  </div>
+                </>
+              )}
             </div>
           </div>
         </div>

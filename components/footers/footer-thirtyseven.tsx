@@ -4,6 +4,7 @@ import React from "react";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
 import WhatsApp from "./components/whatsApp";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirtySeven = ({
   headerSetting,
@@ -61,7 +62,7 @@ const FooterThirtySeven = ({
           </div>
 
           <div className="xl:col-span-2 lg:col-span-2">
-            <div className="grid xl:grid-cols-4 lg:grid-cols-4 md:grid-cols-2 sm:grid-cols-1 gap-4 py-8 ">
+            <div className="grid xl:grid-cols-5 lg:grid-cols-5 md:grid-cols-2 sm:grid-cols-1 gap-4 py-8 ">
               <div>
                 <h1 className="footerFiveBorder footerThirtySeven text-lg font-semibold">
                   Products
@@ -97,6 +98,13 @@ const FooterThirtySeven = ({
                       </li>
                     ) : null
                   )}
+                </div>
+              </div>
+              <div>
+                <h1 className="footerFiveBorder footerThirtySeven text-lg font-semibold">
+                  Legal
+                </h1>
+                <div className="mt-5 list-none">
                   {result?.map((m: any) => (
                     <li key={m?.id}>
                       <Link
@@ -124,6 +132,9 @@ const FooterThirtySeven = ({
         {/* <Messenger /> */}
         <WhatsApp />
       </footer>
+      <div className="sm:container px-5 mt-8 mb-4">
+        <AllPaymantGateway headerSetting={headerSetting} />
+      </div>
       <p className="pb-20 lg:pb-5 sm:container px-5 ">
         <CopyrightAll headerSetting={headerSetting} />
       </p>

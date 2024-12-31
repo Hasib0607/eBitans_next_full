@@ -96,8 +96,11 @@ const headers: any = {
   thirtyseven: dynamic(
     () => import("@/components/headers/header-thirtyseven/header-thirtyseven")
   ),
+  // thirtyeight: dynamic(
+  //   () => import("@/components/headers/header-thirtyeight/header-thirtyeight")
+  // ),
   thirtyeight: dynamic(
-    () => import("@/components/headers/header-thirtyeight/header-thirtyeight")
+    () => import("@/components/headers/header-fortytwo/header-fortytwo")
   ),
   thirtynine: dynamic(
     () => import("@/components/headers/header-thirtynine/header-thirtynine")

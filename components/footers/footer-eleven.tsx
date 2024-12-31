@@ -24,6 +24,7 @@ import Link from "next/link";
 import CategoryList from "./components/category-list";
 import WhatsApp from "./components/whatsApp";
 import PageList from "./components/page-list";
+import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterEleven = ({
   design,
@@ -164,6 +165,9 @@ const FooterEleven = ({
             cls={cls}
           />
         </div>
+      </div>
+      <div className="sm:container px-5 mt-8">
+        <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       <div className="sm:container px-5 pb-14 lg:pb-0 mt-10 mb-0 lg:mb-5 ">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-3">

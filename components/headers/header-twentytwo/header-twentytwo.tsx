@@ -217,7 +217,7 @@ const HeaderTwentyTwo = ({ headerSetting }: any) => {
                             //       }
                             //     : { color: "black" }
                             // }
-                            className=" font-bold text-sm "
+                            className=" font-bold text-sm"
                             key={idx}
                           >
                             <h1
