@@ -29,7 +29,6 @@ import { HSlider } from "../ten/slider";
 import { useQuery } from "@tanstack/react-query";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 // import { HSlider } from "./slider";
 
 const Details = ({
@@ -647,7 +646,7 @@ const Details = ({
           </div>
 
           <div className="flex flex-col gap-y-1 my-2">
-          <ProdMultiCategory product={product} design={design}/>
+            <p>Category: {product?.category} </p>
             <p>Availability</p>
             <p className="border-2 py-0.5 px-2 border-gray-800 w-max">
               {productQuantity >= "0" ? (

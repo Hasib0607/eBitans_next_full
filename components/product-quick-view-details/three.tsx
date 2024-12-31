@@ -18,8 +18,6 @@ import {
   getRelatedProducts,
   getReviews,
 } from "../_product-details-page/apis";
-import ProdMultiCategory from "@/utils/prod-multi-category";
-import useTheme from "@/hooks/use-theme";
 
 const Three = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -42,8 +40,6 @@ const Three = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  const {design } = useTheme();
-
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <Details
@@ -60,7 +56,12 @@ const Three = ({ data, updatedData }: any) => {
             </span>{" "}
             {productDetailsData?.product?.SKU}
           </p>
-          <ProdMultiCategory product={product} design={design}/>
+          <p className="text-sm text-[#5a5a5a] font-seven">
+            <span className="font-semibold text-[#212121] font-seven">
+              Category:
+            </span>{" "}
+            {productDetailsData?.product?.category}
+          </p>
           {productDetailsData?.product?.tags && (
             <p className="text-sm text-[#5a5a5a] font-seven">
               <span className="font-semibold text-[#212121] font-seven">

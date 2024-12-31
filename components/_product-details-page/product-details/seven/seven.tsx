@@ -17,8 +17,6 @@ import VideoPlayer from "../video-player";
 import { getProductDetails, getRelatedProducts, getReviews } from "./apis";
 import Details from "./details";
 import Heading from "@/utils/heading";
-import ProdMultiCategory from "@/utils/prod-multi-category";
-import useTheme from "@/hooks/use-theme";
 
 interface Props {
   data: any;
@@ -27,7 +25,7 @@ interface Props {
 
 const Seven = ({ data, updatedData }: Props) => {
   const { slug } = updatedData;
-  const {design } = useTheme();
+
   const {
     data: productDetailsData,
     fetchStatus,
@@ -77,7 +75,12 @@ const Seven = ({ data, updatedData }: Props) => {
           </SkeletonWrapper>
 
           <SkeletonWrapper fetchStatus={fetchStatus} width={"100px"}>
-          <ProdMultiCategory product={product} design={design}/>
+            <p className="text-sm text-[#5a5a5a] font-seven">
+              <span className="font-semibold text-[#212121] font-seven">
+                Category:
+              </span>{" "}
+              {productDetailsData?.product?.category}
+            </p>
           </SkeletonWrapper>
 
           {productDetailsData?.product?.tags && (

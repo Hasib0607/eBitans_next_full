@@ -1,36 +1,22 @@
 import Link from 'next/link';
-
-const ProdMultiCategory = ({ product, design }: any) => {
+import React from 'react';
+const ProdMultiCategory = ({ category, classes, color }: any) => {
     return (
         <>
-            {Array.isArray(product?.category) &&
-                product?.category?.length > 0 && (
-                    <div className="flex items-center gap-2">
-                        <p className="capitalize">
-                            {' '}
-                            <span className="text-black">Category: </span>{' '}
-                        </p>
-                        {product?.category?.map((cat: any, index: number) => {
-                            <Link
-                                href={'/category/' + cat?.id}
-                                style={{
-                                    color: design?.header_color,
-                                }}
-                                key={index}
-                            >
-                                {cat?.name}
-                            </Link>;
-                            {
-                                index < product?.category?.length - 1 && ',';
-                            }
-                            {
-                                (' ');
-                            }
-                        })}
-                    </div>
-                )}
+            {category?.map((cat: any, index: number) => (
+                <span key={index} className={classes}>
+                    <Link
+                        href={'/category/' + cat.id}
+                        style={{
+                            color: color ? color : "#212121",
+                        }}
+                    >
+                        {cat.name}
+                    </Link>
+                    {index < category.length - 1 && ', '}
+                </span>
+            ))}
         </>
     );
 };
-
 export default ProdMultiCategory;

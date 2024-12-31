@@ -28,7 +28,6 @@ import { HSlider } from "../_product-details-page/product-details/eight/slider";
 import { getQuickViewProductDetails } from "@/lib";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { useRouter } from "next/navigation";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({ updateData, item }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
@@ -455,7 +454,18 @@ const Details = ({ updateData, item }: any) => {
           {product?.name}
         </h2>
         <div className="flex flex-col gap-3 sm:mt-6 mt-1">
-        <ProdMultiCategory product={product} design={design}/>
+          <div className="flex items-center gap-2">
+            <p className="capitalize">
+              {" "}
+              <span className="text-black">Category: </span>{" "}
+            </p>
+            <Link
+              href={"/category/" + product?.category_id}
+              style={{ color: design?.header_color }}
+            >
+              {product?.category}
+            </Link>
+          </div>
           <div className="flex justify-start items-center gap-2">
             <p className="text-xl">
               <Rate rating={product?.rating} />
