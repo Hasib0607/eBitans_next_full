@@ -714,7 +714,7 @@ const Details = ({
           {customizeTextData?.customize_text_show_for_watchtime
             ? customizeTextData?.customize_text_show_for_watchtime
             : ""}
-
+            
           <div className="flex items-center gap-x-3">
             <p className="font-medium">শেয়ার :</p>
             <span className="flex space-x-2">
