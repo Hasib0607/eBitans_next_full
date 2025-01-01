@@ -96,11 +96,8 @@ const headers: any = {
   thirtyseven: dynamic(
     () => import("@/components/headers/header-thirtyseven/header-thirtyseven")
   ),
-  // thirtyeight: dynamic(
-  //   () => import("@/components/headers/header-thirtyeight/header-thirtyeight")
-  // ),
   thirtyeight: dynamic(
-    () => import("@/components/headers/header-fortytwo/header-fortytwo")
+    () => import("@/components/headers/header-thirtyeight/header-thirtyeight")
   ),
   thirtynine: dynamic(
     () => import("@/components/headers/header-thirtynine/header-thirtynine")
@@ -110,6 +107,9 @@ const headers: any = {
   ),
   fortyone: dynamic(
     () => import("@/components/headers/header-fortyone/header-fortyone")
+  ),
+  fortytwo: dynamic(
+    () => import("@/components/headers/header-fortytwo/header-fortytwo")
   ),
 };
 
