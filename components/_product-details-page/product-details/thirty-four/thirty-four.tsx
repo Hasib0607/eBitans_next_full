@@ -52,7 +52,8 @@ const ThirtyFour = ({ data, updatedData }: any) => {
                 href={"/category/" + productDetailsData?.product?.category_id}
               >
                 <ProdMultiCategory category={category} />
-              </Link> {""}
+              </Link>{" "}
+              {""}
               {productDetailsData?.product?.name}
             </p>
           </div>

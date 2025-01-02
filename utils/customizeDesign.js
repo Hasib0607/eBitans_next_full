@@ -103,6 +103,7 @@ export const customizeSingleProductPage = [
   // for watch-time-bd customize text show in details page 28, store id:10064
   {
     id: 10064,
+    text_bangla: true,
     customize_text_show_for_watchtime: (
       <div>
         <p>কেন এখানে অর্ডার করবেন?</p>

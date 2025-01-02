@@ -260,13 +260,15 @@ const Card54 = ({ item }: any) => {
           </div>
 
           <div className="flex flex-col gap-2 py-3">
-          {Array.isArray(category) && category?.length > 0 && (
-            <div className="text-gray-500 text-lg">
-              <Link href={"/category/" + item?.category_id}>
-                <p className="text-gray-500 text-lg"><ProdMultiCategory category={category} count={1} /></p>
-              </Link>
-            </div>
-             )}
+            {Array.isArray(category) && category?.length > 0 && (
+              <div className="text-gray-500 text-lg">
+                <Link href={"/category/" + item?.category_id}>
+                  <p className="text-gray-500 text-lg">
+                    <ProdMultiCategory category={category} count={1} />
+                  </p>
+                </Link>
+              </div>
+            )}
             <div className="font-bold text-xl flex justify-between items-center flex-wrap">
               <Link href={"/product/" + item?.id + "/" + item?.slug}>
                 {" "}

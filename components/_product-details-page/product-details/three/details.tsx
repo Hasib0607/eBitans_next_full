@@ -552,15 +552,15 @@ const Details = ({
           {product?.name}
         </h2>
         <div className="flex flex-col gap-3 sm:mt-6 mt-1">
-        {Array.isArray(category) && category?.length > 0 && (
-          <div className="flex items-center gap-2">
-            <p className="capitalize">
-              {" "}
-              <span className="text-black">Category: </span>{" "}
-            </p>
-            <ProdMultiCategory category={category} />
-          </div>
-           )}
+          {Array.isArray(category) && category?.length > 0 && (
+            <div className="flex items-center gap-2">
+              <p className="capitalize">
+                {" "}
+                <span className="text-black">Category: </span>{" "}
+              </p>
+              <ProdMultiCategory category={category} />
+            </div>
+          )}
           <div className="flex justify-start items-center gap-2">
             <p className="text-xl">
               <Rate rating={product?.rating} />

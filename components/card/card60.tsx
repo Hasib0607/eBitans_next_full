@@ -19,7 +19,6 @@ import Taka from "@/utils/taka";
 import shape from "@/assets/img/shape.png";
 
 const Card60 = ({ item }: any) => {
-  console.log("item", item?.created_at);
   const router = useRouter();
   const { design, store_id, makeid } = useTheme();
   const [camp, setCamp] = useState<any>(null);
