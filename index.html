@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WeChat Chat Bubble</title>
+    <style>
+        /* Bubble Button Styling */
+        .chat-bubble {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background-color: #07C160; /* WeChat green color */
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        .chat-bubble img {
+            width: 30px;
+            height: 30px;
+        }
+
+        /* Popup QR Code Styling */
+        .popup {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 10px;
+            display: none;
+            z-index: 1001;
+            text-align: center;
+        }
+
+        .popup img {
+            width: 150px;
+            height: 150px;
+        }
+
+        .popup .close-btn {
+            margin-top: 10px;
+            color: #007BFF;
+            cursor: pointer;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Chat Bubble -->
+    <div class="chat-bubble" id="chatBubble">
+        <img src="wechat-icon.png" alt="WeChat">
+    </div>
+
+    <!-- Popup -->
+    <div class="popup" id="chatPopup">
+        <div>Scan to Chat:</div>
+        <img src="your-qr-code-url-here.png" alt="WeChat QR Code">
+        <div class="close-btn" id="closePopup">Close</div>
+    </div>
+
+    <script>
+        // Get references to elements
+        const chatBubble = document.getElementById('chatBubble');
+        const chatPopup = document.getElementById('chatPopup');
+        const closePopup = document.getElementById('closePopup');
+
+        // Toggle popup visibility
+        chatBubble.addEventListener('click', () => {
+            chatPopup.style.display = chatPopup.style.display === 'none' || chatPopup.style.display === '' ? 'block' : 'none';
+        });
+
+        closePopup.addEventListener('click', () => {
+            chatPopup.style.display = 'none';
+        });
+
+        // Optional: Close popup when clicking outside
+        window.addEventListener('click', (event) => {
+            if (event.target !== chatBubble && !chatPopup.contains(event.target)) {
+                chatPopup.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
