@@ -13,6 +13,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card42 = ({ item }: any) => {
   const [open, setOpen] = useState<any>(false);
@@ -35,6 +36,8 @@ const Card42 = ({ item }: any) => {
   }
 
   `;
+
+  const category = item?.category || [];
 
   const productGetPrice = getPrice(
     item.regular_price,
@@ -149,9 +152,11 @@ const Card42 = ({ item }: any) => {
             </div>
           </div>
           <div className="py-6 px-3 space-y-2 relative">
-            <p className="sm:text-sm text-xs font-semibold uppercase antialiased mb-2 text-gray-600">
-              {item?.category}
-            </p>
+            {Array.isArray(category) && category?.length > 0 && (
+              <p className="sm:text-sm text-xs font-semibold uppercase antialiased mb-2 text-gray-600">
+                <ProdMultiCategory category={category} count={1} />
+              </p>
+            )}
             <Link href={"/product/" + item?.id + "/" + item?.slug}>
               <h3 className="sm:text-lg text-sm text-hover text-gray-800 font-bold antialiased capitalize whitespace-nowrap overflow-hidden text-ellipsis sm:max-w-[170px] max-w-[150px]">
                 {item?.name}

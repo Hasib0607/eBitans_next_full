@@ -35,6 +35,7 @@ import {
   customizeCards,
   customizeSingleProductPage,
 } from "@/utils/customizeDesign";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -51,6 +52,7 @@ const Details = ({
   const customizeTextData = customizeSingleProductPage.find(
     (item) => item.id == store_id
   );
+  const category = product?.category || [];
   const [filterV, setFilterV] = useState<any>([]);
 
   // select variant state
@@ -714,7 +716,7 @@ const Details = ({
           {customizeTextData?.customize_text_show_for_watchtime
             ? customizeTextData?.customize_text_show_for_watchtime
             : ""}
-            
+
           <div className="flex items-center gap-x-3">
             <p className="font-medium">শেয়ার :</p>
             <span className="flex space-x-2">
@@ -779,7 +781,16 @@ const Details = ({
           {children}
 
           <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            <p>Category: {product?.category} </p>
+            {/* multi category */}
+            {Array.isArray(category) && category?.length > 0 && (
+              <div className="flex items-center gap-2">
+                <p className="capitalize">
+                  {" "}
+                  <span className="text-black">Category: </span>{" "}
+                </p>
+                <ProdMultiCategory category={category} />
+              </div>
+            )}
             <p>
               Availability:{" "}
               {productQuantity >= "0" ? (

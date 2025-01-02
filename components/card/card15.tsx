@@ -17,6 +17,7 @@ import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
 import { useDispatch } from "react-redux";
 import Details from "../product-quick-view-details/details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card15 = ({ item }: any) => {
   const { design, store_id, makeid } = useTheme();
@@ -134,6 +135,8 @@ const Card15 = ({ item }: any) => {
     }
   };
 
+  const category = item?.category || [];
+
   return (
     <div>
       <style>{styleCss}</style>
@@ -179,11 +182,11 @@ const Card15 = ({ item }: any) => {
         </div>
 
         <div className="py-6 px-3 space-y-2 flex justify-center flex-col items-center">
-          <Link href={"/category/" + item?.category_id}>
+          {Array.isArray(category) && category?.length > 0 && (
             <p className="text-sm font-light antialiased mb-2">
-              {item?.category}
+              <ProdMultiCategory category={category} count={1} />
             </p>
-          </Link>
+          )}
           <Link href={"/product/" + item?.id + "/" + item?.slug}>
             <h3 className="text-sm text-gray-800 font-bold antialiased whitespace-nowrap overflow-hidden text-ellipsis sm:max-w-[170px] max-w-[150px]">
               {item?.name}

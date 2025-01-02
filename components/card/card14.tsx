@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card14 = ({ item }: any) => {
   const [open, setOpen] = useState<any>(false);
@@ -119,6 +120,8 @@ const Card14 = ({ item }: any) => {
     }
   };
 
+  const category = item?.category || [];
+
   return (
     <div>
       <div className="relative overflow-hidden group">
@@ -184,7 +187,11 @@ const Card14 = ({ item }: any) => {
           </div>
         </div>
         <div className="py-4">
-          <p className="text-gray-500 text-sm font-medium ">{item.category}</p>
+          {Array.isArray(category) && category?.length > 0 && (
+            <p className="text-gray-500 text-sm font-medium ">
+              <ProdMultiCategory category={category} count={1} />
+            </p>
+          )}
           <Link href={"/product/" + item?.id + "/" + item?.slug}>
             <p className="font-semibold text-base text-gray-700 whitespace-nowrap overflow-hidden text-ellipsis sm:max-w-[170px] max-w-[150px]">
               {item?.name}

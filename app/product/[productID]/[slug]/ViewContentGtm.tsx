@@ -1,6 +1,7 @@
 "use client";
 
 import { ViewContent } from "@/helper/fb-tracking";
+import { prodMultiCat } from "@/helper/prodMultiCat";
 import useTheme from "@/hooks/use-theme";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useCallback, useEffect } from "react";
@@ -17,7 +18,7 @@ const ViewContentGtm = ({ product }: any) => {
     item_brand: product.brand || "",
     google_business_vertical: "retail",
     discount: parseFloat(product.discount_price) || 0,
-    item_category: product.category || "General",
+    item_category: prodMultiCat(product?.category) || "General",
     item_category2: product.subcategory || "General",
     item_variant: product.slug || "default",
     quantity: parseInt(product.quantity, 10) || 1,

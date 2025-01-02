@@ -29,6 +29,7 @@ import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { buyNow } from "@/utils/buy-now";
 import { useRouter } from "next/navigation";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 // import ImageSection from './ImageSection';
 // import Zoom from '../Zoom';
@@ -66,6 +67,8 @@ const Details = ({
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
+
+  const category = product?.category || [];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -549,18 +552,15 @@ const Details = ({
           {product?.name}
         </h2>
         <div className="flex flex-col gap-3 sm:mt-6 mt-1">
+        {Array.isArray(category) && category?.length > 0 && (
           <div className="flex items-center gap-2">
             <p className="capitalize">
               {" "}
               <span className="text-black">Category: </span>{" "}
             </p>
-            <Link
-              href={"/category/" + product?.category_id}
-              style={{ color: design?.header_color }}
-            >
-              {product?.category}
-            </Link>
+            <ProdMultiCategory category={category} />
           </div>
+           )}
           <div className="flex justify-start items-center gap-2">
             <p className="text-xl">
               <Rate rating={product?.rating} />
