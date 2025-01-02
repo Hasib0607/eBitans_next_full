@@ -43,10 +43,7 @@ const Nineteen = ({ data, updatedData }: any) => {
           <p>Home</p>
           <IoIosArrowForward className="text-xs mt-1" />
           {Array.isArray(category) && category?.length > 0 && (
-            <ProdMultiCategory
-              category={category}
-              count={1}
-            />
+            <ProdMultiCategory category={category} count={1} />
           )}
           <IoIosArrowForward className="text-xs mt-1" />
           <p className="text-gray-500 font-medium">

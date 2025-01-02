@@ -1,4 +1,5 @@
 "use client";
+
 import Card58 from "@/components/card/card58";
 import DefaultSlider from "@/components/slider/default-slider";
 import useTheme from "@/hooks/use-theme";
@@ -90,7 +91,7 @@ const TwentyEight = ({ data, updatedData }: any) => {
                   : "bg-white text-black pt-3 px-5 text-lg uppercase"
               }
             >
-              পন্যের বিবরণ
+              {singleProductPageData?.text_bangla ? "Details" : "পন্যের বিবরণ"}
             </Tab>
             {singleProductPageData?.review_not_show ? (
               ""
@@ -189,8 +190,10 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  //
-  const { design } = useTheme();
+  const { store_id, design } = useTheme();
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
 
   const prevEl = "feature-product-prev";
   const nextEl = "feature-product-next";
@@ -225,7 +228,7 @@ const Related = ({ product }: any) => {
       <style>{styleCss}</style>
       <div className="">
         <p className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine">
-          রিলেটেড প্রোডাক্ট
+          {singleProductPageData?.text_bangla ? "Related Product" : "রিলেটেড প্রোডাক্ট"}
         </p>
       </div>
 

@@ -56,13 +56,13 @@ const Three = ({ data, updatedData }: any) => {
             {productDetailsData?.product?.SKU}
           </p>
           {Array.isArray(category) && category?.length > 0 && (
-          <p className="text-sm text-[#5a5a5a] font-seven">
-            <span className="font-semibold text-[#212121] font-seven">
-              Category:
-            </span>{" "}
-            <ProdMultiCategory category={category} />
-          </p>
-           )}
+            <p className="text-sm text-[#5a5a5a] font-seven">
+              <span className="font-semibold text-[#212121] font-seven">
+                Category:
+              </span>{" "}
+              <ProdMultiCategory category={category} />
+            </p>
+          )}
           {productDetailsData?.product?.tags && (
             <p className="text-sm text-[#5a5a5a] font-seven">
               <span className="font-semibold text-[#212121] font-seven">

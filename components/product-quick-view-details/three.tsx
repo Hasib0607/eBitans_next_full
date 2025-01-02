@@ -67,9 +67,7 @@ const Three = ({ data, updatedData }: any) => {
                   {" "}
                   <span className="text-black">Category: </span>{" "}
                 </p>
-                <ProdMultiCategory
-                  category={category}
-                />
+                <ProdMultiCategory category={category} />
               </div>
             )}
           </p>

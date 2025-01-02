@@ -45,11 +45,11 @@ const Seventeen = ({ data, updatedData }: any) => {
             <h1 className="text-5xl font-medium text-white">Products</h1>
           </div>
           <div className="flex gap-1 items-center">
-          {Array.isArray(category) && category?.length > 0 && (
-            <p className="text-white">
-              <ProdMultiCategory category={category} count={1} />
-            </p>
-             )}
+            {Array.isArray(category) && category?.length > 0 && (
+              <p className="text-white">
+                <ProdMultiCategory category={category} count={1} />
+              </p>
+            )}
             <IoIosArrowForward className="text-xs mt-1 text-white" />
             <p className="font-medium text-white">
               {productDetailsData?.product?.name}

@@ -465,9 +465,7 @@ const Details = ({ updateData, item }: any) => {
                   {" "}
                   <span className="text-black">Category: </span>{" "}
                 </p>
-                <ProdMultiCategory
-                  category={category}
-                />
+                <ProdMultiCategory category={category} />
               </div>
             )}
           </div>
