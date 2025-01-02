@@ -100,7 +100,7 @@ export const customizeSingleProductPage = [
     id: 10064,
     review_not_show: true,
   },
-  // for watch-time-bd customize text show in details page 28, store id:10064
+  // for watch-time-bd customize text show in details page 28
   {
     id: 10064,
     text_bangla: true,
