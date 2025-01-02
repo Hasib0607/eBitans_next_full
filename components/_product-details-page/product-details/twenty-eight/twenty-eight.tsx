@@ -228,7 +228,9 @@ const Related = ({ product }: any) => {
       <style>{styleCss}</style>
       <div className="">
         <p className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine">
-          {singleProductPageData?.text_bangla ? "Related Product" : "রিলেটেড প্রোডাক্ট"}
+          {singleProductPageData?.text_bangla
+            ? "Related Product"
+            : "রিলেটেড প্রোডাক্ট"}
         </p>
       </div>
 

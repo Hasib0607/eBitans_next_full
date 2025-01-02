@@ -102,9 +102,9 @@ export const customizeSingleProductPage = [
   },
   // for watch-time-bd customize text show in details page 28, store id:10064
   {
-    id: 10064,
+    id: 8590,
     text_bangla: true,
-    customize_text_show_for_watchtime: (
+    customize_text_show_for_watchtime_1: (
       <div>
         <p>কেন এখানে অর্ডার করবেন?</p>
         <p>- বেস্ট প্রাইস</p>

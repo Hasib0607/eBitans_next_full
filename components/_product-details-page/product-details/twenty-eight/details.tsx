@@ -713,8 +713,8 @@ const Details = ({
             </div>
           )}
 
-          {customizeTextData?.customize_text_show_for_watchtime
-            ? customizeTextData?.customize_text_show_for_watchtime
+          {customizeTextData?.customize_text_show_for_watchtime_1
+            ? customizeTextData?.customize_text_show_for_watchtime_1
             : ""}
 
           <div className="flex items-center gap-x-3">
