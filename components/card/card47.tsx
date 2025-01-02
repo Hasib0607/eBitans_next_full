@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card47 = ({ item, stopAutoplay }: any) => {
   const { design, store_id } = useTheme();
@@ -94,6 +95,8 @@ const Card47 = ({ item, stopAutoplay }: any) => {
       }
 
   `;
+
+  const category = item?.category || [];
 
   const price = getPrice(
     item.regular_price,
@@ -220,12 +223,11 @@ const Card47 = ({ item, stopAutoplay }: any) => {
         </div>
 
         <div className="flex flex-col items-center gap-2 px-4 py-3">
-          <Link href={"/category/" + item?.category_id}>
-            {" "}
+          {Array.isArray(category) && category?.length > 0 && (
             <div className="text-gray-500 text-xs uppercase font-bold text-center">
-              <h1>{item?.category}</h1>
+              <ProdMultiCategory category={category} count={1} />
             </div>
-          </Link>
+          )}
           <div className="text-gray-700 text-sm font-extralight">
             <Link href={"/product/" + item?.id + "/" + item?.slug}>
               {" "}

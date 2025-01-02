@@ -14,6 +14,7 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Forty = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -35,6 +36,7 @@ const Forty = ({ data, updatedData }: any) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
+  const category = product?.category || [];
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <div className="flex gap-2 items-center">
@@ -42,9 +44,9 @@ const Forty = ({ data, updatedData }: any) => {
           <p>Home</p>
         </Link>
         <IoIosArrowForward className="text-xs mt-1" />
-        <Link href={"/category/" + productDetailsData?.product?.category_id}>
-          <p className="w-max">{productDetailsData?.product?.category}</p>
-        </Link>
+        {Array.isArray(category) && category?.length > 0 && (
+          <ProdMultiCategory category={category} count={1} />
+        )}
         <IoIosArrowForward className="text-xs mt-1" />
         <p className="text-gray-500 font-medium truncate">
           {productDetailsData?.product?.name}
@@ -58,14 +60,12 @@ const Forty = ({ data, updatedData }: any) => {
         variant={variant}
       >
         <div className="flex flex-col space-y-3">
-          <p className="text-base text-[#5a5a5a]">
-            <span className="font-semibold text-[#212121]">Category:</span>{" "}
-            <Link
-              href={"/category/" + productDetailsData?.product?.category_id}
-            >
-              {productDetailsData?.product?.category}
-            </Link>
-          </p>
+          {Array.isArray(category) && category?.length > 0 && (
+            <p className="text-base text-[#5a5a5a]">
+              <span className="font-semibold text-[#212121]">Category:</span>{" "}
+              <ProdMultiCategory category={category} />
+            </p>
+          )}
         </div>
       </Details>
 

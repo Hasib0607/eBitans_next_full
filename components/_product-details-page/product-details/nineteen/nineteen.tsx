@@ -11,6 +11,7 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Nineteen = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -33,13 +34,20 @@ const Nineteen = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
+  const category = product?.category || [];
+
   return (
     <div className="bg-[#FAF8F1]">
       <div className="sm:container px-5 space-y-8 pt-5 ">
         <div className="flex gap-2 items-center">
           <p>Home</p>
           <IoIosArrowForward className="text-xs mt-1" />
-          <p>{productDetailsData?.product?.category}</p>
+          {Array.isArray(category) && category?.length > 0 && (
+            <ProdMultiCategory
+              category={category}
+              count={1}
+            />
+          )}
           <IoIosArrowForward className="text-xs mt-1" />
           <p className="text-gray-500 font-medium">
             {productDetailsData?.product?.name}

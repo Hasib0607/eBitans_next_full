@@ -9,6 +9,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { IoSearchCircleOutline } from "react-icons/io5";
 import "./card.css";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card24 = ({ item }: any) => {
   const { design, store_id } = useTheme();
@@ -51,6 +52,8 @@ const Card24 = ({ item }: any) => {
 }
 `;
 
+  const category = item?.category || [];
+
   return (
     <>
       <Link href={"/product/" + item?.id + "/" + item?.slug}>
@@ -79,18 +82,20 @@ const Card24 = ({ item }: any) => {
                 </div>
               </div>
               <div className="sm:px-5 flex flex-col justify-start mt-6">
-                <div
-                  className="font-sans text-sm font-normal antialiased card5itemCategory"
-                  style={{
-                    height: "20px",
-                    overflow: "hidden",
-                    whiteSpace: "nowrap",
-                    width: "130px",
-                    textOverflow: "ellipsis",
-                  }}
-                >
-                  {item.category}
-                </div>
+                {Array.isArray(category) && category?.length > 0 && (
+                  <div
+                    className="font-sans text-sm font-normal antialiased card5itemCategory"
+                    style={{
+                      height: "20px",
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      width: "130px",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    <ProdMultiCategory category={category} count={1} />
+                  </div>
+                )}
                 <div
                   className=" text-base antialiased  font-semibold"
                   style={{

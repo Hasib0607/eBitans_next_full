@@ -24,6 +24,7 @@ import {
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -54,6 +55,8 @@ const Details = ({
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
+
+  const category = product?.category || [];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -582,9 +585,14 @@ const Details = ({
               )}
           </div>
           <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            <p>
-              Category: <span className="text-color">{product?.category}</span>{" "}
-            </p>
+            {Array.isArray(category) && category?.length > 0 && (
+              <p>
+                Category:{" "}
+                <span className="text-color">
+                  <ProdMultiCategory category={category} />
+                </span>{" "}
+              </p>
+            )}
             <p>
               Availability:{" "}
               {product?.quantity > 0

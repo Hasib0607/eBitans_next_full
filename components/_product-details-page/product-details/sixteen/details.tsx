@@ -20,6 +20,7 @@ import "./five.css";
 import { HSlider } from "../ten/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 // import { HSlider } from "./slider";
 
 const Details = ({
@@ -54,6 +55,8 @@ const Details = ({
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
+
+  const category = product?.category || [];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -580,16 +583,18 @@ const Details = ({
             {product?.description?.length > 250 && "..."}
           </p>
 
-          <div
-            className={`${product?.category === "" ? "hidden" : "block"} pb-5`}
-          >
-            <p className="text-base font-medium uppercase pt-5 pb-2 ">
-              Categories
-            </p>
-            <p className="text-sm custom-all px-4 py-1 w-max rounded-md">
-              {product?.category}
-            </p>
-          </div>
+          {Array.isArray(category) && category?.length > 0 && (
+            <div
+              className={`${product?.category === "" ? "hidden" : "block"} pb-5`}
+            >
+              <p className="text-base font-medium uppercase pt-5 pb-2 ">
+                Categories
+              </p>
+              <p className="text-sm custom-all px-4 py-1 w-max rounded-md">
+                <ProdMultiCategory category={category} />
+              </p>
+            </div>
+          )}
 
           <div className="">
             {/* unit  */}

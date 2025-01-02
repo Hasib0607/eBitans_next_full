@@ -2,6 +2,7 @@ import useTheme from "@/hooks/use-theme";
 import { productImg } from "@/site-settings/siteUrl";
 import { getPrice } from "@/utils/get-price";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 import Taka from "@/utils/taka";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -37,6 +38,8 @@ const Card11 = ({ item }: any) => {
     handleCampaign();
   }, [item, store_id]);
 
+  const category = item?.category || [];
+
   return (
     <>
       <div className="group rounded-lg">
@@ -58,11 +61,11 @@ const Card11 = ({ item }: any) => {
               {item?.name}
             </h6>{" "}
           </Link>
-          <Link href={`/category/${item.category_id}`}>
+          {Array.isArray(category) && category?.length > 0 && (
             <p className="text-sm capitalize text-gray-500 pb-3">
-              {item?.category}
+              <ProdMultiCategory category={category} count={1} />
             </p>
-          </Link>
+          )}
           <div className="flex flex-wrap items-center gap-y-1 gap-x-4 xl:gap-4 md:gap-4 lg:gap-4">
             <div className="text-base font-semibold">
               <Taka /> {camp?.status === "active" ? campPrice : productGetPrice}

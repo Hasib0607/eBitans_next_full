@@ -112,6 +112,7 @@ const CategoryEight = () => {
     }
  
     `;
+console.log("data",data);
 
   // return <p>hello</p>;
   return (

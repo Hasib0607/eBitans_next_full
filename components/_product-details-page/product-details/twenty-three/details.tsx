@@ -27,6 +27,7 @@ import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { customizeSingleProductPage } from "@/utils/customizeDesign";
 import { useRouter } from "next/navigation";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -57,6 +58,8 @@ const Details = ({
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
+
+  const category = product?.category || [];
 
   const singleProductPageData = customizeSingleProductPage.find(
     (item) => item.id == store_id
@@ -650,15 +653,11 @@ const Details = ({
           </p>
 
           <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            <p>
-              Category:
-              <Link
-                href={`/category/${product?.category_id}`}
-                className="hover:text-blue-500"
-              >
-                {product?.category}
-              </Link>
-            </p>
+            {Array.isArray(category) && category?.length > 0 && (
+              <p>
+                Category: <ProdMultiCategory category={category} />{" "}
+              </p>
+            )}
             <div className="flex items-center gap-x-3">
               <div className="">Availability:</div>
               <div className="text-[#212121] ">

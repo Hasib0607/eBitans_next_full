@@ -7,6 +7,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card67 = ({ item, design, store_id }: any) => {
   // const { design, store_id } = useTheme();
@@ -68,6 +69,8 @@ const Card67 = ({ item, design, store_id }: any) => {
     }
   `;
 
+  const category = item?.category || [];
+
   return (
     <div className="bg-white h-[400px] lg:h-[650px] relative group">
       <div className="">
@@ -92,11 +95,11 @@ const Card67 = ({ item, design, store_id }: any) => {
               {item?.name}
             </h1>
           </Link>
-          <Link href={"/category/" + item?.category}>
+          {Array.isArray(category) && category?.length > 0 && (
             <h1 className="text-sm sm:text-[15px] capitalize truncate">
-              {item?.category}
-            </h1>{" "}
-          </Link>
+              <ProdMultiCategory category={category} count={1} />
+            </h1>
+          )}
         </div>
 
         <div className="font-semibold flex items-center gap-2 w-full">

@@ -13,6 +13,7 @@ import { toast } from "react-toastify";
 import { v4 as uuidv4 } from "uuid";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 const Card19 = ({ item, design, store_id }: any) => {
   const [open, setOpen] = useState(false);
   const [camp, setCamp] = useState<any>(null);
@@ -106,6 +107,9 @@ const Card19 = ({ item, design, store_id }: any) => {
       filterOfferProduct(item);
     }
   };
+
+  const category = item?.category || [];
+
   return (
     <div className="group rounded-[20px] border hover:shadow-lg overflow-hidden relative">
       {/* out of stock  */}
@@ -148,18 +152,20 @@ const Card19 = ({ item, design, store_id }: any) => {
             >
               {item?.name}
             </h6>
-            <p
-              className="text-sm "
-              style={{
-                height: "30px",
-                overflow: "hidden",
-                whiteSpace: "nowrap",
-                width: "130px",
-                textOverflow: "ellipsis",
-              }}
-            >
-              {item?.category}
-            </p>
+            {Array.isArray(category) && category?.length > 0 && (
+              <p
+                className="text-sm "
+                style={{
+                  height: "30px",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                  width: "130px",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                <ProdMultiCategory category={category} count={1} />
+              </p>
+            )}
             <Rate rating={item?.rating} />
             <div className="flex justify-between">
               <div className="flex gap-4 xl:gap-4 md:gap-4 lg:gap-4">

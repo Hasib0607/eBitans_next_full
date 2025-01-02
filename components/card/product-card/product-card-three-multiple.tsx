@@ -2,6 +2,7 @@
 import { productImg } from "@/site-settings/siteUrl";
 import { getPrice } from "@/utils/get-price";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 import Taka from "@/utils/taka";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -60,6 +61,9 @@ const ProductCardThreeMultipleCard = ({ item1, item3, store_id }: any) => {
     handleCampaign();
   }, [item3, store_id]);
 
+  const category1 = item1?.category || [];
+  const category3 = item3?.category || [];
+
   return (
     <>
       <div className="order-last xl:order-none lg:order-none md:order-last grid grid-cols-2 gap-3 gap-y-3 md:grid-cols-2 col-span-2 xl:col-span-1 lg:col-span-1 md:col-span-2">
@@ -87,9 +91,11 @@ const ProductCardThreeMultipleCard = ({ item1, item3, store_id }: any) => {
                         {item1?.name?.length > 15 && "..."}
                       </p>
                     </Link>
-                    <Link href={`/category/${item1?.category_id}`}>
-                      <p className="text-sm ">{item1?.category}</p>
-                    </Link>
+                    {Array.isArray(category1) && category1?.length > 0 && (
+                      <p className="text-sm ">
+                        <ProdMultiCategory category={category1} count={1} />
+                      </p>
+                    )}
                   </div>
                   <div>
                     <div className="line-through text-gray-400 text-sm">
@@ -151,9 +157,11 @@ const ProductCardThreeMultipleCard = ({ item1, item3, store_id }: any) => {
                         {item3?.name?.length > 15 && "..."}
                       </p>
                     </Link>
-                    <Link href={`/category/${item3?.category_id}`}>
-                      <p className="text-sm">{item3?.category}</p>
-                    </Link>
+                    {Array.isArray(category3) && category3?.length > 0 && (
+                      <p className="text-sm ">
+                        <ProdMultiCategory category={category3} count={1} />
+                      </p>
+                    )}
                   </div>
                   <div>
                     <div className="line-through text-gray-400 text-sm">

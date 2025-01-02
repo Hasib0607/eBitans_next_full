@@ -17,6 +17,7 @@ import VideoPlayer from "../video-player";
 import { getProductDetails, getRelatedProducts, getReviews } from "./apis";
 import Details from "./details";
 import Heading from "@/utils/heading";
+import ProdMultiCategory from "@/utils/prod-multi-category";
 
 interface Props {
   data: any;
@@ -51,7 +52,7 @@ const Seven = ({ data, updatedData }: Props) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
-  // console.log(productDetailsData, "pd data");
+  const category = product?.category || [];
 
   return (
     <div className="container px-5">
@@ -75,12 +76,14 @@ const Seven = ({ data, updatedData }: Props) => {
           </SkeletonWrapper>
 
           <SkeletonWrapper fetchStatus={fetchStatus} width={"100px"}>
-            <p className="text-sm text-[#5a5a5a] font-seven">
-              <span className="font-semibold text-[#212121] font-seven">
-                Category:
-              </span>{" "}
-              {productDetailsData?.product?.category}
-            </p>
+            {Array.isArray(category) && category?.length > 0 && (
+              <p className="text-sm text-[#5a5a5a] font-seven">
+                <span className="font-semibold text-[#212121] font-seven">
+                  Category:
+                </span>{" "}
+                <ProdMultiCategory category={category} />
+              </p>
+            )}
           </SkeletonWrapper>
 
           {productDetailsData?.product?.tags && (
