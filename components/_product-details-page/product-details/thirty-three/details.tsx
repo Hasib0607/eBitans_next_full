@@ -25,7 +25,6 @@ import { toast } from "react-toastify";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -56,8 +55,6 @@ const Details = ({
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
-
-  const category = product?.category || [];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -731,14 +728,12 @@ const Details = ({
           {children}
 
           <div className="text-lg flex flex-col gap-y-1">
-            {Array.isArray(category) && category?.length > 0 && (
-              <p>
-                Category:{" "}
-                <span className="w-max text-blue-500 text-sm">
-                  <ProdMultiCategory category={category} />
-                </span>
-              </p>
-            )}
+            <p>
+              Category:{" "}
+              <span className="w-max text-blue-500 text-sm">
+                {product?.category}{" "}
+              </span>
+            </p>
             <p>
               Stock:{" "}
               <span className="w-max text-green-500 text-sm">

@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card4 = ({ item }: any) => {
   const [open, setOpen] = useState(false);
@@ -36,8 +35,6 @@ const Card4 = ({ item }: any) => {
   }
 
   `;
-
-  const category = item?.category || [];
 
   useEffect(() => {
     async function handleCampaign() {
@@ -163,11 +160,11 @@ const Card4 = ({ item }: any) => {
             </div>
           </div>
           <div className="py-6 px-3 space-y-2 relative">
-            {Array.isArray(category) && category?.length > 0 && (
+            <Link href={"/category/" + item?.category_id}>
               <p className="text-sm font-semibold uppercase antialiased mb-2 text-gray-600">
-                <ProdMultiCategory category={category} count={1} />
+                {item?.category}
               </p>
-            )}
+            </Link>
             <Link href={"/product/" + item?.id + "/" + item?.slug}>
               <h3 className="lg:text-lg text-sm font-medium text-hover text-gray-800 lg:font-bold antialiased capitalize truncate">
                 {item?.name}

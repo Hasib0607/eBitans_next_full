@@ -1,7 +1,6 @@
 "use client";
 
 import { Checkout } from "@/helper/fb-tracking";
-import { prodMultiCat } from "@/helper/prodMultiCat";
 import useTheme from "@/hooks/use-theme";
 import { sendGTMEvent } from "@next/third-parties/google";
 import { useCallback, useEffect } from "react";
@@ -14,7 +13,7 @@ const CheckoutGtm = () => {
   const items = cartList.map((item: any, index: number) => ({
     item_name: item?.name,
     item_category_id: item?.category_id,
-    item_category: prodMultiCat(item?.category) || "",
+    item_category: item?.category || "",
     item_category2: item.subcategory || "General",
     item_id: item?.SKU,
     discount: parseFloat(item.discount_price) || 0,

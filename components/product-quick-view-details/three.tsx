@@ -18,7 +18,6 @@ import {
   getRelatedProducts,
   getReviews,
 } from "../_product-details-page/apis";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Three = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -41,8 +40,6 @@ const Three = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  const category = product?.category || [];
-
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <Details
@@ -60,16 +57,10 @@ const Three = ({ data, updatedData }: any) => {
             {productDetailsData?.product?.SKU}
           </p>
           <p className="text-sm text-[#5a5a5a] font-seven">
-            {/* multi category */}
-            {Array.isArray(category) && category?.length > 0 && (
-              <div className="flex items-center gap-2">
-                <p className="capitalize">
-                  {" "}
-                  <span className="text-black">Category: </span>{" "}
-                </p>
-                <ProdMultiCategory category={category} />
-              </div>
-            )}
+            <span className="font-semibold text-[#212121] font-seven">
+              Category:
+            </span>{" "}
+            {productDetailsData?.product?.category}
           </p>
           {productDetailsData?.product?.tags && (
             <p className="text-sm text-[#5a5a5a] font-seven">

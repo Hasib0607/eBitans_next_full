@@ -1,5 +1,4 @@
 "use client";
-
 import Card58 from "@/components/card/card58";
 import DefaultSlider from "@/components/slider/default-slider";
 import useTheme from "@/hooks/use-theme";
@@ -16,7 +15,6 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
 import { customizeSingleProductPage } from "@/utils/customizeDesign";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const TwentyEight = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
@@ -44,7 +42,6 @@ const TwentyEight = ({ data, updatedData }: any) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
-  const category = product?.category || [];
 
   const styleCss = `
     .active-des-review {
@@ -62,13 +59,7 @@ const TwentyEight = ({ data, updatedData }: any) => {
           <p>Home</p>
         </Link>
         <RiArrowRightSLine />
-        {Array.isArray(category) && category?.length > 0 && (
-          <ProdMultiCategory
-            category={category}
-            count={1}
-            className={"text-gray-500"}
-          />
-        )}
+        <p>{productDetailsData?.product?.category}</p>
         <RiArrowRightSLine />
         <p>{productDetailsData?.product?.name}</p>
       </div>
@@ -190,7 +181,7 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  const { store_id, design } = useTheme();
+  const { design, store_id } = useTheme();
   const singleProductPageData = customizeSingleProductPage.find(
     (item) => item.id == store_id
   );

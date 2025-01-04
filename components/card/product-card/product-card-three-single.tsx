@@ -2,7 +2,6 @@
 import { productImg } from "@/site-settings/siteUrl";
 import { getPrice } from "@/utils/get-price";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 import Taka from "@/utils/taka";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -37,8 +36,6 @@ const ProductCardThreeSingleCard = ({ item, store_id }: any) => {
     handleCampaign();
   }, [item, store_id]);
 
-  const category = item?.category || [];
-
   return (
     <div className="col-span-1 xl:col-span-2 lg:col-span-2 rounded-lg bg-gray-200 group relative">
       {item ? (
@@ -63,11 +60,9 @@ const ProductCardThreeSingleCard = ({ item, store_id }: any) => {
                   {item?.name?.slice(0, 12)} {item?.name?.length > 12 && "..."}
                 </p>{" "}
               </Link>
-              {Array.isArray(category) && category?.length > 0 && (
-                <p className="text-sm">
-                  <ProdMultiCategory category={category} count={1} />
-                </p>
-              )}
+              <Link href={`/category/${item?.category_id}`}>
+                <p className="text-sm">{item.category}</p>
+              </Link>
             </div>
             <div>
               <div className="line-through text-gray-400 text-sm">

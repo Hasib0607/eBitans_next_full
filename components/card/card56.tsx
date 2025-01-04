@@ -17,7 +17,6 @@ import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
 import CallForPriceForCard from "@/utils/call-for-price-for-card";
 import { FaWhatsapp } from "react-icons/fa";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card56 = ({ item }: any) => {
   const { design, makeid, store_id, headerSetting } = useTheme();
@@ -89,8 +88,6 @@ const Card56 = ({ item }: any) => {
         border: 1px solid ${bgColor};
     }
   `;
-
-  const category = item?.category || [];
 
   const price = getPrice(
     item?.regular_price,
@@ -179,11 +176,9 @@ const Card56 = ({ item }: any) => {
         )}
         <style>{styleCss}</style>
         <div className="px-2 sm:px-4 py-5 w-full">
-          {Array.isArray(category) && category?.length > 0 && (
-            <p className="text-gray-600 text-sm text-hover">
-              <ProdMultiCategory category={category} count={1} />
-            </p>
-          )}
+          <Link href={"/category/" + item?.category_id}>
+            <p className="text-gray-600 text-sm text-hover">{item?.category}</p>
+          </Link>
           <Link href={"/product/" + item?.id + "/" + item?.slug}>
             <h1 className="text-hover font-thin capitalize truncate">
               {item?.name}

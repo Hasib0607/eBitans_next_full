@@ -12,7 +12,6 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
 import "./style.css";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Seventeen = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -35,8 +34,6 @@ const Seventeen = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  const category = product?.category || [];
-
   return (
     <>
       <div className="bg-[#AEE6F6] relative mb-10 py-20">
@@ -45,11 +42,9 @@ const Seventeen = ({ data, updatedData }: any) => {
             <h1 className="text-5xl font-medium text-white">Products</h1>
           </div>
           <div className="flex gap-1 items-center">
-            {Array.isArray(category) && category?.length > 0 && (
-              <p className="text-white">
-                <ProdMultiCategory category={category} count={1} />
-              </p>
-            )}
+            <p className="text-white">
+              {productDetailsData?.product?.category}
+            </p>
             <IoIosArrowForward className="text-xs mt-1 text-white" />
             <p className="font-medium text-white">
               {productDetailsData?.product?.name}

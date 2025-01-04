@@ -14,7 +14,6 @@ import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
 import "./five.css";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const ThirtyFour = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -37,8 +36,6 @@ const ThirtyFour = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  const category = product?.category || [];
-
   return (
     <div className="bg-[#F9F8FF]">
       <div className="w-full bg-white text-[#252525]">
@@ -51,9 +48,8 @@ const ThirtyFour = ({ data, updatedData }: any) => {
               <Link
                 href={"/category/" + productDetailsData?.product?.category_id}
               >
-                <ProdMultiCategory category={category} />
-              </Link>{" "}
-              {""}
+                {productDetailsData?.product?.category}
+              </Link>
               {productDetailsData?.product?.name}
             </p>
           </div>

@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card54 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
@@ -122,8 +121,6 @@ const Card54 = ({ item }: any) => {
       }
 
   `;
-
-  const category = item?.category || [];
 
   const filterOfferProduct = (item: any) => {
     let cartItem = {};
@@ -260,15 +257,11 @@ const Card54 = ({ item }: any) => {
           </div>
 
           <div className="flex flex-col gap-2 py-3">
-            {Array.isArray(category) && category?.length > 0 && (
-              <div className="text-gray-500 text-lg">
-                <Link href={"/category/" + item?.category_id}>
-                  <p className="text-gray-500 text-lg">
-                    <ProdMultiCategory category={category} count={1} />
-                  </p>
-                </Link>
-              </div>
-            )}
+            <div>
+              <Link href={"/category/" + item?.category_id}>
+                <p className="text-gray-500 text-lg">{item?.category}</p>
+              </Link>
+            </div>
             <div className="font-bold text-xl flex justify-between items-center flex-wrap">
               <Link href={"/product/" + item?.id + "/" + item?.slug}>
                 {" "}

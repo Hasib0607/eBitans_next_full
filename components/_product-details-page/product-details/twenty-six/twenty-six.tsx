@@ -12,7 +12,6 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
-import Card58 from "@/components/card/card58";
 
 const TwentySix = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
@@ -252,8 +251,7 @@ background: white;
           {product?.slice(0, 10).map((productData: any) => (
             <SwiperSlide key={productData.id}>
               <div className="py-5">
-                {/* <Card56 item={productData} /> */}
-                <Card58 item={productData} />
+                <Card56 item={productData} />
               </div>
             </SwiperSlide>
           ))}

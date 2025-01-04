@@ -14,7 +14,6 @@ import Rate from "@/utils/rate";
 import Taka from "@/utils/taka";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card57 = ({ item }: any) => {
   const { store_id, makeid } = useTheme();
@@ -108,8 +107,6 @@ const Card57 = ({ item }: any) => {
     }
   };
 
-  const category = item?.category || [];
-
   return (
     <div className="group rounded-md bg-white shadow-lg w-full h-[190px] overflow-hidden relative">
       {/* out of stock  */}
@@ -135,11 +132,11 @@ const Card57 = ({ item }: any) => {
         </Link>
 
         <div className="px-5 flex flex-col justify-start mt-6">
-          {Array.isArray(category) && category?.length > 0 && (
+          <Link href={"/category/" + item?.category_id}>
             <div className="font-sans text-sm font-normal antialiased card5itemCategory">
-              <ProdMultiCategory category={category} count={1} />
+              {item.category}
             </div>
-          )}
+          </Link>
           <Link href={"/product/" + item?.id + "/" + item?.slug}>
             <div className=" text-base antialiased capitalize font-semibold truncate">
               {item?.name}
