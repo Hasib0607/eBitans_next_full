@@ -9,12 +9,14 @@ import { useQuery } from "@tanstack/react-query";
 import moment from "moment";
 import Link from "next/link";
 import { AiOutlineHome } from "react-icons/ai";
+import { RiArrowRightSLine } from "react-icons/ri";
 import { FaFacebookF, FaWhatsapp } from "react-icons/fa";
 import { FacebookShareButton, WhatsappShareButton } from "react-share";
 import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
+import Card70 from "@/components/card/card70";
 
 const ThirtyEight = ({ data, updatedData, headerSetting }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -45,6 +47,7 @@ const ThirtyEight = ({ data, updatedData, headerSetting }: any) => {
             <Link href="/">
               <AiOutlineHome className="" />
             </Link>
+            <RiArrowRightSLine />
             <p className="truncate">
               {" "}
               <Link
@@ -52,8 +55,9 @@ const ThirtyEight = ({ data, updatedData, headerSetting }: any) => {
               >
                 {productDetailsData?.product?.category}
               </Link>
-              {productDetailsData?.product?.name}
             </p>
+            <RiArrowRightSLine />
+            {productDetailsData?.product?.name}
           </div>
           <div className="shadow-2xl rounded-full mt-4 py-2 px-5">
             <div className="flex items-center gap-4 xl:gap-2 lg:gap-2 md:gap-2 sm:gap-2  ">
@@ -83,45 +87,50 @@ const ThirtyEight = ({ data, updatedData, headerSetting }: any) => {
         </section>
 
         {/* ************************ tab component start ***************************** */}
-        <section id="description" className="bg-[#F2F4F8]">
-          <div className="sm:container px-5 py-5">
-            <div className="bg-white px-5 mb-5 rounded-md border">
-              <div className="relative mt-5">
-                <h2 className="text-lg text-gray-800 font-bold mb-3 capitalize">
-                  Reviews
-                </h2>
-              </div>
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          <div className="lg:col-span-3">
+            <section id="description" className="bg-[#F2F4F8]">
+              <div className="sm:container px-5 py-5">
+                <div className="bg-white px-5 mb-5 rounded-md border">
+                  <div className="relative mt-5">
+                    <h2 className="text-lg text-gray-800 font-bold mb-3 capitalize">
+                      Specification
+                    </h2>
+                  </div>
+                  <div className="my-5">
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: productDetailsData?.product?.description,
+                      }}
+                      className="apiHtml"
+                    ></div>
+                  </div>
+                </div>
+                <div className="bg-white px-5 mb-5 rounded-md border">
+                  <div className="relative mt-5">
+                    <h2 className="text-lg text-gray-800 font-bold mb-3 capitalize">
+                      Reviews
+                    </h2>
+                  </div>
 
-              {reviews?.error
-                ? reviews?.error
-                : reviews?.map((item: any) => (
-                    <UserReview key={item?.id} review={item} />
-                  ))}
-            </div>
-            <div className="bg-white px-5 mb-5 rounded-md border">
-              <div className="relative mt-5">
-                <h2 className="text-lg text-gray-800 font-bold mb-3 capitalize">
-                  Description
-                </h2>
+                  {reviews?.error
+                    ? reviews?.error
+                    : reviews?.map((item: any) => (
+                        <UserReview key={item?.id} review={item} />
+                      ))}
+                </div>
               </div>
-              <div className="my-5">
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: productDetailsData?.product?.description,
-                  }}
-                  className="apiHtml"
-                ></div>
-              </div>
-            </div>
+            </section>
           </div>
-        </section>
+          <div>
+            <Related product={relatedProducts} />
+          </div>
+        </div>
         {/* ************************ tab component end ***************************** */}
 
         {product && product?.video_link && (
           <VideoPlayer videoUrl={product?.video_link} />
         )}
-
-        <Related product={relatedProducts} />
       </div>
     </div>
   );
@@ -152,51 +161,19 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  const prev = "best_seller_Prev";
-  const next = "best_seller_Next";
   return (
-    <div className="bg-[#F2F4F8] rounded-md py-5 sm:py-10">
+    <div className="bg-[#F2F4F8] py-5 sm:py-10">
       <div className="py-5 pt-1 flex justify-between items-center sm:container px-5">
         <SectionHeadingFive title={"Related product"} />
-        <Arrow prevEl={prev} nextEl={next}></Arrow>
       </div>
       <div className="sm:container px-5">
-        <DefaultSlider
-          prevEl={prev}
-          nextEl={next}
-          breakpoints={{
-            350: {
-              slidesPerView: 1,
-              spaceBetween: 10,
-            },
-            480: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            768: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-            1024: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            1440: {
-              slidesPerView: 4,
-              spaceBetween: 20,
-            },
-            1920: {
-              slidesPerView: 5,
-              spaceBetween: 20,
-            },
-          }}
-        >
+        <div className="flex flex-col gap-5">
           {product?.slice(0, 10).map((item: any) => (
-            <SwiperSlide key={item?.id}>
-              <Card65 item={item} />
-            </SwiperSlide>
+            <div key={item?.id} className="w-full">
+              <Card70 item={item} />
+            </div>
           ))}
-        </DefaultSlider>
+        </div>
       </div>
     </div>
   );

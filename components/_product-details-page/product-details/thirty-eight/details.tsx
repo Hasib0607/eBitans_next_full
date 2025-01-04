@@ -16,7 +16,7 @@ import parse from "html-react-parser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { HiShoppingCart } from "react-icons/hi";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import { HiMinus, HiPlus } from "react-icons/hi";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import { HSlider } from "../eight/slider";
@@ -590,6 +590,42 @@ const Details = ({
                 </p>
               </div>
             )}
+            <div className="py-2 px-4 rounded-full bg-[#F5F6FC] w-max">
+              <div className="flex items-center gap-x-2">
+                <div className="">Status:</div>
+                <div className="text-gray-800 ">
+                  {productQuantity >= "0" ? (
+                    <p>
+                      {/* need to set option */}
+                      {stockShow && (
+                        <span className="font-medium">
+                          {productData?.id ? null : productQuantity}
+                        </span>
+                      )}
+                      <span className="font-bold">In Stock</span>
+                    </p>
+                  ) : (
+                    <span className="text-red-600">Out of Stock</span>
+                  )}
+                </div>
+              </div>
+            </div>
+            {product?.SKU && (
+              <div className="py-2 px-4 rounded-full bg-[#F5F6FC] w-max">
+                <p className="text-sm font-bold">
+                  <span className="font-normal">Product Code:</span>{" "}
+                  {product?.SKU}
+                </p>
+              </div>
+            )}
+            {product?.brand_name && (
+              <div className="py-2 px-4 rounded-full bg-[#F5F6FC] w-max">
+                <p className="text-sm font-bold">
+                  <span className="font-normal">Brand:</span>{" "}
+                  {product?.brand_name}
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="flex gap-x-1">
@@ -603,8 +639,8 @@ const Details = ({
           <a href={`/product/${product?.id}/${product?.slug}#description`}>
             <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
               {" "}
-              {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-              {product?.description?.length > 250 && (
+              {parse(`${product?.description?.slice(0, 350)}`)}{" "}
+              {product?.description?.length > 350 && (
                 <span className="underline underline-offset-8 text-red-500">
                   View More Info
                 </span>
@@ -662,25 +698,6 @@ const Details = ({
               setActiveImg={setActiveImg}
             />
           )}
-
-          <div className="flex items-center gap-x-3">
-            <div className="">Availability:</div>
-            <div className="text-gray-800 ">
-              {productQuantity >= "0" ? (
-                <p>
-                  {/* need to set option */}
-                  {stockShow && (
-                    <span className="font-medium">
-                      {productData?.id ? null : productQuantity}
-                    </span>
-                  )}{" "}
-                  <span className="text-green-500">In Stock!</span>
-                </p>
-              ) : (
-                <span className="text-red-600">Out of Stock!</span>
-              )}
-            </div>
-          </div>
 
           <div className="w-max">
             <CallForPrice
@@ -824,32 +841,29 @@ const AddCart = ({
   return (
     <>
       <div className="flex sm:flex-row flex-col sm:items-center gap-3 ">
-        <div className="border border-gray-200 w-max grid grid-cols-2 justify-items-center items-center ">
-          <div className="row-span-2 py-1 border-r-[1px] border-gray-200">
-            <input
-              type="text"
-              className="form-control w-10 text-center border-0 outline-none ring-0 focus:outline-none focus:ring-0 focus:border-0 py-[1px] sm:py-[7px] text-lg font-semibold"
-              value={qty}
-              onChange={handleChange}
-              disabled
-            />
-          </div>
-          <div
-            onClick={incNum}
-            className="w-full h-full btn-hover focus:outline-none lg:cursor-pointer border-b-[1px] border-gray-200 flex justify-center"
-          >
-            <button className="focus:outline-none " type="button">
-              <MdKeyboardArrowUp />
-            </button>
-          </div>
-          <div
+        <div className="w-max flex items-center">
+          <button
+            className="px-4 py-3 border-r-0 border-2 border-gray-100 text-xl  text-gray-500"
+            type="button"
             onClick={decNum}
-            className="w-full h-full btn-hover focus:outline-none lg:cursor-pointer flex justify-center"
           >
-            <button className="focus:outline-none" type="button">
-              <MdKeyboardArrowDown />
-            </button>
-          </div>
+            <HiMinus />
+          </button>
+
+          <input
+            type="text"
+            className="form-control w-10 text-gray-500 text-center border-r-0 border-l-0 border-2 border-gray-100 outline-none py-[8px] text-lg font-semibold"
+            value={qty}
+            onChange={handleChange}
+          />
+
+          <button
+            className="px-4 py-3 border-l-0 border-2 border-gray-100 text-xl text-gray-500"
+            type="button"
+            onClick={incNum}
+          >
+            <HiPlus />
+          </button>
         </div>
 
         <div className="">

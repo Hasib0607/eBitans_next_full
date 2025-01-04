@@ -15,9 +15,11 @@ import "swiper/css/navigation";
 import "swiper/css/effect-creative";
 import "swiper/css/effect-fade";
 import { BiRightArrowAlt } from "react-icons/bi";
-import { sliderImg } from "@/site-settings/siteUrl";
+import { bannerImg, sliderImg } from "@/site-settings/siteUrl";
+import useTheme from "@/hooks/use-theme";
 
 const HeroThirtyEight = ({ slider, design }: any) => {
+  const { banner } = useTheme();
   let menu = [""];
   let isLoop = slider.length > 1;
   const bgColor = design?.header_color;
@@ -87,12 +89,9 @@ const HeroThirtyEight = ({ slider, design }: any) => {
 
       `;
   return (
-    <div className="bg-[#F2F4F8] z-0 relative group">
-      <div className="sm:container px-5 sm:pt-10 pt-5">
+    <div className="bg-[#F2F4F8] z-0 relative group grid grid-cols-1 lg:grid-cols-3">
+      <div className="sm:container px-5 sm:pt-10 pt-5 lg:col-span-2 relative">
         <style>{styleCss}</style>
-        <div>
-          <div className="swiper-pagination-fourteen"></div>
-        </div>
 
         <Swiper
           navigation={{
@@ -100,7 +99,6 @@ const HeroThirtyEight = ({ slider, design }: any) => {
             nextEl: `.${nextEl}`,
           }}
           speed={1000}
-          // effect={"fade"}
           loop={isLoop}
           pagination={pagination}
           autoplay={{
@@ -126,7 +124,6 @@ const HeroThirtyEight = ({ slider, design }: any) => {
                   <h1 className="xl:text-4xl md:text-[28px] text-[16px] font-bold md:text-center md:leading-7">
                     {s?.title}
                   </h1>
-                  {/* <p className='h-[2px] w-10 bg-black mx-auto md:block hidden'></p> */}
                   <p className="md:text-lg text-xs md:text-center md:leading-5">
                     {s?.subtitle}
                   </p>
@@ -153,6 +150,28 @@ const HeroThirtyEight = ({ slider, design }: any) => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Swiper Pagination */}
+        <div className="swiper-pagination-fourteen absolute bottom-4 left-1/2 transform -translate-x-1/2 z-10"></div>
+      </div>
+
+      {/* Banner Section */}
+      <div>
+        <div className="sm:container px-5 sm:py-10 py-5">
+          <div className="grid sm:grid-cols-1 gap-6">
+            {banner.slice(0, 2).map((ban: any) => (
+              <div key={ban?.id} className="relative overflow-hidden">
+                <a href={ban?.link} target="_blank" rel="noopener noreferrer">
+                  <img
+                    alt="gallery"
+                    className="min-w-full h-min md:h-64 hover:scale-105 lg:cursor-pointer ease-in-out duration-700"
+                    src={bannerImg + ban?.image}
+                  />
+                </a>
+              </div>
+            ))}
+          </div>
+        </div>
       </div>
     </div>
   );
