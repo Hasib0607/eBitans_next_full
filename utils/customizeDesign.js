@@ -95,7 +95,7 @@ export const customizeSingleProductPage = [
     btn_design: true,
   },
 
-   // for watch-time-bd review not show in details page 28, store id:10064
+  // for watch-time-bd review not show in details page 28, store id:10064
   {
     id: 10064,
     review_not_show: true,
@@ -145,6 +145,6 @@ export const customizeCards = [
   // for watch-time-bd rating not show in card 58, store id: 10064
   {
     id: 10064,
-    rating_not_show: true,                          
+    rating_not_show: true,
   },
 ];
