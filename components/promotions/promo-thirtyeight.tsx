@@ -3,9 +3,7 @@ import React from "react";
 
 const PromoThirtyEight = ({ banner }: any) => {
   return (
-    <div className="">
-      {/* promo thirty eight in hero thirty eight */}
-    </div>
+    <div className="">{/* promo thirty eight in hero thirty eight */}</div>
   );
 };
 

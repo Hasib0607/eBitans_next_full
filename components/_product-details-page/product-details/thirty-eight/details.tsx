@@ -639,8 +639,8 @@ const Details = ({
           <a href={`/product/${product?.id}/${product?.slug}#description`}>
             <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
               {" "}
-              {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-              {product?.description?.length > 250 && (
+              {parse(`${product?.description?.slice(0, 350)}`)}{" "}
+              {product?.description?.length > 350 && (
                 <span className="underline underline-offset-8 text-red-500">
                   View More Info
                 </span>
