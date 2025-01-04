@@ -256,7 +256,7 @@ const Product = ({
             }
           >
             {grid === "H" && (
-              <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg2:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
+              <div className="grid grid-cols-2 md:grid-cols-2 lg2:grid-cols-3 xl:grid-cols-4 gap-4 px-2 sm:px-0">
                 {products?.map((item: any) => (
                   <motion.div
                     key={item?.id}

@@ -14,7 +14,6 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Nine = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -40,8 +39,6 @@ const Nine = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  const category = product?.category || [];
-
   return (
     <div className="sm:container px-5 sm:py-10 py-5">
       <Details
@@ -59,14 +56,12 @@ const Nine = ({ data, updatedData }: any) => {
             </span>{" "}
             {productDetailsData?.product?.SKU}
           </p>
-          {Array.isArray(category) && category?.length > 0 && (
-            <p className="text-sm text-[#5a5a5a] font-seven">
-              <span className="font-semibold text-[#212121] font-seven">
-                Category:
-              </span>{" "}
-              <ProdMultiCategory category={category} />
-            </p>
-          )}
+          <p className="text-sm text-[#5a5a5a] font-seven">
+            <span className="font-semibold text-[#212121] font-seven">
+              Category:
+            </span>{" "}
+            {productDetailsData?.product?.category}
+          </p>
           {productDetailsData?.product?.tags && (
             <p className="text-sm text-[#5a5a5a] font-seven">
               <span className="font-semibold text-[#212121] font-seven">

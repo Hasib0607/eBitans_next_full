@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card6 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
@@ -138,8 +137,6 @@ const Card6 = ({ item }: any) => {
     }
   };
 
-  const category = item?.category || [];
-
   return (
     <div className="flex border border-gray-100 card-border-6 w-full relative group">
       <style>{styleCss}</style>
@@ -163,11 +160,9 @@ const Card6 = ({ item }: any) => {
       </div>
 
       <div className="p-4 flex flex-col gap-3 col-span-2 lg2:col-span-3">
-        {Array.isArray(category) && category?.length > 0 && (
-          <p className="text-sm text-gray-400 uppercase menu-hover">
-            <ProdMultiCategory category={category} count={1} />
-          </p>
-        )}
+        <p className="text-sm text-gray-400 uppercase menu-hover">
+          {item.category}
+        </p>
         <Link href={"/product/" + item?.id + "/" + item?.slug}>
           <h1 className="text-md text-hover font-bold text-gray-700 menu-hover capitalize whitespace-nowrap overflow-hidden text-ellipsis sm:max-w-[170px] max-w-[150px]">
             {item?.name}

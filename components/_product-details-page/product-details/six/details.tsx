@@ -29,7 +29,6 @@ import { ProductSlider } from "../twenty-eight/product-slider";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   data,
@@ -61,8 +60,6 @@ const Details = ({
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
-
-  const category = product?.category || [];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -720,16 +717,12 @@ const Details = ({
           {children}
 
           <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            {Array.isArray(category) && category?.length > 0 && (
-              <p>
-                Category: <ProdMultiCategory category={category} />
-              </p>
-            )}
+            <p>Category: {product?.category} </p>
             <p>
               Availability:{" "}
               {productQuantity >= "0" ? (
                 <span>
-                  {stockShow && `${productQuantity}`}
+                  {stockShow && `${productQuantity} `}
                   In Stock!
                 </span>
               ) : (

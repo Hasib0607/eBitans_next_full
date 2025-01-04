@@ -23,7 +23,6 @@ import { toast } from "react-toastify";
 import { HSlider } from "./slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
   const { makeid, store_id, headerSetting, design } = useTheme();
@@ -51,8 +50,6 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item?.size !== null);
-
-  const category = product?.category || [];
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -524,11 +521,8 @@ const Details = ({ data, product, variant, vrcolor, fetchStatus }: any) => {
           <h5 className="text-lg font-bold">
             {product?.name?.charAt(0).toUpperCase() + product?.name?.slice(1)}
           </h5>
-          {Array.isArray(category) && category?.length > 0 && (
-            <p className="text-sm font-light pt-2 pb-3">
-              <ProdMultiCategory category={category} />
-            </p>
-          )}
+          <p className="text-sm font-light pt-2 pb-3">{product?.category}</p>
+
           <div className="flex gap-x-1">
             <div>
               <Rate rating={product?.rating} />

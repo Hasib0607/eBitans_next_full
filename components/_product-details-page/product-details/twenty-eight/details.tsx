@@ -35,7 +35,6 @@ import {
   customizeCards,
   customizeSingleProductPage,
 } from "@/utils/customizeDesign";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({
   fetchStatus,
@@ -48,11 +47,10 @@ const Details = ({
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-  const RatingData = customizeCards.find((item) => item.id == store_id);
+  const CardData = customizeCards.find((item) => item.id == store_id);
   const customizeTextData = customizeSingleProductPage.find(
     (item) => item.id == store_id
   );
-  const category = product?.category || [];
   const [filterV, setFilterV] = useState<any>([]);
 
   // select variant state
@@ -623,7 +621,7 @@ const Details = ({
                 </p>
               )}
           </div>
-          {RatingData?.rating_not_show ? (
+          {CardData?.rating_not_show ? (
             " "
           ) : (
             <>
@@ -781,16 +779,7 @@ const Details = ({
           {children}
 
           <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            {/* multi category */}
-            {Array.isArray(category) && category?.length > 0 && (
-              <div className="flex items-center gap-2">
-                <p className="capitalize">
-                  {" "}
-                  <span className="text-black">Category: </span>{" "}
-                </p>
-                <ProdMultiCategory category={category} />
-              </div>
-            )}
+            <p>Category: {product?.category} </p>
             <p>
               Availability:{" "}
               {productQuantity >= "0" ? (

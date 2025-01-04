@@ -20,7 +20,6 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const TwentyThree = ({ data, updatedData }: any) => {
   const { design, store_id } = useTheme();
@@ -45,8 +44,6 @@ const TwentyThree = ({ data, updatedData }: any) => {
 
   const { product, vrcolor, variant } = productDetailsData || {};
 
-  const category = product?.category || [];
-
   const styleCss = `
     .active-des-review {
       color:  ${design?.header_color};
@@ -68,11 +65,7 @@ const TwentyThree = ({ data, updatedData }: any) => {
             <p>Home</p>
           </Link>
           <RiArrowRightSLine />
-          {Array.isArray(category) && category?.length > 0 && (
-            <ProdMultiCategory category={category} count={1} />
-          )}
-          <RiArrowRightSLine />
-          <p className="truncate">{product?.name}</p>
+          <p className="truncate">{productDetailsData?.name}</p>
         </div>
       )}
       <style>{styleCss}</style>

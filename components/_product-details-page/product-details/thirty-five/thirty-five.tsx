@@ -11,7 +11,6 @@ import { useState } from "react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const ThirtyFive = ({ data, updatedData }: any) => {
   const { data: productDetailsData, fetchStatus } = useQuery({
@@ -33,7 +32,6 @@ const ThirtyFive = ({ data, updatedData }: any) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
-  const category = product?.category || [];
 
   return (
     <div className="container lg:py-24 md:py-20 py-16 px-5">
@@ -49,12 +47,10 @@ const ThirtyFive = ({ data, updatedData }: any) => {
             <span className="font-semibold text-[#212121]">SKU:</span>{" "}
             {product?.SKU}
           </p>
-          {Array.isArray(category) && category?.length > 0 && (
-            <p className="text-sm text-[#5a5a5a]">
-              <span className="font-semibold text-[#212121]">Category:</span>{" "}
-              <ProdMultiCategory category={category} />
-            </p>
-          )}
+          <p className="text-sm text-[#5a5a5a]">
+            <span className="font-semibold text-[#212121]">Category:</span>{" "}
+            {product?.category}
+          </p>
           {product?.tags && (
             <p className="text-sm text-[#5a5a5a]">
               <span className="font-semibold text-[#212121]">Tags:</span>{" "}

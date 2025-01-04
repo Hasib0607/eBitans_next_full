@@ -14,7 +14,6 @@ import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
 import QuikView from "../quick-view";
 import Details from "../product-quick-view-details/details";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Card55 = ({ item }: any) => {
   const { design, makeid, store_id } = useTheme();
@@ -183,8 +182,6 @@ const Card55 = ({ item }: any) => {
     }
   };
 
-  const category = item?.category || [];
-
   return (
     <div className="group overlay-group relative">
       {/* out of stock  */}
@@ -236,11 +233,11 @@ const Card55 = ({ item }: any) => {
 
           <div className="flex flex-col gap-2 px-4 py-3">
             <div>
-              {Array.isArray(category) && category?.length > 0 && (
+              <Link href={"/category/" + item?.category_id}>
                 <p className="uppercase text-gray-500 text-xl">
-                  <ProdMultiCategory category={category} count={1} />
+                  {item?.category}
                 </p>
-              )}
+              </Link>
             </div>
             <div className="font-bold text-lg flex justify-between items-center flex-wrap">
               <Link href={"/product/" + item?.id + "/" + item?.slug}>

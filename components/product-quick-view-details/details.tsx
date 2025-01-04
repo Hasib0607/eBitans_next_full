@@ -28,7 +28,6 @@ import { HSlider } from "../_product-details-page/product-details/eight/slider";
 import { getQuickViewProductDetails } from "@/lib";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { useRouter } from "next/navigation";
-import ProdMultiCategory from "@/utils/prod-multi-category";
 
 const Details = ({ updateData, item }: any) => {
   const { makeid, design, store_id, headerSetting } = useTheme();
@@ -433,8 +432,6 @@ const Details = ({ updateData, item }: any) => {
     });
   };
 
-  const category = product?.category || [];
-
   const buttonOne =
     "font-bold text-white bg-gray-600 rounded-md w-60 py-3 text-center";
 
@@ -458,16 +455,16 @@ const Details = ({ updateData, item }: any) => {
         </h2>
         <div className="flex flex-col gap-3 sm:mt-6 mt-1">
           <div className="flex items-center gap-2">
-            {/* multi category */}
-            {Array.isArray(category) && category?.length > 0 && (
-              <div className="flex items-center gap-2">
-                <p className="capitalize">
-                  {" "}
-                  <span className="text-black">Category: </span>{" "}
-                </p>
-                <ProdMultiCategory category={category} />
-              </div>
-            )}
+            <p className="capitalize">
+              {" "}
+              <span className="text-black">Category: </span>{" "}
+            </p>
+            <Link
+              href={"/category/" + product?.category_id}
+              style={{ color: design?.header_color }}
+            >
+              {product?.category}
+            </Link>
           </div>
           <div className="flex justify-start items-center gap-2">
             <p className="text-xl">
