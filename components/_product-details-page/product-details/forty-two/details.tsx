@@ -1,72 +1,63 @@
 "use client";
+import BookingForm from "@/components/booking-form";
 import Skeleton from "@/components/loader/skeleton";
+import QuikView from "@/components/quick-view";
 import useTheme from "@/hooks/use-theme";
 import { addToCartList } from "@/redux/features/product.slice";
+import { productImg } from "@/site-settings/siteUrl";
 import BDT from "@/utils/bdt";
+import { bookNow } from "@/utils/book-now";
 import { buyNow } from "@/utils/buy-now";
 import CallForPrice from "@/utils/call-for-price";
 import { getPrice } from "@/utils/get-price";
 import httpReq from "@/utils/http/axios/http.service";
 import { getCampaignProduct } from "@/utils/http/get-campaign-product";
-import ImageModal from "@/utils/image-modal";
 import useHeaderSettings from "@/utils/query/use-header-settings";
-import Rate from "@/utils/rate";
+import { MinusIcon, PlusIcon } from "@heroicons/react/24/outline";
 import { sendGTMEvent } from "@next/third-parties/google";
-import parse from "html-react-parser";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { FaPhoneSquareAlt } from "react-icons/fa";
-import { HiMinus, HiPlus } from "react-icons/hi";
+import { IoMdCart } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import {
-  FacebookIcon,
-  FacebookMessengerIcon,
-  FacebookMessengerShareButton,
-  FacebookShareButton,
-  WhatsappIcon,
-  WhatsappShareButton,
-} from "react-share";
 import { toast } from "react-toastify";
-import { ProductSlider } from "./product-slider";
 import { HSlider } from "../eight/slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
-import {
-  customizeCards,
-  customizeSingleProductPage,
-} from "@/utils/customizeDesign";
+import { IoMdHeartEmpty, IoIosReturnLeft } from "react-icons/io";
+import { MdOutlineLocalShipping } from "react-icons/md";
 
 const Details = ({
-  fetchStatus,
+  data,
   product,
   variant,
   vrcolor,
-  data,
+  fetchStatus,
   children,
 }: any) => {
-  const router = useRouter();
-  const { makeid, design, store_id, headerSetting } = useTheme();
+  const { makeid, store_id, headerSetting, design, bookingData } = useTheme();
   const dispatch = useDispatch();
-  const CardData = customizeCards.find((item) => item.id == store_id);
+
   const [filterV, setFilterV] = useState<any>([]);
+  const [load, setLoad] = useState<any>(false);
+  const [openBooking, setOpenBooking] = useState<any>(false);
 
   // select variant state
   const [color, setColor] = useState<any>(null);
   const [size, setSize] = useState<any>(null);
   const [unit, setUnit] = useState<any>(null);
   const [qty, setQty] = useState<any>(1);
-  const [load, setLoad] = useState<any>(false);
   const [camp, setCamp] = useState<any>(null);
   const [open, setOpen] = useState<any>(false);
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
   const [copied, setCopied] = useState(false);
+
   // image selector
   const [activeImg, setActiveImg] = useState("");
   const [stockShow, setStockShow] = useState<boolean>(false);
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
-  const sizeV = variant?.find((item: any) => item?.size !== null);
+  const sizeV = variant?.find((item: any) => item.size !== null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -176,12 +167,10 @@ const Details = ({
         setCamp(null);
       }
 
-      // set state with the result
-
-      setLoad(false);
       setColor(null);
       setSize(null);
       setUnit(null);
+      setLoad(false);
     };
 
     // call the function
@@ -189,6 +178,8 @@ const Details = ({
       // make sure to catch any error
       .catch(console.error);
   }, [data, store_id]);
+
+  const router = useRouter();
 
   const buyNowBtn = () => {
     if (qty > productQuantity) {
@@ -199,6 +190,10 @@ const Details = ({
       return false;
     }
     buyNow(variant, size, color, unit, filterV, add_to_cart, router);
+  };
+
+  const bookNowBtn = () => {
+    bookNow(variant, size, color, unit, filterV, setOpenBooking, openBooking);
   };
 
   if (fetchStatus === "fetching") {
@@ -226,6 +221,10 @@ const Details = ({
     parseInt(camp?.discount_amount),
     camp?.discount_type
   );
+
+  const pricex: any = camp?.status === "active" ? campPrice : price;
+
+  const discount = regularPrice - pricex;
 
   const add_to_cart = () => {
     let productDetails = {
@@ -257,7 +256,6 @@ const Details = ({
                 ...product,
               })
             );
-
             sendGTMEvent({
               event: "add_to_cart",
               value: {
@@ -428,7 +426,6 @@ const Details = ({
                 ...product,
               })
             );
-
             sendGTMEvent({
               event: "add_to_cart",
               value: {
@@ -533,9 +530,11 @@ const Details = ({
     }
     .select-color {
         border: 1px solid ${design?.header_color};
+        background:${design?.header_color};
     }
     .select-size {
-        color : ${design?.header_color};
+        color: ${design?.text_color};
+        background:${design?.header_color};
         border: 1px solid ${design?.header_color};
     }
     .select-unit {
@@ -543,46 +542,73 @@ const Details = ({
         border: 1px solid ${design?.header_color};
     }
     .text-color {
-        color:  ${design?.header_color};
+        color: ${design?.header_color};
     }
     .cart-color {
-        color:  ${design?.header_color};
+        color: ${design?.header_color};
         border-bottom: 2px solid ${design?.header_color};
     }
     .border-hover:hover {
         border: 1px solid ${design?.header_color};
-       
     }
-    .cart-btn1 {
+    .cart-btn-thirty-seven {
+        color: ${design?.text_color};
+        background:${design?.header_color};
+        border: 1px solid ${design?.header_color};
+    }
+    .bg-color {
         color:  ${design?.text_color};
         background: ${design?.header_color};
-        border: 2px solid transparent;
     }
-    .cart-btn2 {
-        color:  ${design?.header_color};
-        background: ${design?.text_color};
-        border: 2px solid transparent;
+
+    .heartbeat {
+      animation: heartbeat 3s ease-in-out infinite;
+      will-change: transform;
     }
-    .cart-btn1:hover {
-        color:  ${design?.header_color};
-        background: transparent;
-        border: 2px solid ${design?.header_color};
+      @keyframes heartbeat {
+    0% {
+      transform: scale(1); 
     }
-    .cart-btn2:hover {
-        color:  ${design?.header_color};
-        background: transparent;
-        border: 2px solid ${design?.header_color};
+    25% {
+      transform: scale(1.1);
     }
+    50% {
+      transform: scale(1);
+    }
+    75% {
+      transform: scale(1.1);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
   `;
 
-  const buttonTwentyNine = " font-bold py-[10px] px-10 w-full w-max ";
+  const buttonSeven =
+    "w-full lg:w-96 flex items-center gap-2 rounded-md text-center py-3 justify-center lg:cursor-pointer cart-btn-thirty-seven heartbeat";
 
   return (
-    <div className="bg-white h-full ">
+    <div className="pt-5 pb-20">
       <style>{styleCss}</style>
-
-      <div className="grid grid-cols-1 md:grid-cols-10 gap-5">
-        <div className="md:col-span-5">
+      <div className="grid grid-cols-1 md:grid-cols-9 gap-x-10 gap-y-5">
+        <div className="md:col-span-5 px-10">
+          {/* <div className="grid grid-cols-2 gap-2 ">
+            {product?.image &&
+              product?.image?.slice(0, 10).map((data: any) => (
+                <div
+                  key={data.id}
+                  className={`${
+                    product?.image.length === 1 && "col-span-2"
+                  } w-full h-full flex justify-center`}
+                >
+                  <img
+                    className="min-w-full h-auto rounded-md"
+                    src={productImg + data}
+                    alt=""
+                  />
+                </div>
+              ))}
+          </div> */}
           <HSlider
             product={product}
             setOpen={setOpen}
@@ -591,47 +617,34 @@ const Details = ({
             setActiveImg={setActiveImg}
           />
         </div>
-        <div className="md:col-span-5 space-y-4 lg:sticky top-28 h-max">
-          <h2 className="text-2xl text-[#212121] font-bold mb-3 capitalize">
+        <div className="md:col-span-4 space-y-3 sticky top-20 h-max mt-3 md:mt-40">
+          <h2 className="lg:text-3xl text-2xl text-[#212121] font-semibold">
             {product?.name}
           </h2>
+
           <div className="flex justify-start items-center gap-x-4">
-            <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
-              <BDT />
-              {camp?.status === "active" ? campPrice : price}{" "}
+            <div className="text-[#212121] text-2xl flex justify-start items-center gap-4">
               {camp?.status !== "active" &&
               (product?.discount_type === "no_discount" ||
                 product?.discount_price === "0.00") ? (
                 " "
               ) : (
-                <span className="text-gray-500 font-thin line-through text-xl font-seven">
+                <span className="text-gray-500 font-thin line-through text-lg font-seven">
                   <BDT />
                   {regularPrice}
                 </span>
               )}
-            </div>
-            {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
-            {product?.discount_type === "percent" &&
-              product?.discount_price > 0 && (
-                <p className="text-md text-gray-400">
-                  {Math.trunc(product?.discount_price)}% Off
+              <BDT />
+              {camp?.status === "active" ? campPrice : price}
+              {discount > 0 && (
+                <p className="bg-color text-white z-[2] px-2 text-sm w-max">
+                  You Save <BDT /> {discount}
                 </p>
               )}
+            </div>
+            {/* <p className='line-through text-md text-gray-400'> ${product?.regular_price}</p> */}
+            {/* {product?.discount_type === 'percent' && <p className='text-md text-gray-400'> {product?.discount_price}% Off</p>} */}
           </div>
-          {CardData?.rating_not_show ? (
-            " "
-          ) : (
-            <>
-              <div>
-                <Rate rating={product?.rating} />
-              </div>
-            </>
-          )}
-          <div className="h-[1px] bg-gray-300 w-full"></div>
-          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
-            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-            {product?.description?.length > 250 && "..."}
-          </p>
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
@@ -684,13 +697,29 @@ const Details = ({
             />
           )}
 
-          <div className="">
+          <div className="mt-5">
             <CallForPrice
               product={product}
               headerSetting={headerSetting}
-              cls={buttonTwentyNine}
+              cls={buttonSeven}
               price={price}
             />
+          </div>
+
+          <div className="flex items-center gap-x-3 py-3">
+            <div className="font-semibold text-[#212121]">Availability:</div>
+            <div className="text-[#5a5a5a] text-sm">
+              {productQuantity >= "0" ? (
+                <p>
+                  {stockShow && (
+                    <span className="font-medium">{productQuantity}</span>
+                  )}{" "}
+                  <span className="text-green-500">In Stock!</span>
+                </p>
+              ) : (
+                <span className="text-red-600">Out of Stock!</span>
+              )}
+            </div>
           </div>
 
           {productQuantity >= "0" && (
@@ -699,40 +728,51 @@ const Details = ({
                 <AddCart
                   qty={qty}
                   setQty={setQty}
-                  buyNowBtn={buyNowBtn}
+                  bookingData={bookingData}
                   onClick={() => add_to_cart()}
-                  variant={variant}
-                  buttonTwentyNine={buttonTwentyNine}
+                  buyNowBtn={buyNowBtn}
+                  buttonSeven={buttonSeven}
                 />
               )}
             </div>
           )}
+          {/* booking  */}
+          {bookingData?.status === 200 && productQuantity !== "0" && (
+            <div className={buttonSeven} onClick={bookNowBtn}>
+              <button>BOOK NOW</button>
+            </div>
+          )}
+          {bookingData?.status === 200 && productQuantity === "0" && (
+            <div className={buttonSeven}>
+              <button>ALREADY BOOKED</button>
+            </div>
+          )}
 
-          <div className="flex items-center gap-x-3">
-            <p className="font-medium">শেয়ার :</p>
-            <span className="flex space-x-2">
-              <FacebookShareButton url={window.location.href}>
-                <FacebookIcon size={32} round={true} />
-              </FacebookShareButton>
-              <WhatsappShareButton url={window.location.href}>
-                <WhatsappIcon size={32} round={true} />
-              </WhatsappShareButton>
-              <FacebookMessengerShareButton
-                appId="2"
-                url={window.location.href}
-              >
-                <FacebookMessengerIcon size={32} round={true} />
-              </FacebookMessengerShareButton>
-            </span>
-          </div>
+          {bookingData?.status === 200 && (
+            <div>
+              <QuikView open={openBooking} setOpen={setOpenBooking}>
+                <BookingForm
+                  product={product}
+                  price={price}
+                  open={openBooking}
+                  setOpen={setOpenBooking}
+                  color={color}
+                  size={size}
+                  unit={unit}
+                  variant={variant}
+                  qty={qty}
+                />
+              </QuikView>
+            </div>
+          )}
 
           {/* Display the referral link */}
           <div>
             {/* Display referral link and copy button */}
             {referralLink && (
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
                 {/* Underlined referral link */}
-                <p>
+                <p className="text-center sm:text-left">
                   Referral Link:{" "}
                   <a
                     href={referralLink}
@@ -746,8 +786,8 @@ const Details = ({
 
                 {/* Copy button */}
                 <button
-                  className={`px-2 py-2 font-semibold rounded-lg transition-all duration-300 
-                  ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
+                  className={`mt-2 sm:mt-0 px-4 py-2 font-semibold rounded-lg transition-all duration-300 
+                    ${copied ? "bg-green-500" : "bg-blue-500 hover:bg-blue-600"} text-white`}
                   onClick={handleCopyLink}
                 >
                   <svg
@@ -770,46 +810,25 @@ const Details = ({
           </div>
 
           {children}
-
-          <div className="text-sm flex flex-col gap-y-1 text-[#5a5a5a]">
-            <p>Category: {product?.category} </p>
-            <p>
-              Availability:{" "}
-              {productQuantity >= "0" ? (
-                <>
-                  {stockShow && `${productQuantity} `}
-                  In Stock
-                </>
-              ) : (
-                "Out Of Stock"
-              )}
-            </p>
-          </div>
         </div>
       </div>
-      {open && (
-        <ImageModal open={open} setOpen={setOpen}>
-          <ProductSlider product={product} open={open} />
-        </ImageModal>
-      )}
     </div>
   );
 };
 
 export default Details;
 
-const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
-  const { design, headerSetting } = useTheme();
-
-  const storeID = headerSetting?.store_id || null;
-  const singleProductPageData = customizeSingleProductPage.find(
-    (item) => item.id == storeID
-  );
-  const customizeTextData = customizeSingleProductPage.find(
-    (item) => item.id == storeID
-  );
-
+const AddCart = ({
+  setQty,
+  qty,
+  onClick,
+  buttonSeven,
+  buyNowBtn,
+  bookingData,
+}: any) => {
   const { data, error } = useHeaderSettings();
+
+  const { design } = useTheme();
 
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
@@ -842,161 +861,79 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
     };
   }, []);
 
-  let incNum = () => {
-    setQty(qty + 1);
+  let incrementNum = () => {
+    setQty((prevCount: any) => prevCount + 1);
   };
-  let decNum = () => {
+  let decrementNum = () => {
     if (qty <= 1) {
       setQty(1);
     } else {
       setQty((prevCount: any) => prevCount - 1);
     }
   };
-  let handleChange = (e: any) => {
-    setQty(e.target.value);
-  };
 
-  const {
-    button,
-    button_color,
-    button_bg_color,
-    button1,
-    button1_color,
-    button1_bg_color,
-  } = data?.custom_design?.single_product_page?.[0] || {};
-
-  const styleCss = `
-    .pd_button {
-        color:  ${button_color};
-        background: ${button_bg_color};
-        border: 2px solid transparent;
-    }
-    .pd_button:hover {
-        color:  ${button_color};
-        background: transparent;
-        border: 2px solid ${button_color};
-    }
-    .pd_button1 {
-        color:  ${button1_color};
-        background: ${button1_bg_color};
-        border: 2px solid transparent;
-    }
-    .pd_button1:hover {
-        color:  ${button1_color};
-        background: transparent;
-        border: 2px solid ${button1_color};
-    }
-
-    .searchHover:hover {
-        color:   ${design?.text_color};
-        background: ${design?.header_color};
-    }
-
-    .heartbeat {
-      animation: heartbeat 2s infinite;
-    }
-      @keyframes heartbeat {
-    0% {
-      transform: scale(0.9); 
-    }
-    25% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(0.9);
-    }
-    75% {
-      transform: scale(1);
-    }
-    100% {
-      transform: scale(0.9);
-    }
-  }
-
-  `;
+  const { button } = data?.custom_design?.single_product_page?.[0] || {};
 
   if (error) {
     return <p>error from header settings</p>;
   }
   return (
     <>
-      <style>{styleCss}</style>
-      <div className="flex flex-col gap-5">
-        <div className=" w-max flex items-center gap-x-3">
-          <p className="text-xl">পরিমান :</p>
-          <div className="w-max flex items-center">
-            <button
-              className="px-4 py-3 border-r-0 border-2 border-gray-100 text-xl  text-gray-500"
-              type="button"
-              onClick={decNum}
-            >
-              <HiMinus />
-            </button>
-
-            <input
-              type="text"
-              className="form-control w-10 text-gray-500 text-center border-r-0 border-l-0 border-2 border-gray-100 outline-none py-[8px] text-lg font-semibold"
-              value={qty}
-              onChange={handleChange}
-            />
-
-            <button
-              className="px-4 py-3 border-l-0 border-2 border-gray-100 text-xl text-gray-500"
-              type="button"
-              onClick={incNum}
-            >
-              <HiPlus />
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="py-4">
-        {customizeTextData?.customize_text_show_for_watchtime_1
-          ? customizeTextData?.customize_text_show_for_watchtime_1
-          : ""}
-      </div>
-      <div
-        className={
-          singleProductPageData?.class_name
-            ? singleProductPageData?.class_name
-            : "flex flex-col sm:flex-row mt-3 items-center gap-3"
-        }
-      >
-        {button1 && (
-          <button
-            onClick={onClick}
-            type="submit"
-            className="pd_button1 font-bold py-[10px] px-10 w-full"
-          >
-            {button1}
-          </button>
-        )}
-        {button && (
-          <button
-            onClick={() => buyNowBtn()}
-            type="submit"
-            className={
-              singleProductPageData?.heartbeat_animation == true
-                ? "pd_button font-bold py-[10px] px-10 w-full heartbeat"
-                : "pd_button font-bold py-[10px] px-10 w-full"
+      {bookingData?.from_type !== "single" && (
+        <div className="flex flex-col justify-start gap-3 py-1 lg:w-96">
+          <p className="text-sm">Quantity</p>
+          <div
+            className="flex border border-black rounded-md w-max"
+            style={
+              {
+                "--header-color": design?.header_color,
+                "--text-color": design?.text_color,
+              } as React.CSSProperties
             }
           >
-            {button}
-          </button>
-        )}
-      </div>
-      <div
-        className={
-          singleProductPageData?.hidden ? singleProductPageData?.hidden : "mt-3"
-        }
-      >
-        <a href={`tel:+88${headerSetting?.phone}`}>
-          <button className="cart-btn1 font-bold py-[10px] w-full">
-            <FaPhoneSquareAlt className="inline text-xl" />{" "}
-            {headerSetting?.phone}
-          </button>
-        </a>
-      </div>
+            <div
+              className="h-12 w-12  flex justify-center items-center bg-[var(--header-color)] rounded-l-md hover:text-white font-semibold lg:cursor-pointer transition-all duration-300 ease-linear"
+              onClick={decrementNum}
+            >
+              <MinusIcon width={15} />
+            </div>
+            <div className="h-12 w-16  flex justify-center items-center font-bold">
+              {qty}
+            </div>
+            <div
+              className="h-12 w-12  flex justify-center items-center bg-[var(--header-color)] rounded-r-md hover:text-white font-semibold lg:cursor-pointer transition-all duration-300 ease-linear"
+              onClick={incrementNum}
+            >
+              <PlusIcon width={15} />
+            </div>
+          </div>
+          <div
+            className={`w-full flex items-center gap-2 rounded-md text-center py-3 justify-center lg:cursor-pointer bg-transparent border border-black text-black `}
+            onClick={onClick}
+          >
+            <IoMdCart />
+            <button>Add to cart</button>
+          </div>
+          <div className={`${buttonSeven}`} onClick={buyNowBtn}>
+            <IoMdCart />
+            <button>{button || "Buy it now"}</button>
+          </div>
+          <div className="flex gap-5 md:gap-11 py-4">
+            <div className="flex flex-col items-center justify-center">
+              <IoMdHeartEmpty className="text-[40px]" />
+              <p>Best Quality</p>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <IoIosReturnLeft className="text-[40px]" />
+              <p>Easy Return</p>
+            </div>
+            <div className="flex flex-col items-center justify-center">
+              <MdOutlineLocalShipping className="text-[40px]" />
+              <p>Fast Shipping</p>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 };

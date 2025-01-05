@@ -1,5 +1,5 @@
 "use client";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { FaUserCircle } from "react-icons/fa";
 import { Menu, Transition } from "@headlessui/react";
 import { useDispatch, useSelector } from "react-redux";
@@ -29,6 +29,8 @@ const HeaderThirtyEight = ({ headerSetting }: any) => {
   const [open, setOpen] = useState(false);
   const [searchTxt, setSearch] = useState("");
   const [cartOpen, setCartOpen] = useState(false);
+  const [openMenu, setOpenMenu] = useState(false);
+  const [openCat, setOpenCat] = useState(false);
 
   const handleClose = () => {
     setSearch("");
@@ -41,10 +43,33 @@ const HeaderThirtyEight = ({ headerSetting }: any) => {
       window.location.href = "/";
     }
   };
+
+  useEffect(() => {
+    // sticky navbar
+    const changeNavbar = () => {
+      if (window.scrollY >= 120) {
+        setOpenMenu(true);
+      } else {
+        setOpenMenu(false);
+      }
+    };
+    window.addEventListener("scroll", changeNavbar);
+  }, []);
+
   // CSS START FROM HERE
 
   const styleCss = `
     @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+    .navbarTwentyOne.openMenu {
+        position: fixed;
+        background: ${design?.header_color};
+        opacity:1;
+        width: 100%;
+        z-index: 10;
+        top:0;
+        animation: fadeIn 0.2s ease-in both;
+      }
           
         .font-thirty-seven {
             font-family: 'Poppins', sans-serif;
@@ -231,15 +256,24 @@ const HeaderThirtyEight = ({ headerSetting }: any) => {
           </div>
         </div>
       </div>
-      <div className="bg-black text-white h-10 lg:flex items-center hidden">
-        <div className="sm:container px-5 flex justify-center gap-x-5">
-          {category?.slice(0, 7).map((cat: any) => (
-            <Link key={cat.id} href={"/category/" + cat?.id}>
-              <ul className="" key={cat?.id}>
-                <li className="text-sm font-medium">{cat?.name}</li>
-              </ul>
-            </Link>
-          ))}
+      {/* sticky navbar */}
+      <div>
+        <div
+          className={`${
+            openMenu && "navbarTwentyOne openMenu"
+          } bg-color lg:block hidden`}
+        >
+          <div className="bg-black text-white h-10 lg:flex items-center hidden">
+            <div className="sm:container px-5 flex justify-center gap-x-5">
+              {category?.slice(0, 7).map((cat: any) => (
+                <Link key={cat.id} href={"/category/" + cat?.id}>
+                  <ul className="" key={cat?.id}>
+                    <li className="text-sm font-medium">{cat?.name}</li>
+                  </ul>
+                </Link>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
       {/* screen touch menu close  */}
