@@ -1,3 +1,5 @@
+import { MdOutlineVerifiedUser } from "react-icons/md";
+
 export const customizeFooter = [
   {
     // Fihamart
@@ -63,7 +65,7 @@ export const customizeCheckout = [
     // for watch-time-bd custom text show checkout 21, store id:10064
     id: 10064,
     customize_text_show_for_watchtime: (
-      <p>
+      <p className="font-semibold">
         বি: দ্র: - অর্ডার করার পূর্বে পছন্দের পণ্যটি দেখে-জেনে-বুঝে মূল্য ও
         ডেলিভারি চার্জ নিশ্চিত হয়ে অর্ডারটি কনফার্ম করুন। অযথা হয়রানি করলে
         বিশেষ ব্যবস্থা নেওয়া হবে।
@@ -97,26 +99,56 @@ export const customizeSingleProductPage = [
 
   // for watch-time-bd review not show in details page 28, store id:10064
   {
-    id: 10064,
+    id: 8590,
     review_not_show: true,
     text_bangla: true,
     customize_text_show_for_watchtime_1: (
       <div>
-        <p>কেন এখানে অর্ডার করবেন?</p>
-        <p>- বেস্ট প্রাইস</p>
-        <p>- আফটার সেল সার্ভিস (বিক্রয় পরবর্তী সেবা)</p>
-        <p>- দ্রুত প্রোডাক্ট ডেলিভারির নিশ্চয়তা⁠</p>
-        <p>- প্রোডাক্ট হাতে পেয়ে টাকা প্রদান এর সুবিধা</p>
-        <p>- ১০০% অরিজিনাল প্রোডাক্ট</p>
-        <p>- ⁠১ বছরের অফিসিয়াল মেশিন ওয়ারেন্টি</p>
-        <p>- ⁠বাংলাদেশ এর যেকোনো জায়গায় হোম ডেলিভারি সুবিধা</p>
-        <p>- প্রোডাক্ট খুলে দেখে চেক করে নেওয়ার সুবিধা</p>
-        <p>
-          - ইজি রিটার্ন সুবিধা (প্রোডাক্ট পছন্দ না হলে ডেলিভারি চার্জ পরিশোধ
-          সাপেক্ষে)
+        <p className="font-bold">কেন এখানে অর্ডার করবেন?</p>
+        <p className="flex items-center gap-1 text-gray-500 font-bold py-1">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> বেস্ট
+          প্রাইস
         </p>
-        <p>- সার্বক্ষণিক কাস্টমার সাপোর্ট</p>
-        <p>- ⁠গ্রাহকের সন্তষ্টিই আমাদের একমাত্র কাম্য</p>
+        <p className="flex items-center gap-1 text-gray-500 font-bold">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> আফটার সেল
+          সার্ভিস (বিক্রয় পরবর্তী সেবা)
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> দ্রুত
+          প্রোডাক্ট ডেলিভারির নিশ্চয়তা⁠
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> প্রোডাক্ট
+          হাতে পেয়ে টাকা প্রদান এর সুবিধা
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> ১০০%
+          অরিজিনাল প্রোডাক্ট
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> ⁠১ বছরের
+          অফিসিয়াল মেশিন ওয়ারেন্টি
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> ⁠বাংলাদেশ
+          এর যেকোনো জায়গায় হোম ডেলিভারি সুবিধা
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> প্রোডাক্ট
+          খুলে দেখে চেক করে নেওয়ার সুবিধা
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> ইজি
+          রিটার্ন সুবিধা (প্রোডাক্ট পছন্দ না হলে ডেলিভারি চার্জ পরিশোধ সাপেক্ষে)
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" />{" "}
+          সার্বক্ষণিক কাস্টমার সাপোর্ট
+        </p>
+        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
+          <MdOutlineVerifiedUser className="text-blue-600 text-xl" /> ⁠গ্রাহকের
+          সন্তষ্টিই আমাদের একমাত্র কাম্য
+        </p>
       </div>
     ),
   },
