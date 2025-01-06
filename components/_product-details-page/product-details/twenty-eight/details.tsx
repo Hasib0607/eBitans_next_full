@@ -573,6 +573,12 @@ const Details = ({
         background: transparent;
         border: 2px solid ${design?.header_color};
     }
+     .description-p > p{
+      overflow: hidden;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 3;
+    }
   `;
 
   const buttonTwentyNine = " font-bold py-[10px] px-10 w-full w-max ";
@@ -628,10 +634,14 @@ const Details = ({
             </>
           )}
           <div className="h-[1px] bg-gray-300 w-full"></div>
-          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
+
+          <div className="text-sm text-[#5a5a5a] leading-6 apiHtml description-p">
+            {parse(` ${product?.description} `)}
+          </div>
+          {/* <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
             {product?.description?.length > 250 && "..."}
-          </p>
+          </p> */}
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (

@@ -164,7 +164,7 @@ const HeroThirtyEight = ({ slider, design }: any) => {
                 <a href={ban?.link} target="_blank" rel="noopener noreferrer">
                   <img
                     alt="gallery"
-                    className="min-w-full h-min md:h-64 hover:scale-105 lg:cursor-pointer ease-in-out duration-700"
+                    className="min-w-full h-auto hover:scale-105 lg:cursor-pointer ease-in-out duration-700"
                     src={bannerImg + ban?.image}
                   />
                 </a>
