@@ -1,5 +1,4 @@
 "use client";
-import Card67 from "@/components/card/card67";
 import { profileImg } from "@/site-settings/siteUrl";
 import Rate from "@/utils/rate";
 import { Tab } from "@headlessui/react";
@@ -8,8 +7,18 @@ import moment from "moment";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
+import useTheme from "@/hooks/use-theme";
+import { useEffect, useState } from "react";
+import getDomain from "@/utils/getDomain";
+import { useGetSettingQuery } from "@/redux/features/home/homeApi";
+import FeatureProductInProductDetailsPage42 from "@/components/_homepage/feature-product/feature-product-in-details-forty-two";
+import Card72 from "@/components/card/card72";
 
 const FortyTwo = ({ data, updatedData }: any) => {
+  const { design, store_id } = useTheme();
+  const url = getDomain();
+
+  const [featureProduct, setFeatureProduct] = useState<any>([]);
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-39"],
     queryFn: () => getProductDetails(updatedData),
@@ -29,6 +38,20 @@ const FortyTwo = ({ data, updatedData }: any) => {
   });
 
   const { product, vrcolor, variant } = productDetailsData || {};
+
+  const {
+    data: featureProductData,
+    isLoading: featureLoading,
+    isSuccess: featureSuccess,
+  } = useGetSettingQuery(
+    { domain: url, slug: "feature_product" }
+  );
+  useEffect(() => {
+    if (featureProductData) {
+      const getFeatureProductData = featureProductData?.data || [];
+      setFeatureProduct(getFeatureProductData);
+    }
+  }, [featureSuccess, featureProductData]);
   return (
     <div className="">
       <div className="sm:container px-5">
@@ -40,23 +63,36 @@ const FortyTwo = ({ data, updatedData }: any) => {
           variant={variant}
         />
 
+        {/* Feature Products */}
+        <div>
+          <FeatureProductInProductDetailsPage42 feature_product={featureProduct} design={design} store_id={store_id} />
+        </div>
+
         {/* ************************ tab component start ***************************** */}
-        <div className="mt-14 bg-white">
+        <div
+          className="mt-14 bg-white"
+          style={
+            {
+              "--header-color": design?.header_color,
+              "--text-color": design?.text_color,
+            } as React.CSSProperties
+          }
+        >
           <Tab.Group>
-            <Tab.List className="px-5 py-2 bg-[#DDDDDD]">
+            <Tab.List className="px-4 bg-[#DDDDDD]">
               <Tab
                 className={({ selected }) =>
                   selected
-                    ? "underline text-sm md:text-xl focus:outline-none underline-offset-[12px] border-hidden "
+                    ? "bg-[var(--header-color)] px-3 py-2 text-sm md:text-xl focus:outline-none underline-offset-[12px] border-hidden "
                     : "text-sm md:text-xl"
                 }
               >
-                Description
+                Product Information
               </Tab>
               <Tab
                 className={({ selected }) =>
                   selected
-                    ? "underline text-sm md:text-xl focus:outline-none underline-offset-[12px] border-hidden ml-8"
+                    ? "bg-[var(--header-color)] px-3 py-2 text-sm md:text-xl focus:outline-none underline-offset-[12px] border-hidden ml-8"
                     : "ml-8 text-sm md:text-xl"
                 }
               >
@@ -129,8 +165,9 @@ const Related = ({ product }: any) => {
       <div className="grid grid-cols-2 md:grid-cols-3 gap-1 sm:gap-3 lg:grid-cols-5 xl:grid-cols-6 justify-center">
         {product
           ?.slice(0, 10)
-          .map((item: any, id: any) => <Card67 item={item} key={id} />)}
+          .map((item: any, id: any) => <Card72 item={item} key={id} />)}
       </div>
     </div>
   );
 };
+
