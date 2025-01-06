@@ -1,12 +1,11 @@
 "use client";
-
-import Card60 from "@/components/card/card60";
+import Card71 from "@/components/card/card71";
 import SectionHeadingThirtyFour from "@/components/section-heading/section-heading-thirtyfour";
 import DefaultSlider from "@/components/slider/default-slider";
 import useHeaderSettings from "@/utils/query/use-header-settings";
 import { SwiperSlide } from "swiper/react";
 
-const FeatureProductThirtyFour = ({
+const FeatureProductInProductDetailsPage42 = ({
   feature_product,
   design,
   store_id,
@@ -35,10 +34,6 @@ const FeatureProductThirtyFour = ({
       opacity:1;
       background: white;
     }
-    .see {
-        color:  ${design?.text_color};
-        background:  ${design?.header_color};
-    }
  `;
   const prevEl = "feature-product-prev";
   const nextEl = "feature-product-next";
@@ -50,11 +45,11 @@ const FeatureProductThirtyFour = ({
   const { title = "Default Title", title_color = "#000" } = featuredProduct;
 
   return (
-    <div className="bg-[#F9F8FF]">
+    <div className="">
       <div className="sm:container px-5 sm:py-10 py-5">
         <style>{styleCss}</style>
         <div className="relative arrow-hov">
-          <div className="text-center mb-5">
+          <div className="mb-5">
             <SectionHeadingThirtyFour title={title} title_color={title_color} />
           </div>
 
@@ -87,7 +82,7 @@ const FeatureProductThirtyFour = ({
           >
             {feature_product?.slice(0, 10).map((item: any) => (
               <SwiperSlide key={item?.id}>
-                <Card60 item={item} design={design} store_id={store_id} />
+                <Card71 item={item} design={design} store_id={store_id} />
               </SwiperSlide>
             ))}
           </DefaultSlider>
@@ -97,4 +92,4 @@ const FeatureProductThirtyFour = ({
   );
 };
 
-export default FeatureProductThirtyFour;
+export default FeatureProductInProductDetailsPage42;
