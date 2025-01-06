@@ -37,7 +37,7 @@ const CheckoutGtm = () => {
       ecommerce: {
         currency: headerSetting?.code || "BDT",
         value: parseFloat(totalPrice) || 0,
-        items: [items],
+        items: items,
       },
     });
 

@@ -43,9 +43,7 @@ const FortyTwo = ({ data, updatedData }: any) => {
     data: featureProductData,
     isLoading: featureLoading,
     isSuccess: featureSuccess,
-  } = useGetSettingQuery(
-    { domain: url, slug: "feature_product" }
-  );
+  } = useGetSettingQuery({ domain: url, slug: "feature_product" });
   useEffect(() => {
     if (featureProductData) {
       const getFeatureProductData = featureProductData?.data || [];
@@ -65,7 +63,11 @@ const FortyTwo = ({ data, updatedData }: any) => {
 
         {/* Feature Products */}
         <div>
-          <FeatureProductInProductDetailsPage42 feature_product={featureProduct} design={design} store_id={store_id} />
+          <FeatureProductInProductDetailsPage42
+            feature_product={featureProduct}
+            design={design}
+            store_id={store_id}
+          />
         </div>
 
         {/* ************************ tab component start ***************************** */}
@@ -170,4 +172,3 @@ const Related = ({ product }: any) => {
     </div>
   );
 };
-
