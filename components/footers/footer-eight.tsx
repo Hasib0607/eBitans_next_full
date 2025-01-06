@@ -191,7 +191,7 @@ const FooterEight = ({
             )}
           </div>
           <div className="">
-            <p className="">
+            <p className="mb-16 md:mb-0">
               © {date} All Rights Reserved{" "}
               <Link href="/" className="font-semibold text-red-700 menu-hover">
                 {headerSetting?.website_name}

@@ -106,8 +106,7 @@ export const customizeSingleProductPage = [
       <div>
         <p className="font-bold text-2xl">কেন এখানে অর্ডার করবেন?</p>
         <p className="flex items-center gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> বেস্ট
-          প্রাইস
+          <MdOutlineVerified className="text-blue-600 text-xl" /> বেস্ট প্রাইস
         </p>
         <p className="flex items-center gap-1 text-gray-500 font-bold">
           <MdOutlineVerified className="text-blue-600 text-xl" /> আফটার সেল
@@ -118,32 +117,32 @@ export const customizeSingleProductPage = [
           প্রোডাক্ট ডেলিভারির নিশ্চয়তা⁠
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> প্রোডাক্ট
-          হাতে পেয়ে টাকা প্রদান এর সুবিধা
+          <MdOutlineVerified className="text-blue-600 text-xl" /> প্রোডাক্ট হাতে
+          পেয়ে টাকা প্রদান এর সুবিধা
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ১০০%
-          অরিজিনাল প্রোডাক্ট
+          <MdOutlineVerified className="text-blue-600 text-xl" /> ১০০% অরিজিনাল
+          প্রোডাক্ট
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold">
           <MdOutlineVerified className="text-blue-600 text-xl" /> ⁠১ বছরের
           অফিসিয়াল মেশিন ওয়ারেন্টি
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ⁠বাংলাদেশ
-          এর যেকোনো জায়গায় হোম ডেলিভারি সুবিধা
+          <MdOutlineVerified className="text-blue-600 text-xl" /> ⁠বাংলাদেশ এর
+          যেকোনো জায়গায় হোম ডেলিভারি সুবিধা
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> প্রোডাক্ট
-          খুলে দেখে চেক করে নেওয়ার সুবিধা
+          <MdOutlineVerified className="text-blue-600 text-xl" /> প্রোডাক্ট খুলে
+          দেখে চেক করে নেওয়ার সুবিধা
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ইজি
-          রিটার্ন সুবিধা (প্রোডাক্ট পছন্দ না হলে ডেলিভারি চার্জ পরিশোধ সাপেক্ষে)
+          <MdOutlineVerified className="text-blue-600 text-xl" /> ইজি রিটার্ন
+          সুবিধা (প্রোডাক্ট পছন্দ না হলে ডেলিভারি চার্জ পরিশোধ সাপেক্ষে)
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" />{" "}
-          সার্বক্ষণিক কাস্টমার সাপোর্ট
+          <MdOutlineVerified className="text-blue-600 text-xl" /> সার্বক্ষণিক
+          কাস্টমার সাপোর্ট
         </p>
         <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
           <MdOutlineVerified className="text-blue-600 text-xl" /> ⁠গ্রাহকের

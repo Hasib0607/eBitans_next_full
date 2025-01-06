@@ -537,6 +537,15 @@ const Details = ({
     });
   };
 
+  const styleCss = `
+   .description-p > p{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+`;
+
   const buttonSeven =
     "font-bold text-white bg-gray-600 rounded-md w-60 text-center py-3 font-seven lg:cursor-pointer";
 
@@ -563,6 +572,7 @@ const Details = ({
 
   return (
     <div className="pt-5 pb-20 bg-white">
+      <style>{styleCss}</style>
       <div className="grid grid-cols-1 md:grid-cols-9 gap-x-10 gap-y-5">
         <div className="md:col-span-5">
           <HSlider
@@ -577,10 +587,13 @@ const Details = ({
             {product?.name}
           </h1>
 
-          <p className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml">
+          {/* <p className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml">
             {parse(`${product?.description?.slice(0, 300)}`)}{" "}
             {product?.description?.length > 300 && "..."}
-          </p>
+          </p> */}
+          <div className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml description-p">
+            {parse(` ${product?.description} `)}
+          </div>
 
           <div className="flex justify-start items-center gap-x-4">
             <div className="text-[#212121] text-2xl font-seven font-bold flex justify-start items-center gap-4">
