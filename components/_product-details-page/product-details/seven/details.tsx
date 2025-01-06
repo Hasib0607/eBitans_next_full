@@ -578,8 +578,8 @@ const Details = ({
           </h1>
 
           <p className="text-sm text-[#5a5a5a] font-seven leading-8 apiHtml">
-            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-            {product?.description?.length > 250 && "..."}
+            {parse(`${product?.description?.slice(0, 300)}`)}{" "}
+            {product?.description?.length > 300 && "..."}
           </p>
 
           <div className="flex justify-start items-center gap-x-4">
