@@ -573,7 +573,7 @@ const Details = ({
         background: transparent;
         border: 2px solid ${design?.header_color};
     }
-     .description-p > p{
+     .description-p > *{
       overflow: hidden;
       display: -webkit-box;
       -webkit-box-orient: vertical;
