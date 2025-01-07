@@ -635,13 +635,13 @@ const Details = ({
           )}
           <div className="h-[1px] bg-gray-300 w-full"></div>
 
-          <div className="text-sm text-[#5a5a5a] leading-6 apiHtml description-p">
+          {/* <div className="text-sm text-[#5a5a5a] leading-6 apiHtml description-p">
             {parse(` ${product?.description} `)}
-          </div>
-          {/* <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
+          </div> */}
+          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
             {parse(`${product?.description?.slice(0, 250)}`)}{" "}
             {product?.description?.length > 250 && "..."}
-          </p> */}
+          </p>
 
           {/* unit  */}
           {!vrcolor && variant?.length > 0 && variant[0]?.unit && (
