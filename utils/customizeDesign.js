@@ -97,57 +97,27 @@ export const customizeSingleProductPage = [
     btn_design: true,
   },
 
-  // for watch-time-bd review not show in details page 28, store id:10064
+  // for watch-time-bd review not show in details page 42, store id:10064
   {
     id: 10064,
     review_not_show: true,
-    text_bangla: true,
     customize_text_show_for_watchtime_1: (
       <div>
         <p className="font-bold text-2xl">কেন এখানে অর্ডার করবেন?</p>
-        <p className="flex items-center gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> বেস্ট প্রাইস
-        </p>
-        <p className="flex items-center gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> আফটার সেল
-          সার্ভিস (বিক্রয় পরবর্তী সেবা)
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> দ্রুত
-          প্রোডাক্ট ডেলিভারির নিশ্চয়তা⁠
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> প্রোডাক্ট হাতে
-          পেয়ে টাকা প্রদান এর সুবিধা
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ১০০% অরিজিনাল
-          প্রোডাক্ট
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ⁠১ বছরের
-          অফিসিয়াল মেশিন ওয়ারেন্টি
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ⁠বাংলাদেশ এর
-          যেকোনো জায়গায় হোম ডেলিভারি সুবিধা
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> প্রোডাক্ট খুলে
-          দেখে চেক করে নেওয়ার সুবিধা
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ইজি রিটার্ন
-          সুবিধা (প্রোডাক্ট পছন্দ না হলে ডেলিভারি চার্জ পরিশোধ সাপেক্ষে)
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> সার্বক্ষণিক
-          কাস্টমার সাপোর্ট
-        </p>
-        <p className="flex items-start gap-1 text-gray-500 font-bold py-1">
-          <MdOutlineVerified className="text-blue-600 text-xl" /> ⁠গ্রাহকের
-          সন্তষ্টিই আমাদের একমাত্র কাম্য
-        </p>
+        <ul
+          className="list-inside text-gray-500 font-bold pl-6"
+          style={{ listStyleType: "disc" }}
+        >
+          <li className="py-1">বেস্ট প্রাইস</li>
+          <li>বিক্রয় পরবর্তী সেবা</li>
+          <li className="py-1">
+            দ্রুত প্রোডাক্ট ডেলিভারি ও হাতে পেয়ে চেক করে টাকা প্রদান এর সুবিধা
+          </li>
+          <li>১০০% অরিজিনাল প্রোডাক্টের নিশ্চয়তা</li>
+          <li className="py-1">ওয়াটার রেসিস্টান্স</li>
+          <li>১ বছরের অফিসিয়াল মেশিন ওয়ারেন্টি</li>
+          <li className="py-1">⁠সার্বক্ষণিক কাস্টমার সাপোর্ট</li>
+        </ul>
       </div>
     ),
   },

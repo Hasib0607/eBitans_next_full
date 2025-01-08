@@ -13,9 +13,15 @@ import getDomain from "@/utils/getDomain";
 import { useGetSettingQuery } from "@/redux/features/home/homeApi";
 import FeatureProductInProductDetailsPage42 from "@/components/_homepage/feature-product/feature-product-in-details-forty-two";
 import Card72 from "@/components/card/card72";
+import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const FortyTwo = ({ data, updatedData }: any) => {
   const { design, store_id } = useTheme();
+
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
+
   const url = getDomain();
 
   const [featureProduct, setFeatureProduct] = useState<any>([]);
@@ -72,7 +78,7 @@ const FortyTwo = ({ data, updatedData }: any) => {
 
         {/* ************************ tab component start ***************************** */}
         <div
-          className="mt-14 bg-white"
+          className="bg-white"
           style={
             {
               "--header-color": design?.header_color,
@@ -81,43 +87,63 @@ const FortyTwo = ({ data, updatedData }: any) => {
           }
         >
           <Tab.Group>
-            <Tab.List className="px-4 bg-[#DDDDDD]">
+            {/* Tab List */}
+            <Tab.List className="px-4 bg-[#DDDDDD] flex flex-col md:flex-row md:space-x-8">
               <Tab
                 className={({ selected }) =>
                   selected
-                    ? "bg-[var(--header-color)] px-3 py-2 text-sm md:text-xl focus:outline-none underline-offset-[12px] border-hidden "
-                    : "text-sm md:text-xl"
+                    ? "bg-[var(--header-color)] px-3 py-2 text-sm md:text-base lg:text-xl focus:outline-none underline-offset-4 border-hidden rounded md:rounded-none mb-2 md:mb-0"
+                    : "text-sm md:text-base lg:text-xl mb-2 md:mb-0"
                 }
               >
                 Product Information
               </Tab>
-              <Tab
-                className={({ selected }) =>
-                  selected
-                    ? "bg-[var(--header-color)] px-3 py-2 text-sm md:text-xl focus:outline-none underline-offset-[12px] border-hidden ml-8"
-                    : "ml-8 text-sm md:text-xl"
-                }
-              >
-                Customer Reviews
-              </Tab>
+              {singleProductPageData?.review_not_show ? (
+                ""
+              ) : (
+                <>
+                  <Tab
+                    className={({ selected }) =>
+                      selected
+                        ? "bg-[var(--header-color)] px-3 py-2 text-sm md:text-base lg:text-xl focus:outline-none underline-offset-4 border-hidden rounded md:rounded-none"
+                        : "text-sm md:text-base lg:text-xl"
+                    }
+                  >
+                    Customer Reviews
+                  </Tab>
+                </>
+              )}
             </Tab.List>
-            <Tab.Panels className="p-5">
+
+            {/* Tab Panels */}
+            <Tab.Panels className="p-4 md:p-5">
+              {/* Product Information Panel */}
               <Tab.Panel>
-                <div className="">
+                <div>
                   <div
                     dangerouslySetInnerHTML={{
                       __html: productDetailsData?.product?.description,
                     }}
-                    className="apiHtml"
+                    className="apiHtml text-sm md:text-base leading-relaxed"
                   ></div>
                 </div>
               </Tab.Panel>
+
+              {/* Customer Reviews Panel */}
               <Tab.Panel>
-                {reviews?.error
-                  ? reviews?.error
-                  : reviews?.map((item: any) => (
-                      <UserReview key={item?.id} review={item} />
-                    ))}
+                {reviews?.error ? (
+                  <div className="text-center text-red-500 text-sm md:text-base">
+                    {reviews?.error}
+                  </div>
+                ) : (
+                  reviews?.map((item: any) => (
+                    <UserReview
+                      key={item?.id}
+                      review={item}
+                      className="mb-4 last:mb-0"
+                    />
+                  ))
+                )}
               </Tab.Panel>
             </Tab.Panels>
           </Tab.Group>

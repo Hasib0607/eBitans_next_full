@@ -25,6 +25,7 @@ import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
 import { IoMdHeartEmpty, IoIosReturnLeft } from "react-icons/io";
 import { MdOutlineLocalShipping } from "react-icons/md";
+import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const Details = ({
   data,
@@ -58,6 +59,10 @@ const Details = ({
   const [productQuantity, setProductQuantity] = useState<any>("0");
 
   const sizeV = variant?.find((item: any) => item.size !== null);
+
+    const customizeTextData = customizeSingleProductPage.find(
+      (item) => item.id == store_id
+    );
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
@@ -591,24 +596,7 @@ const Details = ({
     <div className="pt-5 pb-20">
       <style>{styleCss}</style>
       <div className="grid grid-cols-1 md:grid-cols-9 gap-x-10 gap-y-5">
-        <div className="md:col-span-5 px-10">
-          {/* <div className="grid grid-cols-2 gap-2 ">
-            {product?.image &&
-              product?.image?.slice(0, 10).map((data: any) => (
-                <div
-                  key={data.id}
-                  className={`${
-                    product?.image.length === 1 && "col-span-2"
-                  } w-full h-full flex justify-center`}
-                >
-                  <img
-                    className="min-w-full h-auto rounded-md"
-                    src={productImg + data}
-                    alt=""
-                  />
-                </div>
-              ))}
-          </div> */}
+        <div className="md:col-span-5 px-0 md:px-10">
           <HSlider
             product={product}
             setOpen={setOpen}
@@ -720,6 +708,12 @@ const Details = ({
                 <span className="text-red-600">Out of Stock!</span>
               )}
             </div>
+          </div>
+
+          <div className="">
+            {customizeTextData?.customize_text_show_for_watchtime_1
+              ? customizeTextData?.customize_text_show_for_watchtime_1
+              : ""}
           </div>
 
           {productQuantity >= "0" && (
