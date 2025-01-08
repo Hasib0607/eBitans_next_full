@@ -47,7 +47,6 @@ const Details = ({
   const router = useRouter();
   const { makeid, design, store_id, headerSetting } = useTheme();
   const dispatch = useDispatch();
-  const CardData = customizeCards.find((item) => item.id == store_id);
   const [filterV, setFilterV] = useState<any>([]);
 
   // select variant state
@@ -624,15 +623,11 @@ const Details = ({
                 </p>
               )}
           </div>
-          {CardData?.rating_not_show ? (
-            " "
-          ) : (
-            <>
-              <div>
-                <Rate rating={product?.rating} />
-              </div>
-            </>
-          )}
+
+          <div>
+            <Rate rating={product?.rating} />
+          </div>
+
           <div className="h-[1px] bg-gray-300 w-full"></div>
 
           {/* <div className="text-sm text-[#5a5a5a] leading-6 apiHtml description-p">
@@ -815,9 +810,7 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
   const singleProductPageData = customizeSingleProductPage.find(
     (item) => item.id == storeID
   );
-  const customizeTextData = customizeSingleProductPage.find(
-    (item) => item.id == storeID
-  );
+  
 
   const { data, error } = useHeaderSettings();
 
@@ -960,11 +953,7 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
           </div>
         </div>
       </div>
-      <div className="py-4">
-        {customizeTextData?.customize_text_show_for_watchtime_1
-          ? customizeTextData?.customize_text_show_for_watchtime_1
-          : ""}
-      </div>
+
       <div
         className={
           singleProductPageData?.class_name

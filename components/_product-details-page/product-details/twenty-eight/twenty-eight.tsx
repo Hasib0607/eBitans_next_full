@@ -14,14 +14,9 @@ import { SwiperSlide } from "swiper/react";
 import { getProductDetails, getRelatedProducts, getReviews } from "../../apis";
 import VideoPlayer from "../video-player";
 import Details from "./details";
-import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const TwentyEight = ({ data, updatedData }: any) => {
   const { store_id, design } = useTheme();
-
-  const singleProductPageData = customizeSingleProductPage.find(
-    (item) => item.id == store_id
-  );
 
   const { data: productDetailsData, fetchStatus } = useQuery({
     queryKey: ["pd-28"],
@@ -82,23 +77,18 @@ const TwentyEight = ({ data, updatedData }: any) => {
                   : "bg-white text-black pt-3 px-5 text-lg uppercase"
               }
             >
-              {singleProductPageData?.text_bangla ? "Details" : "পন্যের বিবরণ"}
+              পন্যের বিবরণ
             </Tab>
-            {singleProductPageData?.review_not_show ? (
-              ""
-            ) : (
-              <>
-                <Tab
-                  className={({ selected }) =>
-                    selected
-                      ? "text-lg focus:outline-none border-t-2 pt-3 px-5 border-l-2 border-t-black active-des-review uppercase"
-                      : "bg-white text-black pt-3 px-5 text-lg uppercase"
-                  }
-                >
-                  রিভিউ
-                </Tab>
-              </>
-            )}
+
+            <Tab
+              className={({ selected }) =>
+                selected
+                  ? "text-lg focus:outline-none border-t-2 pt-3 px-5 border-l-2 border-t-black active-des-review uppercase"
+                  : "bg-white text-black pt-3 px-5 text-lg uppercase"
+              }
+            >
+              রিভিউ
+            </Tab>
           </Tab.List>
           <Tab.Panels className="">
             <Tab.Panel>
@@ -181,10 +171,7 @@ const UserReview = ({ review }: any) => {
 };
 
 const Related = ({ product }: any) => {
-  const { design, store_id } = useTheme();
-  const singleProductPageData = customizeSingleProductPage.find(
-    (item) => item.id == store_id
-  );
+  const { design } = useTheme();
 
   const prevEl = "feature-product-prev";
   const nextEl = "feature-product-next";
@@ -219,9 +206,7 @@ const Related = ({ product }: any) => {
       <style>{styleCss}</style>
       <div className="">
         <p className="text-lg md:text-xl text-black pb-[10px] w-max font-bold capitalize sec-twenty-nine">
-          {singleProductPageData?.text_bangla
-            ? "Related Product"
-            : "রিলেটেড প্রোডাক্ট"}
+          রিলেটেড প্রোডাক্ট
         </p>
       </div>
 
