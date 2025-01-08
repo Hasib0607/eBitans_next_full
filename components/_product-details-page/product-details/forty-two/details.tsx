@@ -60,10 +60,6 @@ const Details = ({
 
   const sizeV = variant?.find((item: any) => item.size !== null);
 
-    const customizeTextData = customizeSingleProductPage.find(
-      (item) => item.id == store_id
-    );
-
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const referral = params.get("referral");
@@ -710,12 +706,6 @@ const Details = ({
             </div>
           </div>
 
-          <div className="">
-            {customizeTextData?.customize_text_show_for_watchtime_1
-              ? customizeTextData?.customize_text_show_for_watchtime_1
-              : ""}
-          </div>
-
           {productQuantity >= "0" && (
             <div>
               {price !== 0 && (
@@ -822,7 +812,10 @@ const AddCart = ({
 }: any) => {
   const { data, error } = useHeaderSettings();
 
-  const { design } = useTheme();
+  const { design, store_id } = useTheme();
+  const customizeTextData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
 
   const [referralCode, setReferralCode] = useState("");
   const [referralLink, setReferralLink] = useState("");
@@ -912,20 +905,26 @@ const AddCart = ({
             <IoMdCart />
             <button>{button || "Buy it now"}</button>
           </div>
-          <div className="flex gap-5 md:gap-11 py-4">
-            <div className="flex flex-col items-center justify-center">
-              <IoMdHeartEmpty className="text-[40px]" />
-              <p>Best Quality</p>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <IoIosReturnLeft className="text-[40px]" />
-              <p>Easy Return</p>
-            </div>
-            <div className="flex flex-col items-center justify-center">
-              <MdOutlineLocalShipping className="text-[40px]" />
-              <p>Fast Shipping</p>
-            </div>
-          </div>
+          {customizeTextData?.customize_text_show_for_watchtime_1 ? (
+            customizeTextData?.customize_text_show_for_watchtime_1
+          ) : (
+            <>
+              <div className="flex gap-5 md:gap-11 py-4">
+                <div className="flex flex-col items-center justify-center">
+                  <IoMdHeartEmpty className="text-[40px]" />
+                  <p>Best Quality</p>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <IoIosReturnLeft className="text-[40px]" />
+                  <p>Easy Return</p>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                  <MdOutlineLocalShipping className="text-[40px]" />
+                  <p>Fast Shipping</p>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       )}
     </>

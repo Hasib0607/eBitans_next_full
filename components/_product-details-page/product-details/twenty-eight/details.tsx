@@ -810,7 +810,6 @@ const AddCart = ({ setQty, qty, onClick, variant, buyNowBtn }: any) => {
   const singleProductPageData = customizeSingleProductPage.find(
     (item) => item.id == storeID
   );
-  
 
   const { data, error } = useHeaderSettings();
 
