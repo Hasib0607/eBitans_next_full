@@ -103,7 +103,7 @@ export const customizeSingleProductPage = [
     review_not_show: true,
     customize_text_show_for_watchtime_1: (
       <div>
-        <p className="font-bold text-2xl">কেন এখানে অর্ডার করবেন?</p>
+        <p className="font-bold text-2xl my-2">কেন এখানে অর্ডার করবেন ?</p>
         <ul
           className="list-inside text-gray-500 font-bold pl-6"
           style={{ listStyleType: "disc" }}
