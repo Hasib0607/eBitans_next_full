@@ -38,6 +38,7 @@ const RegisterFour = () => {
         .get("/get-module/120?name=" + store.url)
         .then((response) => {
           setActiveModule(response?.data?.status || false);
+          console.log("response", response);
         });
     } catch (error) {
       console.error("Error fetching module:", error);
@@ -157,6 +158,9 @@ const RegisterFour = () => {
                         Select User Type
                       </label>
                       <select
+                        {...register("type", {
+                          required: "User type is required",
+                        })}
                         value={userType}
                         onChange={(e) => setUserType(e.target.value)} // Update the userType state based on selection
                         className={cls}
@@ -185,7 +189,7 @@ const RegisterFour = () => {
                 </form>
 
                 <p className="text-base text-[#adadad]">
-                  Already have an account?
+                  Already have an account?{" "}
                   <Link
                     href="/login"
                     className="text-primary hover:underline text-blue-600"

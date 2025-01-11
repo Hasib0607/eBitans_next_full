@@ -1,3 +1,5 @@
+'use client'
+
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -11,6 +13,7 @@ import Loading from "../register/loading";
 import { btnhover } from "@/site-settings/style";
 import axiosInstance from "@/utils/http/axios/axios-instance";
 import { toast } from "react-toastify";
+import RegisterFive from "../register/register-five";
 // import Loading from './loading';
 export const cls =
   "w-full text-black rounded-md border border-[#E9EDF4] py-3 px-5 bg-[#FCFDFE] text-base text-body-color placeholder-[#ACB6BE] outline-none focus-visible:shadow-none focus:border-primary ";
@@ -241,7 +244,7 @@ const LoginTwentyNine = () => {
             </div>
           )}
           {select === "signup" && (
-            <div>{/* <RegisterTwentyOne setSelect={setSelect} /> */}</div>
+            <div><RegisterFive /> </div>
           )}
         </div>
       </div>
