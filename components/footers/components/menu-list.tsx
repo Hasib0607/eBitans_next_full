@@ -7,7 +7,7 @@ const MenuList = ({ cls, menu }: any) => {
       {menu?.map((m: any) =>
         m?.name !== "Category" ? (
           <p key={m?.id}>
-            <Link href={"/" + m?.url} className={cls}>
+            <Link href={m?.custom_link || (m?.url ? `/${m?.url}` : "/")}>
               {m?.name}
             </Link>
           </p>
