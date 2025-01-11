@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -244,7 +244,9 @@ const LoginTwentyNine = () => {
             </div>
           )}
           {select === "signup" && (
-            <div><RegisterFive /> </div>
+            <div>
+              <RegisterFive />{" "}
+            </div>
           )}
         </div>
       </div>

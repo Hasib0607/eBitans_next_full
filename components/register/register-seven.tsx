@@ -186,6 +186,9 @@ const RegisterSeven = () => {
                         Select User Type
                       </label>
                       <select
+                        {...register("type", {
+                          required: "User type is required",
+                        })}
                         value={userType}
                         onChange={(e) => setUserType(e.target.value)} // Update the userType state based on selection
                         className={cls}
