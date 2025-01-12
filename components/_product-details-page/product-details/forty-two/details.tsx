@@ -126,6 +126,8 @@ const Details = ({
     }
   }, [color, size, unit]);
 
+  const totalproductQuantity = product?.quantity;
+
   // Copy the referral link to the clipboard
   const handleCopyLink = () => {
     navigator.clipboard
@@ -693,11 +695,13 @@ const Details = ({
           <div className="flex items-center gap-x-3 py-3">
             <div className="font-semibold text-[#212121]">Availability:</div>
             <div className="text-[#5a5a5a] text-sm">
-              {productQuantity >= "0" ? (
+              {totalproductQuantity == "0" ? (
+                <span className="font-medium">Out of Stock!</span>
+              ) : productQuantity >= "0" ? (
                 <p>
                   {stockShow && (
                     <span className="font-medium">{productQuantity}</span>
-                  )}{" "}
+                  )}
                   <span className="text-green-500">In Stock!</span>
                 </p>
               ) : (
