@@ -29,6 +29,7 @@ import { toast } from "react-toastify";
 import { HSlider } from "./slider";
 import getReferralCode from "@/utils/getReferralCode";
 import { Colors, ColorsOnly, Sizes, Units } from "./imageVariations";
+import { customizeSingleProductPage } from "@/utils/customizeDesign";
 
 const Details = ({
   fetchStatus,
@@ -44,6 +45,10 @@ const Details = ({
 
   const [filterV, setFilterV] = useState<any>([]);
   const [load, setLoad] = useState<any>(false);
+
+  const singleProductPageData = customizeSingleProductPage.find(
+    (item) => item.id == store_id
+  );
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -577,11 +582,17 @@ const Details = ({
             </div>
           </div>
           {/* {imageSrc && <img src={imageSrc} alt="ExtractedImage" className='h-auto' />} */}
-          <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
-            {" "}
-            {parse(`${product?.description?.slice(0, 250)}`)}{" "}
-            {product?.description?.length > 250 && "..."}
-          </p>
+          {singleProductPageData?.description_not_show ? (
+            ""
+          ) : (
+            <>
+              <p className="text-sm text-[#5a5a5a] leading-6 apiHtml">
+                {" "}
+                {parse(`${product?.description?.slice(0, 250)}`)}{" "}
+                {product?.description?.length > 250 && "..."}
+              </p>
+            </>
+          )}
 
           <div className="flex justify-start items-center gap-x-4">
             <div className="text-[#83C341] text-lg font-seven font-bold flex justify-start items-center gap-4">
