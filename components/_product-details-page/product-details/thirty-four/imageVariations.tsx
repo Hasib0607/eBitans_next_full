@@ -39,11 +39,19 @@ export const ColorsOnly = ({ color, setColor, variant, setActiveImg }: any) => {
   );
 };
 
-export const Sizes = ({ size, setSize, variant, setActiveImg }: any) => {
+export const Sizes = ({
+  size,
+  setSize,
+  variant,
+  setActiveImg,
+  singleProductPageData,
+}: any) => {
   return (
     <div className="flex flex-wrap items-center gap-2">
       <h3 className="font-medium font-sans border-b border-black text-base mb-2">
-        Sizes:
+        {singleProductPageData?.custom_text_for_authenticdisposable
+          ? singleProductPageData?.custom_text_for_authenticdisposable
+          : "Sizes:"}
       </h3>
       <div className="flex flex-wrap gap-2">
         {variant?.map((item: any, id: any) => (
