@@ -121,6 +121,11 @@ export const customizeSingleProductPage = [
       </div>
     ),
   },
+  // for nexmanbd description not show in details page 34, store id:6433
+  {
+    id: 6433,
+    description_not_show: true,
+  }
 ];
 export const customizeModalPopup = [
   // for mrchickenbd.com, modal will not open
