@@ -125,7 +125,12 @@ export const customizeSingleProductPage = [
   {
     id: 6433,
     description_not_show: true,
-  }
+  },
+  // for authenticdisposable.shop custom text show in details page 34, store id:10307
+  {
+    id: 10307,
+    custom_text_for_authenticdisposable: "flavor:",
+  },
 ];
 export const customizeModalPopup = [
   // for mrchickenbd.com, modal will not open
