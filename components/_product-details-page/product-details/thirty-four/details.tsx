@@ -666,7 +666,7 @@ const Details = ({
               size={size}
               setSize={setSize}
               variant={filterV}
-              setActiveImg={setActiveImg} 
+              setActiveImg={setActiveImg}
               singleProductPageData={singleProductPageData}
             />
           )}
