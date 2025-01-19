@@ -61,6 +61,7 @@ export const Sizes = ({
             select={size}
             setSelect={setSize}
             setActiveImg={setActiveImg}
+            singleProductPageData={singleProductPageData}
           />
         ))}
       </div>
@@ -105,7 +106,13 @@ export const Unit = ({ item, select, setSelect, setActiveImg }: any) => {
   );
 };
 
-export const Size = ({ item, select, setSelect, setActiveImg }: any) => {
+export const Size = ({
+  item,
+  select,
+  setSelect,
+  setActiveImg,
+  singleProductPageData,
+}: any) => {
   return (
     <div
       onClick={() => {
