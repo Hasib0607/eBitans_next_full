@@ -128,7 +128,7 @@ export const customizeSingleProductPage = [
   },
   // for authenticdisposable.shop custom text show in details page 34, store id:10307
   {
-    id: 10307,
+    id: 8590,
     custom_text_for_authenticdisposable: "flavor:",
   },
 ];

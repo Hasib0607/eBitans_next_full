@@ -49,7 +49,6 @@ const Details = ({
   const singleProductPageData = customizeSingleProductPage.find(
     (item) => item.id == store_id
   );
-  
 
   // select variant state
   const [color, setColor] = useState<any>(null);
@@ -667,7 +666,8 @@ const Details = ({
               size={size}
               setSize={setSize}
               variant={filterV}
-              setActiveImg={setActiveImg}
+              setActiveImg={setActiveImg} 
+              singleProductPageData={singleProductPageData}
             />
           )}
 
