@@ -214,30 +214,38 @@ const Address = ({
 
                   if (field.status == 1 && field.name == "phone") {
                     return (
-                      <div
-                        key={field.name}
-                        className="flex items-center border border-gray-400 rounded focus-within:border-gray-400"
-                      >
-                        <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
-                          <FaPhoneAlt className="text-black" />
+                      <>
+                        <div
+                          key={field.name}
+                          className="flex items-center border border-gray-400 rounded focus-within:border-gray-400"
+                        >
+                          <div className="bg-gray-200 p-2 rounded-l-md rounded-r-none">
+                            <FaPhoneAlt className="text-black" />
+                          </div>
+                          <input
+                            value={userPhone}
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            type="number"
+                            maxLength={11}
+                            minLength={11}
+                            placeholder={
+                              design?.template_id === "29" ||
+                              store_id === 3601 ||
+                              store_id === 3904
+                                ? "ফোন"
+                                : "Phone"
+                            }
+                            className="flex-grow ml-2 focus:outline-none focus:ring-0"
+                          />
                         </div>
-                        <input
-                          value={userPhone}
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          type="number"
-                          maxLength={11}
-                          minLength={11}
-                          placeholder={
-                            design?.template_id === "29" ||
-                            store_id === 3601 ||
-                            store_id === 3904
-                              ? "ফোন"
-                              : "Phone"
-                          }
-                          className="flex-grow ml-2 focus:outline-none focus:ring-0"
-                        />
-                      </div>
+                        {/* Phone Validation Error */}
+                        {!isPhoneValid && (
+                          <small className="text-rose-500">
+                            Need 11 digits
+                          </small>
+                        )}
+                      </>
                     );
                   }
 
@@ -305,6 +313,7 @@ const Address = ({
                       store_id={store_id}
                       setToken={setToken}
                       formField={formField}
+                      isPhoneValid={isPhoneValid}
                     />
                   </div>
                 )}
@@ -331,6 +340,7 @@ const Address = ({
                           setSelectAddress={setSelectAddress}
                           setCall={setCall}
                           formField={formField}
+                          isPhoneValid={isPhoneValid}
                         />
                       ))}
                   </div>
@@ -351,6 +361,7 @@ const Address = ({
         setCall={setCall}
         design={design}
         formField={formField}
+        isPhoneValid={isPhoneValid}
       />
     </>
   );
@@ -365,6 +376,7 @@ const Single = ({
   setCall,
   token,
   formField,
+  isPhoneValid,
 }: any) => {
   const [open, setOpen] = useState(false);
   const { design, store } = useTheme();
@@ -441,6 +453,7 @@ const Single = ({
             setSelectAddress={setSelectAddress}
             design={design}
             formField={formField}
+            isPhoneValid={isPhoneValid}
           />
         </div>
       </div>
@@ -474,6 +487,7 @@ const AddressView = ({
   store,
   design,
   formField,
+  isPhoneValid,
 }: any) => {
   const { user } = useSelector((state: any) => state.auth);
   const {
@@ -626,6 +640,9 @@ const AddressView = ({
                         className="flex-grow ml-2 outline-none"
                       />
                     </div>
+                    {!isPhoneValid && (
+                      <small className="text-rose-500">Need 11 digits</small>
+                    )}
                     {errors.phone?.type === "required" && (
                       <span className="text-red-500">
                         Phone number is required
@@ -738,6 +755,7 @@ export function SaveAddress({
   store_id,
   design,
   formField,
+  isPhoneValid,
 }: any) {
   const {
     register,
@@ -878,6 +896,9 @@ export function SaveAddress({
                         autoComplete="address-level1"
                         className="mt-1 border p-2 text-black focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                       />
+                      {!isPhoneValid && (
+                        <small className="text-rose-500">Need 11 digits</small>
+                      )}
                       {errors.phone?.type === "required" && (
                         <span className="text-red-500">
                           Phone number is required
@@ -974,6 +995,7 @@ export function UpdateAddress({
   design,
   token,
   formField,
+  isPhoneValid,
 }: any) {
   const { store } = useTheme();
 
@@ -1115,6 +1137,9 @@ export function UpdateAddress({
                       autoComplete="address-level1"
                       className="mt-1 border p-2 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
                     />
+                    {!isPhoneValid && (
+                      <small className="text-rose-500">Need 11 digits</small>
+                    )}
                     {errors.phone && (
                       <span className="text-red-500">
                         Phone number is required
