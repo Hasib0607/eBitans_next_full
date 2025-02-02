@@ -62,9 +62,28 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 onChange={(e) => setSelectPayment(e.target.value)}
                 className="mr-2"
               />
-              {headerSetting?.bkash_text || (
-                <img src={bkashLogo.src} className="h-8 mr-2" alt="bkashLogo" />
-              )}
+              {headerSetting?.bkash_text }
+            </label>
+          )}
+
+          {headerSetting?.amarpay === "active" && (
+            <label
+              style={{
+                backgroundColor:
+                  selectPayment === "amarpay" ? design?.header_color : "#fff",
+                color: selectPayment === "amarpay" ? design?.text_color : "#000",
+              }}
+              className="py-2 px-5 rounded-lg w-full transition-colors duration-300 flex items-center cursor-pointer hover:bg-gray-100"
+            >
+              <input
+                type="radio"
+                name="payment_method"
+                value="amarpay"
+                checked={selectPayment === "amarpay"}
+                onChange={(e) => setSelectPayment(e.target.value)}
+                className="mr-2"
+              />
+              {headerSetting?.amarpay_text }
             </label>
           )}
 

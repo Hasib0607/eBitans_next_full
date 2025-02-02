@@ -122,6 +122,37 @@ const CheckOutFortyPaymentGateway = ({
                   />
                 </label>
               )}
+
+              {headerSetting?.amarpay === "active" && (
+                <label
+                  style={{
+                    backgroundColor:
+                      selectPayment === "amarpay" ? design?.header_color : "#fff",
+                    color:
+                      selectPayment === "amarpay" ? design?.text_color : "#000",
+                  }}
+                  className={`p-3 rounded text-center space-y-2 w-full border border-gray-300`}
+                >
+                  <div className="lg:cursor-pointer">
+                    <h3 className="font-semibold tracking-wider">
+                      {headerSetting?.amarpay_text || "Amar Pay"}
+                    </h3>
+                  </div>
+
+                  <input
+                    className="
+                                    hidden
+                                    checked:focus:bg-black
+                                    checked:focus:border-black
+                                    checked:focus:ring-black"
+                    name="address_type"
+                    type="radio"
+                    value={"amarpay"}
+                    onChange={(e) => setSelectPayment(e.target.value)}
+                  />
+                </label>
+              )}
+              
               {advancePay?.status === "1" && (
                 <label
                   style={{
