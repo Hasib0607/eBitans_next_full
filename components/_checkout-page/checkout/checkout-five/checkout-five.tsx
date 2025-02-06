@@ -117,7 +117,7 @@ const CheckOutsFive = () => {
           />
           {headerSetting?.online === "active" && (
             <>
-              <div>
+              <div className="pl-5 pb-5">
                 I have read and agree with the website’s{" "}
                 <span>
                   <a

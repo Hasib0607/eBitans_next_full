@@ -204,6 +204,12 @@ const YourOrders = ({
         ? userPhone
         : selectAddress?.phone
     );
+    formData.append(
+      "email",
+      store?.auth_type === "EasyOrder" && !user
+        ? userEmail
+        : selectAddress?.email
+    );
     formData.append("payment_type", selectPayment);
     formData.append(
       "address",
