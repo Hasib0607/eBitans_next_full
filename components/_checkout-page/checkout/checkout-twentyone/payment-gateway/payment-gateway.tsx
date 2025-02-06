@@ -172,7 +172,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                   />
                 </label>
               )}
-                {headerSetting?.amarpay === "active" && (
+              {headerSetting?.amarpay === "active" && (
                 <label
                   style={{
                     backgroundColor:

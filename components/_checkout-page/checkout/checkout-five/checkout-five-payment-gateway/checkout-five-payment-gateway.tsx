@@ -127,7 +127,9 @@ const CheckOutFivePaymentGateway = ({
                 <label
                   style={{
                     backgroundColor:
-                      selectPayment === "amarpay" ? design?.header_color : "#fff",
+                      selectPayment === "amarpay"
+                        ? design?.header_color
+                        : "#fff",
                     color:
                       selectPayment === "amarpay" ? design?.text_color : "#000",
                   }}

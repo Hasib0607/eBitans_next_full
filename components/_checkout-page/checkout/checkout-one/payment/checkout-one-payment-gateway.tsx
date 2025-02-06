@@ -62,7 +62,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 onChange={(e) => setSelectPayment(e.target.value)}
                 className="mr-2"
               />
-              {headerSetting?.bkash_text }
+              {headerSetting?.bkash_text}
             </label>
           )}
 
@@ -71,7 +71,8 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
               style={{
                 backgroundColor:
                   selectPayment === "amarpay" ? design?.header_color : "#fff",
-                color: selectPayment === "amarpay" ? design?.text_color : "#000",
+                color:
+                  selectPayment === "amarpay" ? design?.text_color : "#000",
               }}
               className="py-2 px-5 rounded-lg w-full transition-colors duration-300 flex items-center cursor-pointer hover:bg-gray-100"
             >
@@ -83,7 +84,7 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 onChange={(e) => setSelectPayment(e.target.value)}
                 className="mr-2"
               />
-              {headerSetting?.amarpay_text }
+              {headerSetting?.amarpay_text}
             </label>
           )}
 
