@@ -173,7 +173,9 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
                 <label
                   style={{
                     backgroundColor:
-                      selectPayment === "amarpay" ? design?.header_color : "#fff",
+                      selectPayment === "amarpay"
+                        ? design?.header_color
+                        : "#fff",
                     color:
                       selectPayment === "amarpay" ? design?.text_color : "#000",
                   }}
@@ -187,10 +189,10 @@ const PaymentGateway = ({ selectPayment, setSelectPayment }: any) => {
 
                   <input
                     className="
-                                    hidden
-                                    checked:focus:bg-black
-                                    checked:focus:border-black
-                                    checked:focus:ring-black"
+                    hidden
+                    checked:focus:bg-black
+                    checked:focus:border-black
+                    checked:focus:ring-black"
                     name="address_type"
                     type="radio"
                     value={"amarpay"}
