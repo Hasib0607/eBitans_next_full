@@ -11,7 +11,7 @@ const FloatingContact = () => {
   const wphoneNumber = headerSetting?.whatsapp_phone;
   const phoneNumber = headerSetting?.phone;
   const [isOpen, setIsOpen] = useState(false);
-  const message = "আমি eBitans এবং এর সার্ভিস সম্পর্কে বিস্তারিত জানতে চাই?";
+  // const message = "আমি eBitans এবং এর সার্ভিস সম্পর্কে বিস্তারিত জানতে চাই?";
 
   const toggleServices = () => {
     setIsOpen(!isOpen); // Toggle icons visibility
@@ -30,7 +30,7 @@ const FloatingContact = () => {
       <div className={`${styles.services} ${isOpen ? styles.active : ""}`}>
         {wphoneNumber && (
           <a
-            href={`https://wa.me/${wphoneNumber}?text=${encodeURIComponent(message)}`}
+            href={`https://wa.me/${wphoneNumber}`}
             className={`${styles.serviceItem} ${styles.whatsapp}`}
             title="WhatsApp"
           >
