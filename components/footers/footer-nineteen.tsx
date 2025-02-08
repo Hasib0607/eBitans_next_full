@@ -6,7 +6,8 @@ import FollowUs from "./components/follow-us";
 import MenuList from "./components/menu-list";
 import CategoryList from "./components/category-list";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -78,7 +79,8 @@ const FooterNineteen = ({
           </div>
         </div>
       </div>
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
       {/* <Messenger /> */}
     </>
   );

@@ -11,7 +11,8 @@ import Newsletter from "./components/newsletter";
 import Link1 from "../link1";
 import Link from "next/link";
 import MenuList from "./components/menu-list";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -211,7 +212,8 @@ const FooterOne = ({
         </div>
       </div>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </footer>
   );
 };

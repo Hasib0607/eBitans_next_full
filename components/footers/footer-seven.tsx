@@ -6,7 +6,8 @@ import {
 } from "react-icons/ai";
 import { BsFacebook, BsYoutube } from "react-icons/bs";
 import Newsletter from "./components/newsletter";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import { customizeFooter } from "@/utils/customizeDesign";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -184,7 +185,8 @@ const FooterSeven = ({
         </a>
       </p>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

@@ -22,7 +22,8 @@ import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
 import Link from "next/link";
 import CategoryList from "./components/category-list";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -263,7 +264,8 @@ const FooterEleven = ({
         </div>
       </div>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

@@ -6,7 +6,8 @@ import {
 } from "@heroicons/react/24/outline";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
@@ -85,7 +86,8 @@ const FooterThirteen = ({ headerSetting, category, menu, store_id }: any) => {
         <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

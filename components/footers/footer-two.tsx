@@ -1,7 +1,8 @@
 import React from "react";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
@@ -47,7 +48,8 @@ const FooterTwo = ({ menu, headerSetting, store_id }: any) => {
       </div>
 
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

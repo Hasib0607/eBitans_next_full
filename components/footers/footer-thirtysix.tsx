@@ -11,7 +11,8 @@ import { BsFacebook, BsYoutube } from "react-icons/bs";
 import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import SSLImg from "@/assets/SSLCommerz-Pay-With-logo-All-Size-03.webp";
 import AllPaymantGateway from "./components/all-payment-gateway";
@@ -141,7 +142,8 @@ const FooterThirtySix = ({
         )}
       </div>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

@@ -5,7 +5,8 @@ import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
 import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterFive = ({
@@ -162,7 +163,8 @@ const FooterFive = ({
           <AllPaymantGateway headerSetting={headerSetting} />
         </div>
         {/* <Messenger /> */}
-        <WhatsApp />
+        {/* <WhatsApp /> */}
+        <FlotingContact />
       </footer>
     </div>
   );

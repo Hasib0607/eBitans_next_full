@@ -3,7 +3,8 @@ import Link from "next/link";
 import React from "react";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirtySeven = ({
@@ -130,7 +131,8 @@ const FooterThirtySeven = ({
           </div>
         </div>
         {/* <Messenger /> */}
-        <WhatsApp />
+        {/* <WhatsApp /> */}
+        <FlotingContact />
       </footer>
       <div className="sm:container px-5 mt-8 mb-4">
         <AllPaymantGateway headerSetting={headerSetting} />

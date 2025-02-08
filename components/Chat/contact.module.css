@@ -1,0 +1,270 @@
+/* General Styles */
+.whatshelp {
+    right: 25px;
+    bottom: 25px;
+    position: fixed;
+    z-index: 9999;
+  }
+  
+  .openServices {
+    background-color: #f1593a;
+    color: #fff;
+    line-height: 55px;
+    margin-top: 10px;
+    padding: 10px 17px 10px 17px;
+    border: none;
+    cursor: pointer;
+    font-size: 40px;
+    width: 75px;
+    height: 75px;
+    text-align: center;
+    box-shadow: 2px 2px 8px -3px #000;
+    border-radius: 100%;
+    display: inline-block;
+    position: relative;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .openServicesTooltip {
+    position: absolute;
+    bottom: 21px;
+    right: 110%;
+    transform: translateX(50%);
+    background: linear-gradient(to right top, #fff, #f1593a);
+    color: black;
+    padding: 8px 22px;
+    border: 1px solid black;
+    border-radius: 5px;
+    font-size: 18px;
+    letter-spacing: 3px;
+    font-family: "Lucida Console", "Courier New", monospace;
+    font-weight: 800;
+    white-space: nowrap;
+    opacity: 0.8;
+    z-index: 1000;
+    transition: opacity 0.3s ease-out;
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+  }
+  
+  @keyframes floating {
+    from { transform: translate(0, 0); }
+    65%  { transform: translate(0, 15px); }
+    to   { transform: translate(0, 0); }
+  }
+  
+  /* Floating Icons */
+  .services {
+    width: 55px;
+    height: auto;
+    display: none;
+    position: absolute;
+    right: 16px;
+    bottom: 80px;
+  }
+  
+  .services.active {
+    display: block;
+  }
+  
+  .serviceItem {
+    display: block;
+    opacity: 1;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    margin-bottom: 20px;
+  }
+  
+  .serviceItem i {
+    background-color: #129bf4;
+    color: #fff;
+    line-height: 55px;
+    text-align: center;
+    box-shadow: 2px 2px 8px -3px #000;
+    border-radius: 100%;
+    display: inline-block;
+  }
+  
+  .messenger i {
+    background-color: #0084ff;
+    font-size: 23px;
+    width: 55px;
+    height: 55px;
+  }
+  
+  .whatsapp i {
+    background-color: #25d366;
+    font-size: 35px;
+    width: 60px;
+    height: 60px;
+    padding: 2px 15px 2px 15px;
+  }
+  
+  .call i {
+    background-color: red;
+    font-size: 40px;
+    width: 65px;
+    height: 65px;
+    padding: 5px 15px 5px 15px;
+  }
+  
+  /* Tooltip for each service icon */
+  .serviceItem a {
+    display: block;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Mobile Responsiveness */
+  @media (max-width: 768px) {
+    .whatshelp {
+      right: 15px;
+      bottom: 15px;
+    }
+  
+    .openServices {
+      font-size: 35px;
+      width: 65px;
+      height: 65px;
+    }
+  
+    .openServicesTooltip {
+      font-size: 16px;
+      padding: 6px 16px;
+      bottom: 10px;
+      right: 50%;
+      transform: translateX(50%);
+    }
+  
+    .services {
+      right: 10px;
+      bottom: 100px; /* Adjust position for better alignment */
+    }
+  
+    .serviceItem {
+      margin-bottom: 15px;
+    }
+  
+    .messenger i {
+      font-size: 20px;
+      width: 50px;
+      height: 50px;
+    }
+  
+    .whatsapp i {
+      font-size: 30px;
+      width: 55px;
+      height: 55px;
+    }
+  
+    .call i {
+      font-size: 35px;
+      width: 60px;
+      height: 60px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .whatshelp {
+      right: 10px;
+      bottom: 10px;
+    }
+  
+    .openServices {
+      font-size: 30px;
+      width: 60px;
+      height: 60px;
+    }
+  
+    .openServicesTooltip {
+      font-size: 14px;
+      padding: 6px 12px;
+      bottom: 19px;
+      right: 110%;
+      transform: translateX(50%);
+    }
+  
+    .services {
+      right: 5px;
+      bottom: 80px;
+    }
+  
+    .serviceItem {
+      margin-bottom: 10px;
+    }
+  
+    .messenger i {
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+      padding: 0px 13px;
+    }
+  
+    .whatsapp i {
+      font-size: 25px;
+      width: 50px;
+      height: 50px;
+      padding: 0px 13px 0px 13px;
+    }
+  
+    .call i {
+      font-size: 30px;
+      width: 55px;
+      height: 55px;
+      padding: 2px 15px 2px 15px;
+    }
+  }
+  
+  @media (max-width: 320px) {
+    .whatshelp {
+      right: 5px;
+      bottom: 5px;
+    }
+  
+    .openServices {
+      font-size: 25px;
+      width: 55px;
+      height: 55px;
+    }
+  
+    .openServicesTooltip {
+      font-size: 12px;
+      padding: 5px 10px;
+      bottom: 5px;
+      right: 50%;
+      transform: translateX(50%);
+    }
+  
+    .services {
+      right: 5px;
+      bottom: 70px;
+    }
+  
+    .serviceItem {
+      margin-bottom: 5px;
+    }
+  
+    .messenger i {
+      font-size: 15px;
+      width: 40px;
+      height: 40px;
+    }
+  
+    .whatsapp i {
+      font-size: 20px;
+      width: 45px;
+      height: 45px;
+    }
+  
+    .call i {
+      font-size: 25px;
+      width: 50px;
+      height: 50px;
+    }
+  }
+  

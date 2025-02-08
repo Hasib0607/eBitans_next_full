@@ -1,6 +1,7 @@
 import React from "react";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 
 const FooterTwentySeven = ({ headerSetting }: any) => {
   return (
@@ -9,7 +10,8 @@ const FooterTwentySeven = ({ headerSetting }: any) => {
         <CopyrightAll headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

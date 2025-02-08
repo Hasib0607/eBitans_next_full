@@ -5,7 +5,8 @@ import MenuList from "./components/menu-list";
 import MyAccount from "./components/myaccount";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -58,7 +59,8 @@ const FooterTwenty = ({ headerSetting, page, menu, store_id, design }: any) => {
         </div>
       </div>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

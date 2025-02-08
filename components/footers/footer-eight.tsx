@@ -15,7 +15,8 @@ import {
 } from "@heroicons/react/24/outline";
 
 import Link from "next/link";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterEight = ({
@@ -205,7 +206,8 @@ const FooterEight = ({
         </div>
       </div>
       {/* <Messenger /> */}
-      <WhatsApp />
+      {/* <WhatsApp /> */}
+      <FlotingContact />
     </div>
   );
 };

@@ -849,7 +849,7 @@ export function UpdateAddress({
           reset();
           setSelectAddress(null);
         } catch (error) {
-          console.error("Error posting data:", error);
+          // console.error("Error posting data:", error);
           // Handle any errors here
         }
       };

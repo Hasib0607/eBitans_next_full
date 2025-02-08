@@ -25,6 +25,7 @@
     "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "font-awesome": "^4.7.0",
     "framer-motion": "^11.0.24",
     "helmet": "^7.1.0",
     "html-react-parser": "^5.1.10",

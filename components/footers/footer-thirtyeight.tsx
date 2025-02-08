@@ -4,7 +4,8 @@ import React from "react";
 import { BsTelephoneFill } from "react-icons/bs";
 import FollowUs from "./components/follow-us";
 import CopyrightAll from "./components/copyrightall";
-import WhatsApp from "./components/whatsApp";
+// import WhatsApp from "./components/whatsApp";
+import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThirtyEight = ({
@@ -120,7 +121,8 @@ const FooterThirtyEight = ({
           </div>
         </div>
         {/* <Messenger /> */}
-        <WhatsApp />
+        {/* <WhatsApp /> */}
+        <FlotingContact />
       </footer>
       <div className="sm:container px-5 mt-8 mb-4 text-[#666666]">
         <AllPaymantGateway headerSetting={headerSetting} />
