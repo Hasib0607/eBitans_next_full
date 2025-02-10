@@ -15,8 +15,8 @@ import { FaFacebookF } from "react-icons/fa";
 import { RiInstagramLine } from "react-icons/ri";
 import CopyrightAll from "./components/copyrightall";
 import Newsletter from "./components/newsletter";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwentyFour = ({
@@ -223,8 +223,8 @@ const FooterTwentyFour = ({
       </div>
       <hr />
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </div>
   );
 };

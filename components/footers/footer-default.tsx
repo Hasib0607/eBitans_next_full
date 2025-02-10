@@ -3,8 +3,8 @@ import { AiOutlineInstagram, AiOutlineMail } from "react-icons/ai";
 import { BsFacebook, BsTelephone, BsYoutube } from "react-icons/bs";
 import { IoLocationOutline } from "react-icons/io5";
 import CopyrightAll from "./components/copyrightall";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 
 const FooterDefault = ({ headerSetting, category }: any) => {
   return (
@@ -118,8 +118,8 @@ const FooterDefault = ({ headerSetting, category }: any) => {
           <CopyrightAll headerSetting={headerSetting} />
         </p>
         {/* <Messenger /> */}
-        {/* <WhatsApp /> */}
-        <FlotingContact />
+        <WhatsApp />
+        {/* <FlotingContact /> */}
       </div>
     </a>
   );

@@ -5,8 +5,8 @@ import { GoLocation } from "react-icons/go";
 import Newsletter from "./components/newsletter";
 import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
@@ -138,8 +138,8 @@ const FooterFour = ({ menu, headerSetting, page, store_id }: any) => {
         <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </footer>
   );
 };

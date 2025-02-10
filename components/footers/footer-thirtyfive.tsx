@@ -13,8 +13,8 @@ import { imgUrl } from "@/site-settings/siteUrl";
 import CategoryList from "./components/category-list";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -138,8 +138,8 @@ const FooterThirtyFive = ({
         </div>
       </div>
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </div>
   );
 };

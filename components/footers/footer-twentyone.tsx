@@ -16,8 +16,8 @@ import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
 import MyAccount from "./components/myaccount";
 import NewsletterThree from "./components/newsletter-three";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import { customizeFooter } from "@/utils/customizeDesign";
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
@@ -342,8 +342,8 @@ const FooterTwentyOne = ({
           </div>
         </div>
         {/* <Messenger /> */}
-        {/* <WhatsApp /> */}
-        <FlotingContact />
+        <WhatsApp />
+        {/* <FlotingContact /> */}
       </div>
     </>
   );

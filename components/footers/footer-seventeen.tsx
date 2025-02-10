@@ -15,8 +15,8 @@ import Link from "next/link";
 import { imgUrl } from "@/site-settings/siteUrl";
 import CopyrightAll from "./components/copyrightall";
 import MenuList from "./components/menu-list";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -226,8 +226,8 @@ const FooterSeventeen = ({
         </div>
       </div>
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </div>
   );
 };

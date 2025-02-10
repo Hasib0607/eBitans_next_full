@@ -6,8 +6,8 @@ import Newsletter from "./components/newsletter";
 import MyAccount from "./components/myaccount";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -93,8 +93,8 @@ const FooterTwentyFive = ({
         <CopyrightAll headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </footer>
   );
 };

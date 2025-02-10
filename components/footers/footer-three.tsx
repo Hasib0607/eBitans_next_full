@@ -8,8 +8,8 @@ import {
 import { FaFacebookF } from "react-icons/fa";
 import { RiInstagramLine } from "react-icons/ri";
 import Newsletter from "./components/newsletter";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
@@ -138,8 +138,8 @@ const FooterThree = ({ category, headerSetting, menu, store_id }: any) => {
         <AllPaymantGateway headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </div>
   );
 };

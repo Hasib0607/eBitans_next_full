@@ -3,8 +3,8 @@ import FollowUs from "./components/follow-us";
 import Link from "next/link";
 import NewsletterTwo from "./components/newsletter-two";
 import CopyrightAll from "./components/copyrightall";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterForty = ({
@@ -122,8 +122,8 @@ const FooterForty = ({
           </div>
         </div>
         {/* <Messenger /> */}
-        {/* <WhatsApp /> */}
-        <FlotingContact />
+        <WhatsApp />
+        {/* <FlotingContact /> */}
         
       </footer>
 

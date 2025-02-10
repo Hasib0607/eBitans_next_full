@@ -8,8 +8,8 @@ import { IoLogoWhatsapp } from "react-icons/io5";
 import MyAccount from "./components/myaccount";
 import MenuList from "./components/menu-list";
 import CopyrightAll from "./components/copyrightall";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import PageList from "./components/page-list";
 import AllPaymantGateway from "./components/all-payment-gateway";
 
@@ -135,8 +135,8 @@ const FooterTwentyTwo = ({ headerSetting, store_id, page, menu }: any) => {
         </div>
       </div>
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </div>
   );
 };

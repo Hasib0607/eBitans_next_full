@@ -9,8 +9,8 @@ import Newsletter from "./components/newsletter";
 import { imgUrl } from "@/site-settings/siteUrl";
 import Link from "next/link";
 import CopyrightAll from "./components/copyrightall";
-// import WhatsApp from "./components/whatsApp";
-import FlotingContact from '@/components/Chat/FloatingContact';
+import WhatsApp from "./components/whatsApp";
+// import FlotingContact from '@/components/Chat/FloatingContact';
 import AllPaymantGateway from "./components/all-payment-gateway";
 
 const FooterTwentySix = ({
@@ -123,8 +123,8 @@ const FooterTwentySix = ({
         <CopyrightAll headerSetting={headerSetting} />
       </div>
       {/* <Messenger /> */}
-      {/* <WhatsApp /> */}
-      <FlotingContact />
+      <WhatsApp />
+      {/* <FlotingContact /> */}
     </div>
   );
 };
