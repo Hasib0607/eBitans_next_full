@@ -7,6 +7,7 @@ import { fetchBlogData, fetchBlogDetailsData } from "../helper/api";
 export async function generateMetadata({ params }: any) {
   const url = getUrl();
   const { details } = (await fetchBlogDetailsData(params, url)) ?? [];
+
   return {
     title: details?.title,
     description: details?.sub_title,
@@ -40,7 +41,6 @@ const BlogDetails = async ({ params }: any) => {
   );
 
   const truncatedTitle = truncateTitle(details?.title || "", 80);
-  const markup = { __html: details?.description };
 
   return (
     <div className="bg-[#f7f7f7] md:pt-[10px] pt-[5px] container px-5 lg:px-10 relative z-[1]">
@@ -70,7 +70,7 @@ const BlogDetails = async ({ params }: any) => {
 
       <div className="flex lg:flex-row flex-col gap-5 py-10">
         <div className="lg:w-[70%] w-full">
-          <div dangerouslySetInnerHTML={markup} className="apiHtml"></div>
+          <div dangerouslySetInnerHTML={{ __html: details?.description  }} className="apiHtml"></div>
         </div>
         <div className="lg:w-[30%] w-full">
           <h1 className="text-2xl pb-5">Related Blogs</h1>
@@ -78,7 +78,7 @@ const BlogDetails = async ({ params }: any) => {
             <div>
               {filterBlog?.slice(0, 4).map((blog: any) => {
                 return (
-                  <Link href={`/resources/blogs/${blog?.slug}`} key={blog?.id}>
+                  <Link href={`/blog/${blog?.slug}`} key={blog?.id}>
                     <div key={blog?.id} className="flex gap-2 border-b-2 py-5">
                       <div className="h-28 w-28">
                         <img

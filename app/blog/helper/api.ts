@@ -48,7 +48,7 @@ export const fetchBlogSitemapData = async () => {
 export const fetchBlogData = async (url: string) => {
   try {
     const response = await fetch(
-      `https://admin.rongmoshal.store/api/v1/blog/get?name=${url}`,
+      `https://admin.ebitans.com/api/v1/blog/get?name=${url}`,
       {
         next: { revalidate: 10 },
       }
@@ -63,7 +63,7 @@ export const fetchBlogData = async (url: string) => {
 export const fetchBlogPopularData = async (url: string) => {
   try {
     const response = await fetch(
-      `https://admin.rongmoshal.store/api/v1/blog/popular?name=${url}`,
+      `https://admin.ebitans.com/api/v1/blog/popular?name=${url}`,
       {
         next: { revalidate: 10 },
       }
@@ -78,7 +78,7 @@ export const fetchBlogPopularData = async (url: string) => {
 export const fetchBlogTypeData = async (url: string) => {
   try {
     const response = await fetch(
-      `https://admin.rongmoshal.store/api/v1/blog/types?name=${url}`,
+      `https://admin.ebitans.com/api/v1/blog/types?name=${url}`,
       {
         next: { revalidate: 10 },
       }
@@ -93,7 +93,7 @@ export const fetchBlogTypeData = async (url: string) => {
 export const fetchTypeWiseBlogData = async (blogTypeId: any, typePage: any) => {
   try {
     const response = await fetch(
-      `https://admin.rongmoshal.store/api/v1/blog/types/${blogTypeId}${typePage}&name=${getClientUrl()}`,
+      `https://admin.ebitans.com/api/v1/blog/types/${blogTypeId}${typePage}&name=${getClientUrl()}`,
       { next: { revalidate: 10 } }
     );
     const data = await response.json();
@@ -107,7 +107,7 @@ export const fetchTypeWiseBlogData = async (blogTypeId: any, typePage: any) => {
 export const fetchBlogDetailsData = async (params: any, url: string) => {
   try {
     const response = await fetch(
-      "https://admin.rongmoshal.store/api/v1/blog/details/" +
+      "https://admin.ebitans.com/api/v1/blog/details/" +
         params?.slug +
         `?name=${url}`,
       {
